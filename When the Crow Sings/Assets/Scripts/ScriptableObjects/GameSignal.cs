@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ScrObj
+namespace ScriptableObjects
 {
     [CreateAssetMenu]
     public class GameSignal : ScriptableObject
     {
         List<GameSignalListener> listeners = new List<GameSignalListener>();
 
-        public void Raise()
+        public void Emit()
         {
             for (int i = listeners.Count - 1; i >= 0; i--)
             {
-                listeners[i].OnSignalRaised(); // Useful in case the response involves removing it from the list.
+                listeners[i].OnSignalEmitted(); // Useful in case the response involves removing it from the list.
             }
         }
 
-        public void Raise(float delay_in_seconds)
+        public void Emit(float delay_in_seconds)
         {
             // TODO: Use the delay_in_seconds.
             for (int i = listeners.Count - 1; i >= 0; i--)
             {
-                listeners[i].OnSignalRaised(); // Useful in case the response involves removing it from the list.
+                listeners[i].OnSignalEmitted(); // Useful in case the response involves removing it from the list.
             }
         }
 
