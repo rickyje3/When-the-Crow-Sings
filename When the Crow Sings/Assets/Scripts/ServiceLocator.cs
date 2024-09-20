@@ -8,7 +8,7 @@ public sealed class ServiceLocator
     private readonly static Dictionary<Type, object> _services = new Dictionary<Type, object>();
 
     // Sets the value of key <T> to service.
-    public static void Register<T>(T service)
+    public static void Register<T>(T service) where T : IService
     {
         _services[typeof(T)] = service;
     }
