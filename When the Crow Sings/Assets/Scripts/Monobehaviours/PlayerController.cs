@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 5.0f;
     private Vector3 movementInput;
 
+    public List<DialogueInteract> dialogueInteractables = new List<DialogueInteract>();
+
     private void OnEnable()
     {
         // Enable the Input System
@@ -17,6 +19,9 @@ public class PlayerController : MonoBehaviour
         // Subscribe to the Move event in the input system
         playerInput.Player.Move.performed += OnMove;
         playerInput.Player.Move.canceled += OnMove;
+
+        playerInput.Player.Interact.performed += OnInteract;
+        playerInput.Player.Interact.canceled += OnInteract;
     }
 
     private void OnDisable()
@@ -25,6 +30,10 @@ public class PlayerController : MonoBehaviour
         var playerInput = new PlayerInputActions();
         playerInput.Player.Move.performed -= OnMove;
         playerInput.Player.Move.canceled -= OnMove;
+
+        playerInput.Player.Interact.performed -= OnInteract;
+        playerInput.Player.Interact.canceled -= OnInteract;
+
         playerInput.Player.Disable();
     }
 
@@ -33,6 +42,23 @@ public class PlayerController : MonoBehaviour
         // Get the input vector from the action map
         movementInput = context.ReadValue<Vector2>();
     }
+
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            foreach (var interactable in dialogueInteractables)
+            {
+                if (interactable.playerInRange)
+                {
+                    //activate when interact key is pressed
+                    interactable.ActivateDialogue();
+                    break; // Exit after activating the first available dialogue
+                }
+            }
+        }
+    }
+
 
     private void Update()
     {
