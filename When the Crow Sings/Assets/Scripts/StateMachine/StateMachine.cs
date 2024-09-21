@@ -13,6 +13,23 @@ public class StateMachine
     //    get { return GetComponents<StateMachineState>(); } // ???
     //}
 
+    public StateMachine(MonoBehaviour monoBehaviour)
+    {
+        // TODO: Figure out how to get Update and FixedUpdate to be hooked up via the constructor.
+    }
+
+    // Callbacks
+    public void Update(float deltaTime)
+    {
+        currentState.Update(deltaTime);
+    }
+    public void FixedUpdate()
+    {
+        currentState.FixedUpdate();
+    }
+
+
+
     public void Enter(StateMachineState new_state) 
     {
         if (new_state == currentState) { return;}
@@ -43,15 +60,7 @@ public class StateMachine
         Enter(previousState);
     }
 
-    // Callbacks
-    public void Update(float deltaTime)
-    {
-        currentState.Update(deltaTime);
-    }
-    public void FixedUpdate()
-    {
-        currentState.FixedUpdate();
-    }
+   
 
 
     // Unused
