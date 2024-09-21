@@ -13,6 +13,16 @@ public class PlayerState2 : StateMachineState
 
     }
 
+    public override void OnDisable()
+    {
+        
+    }
+
+    public override void OnEnable()
+    {
+       
+    }
+
     public override void StateEntered()
     {
         Debug.Log("I have been born.");

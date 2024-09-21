@@ -2,10 +2,10 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class StateMachineState //: MonoBehaviour? Interface?
+public abstract class StateMachineState//<T>// where T:MonoBehaviour //: MonoBehaviour? Interface?
 {
     public StateMachine stateMachine;
-    public MonoBehaviour component; 
+    public MonoBehaviour component;
 
     // Entered Signal?
     // Exited Signal?
@@ -14,11 +14,13 @@ public abstract class StateMachineState //: MonoBehaviour? Interface?
     public abstract void FixedUpdate();//(float deltaTime);
     public abstract void StateEntered();
     public abstract void StateExited();
+    public abstract void OnEnable();
+    public abstract void OnDisable();
 
-    protected StateMachineState(StateMachine stateMachine, MonoBehaviour component)
+    protected StateMachineState(StateMachine stateMachine, MonoBehaviour myComponent)
     {
         this.stateMachine = stateMachine;
-        this.component = component;
+        this.component = myComponent;
 
         Type type = this.GetType();
 

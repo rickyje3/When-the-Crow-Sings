@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StateMachine
 {
-    StateMachineState currentState;
+    public StateMachineState currentState;
     StateMachineState previousState;
     public Dictionary<Type,object> states = new Dictionary<Type,object>();
     //StateMachineState[] states
@@ -13,8 +13,10 @@ public class StateMachine
     //    get { return GetComponents<StateMachineState>(); } // ???
     //}
 
-    public StateMachine(MonoBehaviour monoBehaviour)
+    //private MonoBehaviour component;
+    public StateMachine()//MonoBehaviour monoBehaviour)
     {
+
         // TODO: Figure out how to get Update and FixedUpdate to be hooked up via the constructor.
     }
 
@@ -39,10 +41,10 @@ public class StateMachine
         currentState.StateEntered();
     }
 
-    public void RegisterState<T>(T state) where T : StateMachineState
-    {
-        states[typeof(T)] = state;
-    }
+    //public void RegisterState<T>(T state) where T : StateMachineState
+    //{
+    //    states[typeof(T)] = state;
+    //}
     public void RegisterState(StateMachineState state)
     {
         states[state.GetType()] = state;
