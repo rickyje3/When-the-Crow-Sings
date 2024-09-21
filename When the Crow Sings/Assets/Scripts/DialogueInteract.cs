@@ -7,7 +7,6 @@ public class DialogueInteract : MonoBehaviour
     public Dialogue dialogue;
     public GameObject visualCue;
     public bool playerInRange;
-    public Collider NPC;
 
     void Awake()
     {
