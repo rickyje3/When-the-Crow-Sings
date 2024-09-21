@@ -26,6 +26,10 @@ public class StateMachine
     {
         states[typeof(T)] = state;
     }
+    public void RegisterState(StateMachineState state)
+    {
+        states[state.GetType()] = state;
+    }
 
     public void Enter<T>() where T : StateMachineState
     {

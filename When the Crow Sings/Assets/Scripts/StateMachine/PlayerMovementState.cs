@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerState1 : StateMachineState
+public class PlayerMovementState : StateMachineState
 {
 
     int time_remaining = 100;
+
+    public PlayerMovementState(StateMachine stateMachine, MonoBehaviour component) : base(stateMachine, component)
+    {
+    }
+
     public override void FixedUpdate()
     {
         if (time_remaining > 0) { time_remaining -= 1; }
@@ -20,11 +25,11 @@ public class PlayerState1 : StateMachineState
 
     public override void StateExited()
     {
-        Debug.Log("No wait I had so much to live fooooor!!!");
+        Debug.Log("But there was so much left to live forrr!!!!");
     }
 
     public override void Update(float deltaTime)
     {
-        Debug.Log("State 1 is updating!");
+        Debug.Log("I'm state 1");
     }
 }
