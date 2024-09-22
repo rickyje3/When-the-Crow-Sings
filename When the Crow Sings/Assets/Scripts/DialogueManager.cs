@@ -8,23 +8,34 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
-    public Animator animator;
+    private TextMeshProUGUI[] choicesText;
+    public Animator DialogueAnimator;
+    public Animator choiceDialogueAnimator;
     private float dialogueSpeed = .05f;
-
+    public PlayerController player;
     //Each individual sentence spoken
     public Queue<string> sentences;
+    public Queue<string> choices;
 
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
+        player = FindObjectOfType<PlayerController>(); 
+
+        if (player == null)
+        {
+            Debug.LogError("PlayerController not found in the scene.");
+        }
+
     }
+
 
     public void StartDialogue(Dialogue dialogue)
     {
         Debug.Log("Starting conversation with " + dialogue.name);
 
-        animator.SetBool("isOpen", true);
+        DialogueAnimator.SetBool("isOpen", true);
 
         nameText.text = dialogue.name;
 
@@ -34,6 +45,9 @@ public class DialogueManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);
         }
+
+        player.speed = 0;
+
         DisplayNextSentence();
     }
 
@@ -72,6 +86,20 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("End of conversation");
 
-        animator.SetBool("isOpen", false);
+        if (choices.Count > 0)
+        {
+
+        }
+        else if (choices.Count == 0)
+        {
+            DialogueAnimator.SetBool("isOpen", false);
+            player.speed = 5;
+        }
+    }
+
+    public void ChoiceDialogue(Dialogue dialogue)
+    {
+        choices = new Queue<string>();
+        choiceDialogueAnimator.SetBool("isOpen", true);
     }
 }
