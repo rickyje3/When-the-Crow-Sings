@@ -5,9 +5,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovementState : StateMachineState
 {
-    public PlayerMovementState(StateMachine stateMachine, PlayerController2 component, string stateName) : base(stateMachine, component,stateName) // Constructor.
+    PlayerController2 s;
+    public PlayerMovementState(PlayerController2 component)
     {
-        
+        s = component;
     }
 
     public override void FixedUpdate()
@@ -52,8 +53,6 @@ public class PlayerMovementState : StateMachineState
 
     public override void Update(float deltaTime)
     {
-        
-        PlayerController2 s = (PlayerController2)component;
         // Move!!!
         Vector3 movement = new Vector3(s.movementInput.x, 0, s.movementInput.y).normalized * s.speed * Time.deltaTime;
         s.transform.position += movement;
@@ -80,7 +79,6 @@ public class PlayerMovementState : StateMachineState
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        PlayerController2 s = (PlayerController2)component;
         // Get the input vector from the action map
         //s.movementInput = context.ReadValue<Vector2>();
         if (s.dialogueManager.choicesShown)
@@ -106,7 +104,6 @@ public class PlayerMovementState : StateMachineState
 
     private void OnAction(InputAction.CallbackContext context)
     {
-        PlayerController2 s = (PlayerController2)component;
         if (context.performed && s.dialogueManager != null && s.dialogueManager.choicesShown)
         {
             // Confirm the currently selected choice
@@ -120,7 +117,6 @@ public class PlayerMovementState : StateMachineState
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        PlayerController2 s = (PlayerController2)component;
 
         if (context.performed)
         {

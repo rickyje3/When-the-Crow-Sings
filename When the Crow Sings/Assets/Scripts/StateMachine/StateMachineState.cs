@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class StateMachineState//<T>// where T:MonoBehaviour //: MonoBehaviour? Interface?
 {
-    public StateMachine stateMachine;
-    public MonoBehaviour component;
 
 
     // Entered Signal?
@@ -19,14 +17,11 @@ public abstract class StateMachineState//<T>// where T:MonoBehaviour //: MonoBeh
     public abstract void OnEnable();
     public abstract void OnDisable();
 
-    protected StateMachineState(StateMachine stateMachine, MonoBehaviour myComponent, string stateName)
-    {
-        this.stateMachine = stateMachine;
-        this.component = myComponent;
+//    protected StateMachineState(StateMachine stateMachine, MonoBehaviour myComponent, string stateName)
+//    {
+//        this.stateMachine = stateMachine;
 
-        Type type = this.GetType();
-
-        //stateMachine.RegisterState<type>(this);
-        stateMachine.RegisterState(this, stateName);
-    }
+//        //stateMachine.RegisterState<type>(this);
+//        stateMachine.RegisterState(this, stateName);
+//    }
 }

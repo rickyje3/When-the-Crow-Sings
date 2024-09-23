@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerState2 : StateMachineState
 {
-    public PlayerState2(StateMachine stateMachine, PlayerController2 component, string stateName) : base(stateMachine, component, stateName)
+    PlayerController2 s;
+    public PlayerState2(PlayerController2 component, StateMachine machine)
     {
+        s = component;
     }
 
     public override void FixedUpdate()

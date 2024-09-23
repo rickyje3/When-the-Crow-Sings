@@ -9,8 +9,8 @@ public class PlayerController2 : MonoBehaviour
 
     // Paul's variables
     private StateMachine stateMachine;
-    private PlayerMovementState playerMovementState;
-    private PlayerState2 playerState2;
+    //private PlayerMovementState playerMovementState;
+    //private PlayerState2 playerState2;
 
     // Ricky's variables
     [HideInInspector]
@@ -23,10 +23,7 @@ public class PlayerController2 : MonoBehaviour
     private void Awake()
     {
         stateMachine = new StateMachine();
-
-        playerMovementState = new PlayerMovementState(stateMachine, this,"PlayerMovementState");
-        playerState2 = new PlayerState2(stateMachine,this,"PlayerState2");
-
+        stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
         stateMachine.Enter("PlayerMovementState");
     }
 
