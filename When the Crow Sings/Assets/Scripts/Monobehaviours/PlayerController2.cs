@@ -10,6 +10,9 @@ public class PlayerController2 : MonoBehaviour
     private PlayerMovementState playerState1;
     private PlayerState2 playerState2;
 
+    [HideInInspector]
+    public DialogueManager dialogueManager;
+
     public float speed = 5.0f;
     [HideInInspector]
     public Vector3 movementInput;
@@ -23,6 +26,11 @@ public class PlayerController2 : MonoBehaviour
         playerState2 = new PlayerState2(stateMachine,this);
 
         stateMachine.Enter<PlayerMovementState>();
+    }
+
+    private void Start()
+    {
+        dialogueManager = FindObjectOfType<DialogueManager>();
     }
 
     private void Update() => stateMachine.Update(Time.deltaTime);
