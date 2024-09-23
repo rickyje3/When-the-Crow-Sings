@@ -51,9 +51,26 @@ public class PlayerController : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        // Get the input vector from the action map
-        movementInput = context.ReadValue<Vector2>();
+        if (dialogueManager.choicesShown)
+        {
+            Vector2 input = context.ReadValue<Vector2>();
+
+            // Check if input is up or down to navigate choices
+            if (input.y > 0) // Move up
+            {
+                dialogueManager.HandleChoiceSelection(false); // Move up in choices
+            }
+            else if (input.y < 0) // Move down
+            {
+                dialogueManager.HandleChoiceSelection(true); // Move down in choices
+            }
+        }
+        else
+        {
+            movementInput = context.ReadValue<Vector2>(); // Normal movement
+        }
     }
+
 
     private void OnInteract(InputAction.CallbackContext context)
     {
@@ -72,14 +89,17 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnAction(InputAction.CallbackContext context)
-{
-    if (context.performed && dialogueManager != null)
     {
-        Debug.Log("Action button pressed, selecting choice.");
-        dialogueManager.SelectChoice();
+        if (context.performed && dialogueManager != null && dialogueManager.choicesShown)
+        {
+            // Confirm the currently selected choice
+            dialogueManager.ConfirmChoice();
+        }
+        else if (context.performed && dialogueManager != null && dialogueManager.choicesShown == false)
+        {
+            dialogueManager.DisplayNextSentence();
+        }
     }
-}
-
 
 
     private void Update()

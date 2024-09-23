@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     private bool isTyping = false;
     private bool isAfterChoice = false;
     private Dialogue currentDialogue;
+    public bool choicesShown;
 
     // Dialogue queues
     public Queue<string> sentences;
@@ -44,41 +45,51 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         Debug.Log("Starting conversation with " + dialogue.name);
-        currentDialogue = dialogue;
+        currentDialogue = dialogue; // Set the current dialogue
         DialogueAnimator.SetBool("isOpen", true);
         nameText.text = dialogue.name;
 
         sentences.Clear();
-
         foreach (string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
+            Debug.Log("Enqueued sentence: " + sentence);
         }
+
+        // Log after populating sentencesAfterChoice
+        Debug.Log("AfterChoice1 count: " + dialogue.sentencesAfterChoice1.Length);
+        Debug.Log("AfterChoice2 count: " + dialogue.sentencesAfterChoice2.Length);
+
+        currentQueue = sentences;
 
         player.speed = 0; // Stop player movement during dialogue
         isAfterChoice = false;
-        currentQueue = sentences;
 
-        DisplayNextSentence();
+        DisplayNextSentence(); // Ensure this is called after the queue is set up
     }
+
+
+
+
 
     public void DisplayNextSentence()
     {
         if (isTyping) return;  // Don't interrupt typing
 
-        if (currentQueue == null || currentQueue.Count == 0)
+        if (currentQueue.Count == 0)
         {
-            Debug.Log("Current queue is empty or null, ending dialogue.");
             EndDialogue();
             return;
         }
 
-        Debug.Log("Displaying next sentence. Sentences remaining: " + currentQueue.Count);
+
+        Debug.Log("Displaying next sentence");
 
         string sentence = currentQueue.Dequeue();
         StopAllCoroutines();  // Stop any currently running typing coroutines
         StartCoroutine(TypeOutSentence(sentence));  // Start typing the next sentence
     }
+
 
 
     private IEnumerator TypeOutSentence(string sentence)
@@ -99,9 +110,9 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("End of conversation");
 
-        if (sentencesAfterChoice1.Count > 0 || sentencesAfterChoice2.Count > 0)
+        if (currentDialogue.sentencesAfterChoice1.Length > 0 || currentDialogue.sentencesAfterChoice1.Length > 0)
         {
-            ShowChoices();
+            ShowChoices(); // Show choices if there are any
         }
         else
         {
@@ -111,28 +122,29 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+
     public void SelectChoice()
     {
-        choiceDialogueAnimator.SetBool("isOpen", false);  // Close the choice display
+        choiceDialogueAnimator.SetBool("isOpen", false); // Close the choice display
 
         // Process the player's choice
         if (currentChoiceIndex == 0)
         {
             Debug.Log("Choice 1 selected");
-            StartDialogueAfterChoice(1); // Now just pass the choice number
+            StartDialogueAfterChoice(1); // Pass the choice number
         }
         else if (currentChoiceIndex == 1)
         {
             Debug.Log("Choice 2 selected");
-            StartDialogueAfterChoice(2); // Now just pass the choice number
+            StartDialogueAfterChoice(2); // Pass the choice number
         }
     }
-
 
 
     private void ShowChoices()
     {
         Debug.Log("Showing Choices");
+        choicesShown = true;
 
         // Clear previous choice texts
         choice1Text.text = "";
@@ -156,7 +168,8 @@ public class DialogueManager : MonoBehaviour
         HighlightCurrentChoice();
     }
 
-        private void HighlightCurrentChoice()
+
+    private void HighlightCurrentChoice()
     {
         // Example logic: change color to highlight selected choice
         choice1Text.color = currentChoiceIndex == 0 ? Color.black : Color.red;
@@ -182,23 +195,21 @@ public class DialogueManager : MonoBehaviour
     {
         choiceDialogueAnimator.SetBool("isOpen", false);  // Close the choice display
 
+        // Process the player's choice
         if (currentChoiceIndex == 0)
         {
-            Debug.Log("Choice 1 selected. Queueing sentences for Choice 1.");
-            currentQueue = sentencesAfterChoice1;  // Set the queue to sentencesAfterChoice1
+            Debug.Log("Choice 1 selected");
+            currentQueue = sentencesAfterChoice1;
         }
         else if (currentChoiceIndex == 1)
         {
-            Debug.Log("Choice 2 selected. Queueing sentences for Choice 2.");
-            currentQueue = sentencesAfterChoice2;  // Set the queue to sentencesAfterChoice2
+            Debug.Log("Choice 2 selected");
+            currentQueue = sentencesAfterChoice2;
         }
 
         isAfterChoice = true;
-        Debug.Log("Starting after-choice dialogue. Sentences in queue: " + currentQueue.Count);
-        DisplayNextSentence();  // Continue with the dialogue from the selected choice
+        DisplayNextSentence();  // Ensure this is called to show the next sentence
     }
-
-
 
     public void StartDialogueAfterChoice(int choiceNumber)
     {
@@ -209,6 +220,7 @@ public class DialogueManager : MonoBehaviour
             {
                 sentencesAfterChoice1.Enqueue(sentence);
             }
+            currentQueue = sentencesAfterChoice1; // Set currentQueue to after-choice sentences
         }
         else if (choiceNumber == 2)
         {
@@ -217,14 +229,11 @@ public class DialogueManager : MonoBehaviour
             {
                 sentencesAfterChoice2.Enqueue(sentence);
             }
+            currentQueue = sentencesAfterChoice2; // Set currentQueue to after-choice sentences
         }
 
-        // After updating the queues, display the next sentence
-        DisplayNextSentence();
+        DisplayNextSentence(); // After updating the queues, display the next sentence
     }
-
-
-
 
 }
 
