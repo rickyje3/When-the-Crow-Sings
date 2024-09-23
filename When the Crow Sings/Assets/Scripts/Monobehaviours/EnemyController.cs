@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class EnemyController : StateMachineComponent
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        stateMachine = new StateMachine();
+        //stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
+        //stateMachine.Enter("PlayerMovementState");
     }
 }

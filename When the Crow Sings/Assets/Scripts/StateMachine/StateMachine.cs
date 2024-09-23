@@ -13,11 +13,11 @@ public class StateMachine
     // "Callbacks"
     public void Update(float deltaTime)
     {
-        currentState.Update(deltaTime);
+        if (currentState != null){currentState.Update(deltaTime);}
     }
     public void FixedUpdate()
     {
-        currentState.FixedUpdate();
+        if (currentState != null){currentState.FixedUpdate();}
     }
 
 
