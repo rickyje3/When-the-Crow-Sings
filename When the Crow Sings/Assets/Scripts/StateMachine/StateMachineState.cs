@@ -10,6 +10,7 @@ public abstract class StateMachineState//<T>// where T:MonoBehaviour //: MonoBeh
     // Entered Signal?
     // Exited Signal?
 
+
     public abstract void Update(float deltaTime);
     public abstract void FixedUpdate();//(float deltaTime);
     public abstract void StateEntered();
