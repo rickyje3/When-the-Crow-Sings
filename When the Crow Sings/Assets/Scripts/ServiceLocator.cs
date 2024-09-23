@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 
 
+// Uses static members. Therefore, the ServiceLocator should never be actually instantiated. It is --NOT-- a Don'tDestroyOnLoad object.
 public sealed class ServiceLocator
 {
     // A series of globally accessible objects. The Type is the key and the object is the value, meaning there can only be one object of a given type in _services.

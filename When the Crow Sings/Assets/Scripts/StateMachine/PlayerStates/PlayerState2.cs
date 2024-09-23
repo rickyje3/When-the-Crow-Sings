@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerState2 : StateMachineState
 {
-    PlayerController2 s;
-    public PlayerState2(PlayerController2 component, StateMachine machine)
+    PlayerController s;
+    public PlayerState2(PlayerController component, StateMachine machine)
     {
         s = component;
     }

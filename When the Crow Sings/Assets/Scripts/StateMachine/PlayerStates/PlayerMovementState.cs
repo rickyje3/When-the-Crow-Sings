@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovementState : StateMachineState
 {
-    PlayerController2 s;
-    public PlayerMovementState(PlayerController2 component)
+    PlayerController s;
+    public PlayerMovementState(PlayerController component)
     {
         s = component;
     }
@@ -18,8 +16,6 @@ public class PlayerMovementState : StateMachineState
 
     public override void StateEntered()
     {
-        
-
         // Enable the Input System
         var playerInput = new PlayerInputActions();
         playerInput.Player.Enable();
