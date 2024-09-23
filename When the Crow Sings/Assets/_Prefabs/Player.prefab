@@ -122,7 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb679c7beffc9394d9837eede24bf5b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueManager: {fileID: 0}
   speed: 5
+  movementInput: {x: 0, y: 0, z: 0}
+  dialogueInteractables: []
 --- !u!54 &9058567607391509840
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -240,6 +243,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e39e4db7-7265-4b43-8438-846e4578e38f
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7ce506a0-49b1-4fb0-819a-f39c5ad64d71
+    m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 36584657-56f9-4182-ad68-340351c87bba
+    m_ActionName: Player/Action[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0191f964-d9f9-46bb-8199-3beb69d23feb
+    m_ActionName: Player/Choice1[/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 07ca36d8-b1fb-4a0e-9d7e-9ad1a6ead573
+    m_ActionName: Player/Choice2[/Keyboard/x]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
