@@ -7,8 +7,14 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5.0f;
     private Vector3 movementInput;
+    private DialogueManager dialogueManager;
 
     public List<DialogueInteract> dialogueInteractables = new List<DialogueInteract>();
+
+    private void Start()
+    {
+        dialogueManager = FindObjectOfType<DialogueManager>();
+    }
 
     private void OnEnable()
     {
@@ -22,6 +28,9 @@ public class PlayerController : MonoBehaviour
 
         playerInput.Player.Interact.performed += OnInteract;
         playerInput.Player.Interact.canceled += OnInteract;
+
+        playerInput.Player.Action.performed += OnAction;
+        playerInput.Player.Action.canceled += OnAction;
     }
 
     private void OnDisable()
@@ -33,6 +42,9 @@ public class PlayerController : MonoBehaviour
 
         playerInput.Player.Interact.performed -= OnInteract;
         playerInput.Player.Interact.canceled -= OnInteract;
+
+        playerInput.Player.Action.performed += OnAction;
+        playerInput.Player.Action.canceled += OnAction;
 
         playerInput.Player.Disable();
     }
@@ -58,6 +70,16 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private void OnAction(InputAction.CallbackContext context)
+{
+    if (context.performed && dialogueManager != null)
+    {
+        Debug.Log("Action button pressed, selecting choice.");
+        dialogueManager.SelectChoice();
+    }
+}
+
 
 
     private void Update()

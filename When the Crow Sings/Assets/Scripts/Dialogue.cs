@@ -9,6 +9,10 @@ public class Dialogue
 
     [TextArea(2, 5)]
     public string[] sentences;
-    [TextArea(2, 5)]
+    [TextArea(1, 5)]
     public string[] choices;
+    [TextArea(2, 5)]
+    public string[] sentencesAfterChoice1;
+    [TextArea(2, 5)]
+    public string[] sentencesAfterChoice2;
 }
