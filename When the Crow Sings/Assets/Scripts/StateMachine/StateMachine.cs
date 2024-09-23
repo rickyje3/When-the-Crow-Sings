@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Reflection;
 
 public class StateMachine
 {
     public StateMachineState currentState;
     StateMachineState previousState;
-    public Dictionary<Type,object> states = new Dictionary<Type,object>();
+    public Dictionary<String,StateMachineState> states = new Dictionary<String, StateMachineState>();
     //StateMachineState[] states
     //{
     //    get { return GetComponents<StateMachineState>(); } // ???
@@ -45,18 +46,16 @@ public class StateMachine
     //{
     //    states[typeof(T)] = state;
     //}
-    public void RegisterState(StateMachineState state)
+    public void RegisterState(StateMachineState state, string stateName)
     {
-        states[state.GetType()] = state;
+        states[stateName] = state;
     }
 
-    public void Enter<T>() where T : StateMachineState
+    public void Enter(string stateName)
     {
-       
-        T new_state = (T)states[typeof(T)];
-        // turn string to state
-        Enter(new_state);
+        Enter(states[stateName]);
     }
+
     public void EnterPrevious()
     {
         Enter(previousState);

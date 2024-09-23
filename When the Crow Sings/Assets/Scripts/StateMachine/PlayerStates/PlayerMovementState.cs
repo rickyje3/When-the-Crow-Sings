@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovementState : StateMachineState
 {
-    public PlayerMovementState(StateMachine stateMachine, PlayerController2 component) : base(stateMachine, component) // Constructor.
+    public PlayerMovementState(StateMachine stateMachine, PlayerController2 component, string stateName) : base(stateMachine, component,stateName) // Constructor.
     {
         
     }

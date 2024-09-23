@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerState2 : StateMachineState
 {
-    public PlayerState2(StateMachine stateMachine, MonoBehaviour component) : base(stateMachine, component)
+    public PlayerState2(StateMachine stateMachine, PlayerController2 component, string stateName) : base(stateMachine, component, stateName)
     {
     }
 

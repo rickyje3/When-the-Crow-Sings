@@ -7,6 +7,7 @@ public abstract class StateMachineState//<T>// where T:MonoBehaviour //: MonoBeh
     public StateMachine stateMachine;
     public MonoBehaviour component;
 
+
     // Entered Signal?
     // Exited Signal?
 
@@ -18,7 +19,7 @@ public abstract class StateMachineState//<T>// where T:MonoBehaviour //: MonoBeh
     public abstract void OnEnable();
     public abstract void OnDisable();
 
-    protected StateMachineState(StateMachine stateMachine, MonoBehaviour myComponent)
+    protected StateMachineState(StateMachine stateMachine, MonoBehaviour myComponent, string stateName)
     {
         this.stateMachine = stateMachine;
         this.component = myComponent;
@@ -26,6 +27,6 @@ public abstract class StateMachineState//<T>// where T:MonoBehaviour //: MonoBeh
         Type type = this.GetType();
 
         //stateMachine.RegisterState<type>(this);
-        stateMachine.RegisterState(this);
+        stateMachine.RegisterState(this, stateName);
     }
 }
