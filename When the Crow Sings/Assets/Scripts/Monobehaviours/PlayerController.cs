@@ -50,26 +50,26 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnMove(InputAction.CallbackContext context)
+{
+    if (dialogueManager.choicesShown)
     {
-        if (dialogueManager.choicesShown)
+        Vector2 input = context.ReadValue<Vector2>();
+        
+        // Check if input is up or down to navigate choices
+        if (input.y > 0) // Move up
         {
-            Vector2 input = context.ReadValue<Vector2>();
-
-            // Check if input is up or down to navigate choices
-            if (input.y > 0) // Move up
-            {
-                dialogueManager.HandleChoiceSelection(false); // Move up in choices
-            }
-            else if (input.y < 0) // Move down
-            {
-                dialogueManager.HandleChoiceSelection(true); // Move down in choices
-            }
+            dialogueManager.HandleChoiceSelection(false); // Move up in choices
         }
-        else
+        else if (input.y < 0) // Move down
         {
-            movementInput = context.ReadValue<Vector2>(); // Normal movement
+            dialogueManager.HandleChoiceSelection(true); // Move down in choices
         }
     }
+    else
+    {
+        movementInput = context.ReadValue<Vector2>(); // Normal movement
+    }
+}
 
 
     private void OnInteract(InputAction.CallbackContext context)

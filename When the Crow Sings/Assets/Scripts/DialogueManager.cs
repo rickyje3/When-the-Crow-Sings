@@ -22,6 +22,7 @@ public class DialogueManager : MonoBehaviour
 
     // Dialogue queues
     public Queue<string> sentences;
+    public Queue<string> choices;
     public Queue<string> sentencesAfterChoice1;
     public Queue<string> sentencesAfterChoice2;
     private Queue<string> currentQueue;  // Track which sentence queue to display
@@ -31,6 +32,7 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         sentences = new Queue<string>();
+        choices = new Queue<string>();
         sentencesAfterChoice1 = new Queue<string>();
         sentencesAfterChoice2 = new Queue<string>();
         currentQueue = new Queue<string>();
@@ -110,11 +112,11 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("End of conversation");
 
-        if (currentDialogue.sentencesAfterChoice1.Length > 0 || currentDialogue.sentencesAfterChoice1.Length > 0)
+        if (!isAfterChoice)
         {
             ShowChoices(); // Show choices if there are any
         }
-        else
+        else if(isAfterChoice)
         {
             Debug.Log("No choices available, closing dialogue.");
             DialogueAnimator.SetBool("isOpen", false);
@@ -151,14 +153,14 @@ public class DialogueManager : MonoBehaviour
         choice2Text.text = "";
 
         // Check if choices exist in the current dialogue
-        if (currentDialogue.sentencesAfterChoice1.Length > 0)
+        if (currentDialogue.choices1.Length > 0)
         {
-            choice1Text.text = currentDialogue.sentencesAfterChoice1[0]; // Display the first choice text
+            choice1Text.text = currentDialogue.choices1[0]; // Display the first choice text
         }
 
-        if (currentDialogue.sentencesAfterChoice2.Length > 0)
+        if (currentDialogue.choices2.Length > 0)
         {
-            choice2Text.text = currentDialogue.sentencesAfterChoice2[0]; // Display the second choice text
+            choice2Text.text = currentDialogue.choices2[0]; // Display the second choice text
         }
 
         choiceDialogueAnimator.SetBool("isOpen", true);
@@ -194,17 +196,20 @@ public class DialogueManager : MonoBehaviour
     public void ConfirmChoice()
     {
         choiceDialogueAnimator.SetBool("isOpen", false);  // Close the choice display
+        choicesShown = false;
 
         // Process the player's choice
-        if (currentChoiceIndex == 0)
+        if (currentChoiceIndex == 1)
         {
             Debug.Log("Choice 1 selected");
             currentQueue = sentencesAfterChoice1;
+            StartDialogueAfterChoice(1);
         }
-        else if (currentChoiceIndex == 1)
+        else if (currentChoiceIndex == 0)
         {
             Debug.Log("Choice 2 selected");
             currentQueue = sentencesAfterChoice2;
+            StartDialogueAfterChoice(2);
         }
 
         isAfterChoice = true;
@@ -232,6 +237,7 @@ public class DialogueManager : MonoBehaviour
             currentQueue = sentencesAfterChoice2; // Set currentQueue to after-choice sentences
         }
 
+        isAfterChoice = true;
         DisplayNextSentence(); // After updating the queues, display the next sentence
     }
 
