@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyController : StateMachineComponent
 {
+    public MeshCollider sightCone;
+
     private void Awake()
     {
         stateMachine = new StateMachine();
