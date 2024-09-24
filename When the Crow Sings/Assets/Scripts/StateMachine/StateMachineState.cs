@@ -1,9 +1,14 @@
+using UnityEngine;
+
 public abstract class StateMachineState//<T>// where T:MonoBehaviour //: MonoBehaviour? Interface?
 {
-    public abstract void Update(float deltaTime);
-    public abstract void FixedUpdate();//(float deltaTime);
-    public abstract void StateEntered();
-    public abstract void StateExited();
-    public abstract void OnEnable();
-    public abstract void OnDisable();
+    public virtual void Update(float deltaTime){}
+    public virtual void FixedUpdate(){}//(float deltaTime){}
+    public virtual void StateEntered(){}
+    public virtual void StateExited(){}
+    public virtual void OnEnable(){}
+    public virtual void OnDisable(){}
+    public virtual void OnTriggerEnter(Collider other) { }
+    public virtual void OnTriggerExit(Collider other) { }
+    
 }

@@ -19,6 +19,14 @@ public class StateMachine
     {
         if (currentState != null){currentState.FixedUpdate();}
     }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (currentState != null) { currentState.OnTriggerEnter(other); }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (currentState != null) { currentState.OnTriggerExit(other); }
+    }
 
 
 
@@ -46,7 +54,6 @@ public class StateMachine
         Enter(previousState);
     }
 
-   
 
 
     // Unused

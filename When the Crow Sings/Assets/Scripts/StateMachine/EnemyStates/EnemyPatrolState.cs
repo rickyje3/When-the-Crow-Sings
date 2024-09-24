@@ -23,7 +23,12 @@ public class EnemyPatrolState : EnemyState
     public override void FixedUpdate()
     {
         //if (Physics.Raycast(s.transform,))
-        Debug.Log(ServiceLocator.Get<PlayerController>());
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("I SEE YOU THERE IS NO LIFE IN THE VOID DIE NOW");
+        s.stateMachine.Enter("EnemyChaseState");
     }
 
     public override void OnDisable()

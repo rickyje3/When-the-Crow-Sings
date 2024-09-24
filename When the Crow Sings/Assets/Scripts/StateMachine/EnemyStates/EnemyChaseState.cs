@@ -13,28 +13,8 @@ public class EnemyChaseState : EnemyState
         s.navMeshAgent.destination = ServiceLocator.Get<PlayerController>().transform.position;
     }
 
-    public override void OnDisable()
+    public override void OnTriggerExit(Collider other)
     {
-
-    }
-
-    public override void OnEnable()
-    {
-
-    }
-
-    public override void StateEntered()
-    {
-
-    }
-
-    public override void StateExited()
-    {
-
-    }
-
-    public override void Update(float deltaTime)
-    {
-
+        s.stateMachine.Enter("EnemyPatrolState");
     }
 }
