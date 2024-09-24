@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour
     public Animator choiceDialogueAnimator;
 
     private float dialogueSpeed = .03f; // Less = faster, more = slower
-    private PlayerController player;
+    private PlayerController2 player;
     private bool isTyping = false;
     private bool isAfterChoice = false;
     private Dialogue currentDialogue;
@@ -37,7 +37,7 @@ public class DialogueManager : MonoBehaviour
         sentencesAfterChoice2 = new Queue<string>();
         currentQueue = new Queue<string>();
 
-        player = FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<PlayerController2>();
         if (player == null)
         {
             Debug.LogError("PlayerController not found in the scene.");
