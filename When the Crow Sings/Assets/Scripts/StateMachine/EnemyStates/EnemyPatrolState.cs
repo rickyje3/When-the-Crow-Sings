@@ -2,13 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrolState : StateMachineState
+public class EnemyPatrolState : EnemyState
 {
-    EnemyController s;
-    public EnemyPatrolState(EnemyController component)
+    public EnemyPatrolState(EnemyController component) : base(component)
     {
-        s = component;
     }
+
+    private void Patrol()
+    {
+
+    }
+
+
+
+
+
+
+
+
     public override void FixedUpdate()
     {
         //if (Physics.Raycast(s.transform,))
