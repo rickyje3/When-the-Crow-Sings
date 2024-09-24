@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovementState : StateMachineState
 {
-    public float speed = 5.0f;
-    private Vector3 movementInput;
+    public PlayerMovementState(StateMachine stateMachine, PlayerController2 component) : base(stateMachine, component) // Constructor.
+    {
+        
+    }
 
-    public List<DialogueInteract> dialogueInteractables = new List<DialogueInteract>();
+    public override void FixedUpdate()
+    {
+        
+    }
 
-    private void OnEnable()
+    public override void StateEntered()
     {
         // Enable the Input System
         var playerInput = new PlayerInputActions();
@@ -24,7 +29,7 @@ public class PlayerController : MonoBehaviour
         playerInput.Player.Interact.canceled += OnInteract;
     }
 
-    private void OnDisable()
+    public override void StateExited()
     {
         // Unsubscribe from events
         var playerInput = new PlayerInputActions();
@@ -37,17 +42,48 @@ public class PlayerController : MonoBehaviour
         playerInput.Player.Disable();
     }
 
+    public override void Update(float deltaTime)
+    {
+        
+        PlayerController2 s = (PlayerController2)component;
+        // Move!!!
+        Vector3 movement = new Vector3(s.movementInput.x, 0, s.movementInput.y).normalized * s.speed * Time.deltaTime;
+        s.transform.position += movement;
+
+        //Rotate!!!
+        if (movement != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
+            s.transform.rotation = Quaternion.RotateTowards(s.transform.rotation, toRotation, s.speed * Time.deltaTime);
+        }
+    }
+
+    
+
+    public override void OnEnable()
+    {
+        
+    }
+
+    public override void OnDisable()
+    {
+        
+    }
+
     private void OnMove(InputAction.CallbackContext context)
     {
+        PlayerController2 s = (PlayerController2)component;
         // Get the input vector from the action map
-        movementInput = context.ReadValue<Vector2>();
+        s.movementInput = context.ReadValue<Vector2>();
     }
 
     private void OnInteract(InputAction.CallbackContext context)
     {
+        PlayerController2 s = (PlayerController2)component;
+
         if (context.performed)
         {
-            foreach (var interactable in dialogueInteractables)
+            foreach (var interactable in s.dialogueInteractables)
             {
                 if (interactable.playerInRange)
                 {
@@ -58,21 +94,4 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-
-    private void Update()
-    {
-        // Move!!!
-        Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y).normalized * speed * Time.deltaTime;
-        transform.position += movement;
-
-        //Rotate!!!
-        if (movement != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, speed * Time.deltaTime);
-        }
-    }
 }
-
-
