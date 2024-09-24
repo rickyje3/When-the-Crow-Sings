@@ -11,7 +11,8 @@ public class EnemyPatrolState : StateMachineState
     }
     public override void FixedUpdate()
     {
-        
+        //if (Physics.Raycast(s.transform,))
+        Debug.Log(ServiceLocator.Get<PlayerController>());
     }
 
     public override void OnDisable()

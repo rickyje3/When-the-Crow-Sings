@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerController : StateMachineComponent
+public class PlayerController : StateMachineComponent, IService
 {
     // Paul code
     private void Awake()
     {
+        register_self();
+
         stateMachine = new StateMachine();
         stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
         stateMachine.Enter("PlayerMovementState");
@@ -25,5 +27,10 @@ public class PlayerController : StateMachineComponent
     private void Start()
     {
         dialogueManager = FindObjectOfType<DialogueManager>();
+    }
+
+    public void register_self()
+    {
+        ServiceLocator.Register<PlayerController>(this);
     }
 }
