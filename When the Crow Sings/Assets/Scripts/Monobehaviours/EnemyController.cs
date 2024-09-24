@@ -9,7 +9,7 @@ public class EnemyController : StateMachineComponent
     private void Awake()
     {
         stateMachine = new StateMachine();
-        //stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
-        //stateMachine.Enter("PlayerMovementState");
+        stateMachine.RegisterState(new EnemyPatrolState(this), "EnemyPatrolState");
+        stateMachine.Enter("EnemyPatrolState");
     }
 }
