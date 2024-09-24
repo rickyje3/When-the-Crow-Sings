@@ -6,15 +6,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController2 : MonoBehaviour
 {
-
-    // Paul's variables
     private StateMachine stateMachine;
-    //private PlayerMovementState playerMovementState;
-    //private PlayerState2 playerState2;
+    private PlayerMovementState playerState1;
+    private PlayerState2 playerState2;
 
-    // Ricky's variables
-    [HideInInspector]
-    public DialogueManager dialogueManager;
     public float speed = 5.0f;
     [HideInInspector]
     public Vector3 movementInput;
@@ -23,13 +18,11 @@ public class PlayerController2 : MonoBehaviour
     private void Awake()
     {
         stateMachine = new StateMachine();
-        stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
-        stateMachine.Enter("PlayerMovementState");
-    }
 
-    private void Start()
-    {
-        dialogueManager = FindObjectOfType<DialogueManager>();
+        playerState1 = new PlayerMovementState(stateMachine, this);
+        playerState2 = new PlayerState2(stateMachine,this);
+
+        stateMachine.Enter<PlayerMovementState>();
     }
 
     private void Update() => stateMachine.Update(Time.deltaTime);
