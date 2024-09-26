@@ -25,6 +25,7 @@ public class BirdseedController : MonoBehaviour//StateMachineComponent
     {
         transform.eulerAngles = new Vector3(0,0,Utilities.GetAngleFromVector_Deg(direction));
         Shoot(direction);
+        Destroy(gameObject, 5.0f);
     }
 
     private void Shoot(Vector3 direction)
