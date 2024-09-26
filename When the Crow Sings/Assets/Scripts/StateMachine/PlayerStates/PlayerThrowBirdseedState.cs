@@ -21,7 +21,7 @@ public class PlayerThrowBirdseedState : StateMachineState
     private IEnumerator ExitStateAfterDelay()
     {
         Debug.Log("Timer's started");
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(.25f);
         Debug.Log("Timer's over");
         s.stateMachine.Enter("PlayerMovementState");
     }

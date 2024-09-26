@@ -5,6 +5,18 @@ using UnityEngine;
 public class BirdseedController : MonoBehaviour//StateMachineComponent
 {
     public Transform pfCrowsTemp;
+    public GameObject throwVisual;
+    public GameObject landedVisual;
+
+    private bool _isLanded = false;
+    public bool isLanded { get {return _isLanded; }
+        set
+        {
+            throwVisual.SetActive(!value);
+            landedVisual.SetActive(value);
+            _isLanded = value;
+        }
+}
 
 
     // Factory Pattern-ish thing. TODO: Should this be centralized?
@@ -21,11 +33,21 @@ public class BirdseedController : MonoBehaviour//StateMachineComponent
     }
 
 
+
+    private IEnumerator changeState()
+    {
+        isLanded = false;
+        yield return new WaitForSeconds(1.5f);
+        isLanded = true;
+        Destroy(gameObject, 1.5f);
+    }
+
     private void Init(Vector3 direction)
     {
         transform.eulerAngles = new Vector3(0,0,Utilities.GetAngleFromVector_Deg(direction));
         Shoot(direction);
-        Destroy(gameObject, 5.0f);
+        StartCoroutine(changeState());
+        
     }
 
     private void Shoot(Vector3 direction)
