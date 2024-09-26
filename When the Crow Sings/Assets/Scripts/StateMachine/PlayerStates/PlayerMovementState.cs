@@ -29,12 +29,15 @@ public class PlayerMovementState : StateMachineState
 
         playerInput.Player.Interact.performed += OnInteract;
         playerInput.Player.Interact.canceled += OnInteract;
+
+        playerInput.Player.Fire.performed += OnFired;
     }
 
     public override void StateExited()
     {
         // Unsubscribe from events
         var playerInput = new PlayerInputActions();
+
         playerInput.Player.Move.performed -= OnMove;
         playerInput.Player.Move.canceled -= OnMove;
 
@@ -43,6 +46,8 @@ public class PlayerMovementState : StateMachineState
 
         playerInput.Player.Interact.performed -= OnInteract;
         playerInput.Player.Interact.canceled -= OnInteract;
+
+        playerInput.Player.Fire.performed -= OnFired;
 
         playerInput.Player.Disable();
     }
@@ -62,15 +67,9 @@ public class PlayerMovementState : StateMachineState
     }
 
     
-
-    public override void OnEnable()
+    private void OnFired(InputAction.CallbackContext context)
     {
-        
-    }
-
-    public override void OnDisable()
-    {
-        
+        s.stateMachine.Enter("PlayerThrowBirdseedState");
     }
 
     private void OnMove(InputAction.CallbackContext context)

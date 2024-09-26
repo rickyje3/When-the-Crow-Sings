@@ -11,6 +11,7 @@ public class PlayerController : StateMachineComponent, IService
 
         stateMachine = new StateMachine();
         stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
+        stateMachine.RegisterState(new PlayerThrowBirdseedState(this), "PlayerThrowBirdseedState");
         stateMachine.Enter("PlayerMovementState");
     }
     
