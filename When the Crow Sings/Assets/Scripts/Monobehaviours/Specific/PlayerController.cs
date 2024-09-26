@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -7,7 +8,7 @@ public class PlayerController : StateMachineComponent, IService
     // Paul code
     public Transform throwPosition;
     [SerializeField]
-    private Transform pfBirdseedProjectile;
+    private BirdseedController pfBirdseedProjectile;
     private void Awake()
     {
         register_self();
@@ -41,7 +42,7 @@ public class PlayerController : StateMachineComponent, IService
 
     public void ThrowBirdseed()
     {
-        Instantiate(pfBirdseedProjectile, throwPosition.position, Quaternion.identity);
+        BirdseedController.Create(pfBirdseedProjectile, throwPosition, new Vector3(1,0,1));
     }
 
 }
