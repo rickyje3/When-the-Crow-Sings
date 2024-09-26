@@ -12,6 +12,8 @@ public class PlayerThrowBirdseedState : StateMachineState
     public override void StateEntered()
     {
         Debug.Log("Throw it now!!");
+        s.ThrowBirdseed();
+
         s.StartCoroutine(ExitStateAfterDelay());
     }
 
@@ -31,6 +33,6 @@ public class PlayerThrowBirdseedState : StateMachineState
 
     public override void Update(float deltaTime)
     {
-        Debug.Log("State 2 is updating!");
+        //Debug.Log("State 2 is updating!");
     }
 }

@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerController : StateMachineComponent, IService
 {
     // Paul code
+    public Transform throwPosition;
+    [SerializeField]
+    private Transform pfBirdseedProjectile;
     private void Awake()
     {
         register_self();
@@ -34,4 +37,11 @@ public class PlayerController : StateMachineComponent, IService
     {
         ServiceLocator.Register<PlayerController>(this);
     }
+
+
+    public void ThrowBirdseed()
+    {
+        Instantiate(pfBirdseedProjectile);
+    }
+
 }
