@@ -34,11 +34,11 @@ public class BirdseedController : MonoBehaviour//StateMachineComponent
 
 
 
-    private IEnumerator changeState()
+    private IEnumerator SpawnCrows()
     {
-        isLanded = false;
+
         yield return new WaitForSeconds(1.5f);
-        isLanded = true;
+        Instantiate(pfCrowsTemp,transform.position, Quaternion.identity);
         Destroy(gameObject, 1.5f);
     }
 
@@ -47,7 +47,6 @@ public class BirdseedController : MonoBehaviour//StateMachineComponent
         isLanded = false;
         transform.eulerAngles = new Vector3(0,0,Utilities.GetAngleFromVector_Deg(direction));
         Shoot(direction);
-        //StartCoroutine(changeState());
         
     }
 
@@ -64,7 +63,7 @@ public class BirdseedController : MonoBehaviour//StateMachineComponent
         //    Destroy(gameObject, 1.5f);
         //}
         isLanded = true;
-        Destroy(gameObject, 1.5f);
+        StartCoroutine(SpawnCrows());
     }
 
 
