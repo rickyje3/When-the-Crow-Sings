@@ -9,7 +9,7 @@ public class PlayerController : StateMachineComponent, IService
     {
         register_self();
 
-        stateMachine = new StateMachine();
+        stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
         stateMachine.RegisterState(new PlayerThrowBirdseedState(this), "PlayerThrowBirdseedState");
         stateMachine.Enter("PlayerMovementState");

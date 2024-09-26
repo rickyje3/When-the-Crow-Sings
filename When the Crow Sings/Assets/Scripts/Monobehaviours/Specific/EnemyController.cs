@@ -10,7 +10,7 @@ public class EnemyController : StateMachineComponent
 
     private void Awake()
     {
-        stateMachine = new StateMachine();
+        stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new EnemyPatrolState(this), "EnemyPatrolState");
         stateMachine.RegisterState(new EnemyChaseState(this), "EnemyChaseState");
         stateMachine.Enter("EnemyPatrolState");

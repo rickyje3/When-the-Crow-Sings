@@ -10,6 +10,13 @@ public class StateMachine
     StateMachineState previousState;
     public Dictionary<String,StateMachineState> states = new Dictionary<String, StateMachineState>();
 
+
+    MonoBehaviour s;
+    public StateMachine(MonoBehaviour monoBehaviour)
+    {
+        s = monoBehaviour;
+    }
+
     // "Callbacks"
     public void Update(float deltaTime)
     {
@@ -34,6 +41,7 @@ public class StateMachine
     {
         if (new_state == currentState) { return;}
         if(currentState != null) { currentState.StateExited(); }
+        s.StopAllCoroutines();
         previousState = currentState;
         currentState = new_state;
         currentState.StateEntered();
