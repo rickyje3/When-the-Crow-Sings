@@ -41,7 +41,7 @@ public class PlayerController : StateMachineComponent, IService
 
     public void ThrowBirdseed()
     {
-        Instantiate(pfBirdseedProjectile);
+        Instantiate(pfBirdseedProjectile, throwPosition.position, Quaternion.identity);
     }
 
 }
