@@ -44,9 +44,10 @@ public class BirdseedController : MonoBehaviour//StateMachineComponent
 
     private void Init(Vector3 direction)
     {
+        isLanded = false;
         transform.eulerAngles = new Vector3(0,0,Utilities.GetAngleFromVector_Deg(direction));
         Shoot(direction);
-        StartCoroutine(changeState());
+        //StartCoroutine(changeState());
         
     }
 
@@ -55,7 +56,16 @@ public class BirdseedController : MonoBehaviour//StateMachineComponent
 
     }
 
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        //if(collision.gameObject.tag == "FloorTemp")
+        //{
+        //    isLanded = true;
+        //    Destroy(gameObject, 1.5f);
+        //}
+        isLanded = true;
+        Destroy(gameObject, 1.5f);
+    }
 
 
 }
