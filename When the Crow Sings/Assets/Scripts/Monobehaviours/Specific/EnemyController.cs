@@ -13,6 +13,7 @@ public class EnemyController : StateMachineComponent
         stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new EnemyPatrolState(this), "EnemyPatrolState");
         stateMachine.RegisterState(new EnemyChaseState(this), "EnemyChaseState");
+        stateMachine.RegisterState(new EnemyStunnedState(this), "EnemyStunnedState");
         stateMachine.Enter("EnemyPatrolState");
     }
     private void Start()

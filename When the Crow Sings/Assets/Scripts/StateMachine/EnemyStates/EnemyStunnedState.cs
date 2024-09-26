@@ -8,33 +8,19 @@ public class EnemyStunnedState : EnemyState
     {
     }
 
-    public override void FixedUpdate()
+    private IEnumerator exitStateAfterTime()
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnDisable()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnEnable()
-    {
-        throw new System.NotImplementedException();
+        yield return new WaitForSeconds(2.0f);
+        s.stateMachine.Enter("EnemyChaseState"); // TODO: Maybe a "EnemyRecoveringState" to handle logic? Maybe do that here?
     }
 
     public override void StateEntered()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Get them off! Get them off!");
+        s.StartCoroutine(exitStateAfterTime());
     }
-
     public override void StateExited()
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Update(float deltaTime)
-    {
-        throw new System.NotImplementedException();
+        Debug.Log("Why, you little--");
     }
 }

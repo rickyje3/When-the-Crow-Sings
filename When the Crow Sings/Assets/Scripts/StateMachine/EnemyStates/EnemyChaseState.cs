@@ -15,6 +15,6 @@ public class EnemyChaseState : EnemyState
 
     public override void OnTriggerExit(Collider other)
     {
-        s.stateMachine.Enter("EnemyPatrolState");
+        //s.stateMachine.Enter("EnemyPatrolState");
     }
 }

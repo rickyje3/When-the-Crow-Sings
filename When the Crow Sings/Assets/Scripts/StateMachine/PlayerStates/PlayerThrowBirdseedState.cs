@@ -11,7 +11,6 @@ public class PlayerThrowBirdseedState : StateMachineState
 
     public override void StateEntered()
     {
-        Debug.Log("Throw it now!!");
         s.ThrowBirdseed();
 
         s.StartCoroutine(ExitStateAfterDelay());
@@ -20,15 +19,12 @@ public class PlayerThrowBirdseedState : StateMachineState
 
     private IEnumerator ExitStateAfterDelay()
     {
-        Debug.Log("Timer's started");
         yield return new WaitForSeconds(.25f);
-        Debug.Log("Timer's over");
         s.stateMachine.Enter("PlayerMovementState");
     }
 
     public override void StateExited()
     {
-        Debug.Log("It's thrown...");
     }
 
     public override void Update(float deltaTime)
