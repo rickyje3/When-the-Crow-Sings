@@ -13,6 +13,8 @@ public class PlayerController : StateMachineComponent, IService
     {
         register_self();
 
+        playerInput = new PlayerInputActions();
+
         stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
         stateMachine.RegisterState(new PlayerThrowBirdseedState(this), "PlayerThrowBirdseedState");
@@ -43,6 +45,16 @@ public class PlayerController : StateMachineComponent, IService
     public void ThrowBirdseed()
     {
         BirdseedController.Create(pfBirdseedProjectile, throwPosition, new Vector3(1,0,1));
+    }
+
+    public PlayerInputActions playerInput;
+    private void OnEnable()
+    {
+        playerInput.Player.Enable();
+    }
+    private void OnDisable()
+    {
+        playerInput.Player.Disable();
     }
 
 }

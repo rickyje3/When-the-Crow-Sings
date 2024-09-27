@@ -55,6 +55,8 @@ public class BirdseedController : MonoBehaviour//StateMachineComponent
 
     }
 
+
+    bool firstTime = false;
     private void OnCollisionEnter(Collision collision)
     {
         //if(collision.gameObject.tag == "FloorTemp")
@@ -62,8 +64,12 @@ public class BirdseedController : MonoBehaviour//StateMachineComponent
         //    isLanded = true;
         //    Destroy(gameObject, 1.5f);
         //}
-        isLanded = true;
-        StartCoroutine(SpawnCrows());
+        if (!firstTime)
+        {
+            firstTime = true;
+            isLanded = true;
+            StartCoroutine(SpawnCrows());
+        }
     }
 
 
