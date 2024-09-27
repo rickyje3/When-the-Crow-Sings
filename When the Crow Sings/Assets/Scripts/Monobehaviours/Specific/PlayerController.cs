@@ -7,11 +7,12 @@ public class PlayerController : StateMachineComponent, IService
 {
     // Paul code
     public Transform throwPosition;
+    public GameObject throwTarget;
     [SerializeField]
     private BirdseedController pfBirdseedProjectile;
     private void Awake()
     {
-        register_self();
+        RegisterSelfAsService();
 
         playerInput = new PlayerInputActions();
 
@@ -36,7 +37,7 @@ public class PlayerController : StateMachineComponent, IService
         dialogueManager = FindObjectOfType<DialogueManager>();
     }
 
-    public void register_self()
+    public void RegisterSelfAsService()
     {
         ServiceLocator.Register<PlayerController>(this);
     }
