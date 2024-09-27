@@ -45,7 +45,7 @@ public class BirdseedController : MonoBehaviour
 
     private void Shoot(Vector3 direction)
     {
-        GetComponent<Rigidbody>().velocity = direction*10;
+        GetComponent<Rigidbody>().velocity = direction*5;
     }
 
 

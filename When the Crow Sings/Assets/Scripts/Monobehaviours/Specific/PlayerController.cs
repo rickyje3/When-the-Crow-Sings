@@ -45,7 +45,8 @@ public class PlayerController : StateMachineComponent, IService
 
     public void ThrowBirdseed()
     {
-        BirdseedController.Create(pfBirdseedProjectile, throwPosition, new Vector3(1,0,1));
+        var direction = throwTarget.transform.position - transform.position;
+        BirdseedController.Create(pfBirdseedProjectile, throwPosition,direction);
     }
 
     public PlayerInputActions playerInput;
