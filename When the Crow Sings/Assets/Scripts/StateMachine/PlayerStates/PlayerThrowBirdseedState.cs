@@ -14,16 +14,16 @@ public class PlayerThrowBirdseedState : StateMachineState
 
     public override void StateEntered()
     {
-        s.playerInput.Player.Fire.canceled += OnAction;
+        s.playerInput.Player.Fire.canceled += OnFire;
     }
     public override void StateExited()
     {
-        s.playerInput.Player.Fire.canceled -= OnAction;
+        
     }
 
-    private void OnAction(InputAction.CallbackContext context)
+    private void OnFire(InputAction.CallbackContext context)
     {
-        Debug.Log("Actioned!");
+        s.playerInput.Player.Fire.canceled -= OnFire;
         s.ThrowBirdseed();
         s.StartCoroutine(ExitStateAfterDelay());
     }

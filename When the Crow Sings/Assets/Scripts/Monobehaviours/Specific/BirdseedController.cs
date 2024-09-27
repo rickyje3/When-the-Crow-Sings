@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BirdseedController : MonoBehaviour//StateMachineComponent
+public class BirdseedController : MonoBehaviour
 {
     public Transform pfCrowsTemp;
     public GameObject throwVisual;
@@ -18,21 +18,14 @@ public class BirdseedController : MonoBehaviour//StateMachineComponent
         }
 }
 
-
-    // Factory Pattern-ish thing. TODO: Should this be centralized?
+    
     public static BirdseedController Create(BirdseedController prefab, Transform throwPosition, Vector3 direction)
+        // Factory Pattern-ish thing. TODO: Should this be centralized?
     {
         BirdseedController birdseed = Instantiate(prefab, throwPosition.position, Quaternion.identity);
         birdseed.Init(direction);
         return birdseed;
     }
-
-    private void Awake()
-    {
-        //stateMachine = new StateMachine(this); // TODO: Figure out how to make this line "required" so it's type-safe and shows the error at compile-time.
-    }
-
-
 
     private IEnumerator SpawnCrows()
     {
@@ -52,18 +45,13 @@ public class BirdseedController : MonoBehaviour//StateMachineComponent
 
     private void Shoot(Vector3 direction)
     {
-
+        GetComponent<Rigidbody>().velocity = direction*10;
     }
 
 
     bool firstTime = false;
     private void OnCollisionEnter(Collision collision)
     {
-        //if(collision.gameObject.tag == "FloorTemp")
-        //{
-        //    isLanded = true;
-        //    Destroy(gameObject, 1.5f);
-        //}
         if (!firstTime)
         {
             firstTime = true;
