@@ -6,10 +6,10 @@ public sealed class ExampleService : MonoBehaviour, IService
 {
     private void Awake()
     {
-        register_self();
+        RegisterSelfAsService();
     }
 
-    public void register_self()
+    public void RegisterSelfAsService()
     {
         ServiceLocator.Register<ExampleService>(this);
     }
