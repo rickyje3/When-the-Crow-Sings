@@ -11,10 +11,6 @@ public class PlayerMovementState : StateMachineState
         s = component;
     }
 
-    public override void FixedUpdate()
-    {
-        
-    }
 
     public override void StateEntered()
     {
@@ -98,9 +94,13 @@ public class PlayerMovementState : StateMachineState
             // Confirm the currently selected choice
             s.dialogueManager.ConfirmChoice();
         }
-        else if (context.performed && s.dialogueManager != null && s.dialogueManager.choicesShown == false)
+        else if (context.performed && s.dialogueManager != null && s.dialogueManager.choicesShown == false && s.dialogueManager.inDialogue)
         {
             s.dialogueManager.DisplayNextSentence();
+        }
+        else if (context.performed && s.dialogueManager != null && s.dialogueManager.choicesShown == false && s.dialogueManager.inDialogue == false)
+        {
+
         }
     }
 
