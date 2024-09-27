@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovementState : StateMachineState
 {
-    public PlayerMovementState(StateMachine stateMachine, PlayerController2 component) : base(stateMachine, component) // Constructor.
+    PlayerController s;
+    public PlayerMovementState(PlayerController component)
     {
-        
+        s = component;
     }
 
     public override void FixedUpdate()
@@ -25,27 +24,36 @@ public class PlayerMovementState : StateMachineState
         playerInput.Player.Move.performed += OnMove;
         playerInput.Player.Move.canceled += OnMove;
 
+        playerInput.Player.Action.performed += OnAction;
+        playerInput.Player.Action.canceled += OnAction;
+
         playerInput.Player.Interact.performed += OnInteract;
         playerInput.Player.Interact.canceled += OnInteract;
+
+        playerInput.Player.Fire.performed += OnFired;
     }
 
     public override void StateExited()
     {
         // Unsubscribe from events
         var playerInput = new PlayerInputActions();
+
         playerInput.Player.Move.performed -= OnMove;
         playerInput.Player.Move.canceled -= OnMove;
 
+        playerInput.Player.Action.performed -= OnAction;
+        playerInput.Player.Action.canceled -= OnAction;
+
         playerInput.Player.Interact.performed -= OnInteract;
         playerInput.Player.Interact.canceled -= OnInteract;
+
+        playerInput.Player.Fire.performed -= OnFired;
 
         playerInput.Player.Disable();
     }
 
     public override void Update(float deltaTime)
     {
-        
-        PlayerController2 s = (PlayerController2)component;
         // Move!!!
         Vector3 movement = new Vector3(s.movementInput.x, 0, s.movementInput.y).normalized * s.speed * Time.deltaTime;
         s.transform.position += movement;
@@ -59,27 +67,51 @@ public class PlayerMovementState : StateMachineState
     }
 
     
-
-    public override void OnEnable()
+    private void OnFired(InputAction.CallbackContext context)
     {
-        
-    }
-
-    public override void OnDisable()
-    {
-        
+        s.stateMachine.Enter("PlayerThrowBirdseedState");
     }
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        PlayerController2 s = (PlayerController2)component;
         // Get the input vector from the action map
-        s.movementInput = context.ReadValue<Vector2>();
+        //s.movementInput = context.ReadValue<Vector2>();
+        if (s.dialogueManager.choicesShown)
+        {
+            Vector2 input = context.ReadValue<Vector2>();
+
+            // Check if input is up or down to navigate choices
+            if (input.y > 0) // Move up
+            {
+                s.dialogueManager.HandleChoiceSelection(false); // Move up in choices
+            }
+            else if (input.y < 0) // Move down
+            {
+                s.dialogueManager.HandleChoiceSelection(true); // Move down in choices
+            }
+        }
+        else
+        {
+            s.movementInput = context.ReadValue<Vector2>(); // Normal movement
+
+        }
+    }
+
+    private void OnAction(InputAction.CallbackContext context)
+    {
+        if (context.performed && s.dialogueManager != null && s.dialogueManager.choicesShown)
+        {
+            // Confirm the currently selected choice
+            s.dialogueManager.ConfirmChoice();
+        }
+        else if (context.performed && s.dialogueManager != null && s.dialogueManager.choicesShown == false)
+        {
+            s.dialogueManager.DisplayNextSentence();
+        }
     }
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        PlayerController2 s = (PlayerController2)component;
 
         if (context.performed)
         {
