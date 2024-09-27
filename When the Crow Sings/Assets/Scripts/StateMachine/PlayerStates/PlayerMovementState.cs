@@ -32,8 +32,8 @@ public class PlayerMovementState : StateMachineState
 
     public override void StateExited()
     {
-        s.playerInput.Player.Move.performed -= OnMove;
-        s.playerInput.Player.Move.canceled -= OnMove;
+        //s.playerInput.Player.Move.performed -= OnMove;
+        //s.playerInput.Player.Move.canceled -= OnMove;
 
         s.playerInput.Player.Action.performed -= OnAction;
         s.playerInput.Player.Action.canceled -= OnAction;
