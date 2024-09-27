@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,11 +22,20 @@ namespace ScriptableObjects
         public void Emit(float delay_in_seconds)
         {
             // TODO: Use the delay_in_seconds.
+            EmitAfterTime(delay_in_seconds);
+        }
+
+        private IEnumerator EmitAfterTime(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+
             for (int i = listeners.Count - 1; i >= 0; i--)
             {
                 listeners[i].OnSignalEmitted(); // Useful in case the response involves removing it from the list.
             }
         }
+
+
 
         public void RegisterListener(GameSignalListener listener)
         {
