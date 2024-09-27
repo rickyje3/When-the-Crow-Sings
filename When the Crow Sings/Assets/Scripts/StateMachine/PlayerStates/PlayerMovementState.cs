@@ -4,7 +4,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovementState : StateMachineState
 {
     PlayerController s;
+  
     public PlayerMovementState(PlayerController component)
+    
     {
         s = component;
     }
