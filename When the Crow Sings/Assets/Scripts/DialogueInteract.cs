@@ -7,7 +7,7 @@ public class DialogueInteract : MonoBehaviour
     public Dialogue dialogue;
     public GameObject visualCue;
     public bool playerInRange;
-    public Collider NPC;
+
 
     void Awake()
     {
@@ -19,6 +19,16 @@ public class DialogueInteract : MonoBehaviour
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
+
+    /*public void ActivateChoiceDialogue()
+    {
+        FindObjectOfType<DialogueManager>().ChoiceDialogue(dialogue);
+    }
+
+    public void ActivateDialogueAfterChoice(int choiceNumber)
+    {
+        FindObjectOfType<DialogueManager>().StartDialogueAfterChoice(dialogue);
+    }*/
 
     private void OnTriggerEnter(Collider NPC)
     {
@@ -38,3 +48,6 @@ public class DialogueInteract : MonoBehaviour
         }
     }
 }
+
+
+
