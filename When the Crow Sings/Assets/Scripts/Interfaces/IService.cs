@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IService
 {
-    void register_self();
+    void RegisterSelfAsService();
 }

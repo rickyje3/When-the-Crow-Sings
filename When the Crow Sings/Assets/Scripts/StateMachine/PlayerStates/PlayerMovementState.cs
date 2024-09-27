@@ -16,40 +16,32 @@ public class PlayerMovementState : StateMachineState
 
     public override void StateEntered()
     {
-        // Enable the Input System
-        var playerInput = new PlayerInputActions();
-        playerInput.Player.Enable();
 
         // Subscribe to the Move event in the input system
-        playerInput.Player.Move.performed += OnMove;
-        playerInput.Player.Move.canceled += OnMove;
+        s.playerInput.Player.Move.performed += OnMove;
+        s.playerInput.Player.Move.canceled += OnMove;
 
-        playerInput.Player.Action.performed += OnAction;
-        playerInput.Player.Action.canceled += OnAction;
+        s.playerInput.Player.Action.performed += OnAction;
+        s.playerInput.Player.Action.canceled += OnAction;
 
-        playerInput.Player.Interact.performed += OnInteract;
-        playerInput.Player.Interact.canceled += OnInteract;
+        s.playerInput.Player.Interact.performed += OnInteract;
+        s.playerInput.Player.Interact.canceled += OnInteract;
 
-        playerInput.Player.Fire.performed += OnFired;
+        s.playerInput.Player.Fire.performed += OnFired;
     }
 
     public override void StateExited()
     {
-        // Unsubscribe from events
-        var playerInput = new PlayerInputActions();
+        //s.playerInput.Player.Move.performed -= OnMove;
+        //s.playerInput.Player.Move.canceled -= OnMove;
 
-        playerInput.Player.Move.performed -= OnMove;
-        playerInput.Player.Move.canceled -= OnMove;
+        s.playerInput.Player.Action.performed -= OnAction;
+        s.playerInput.Player.Action.canceled -= OnAction;
 
-        playerInput.Player.Action.performed -= OnAction;
-        playerInput.Player.Action.canceled -= OnAction;
+        s.playerInput.Player.Interact.performed -= OnInteract;
+        s.playerInput.Player.Interact.canceled -= OnInteract;
 
-        playerInput.Player.Interact.performed -= OnInteract;
-        playerInput.Player.Interact.canceled -= OnInteract;
-
-        playerInput.Player.Fire.performed -= OnFired;
-
-        playerInput.Player.Disable();
+        s.playerInput.Player.Fire.performed -= OnFired;
     }
 
     public override void Update(float deltaTime)

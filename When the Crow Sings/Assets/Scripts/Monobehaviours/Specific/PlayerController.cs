@@ -7,11 +7,14 @@ public class PlayerController : StateMachineComponent, IService
 {
     // Paul code
     public Transform throwPosition;
+    public GameObject throwTarget;
     [SerializeField]
     private BirdseedController pfBirdseedProjectile;
     private void Awake()
     {
-        register_self();
+        RegisterSelfAsService();
+
+        playerInput = new PlayerInputActions();
 
         stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
@@ -34,7 +37,7 @@ public class PlayerController : StateMachineComponent, IService
         dialogueManager = FindObjectOfType<DialogueManager>();
     }
 
-    public void register_self()
+    public void RegisterSelfAsService()
     {
         ServiceLocator.Register<PlayerController>(this);
     }
@@ -42,7 +45,18 @@ public class PlayerController : StateMachineComponent, IService
 
     public void ThrowBirdseed()
     {
-        BirdseedController.Create(pfBirdseedProjectile, throwPosition, new Vector3(1,0,1));
+        var direction = throwTarget.transform.position - transform.position;
+        BirdseedController.Create(pfBirdseedProjectile, throwPosition,direction);
+    }
+
+    public PlayerInputActions playerInput;
+    private void OnEnable()
+    {
+        playerInput.Player.Enable();
+    }
+    private void OnDisable()
+    {
+        playerInput.Player.Disable();
     }
 
 }
