@@ -17,7 +17,7 @@ public class CameraManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitInfo))
         {
             
-            Debug.DrawLine(ray.origin, hitInfo.point,Color.red,1f);
+            //Debug.DrawLine(ray.origin, hitInfo.point,Color.red,1f);
             mouseWorldPosition = hitInfo.point;
             
         }
