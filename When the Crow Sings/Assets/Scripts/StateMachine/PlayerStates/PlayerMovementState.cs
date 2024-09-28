@@ -58,7 +58,7 @@ public class PlayerMovementState : StateMachineState
         if (movement != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
-            s.transform.rotation = Quaternion.RotateTowards(s.transform.rotation, toRotation, s.speed * Time.deltaTime);
+            s.transform.rotation = Quaternion.RotateTowards(s.transform.rotation, toRotation, 1000 * Time.deltaTime);
         }
     }
 
@@ -93,7 +93,6 @@ public class PlayerMovementState : StateMachineState
         else
         {
             s.movementInput = context.ReadValue<Vector2>(); // Normal movement
-
         }
     }
 
