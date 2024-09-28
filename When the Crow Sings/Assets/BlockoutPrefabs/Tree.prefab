@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 562523588474497350}
   - component: {fileID: 399639916107982588}
   - component: {fileID: 1294047966041484389}
-  - component: {fileID: 79676791178956359}
+  - component: {fileID: 5719935820755241551}
   m_Layer: 0
   m_Name: Cube (10)
   m_TagString: Untagged
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3122
+  m_VersionIndex: 3137
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -332,8 +332,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663229029649754069}
   m_Mesh: {fileID: 0}
---- !u!64 &79676791178956359
-MeshCollider:
+--- !u!65 &5719935820755241551
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -350,10 +350,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 2.0429914, y: 4.7855983, z: 1.9723663}
+  m_Center: {x: -1.0214919, y: 2.3927991, z: 0.98618317}
 --- !u!1 &3013232097320070395
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5619996535191862591}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 102.64, y: 3.92, z: 124.78}
   m_LocalScale: {x: 0.60035, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -431,7 +430,7 @@ GameObject:
   - component: {fileID: 3712712804150486831}
   - component: {fileID: 1842285430620792234}
   - component: {fileID: 1812514789275747021}
-  - component: {fileID: 1516192631095710932}
+  - component: {fileID: 7716354552143813363}
   m_Layer: 0
   m_Name: Cone
   m_TagString: Untagged
@@ -804,7 +803,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5785
+  m_VersionIndex: 5800
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -889,8 +888,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6660287628214096269}
   m_Mesh: {fileID: 0}
---- !u!64 &1516192631095710932
-MeshCollider:
+--- !u!65 &7716354552143813363
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -907,7 +906,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 11.49137, y: 8.389821, z: 6.6492195}
+  m_Center: {x: 5.745689, y: 4.1949105, z: -3.8389282}

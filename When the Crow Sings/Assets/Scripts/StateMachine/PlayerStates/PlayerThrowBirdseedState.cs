@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerThrowBirdseedState : StateMachineState
 {
@@ -11,8 +14,19 @@ public class PlayerThrowBirdseedState : StateMachineState
 
     public override void StateEntered()
     {
-        s.ThrowBirdseed();
+        s.playerInput.Player.Fire.canceled += OnFire;
+        s.throwTarget.SetActive(true);
+    }
+    public override void StateExited()
+    {
+        
+    }
 
+    private void OnFire(InputAction.CallbackContext context)
+    {
+        s.playerInput.Player.Fire.canceled -= OnFire;
+        s.throwTarget.SetActive(false);
+        s.ThrowBirdseed();
         s.StartCoroutine(ExitStateAfterDelay());
     }
 
@@ -23,9 +37,7 @@ public class PlayerThrowBirdseedState : StateMachineState
         s.stateMachine.Enter("PlayerMovementState");
     }
 
-    public override void StateExited()
-    {
-    }
+
 
     public override void Update(float deltaTime)
     {
