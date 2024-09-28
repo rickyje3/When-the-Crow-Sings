@@ -22,6 +22,6 @@ public class CameraManager : MonoBehaviour
             
         }
         else { mouseWorldPosition = Vector3.zero; }
-        Debug.Log(mouseWorldPosition);
+        //Debug.Log(mouseWorldPosition);
     }
 }
