@@ -44,6 +44,8 @@ public class PlayerMovementState : StateMachineState
         s.playerInput.Player.Fire.performed -= OnFired;
 
         s.playerInput.Player.Crouch.performed -= OnCrouched;
+
+        s.playerAnimator.SetBool("animIsMoving", false);
     }
 
   
@@ -59,13 +61,19 @@ public class PlayerMovementState : StateMachineState
         {
             Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
             s.transform.rotation = Quaternion.RotateTowards(s.transform.rotation, toRotation, 1000 * Time.deltaTime);
+
+            s.playerAnimator.SetBool("animIsMoving", true);
+        }
+        else
+        {
+            s.playerAnimator.SetBool("animIsMoving", false);
         }
     }
 
     private void OnCrouched(InputAction.CallbackContext context)
     {
         s.isCrouching = !s.isCrouching;
-        Debug.Log("Crouching = " + s.isCrouching);
+        s.playerAnimator.SetBool("animIsCrouching", s.isCrouching);
     }
     private void OnFired(InputAction.CallbackContext context)
     {
