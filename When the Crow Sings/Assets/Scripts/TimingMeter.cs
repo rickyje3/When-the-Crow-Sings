@@ -88,7 +88,7 @@ public class TimingMeter : MonoBehaviour
         // Set the size and position of the highlight area
         float highlightWidth = maxXPos - minXPos;  // Width of the highlighted area
         targetRangeHighlight.sizeDelta = new Vector2(highlightWidth, targetRangeHighlight.sizeDelta.y); // Adjust width
-        targetRangeHighlight.anchoredPosition = new Vector2(minXPos + (highlightWidth / 2), targetRangeHighlight.anchoredPosition.y); // Adjust position
+        targetRangeHighlight.anchoredPosition = new Vector2(minXPos + 0.5f, targetRangeHighlight.anchoredPosition.y); // Adjust position
         Debug.Log(targetRangeHighlight.sizeDelta + targetRangeHighlight.anchoredPosition);
     }
 }
