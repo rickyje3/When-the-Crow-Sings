@@ -8,6 +8,7 @@ public class PlayerController : StateMachineComponent, IService
     // Paul code
     public Transform throwPosition;
     public GameObject throwTarget;
+    public GameObject playerVisual;
     [SerializeField]
     private BirdseedController pfBirdseedProjectile;
     [HideInInspector]
