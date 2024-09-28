@@ -26,6 +26,8 @@ public class PlayerMovementState : StateMachineState
         s.playerInput.Player.Interact.canceled += OnInteract;
 
         s.playerInput.Player.Fire.performed += OnFired;
+
+        s.playerInput.Player.Crouch.performed += OnCrouched;
     }
 
     public override void StateExited()
@@ -40,7 +42,11 @@ public class PlayerMovementState : StateMachineState
         s.playerInput.Player.Interact.canceled -= OnInteract;
 
         s.playerInput.Player.Fire.performed -= OnFired;
+
+        s.playerInput.Player.Crouch.performed -= OnCrouched;
     }
+
+  
 
     public override void Update(float deltaTime)
     {
@@ -56,7 +62,11 @@ public class PlayerMovementState : StateMachineState
         }
     }
 
-    
+    private void OnCrouched(InputAction.CallbackContext context)
+    {
+        s.isCrouching = !s.isCrouching;
+        Debug.Log("Crouching = " + s.isCrouching);
+    }
     private void OnFired(InputAction.CallbackContext context)
     {
         s.stateMachine.Enter("PlayerThrowBirdseedState");
