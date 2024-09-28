@@ -10,6 +10,9 @@ public class PlayerController : StateMachineComponent, IService
     public GameObject throwTarget;
     [SerializeField]
     private BirdseedController pfBirdseedProjectile;
+    [HideInInspector]
+    public bool isCrouching = false;
+
     private void Awake()
     {
         RegisterSelfAsService();
@@ -21,7 +24,29 @@ public class PlayerController : StateMachineComponent, IService
         stateMachine.RegisterState(new PlayerThrowBirdseedState(this), "PlayerThrowBirdseedState");
         stateMachine.Enter("PlayerMovementState");
     }
-    
+
+    public void RegisterSelfAsService()
+    {
+        ServiceLocator.Register<PlayerController>(this);
+    }
+
+
+    public void ThrowBirdseed()
+    {
+        var direction = throwTarget.transform.position - transform.position;
+        BirdseedController.Create(pfBirdseedProjectile, throwPosition, direction);
+    }
+
+    public PlayerInputActions playerInput;
+    private void OnEnable()
+    {
+        playerInput.Player.Enable();
+    }
+    private void OnDisable()
+    {
+        playerInput.Player.Disable();
+    }
+
 
     // Ricky code
 
@@ -35,28 +60,6 @@ public class PlayerController : StateMachineComponent, IService
     private void Start()
     {
         dialogueManager = FindObjectOfType<DialogueManager>();
-    }
-
-    public void RegisterSelfAsService()
-    {
-        ServiceLocator.Register<PlayerController>(this);
-    }
-
-
-    public void ThrowBirdseed()
-    {
-        var direction = throwTarget.transform.position - transform.position;
-        BirdseedController.Create(pfBirdseedProjectile, throwPosition,direction);
-    }
-
-    public PlayerInputActions playerInput;
-    private void OnEnable()
-    {
-        playerInput.Player.Enable();
-    }
-    private void OnDisable()
-    {
-        playerInput.Player.Disable();
     }
 
 }
