@@ -19,6 +19,7 @@ public class DialogueManager : MonoBehaviour
     private bool isAfterChoice = false;
     private Dialogue currentDialogue;
     public bool choicesShown;
+    public bool inDialogue;
 
     // Dialogue queues
     public Queue<string> sentences;
@@ -66,6 +67,7 @@ public class DialogueManager : MonoBehaviour
 
         player.speed = 0; // Stop player movement during dialogue
         isAfterChoice = false;
+        inDialogue = true;
 
         DisplayNextSentence(); // Ensure this is called after the queue is set up
     }
@@ -121,6 +123,7 @@ public class DialogueManager : MonoBehaviour
             Debug.Log("No choices available, closing dialogue.");
             DialogueAnimator.SetBool("isOpen", false);
             player.speed = 5; // Restore player movement after dialogue ends
+            inDialogue = false;
         }
     }
 
