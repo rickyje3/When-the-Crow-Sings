@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueInteract : MonoBehaviour
+public class QTEInteract : MonoBehaviour
 {
-    public Dialogue dialogue;
     public GameObject visualCue;
     public bool playerInRange;
-
 
     void Awake()
     {
@@ -15,29 +13,26 @@ public class DialogueInteract : MonoBehaviour
         playerInRange = false;
     }
 
-    public void ActivateDialogue()
+    public void ActivateTimingMeter()
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        FindObjectOfType<TimingMeter>().startQTE();
     }
 
-    private void OnTriggerEnter(Collider NPC)
+    private void OnTriggerEnter(Collider QTE)
     {
-        if (NPC.CompareTag("Player"))
+        if (QTE.CompareTag("Player"))
         {
             visualCue.SetActive(true);
             playerInRange = true;
         }
     }
 
-    private void OnTriggerExit(Collider NPC)
+    private void OnTriggerExit(Collider QTE)
     {
-        if (NPC.CompareTag("Player"))
+        if (QTE.CompareTag("Player"))
         {
             visualCue.SetActive(false);
             playerInRange = false;
         }
     }
 }
-
-
-

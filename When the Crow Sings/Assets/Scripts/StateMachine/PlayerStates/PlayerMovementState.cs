@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovementState : StateMachineState
 {
     PlayerController s;
-  
+    QTEInteract qte;
+
     public PlayerMovementState(PlayerController component)
-    
     {
         s = component;
     }
@@ -48,7 +48,7 @@ public class PlayerMovementState : StateMachineState
         s.playerAnimator.SetBool("animIsMoving", false);
     }
 
-  
+
 
     public override void Update(float deltaTime)
     {
@@ -146,6 +146,15 @@ public class PlayerMovementState : StateMachineState
                     interactable.ActivateDialogue();
                     break; // Exit after activating the first available dialogue
                 }
+            }
+        }
+
+        if (context.performed)
+        {
+            if (s.qteInteract.playerInRange)
+            {
+                 //activate when interact key is pressed
+                 s.qteInteract.ActivateTimingMeter();
             }
         }
     }

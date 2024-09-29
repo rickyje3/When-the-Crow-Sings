@@ -7,19 +7,22 @@ public class TimingMeter : MonoBehaviour
 {
     public Slider sliderMeter;
     public float speed = 2f;
-    public float targetMin = 0.4f; //Range for successful hit
-    public float targetMax = 0.6f;
+    public float targetMin; //Range for successful hit
+    public float targetMax;
+    //public float targetValue;
+    public Animator timingMeterAnimator;
 
     public RectTransform targetMinMarker;  
     public RectTransform targetMaxMarker;
     public RectTransform targetRangeHighlight;
 
     private bool movingRight = true; //Meter movement direction
-    public bool meterActive = true;
+    public bool meterActive = false;
 
     private void Start()
     {
         SetTargetRangeMarkers();
+        RandomizeMeter();
     }
 
     // Update is called once per frame
@@ -33,6 +36,13 @@ public class TimingMeter : MonoBehaviour
                 CheckSuccess();
             }
         }
+    }
+
+    public void startQTE()
+    {
+        timingMeterAnimator.SetBool("isOpen", true);
+        meterActive = true;
+        SetTargetRangeMarkers();
     }
 
     //Moves the handle up and down
@@ -64,11 +74,27 @@ public class TimingMeter : MonoBehaviour
         if(sliderMeter.value >= targetMin && sliderMeter.value <= targetMax)
         {
             Debug.Log("Successful QTE");
+            RandomizeMeter();
         }
         else
         {
             Debug.Log("Failed QTE");
+            RandomizeMeter();
+            EndQTE();
         }
+    }
+
+    public void RandomizeMeter()
+    {
+        /*targetValue = Random.Range(0.1f, 0.9f);
+        targetMin = targetValue - 0.1f;
+        targetMax = targetValue + 0.1f;*/
+
+        targetMin = Random.Range(0.1f, 0.4f);
+        targetMax = Random.Range(0.6f, 0.9f);
+        meterActive = true;
+        
+        EndQTE();
     }
 
     //Set the target markers based off target range
@@ -90,5 +116,11 @@ public class TimingMeter : MonoBehaviour
         targetRangeHighlight.sizeDelta = new Vector2(highlightWidth, targetRangeHighlight.sizeDelta.y); // Adjust width
         targetRangeHighlight.anchoredPosition = new Vector2(minXPos + 0.5f, targetRangeHighlight.anchoredPosition.y); // Adjust position
         Debug.Log(targetRangeHighlight.sizeDelta + targetRangeHighlight.anchoredPosition);
+    }
+
+    public void EndQTE()
+    {
+        timingMeterAnimator.SetBool("isOpen", false);
+        meterActive = false;
     }
 }

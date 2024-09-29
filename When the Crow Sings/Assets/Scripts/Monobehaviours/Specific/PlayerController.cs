@@ -57,10 +57,12 @@ public class PlayerController : StateMachineComponent, IService
     [HideInInspector]
     public Vector3 movementInput;
     public List<DialogueInteract> dialogueInteractables = new List<DialogueInteract>();
+    public QTEInteract qteInteract;
 
     private void Start()
     {
         dialogueManager = FindObjectOfType<DialogueManager>();
+        qteInteract = FindObjectOfType<QTEInteract>();
     }
 
 }
