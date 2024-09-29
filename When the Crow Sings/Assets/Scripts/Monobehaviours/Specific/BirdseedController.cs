@@ -9,6 +9,11 @@ public class BirdseedController : MonoBehaviour
     public GameObject landedVisual;
 
     private bool _isLanded = false;
+
+    public float crowDelayInSeconds = .5f;
+    public float birdseedLifeAfterGround = 1.5f;
+
+    [HideInInspector]
     public bool isLanded { get {return _isLanded; }
         set
         {
@@ -29,10 +34,9 @@ public class BirdseedController : MonoBehaviour
 
     private IEnumerator SpawnCrows()
     {
-
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(crowDelayInSeconds);
         Instantiate(pfCrowsTemp,transform.position, Quaternion.identity);
-        Destroy(gameObject, 1.5f);
+        Destroy(gameObject, birdseedLifeAfterGround);
     }
 
     private void Init(Vector3 direction)
@@ -52,12 +56,17 @@ public class BirdseedController : MonoBehaviour
     bool firstTime = false;
     private void OnCollisionEnter(Collision collision)
     {
-        if (!firstTime)
+        if (collision.gameObject.layer == 3)
         {
-            firstTime = true;
-            isLanded = true;
-            StartCoroutine(SpawnCrows());
+            if (!firstTime)
+            {
+                firstTime = true;
+                isLanded = true;
+                GetComponent<Rigidbody>().velocity *= 0.05f;
+                StartCoroutine(SpawnCrows());
+            }
         }
+        
     }
 
 

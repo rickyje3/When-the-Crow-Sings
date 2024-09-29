@@ -31,28 +31,20 @@ public class EnemyPatrolState : EnemyState
         s.stateMachine.Enter("EnemyChaseState");
     }
 
-    public override void OnDisable()
-    {
-
-    }
-
-    public override void OnEnable()
-    {
-
-    }
 
     public override void StateEntered()
     {
-
+        s.StartCoroutine(setRandomPoint());
     }
 
-    public override void StateExited()
+    private IEnumerator setRandomPoint()
     {
+        var radius = 10;
+        s.navMeshAgent.destination = new Vector3(Random.Range(-10,10), Random.Range(-10, 10), Random.Range(-10, 10));
+        yield return new WaitForSeconds(s.timeToWander);
+        s.navMeshAgent.destination = s.transform.position;
+        yield return new WaitForSeconds(s.timeToWaitBetweenWander);
 
-    }
-
-    public override void Update(float deltaTime)
-    {
-
+        s.StartCoroutine(setRandomPoint());
     }
 }
