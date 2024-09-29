@@ -74,6 +74,18 @@ public class PlayerMovementState : StateMachineState
     {
         s.isCrouching = !s.isCrouching;
         s.playerAnimator.SetBool("animIsCrouching", s.isCrouching);
+        if (s.isCrouching)
+        {
+            //s.GetComponent<CapsuleCollider>().center.Set(0,0,0);
+            s.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0);
+            s.GetComponent<CapsuleCollider>().height = 2;
+        }
+        else
+        {
+            //s.GetComponent<CapsuleCollider>().center.Set(0, 1, 0);
+            s.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
+            s.GetComponent<CapsuleCollider>().height = 4;
+        }
     }
     private void OnFired(InputAction.CallbackContext context)
     {

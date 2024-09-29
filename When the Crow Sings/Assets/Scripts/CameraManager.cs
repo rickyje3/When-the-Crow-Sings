@@ -11,10 +11,9 @@ public class CameraManager : MonoBehaviour
 
     void Update()
     {
-
         Ray ray = GetComponent<Camera>().ScreenPointToRay(Mouse.current.position.ReadValue());
         
-        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo,Mathf.Infinity, ~LayerMask.GetMask("Player")))
         {
             
             //Debug.DrawLine(ray.origin, hitInfo.point,Color.red,1f);

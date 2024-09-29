@@ -56,12 +56,17 @@ public class BirdseedController : MonoBehaviour
     bool firstTime = false;
     private void OnCollisionEnter(Collision collision)
     {
-        if (!firstTime)
+        if (collision.gameObject.layer == 3)
         {
-            firstTime = true;
-            isLanded = true;
-            StartCoroutine(SpawnCrows());
+            if (!firstTime)
+            {
+                firstTime = true;
+                isLanded = true;
+                GetComponent<Rigidbody>().velocity *= 0.05f;
+                StartCoroutine(SpawnCrows());
+            }
         }
+        
     }
 
 

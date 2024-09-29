@@ -23,10 +23,21 @@ public class EnemyController : StateMachineComponent
 
     public void TriggerEntered(Collider other)
     {
-        stateMachine.OnTriggerEnter(other);
+        //stateMachine.OnTriggerEnter(other);
     }
     public void TriggerExited(Collider other)
     {
-       stateMachine.OnTriggerExit(other);
+       //stateMachine.OnTriggerExit(other);
+    }
+    public void TriggerStay(Collider other)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, ServiceLocator.Get<PlayerController>().transform.position - transform.position, out hit))
+        {
+            if(hit.transform.tag == "Player")
+            {
+                stateMachine.OnTriggerEnter(other);
+            }
+        }
     }
 }
