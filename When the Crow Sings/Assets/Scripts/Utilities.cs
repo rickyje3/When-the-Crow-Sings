@@ -11,4 +11,11 @@ public static class Utilities
         if (n < 0) n += 360;
         return n;
     }
+    //public static float GetAngleFromVector_Rad(Vector3 dir)
+    //{
+    //    dir = dir.normalized;
+    //    float n = Mathf.Atan2(dir.y, dir.x);
+    //    if (n < 0) n += 360;
+    //    return n;
+    //}
 }
