@@ -10,6 +10,7 @@ public class EnemyStunnedState : EnemyState
 
     private IEnumerator exitStateAfterTime()
     {
+        s.navMeshAgent.destination = s.transform.position;
         yield return new WaitForSeconds(2.0f);
         s.stateMachine.Enter("EnemyChaseState"); // TODO: Maybe a "EnemyRecoveringState" to handle logic? Maybe do that here?
     }
