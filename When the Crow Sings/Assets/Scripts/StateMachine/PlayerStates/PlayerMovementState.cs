@@ -26,6 +26,8 @@ public class PlayerMovementState : StateMachineState
         s.playerInput.Player.Interact.canceled += OnInteract;
 
         s.playerInput.Player.Fire.performed += OnFired;
+
+        s.playerInput.Player.Crouch.performed += OnCrouched;
     }
 
     public override void StateExited()
@@ -40,7 +42,13 @@ public class PlayerMovementState : StateMachineState
         s.playerInput.Player.Interact.canceled -= OnInteract;
 
         s.playerInput.Player.Fire.performed -= OnFired;
+
+        s.playerInput.Player.Crouch.performed -= OnCrouched;
+
+        s.playerAnimator.SetBool("animIsMoving", false);
     }
+
+  
 
     public override void Update(float deltaTime)
     {
@@ -52,11 +60,33 @@ public class PlayerMovementState : StateMachineState
         if (movement != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
-            s.transform.rotation = Quaternion.RotateTowards(s.transform.rotation, toRotation, s.speed * Time.deltaTime);
+            s.transform.rotation = Quaternion.RotateTowards(s.transform.rotation, toRotation, 1000 * Time.deltaTime);
+
+            s.playerAnimator.SetBool("animIsMoving", true);
+        }
+        else
+        {
+            s.playerAnimator.SetBool("animIsMoving", false);
         }
     }
 
-    
+    private void OnCrouched(InputAction.CallbackContext context)
+    {
+        s.isCrouching = !s.isCrouching;
+        s.playerAnimator.SetBool("animIsCrouching", s.isCrouching);
+        if (s.isCrouching)
+        {
+            //s.GetComponent<CapsuleCollider>().center.Set(0,0,0);
+            s.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0);
+            s.GetComponent<CapsuleCollider>().height = 2;
+        }
+        else
+        {
+            //s.GetComponent<CapsuleCollider>().center.Set(0, 1, 0);
+            s.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
+            s.GetComponent<CapsuleCollider>().height = 4;
+        }
+    }
     private void OnFired(InputAction.CallbackContext context)
     {
         s.stateMachine.Enter("PlayerThrowBirdseedState");
@@ -83,7 +113,6 @@ public class PlayerMovementState : StateMachineState
         else
         {
             s.movementInput = context.ReadValue<Vector2>(); // Normal movement
-
         }
     }
 

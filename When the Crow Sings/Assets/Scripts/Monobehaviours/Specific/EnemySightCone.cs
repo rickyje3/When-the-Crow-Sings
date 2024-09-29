@@ -8,10 +8,27 @@ public class EnemySightCone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        controller.TriggerEntered(other);
+
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Birdseed")
+        {
+            controller.TriggerEntered(other);
+        }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Birdseed")
+        {
+            controller.TriggerStay(other);
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
-        controller.TriggerExited(other);
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Birdseed")
+        {
+            controller.TriggerExited(other);
+        }
+           
     }
 }
