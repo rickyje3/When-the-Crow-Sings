@@ -8,17 +8,18 @@ public class EnemyController : StateMachineComponent
     [HideInInspector]
     public NavMeshAgent navMeshAgent;
 
+    public float timeToWander = 4.0f;
+    public float timeToWaitBetweenWander = 2.0f;
+    public float lookAtHeight = 2.5f;
+
     private void Awake()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new EnemyPatrolState(this), "EnemyPatrolState");
         stateMachine.RegisterState(new EnemyChaseState(this), "EnemyChaseState");
         stateMachine.RegisterState(new EnemyStunnedState(this), "EnemyStunnedState");
         stateMachine.Enter("EnemyPatrolState");
-    }
-    private void Start()
-    {
-        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     public void TriggerEntered(Collider other)
@@ -27,12 +28,24 @@ public class EnemyController : StateMachineComponent
     }
     public void TriggerExited(Collider other)
     {
-       //stateMachine.OnTriggerExit(other);
+        //stateMachine.OnTriggerExit(other);
+        LineRenderer lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.enabled = false;
     }
     public void TriggerStay(Collider other)
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, ServiceLocator.Get<PlayerController>().transform.position - transform.position, out hit))
+
+        Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
+        targetPosition.y += lookAtHeight;
+
+
+        LineRenderer lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, targetPosition);
+
+        if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit))
         {
             if(hit.transform.tag == "Player")
             {
@@ -40,4 +53,28 @@ public class EnemyController : StateMachineComponent
             }
         }
     }
+
+    //private void FixedUpdate()
+    //{
+    //    RaycastHit hit;
+
+    //    Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
+    //    targetPosition.y += lookAtHeight;
+
+
+    //    LineRenderer lineRenderer = GetComponent<LineRenderer>();
+    //    lineRenderer.enabled = true;
+    //    lineRenderer.SetPosition(0, transform.position);
+    //    lineRenderer.SetPosition(1, targetPosition);
+
+
+        
+    //    if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit))
+    //    {
+    //        if (hit.transform.tag == "Player")
+    //        {
+    //            Debug.Log("I SEE YOU");
+    //        }
+    //    }
+    //}
 }
