@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 9099458239503796105}
   - component: {fileID: 4517060189245592930}
   - component: {fileID: 4748030565633445404}
+  - component: {fileID: 370623299872109477}
+  - component: {fileID: 7489657694225672266}
   m_Layer: 8
   m_Name: pf_Enemy
   m_TagString: Untagged
@@ -53,8 +55,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 0}
+  enemyMaterial: {fileID: 2100000, guid: 4bd5ec13fe23f6c4aab4fc483b0f47f7, type: 2}
   timeToWander: 4
   timeToWaitBetweenWander: 2
+  lookAtHeight: 2.5
 --- !u!195 &6927032940599626117
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -216,6 +220,47 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &370623299872109477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3477123717623650676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b5006fcb1f39944c9cf88ccb381c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoingToHub: 0
+  GoingToZone1: 0
+  GoingToZone2: 0
+  GoingToZone3: 0
+  GoingToZone4: 0
+  GoingToStealth: 1
+--- !u!136 &7489657694225672266
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3477123717623650676}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.4
+  m_Height: 6.06
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5266600726387048090
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +391,7 @@ GameObject:
   - component: {fileID: 6241155567005795643}
   - component: {fileID: 3470343145319793302}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: VisualCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -387,7 +432,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb43117edb0066644b95f7f5432544d1, type: 2}
+  - {fileID: 2100000, guid: 4bd5ec13fe23f6c4aab4fc483b0f47f7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
