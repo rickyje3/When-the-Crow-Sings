@@ -13,13 +13,14 @@ public class DialogueManager : MonoBehaviour
     public Animator DialogueAnimator;
     public Animator choiceDialogueAnimator;
 
-    private float dialogueSpeed = .03f; // Less = faster, more = slower
+    private float dialogueSpeed = .02f; // Less = faster, more = slower
     private PlayerController player;
     private bool isTyping = false;
     private bool isAfterChoice = false;
     private Dialogue currentDialogue;
     public bool choicesShown;
     public bool inDialogue;
+    public bool noChoices;
 
     // Dialogue queues
     public Queue<string> sentences;
@@ -39,6 +40,8 @@ public class DialogueManager : MonoBehaviour
         currentQueue = new Queue<string>();
 
         player = FindObjectOfType<PlayerController>();
+
+
         if (player == null)
         {
             Debug.LogError("PlayerController not found in the scene.");
@@ -49,6 +52,7 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("Starting conversation with " + dialogue.name);
         currentDialogue = dialogue; // Set the current dialogue
+
         DialogueAnimator.SetBool("isOpen", true);
         nameText.text = dialogue.name;
 
@@ -114,16 +118,26 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("End of conversation");
 
-        if (!isAfterChoice)
-        {
-            ShowChoices(); // Show choices if there are any
-        }
-        else if(isAfterChoice)
+        if (noChoices)
         {
             Debug.Log("No choices available, closing dialogue.");
             DialogueAnimator.SetBool("isOpen", false);
-            player.speed = 5; // Restore player movement after dialogue ends
+            player.speed = 10; // Restore player movement after dialogue ends
             inDialogue = false;
+        }
+        else
+        {
+            if (!isAfterChoice)
+            {
+                ShowChoices(); // Show choices if there are any
+            }
+            else if (isAfterChoice)
+            {
+                Debug.Log("No choices available, closing dialogue.");
+                DialogueAnimator.SetBool("isOpen", false);
+                player.speed = 10; // Restore player movement after dialogue ends
+                inDialogue = false;
+            }
         }
     }
 
