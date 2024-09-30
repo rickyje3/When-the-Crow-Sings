@@ -17,4 +17,8 @@ public class EnemyChaseState : EnemyState
     {
         //s.stateMachine.Enter("EnemyPatrolState");
     }
+    public override void StateEntered()
+    {
+        s.enemyMaterial.color = Color.red;
+    }
 }

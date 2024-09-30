@@ -8,6 +8,8 @@ public class EnemyController : StateMachineComponent
     [HideInInspector]
     public NavMeshAgent navMeshAgent;
 
+    public Material enemyMaterial;
+
     public float timeToWander = 4.0f;
     public float timeToWaitBetweenWander = 2.0f;
     public float lookAtHeight = 2.5f;
@@ -32,12 +34,20 @@ public class EnemyController : StateMachineComponent
         LineRenderer lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
     }
+
+
+    bool lastTime = false;
     public void TriggerStay(Collider other)
     {
         RaycastHit hit;
 
         Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
         targetPosition.y += lookAtHeight;
+        if ( lastTime)
+        {
+            targetPosition.y -= 3.0f;
+        }
+        lastTime = !lastTime;
 
 
         LineRenderer lineRenderer = GetComponent<LineRenderer>();

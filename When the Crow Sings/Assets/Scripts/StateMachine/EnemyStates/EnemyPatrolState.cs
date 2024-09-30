@@ -35,6 +35,7 @@ public class EnemyPatrolState : EnemyState
     public override void StateEntered()
     {
         s.StartCoroutine(setRandomPoint());
+        s.enemyMaterial.color = Color.white;
     }
 
     private IEnumerator setRandomPoint()
