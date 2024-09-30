@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class PlayerController : StateMachineComponent, IService
@@ -42,10 +43,16 @@ public class PlayerController : StateMachineComponent, IService
     private void OnEnable()
     {
         playerInput.Player.Enable();
+        playerInput.Player.Quit.performed += OnQuit;
     }
     private void OnDisable()
     {
         playerInput.Player.Disable();
+    }
+
+    private void OnQuit(InputAction.CallbackContext context)
+    {
+        Application.Quit();
     }
 
 
