@@ -8,6 +8,8 @@ public class EnemyController : StateMachineComponent
     [HideInInspector]
     public NavMeshAgent navMeshAgent;
 
+    public Material enemyMaterial;
+
     public float timeToWander = 4.0f;
     public float timeToWaitBetweenWander = 2.0f;
     public float lookAtHeight = 2.5f;

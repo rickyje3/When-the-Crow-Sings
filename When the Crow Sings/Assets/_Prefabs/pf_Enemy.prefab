@@ -53,8 +53,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 0}
+  enemyMaterial: {fileID: 2100000, guid: 4bd5ec13fe23f6c4aab4fc483b0f47f7, type: 2}
   timeToWander: 4
   timeToWaitBetweenWander: 2
+  lookAtHeight: 2.5
 --- !u!195 &6927032940599626117
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -346,7 +348,7 @@ GameObject:
   - component: {fileID: 6241155567005795643}
   - component: {fileID: 3470343145319793302}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: VisualCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -387,7 +389,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb43117edb0066644b95f7f5432544d1, type: 2}
+  - {fileID: 2100000, guid: 4bd5ec13fe23f6c4aab4fc483b0f47f7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
