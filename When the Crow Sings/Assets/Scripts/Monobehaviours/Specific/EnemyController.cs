@@ -43,6 +43,12 @@ public class EnemyController : StateMachineComponent
 
         Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
         targetPosition.y += lookAtHeight;
+
+        LineRenderer lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, targetPosition);
+
         if ( lastTime)
         {
             targetPosition.y -= 3.0f;
@@ -50,10 +56,7 @@ public class EnemyController : StateMachineComponent
         lastTime = !lastTime;
 
 
-        LineRenderer lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.enabled = true;
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, targetPosition);
+        
 
         if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit))
         {
