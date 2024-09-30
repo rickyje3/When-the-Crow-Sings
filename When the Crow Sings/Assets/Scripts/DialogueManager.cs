@@ -31,6 +31,8 @@ public class DialogueManager : MonoBehaviour
 
     private int currentChoiceIndex = 0;  // Tracks currently selected choice
 
+    public bool isInDialogue = false;
+
     private void Start()
     {
         sentences = new Queue<string>();
@@ -50,6 +52,8 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        isInDialogue = true;
+
         Debug.Log("Starting conversation with " + dialogue.name);
         currentDialogue = dialogue; // Set the current dialogue
 
@@ -82,6 +86,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
+        isInDialogue = true;
         if (isTyping) return;  // Don't interrupt typing
 
         if (currentQueue.Count == 0)
@@ -139,6 +144,7 @@ public class DialogueManager : MonoBehaviour
                 inDialogue = false;
             }
         }
+        isInDialogue = false;
     }
 
 
@@ -162,6 +168,7 @@ public class DialogueManager : MonoBehaviour
 
     private void ShowChoices()
     {
+        isInDialogue = true;
         Debug.Log("Showing Choices");
         choicesShown = true;
 
@@ -235,6 +242,8 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogueAfterChoice(int choiceNumber)
     {
+        isInDialogue = true; // TODO: Might be redundant here?
+
         if (choiceNumber == 1)
         {
             sentencesAfterChoice1.Clear();
