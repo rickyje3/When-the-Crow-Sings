@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     public Animator DialogueAnimator;
     public Animator choiceDialogueAnimator;
 
-    private float dialogueSpeed = .02f; // Less = faster, more = slower
+    private float dialogueSpeed = .015f; // Less = faster, more = slower
     private PlayerController player;
     private bool isTyping = false;
     private bool isAfterChoice = false;
