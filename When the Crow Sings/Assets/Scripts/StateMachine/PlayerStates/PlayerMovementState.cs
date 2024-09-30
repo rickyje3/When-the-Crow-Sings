@@ -135,7 +135,6 @@ public class PlayerMovementState : StateMachineState
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-
         if (context.performed)
         {
             foreach (var interactable in s.dialogueInteractables)

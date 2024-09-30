@@ -11,7 +11,7 @@ public class DialogueInteract : MonoBehaviour
     public Sprite NPCSprite; //If there is no NPC image for this interaction leave it empty
     public Image NPCImage; //This always needs to be attached whether there is a NPC sprite or not
     public float targetAlpha;
-    public DialogueManager dialogueManager;
+    [HideInInspector] public DialogueManager dialogueManager;
 
     void Awake()
     {
