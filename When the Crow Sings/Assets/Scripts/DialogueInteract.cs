@@ -13,6 +13,9 @@ public class DialogueInteract : MonoBehaviour
     public float targetAlpha;
     [HideInInspector] public DialogueManager dialogueManager;
 
+
+    
+
     void Awake()
     {
         dialogueManager = FindObjectOfType<DialogueManager>();

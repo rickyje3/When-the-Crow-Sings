@@ -139,7 +139,7 @@ public class PlayerMovementState : StateMachineState
         {
             foreach (var interactable in s.dialogueInteractables)
             {
-                if (interactable.playerInRange)
+                if (interactable.playerInRange && !s.dialogueManager.isInDialogue)
                 {
                     //activate when interact key is pressed
                     interactable.ActivateDialogue();
