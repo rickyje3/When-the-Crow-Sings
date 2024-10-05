@@ -12,4 +12,11 @@ public class DialogueManager : MonoBehaviour, IService
     {
         ServiceLocator.Register<DialogueManager>(this);
     }
+
+    private void Start()
+    {
+        DialogueParser parser = new DialogueParser(new DialogueResource(),"");
+    }
+
+
 }
