@@ -27,8 +27,7 @@ public class DialogueParser
         for (int i = 0;  i < raw_lines.Length; i++)
         {
             DialogueLine newLine = new DialogueLine(raw_lines[i]);
-
-            Debug.Log("Line = " + newLine.fullDialogueLine + " and type = " + newLine.type);
+            
 
         }
        

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DialogueLine
@@ -36,14 +37,27 @@ public class DialogueLine
     {
         fullDialogueLine = rawLine.Trim();
 
+        if (fullDialogueLine.Split(":").Length > 1)
+        {
+            type = LINE_TYPE.DIALOGUE;
+            string[] split = fullDialogueLine.Split(":", 2);
+            characterName = split[0];
+            dialogue = string.Join("", split.Skip(1));
+
+
+            Debug.Log("Name: "+characterName);
+            Debug.Log("Dialogue: "+dialogue);
+        }
+
         switch (fullDialogueLine)
         {
             case "Yeah":
-                type = LINE_TYPE.DIALOGUE;
+                
                 break;
             default:
                 break;
         };
+
 
     }
 }
