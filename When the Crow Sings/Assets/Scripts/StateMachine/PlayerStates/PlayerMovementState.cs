@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class PlayerMovementState : StateMachineState
 {
     PlayerController s;
-    QTEInteract qte;
 
     public PlayerMovementState(PlayerController component)
     {
@@ -94,67 +93,16 @@ public class PlayerMovementState : StateMachineState
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        // Get the input vector from the action map
-        //s.movementInput = context.ReadValue<Vector2>();
-        if (s.dialogueManager.choicesShown)
-        {
-            Vector2 input = context.ReadValue<Vector2>();
-
-            // Check if input is up or down to navigate choices
-            if (input.y > 0) // Move up
-            {
-                s.dialogueManager.HandleChoiceSelection(false); // Move up in choices
-            }
-            else if (input.y < 0) // Move down
-            {
-                s.dialogueManager.HandleChoiceSelection(true); // Move down in choices
-            }
-        }
-        else
-        {
-            s.movementInput = context.ReadValue<Vector2>(); // Normal movement
-        }
+         s.movementInput = context.ReadValue<Vector2>(); // Normal movement
+        
     }
 
     private void OnAction(InputAction.CallbackContext context)
     {
-        if (context.performed && s.dialogueManager != null && s.dialogueManager.choicesShown)
-        {
-            // Confirm the currently selected choice
-            s.dialogueManager.ConfirmChoice();
-        }
-        else if (context.performed && s.dialogueManager != null && s.dialogueManager.choicesShown == false && s.dialogueManager.inDialogue)
-        {
-            s.dialogueManager.DisplayNextSentence();
-        }
-        else if (context.performed && s.dialogueManager != null && s.dialogueManager.choicesShown == false && s.dialogueManager.inDialogue == false)
-        {
-
-        }
     }
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            foreach (var interactable in s.dialogueInteractables)
-            {
-                if (interactable.playerInRange && !s.dialogueManager.isInDialogue)
-                {
-                    //activate when interact key is pressed
-                    interactable.ActivateDialogue();
-                    break; // Exit after activating the first available dialogue
-                }
-            }
-        }
 
-        if (context.performed)
-        {
-            if (s.qteInteract.playerInRange)
-            {
-                 //activate when interact key is pressed
-                 s.qteInteract.ActivateTimingMeter();
-            }
-        }
     }
 }
