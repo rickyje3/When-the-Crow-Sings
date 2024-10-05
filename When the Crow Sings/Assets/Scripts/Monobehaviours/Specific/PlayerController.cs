@@ -59,17 +59,9 @@ public class PlayerController : StateMachineComponent, IService
     // Ricky code
 
     [HideInInspector]
-    public DialogueManager dialogueManager;
     public float speed = 5.0f;
     [HideInInspector]
     public Vector3 movementInput;
-    public List<DialogueInteract> dialogueInteractables = new List<DialogueInteract>();
-    [HideInInspector] public QTEInteract qteInteract;
 
-    private void Start()
-    {
-        dialogueManager = FindObjectOfType<DialogueManager>();
-        qteInteract = FindObjectOfType<QTEInteract>();
-    }
 
 }
