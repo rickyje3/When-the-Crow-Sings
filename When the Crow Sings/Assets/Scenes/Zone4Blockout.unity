@@ -1799,7 +1799,6 @@ GameObject:
   - component: {fileID: 131462187}
   - component: {fileID: 131462186}
   - component: {fileID: 131462185}
-  - component: {fileID: 131462189}
   - component: {fileID: 131462190}
   m_Layer: 0
   m_Name: Cube (2)
@@ -1894,20 +1893,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 761153022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &131462189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 131462184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79bc3d9dc258da64ea2054149773c372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualCue: {fileID: 0}
-  playerInRange: 0
 --- !u!135 &131462190
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2536,7 +2521,6 @@ GameObject:
   - component: {fileID: 237120694}
   - component: {fileID: 237120693}
   - component: {fileID: 237120692}
-  - component: {fileID: 237120696}
   - component: {fileID: 237120697}
   m_Layer: 0
   m_Name: Cube (13)
@@ -2632,32 +2616,6 @@ Transform:
   - {fileID: 523610740}
   m_Father: {fileID: 761153022}
   m_LocalEulerAnglesHint: {x: -57.712, y: -75.091, z: 0}
---- !u!114 &237120696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 237120691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e24304ac446d0ae47b4e582c1ecc1eb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue:
-    name: 
-    sentences:
-    - '"The one piece lies ahead..."'
-    choices1: []
-    choices2: []
-    sentencesAfterChoice1: []
-    sentencesAfterChoice2: []
-  visualCue: {fileID: 0}
-  playerInRange: 0
-  NPCSprite: {fileID: 0}
-  NPCImage: {fileID: 0}
-  targetAlpha: 0
-  dialogueManager: {fileID: 0}
 --- !u!135 &237120697
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10231,7 +10189,7 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogueInteractables.Array.data[1]
       value: 
-      objectReference: {fileID: 237120696}
+      objectReference: {fileID: 0}
     - target: {fileID: 8946101180679054567, guid: 5881e06d468398a44878e800776633ac,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
