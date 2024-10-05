@@ -37,7 +37,13 @@ public class DialogueLine
     {
         fullDialogueLine = rawLine.Trim();
 
-        if (fullDialogueLine.Split(":").Length > 1)
+
+        if (fullDialogueLine.StartsWith('~')) // TODO: Move this logic to the parser and create multiple classes for each line type.
+        {
+            type = LINE_TYPE.TITLE;
+        }
+
+        else if (fullDialogueLine.Split(":").Length > 1)
         {
             type = LINE_TYPE.DIALOGUE;
             string[] split = fullDialogueLine.Split(":", 2);
@@ -49,14 +55,7 @@ public class DialogueLine
             Debug.Log("Dialogue: "+dialogue);
         }
 
-        switch (fullDialogueLine)
-        {
-            case "Yeah":
-                
-                break;
-            default:
-                break;
-        };
+        Debug.Log("Line type is == " + type);
 
 
     }
