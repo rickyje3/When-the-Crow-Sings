@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,9 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour, IService
 {
     public DialogueResource dialogueResource;
+    public GameSignal[] signalsDialogueCanUse;
+
+
     private void Awake()
     {
         RegisterSelfAsService();
