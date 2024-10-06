@@ -4,5 +4,6 @@ using UnityEngine;
 
 abstract public class DialogueBase
 {
-    public int nextID;
+    public int nextID = 0;
+    public int tabCount = 0;
 }

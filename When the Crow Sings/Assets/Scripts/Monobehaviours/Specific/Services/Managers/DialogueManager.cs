@@ -18,5 +18,51 @@ public class DialogueManager : MonoBehaviour, IService
         DialogueParser parser = new DialogueParser(new DialogueResource(),"");
     }
 
+    void GetNextLine()
+    {
+        // SUDO: if goto, empty, or conditional, get/"do"(?) the next-next line automatically. Otherwise, wait for input/signal/whatever.
+        // only exception is Choices, which need to be "got" on "finished typing" not "on input").
+    }
+
+    void DoConditionalDialogueLogic(DialogueCondition dialogueCondition)
+    {
+        switch (dialogueCondition.logicType)
+        {
+            case DialogueCondition.LogicType.IF:
+                switch (dialogueCondition.operatorType)
+                {
+                    case DialogueCondition.OperatorType.EQUAL_TO:
+
+                        break;
+
+                    case DialogueCondition.OperatorType.GREATER_THAN:
+
+                        break;
+
+                    case DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO:
+
+                        break;
+
+                    case DialogueCondition.OperatorType.LESS_THAN:
+
+                        break;
+
+                    case DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO:
+
+                        break;
+
+                    case DialogueCondition.OperatorType.NOT_EQUAL_TO:
+
+                        break;
+                }
+                break;
+                
+            case DialogueCondition.LogicType.ELIF:
+                break;
+            case DialogueCondition.LogicType.ELSE:
+                break;
+        }
+    }
+
 
 }

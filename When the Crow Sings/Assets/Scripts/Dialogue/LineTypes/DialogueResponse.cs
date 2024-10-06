@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DialogueLine : DialogueBase
+public class DialogueResponse : DialogueBase
 {
     public enum LINE_TYPE
     {
