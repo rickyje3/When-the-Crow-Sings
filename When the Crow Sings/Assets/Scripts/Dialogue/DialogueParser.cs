@@ -36,6 +36,7 @@ public class DialogueParser
             if (string.IsNullOrEmpty(trimmedLine) )
             {
                 allLines.Add(new DialogueEmpty());
+                Debug.Log(allLines[i]);
                 continue;
             }
 
@@ -157,38 +158,52 @@ public class DialogueParser
             trimmedLine = Utilities.RemoveFirstOccurence("else:", trimmedLine);
         }
 
-        string[] variableKeys;
+        string[] variableKeys = null;
         trimmedLine = Regex.Replace(trimmedLine, @"\s+", ""); // We're removing all whitespace.
-        if (trimmedLine.Contains("=="))
+
+        if (newLine.logicType != DialogueCondition.LogicType.ELSE)
         {
-            newLine.operatorType = DialogueCondition.OperatorType.EQUAL_TO;
-            variableKeys = trimmedLine.Split("==");
+            if (trimmedLine.Contains("=="))
+            {
+                newLine.operatorType = DialogueCondition.OperatorType.EQUAL_TO;
+                variableKeys = trimmedLine.Split(new string[] { "==" }, System.StringSplitOptions.None);
+            }
+            else if (trimmedLine.Contains(">="))
+            {
+                newLine.operatorType = DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO;
+                variableKeys = trimmedLine.Split(new string[] { ">=" }, System.StringSplitOptions.None);
+            }
+            else if (trimmedLine.Contains(">"))
+            {
+                newLine.operatorType = DialogueCondition.OperatorType.GREATER_THAN;
+                variableKeys = trimmedLine.Split(new string[] { ">" }, System.StringSplitOptions.None);
+            }
+            else if (trimmedLine.Contains("<="))
+            {
+                newLine.operatorType = DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO;
+                variableKeys = trimmedLine.Split(new string[] { "<=" }, System.StringSplitOptions.None);
+            }
+            else if (trimmedLine.Contains("<"))
+            {
+                newLine.operatorType = DialogueCondition.OperatorType.LESS_THAN;
+                variableKeys = trimmedLine.Split(new string[] { "<" }, System.StringSplitOptions.None);
+            }
+            else if (trimmedLine.Contains("!="))
+            {
+                newLine.operatorType = DialogueCondition.OperatorType.NOT_EQUAL_TO;
+                variableKeys = trimmedLine.Split(new string[] { "!=" }, System.StringSplitOptions.None);
+            }
+
+            // Set the terms on each side of the operator (as strings).
+            newLine.variableKey1 = variableKeys[0];
+            newLine.variableKey2 = variableKeys[1];
         }
-        else if (trimmedLine.Contains(">="))
+        else
         {
-            newLine.operatorType = DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO;
-            variableKeys = trimmedLine.Split(">=");
+            newLine.operatorType = DialogueCondition.OperatorType.NO_OPERATOR;
+            // Presumably the DialogueManager will handle variableKey stuff since there aren't any.
         }
-        else if (trimmedLine.Contains(">"))
-        {
-            newLine.operatorType = DialogueCondition.OperatorType.GREATER_THAN;
-            variableKeys = trimmedLine.Split(">");
-        }
-        else if (trimmedLine.Contains("<="))
-        {
-            newLine.operatorType = DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO;
-            variableKeys = trimmedLine.Split("<=");
-        }
-        else if (trimmedLine.Contains("<"))
-        {
-            newLine.operatorType = DialogueCondition.OperatorType.LESS_THAN;
-            variableKeys = trimmedLine.Split("<");
-        }
-        else if (trimmedLine.Contains("!="))
-        {
-            newLine.operatorType = DialogueCondition.OperatorType.NOT_EQUAL_TO;
-            variableKeys = trimmedLine.Split("!=");
-        }
+        
     }
 
     string rawText;
