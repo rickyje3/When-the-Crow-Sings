@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using static DialogueLine;
+using System.Linq;
 
 public class DialogueParser
 {
@@ -26,7 +28,29 @@ public class DialogueParser
 
         for (int i = 0;  i < raw_lines.Length; i++)
         {
-            DialogueLine newLine = new DialogueLine(raw_lines[i]);
+            string trimmedLine = raw_lines[i].Trim();
+
+
+            if (trimmedLine.StartsWith('~')) // TODO: Move this logic to the parser and create multiple classes for each line type.
+            {
+                //type = LINE_TYPE.TITLE;
+            }
+
+            else if (trimmedLine.Split(":").Length > 1)
+            {
+                //type = LINE_TYPE.DIALOGUE;
+                //string[] split = fullDialogueLine.Split(":", 2);
+                //characterName = split[0];
+                //dialogue = string.Join("", split.Skip(1));
+
+
+                //Debug.Log("Name: " + characterName);
+                //Debug.Log("Dialogue: " + dialogue);
+            }
+
+            //Debug.Log("Line type is == " + type);
+
+            DialogueLine newLine = new DialogueLine();
             
 
         }
