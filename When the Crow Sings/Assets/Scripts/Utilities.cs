@@ -18,4 +18,13 @@ public static class Utilities
     //    if (n < 0) n += 360;
     //    return n;
     //}
+
+    public static string RemoveFirstOccurence(string removeThis, string fromThis)
+    {
+        int index = fromThis.IndexOf(removeThis);
+        string newString = (index < 0)
+            ? fromThis
+            : fromThis.Remove(index, removeThis.Length);
+        return newString;
+    }
 }

@@ -41,7 +41,7 @@ public class EnemyPatrolState : EnemyState
     private IEnumerator setRandomPoint()
     {
         var radius = 10;
-        s.navMeshAgent.destination = new Vector3(Random.Range(-10,10), Random.Range(-10, 10), Random.Range(-10, 10));
+        s.navMeshAgent.destination = new Vector3(Random.Range(-radius, radius), Random.Range(-radius, radius), Random.Range(-radius, radius));
         yield return new WaitForSeconds(s.timeToWander);
         s.navMeshAgent.destination = s.transform.position;
         yield return new WaitForSeconds(s.timeToWaitBetweenWander);
