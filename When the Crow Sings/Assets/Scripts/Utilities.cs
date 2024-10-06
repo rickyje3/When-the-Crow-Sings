@@ -25,7 +25,6 @@ public static class Utilities
         string newString = (index < 0)
             ? fromThis
             : fromThis.Remove(index, removeThis.Length);
-        //Debug.Log("The altered line is---" + newString);
         return newString;
     }
 }

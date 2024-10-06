@@ -8,19 +8,16 @@ using System.Text.RegularExpressions;
 
 public class DialogueParser
 {
-    string _filePath;
-    int currentLine = 0;
-    public DialogueParser(DialogueResource resource,string filePath) // Or the actual Asset, not a string filePath.
+    public DialogueParser(DialogueResource dialogueResource) // Or the actual Asset, not a string filePath.
     {
-        _filePath = "Assets/Dialogue/TestText.txt";
-        Prepare(File.ReadAllText(_filePath),_filePath);
+        Prepare(dialogueResource,File.ReadAllText(dialogueResource.path));
     }
 
 
 
     string[] raw_lines;
     public List<DialogueBase> allLines = new List<DialogueBase>();
-    void Prepare(string text, string path)
+    void Prepare(DialogueResource dialogueResource, string text)
     {
         raw_lines = text.Split("\n");
 
@@ -36,7 +33,6 @@ public class DialogueParser
             if (string.IsNullOrEmpty(trimmedLine) )
             {
                 allLines.Add(new DialogueEmpty());
-                Debug.Log(allLines[i]);
                 continue;
             }
 
@@ -130,10 +126,11 @@ public class DialogueParser
                 }
                 allLines.Add(newLine);
             }
-            Debug.Log(allLines[i]);
+
+            
         }
-       
-        
+        // After finding all the lines, set the dialogueResource's lines.
+        dialogueResource.dialogueLines = allLines;
     }
 
     void PrepareConditional(string trimmedLine, DialogueCondition newLine)
@@ -217,13 +214,13 @@ public class DialogueParser
 
 
 
-    string GetNextLine()
-    {
-        currentLine += 1;
-        StreamReader reader = new StreamReader(_filePath);
-        //reader.
+    //string GetNextLine()
+    //{
+    //    currentLine += 1;
+    //    StreamReader reader = new StreamReader(_filePath);
+    //    //reader.
 
 
-        return "";
-    }
+    //    return "";
+    //}
 }

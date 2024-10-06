@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour, IService
 {
+    public DialogueResource dialogueResource;
     private void Awake()
     {
         RegisterSelfAsService();
@@ -15,7 +16,11 @@ public class DialogueManager : MonoBehaviour, IService
 
     private void Start()
     {
-        DialogueParser parser = new DialogueParser(new DialogueResource(),"");
+        DialogueParser parser = new DialogueParser(dialogueResource);
+        foreach (DialogueBase i in dialogueResource.dialogueLines)
+        {
+            Debug.Log(i);
+        }
     }
 
     void GetNextLine()
