@@ -17,10 +17,12 @@ public class DialogueManager : MonoBehaviour, IService
     private void Awake()
     {
         RegisterSelfAsService();
+        dialogueText.maxVisibleCharacters = 0;
     }
     public void RegisterSelfAsService()
     {
         ServiceLocator.Register<DialogueManager>(this);
+        StartCoroutine(TypeText(dialogueText, dialogueText.text));
     }
 
     private void Start()
@@ -31,6 +33,16 @@ public class DialogueManager : MonoBehaviour, IService
             Debug.Log(i);
         }
     }
+
+
+    int currentVisibleChar = 0;
+    IEnumerator TypeText(TextMeshProUGUI textMesh, string text)
+    {
+        yield return new WaitForSeconds(.1f);
+        textMesh.maxVisibleCharacters += 1;
+        
+    }
+
 
     void GetNextLine()
     {
