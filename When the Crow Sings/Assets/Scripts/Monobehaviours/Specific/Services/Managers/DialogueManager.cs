@@ -2,11 +2,16 @@ using ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DialogueManager : MonoBehaviour, IService
 {
     public DialogueResource dialogueResource;
     public GameSignal[] signalsDialogueCanUse;
+    [SerializeField]
+    private TextMeshProUGUI dialogueText;
+    [SerializeField]
+    private TextMeshProUGUI nameText;
 
 
     private void Awake()
