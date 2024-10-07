@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
+using System;
 
 public class DialogueManager : MonoBehaviour, IService
 {
@@ -50,6 +52,31 @@ public class DialogueManager : MonoBehaviour, IService
 
             nameText.text = newLine2.characterName;
             StartCoroutine(TypeText(dialogueText, newLine2.dialogue,index));
+        }
+        else if (newLine is DialogueGoto)
+        {
+            DialogueGoto newLine2 = (DialogueGoto)newLine;
+            if (newLine2.isEnd)
+            {
+                // SUDO: End dialogue.
+            }
+            else
+            {
+                //if (dialogueResource.dialogueTitles.Count(x => x.titleName == newLine2.gotoTitleName) != 1)
+                //{
+                //    Debug.Log("Hi");
+                //    throw new Exception("at dah dah dah dah NO");
+                //}
+                //else
+                //{
+                //    
+                //}
+                //&& (DialogueTitle)x.titleName == newLine2.gotoTitleName);
+
+                // SUDO find the index and make that the new index yeah
+                DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == newLine2.gotoTitleName);
+                Debug.Log(newLine2.gotoTitleName + " so we're going to " + tempHolderForTheTargetIndex.titleIndex);
+            }
         }
         else
         {
