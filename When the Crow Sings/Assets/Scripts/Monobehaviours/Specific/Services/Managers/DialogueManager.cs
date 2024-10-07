@@ -17,12 +17,12 @@ public class DialogueManager : MonoBehaviour, IService
     private void Awake()
     {
         RegisterSelfAsService();
-        dialogueText.maxVisibleCharacters = 0;
+        StartDialogueTESTING();
     }
     public void RegisterSelfAsService()
     {
         ServiceLocator.Register<DialogueManager>(this);
-        StartCoroutine(TypeText(dialogueText, dialogueText.text));
+        
     }
 
     private void Start()
@@ -32,6 +32,15 @@ public class DialogueManager : MonoBehaviour, IService
         {
             Debug.Log(i);
         }
+    }
+
+
+
+
+    void StartDialogueTESTING()
+    {
+        dialogueText.maxVisibleCharacters = 0;
+        StartCoroutine(TypeText(dialogueText, dialogueText.text));
     }
 
 
