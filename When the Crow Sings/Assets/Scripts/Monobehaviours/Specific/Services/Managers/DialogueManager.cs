@@ -13,6 +13,9 @@ public class DialogueManager : MonoBehaviour, IService
     [SerializeField]
     private TextMeshProUGUI nameText;
 
+    public float textSpeed = .05f;
+    public float pauseMultiplier = 10f;
+
 
     private void Awake()
     {
@@ -39,26 +42,26 @@ public class DialogueManager : MonoBehaviour, IService
 
     void StartDialogueTESTING()
     {
-        dialogueText.maxVisibleCharacters = 0;
+        
         StartCoroutine(TypeText(dialogueText, dialogueText.text));
     }
 
 
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text)
     {
+        dialogueText.maxVisibleCharacters = 0;
         while (textMesh.maxVisibleCharacters < textMesh.text.Length)
         {
-            float delay = .1f;
+            float pauseBetweenChars = textSpeed;
             char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1,0,textMesh.text.Length)];
-            //Debug.Log(character);
-            if (character == '.')
+            foreach (char i in ".!?")
             {
-
-                delay = 1.0f;
+                if (character == i)
+                {
+                    pauseBetweenChars *= pauseMultiplier;
+                }
             }
-
-
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(pauseBetweenChars);
             textMesh.maxVisibleCharacters += 1;
         }
     }
