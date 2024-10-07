@@ -38,8 +38,11 @@ public class DialogueManager : MonoBehaviour, IService
     int currentVisibleChar = 0;
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text)
     {
-        yield return new WaitForSeconds(.1f);
-        textMesh.maxVisibleCharacters += 1;
+        while (currentVisibleChar < textMesh.text.Length)
+        {
+            yield return new WaitForSeconds(.1f);
+            textMesh.maxVisibleCharacters += 1;
+        }
         
     }
 
