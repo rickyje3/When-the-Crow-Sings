@@ -44,15 +44,23 @@ public class DialogueManager : MonoBehaviour, IService
     }
 
 
-    int currentVisibleChar = 0;
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text)
     {
-        while (currentVisibleChar < textMesh.text.Length)
+        while (textMesh.maxVisibleCharacters < textMesh.text.Length)
         {
-            yield return new WaitForSeconds(.1f);
+            float delay = .1f;
+            char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1,0,textMesh.text.Length)];
+            //Debug.Log(character);
+            if (character == '.')
+            {
+
+                delay = 1.0f;
+            }
+
+
+            yield return new WaitForSeconds(delay);
             textMesh.maxVisibleCharacters += 1;
         }
-        
     }
 
 
