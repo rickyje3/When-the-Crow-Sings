@@ -20,7 +20,6 @@ public class DialogueManager : MonoBehaviour, IService
     private void Awake()
     {
         RegisterSelfAsService();
-        StartDialogueTESTING();
     }
     public void RegisterSelfAsService()
     {
@@ -31,10 +30,11 @@ public class DialogueManager : MonoBehaviour, IService
     private void Start()
     {
         DialogueParser parser = new DialogueParser(dialogueResource);
-        foreach (DialogueBase i in dialogueResource.dialogueLines)
-        {
-            Debug.Log(i);
-        }
+        //foreach (DialogueBase i in dialogueResource.dialogueLines)
+        //{
+        //    Debug.Log(i);
+        //}
+        StartDialogueTESTING();
     }
 
 
@@ -43,13 +43,15 @@ public class DialogueManager : MonoBehaviour, IService
     void StartDialogueTESTING()
     {
         
-        StartCoroutine(TypeText(dialogueText, dialogueText.text));
+        StartCoroutine(TypeText(dialogueText, dialogueResource.dialogueLines[2].dialogue));
     }
 
 
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text)
     {
         dialogueText.maxVisibleCharacters = 0;
+        textMesh.text = text;
+
         while (textMesh.maxVisibleCharacters < textMesh.text.Length)
         {
             float pauseBetweenChars = textSpeed;
