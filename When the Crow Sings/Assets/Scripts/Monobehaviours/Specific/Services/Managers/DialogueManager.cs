@@ -34,20 +34,33 @@ public class DialogueManager : MonoBehaviour, IService
         //{
         //    Debug.Log(i);
         //}
-        StartDialogueTESTING();
+        StartDialogueTESTING(0);
     }
 
 
 
 
-    void StartDialogueTESTING()
+    void StartDialogueTESTING(int index)
     {
+        DialogueBase newLine = dialogueResource.dialogueLines[index];
+
+        if (newLine is DialogueResponse)
+        {
+            DialogueResponse newLine2 = (DialogueResponse)newLine;
+
+            nameText.text = newLine2.characterName;
+            StartCoroutine(TypeText(dialogueText, newLine2.dialogue,index));
+        }
+        else
+        {
+            StartDialogueTESTING(index+1);
+        }
+
         
-        StartCoroutine(TypeText(dialogueText, dialogueResource.dialogueLines[2].dialogue));
     }
 
 
-    IEnumerator TypeText(TextMeshProUGUI textMesh, string text)
+    IEnumerator TypeText(TextMeshProUGUI textMesh, string text, int index)
     {
         dialogueText.maxVisibleCharacters = 0;
         textMesh.text = text;
@@ -66,6 +79,7 @@ public class DialogueManager : MonoBehaviour, IService
             yield return new WaitForSeconds(pauseBetweenChars);
             textMesh.maxVisibleCharacters += 1;
         }
+        StartDialogueTESTING(index+1);
     }
 
 

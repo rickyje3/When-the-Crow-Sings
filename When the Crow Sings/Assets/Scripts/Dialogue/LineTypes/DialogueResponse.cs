@@ -23,6 +23,9 @@ public class DialogueResponse : DialogueBase
 
     public LINE_TYPE type = LINE_TYPE.UNKNOWN;
 
+    public string fullDialogueLine = "";
+    public string dialogue = "";
+
     public string characterName;
     public string characterEmotion; // enum?
 
