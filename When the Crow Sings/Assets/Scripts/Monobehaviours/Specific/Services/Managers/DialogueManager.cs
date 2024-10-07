@@ -36,13 +36,18 @@ public class DialogueManager : MonoBehaviour, IService
         //{
         //    Debug.Log(i);
         //}
-        StartDialogueTESTING(0);
+        OnDialogueStart();
+    }
+
+
+    void OnDialogueStart()
+    {
+        ControlLineBehavior(0);
     }
 
 
 
-
-    void StartDialogueTESTING(int index)
+    void ControlLineBehavior(int index)
     {
         DialogueBase newLine = dialogueResource.dialogueLines[index];
 
@@ -62,25 +67,16 @@ public class DialogueManager : MonoBehaviour, IService
             }
             else
             {
-                //if (dialogueResource.dialogueTitles.Count(x => x.titleName == newLine2.gotoTitleName) != 1)
-                //{
-                //    Debug.Log("Hi");
-                //    throw new Exception("at dah dah dah dah NO");
-                //}
-                //else
-                //{
-                //    
-                //}
-                //&& (DialogueTitle)x.titleName == newLine2.gotoTitleName);
-
                 // SUDO find the index and make that the new index yeah
                 DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == newLine2.gotoTitleName);
                 Debug.Log(newLine2.gotoTitleName + " so we're going to " + tempHolderForTheTargetIndex.titleIndex);
+                ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
+
             }
         }
         else
         {
-            StartDialogueTESTING(index+1);
+            ControlLineBehavior(index+1);
         }
 
         
@@ -92,7 +88,7 @@ public class DialogueManager : MonoBehaviour, IService
         dialogueText.maxVisibleCharacters = 0;
         textMesh.text = text;
 
-        while (textMesh.maxVisibleCharacters < textMesh.text.Length)
+        while (textMesh.maxVisibleCharacters <= textMesh.text.Length)
         {
             float pauseBetweenChars = textSpeed;
             char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1,0,textMesh.text.Length)];
@@ -106,7 +102,7 @@ public class DialogueManager : MonoBehaviour, IService
             yield return new WaitForSeconds(pauseBetweenChars);
             textMesh.maxVisibleCharacters += 1;
         }
-        StartDialogueTESTING(index+1);
+        ControlLineBehavior(index+1);
     }
 
 
