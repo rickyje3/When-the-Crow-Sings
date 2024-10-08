@@ -32,13 +32,6 @@ public class DialogueManager : MonoBehaviour, IService
         
     }
 
-    private void Start()
-    {
-
-
-        //OnDialogueStart();
-    }
-
 
 
 
@@ -61,7 +54,9 @@ public class DialogueManager : MonoBehaviour, IService
 
         DialogueParser parser = new DialogueParser(dialogueResource);
 
-        ControlLineBehavior(0);
+        DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]);
+        ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
+
     }
 
 
@@ -86,19 +81,15 @@ public class DialogueManager : MonoBehaviour, IService
             }
             else
             {
-                // SUDO find the index and make that the new index yeah
                 DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == newLine2.gotoTitleName);
                 Debug.Log(newLine2.gotoTitleName + " so we're going to " + tempHolderForTheTargetIndex.titleIndex);
                 ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
-
             }
         }
         else
         {
             ControlLineBehavior(index+1);
         }
-
-        
     }
 
 
