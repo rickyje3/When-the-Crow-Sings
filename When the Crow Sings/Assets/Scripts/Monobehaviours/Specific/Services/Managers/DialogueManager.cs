@@ -15,6 +15,9 @@ public class DialogueManager : MonoBehaviour, IService
     [SerializeField]
     private TextMeshProUGUI nameText;
 
+
+    public GameSignal startDialogueSignal;
+
     public float textSpeed = .05f;
     public float pauseMultiplier = 10f;
 
@@ -32,15 +35,22 @@ public class DialogueManager : MonoBehaviour, IService
     private void Start()
     {
         DialogueParser parser = new DialogueParser(dialogueResource);
-        //foreach (DialogueBase i in dialogueResource.dialogueLines)
-        //{
-        //    Debug.Log(i);
-        //}
-        OnDialogueStart();
+
+        //OnDialogueStart();
+
+        startDialogueSignal.Emit();
     }
 
 
-    void OnDialogueStart()
+
+
+
+
+
+
+
+
+    void StartDialogue(SignalArguments signalArgs)
     {
         ControlLineBehavior(0);
     }

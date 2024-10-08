@@ -9,13 +9,14 @@ namespace ScriptableObjects
     [CreateAssetMenu]
     public class GameSignal : ScriptableObject
     {
+        public SignalArguments signalArguments;
         List<GameSignalListener> listeners = new List<GameSignalListener>();
 
         public void Emit()
         {
             for (int i = listeners.Count - 1; i >= 0; i--)
             {
-                listeners[i].OnSignalEmitted(); // Useful in case the response involves removing it from the list.
+                listeners[i].OnSignalEmitted(signalArguments); // Useful in case the response involves removing it from the list.
             }
         }
 
@@ -31,7 +32,7 @@ namespace ScriptableObjects
 
             for (int i = listeners.Count - 1; i >= 0; i--)
             {
-                listeners[i].OnSignalEmitted(); // Useful in case the response involves removing it from the list.
+                listeners[i].OnSignalEmitted(signalArguments); // Useful in case the response involves removing it from the list.
             }
         }
 
