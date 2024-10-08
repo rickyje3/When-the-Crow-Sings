@@ -8,7 +8,7 @@ using System;
 
 public class DialogueManager : MonoBehaviour, IService
 {
-    public DialogueResource dialogueResource;
+    private DialogueResource dialogueResource;
     public GameSignal[] signalsDialogueCanUse;
     [SerializeField]
     private TextMeshProUGUI dialogueText;
@@ -34,11 +34,9 @@ public class DialogueManager : MonoBehaviour, IService
 
     private void Start()
     {
-        DialogueParser parser = new DialogueParser(dialogueResource);
+
 
         //OnDialogueStart();
-
-        startDialogueSignal.Emit();
     }
 
 
@@ -50,8 +48,19 @@ public class DialogueManager : MonoBehaviour, IService
 
 
 
-    void StartDialogue(SignalArguments signalArgs)
+    public void StartDialogue(SignalArguments signalArgs)
     {
+        if (signalArgs.objectArgs[0] is DialogueResource)
+        {
+            dialogueResource = (DialogueResource)signalArgs.objectArgs[0];
+        }
+        else
+        {
+            throw new Exception("Error! The component emitting the signal does not have a DialogueResource as its first ObjectArgument.");
+        }
+
+        DialogueParser parser = new DialogueParser(dialogueResource);
+
         ControlLineBehavior(0);
     }
 
