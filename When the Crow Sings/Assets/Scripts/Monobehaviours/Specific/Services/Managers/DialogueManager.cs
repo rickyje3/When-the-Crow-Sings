@@ -10,15 +10,16 @@ public class DialogueManager : MonoBehaviour, IService
 {
     private DialogueResource dialogueResource;
     public GameSignal[] signalsDialogueCanUse;
+
+    [SerializeField] private GameObject dialogueBox;
     [SerializeField]
     private TextMeshProUGUI dialogueText;
     [SerializeField]
     private TextMeshProUGUI nameText;
 
 
-    public GameSignal startDialogueSignal;
 
-    private PlayerInputActions playerInputActions;
+    public GameSignal startDialogueSignal;
 
 
     public float textSpeed = .05f;
@@ -28,13 +29,10 @@ public class DialogueManager : MonoBehaviour, IService
     private void Awake()
     {
         RegisterSelfAsService();
-
-        playerInputActions = new PlayerInputActions();
     }
     public void RegisterSelfAsService()
     {
         ServiceLocator.Register<DialogueManager>(this);
-        
     }
 
 
@@ -57,7 +55,8 @@ public class DialogueManager : MonoBehaviour, IService
             throw new Exception("Error! The component emitting the signal does not have a DialogueResource as its first ObjectArgument.");
         }
 
-        playerInputActions.Player.Disable();
+        InputManager.playerInputActions.Player.Disable();
+        dialogueBox.SetActive(true);
 
         DialogueParser parser = new DialogueParser(dialogueResource);
         DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
@@ -68,7 +67,8 @@ public class DialogueManager : MonoBehaviour, IService
 
     public void EndDialogue()
     {
-        playerInputActions.Player.Enable();
+        InputManager.playerInputActions.Player.Enable();
+        dialogueBox.SetActive(false);
     }
 
 

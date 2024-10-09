@@ -19,11 +19,13 @@ public class PlayerController : StateMachineComponent, IService
     {
         RegisterSelfAsService();
 
-        playerInput = new PlayerInputActions();
-
         stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
         stateMachine.RegisterState(new PlayerThrowBirdseedState(this), "PlayerThrowBirdseedState");
+        
+    }
+    private void Start()
+    {
         stateMachine.Enter("PlayerMovementState");
     }
 
@@ -38,16 +40,14 @@ public class PlayerController : StateMachineComponent, IService
         var direction = throwTarget.transform.position - transform.position;
         BirdseedController.Create(pfBirdseedProjectile, throwPosition, direction);
     }
-
-    public PlayerInputActions playerInput;
     private void OnEnable()
     {
-        playerInput.Player.Enable();
-        playerInput.Player.Quit.performed += OnQuit;
+        InputManager.playerInputActions.Player.Enable();
+        InputManager.playerInputActions.Player.Quit.performed += OnQuit;
     }
     private void OnDisable()
     {
-        playerInput.Player.Disable();
+        InputManager.playerInputActions.Player.Disable();
     }
 
     private void OnQuit(InputAction.CallbackContext context)
