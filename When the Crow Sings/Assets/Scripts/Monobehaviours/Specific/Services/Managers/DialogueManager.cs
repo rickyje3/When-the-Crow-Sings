@@ -63,7 +63,10 @@ public class DialogueManager : MonoBehaviour, IService
 
     void ControlLineBehavior(int index)
     {
+        canNextLine = false;
+        currentLine = index;
         DialogueBase newLine = dialogueResource.dialogueLines[index];
+        
 
         if (newLine is DialogueResponse)
         {
@@ -86,9 +89,10 @@ public class DialogueManager : MonoBehaviour, IService
                 ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
             }
         }
-        else
+        else // In case of an EmptyLine
         {
             ControlLineBehavior(index+1);
+            
         }
     }
 
@@ -112,14 +116,22 @@ public class DialogueManager : MonoBehaviour, IService
             yield return new WaitForSeconds(pauseBetweenChars);
             textMesh.maxVisibleCharacters += 1;
         }
-        ControlLineBehavior(index+1);
+        //ControlLineBehavior(index+1);
+        canNextLine = true;
     }
 
-
-    void GetNextLine()
+    private int currentLine;
+    private bool canNextLine = false;
+    public void NextLine()
     {
         // SUDO: if goto, empty, or conditional, get/"do"(?) the next-next line automatically. Otherwise, wait for input/signal/whatever.
         // only exception is Choices, which need to be "got" on "finished typing" not "on input").
+
+        if (canNextLine)
+        {
+            ControlLineBehavior(currentLine + 1);
+        }
+        
     }
 
     void DoConditionalDialogueLogic(DialogueCondition dialogueCondition)
