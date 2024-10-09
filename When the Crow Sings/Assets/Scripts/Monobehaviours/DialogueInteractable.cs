@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TempDialogueStarter : MonoBehaviour
+public class DialogueInteractable : MonoBehaviour
 {
     public GameSignal signal;
     public SignalArguments signalArgs;

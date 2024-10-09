@@ -53,8 +53,8 @@ public class DialogueManager : MonoBehaviour, IService
         }
 
         DialogueParser parser = new DialogueParser(dialogueResource);
+        DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
 
-        DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]);
         ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
 
     }
