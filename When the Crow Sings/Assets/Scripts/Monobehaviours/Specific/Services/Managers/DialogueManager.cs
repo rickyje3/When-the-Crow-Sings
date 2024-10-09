@@ -18,6 +18,9 @@ public class DialogueManager : MonoBehaviour, IService
 
     public GameSignal startDialogueSignal;
 
+    private PlayerInputActions playerInputActions;
+
+
     public float textSpeed = .05f;
     public float pauseMultiplier = 10f;
 
@@ -25,6 +28,8 @@ public class DialogueManager : MonoBehaviour, IService
     private void Awake()
     {
         RegisterSelfAsService();
+
+        playerInputActions = new PlayerInputActions();
     }
     public void RegisterSelfAsService()
     {
@@ -52,11 +57,18 @@ public class DialogueManager : MonoBehaviour, IService
             throw new Exception("Error! The component emitting the signal does not have a DialogueResource as its first ObjectArgument.");
         }
 
+        playerInputActions.Player.Disable();
+
         DialogueParser parser = new DialogueParser(dialogueResource);
         DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
 
         ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
 
+    }
+
+    public void EndDialogue()
+    {
+        playerInputActions.Player.Enable();
     }
 
 
@@ -80,7 +92,7 @@ public class DialogueManager : MonoBehaviour, IService
             DialogueGoto newLine2 = (DialogueGoto)newLine;
             if (newLine2.isEnd)
             {
-                // SUDO: End dialogue.
+                EndDialogue();
             }
             else
             {
