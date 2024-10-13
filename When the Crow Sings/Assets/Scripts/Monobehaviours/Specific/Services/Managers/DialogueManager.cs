@@ -123,9 +123,12 @@ public class DialogueManager : MonoBehaviour, IService
             }
             if (choiceBlock == null) { throw new Exception("THE THING IS BLANK YOU SILLY GOOSE"); }
 
+            int loop = 0;
             foreach (DialogueChoice i in choiceBlock.dialogueChoices)
-            {
-                Debug.Log("The choice is "+i.choiceText + " and its tab count is "+i.tabCount);
+            { 
+                dialogueChoiceButtons[loop].GetComponentInChildren<TextMeshProUGUI>().text = i.choiceText;
+                dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueLineIndex = i.choiceIndex;
+                loop++;
             }
 
             // TODO: Populate the buttons. Then, wait for an inputevent from one of them to call ControlLineBehavior() again.
@@ -139,6 +142,10 @@ public class DialogueManager : MonoBehaviour, IService
         }
     }
 
+    public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
+    {
+        ControlLineBehavior(choiceButton.dialogueLineIndex + 1);
+    }
 
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text, int index)
     {

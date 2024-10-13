@@ -6,4 +6,5 @@ public class DialogueChoice : DialogueBase
 {
     // A potential dialogue response.
     public string choiceText;
+    public int choiceIndex;
 }

@@ -8,6 +8,7 @@ abstract public class DialogueBase
 
     // The number of indentations the line has.
     public int tabCount = 0;
+    
 
 
 }
