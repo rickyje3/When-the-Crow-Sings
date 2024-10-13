@@ -9,7 +9,11 @@ public class DialogueParser
 {
     public DialogueParser(DialogueResource dialogueResource) // Or the actual Asset, not a string filePath.
     {
-        Prepare(dialogueResource,File.ReadAllText(dialogueResource.path));
+        if (dialogueResource.dialogueLines.Count == 0)
+        {
+            Prepare(dialogueResource, File.ReadAllText(dialogueResource.path));
+        }
+        
     }
 
 
