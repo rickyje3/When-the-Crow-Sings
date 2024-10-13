@@ -24,13 +24,9 @@ public class DialogueParser
     {
         raw_lines = text.Split("\n");
 
-        // ???var non_empty_lines = raw_lines - raw_lines.emptylines()
-        //
-
         for (int i = 0;  i < raw_lines.Length; i++)
         {
-            string trimmedLine = raw_lines[i].Trim();
-
+            string trimmedLine = raw_lines[i];
 
             // Skip empty lines.
             if (string.IsNullOrEmpty(trimmedLine) )
@@ -44,17 +40,21 @@ public class DialogueParser
             int myTabCount = 0;
             while (!hasFinishedCountingTabs)
             {
-
                 if (trimmedLine.StartsWith('\t'))
                 {
-                    myTabCount++;
-                    trimmedLine.Remove(0,1); // Remove the tab before checking for any more.
+                    myTabCount = myTabCount + 1;
+                    Debug.Log("We counted a tab!");
+                    trimmedLine = trimmedLine.Remove(0,1); // Remove the tab before checking for any more.
                 }
                 else
                 {
                     hasFinishedCountingTabs = true;
                 }
             }
+
+            // Actually trim the line (couldn't do it earlier because of the tab stuff)
+            trimmedLine = trimmedLine.Trim();
+
 
             // Parse the dialogue line type.
             if (trimmedLine.StartsWith('~')) // Title
@@ -103,6 +103,30 @@ public class DialogueParser
             {
                 DialogueChoice newLine = new DialogueChoice();
                 newLine.tabCount = myTabCount;
+                newLine.choiceText = trimmedLine;
+
+
+                DialogueChoiceBlock choiceBlock;
+                if (dialogueResource.dialogueChoiceBlocks.Count > 0)
+                {
+                    foreach (DialogueChoiceBlock ii in dialogueResource.dialogueChoiceBlocks)
+                    {
+                        // Check indentation
+                        if (ii.choiceTabCount == myTabCount && !ii.dialogueChoices.Contains(newLine))
+                        {
+                            ii.dialogueChoices.Add(newLine);
+                        }
+                    }
+                }
+                else
+                {
+                    choiceBlock = new DialogueChoiceBlock();
+                    dialogueResource.dialogueChoiceBlocks.Add(choiceBlock);
+
+                    choiceBlock.choiceTabCount = myTabCount;
+                    choiceBlock.dialogueChoices.Add(newLine);
+                    
+                }
 
                 allLines.Add(newLine);
             }

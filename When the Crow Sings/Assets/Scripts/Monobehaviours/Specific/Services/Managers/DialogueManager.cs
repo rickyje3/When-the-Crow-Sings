@@ -34,6 +34,7 @@ public class DialogueManager : MonoBehaviour, IService
     private void Awake()
     {
         RegisterSelfAsService();
+        dialogueUI.SetActive(false);
     }
     public void RegisterSelfAsService()
     {
@@ -93,6 +94,7 @@ public class DialogueManager : MonoBehaviour, IService
             nameText.text = newLine2.characterName;
             StartCoroutine(TypeText(dialogueText, newLine2.dialogue,index));
         }
+       
         else if (newLine is DialogueGoto)
         {
             DialogueGoto newLine2 = (DialogueGoto)newLine;
@@ -107,6 +109,29 @@ public class DialogueManager : MonoBehaviour, IService
                 ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
             }
         }
+
+        else if (newLine is DialogueChoice)
+        {
+            DialogueChoiceBlock choiceBlock = null;
+            foreach (DialogueChoiceBlock i in dialogueResource.dialogueChoiceBlocks)
+            {
+                if (i.dialogueChoices.Contains(newLine))
+                {
+                    choiceBlock = i;
+                    break;
+                }
+            }
+            if (choiceBlock == null) { throw new Exception("THE THING IS BLANK YOU SILLY GOOSE"); }
+
+            foreach (DialogueChoice i in choiceBlock.dialogueChoices)
+            {
+                Debug.Log("The choice is "+i.choiceText + " and its tab count is "+i.tabCount);
+            }
+
+            // TODO: Populate the buttons. Then, wait for an inputevent from one of them to call ControlLineBehavior() again.
+
+        }
+
         else // In case of an EmptyLine
         {
             ControlLineBehavior(index+1);
