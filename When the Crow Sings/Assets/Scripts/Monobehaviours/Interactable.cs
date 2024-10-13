@@ -4,23 +4,11 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public bool isPlayerInTrigger = false;
-    private void OnTriggerEnter(Collider other)
+    public void DoInteraction()
     {
-        if (other.GetComponent<PlayerInteractionArea>())
+        if (GetComponent<DialogueInteractable>())
         {
-            Debug.Log("He's here he's here he's heeereee");
-            isPlayerInTrigger = true;
+            GetComponent<DialogueInteractable>().EmitStartDialogueSignal();
         }
-        
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.GetComponent<PlayerInteractionArea>())
-        {
-            Debug.Log("Oh never mind whew oh i hate socializing SO much.");
-            isPlayerInTrigger = false;
-        }
-        
     }
 }
