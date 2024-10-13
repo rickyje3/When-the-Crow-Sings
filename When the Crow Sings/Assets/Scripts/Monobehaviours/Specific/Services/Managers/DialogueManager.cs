@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour, IService
 
 
     public GameSignal startDialogueSignal;
+    public GameSignal finishDialogueSignal;
 
 
     public float textSpeed = .05f;
@@ -55,7 +56,7 @@ public class DialogueManager : MonoBehaviour, IService
             throw new Exception("Error! The component emitting the signal does not have a DialogueResource as its first ObjectArgument.");
         }
 
-        InputManager.playerInputActions.Player.Disable();
+        //InputManager.playerInputActions.Player.Disable();
         dialogueBox.SetActive(true);
 
         DialogueParser parser = new DialogueParser(dialogueResource);
@@ -67,8 +68,9 @@ public class DialogueManager : MonoBehaviour, IService
 
     public void EndDialogue()
     {
-        InputManager.playerInputActions.Player.Enable();
+        //InputManager.playerInputActions.Player.Enable();
         dialogueBox.SetActive(false);
+        finishDialogueSignal.Emit();
     }
 
 

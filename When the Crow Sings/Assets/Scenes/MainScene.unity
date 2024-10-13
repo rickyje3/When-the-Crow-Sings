@@ -875,15 +875,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ba2cf5a8f4c5641a5def6c8c7cccf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 20b772f70a9d9fd45bb90955e34f0875, type: 2}
-  signalArgs:
-    stringArgs:
-    - my_second_title
-    intArgs: 
-    floatArgs: []
-    boolArgs: 
-    objectArgs:
-    - {fileID: 11400000, guid: c955e6afdee9394488baa327ed03e514, type: 2}
+  globalDialogueSignal: {fileID: 11400000, guid: 20b772f70a9d9fd45bb90955e34f0875,
+    type: 2}
+  startingTitle: my_second_title
+  dialogueResource: {fileID: 11400000, guid: c955e6afdee9394488baa327ed03e514, type: 2}
 --- !u!65 &1747366370
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1005,6 +1000,8 @@ MonoBehaviour:
   dialogueText: {fileID: 1485353222}
   nameText: {fileID: 1299926762}
   startDialogueSignal: {fileID: 11400000, guid: 20b772f70a9d9fd45bb90955e34f0875,
+    type: 2}
+  finishDialogueSignal: {fileID: 11400000, guid: 6ff63fe5abcb510419f49446bfcd9dca,
     type: 2}
   textSpeed: 0.05
   pauseMultiplier: 10
@@ -1317,36 +1314,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2845398644574571625, guid: 5881e06d468398a44878e800776633ac,
-        type: 3}
-      propertyPath: field of view
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2845398644574571625, guid: 5881e06d468398a44878e800776633ac,
-        type: 3}
-      propertyPath: near clip plane
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3993083259330394503, guid: 5881e06d468398a44878e800776633ac,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 13.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 3993083259330394503, guid: 5881e06d468398a44878e800776633ac,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3993083259330394503, guid: 5881e06d468398a44878e800776633ac,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.91177213
-      objectReference: {fileID: 0}
-    - target: {fileID: 3993083259330394503, guid: 5881e06d468398a44878e800776633ac,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.4106967
-      objectReference: {fileID: 0}
     - target: {fileID: 6084429890904193503, guid: 5881e06d468398a44878e800776633ac,
         type: 3}
       propertyPath: m_Name

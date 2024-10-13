@@ -5,8 +5,17 @@ using UnityEngine;
 
 public class DialogueInteractable : MonoBehaviour
 {
-    public GameSignal signal;
-    public SignalArguments signalArgs;
+    public GameSignal globalDialogueSignal;
+    public string startingTitle = "";
+    public DialogueResource dialogueResource;
+    private SignalArguments signalArgs;
+
+    private void Awake()
+    {
+        signalArgs = new SignalArguments();
+        signalArgs.stringArgs.Add(startingTitle);
+        signalArgs.objectArgs.Add(dialogueResource);
+    }
 
     private void Start()
     {
@@ -16,6 +25,11 @@ public class DialogueInteractable : MonoBehaviour
     IEnumerator MyMethod()
     {
         yield return new WaitForSeconds(1.0f);
-        signal.Emit(signalArgs);
+        EmitStartDialogueSignal();
+    }
+
+    public void EmitStartDialogueSignal()
+    {
+        globalDialogueSignal.Emit(signalArgs);
     }
 }

@@ -13,8 +13,8 @@ public class InputManager : MonoBehaviour, IService
         playerInputActions = new PlayerInputActions();
         Debug.Log(playerInputActions+ " is the thing");
         RegisterSelfAsService();
-        
     }
+
     public void RegisterSelfAsService()
     {
         ServiceLocator.Register<InputManager>(this);

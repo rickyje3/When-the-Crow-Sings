@@ -13,6 +13,7 @@ public class PlayerMovementState : StateMachineState
 
     public override void StateEntered()
     {
+        Debug.Log("Entering MovementState");
 
         // Subscribe to the Move event in the input system
         InputManager.playerInputActions.Player.Move.performed += OnMove;

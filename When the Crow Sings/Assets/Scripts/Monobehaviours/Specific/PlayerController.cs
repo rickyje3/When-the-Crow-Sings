@@ -22,10 +22,12 @@ public class PlayerController : StateMachineComponent, IService
         stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
         stateMachine.RegisterState(new PlayerThrowBirdseedState(this), "PlayerThrowBirdseedState");
+        stateMachine.RegisterState(new PlayerDialogueState(this), "PlayerDialogueState");
         
     }
     private void Start()
     {
+        InputManager.playerInputActions.Player.Enable();
         stateMachine.Enter("PlayerMovementState");
     }
 
@@ -42,17 +44,26 @@ public class PlayerController : StateMachineComponent, IService
     }
     private void OnEnable()
     {
-        InputManager.playerInputActions.Player.Enable();
+        //InputManager.playerInputActions.Player.Enable();
         InputManager.playerInputActions.Player.Quit.performed += OnQuit;
     }
     private void OnDisable()
     {
-        InputManager.playerInputActions.Player.Disable();
+        //InputManager.playerInputActions.Player.Disable();
     }
 
     private void OnQuit(InputAction.CallbackContext context)
     {
         Application.Quit();
+    }
+
+    public void OnDialogueStarted(SignalArguments signalArgs)
+    {
+        stateMachine.Enter("PlayerDialogueState");
+    }
+    public void OnDialogueFinished()
+    {
+        stateMachine.Enter("PlayerMovementState");
     }
 
 
