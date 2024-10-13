@@ -20,7 +20,6 @@ public class DialogueManager : MonoBehaviour, IService
     [SerializeField] private GameObject dialogueChoicesHolder;
     [SerializeField] private List<GameObject> dialogueChoiceButtons;
 
-
     [Header("Signals")]
     public GameSignal startDialogueSignal;
     public GameSignal finishDialogueSignal;
@@ -29,7 +28,6 @@ public class DialogueManager : MonoBehaviour, IService
     public float textSpeed = .05f;
     public float pauseMultiplier = 10f;
     public List<GameSignal> signalsDialogueCanUse;
-
 
     private void Awake()
     {
