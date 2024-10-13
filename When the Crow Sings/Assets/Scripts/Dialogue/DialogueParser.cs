@@ -108,14 +108,26 @@ public class DialogueParser
                 DialogueChoiceBlock choiceBlock;
                 if (dialogueResource.dialogueChoiceBlocks.Count > 0)
                 {
+                    bool hasBeenSet = false;
                     foreach (DialogueChoiceBlock ii in dialogueResource.dialogueChoiceBlocks)
                     {
                         // Check indentation
                         if (ii.choiceTabCount == myTabCount && !ii.dialogueChoices.Contains(newLine))
                         {
                             ii.dialogueChoices.Add(newLine);
+                            hasBeenSet = true;
                         }
                     }
+                    if (!hasBeenSet)
+                    {
+                        choiceBlock = new DialogueChoiceBlock();
+                        dialogueResource.dialogueChoiceBlocks.Add(choiceBlock);
+
+                        choiceBlock.choiceTabCount = myTabCount;
+
+                        choiceBlock.dialogueChoices.Add(newLine);
+                    }
+
                 }
                 else
                 {
@@ -183,6 +195,7 @@ public class DialogueParser
         }
         // After finding all the lines, set the dialogueResource's lines.
         dialogueResource.dialogueLines = allLines;
+        Debug.Log("All of the ChoiceBlocks are: " + dialogueResource.dialogueChoiceBlocks.Count);
     }
 
     void PrepareConditional(string trimmedLine, DialogueCondition newLine)

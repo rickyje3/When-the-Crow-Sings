@@ -35,6 +35,7 @@ public class DialogueManager : MonoBehaviour, IService
     {
         RegisterSelfAsService();
         dialogueUI.SetActive(false);
+        
     }
     public void RegisterSelfAsService()
     {
@@ -63,11 +64,12 @@ public class DialogueManager : MonoBehaviour, IService
 
         //InputManager.playerInputActions.Player.Disable();
         dialogueUI.SetActive(true);
+        dialogueChoicesHolder.SetActive(false);
 
         DialogueParser parser = new DialogueParser(dialogueResource);
         DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
 
-        ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
+        ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex,tempHolderForTheTargetIndex.tabCount);
 
     }
 
@@ -80,7 +82,7 @@ public class DialogueManager : MonoBehaviour, IService
 
 
 
-    void ControlLineBehavior(int index)
+    void ControlLineBehavior(int index, int previousLineTabCount)
     {
         canNextLine = false;
         currentLine = index;
@@ -106,12 +108,14 @@ public class DialogueManager : MonoBehaviour, IService
             {
                 DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == newLine2.gotoTitleName);
                 Debug.Log(newLine2.gotoTitleName + " so we're going to " + tempHolderForTheTargetIndex.titleIndex);
-                ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
+                ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex,previousLineTabCount);
             }
         }
 
         else if (newLine is DialogueChoice)
         {
+            dialogueChoicesHolder.SetActive(true);
+
             DialogueChoiceBlock choiceBlock = null;
             foreach (DialogueChoiceBlock i in dialogueResource.dialogueChoiceBlocks)
             {
@@ -121,6 +125,7 @@ public class DialogueManager : MonoBehaviour, IService
                     break;
                 }
             }
+
             if (choiceBlock == null) { throw new Exception("THE THING IS BLANK YOU SILLY GOOSE"); }
 
             int loop = 0;
@@ -128,6 +133,7 @@ public class DialogueManager : MonoBehaviour, IService
             { 
                 dialogueChoiceButtons[loop].GetComponentInChildren<TextMeshProUGUI>().text = i.choiceText;
                 dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueLineIndex = i.choiceIndex;
+                dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueChoice = i;
                 loop++;
             }
 
@@ -137,14 +143,15 @@ public class DialogueManager : MonoBehaviour, IService
 
         else // In case of an EmptyLine
         {
-            ControlLineBehavior(index+1);
+            ControlLineBehavior(index+1,previousLineTabCount);
             
         }
     }
 
     public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
     {
-        ControlLineBehavior(choiceButton.dialogueLineIndex + 1);
+        dialogueChoicesHolder.SetActive(false);
+        ControlLineBehavior(choiceButton.dialogueLineIndex + 1,choiceButton.dialogueChoice.tabCount);
     }
 
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text, int index)
@@ -179,7 +186,9 @@ public class DialogueManager : MonoBehaviour, IService
 
         if (canNextLine)
         {
-            ControlLineBehavior(currentLine + 1);
+            //DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == newLine2.gotoTitleName);
+            
+            ControlLineBehavior(currentLine + 1, dialogueResource.dialogueLines[currentLine].tabCount);
         }
         
     }
