@@ -8,21 +8,27 @@ using System;
 
 public class DialogueManager : MonoBehaviour, IService
 {
-    private DialogueResource dialogueResource;
-    public GameSignal[] signalsDialogueCanUse;
 
+    
+    private DialogueResource dialogueResource;
+    
+
+    [Header("Dialogue UI Elements")]
     [SerializeField] private GameObject dialogueUI;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private GameObject dialogueChoicesHolder;
+    [SerializeField] private List<GameObject> dialogueChoiceButtons;
 
 
-
+    [Header("Signals")]
     public GameSignal startDialogueSignal;
     public GameSignal finishDialogueSignal;
 
-
+    [Header("Settings")]
     public float textSpeed = .05f;
     public float pauseMultiplier = 10f;
+    public List<GameSignal> signalsDialogueCanUse;
 
 
     private void Awake()
