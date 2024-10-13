@@ -11,11 +11,9 @@ public class DialogueManager : MonoBehaviour, IService
     private DialogueResource dialogueResource;
     public GameSignal[] signalsDialogueCanUse;
 
-    [SerializeField] private GameObject dialogueBox;
-    [SerializeField]
-    private TextMeshProUGUI dialogueText;
-    [SerializeField]
-    private TextMeshProUGUI nameText;
+    [SerializeField] private GameObject dialogueUI;
+    [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI nameText;
 
 
 
@@ -57,7 +55,7 @@ public class DialogueManager : MonoBehaviour, IService
         }
 
         //InputManager.playerInputActions.Player.Disable();
-        dialogueBox.SetActive(true);
+        dialogueUI.SetActive(true);
 
         DialogueParser parser = new DialogueParser(dialogueResource);
         DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
@@ -69,7 +67,7 @@ public class DialogueManager : MonoBehaviour, IService
     public void EndDialogue()
     {
         //InputManager.playerInputActions.Player.Enable();
-        dialogueBox.SetActive(false);
+        dialogueUI.SetActive(false);
         finishDialogueSignal.Emit();
     }
 
