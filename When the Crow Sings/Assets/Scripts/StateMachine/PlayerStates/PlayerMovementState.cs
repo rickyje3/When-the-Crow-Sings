@@ -13,20 +13,21 @@ public class PlayerMovementState : StateMachineState
 
     public override void StateEntered()
     {
+        Debug.Log("Entering MovementState");
 
         // Subscribe to the Move event in the input system
-        s.playerInput.Player.Move.performed += OnMove;
-        s.playerInput.Player.Move.canceled += OnMove;
+        InputManager.playerInputActions.Player.Move.performed += OnMove;
+        InputManager.playerInputActions.Player.Move.canceled += OnMove;
 
-        s.playerInput.Player.Action.performed += OnAction;
-        s.playerInput.Player.Action.canceled += OnAction;
+        InputManager.playerInputActions.Player.Action.performed += OnAction;
+        InputManager.playerInputActions.Player.Action.canceled += OnAction;
 
-        s.playerInput.Player.Interact.performed += OnInteract;
-        s.playerInput.Player.Interact.canceled += OnInteract;
+        InputManager.playerInputActions.Player.Interact.performed += OnInteract;
+        InputManager.playerInputActions.Player.Interact.canceled += OnInteract;
 
-        s.playerInput.Player.Fire.performed += OnFired;
+        InputManager.playerInputActions.Player.Fire.performed += OnFired;
 
-        s.playerInput.Player.Crouch.performed += OnCrouched;
+        InputManager.playerInputActions.Player.Crouch.performed += OnCrouched;
     }
 
     public override void StateExited()
@@ -34,15 +35,15 @@ public class PlayerMovementState : StateMachineState
         //s.playerInput.Player.Move.performed -= OnMove;
         //s.playerInput.Player.Move.canceled -= OnMove;
 
-        s.playerInput.Player.Action.performed -= OnAction;
-        s.playerInput.Player.Action.canceled -= OnAction;
+        InputManager.playerInputActions.Player.Action.performed -= OnAction;
+        InputManager.playerInputActions.Player.Action.canceled -= OnAction;
 
-        s.playerInput.Player.Interact.performed -= OnInteract;
-        s.playerInput.Player.Interact.canceled -= OnInteract;
+        InputManager.playerInputActions.Player.Interact.performed -= OnInteract;
+        InputManager.playerInputActions.Player.Interact.canceled -= OnInteract;
 
-        s.playerInput.Player.Fire.performed -= OnFired;
+        InputManager.playerInputActions.Player.Fire.performed -= OnFired;
 
-        s.playerInput.Player.Crouch.performed -= OnCrouched;
+        InputManager.playerInputActions.Player.Crouch.performed -= OnCrouched;
 
         s.playerAnimator.SetBool("animIsMoving", false);
     }

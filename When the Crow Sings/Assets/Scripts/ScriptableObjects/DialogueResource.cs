@@ -10,4 +10,6 @@ public class DialogueResource : ScriptableObject
     public List<DialogueBase> dialogueLines = new List<DialogueBase>();
     [HideInInspector]
     public List<DialogueConditionBlock> dialogueConditionBlocks = new List<DialogueConditionBlock>();
+    [HideInInspector]
+    public List<DialogueTitle> dialogueTitles = new List<DialogueTitle>();
 }

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using static DialogueResponse;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -10,7 +9,11 @@ public class DialogueParser
 {
     public DialogueParser(DialogueResource dialogueResource) // Or the actual Asset, not a string filePath.
     {
-        Prepare(dialogueResource,File.ReadAllText(dialogueResource.path));
+        if (dialogueResource.dialogueLines.Count == 0)
+        {
+            Prepare(dialogueResource, File.ReadAllText(dialogueResource.path));
+        }
+        
     }
 
 
@@ -60,13 +63,38 @@ public class DialogueParser
                 DialogueTitle newLine = new DialogueTitle();
                 newLine.tabCount = myTabCount;
 
+                trimmedLine = Regex.Replace(trimmedLine, @"\s+", "");
+                trimmedLine = Utilities.RemoveFirstOccurence("~", trimmedLine);
+
+                newLine.titleName = trimmedLine;
+                newLine.titleIndex = i;
+
                 allLines.Add(newLine);
+                dialogueResource.dialogueTitles.Add(newLine); // TODO: make like a getter for this instead.
+                if (dialogueResource.dialogueTitles.Count(x => x.titleName == newLine.titleName) > 1)
+                {
+                    throw new System.Exception("CHELLE SERIOUSLY I WARNED YOU ABOUT THIS! Error: Multiple titles with the same name detected in the same document.");
+                }
             }
 
             else if (trimmedLine.StartsWith("=>")) // GoTo
             {
                 DialogueGoto newLine = new DialogueGoto();
                 newLine.tabCount = myTabCount;
+
+                trimmedLine = Regex.Replace(trimmedLine, @"\s+", ""); // Remove white space
+                trimmedLine = Utilities.RemoveFirstOccurence("=>", trimmedLine);
+
+                if (trimmedLine == "END")
+                {
+                    newLine.isEnd = true;
+                }
+                else
+                {
+                    newLine.isEnd = false;
+                    newLine.gotoTitleName = trimmedLine;
+                    Debug.Log("Title is = " + trimmedLine);
+                }
 
                 allLines.Add(newLine);
             }

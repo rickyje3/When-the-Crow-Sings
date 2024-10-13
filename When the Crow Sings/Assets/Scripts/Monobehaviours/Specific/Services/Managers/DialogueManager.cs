@@ -1,10 +1,32 @@
+using ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System.Linq;
+using System;
 
 public class DialogueManager : MonoBehaviour, IService
 {
-    public DialogueResource dialogueResource;
+    private DialogueResource dialogueResource;
+    public GameSignal[] signalsDialogueCanUse;
+
+    [SerializeField] private GameObject dialogueBox;
+    [SerializeField]
+    private TextMeshProUGUI dialogueText;
+    [SerializeField]
+    private TextMeshProUGUI nameText;
+
+
+
+    public GameSignal startDialogueSignal;
+    public GameSignal finishDialogueSignal;
+
+
+    public float textSpeed = .05f;
+    public float pauseMultiplier = 10f;
+
+
     private void Awake()
     {
         RegisterSelfAsService();
@@ -14,19 +36,116 @@ public class DialogueManager : MonoBehaviour, IService
         ServiceLocator.Register<DialogueManager>(this);
     }
 
-    private void Start()
+
+
+
+
+
+
+
+
+
+    public void StartDialogue(SignalArguments signalArgs)
     {
-        DialogueParser parser = new DialogueParser(dialogueResource);
-        foreach (DialogueBase i in dialogueResource.dialogueLines)
+        if (signalArgs.objectArgs[0] is DialogueResource)
         {
-            Debug.Log(i);
+            dialogueResource = (DialogueResource)signalArgs.objectArgs[0];
+        }
+        else
+        {
+            throw new Exception("Error! The component emitting the signal does not have a DialogueResource as its first ObjectArgument.");
+        }
+
+        //InputManager.playerInputActions.Player.Disable();
+        dialogueBox.SetActive(true);
+
+        DialogueParser parser = new DialogueParser(dialogueResource);
+        DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
+
+        ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
+
+    }
+
+    public void EndDialogue()
+    {
+        //InputManager.playerInputActions.Player.Enable();
+        dialogueBox.SetActive(false);
+        finishDialogueSignal.Emit();
+    }
+
+
+
+    void ControlLineBehavior(int index)
+    {
+        canNextLine = false;
+        currentLine = index;
+        DialogueBase newLine = dialogueResource.dialogueLines[index];
+        
+
+        if (newLine is DialogueResponse)
+        {
+            DialogueResponse newLine2 = (DialogueResponse)newLine;
+
+            nameText.text = newLine2.characterName;
+            StartCoroutine(TypeText(dialogueText, newLine2.dialogue,index));
+        }
+        else if (newLine is DialogueGoto)
+        {
+            DialogueGoto newLine2 = (DialogueGoto)newLine;
+            if (newLine2.isEnd)
+            {
+                EndDialogue();
+            }
+            else
+            {
+                DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == newLine2.gotoTitleName);
+                Debug.Log(newLine2.gotoTitleName + " so we're going to " + tempHolderForTheTargetIndex.titleIndex);
+                ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
+            }
+        }
+        else // In case of an EmptyLine
+        {
+            ControlLineBehavior(index+1);
+            
         }
     }
 
-    void GetNextLine()
+
+    IEnumerator TypeText(TextMeshProUGUI textMesh, string text, int index)
+    {
+        dialogueText.maxVisibleCharacters = 0;
+        textMesh.text = text;
+
+        while (textMesh.maxVisibleCharacters <= textMesh.text.Length)
+        {
+            float pauseBetweenChars = textSpeed;
+            char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1,0,textMesh.text.Length)];
+            foreach (char i in ".!?")
+            {
+                if (character == i)
+                {
+                    pauseBetweenChars *= pauseMultiplier;
+                }
+            }
+            yield return new WaitForSeconds(pauseBetweenChars);
+            textMesh.maxVisibleCharacters += 1;
+        }
+        //ControlLineBehavior(index+1);
+        canNextLine = true;
+    }
+
+    private int currentLine;
+    private bool canNextLine = false;
+    public void NextLine()
     {
         // SUDO: if goto, empty, or conditional, get/"do"(?) the next-next line automatically. Otherwise, wait for input/signal/whatever.
         // only exception is Choices, which need to be "got" on "finished typing" not "on input").
+
+        if (canNextLine)
+        {
+            ControlLineBehavior(currentLine + 1);
+        }
+        
     }
 
     void DoConditionalDialogueLogic(DialogueCondition dialogueCondition)
