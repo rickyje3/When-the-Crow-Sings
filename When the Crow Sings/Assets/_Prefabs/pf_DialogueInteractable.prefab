@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6803497763721583419}
   - component: {fileID: 4468416896440592636}
+  - component: {fileID: 158499437496051691}
   - component: {fileID: 1875406335147647528}
   m_Layer: 0
   m_Name: pf_DialogueInteractable
@@ -50,6 +51,19 @@ MonoBehaviour:
     type: 2}
   startingTitle: my_second_title
   dialogueResource: {fileID: 11400000, guid: c955e6afdee9394488baa327ed03e514, type: 2}
+--- !u!114 &158499437496051691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658357030368060936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e8d5457f9a4244fbf7d34244741865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayerInTrigger: 0
 --- !u!135 &1875406335147647528
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -82,7 +96,6 @@ GameObject:
   - component: {fileID: 3741825203840651700}
   - component: {fileID: 2816813254433864627}
   - component: {fileID: 5442238512778675426}
-  - component: {fileID: 4913605273324598048}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -155,24 +168,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4913605273324598048
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4654524222143933120}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

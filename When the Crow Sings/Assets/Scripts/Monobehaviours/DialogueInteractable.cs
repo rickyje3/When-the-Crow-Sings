@@ -28,10 +28,10 @@ public class DialogueInteractable : MonoBehaviour
     //    EmitStartDialogueSignal();
     //}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        EmitStartDialogueSignal();
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    EmitStartDialogueSignal();
+    //}
 
     public void EmitStartDialogueSignal()
     {
