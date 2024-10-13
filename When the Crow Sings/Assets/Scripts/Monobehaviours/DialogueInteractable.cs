@@ -19,12 +19,17 @@ public class DialogueInteractable : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(MyMethod());
+        //StartCoroutine(MyMethod());
     }
 
-    IEnumerator MyMethod()
+    //IEnumerator MyMethod()
+    //{
+    //    yield return new WaitForSeconds(1.0f);
+    //    EmitStartDialogueSignal();
+    //}
+
+    private void OnTriggerEnter(Collider other)
     {
-        yield return new WaitForSeconds(1.0f);
         EmitStartDialogueSignal();
     }
 
