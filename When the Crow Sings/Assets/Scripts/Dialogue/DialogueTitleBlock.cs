@@ -10,4 +10,9 @@ public class DialogueTitleBlock
     // Blocks of related lines.
     public List<DialogueConditionBlock> dialogueConditionBlocks = new List<DialogueConditionBlock>();
     public List<DialogueChoiceBlock> dialogueChoiceBlocks = new List<DialogueChoiceBlock>();
+
+    public DialogueTitleBlock(DialogueTitle _dialogueTitle)
+    {
+        dialogueTitle = _dialogueTitle;
+    }
 }

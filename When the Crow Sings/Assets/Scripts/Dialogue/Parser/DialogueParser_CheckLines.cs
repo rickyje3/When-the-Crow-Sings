@@ -7,6 +7,49 @@ using System.Text.RegularExpressions;
 
 public partial class DialogueParser
 {
+    private void IdentifyAndAssignDialogueLines(string text)
+    {
+        raw_lines = text.Split("\n");
+
+        for (int i = 0; i < raw_lines.Length; i++)
+        {
+            int myTabCount = -1;
+            trimmedLine = raw_lines[i];
+
+            CountTabs(i, ref myTabCount);
+
+            // Skip empty lines.
+            if (string.IsNullOrEmpty(trimmedLine))
+            {
+                dialogueResource.dialogueLines.Add(new DialogueEmpty());
+                continue;
+            }
+
+            CheckWhichLineType(i, myTabCount);
+        }
+    }
+    private void CountTabs(int i, ref int myTabCount) // The ref int is intentional here.
+    {
+        // Count the number of indents/tabs.
+        bool hasFinishedCountingTabs = false;
+        myTabCount = 0;
+        while (!hasFinishedCountingTabs)
+        {
+            if (trimmedLine.StartsWith('\t'))
+            {
+                myTabCount = myTabCount + 1;
+                trimmedLine = trimmedLine.Remove(0, 1); // Remove the tab before checking for any more.
+            }
+            else
+            {
+                hasFinishedCountingTabs = true;
+            }
+        }
+
+        // Actually trim the line (couldn't do it earlier because of the tab stuff)
+        trimmedLine = trimmedLine.Trim();
+    }
+
     private void CheckWhichLineType(int i, int myTabCount) // Parse the dialogue line type.
     {
         // if
@@ -36,11 +79,12 @@ public partial class DialogueParser
             newLine.titleIndex = i;
 
             dialogueResource.dialogueLines.Add(newLine);
-            //dialogueResource.dialogueTitles.Add(newLine); // TODO: make like a getter for this instead.
-            //if (dialogueResource.dialogueTitles.Count(x => x.titleName == newLine.titleName) > 1)
-            //{
-            //    throw new System.Exception("CHELLE SERIOUSLY I WARNED YOU ABOUT THIS! Error: Multiple titles with the same name detected in the same document. >:(");
-            //}
+
+            if (dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Count(x => x.titleName == newLine.titleName) > 1)
+            {
+                throw new System.Exception("CHELLE SERIOUSLY I WARNED YOU ABOUT THIS! Error: Multiple titles with the same name detected in the same document. >:(");
+            }
+            
             return true;
         }
             return false;

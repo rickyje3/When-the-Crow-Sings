@@ -29,50 +29,70 @@ public partial class DialogueParser
         // Identify all DialogueBase line types and add them to dialogueResource.dialogueLines.
         IdentifyAndAssignDialogueLines(text);
 
-        // TODO: Figure out how to sort things so "blocks" can be structured. Either: Do it all at once, or iterate through everything a second time.
-    }
 
-    private void IdentifyAndAssignDialogueLines(string text)
-    {
-        raw_lines = text.Split("\n");
+        // TODO: Figure out how to sort things so "blocks" can be structured.
+        DialogueTitle currentTitle = null;
+        DialogueTitleBlock currentTitleBlock = null;
 
-        for (int i = 0; i < raw_lines.Length; i++)
+        foreach (DialogueBase i in dialogueResource.dialogueLines)
         {
-            int myTabCount = -1;
-            trimmedLine = raw_lines[i];
+            if (dialogueResource.dialogueTitleBlocks.Count == 0) continue;
 
-            CountTabs(i, ref myTabCount);
-
-            // Skip empty lines.
-            if (string.IsNullOrEmpty(trimmedLine))
+            // Start a new block for every title we encounter.
+            if (i is DialogueTitle)
             {
-                dialogueResource.dialogueLines.Add(new DialogueEmpty());
+                currentTitle = (DialogueTitle)i;
+                currentTitleBlock = new DialogueTitleBlock(currentTitle);
+                dialogueResource.dialogueTitleBlocks.Add(currentTitleBlock);
+
                 continue;
             }
 
-            CheckWhichLineType(i, myTabCount);
-        }
-    }
-    private void CountTabs(int i, ref int myTabCount) // The ref int is intentional here.
-    {
-        // Count the number of indents/tabs.
-        bool hasFinishedCountingTabs = false;
-        myTabCount = 0;
-        while (!hasFinishedCountingTabs)
-        {
-            if (trimmedLine.StartsWith('\t'))
-            {
-                myTabCount = myTabCount + 1;
-                trimmedLine = trimmedLine.Remove(0, 1); // Remove the tab before checking for any more.
-            }
-            else
-            {
-                hasFinishedCountingTabs = true;
-            }
-        }
+            if (currentTitleBlock == null) throw new System.Exception("Uh wait this shouldn't be possible hold up.");
 
-        // Actually trim the line (couldn't do it earlier because of the tab stuff)
-        trimmedLine = trimmedLine.Trim();
+            currentTitleBlock.dialogueLines.Add(i);
+
+            if (i is DialogueChoice)
+            {
+
+            }
+            //DialogueChoiceBlock choiceBlock;
+            //if (dialogueResource.dialogueChoiceBlocks.Count > 0)
+            //{
+            //    bool hasBeenSet = false;
+            //    foreach (DialogueChoiceBlock ii in dialogueResource.dialogueChoiceBlocks)
+            //    {
+            //        // Check indentation
+            //        if (ii.choiceTabCount == myTabCount && !ii.dialogueChoices.Contains(newLine))
+            //        {
+            //            ii.dialogueChoices.Add(newLine);
+            //            hasBeenSet = true;
+            //        }
+            //    }
+            //    if (!hasBeenSet)
+            //    {
+            //        choiceBlock = new DialogueChoiceBlock();
+            //        dialogueResource.dialogueChoiceBlocks.Add(choiceBlock);
+
+            //        choiceBlock.choiceTabCount = myTabCount;
+
+            //        choiceBlock.dialogueChoices.Add(newLine);
+            //    }
+
+            //}
+            //else
+            //{
+            //    choiceBlock = new DialogueChoiceBlock();
+            //    dialogueResource.dialogueChoiceBlocks.Add(choiceBlock);
+
+            //    choiceBlock.choiceTabCount = myTabCount;
+
+            //    choiceBlock.dialogueChoices.Add(newLine);
+
+            //}
+        }
     }
+
+    
 
 }
