@@ -14,4 +14,16 @@ public class GameStateManager : MonoBehaviour, IService
     {
         ServiceLocator.Register<GameStateManager>(this);
     }
+
+
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            SceneManager.LoadScene(1);//, LoadSceneMode.Additive);
+        }
+    }
+
+
 }

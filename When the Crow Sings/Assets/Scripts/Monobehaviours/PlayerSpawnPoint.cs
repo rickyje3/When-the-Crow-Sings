@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class PlayerSpawnPoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Position and rotation the player should spawn in.
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int entranceIndex = -1;
+
+
 }
