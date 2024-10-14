@@ -9,9 +9,7 @@ public class InputManager : MonoBehaviour, IService
 
     private void Awake()
     {
-        Debug.Log("anything??");
         playerInputActions = new PlayerInputActions();
-        Debug.Log(playerInputActions+ " is the thing");
         RegisterSelfAsService();
     }
 

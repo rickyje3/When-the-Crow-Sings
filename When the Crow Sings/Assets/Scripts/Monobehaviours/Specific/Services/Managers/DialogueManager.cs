@@ -8,28 +8,32 @@ using System;
 
 public class DialogueManager : MonoBehaviour, IService
 {
+
+    
     private DialogueResource dialogueResource;
-    public GameSignal[] signalsDialogueCanUse;
+    
 
-    [SerializeField] private GameObject dialogueBox;
-    [SerializeField]
-    private TextMeshProUGUI dialogueText;
-    [SerializeField]
-    private TextMeshProUGUI nameText;
+    [Header("Dialogue UI Elements")]
+    [SerializeField] private GameObject dialogueUI;
+    [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private GameObject dialogueChoicesHolder;
+    [SerializeField] private List<GameObject> dialogueChoiceButtons;
 
-
-
+    [Header("Signals")]
     public GameSignal startDialogueSignal;
     public GameSignal finishDialogueSignal;
 
-
+    [Header("Settings")]
     public float textSpeed = .05f;
     public float pauseMultiplier = 10f;
-
+    public List<GameSignal> signalsDialogueCanUse;
 
     private void Awake()
     {
         RegisterSelfAsService();
+        dialogueUI.SetActive(false);
+        
     }
     public void RegisterSelfAsService()
     {
@@ -57,25 +61,29 @@ public class DialogueManager : MonoBehaviour, IService
         }
 
         //InputManager.playerInputActions.Player.Disable();
-        dialogueBox.SetActive(true);
+        dialogueUI.SetActive(true);
+        dialogueChoicesHolder.SetActive(false);
 
         DialogueParser parser = new DialogueParser(dialogueResource);
-        DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
+        //DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
+        DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
 
-        ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
+        //dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Count(x => x.titleName == newLine.titleName)
+
+        ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex,tempHolderForTheTargetIndex.tabCount);
 
     }
 
     public void EndDialogue()
     {
         //InputManager.playerInputActions.Player.Enable();
-        dialogueBox.SetActive(false);
+        dialogueUI.SetActive(false);
         finishDialogueSignal.Emit();
     }
 
 
 
-    void ControlLineBehavior(int index)
+    void ControlLineBehavior(int index, int previousLineTabCount)
     {
         canNextLine = false;
         currentLine = index;
@@ -89,6 +97,7 @@ public class DialogueManager : MonoBehaviour, IService
             nameText.text = newLine2.characterName;
             StartCoroutine(TypeText(dialogueText, newLine2.dialogue,index));
         }
+       
         else if (newLine is DialogueGoto)
         {
             DialogueGoto newLine2 = (DialogueGoto)newLine;
@@ -98,18 +107,60 @@ public class DialogueManager : MonoBehaviour, IService
             }
             else
             {
-                DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == newLine2.gotoTitleName);
+                DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Find(x => x.titleName == newLine2.gotoTitleName);
                 Debug.Log(newLine2.gotoTitleName + " so we're going to " + tempHolderForTheTargetIndex.titleIndex);
-                ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex);
+                ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex,previousLineTabCount);
             }
         }
+
+        else if (newLine is DialogueChoice)
+        {
+            dialogueChoicesHolder.SetActive(true);
+
+            DialogueChoiceBlock choiceBlock = null;
+            foreach (DialogueTitleBlock i in dialogueResource.dialogueTitleBlocks)
+            {
+                foreach (DialogueChoiceBlock ii in i.dialogueChoiceBlocks)
+                {
+                    if (ii.dialogueChoices.Contains(newLine))
+                    {
+                        choiceBlock = ii;
+                        Debug.Log("alasdhflaskgdjhklasdfh");
+                        break;
+                    }
+                }
+                Debug.Log("Well, nothing in that title block.");
+            }
+            Debug.Log(choiceBlock);
+            
+
+            if (choiceBlock == null) { throw new Exception("THE THING IS BLANK YOU SILLY GOOSE"); }
+
+            int loop = 0;
+            foreach (DialogueChoice i in choiceBlock.dialogueChoices)
+            { 
+                dialogueChoiceButtons[loop].GetComponentInChildren<TextMeshProUGUI>().text = i.choiceText;
+                dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueLineIndex = i.choiceIndex;
+                dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueChoice = i;
+                loop++;
+            }
+
+            // TODO: Populate the buttons. Then, wait for an inputevent from one of them to call ControlLineBehavior() again.
+
+        }
+
         else // In case of an EmptyLine
         {
-            ControlLineBehavior(index+1);
+            ControlLineBehavior(index+1,previousLineTabCount);
             
         }
     }
 
+    public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
+    {
+        dialogueChoicesHolder.SetActive(false);
+        ControlLineBehavior(choiceButton.dialogueLineIndex + 1,choiceButton.dialogueChoice.tabCount);
+    }
 
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text, int index)
     {
@@ -143,7 +194,9 @@ public class DialogueManager : MonoBehaviour, IService
 
         if (canNextLine)
         {
-            ControlLineBehavior(currentLine + 1);
+            //DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == newLine2.gotoTitleName);
+            
+            ControlLineBehavior(currentLine + 1, dialogueResource.dialogueLines[currentLine].tabCount);
         }
         
     }

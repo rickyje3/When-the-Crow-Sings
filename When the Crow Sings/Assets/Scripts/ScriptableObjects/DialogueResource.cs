@@ -9,7 +9,12 @@ public class DialogueResource : ScriptableObject
     [HideInInspector]
     public List<DialogueBase> dialogueLines = new List<DialogueBase>();
     [HideInInspector]
-    public List<DialogueConditionBlock> dialogueConditionBlocks = new List<DialogueConditionBlock>();
-    [HideInInspector]
-    public List<DialogueTitle> dialogueTitles = new List<DialogueTitle>();
+    public List<DialogueTitleBlock> dialogueTitleBlocks = new List<DialogueTitleBlock>();
+
+
+    
+
+
+    //[HideInInspector]
+    //public List<DialogueTitle> dialogueTitles = new List<DialogueTitle>();
 }
