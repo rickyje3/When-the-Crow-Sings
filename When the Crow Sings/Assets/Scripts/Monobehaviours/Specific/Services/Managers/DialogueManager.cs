@@ -65,7 +65,10 @@ public class DialogueManager : MonoBehaviour, IService
         dialogueChoicesHolder.SetActive(false);
 
         DialogueParser parser = new DialogueParser(dialogueResource);
-        DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
+        //DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
+        DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
+
+        //dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Count(x => x.titleName == newLine.titleName)
 
         ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex,tempHolderForTheTargetIndex.tabCount);
 
@@ -104,7 +107,7 @@ public class DialogueManager : MonoBehaviour, IService
             }
             else
             {
-                DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == newLine2.gotoTitleName);
+                DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Find(x => x.titleName == newLine2.gotoTitleName);
                 Debug.Log(newLine2.gotoTitleName + " so we're going to " + tempHolderForTheTargetIndex.titleIndex);
                 ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex,previousLineTabCount);
             }
@@ -115,14 +118,21 @@ public class DialogueManager : MonoBehaviour, IService
             dialogueChoicesHolder.SetActive(true);
 
             DialogueChoiceBlock choiceBlock = null;
-            foreach (DialogueChoiceBlock i in dialogueResource.dialogueChoiceBlocks)
+            foreach (DialogueTitleBlock i in dialogueResource.dialogueTitleBlocks)
             {
-                if (i.dialogueChoices.Contains(newLine))
+                foreach (DialogueChoiceBlock ii in i.dialogueChoiceBlocks)
                 {
-                    choiceBlock = i;
-                    break;
+                    if (ii.dialogueChoices.Contains(newLine))
+                    {
+                        choiceBlock = ii;
+                        Debug.Log("alasdhflaskgdjhklasdfh");
+                        break;
+                    }
                 }
+                Debug.Log("Well, nothing in that title block.");
             }
+            Debug.Log(choiceBlock);
+            
 
             if (choiceBlock == null) { throw new Exception("THE THING IS BLANK YOU SILLY GOOSE"); }
 
