@@ -16,6 +16,17 @@ public class GameStateManager : MonoBehaviour, IService
     }
 
 
+    void LoadRoom()
+    {
+        // unload previous scenes
+
+        // first check what scenes should be loaded based on save data
+        
+        // then load them all
+
+        // get all of the spawners, determine which one to use based on which room was left
+    }
+
 
     private void Update()
     {

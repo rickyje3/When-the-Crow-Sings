@@ -122,13 +122,19 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &302266040 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3320298995240147814, guid: 9928129fecceb914dab6c5b15c83c02f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3651931646337831301}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2126802445
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 6160339982780498480}
     m_Modifications:
     - target: {fileID: 3993083259330394503, guid: 5881e06d468398a44878e800776633ac,
         type: 3}
@@ -195,6 +201,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5881e06d468398a44878e800776633ac, type: 3}
+--- !u!4 &2126802446 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6605035451907473929, guid: 5881e06d468398a44878e800776633ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2126802445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!222 &31169648482277930
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1080,7 +1092,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 6160339982780498480}
     m_Modifications:
     - target: {fileID: 2300529904600026724, guid: 9928129fecceb914dab6c5b15c83c02f,
         type: 3}
@@ -1110,17 +1122,17 @@ PrefabInstance:
     - target: {fileID: 3320298995240147814, guid: 9928129fecceb914dab6c5b15c83c02f,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3320298995240147814, guid: 9928129fecceb914dab6c5b15c83c02f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3320298995240147814, guid: 9928129fecceb914dab6c5b15c83c02f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3320298995240147814, guid: 9928129fecceb914dab6c5b15c83c02f,
         type: 3}
@@ -1905,6 +1917,8 @@ Transform:
   m_Children:
   - {fileID: 1381248603434131218}
   - {fileID: 1568606926402196309}
+  - {fileID: 302266040}
+  - {fileID: 2126802446}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &6183198797339005304
@@ -3143,6 +3157,4 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 3651931646337831301}
-  - {fileID: 2126802445}
   - {fileID: 6160339982780498480}
