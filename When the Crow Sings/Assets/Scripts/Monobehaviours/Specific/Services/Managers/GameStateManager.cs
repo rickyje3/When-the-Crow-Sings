@@ -46,11 +46,6 @@ public class GameStateManager : MonoBehaviour, IService
 
     void LoadRoom()
     {
-        
-
-        
-
-
         // Unload previosu scenes.
         foreach (Scene i in GetLoadedScenes())
         {
