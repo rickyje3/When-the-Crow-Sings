@@ -35,16 +35,64 @@ public class GameStateManager : MonoBehaviour, IService
                 SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
             }
         }
-        if (Input.GetKeyUp(KeyCode.K))
+        if (Input.GetKeyUp(KeyCode.Alpha1))
         {
-            LoadRoom();
+            LoadRoom(1);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha2))
+        {
+            LoadRoom(2);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha3))
+        {
+            LoadRoom(3);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha4))
+        {
+            LoadRoom(4);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha5))
+        {
+            LoadRoom(5);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha6))
+        {
+            LoadRoom(6);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha7))
+        {
+            LoadRoom(7);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha8))
+        {
+            LoadRoom(8);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha9))
+        {
+            LoadRoom(9);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha0))
+        {
+            LoadRoom(10);
+        }
+        if (Input.GetKeyUp(KeyCode.Minus))
+        {
+            LoadRoom(11);
+        }
+        if (Input.GetKeyUp(KeyCode.Plus))
+        {
+            LoadRoom(12);
+        }
+        if (Input.GetKeyUp(KeyCode.Backspace))
+        {
+            LoadRoom(13);
         }
     }
 
 
     // ---------------------------------------------------------------------------
 
-    void LoadRoom()
+    void LoadRoom(int whichTEMP)
     {
         // Unload previosu scenes.
         foreach (Scene i in GetLoadedScenes())
@@ -55,23 +103,24 @@ public class GameStateManager : MonoBehaviour, IService
         // Check what scenes should be loaded based on save data and exit trigger
 
         // then load them all
-        foreach (Scene i in GetScenesToLoad())
+        foreach (Scene i in GetScenesToLoad(whichTEMP))
         {
             //SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
-            SceneManager.LoadScene(3, LoadSceneMode.Additive);
+            SceneManager.LoadScene(whichTEMP, LoadSceneMode.Additive);
         }
 
-        StartCoroutine(ValidateScenesOnNextFrame());
+        StartCoroutine(NextFrameSteps());
 
-        // get all of the spawners, determine which one to use based on which room was left
-        FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
+       
     }
 
 
-    IEnumerator ValidateScenesOnNextFrame()
+    IEnumerator NextFrameSteps()
     {
         yield return null;
         ValidateScenes();
+        // get all of the spawners, determine which one to use based on which room was left
+        FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
     }
     void ValidateScenes()
     {
@@ -80,10 +129,10 @@ public class GameStateManager : MonoBehaviour, IService
         ValidateOnlyOneLEVEL();
     }
 
-    List<Scene> GetScenesToLoad()
+    List<Scene> GetScenesToLoad(int whichTEMP)
     {
         List<Scene> scenes = new List<Scene>();
-        scenes.Add(SceneManager.GetSceneByBuildIndex(3));
+        scenes.Add(SceneManager.GetSceneByBuildIndex(whichTEMP+1));
 
         return scenes;
     }
