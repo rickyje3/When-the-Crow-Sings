@@ -11,6 +11,7 @@ public class GameStateManager : MonoBehaviour, IService
 
     const string SCN_PATH = "Assets/Scenes/";
 
+    // ---------------------------------------------------------------------------
     private void Awake()
     {
         RegisterSelfAsService();
@@ -23,6 +24,40 @@ public class GameStateManager : MonoBehaviour, IService
     private void Start()
     {
         GetLoadedScenes();
+    }
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        }
+        if (Input.GetKeyUp(KeyCode.K))
+        {
+            LoadRoom();
+        }
+    }
+
+
+    // ---------------------------------------------------------------------------
+
+    void LoadRoom()
+    {
+        currentLevelData = FindObjectsOfType<LevelData>().ToList<LevelData>();
+
+        ValidateNoUNASSIGNED();
+        ValidateOnlyOneLEVEL();
+
+        foreach (Scene i in GetLoadedScenes())
+        {
+            SceneManager.UnloadScene(i);
+        }
+        // unload previous scenes
+
+        // first check what scenes should be loaded based on save data
+
+        // then load them all
+
+        // get all of the spawners, determine which one to use based on which room was left
     }
 
 
@@ -56,34 +91,10 @@ public class GameStateManager : MonoBehaviour, IService
         }
     }
 
-    void LoadRoom()
-    {
-        currentLevelData = FindObjectsOfType<LevelData>().ToList<LevelData>();
-        
-        ValidateNoUNASSIGNED();
-        ValidateOnlyOneLEVEL();
 
 
 
-
-
-        // unload previous scenes
-
-            // first check what scenes should be loaded based on save data
-
-            // then load them all
-
-            // get all of the spawners, determine which one to use based on which room was left
-    }
-
-
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            SceneManager.LoadScene(1);//, LoadSceneMode.Additive);
-        }
-    }
+    
 
 
 }
