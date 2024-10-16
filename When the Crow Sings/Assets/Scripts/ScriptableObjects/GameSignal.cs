@@ -38,9 +38,17 @@ namespace ScriptableObjects
 
         private void _Emit(SignalArguments args)
         {
-            for (int i = listeners.Count - 1; i >= 0; i--)
+            //for (int i = listeners.Count - 1; i >= 0; i--)
+            //{
+            //    args.sender = listeners[i].gameObject;
+
+            //    listeners[i].OnSignalEmitted(args); // Useful in case the response involves removing it from the list.
+            //}
+
+            foreach (GameSignalListener i in listeners)
             {
-                listeners[i].OnSignalEmitted(args); // Useful in case the response involves removing it from the list.
+                args.sender = i.gameObject;
+                i.OnSignalEmitted(args);
             }
         }
 
