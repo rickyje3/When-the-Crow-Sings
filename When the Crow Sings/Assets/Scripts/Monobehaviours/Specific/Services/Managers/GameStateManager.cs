@@ -20,18 +20,24 @@ public class GameStateManager : MonoBehaviour, IService
         ServiceLocator.Register<GameStateManager>(this);
     }
 
-
+    private void Start()
+    {
+        GetLoadedScenes();
+    }
 
 
 
     List<Scene> GetLoadedScenes()
     {
-        foreach (int i in SceneManager.sceneCount)
+        List<Scene> scenes = new List<Scene>();
+        foreach (int i in Enumerable.Range(0, SceneManager.sceneCount))
         {
-
+            if (SceneManager.GetSceneAt(i).name != "MainScene")
+            {
+                scenes.Add(SceneManager.GetSceneAt(i));
+            }
         }
-
-        List<Scene> scenes = SceneManager.GetAllScenes().ToList();
+        return scenes;
     }
 
 
