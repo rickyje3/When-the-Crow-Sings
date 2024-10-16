@@ -121,6 +121,7 @@ public class GameStateManager : MonoBehaviour, IService
         ValidateScenes();
         // get all of the spawners, determine which one to use based on which room was left
         FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
+        FindObjectOfType<PlayerController>().movementInput = Vector3.zero;
     }
     void ValidateScenes()
     {
