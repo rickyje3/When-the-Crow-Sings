@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,10 @@ public class GameStateManager : MonoBehaviour, IService
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            SceneManager.LoadScene(1, LoadSceneMode.Additive);
+            foreach (Scene i in GetLoadedScenes())
+            {
+                SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
+            }
         }
         if (Input.GetKeyUp(KeyCode.K))
         {
@@ -42,24 +46,52 @@ public class GameStateManager : MonoBehaviour, IService
 
     void LoadRoom()
     {
-        currentLevelData = FindObjectsOfType<LevelData>().ToList<LevelData>();
+        
 
-        ValidateNoUNASSIGNED();
-        ValidateOnlyOneLEVEL();
+        
 
+
+        // Unload previosu scenes.
         foreach (Scene i in GetLoadedScenes())
         {
-            SceneManager.UnloadScene(i);
+            SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
         }
-        // unload previous scenes
 
-        // first check what scenes should be loaded based on save data
+        // Check what scenes should be loaded based on save data and exit trigger
 
         // then load them all
+        foreach (Scene i in GetScenesToLoad())
+        {
+            //SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
+            SceneManager.LoadScene(3, LoadSceneMode.Additive);
+        }
+
+        StartCoroutine(ValidateScenesOnNextFrame());
 
         // get all of the spawners, determine which one to use based on which room was left
+        FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
     }
 
+
+    IEnumerator ValidateScenesOnNextFrame()
+    {
+        yield return null;
+        ValidateScenes();
+    }
+    void ValidateScenes()
+    {
+        currentLevelData = FindObjectsOfType<LevelData>().ToList<LevelData>(); // TODO: Investigate Object.FindObjectByType instead. BY type, not OF type.
+        ValidateNoUNASSIGNED();
+        ValidateOnlyOneLEVEL();
+    }
+
+    List<Scene> GetScenesToLoad()
+    {
+        List<Scene> scenes = new List<Scene>();
+        scenes.Add(SceneManager.GetSceneByBuildIndex(3));
+
+        return scenes;
+    }
 
 
     List<Scene> GetLoadedScenes()
