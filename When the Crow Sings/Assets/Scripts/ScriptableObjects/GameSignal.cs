@@ -9,14 +9,12 @@ namespace ScriptableObjects
     [CreateAssetMenu]
     public class GameSignal : ScriptableObject
     {
+        public SignalArguments builtinSignalArguments;
         List<GameSignalListener> listeners = new List<GameSignalListener>();
 
         public void Emit()
         {
-            for (int i = listeners.Count - 1; i >= 0; i--)
-            {
-                listeners[i].OnSignalEmitted(); // Useful in case the response involves removing it from the list.
-            }
+            _Emit(builtinSignalArguments);
         }
 
         public void Emit(float delay_in_seconds)
@@ -25,13 +23,32 @@ namespace ScriptableObjects
             EmitAfterTime(delay_in_seconds);
         }
 
+        public void Emit(SignalArguments externalSignalArguments)
+        {
+            _Emit(externalSignalArguments);
+        }
+
+
+
         private IEnumerator EmitAfterTime(float seconds)
         {
             yield return new WaitForSeconds(seconds);
+            _Emit(builtinSignalArguments);
+        }
 
-            for (int i = listeners.Count - 1; i >= 0; i--)
+        private void _Emit(SignalArguments args)
+        {
+            //for (int i = listeners.Count - 1; i >= 0; i--)
+            //{
+            //    args.sender = listeners[i].gameObject;
+
+            //    listeners[i].OnSignalEmitted(args); // Useful in case the response involves removing it from the list.
+            //}
+
+            foreach (GameSignalListener i in listeners)
             {
-                listeners[i].OnSignalEmitted(); // Useful in case the response involves removing it from the list.
+                args.sender = i.gameObject;
+                i.OnSignalEmitted(args);
             }
         }
 
