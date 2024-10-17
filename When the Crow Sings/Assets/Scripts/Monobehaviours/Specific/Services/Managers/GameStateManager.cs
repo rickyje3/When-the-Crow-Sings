@@ -79,11 +79,11 @@ public class GameStateManager : MonoBehaviour, IService
         {
             LoadRoom(11);
         }
-        if (Input.GetKeyUp(KeyCode.Plus))
+        if (Input.GetKeyUp(KeyCode.Z))
         {
             LoadRoom(12);
         }
-        if (Input.GetKeyUp(KeyCode.Backspace))
+        if (Input.GetKeyUp(KeyCode.X))
         {
             LoadRoom(13);
         }
