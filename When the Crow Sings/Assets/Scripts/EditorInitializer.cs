@@ -80,15 +80,17 @@ public class EditorInitializer
         // remove "IsValidScene" method if you want to do the initialization in all scenes.
         if (state == PlayModeStateChange.ExitingEditMode)// && IsValidScene(validScenes, out string sceneName))
         {
-            string sceneName = SceneManager.GetActiveScene().name;
-            EditorPrefs.SetString(activeEditorScene, sceneName);
+            //string sceneName = SceneManager.GetActiveScene().name;
+            //EditorPrefs.SetString(activeEditorScene, sceneName);
+            EditorSceneLoad = SceneManager.GetActiveScene().buildIndex;
+            Debug.Log("Build index is " + EditorSceneLoad);
             EditorPrefs.SetBool(isEditorInitialization, true);
             SetStartScene(firstSceneToLoad);
         }
-        if (state == PlayModeStateChange.EnteredPlayMode && EditorPrefs.GetBool(isEditorInitialization))
-        {
-            LoadExtraScenes();
-        }
+        //if (state == PlayModeStateChange.EnteredPlayMode && EditorPrefs.GetBool(isEditorInitialization))
+        //{
+        //    LoadExtraScenes();
+        //}
         if (state == PlayModeStateChange.EnteredEditMode)
         {
             EditorPrefs.SetBool(isEditorInitialization, false);
@@ -115,9 +117,14 @@ public class EditorInitializer
         Debug.Log("PrevScene is" + prevScene);
         if (prevScene != "MainScene")
         {
-            SceneManager.LoadScene(prevScene, LoadSceneMode.Additive);
+            //SceneManager.LoadScene(prevScene, LoadSceneMode.Additive);
+            //ServiceLocator.Get<GameStateManager>().TempPlayerSpawn();
+            //ServiceLocator.Get<GameStateManager>().LoadRoom(buildIndex);
         }
     }
+    public static int EditorSceneLoad = 0;
+
+
     static bool IsValidScene(List<string> scenesToCheck, out string sceneName)
     {
         //sceneName = SceneManager.GetActiveScene().name;

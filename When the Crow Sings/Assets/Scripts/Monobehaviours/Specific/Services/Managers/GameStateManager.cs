@@ -28,7 +28,15 @@ public class GameStateManager : MonoBehaviour, IService
 
     private void Start()
     {
-        GetLoadedScenes();
+        //GetLoadedScenes();
+
+
+        Debug.Log("Started");
+        if (EditorInitializer.EditorSceneLoad != 0)
+        {
+            Debug.Log("REALLY started");
+            StartCoroutine(InitialLoad(EditorInitializer.EditorSceneLoad));
+        }
     }
     private void Update()
     {
@@ -96,7 +104,7 @@ public class GameStateManager : MonoBehaviour, IService
 
     // ---------------------------------------------------------------------------
 
-    void LoadRoom(int whichTEMP)
+    public void LoadRoom(int whichTEMP)
     {
         // Unload previosu scenes.
         foreach (Scene i in GetLoadedScenes())
@@ -126,14 +134,13 @@ public class GameStateManager : MonoBehaviour, IService
     }
 
 
-    IEnumerator NextFrameSteps()
+    public void TempPlayerSpawn()
     {
-        yield return null;
-        ValidateScenes();
-        // get all of the spawners, determine which one to use based on which room was left
         FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
         FindObjectOfType<PlayerController>().movementInput = Vector3.zero;
     }
+
+    
     void ValidateScenes()
     {
         currentLevelData = FindObjectsOfType<LevelData>().ToList<LevelData>(); // TODO: Investigate Object.FindObjectByType instead. BY type, not OF type.
@@ -181,8 +188,22 @@ public class GameStateManager : MonoBehaviour, IService
 
 
 
+    IEnumerator NextFrameSteps()
+    {
+        yield return null;
+        ValidateScenes();
+        // get all of the spawners, determine which one to use based on which room was left
+        TempPlayerSpawn();
+    }
 
-    
+    IEnumerator InitialLoad(int index)
+    {
+        Debug.Log("About to coroutine!");
+        yield return null;
+        Debug.Log("Coroutined!");
+        LoadRoom(index);
+    }
+
 
 
 }
