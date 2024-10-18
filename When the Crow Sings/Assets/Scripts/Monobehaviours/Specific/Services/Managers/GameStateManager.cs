@@ -114,8 +114,15 @@ public class GameStateManager : MonoBehaviour, IService
         }
 
         StartCoroutine(NextFrameSteps());
+    }
 
-       
+    public void OnLoadStart(SignalArguments args)
+    {
+
+    }
+    public void OnLoadFinish(SignalArguments args)
+    {
+
     }
 
 
