@@ -27,7 +27,7 @@ public class EditorInitializer
         {
             EditorApplication.playModeStateChanged += BackToBasics;
         }
-        
+
     }
 
     static void BackToBasics(PlayModeStateChange state)
@@ -47,8 +47,6 @@ public class EditorInitializer
     }
     static void OnPlayModeStateChanged(PlayModeStateChange state)
     {
-        Debug.Log("EditorInitializer is happening!");
-
         // remove "IsValidScene" method if you want to do the initialization in all scenes.
         if (state == PlayModeStateChange.ExitingEditMode)// && IsValidScene(validScenes, out string sceneName))
         {
@@ -78,7 +76,6 @@ public class EditorInitializer
     static void LoadExtraScenes()
     {
         string prevScene = EditorPrefs.GetString(activeEditorScene);
-        Debug.Log("PrevScene is" + prevScene);
         if (prevScene != "MainScene")
         {
             SceneManager.LoadScene(prevScene, LoadSceneMode.Additive);
