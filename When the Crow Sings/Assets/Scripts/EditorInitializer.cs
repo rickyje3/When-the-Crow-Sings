@@ -111,8 +111,12 @@ public class EditorInitializer
         //    SceneManager.LoadScene(scenePath, LoadSceneMode.Additive);
         //}
         // the original scene loading
-        var prevScene = EditorPrefs.GetString(activeEditorScene);
-        SceneManager.LoadScene(prevScene, LoadSceneMode.Additive);
+        string prevScene = EditorPrefs.GetString(activeEditorScene);
+        Debug.Log("PrevScene is" + prevScene);
+        if (prevScene != "MainScene")
+        {
+            SceneManager.LoadScene(prevScene, LoadSceneMode.Additive);
+        }
     }
     static bool IsValidScene(List<string> scenesToCheck, out string sceneName)
     {
