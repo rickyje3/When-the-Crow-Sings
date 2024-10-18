@@ -62,9 +62,12 @@ public class EditorInitializer
         {
             string sceneName = SceneManager.GetActiveScene().name;
             EditorPrefs.SetString(activeEditorScene, sceneName);
+            EditorPrefs.SetBool(isEditorInitialization, true);
             EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(EditorPrefs.GetString(activeEditorScene));
-        }
+            
+            //EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(firstSceneToLoad);
 
+        }
         if (state == PlayModeStateChange.EnteredEditMode)
         {
             EditorPrefs.SetBool(isEditorInitialization, false);
