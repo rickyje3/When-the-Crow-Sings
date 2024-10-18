@@ -112,8 +112,6 @@ public class GameStateManager : MonoBehaviour, IService
             //SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
             SceneManager.LoadScene(whichTEMP, LoadSceneMode.Additive);
         }
-
-        StartCoroutine(NextFrameSteps());
     }
 
     public void OnLoadStart(SignalArguments args)
@@ -122,18 +120,12 @@ public class GameStateManager : MonoBehaviour, IService
     }
     public void OnLoadFinish(SignalArguments args)
     {
-
-    }
-
-
-    IEnumerator NextFrameSteps()
-    {
-        yield return null;
         ValidateScenes();
         // get all of the spawners, determine which one to use based on which room was left
         FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
         FindObjectOfType<PlayerController>().movementInput = Vector3.zero;
     }
+
     void ValidateScenes()
     {
         currentLevelData = FindObjectsOfType<LevelData>().ToList<LevelData>(); // TODO: Investigate Object.FindObjectByType instead. BY type, not OF type.

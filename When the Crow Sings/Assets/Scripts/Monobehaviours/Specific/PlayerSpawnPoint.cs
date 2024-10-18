@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,5 +10,10 @@ public class PlayerSpawnPoint : MonoBehaviour
 
     public int entranceIndex = -1;
 
+    public GameSignal loadingFinishedTEMP;
 
+    private void Start()
+    {
+        loadingFinishedTEMP.Emit();
+    }
 }

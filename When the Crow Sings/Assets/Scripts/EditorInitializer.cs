@@ -15,32 +15,6 @@ public class EditorInitializer
     const string activeEditorScene = "PreviousScenePath";
     const string isEditorInitialization = "EditorIntialization";
 
-    // The scenes names that you want to do the editor initialization, only these scenes will work,
-    // alternatively, you can do the initialization in all scenes by removing this list.
-    static List<string> validScenes = new List<string>
-    {
-        "GameplayScene_1",
-        "Level_2",
-        "Test Scene"
-    };
-    // The scenes names that you want to load in addition to the first scene. Loaded in the list order.
-    static List<string> extraScenesToLoad = new List<string>
-    {
-        "ExtraManager_ForGameplayOnly",
-        "DeveloperScene_CheatScene_DebugScene_Scene"
-    };
-
-    //static List<string> invalidScenes = new List<string>
-    //{
-    //Path.GetFileNameWithoutExtension(firstSceneToLoad),
-    //};
-
-    //static bool IsValidScene(List<string> scenesToCheck, out string sceneName)
-    //{
-    //    sceneName = SceneManager.GetActiveScene().name;
-    //    return !scenesToCheck.Contains(sceneName);
-    //}
-
 
     static bool useFancy = true;
     static EditorInitializer()
@@ -58,14 +32,12 @@ public class EditorInitializer
 
     static void BackToBasics(PlayModeStateChange state)
     {
-        if (state == PlayModeStateChange.ExitingEditMode)// && IsValidScene(validScenes, out string sceneName))
+        if (state == PlayModeStateChange.ExitingEditMode)
         {
             string sceneName = SceneManager.GetActiveScene().name;
             EditorPrefs.SetString(activeEditorScene, sceneName);
             EditorPrefs.SetBool(isEditorInitialization, true);
             EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(EditorPrefs.GetString(activeEditorScene));
-            
-            //EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(firstSceneToLoad);
 
         }
         if (state == PlayModeStateChange.EnteredEditMode)
@@ -105,24 +77,11 @@ public class EditorInitializer
     }
     static void LoadExtraScenes()
     {
-        // extra scenes to load
-        //foreach (string scenePath in extraScenesToLoad)
-        //{
-        //    SceneManager.LoadScene(scenePath, LoadSceneMode.Additive);
-        //}
-        // the original scene loading
         string prevScene = EditorPrefs.GetString(activeEditorScene);
         Debug.Log("PrevScene is" + prevScene);
         if (prevScene != "MainScene")
         {
             SceneManager.LoadScene(prevScene, LoadSceneMode.Additive);
         }
-    }
-    static bool IsValidScene(List<string> scenesToCheck, out string sceneName)
-    {
-        //sceneName = SceneManager.GetActiveScene().name;
-        //return scenesToCheck.Contains(sceneName);
-        sceneName = SceneManager.GetActiveScene().name;
-        return true;
     }
 }
