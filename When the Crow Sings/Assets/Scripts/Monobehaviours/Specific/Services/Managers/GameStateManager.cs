@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,9 @@ using UnityEngine.UI;
 
 public class GameStateManager : MonoBehaviour, IService
 {
+    public GameSignal levelLoadStartSignal;
+    public GameSignal levelLoadFinishSignal;
+
     List<LevelData> currentLevelData = new List<LevelData>();
 
     const string SCN_PATH = "Assets/Scenes/";
@@ -110,8 +114,15 @@ public class GameStateManager : MonoBehaviour, IService
         }
 
         StartCoroutine(NextFrameSteps());
+    }
 
-       
+    public void OnLoadStart(SignalArguments args)
+    {
+
+    }
+    public void OnLoadFinish(SignalArguments args)
+    {
+
     }
 
 
