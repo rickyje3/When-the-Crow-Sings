@@ -26,72 +26,72 @@ public class GameStateManager : MonoBehaviour, IService
         ServiceLocator.Register<GameStateManager>(this);
     }
 
-    private void Start()
-    {
-        GetLoadedScenes();
-    }
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            foreach (Scene i in GetLoadedScenes())
-            {
-                SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
-            }
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha1))
-        {
-            LoadRoom(1);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha2))
-        {
-            LoadRoom(2);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha3))
-        {
-            LoadRoom(3);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha4))
-        {
-            LoadRoom(4);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha5))
-        {
-            LoadRoom(5);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha6))
-        {
-            LoadRoom(6);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha7))
-        {
-            LoadRoom(7);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha8))
-        {
-            LoadRoom(8);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha9))
-        {
-            LoadRoom(9);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha0))
-        {
-            LoadRoom(10);
-        }
-        if (Input.GetKeyUp(KeyCode.Minus))
-        {
-            LoadRoom(11);
-        }
-        if (Input.GetKeyUp(KeyCode.Z))
-        {
-            LoadRoom(12);
-        }
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-            LoadRoom(13);
-        }
-    }
+    //private void Start()
+    //{
+    //    GetLoadedScenes();
+    //}
+    //private void Update()
+    //{
+    //    if (Input.GetKeyUp(KeyCode.Space))
+    //    {
+    //        foreach (Scene i in GetLoadedScenes())
+    //        {
+    //            SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
+    //        }
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha1))
+    //    {
+    //        LoadRoom(1);
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha2))
+    //    {
+    //        LoadRoom(2);
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha3))
+    //    {
+    //        LoadRoom(3);
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha4))
+    //    {
+    //        LoadRoom(4);
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha5))
+    //    {
+    //        LoadRoom(5);
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha6))
+    //    {
+    //        LoadRoom(6);
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha7))
+    //    {
+    //        LoadRoom(7);
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha8))
+    //    {
+    //        LoadRoom(8);
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha9))
+    //    {
+    //        LoadRoom(9);
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha0))
+    //    {
+    //        LoadRoom(10);
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.Minus))
+    //    {
+    //        LoadRoom(11);
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.Z))
+    //    {
+    //        LoadRoom(12);
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.X))
+    //    {
+    //        LoadRoom(13);
+    //    }
+    //}
 
 
     // ---------------------------------------------------------------------------
