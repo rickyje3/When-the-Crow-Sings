@@ -12,6 +12,11 @@ public class SeeThruWall : MonoBehaviour
     public static int SizeID = Shader.PropertyToID("_Size");
     public static int TintID = Shader.PropertyToID("_Tint");
 
+    private void Awake()
+    {
+        Camera = FindObjectOfType<Camera>();
+    }
+
     // Update is called once per frame
     void Update()
     {
