@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,4 +21,16 @@ public class LevelData : MonoBehaviour
     [Header("MAIN")]
     [HideInInspector]
     public int ThisVariableDoesNothingItsJustHereToHaveSomethingForNow;
+
+
+
+    public GameSignal loadingFinished;
+    private void Start()
+    {
+        if (sceneType == SceneType.LEVEL)
+        {
+            loadingFinished.Emit();
+        }
+        
+    }
 }
