@@ -23,6 +23,7 @@ public class SeeThruWall : MonoBehaviour
         var dir = Camera.transform.position - transform.position;
         var ray = new Ray(transform.position, dir.normalized);
 
+        //if raycast in range, increase the seethru material size
         if (Physics.Raycast(ray, 3000, mask))
         {
             SeeThruMaterial.SetFloat(SizeID, 1);
