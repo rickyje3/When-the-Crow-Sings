@@ -1,6 +1,7 @@
 using ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class LevelData : MonoBehaviour
@@ -23,8 +24,20 @@ public class LevelData : MonoBehaviour
     public int ThisVariableDoesNothingItsJustHereToHaveSomethingForNow;
 
 
+    public List<SubSceneContainer> subScenes;
+
+
 
     public GameSignal loadingFinished;
+
+
+    private void Awake()
+    {
+        if (sceneType != SceneType.LEVEL && subScenes != null)
+        {
+            throw new System.Exception("A non-LEVEL scene has SubScenes listed!");
+        }
+    }
     private void Start()
     {
         if (sceneType == SceneType.LEVEL)
