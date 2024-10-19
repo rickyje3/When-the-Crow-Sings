@@ -24,8 +24,7 @@ public class LevelData : MonoBehaviour
     public int ThisVariableDoesNothingItsJustHereToHaveSomethingForNow;
 
 
-    public List<SubSceneContainer> subScenes;
-
+    public LevelDataResource levelDataResource;
 
 
     public GameSignal loadingFinished;
@@ -33,14 +32,14 @@ public class LevelData : MonoBehaviour
 
     private void Awake()
     {
-        if  (subScenes != null)
+        if  (levelDataResource != null)
         {
             if (sceneType != SceneType.LEVEL)
             {
                 throw new System.Exception("A non-LEVEL scene has SubScenes listed!");
             }
 
-            foreach (SubSceneContainer i in subScenes)
+            foreach (SubSceneContainer i in levelDataResource.subScenes)
             {
                 foreach (SubSceneLogicBase ii in i.subSceneLogics)
                 {
@@ -52,10 +51,13 @@ public class LevelData : MonoBehaviour
     }
     private void Start()
     {
+        SignalArguments args = new SignalArguments();
+        args.intArgs.Add(0);
+        
         if (sceneType == SceneType.LEVEL)
         {
-            loadingFinished.Emit();
+            args.intArgs[0] = 1;
         }
-        
+        loadingFinished.Emit(args);
     }
 }

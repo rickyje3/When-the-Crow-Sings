@@ -37,9 +37,15 @@ public class GameStateManager : MonoBehaviour, IService
     public void OnLoadFinish(SignalArguments args)
     {
         ValidateScenes();
-        // get all of the spawners, determine which one to use based on which room was left
-        FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
-        FindObjectOfType<PlayerController>().movementInput = Vector3.zero;
+        if (args.intArgs[0] == 1)
+        {
+            
+
+            // get all of the spawners, determine which one to use based on which room was left
+            FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
+            FindObjectOfType<PlayerController>().movementInput = Vector3.zero;
+        }
+        
     }
 
     // ---------------------------------------------------------------------------
@@ -65,7 +71,7 @@ public class GameStateManager : MonoBehaviour, IService
     {
         currentLevelData = FindObjectsOfType<LevelData>().ToList<LevelData>(); // TODO: Investigate Object.FindObjectByType instead. BY type, not OF type.
         Validate_No_UNASSIGNED();
-        Validate_OnlyOne_LEVEL();
+        Validate_ExactlyOne_LEVEL();
     }
 
     List<Scene> GetScenesToLoad(int whichTEMP)
@@ -90,10 +96,11 @@ public class GameStateManager : MonoBehaviour, IService
         return scenes;
     }
 
-    void Validate_OnlyOne_LEVEL()
+    void Validate_ExactlyOne_LEVEL()
     {
-        if (currentLevelData.Count(x => x.sceneType == LevelData.SceneType.LEVEL) > 1)
-            throw new System.Exception("More than one LEVEL-type scene loaded!");
+        if (currentLevelData.Count(x => x.sceneType == LevelData.SceneType.LEVEL) != 1)
+            throw new System.Exception("Not EXACTLY one LEVEL-type scene is currently loaded!");
+        else { Debug.Log("All's well!"); }
     }
     void Validate_No_UNASSIGNED()
     {
