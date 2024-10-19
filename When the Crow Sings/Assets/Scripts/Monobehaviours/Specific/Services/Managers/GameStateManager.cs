@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,9 @@ using UnityEngine.UI;
 
 public class GameStateManager : MonoBehaviour, IService
 {
+    public GameSignal levelLoadStartSignal;
+    public GameSignal levelLoadFinishSignal;
+
     List<LevelData> currentLevelData = new List<LevelData>();
 
     const string SCN_PATH = "Assets/Scenes/";
@@ -108,21 +112,20 @@ public class GameStateManager : MonoBehaviour, IService
             //SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
             SceneManager.LoadScene(whichTEMP, LoadSceneMode.Additive);
         }
-
-        StartCoroutine(NextFrameSteps());
-
-       
     }
 
-
-    IEnumerator NextFrameSteps()
+    public void OnLoadStart(SignalArguments args)
     {
-        yield return null;
+
+    }
+    public void OnLoadFinish(SignalArguments args)
+    {
         ValidateScenes();
         // get all of the spawners, determine which one to use based on which room was left
         FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
         FindObjectOfType<PlayerController>().movementInput = Vector3.zero;
     }
+
     void ValidateScenes()
     {
         currentLevelData = FindObjectsOfType<LevelData>().ToList<LevelData>(); // TODO: Investigate Object.FindObjectByType instead. BY type, not OF type.
