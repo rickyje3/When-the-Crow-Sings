@@ -9,40 +9,22 @@ using static UnityEngine.ParticleSystem;
 [InitializeOnLoad]
 public class EditorInitializer
 {
-    // your first scene path:
     const string firstSceneToLoad = "Assets/Scenes/MainScene.unity";
-    // Editor pref save name, no need to change
     const string activeEditorScene = "PreviousScenePath";
     const string isEditorInitialization = "EditorIntialization";
 
-
-    static bool useFancy = true;
+    static bool useTestingLoading = true;
     static EditorInitializer()
     {
-        if (useFancy)
+        if (useTestingLoading)
         {
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
         }
         else
         {
-            EditorApplication.playModeStateChanged += BackToBasics;
-        }
-
-    }
-
-    static void BackToBasics(PlayModeStateChange state)
-    {
-        if (state == PlayModeStateChange.ExitingEditMode)
-        {
-            string sceneName = SceneManager.GetActiveScene().name;
-            EditorPrefs.SetString(activeEditorScene, sceneName);
-            EditorPrefs.SetBool(isEditorInitialization, true);
-            EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(EditorPrefs.GetString(activeEditorScene));
-
-        }
-        if (state == PlayModeStateChange.EnteredEditMode)
-        {
+            EditorPrefs.SetString(activeEditorScene, SceneManager.GetActiveScene().name);
             EditorPrefs.SetBool(isEditorInitialization, false);
+            EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(EditorPrefs.GetString(activeEditorScene));
         }
     }
     static void OnPlayModeStateChanged(PlayModeStateChange state)
