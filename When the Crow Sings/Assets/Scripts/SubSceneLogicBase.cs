@@ -11,5 +11,4 @@ public class SubSceneLogicBase
     public enum VALUE_TYPE { BOOL, INT }
     public VALUE_TYPE valueType = VALUE_TYPE.BOOL;
     public bool boolValue;
-    
 }

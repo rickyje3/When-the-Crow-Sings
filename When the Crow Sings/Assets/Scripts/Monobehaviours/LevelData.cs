@@ -33,10 +33,22 @@ public class LevelData : MonoBehaviour
 
     private void Awake()
     {
-        if (sceneType != SceneType.LEVEL && subScenes != null)
+        if  (subScenes != null)
         {
-            throw new System.Exception("A non-LEVEL scene has SubScenes listed!");
+            if (sceneType != SceneType.LEVEL)
+            {
+                throw new System.Exception("A non-LEVEL scene has SubScenes listed!");
+            }
+
+            foreach (SubSceneContainer i in subScenes)
+            {
+                foreach (SubSceneLogicBase ii in i.subSceneLogics)
+                {
+                    // TODO: Add logic to make sure nothing is broken.
+                }
+            }
         }
+        
     }
     private void Start()
     {
