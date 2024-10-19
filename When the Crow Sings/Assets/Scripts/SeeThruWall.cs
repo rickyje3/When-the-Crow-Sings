@@ -10,6 +10,7 @@ public class SeeThruWall : MonoBehaviour
 
     public static int PosID = Shader.PropertyToID("_Position");
     public static int SizeID = Shader.PropertyToID("_Size");
+    public static int TintID = Shader.PropertyToID("_Tint");
 
     // Update is called once per frame
     void Update()
