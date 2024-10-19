@@ -26,7 +26,7 @@ public class LevelData : MonoBehaviour
 
     public List<SubSceneContainer> subScenes;
 
-
+    public bool toggleBool;
 
     public GameSignal loadingFinished;
 
