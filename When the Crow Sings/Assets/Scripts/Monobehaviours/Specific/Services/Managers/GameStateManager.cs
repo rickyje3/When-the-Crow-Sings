@@ -31,7 +31,8 @@ public class GameStateManager : MonoBehaviour, IService
 
     public void OnLoadStart(SignalArguments args)
     {
-        Debug.Log("Start loading!");
+        LoadRoom(args.intArgs[0]);
+        //Debug.Log("Start loading!");
     }
     public void OnLoadFinish(SignalArguments args)
     {
@@ -101,21 +102,14 @@ public class GameStateManager : MonoBehaviour, IService
             if (i.sceneType == LevelData.SceneType.UNASSIGNED) throw new System.Exception("Attempting to load a level of type UNASSIGNED!");
         }
     }
-    // ---------------------------------------------------------------------------
 
+    // ---------------------------------------------------------------------------
     void LoadPersistentData() { }
     void SavePersistentData() { }
 
     // ---------------------------------------------------------------------------
     void DebugLoadInput()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            foreach (Scene i in GetLoadedScenes())
-            {
-                SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
-            }
-        }
         if (Input.GetKeyUp(KeyCode.Alpha1))
         {
             LoadRoom(1);
