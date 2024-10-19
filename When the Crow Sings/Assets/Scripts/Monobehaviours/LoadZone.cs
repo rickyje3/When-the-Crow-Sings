@@ -5,16 +5,19 @@ using UnityEngine;
 
 public class LoadZone : MonoBehaviour
 {
-    public GameSignal startLoadSignal;
-    public int targetIndexTEMP = 0;
+    
+    public int targetSpawnPointIndex = 0;
+    public LevelDataResource levelDataResource;
 
+    public GameSignal startLoadSignal;
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerInteractionArea>() != null)
         {
             Debug.Log("Going to try to load!");
             SignalArguments args = new SignalArguments();
-            args.intArgs.Add(targetIndexTEMP);
+            args.intArgs.Add(targetSpawnPointIndex);
+            args.objectArgs.Add(levelDataResource);
             startLoadSignal.Emit(args);
         }
     }

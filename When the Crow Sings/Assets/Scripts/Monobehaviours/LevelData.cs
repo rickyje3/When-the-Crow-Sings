@@ -24,31 +24,31 @@ public class LevelData : MonoBehaviour
     public int ThisVariableDoesNothingItsJustHereToHaveSomethingForNow;
 
 
-    public LevelDataResource levelDataResource;
+    //public LevelDataResource levelDataResource;
 
 
     public GameSignal loadingFinished;
 
 
-    private void Awake()
-    {
-        if  (levelDataResource != null)
-        {
-            if (sceneType != SceneType.LEVEL)
-            {
-                throw new System.Exception("A non-LEVEL scene has SubScenes listed!");
-            }
+    //private void Awake()
+    //{
+    //    if  (levelDataResource != null)
+    //    {
+    //        if (sceneType != SceneType.LEVEL)
+    //        {
+    //            throw new System.Exception("A non-LEVEL scene has SubScenes listed!");
+    //        }
 
-            foreach (SubSceneContainer i in levelDataResource.subScenes)
-            {
-                foreach (SubSceneLogicBase ii in i.subSceneLogics)
-                {
-                    // TODO: Add logic to make sure nothing is broken.
-                }
-            }
-        }
+    //        foreach (SubSceneContainer i in levelDataResource.subScenes)
+    //        {
+    //            foreach (SubSceneLogicBase ii in i.subSceneLogics)
+    //            {
+    //                // TODO: Add logic to make sure nothing is broken.
+    //            }
+    //        }
+    //    }
         
-    }
+    //}
     private void Start()
     {
         SignalArguments args = new SignalArguments();

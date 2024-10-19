@@ -31,6 +31,7 @@ public class GameStateManager : MonoBehaviour, IService
 
     public void OnLoadStart(SignalArguments args)
     {
+        // if args.objectargs[0] != LevelDataResource then return ERROR
         LoadRoom(args.intArgs[0]);
         //Debug.Log("Start loading!");
     }
