@@ -11,39 +11,48 @@ public static class SaveData
         { "AngelTaskCompleted",false },
         { "AngelBaseComplete",false },
         { "AngelExhausted",false },
+
         { "BeauTaskOffered",false },
         { "BeauTaskCompleted",false },
         { "BeauBaseComplete",false },
         { "BeauExhausted",false },
+        
         { "CalebTaskOffered",false },
         { "CalebTaskCompleted",false },
         { "CalebBaseComplete",false },
         { "CalebExhausted",false },
+        
         { "FaridaIntroduction",false },
         { "FaridaTaskOffered",false },
         { "FaridaTaskCompleted",false },
         { "FaridaBaseCompleted",false },
         { "FaridaExhausted",false },
+        
         { "QuinnTaskOffered",false },
         { "QuinnTaskCompleted",false },
         { "QuinnBaseCompleted",false },
         { "QuinnExhausted",false },
+        
         { "JazmyneTaskOffered",false },
         { "JazmyneTaskCompleted",false },
         { "JazmyneBaseComplete",false },
         { "JazmyneExhausted",false },
+        
         { "FranciscoTaskOffered",false },
         { "FranciscoTaskCompleted",false },
         { "FranciscoBaseCompleted",false },
         { "FranciscoExhausted",false },
+        
         { "YuleTaskOffered",false },
         { "YuleTaskCompleted",false },
         { "YuleBaseCompleted",false },
         { "YuleExhausted",false },
+        
         { "PhilomenaTaskOffered",false },
         { "PhilomenaTaskCompleted",false },
         { "PhilomenaBaseCompleted",false },
         { "PhilomenaExhausted",false },
+        
         { "TheodoreIntroduction",false },
         { "TheodoreTaskOffered",false },
         { "TheodoreTaskCompleted",false },
@@ -56,5 +65,7 @@ public static class SaveData
 
     public static int day = 0;
 
-    public static int tasksCompleted = 0;
+    public static int numberOfTasksCompleted = 0;
+
+    public static int TBD_OnLoadSpawnPoint_OrSomething = 0;
 }
