@@ -58,11 +58,9 @@ public class GameStateManager : MonoBehaviour, IService
     void LoadRoom(LevelDataResource levelDataResource)
     {
         // Unload previosu scenes.
-        foreach (Scene i in GetLoadedScenes())
-        {
-            SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
-            //SceneManager.UnloadScene(i);
-        }
+        StartCoroutine(UnloadLoadedScenes());
+
+        Debug.Log("Should all be done now.");
 
         // Check what scenes should be loaded based on save data and exit trigger
 
@@ -75,6 +73,21 @@ public class GameStateManager : MonoBehaviour, IService
             Debug.Log(i.name + " was loaded!");
         }
     }
+
+
+    IEnumerator UnloadLoadedScenes()
+    {
+        foreach (Scene i in GetLoadedScenes())
+        {
+            //SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
+            Debug.Log("About to unload a scene");
+            yield return SceneManager.UnloadSceneAsync(i);
+            Debug.Log("Unloaded a scene");
+            
+        }
+        
+    }
+
     void ValidateScenes()
     {
         currentLevelData = FindObjectsOfType<LevelData>().ToList<LevelData>(); // TODO: Investigate Object.FindObjectByType instead. BY type, not OF type.
