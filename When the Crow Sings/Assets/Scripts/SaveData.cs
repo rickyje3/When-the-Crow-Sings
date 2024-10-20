@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class SaveData
 {
-    public static Dictionary<string, bool> flagsDialogue = new Dictionary<string, bool>()
+    public static Dictionary<string, bool> boolFlags = new Dictionary<string, bool>()
     {
         { "AngelTaskOffered",false },
         { "AngelTaskCompleted",false },
@@ -60,12 +60,11 @@ public static class SaveData
         { "TheodoreExhausted",false },
     };
 
-    public enum TimeOfDay{MORNING,AFTERNOON,NIGHT}
-    public static TimeOfDay timeOfDay = TimeOfDay.MORNING;
-
-    public static int day = 0;
-
-    public static int numberOfTasksCompleted = 0;
-
-    public static int TBD_OnLoadSpawnPoint_OrSomething = 0;
+    public static Dictionary<string, int> intFlags = new Dictionary<string, int>()
+    {
+        {"day",0 },
+        {"timeOfDay",0 },
+        {"numberOfTasksCompleted",0 },
+        {"TBD_OnLoadSpawnPoint_OrSomething",0 },
+    };
 }

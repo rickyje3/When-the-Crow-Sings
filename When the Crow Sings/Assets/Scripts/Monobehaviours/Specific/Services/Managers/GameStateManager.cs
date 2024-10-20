@@ -100,14 +100,45 @@ public class GameStateManager : MonoBehaviour, IService
 
         scenes.Add(levelDataResource.level);
 
-        if (levelDataResource.subScenes.Count > 0 )
+        if (levelDataResource.subScenes.Count > 0)
         {
             foreach (SubSceneContainer i in levelDataResource.subScenes)
             {
+                bool shouldContinue = false;
+                foreach (SubSceneLogicBase ii in i.subSceneLogics)
+                {
+                    if (ii.valueType == SubSceneLogicBase.VALUE_TYPE.BOOL)
+                    {
+                        bool boolFlag = SaveData.boolFlags[ii.associatedDataKey];
+                        if (ii.boolValue != boolFlag)
+                        {
+                            shouldContinue = true;
+                        }
+                    }
+
+                    else if (ii.valueType == SubSceneLogicBase.VALUE_TYPE.INT)
+                    {
+                        int intFlag = SaveData.intFlags[ii.associatedDataKey];
+                        //Debug.Log("Flag is == " + intFlag);
+
+                        if (ii.associatedOperator == SubSceneLogicBase.OPERATOR.EQUALS)
+                        {
+                            if (ii.intValue != intFlag) shouldContinue = true;
+                        }
+                        else if (ii.associatedOperator == SubSceneLogicBase.OPERATOR.LESS_THAN)
+                        {
+                            if (ii.intValue! < intFlag) shouldContinue = true;
+                        }
+                        else
+                        {
+                            if (ii.intValue! > intFlag) shouldContinue = true;
+                        }
+                    }
+                }
+                if (shouldContinue) continue;
                 scenes.Add(i.subScene);
             }
         }
-        
 
         //scenes.Add(SceneManager.GetSceneByBuildIndex(whichTEMP+1));
 
