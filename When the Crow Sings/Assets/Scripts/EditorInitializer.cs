@@ -60,7 +60,10 @@ public class EditorInitializer
         string prevScene = EditorPrefs.GetString(activeEditorScene);
         if (prevScene != "MainScene")
         {
-            SceneManager.LoadScene(prevScene, LoadSceneMode.Additive);
+            LevelDataResource myResource = new LevelDataResource();
+            //myResource.level = 
+            //SceneManager.LoadScene(prevScene, LoadSceneMode.Additive);
+            ServiceLocator.Get<GameStateManager>().LoadRoomDebug(prevScene);
         }
     }
 }

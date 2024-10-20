@@ -63,11 +63,29 @@ public class GameStateManager : MonoBehaviour, IService
 
     // ---------------------------------------------------------------------------
 
-    void LoadRoom(LevelDataResource levelDataResource)
+    public void LoadRoomDebug(string levelName)
     {
         Destroy(player);
 
-        // Unload previosu scenes.
+        // Unload previous scenes.
+        foreach (Scene i in GetLoadedScenes())
+        {
+            SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
+            //SceneManager.UnloadScene(i);
+        }
+
+        // Check what scenes should be loaded based on save data and exit trigger
+
+        SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
+        player = Instantiate(_playerPrefab);
+    }
+
+
+    public void LoadRoom(LevelDataResource levelDataResource)
+    {
+        Destroy(player);
+
+        // Unload previous scenes.
         foreach (Scene i in GetLoadedScenes())
         {
             SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
@@ -93,6 +111,7 @@ public class GameStateManager : MonoBehaviour, IService
         Validate_No_UNASSIGNED();
         Validate_ExactlyOne_LEVEL();
     }
+
 
     List<SceneAsset> GetScenesToLoad(LevelDataResource levelDataResource)
     {
