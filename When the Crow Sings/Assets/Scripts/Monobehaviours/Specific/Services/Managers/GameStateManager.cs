@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,9 @@ using UnityEngine.UI;
 
 public class GameStateManager : MonoBehaviour, IService
 {
+    public GameObject _playerPrefab;
+    public GameObject player = null;
+
     public GameSignal levelLoadStartSignal;
     public GameSignal levelLoadFinishSignal;
 
@@ -34,7 +38,10 @@ public class GameStateManager : MonoBehaviour, IService
     {
         if (args.objectArgs[0] is not LevelDataResource) { throw new Exception("No valid LevelDataResource assigned to the load trigger!"); }
 
-        ServiceLocator.Get<PlayerController>().gameObject.SetActive(false);
+        //ServiceLocator.Get<PlayerController>().gameObject.SetActive(false);
+        
+
+        
 
         LoadRoom((LevelDataResource)args.objectArgs[0]);
         //LoadRoom(args.intArgs[0]);
@@ -44,7 +51,8 @@ public class GameStateManager : MonoBehaviour, IService
         ValidateScenes();
         if (args.intArgs[0] == 1)
         {
-            ServiceLocator.Get<PlayerController>().gameObject.SetActive(true);
+            //ServiceLocator.Get<PlayerController>().gameObject.SetActive(true);
+            
 
             // get all of the spawners, determine which one to use based on which room was left
             FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
@@ -57,6 +65,8 @@ public class GameStateManager : MonoBehaviour, IService
 
     void LoadRoom(LevelDataResource levelDataResource)
     {
+        Destroy(player);
+
         // Unload previosu scenes.
         foreach (Scene i in GetLoadedScenes())
         {
@@ -74,6 +84,8 @@ public class GameStateManager : MonoBehaviour, IService
             SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
             Debug.Log(i.name + " was loaded!");
         }
+
+        player = Instantiate(_playerPrefab);
     }
     void ValidateScenes()
     {
