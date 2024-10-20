@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -31,16 +32,19 @@ public class GameStateManager : MonoBehaviour, IService
 
     public void OnLoadStart(SignalArguments args)
     {
-        // if args.objectargs[0] != LevelDataResource then return ERROR
-        LoadRoom(args.intArgs[0]);
-        //Debug.Log("Start loading!");
+        if (args.objectArgs[0] is not LevelDataResource) { throw new Exception("No valid LevelDataResource assigned to the load trigger!"); }
+
+        ServiceLocator.Get<PlayerController>().gameObject.SetActive(false);
+
+        LoadRoom((LevelDataResource)args.objectArgs[0]);
+        //LoadRoom(args.intArgs[0]);
     }
     public void OnLoadFinish(SignalArguments args)
     {
         ValidateScenes();
         if (args.intArgs[0] == 1)
         {
-            
+            ServiceLocator.Get<PlayerController>().gameObject.SetActive(true);
 
             // get all of the spawners, determine which one to use based on which room was left
             FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
@@ -51,21 +55,24 @@ public class GameStateManager : MonoBehaviour, IService
 
     // ---------------------------------------------------------------------------
 
-    void LoadRoom(int whichTEMP)
+    void LoadRoom(LevelDataResource levelDataResource)
     {
         // Unload previosu scenes.
         foreach (Scene i in GetLoadedScenes())
         {
             SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
+            //SceneManager.UnloadScene(i);
         }
 
         // Check what scenes should be loaded based on save data and exit trigger
 
+
         // then load them all
-        foreach (Scene i in GetScenesToLoad(whichTEMP))
+        foreach (SceneAsset i in GetScenesToLoad(levelDataResource))
         {
             //SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
-            SceneManager.LoadScene(whichTEMP, LoadSceneMode.Additive);
+            SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
+            Debug.Log(i.name + " was loaded!");
         }
     }
     void ValidateScenes()
@@ -75,10 +82,22 @@ public class GameStateManager : MonoBehaviour, IService
         Validate_ExactlyOne_LEVEL();
     }
 
-    List<Scene> GetScenesToLoad(int whichTEMP)
+    List<SceneAsset> GetScenesToLoad(LevelDataResource levelDataResource)
     {
-        List<Scene> scenes = new List<Scene>();
-        scenes.Add(SceneManager.GetSceneByBuildIndex(whichTEMP+1));
+        List<SceneAsset> scenes = new List<SceneAsset>();
+
+        scenes.Add(levelDataResource.level);
+
+        if (levelDataResource.subScenes.Count > 0 )
+        {
+            foreach (SubSceneContainer i in levelDataResource.subScenes)
+            {
+                scenes.Add(i.subScene);
+            }
+        }
+        
+
+        //scenes.Add(SceneManager.GetSceneByBuildIndex(whichTEMP+1));
 
         return scenes;
     }
@@ -116,59 +135,68 @@ public class GameStateManager : MonoBehaviour, IService
     void SavePersistentData() { }
 
     // ---------------------------------------------------------------------------
+
+    public List<SceneAsset> debugScenes;
     void DebugLoadInput()
     {
+        LevelDataResource testResource = new LevelDataResource();
         if (Input.GetKeyUp(KeyCode.Alpha1))
         {
-            LoadRoom(1);
+            testResource.level = debugScenes[0];
+            LoadRoom(testResource);
         }
         if (Input.GetKeyUp(KeyCode.Alpha2))
         {
-            LoadRoom(2);
+            testResource.level = debugScenes[1];
+            LoadRoom(testResource);
         }
         if (Input.GetKeyUp(KeyCode.Alpha3))
         {
-            LoadRoom(3);
+            testResource.level = debugScenes[2];
+            LoadRoom(testResource);
         }
         if (Input.GetKeyUp(KeyCode.Alpha4))
         {
-            LoadRoom(4);
+            testResource.level = debugScenes[3];
+            LoadRoom(testResource);
         }
         if (Input.GetKeyUp(KeyCode.Alpha5))
         {
-            LoadRoom(5);
+            testResource.level = debugScenes[4];
+            LoadRoom(testResource);
         }
         if (Input.GetKeyUp(KeyCode.Alpha6))
         {
-            LoadRoom(6);
+            testResource.level = debugScenes[5];
         }
         if (Input.GetKeyUp(KeyCode.Alpha7))
         {
-            LoadRoom(7);
+            testResource.level = debugScenes[6];
         }
         if (Input.GetKeyUp(KeyCode.Alpha8))
         {
-            LoadRoom(8);
+            testResource.level = debugScenes[7];
         }
         if (Input.GetKeyUp(KeyCode.Alpha9))
         {
-            LoadRoom(9);
+            testResource.level = debugScenes[8];
         }
         if (Input.GetKeyUp(KeyCode.Alpha0))
         {
-            LoadRoom(10);
+            testResource.level = debugScenes[9];
         }
         if (Input.GetKeyUp(KeyCode.Minus))
         {
-            LoadRoom(11);
+            testResource.level = debugScenes[10];
         }
         if (Input.GetKeyUp(KeyCode.Z))
         {
-            LoadRoom(12);
+            testResource.level = debugScenes[11];
         }
         if (Input.GetKeyUp(KeyCode.X))
         {
-            LoadRoom(13);
+            testResource.level = debugScenes[12];
         }
+        
     }
 }

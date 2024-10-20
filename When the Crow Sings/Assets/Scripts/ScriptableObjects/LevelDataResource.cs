@@ -8,5 +8,5 @@ using UnityEngine;
 public class LevelDataResource : ScriptableObject
 {
     public SceneAsset level;
-    public List<SubSceneContainer> subScenes;
+    public List<SubSceneContainer> subScenes = new List<SubSceneContainer>();
 }

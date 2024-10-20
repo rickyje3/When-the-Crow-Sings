@@ -18,6 +18,9 @@ public class LoadZone : MonoBehaviour
             SignalArguments args = new SignalArguments();
             args.intArgs.Add(targetSpawnPointIndex);
             args.objectArgs.Add(levelDataResource);
+
+            this.gameObject.SetActive(false);
+
             startLoadSignal.Emit(args);
         }
     }
