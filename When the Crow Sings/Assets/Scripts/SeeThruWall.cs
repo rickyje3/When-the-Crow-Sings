@@ -26,7 +26,7 @@ public class SeeThruWall : MonoBehaviour
         //if raycast in range, increase the seethru material size
         if (Physics.Raycast(ray, 3000, mask))
         {
-            SeeThruMaterial.SetFloat(SizeID, 1);
+            SeeThruMaterial.SetFloat(SizeID, 0.5f);
         }
         else SeeThruMaterial.SetFloat(SizeID, 0);
 
