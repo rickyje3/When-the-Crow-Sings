@@ -1,0 +1,46 @@
+﻿~caleb_first_int
+        Caleb:Oh, good (conditional dialogue here). You must be the new resident Farida was talking about.
+        Conditional choice here that doesn’t show up unless flagged.
+        Chance:Yep, that’s me.
+        Caleb:Nice to meet you, I’m Caleb. What’s your name again?
+        Chance:Chance.
+        Caleb:That’s a fine name. Guess I could take a-
+        [caleb_wink]Caleb:CHANCE on you, huh?
+        -funny
+                Chance:Hah.
+                        =>caleb_first_int_cont
+        -unfunny
+                Chance:. . .
+                [caleb_smile]Caleb: !
+                        =>caleb_first_int_cont
+~caleb_first_int_cont
+        Caleb:Well I’m just here doing some solar panel work. I’m our head electrician around here.
+        Chance:This place runs on solar?
+        Chance:(something to indicate an inner thought) Just like home…
+        [caleb_smile]Caleb: Yep. This place used to run off some other energy source, but at some point it failed and they shipped me out and installed the panels.
+        Caleb:Came here just for this job. It’s a simple one for me.
+        Chance:(something to indicate an inner thought) . . . ?
+        Chance:Other energy source?
+Chance:(something to indicate an inner thought)There’s no big water sources out here… Wonder what it was.
+        Caleb:Oooh yeah. I don’t know a whole lot about it but…
+        [caleb_think]Caleb:If you’re curious about it, maybe I could spend some time thinking while you do me a favor?
+        -Uh, sure?
+                Chance:Uh, sure?
+                        =>caleb_first_cont_2
+        -Really?
+                Chance:You can’t just tell me?
+                [caleb_wink]Caleb: ;)
+                Chance:. . .
+                Chance: Fine.
+                        =>caleb_first_cont_2
+        -Not a Chance.
+                [chance_upset]Chance:Not a chance.
+                Caleb:HAH!
+                Caleb:Well you come back if you want me to slide some knowledge your way, kid.
+                        =>END
+~caleb_first_cont_2
+        [caleb_smile]Caleb:Great!
+        [caleb_disgruntled]Caleb:Now listen. These damned crows are bad enough, weighing down the power lines connecting the buildings and making me do maintenance on the connectors.
+        [caleb_disgruntled]Caleb:Then, they started taking my wires! They’ve been making nests over by the south east gate, near the old quarter. 
+[caleb_smile]Caleb:If you could go and grab some back for me, I’d be mighty grateful.
+        =>END
