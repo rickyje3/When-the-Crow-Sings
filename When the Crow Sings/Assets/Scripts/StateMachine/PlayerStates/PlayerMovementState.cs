@@ -27,6 +27,7 @@ public class PlayerMovementState : StateMachineState
 
         InputManager.playerInputActions.Player.Fire.performed += OnFired;
 
+        InputManager.playerInputActions.Player.Sprint.performed += OnSprint;
         InputManager.playerInputActions.Player.Crouch.performed += OnCrouched;
     }
 
@@ -43,6 +44,7 @@ public class PlayerMovementState : StateMachineState
 
         InputManager.playerInputActions.Player.Fire.performed -= OnFired;
 
+        InputManager.playerInputActions.Player.Sprint.performed -= OnSprint;
         InputManager.playerInputActions.Player.Crouch.performed -= OnCrouched;
 
         s.playerAnimator.SetBool("animIsMoving", false);
@@ -83,6 +85,20 @@ public class PlayerMovementState : StateMachineState
         }
     }
 
+    private void OnSprint(InputAction.CallbackContext context)
+    {
+        s.isSprinting = !s.isSprinting;
+        //Set animator to sprint
+        if (s.isSprinting)
+        {
+            s.speed = 15;
+        }
+        else
+        {
+            s.speed = 8;
+        }
+    }
+
     private void OnCrouched(InputAction.CallbackContext context)
     {
         s.isCrouching = !s.isCrouching;
@@ -96,7 +112,7 @@ public class PlayerMovementState : StateMachineState
         }
         else
         {
-            s.speed = 6;
+            s.speed = 8;
             //s.GetComponent<CapsuleCollider>().center.Set(0, 1, 0);
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
             s.GetComponent<CapsuleCollider>().height = 4;

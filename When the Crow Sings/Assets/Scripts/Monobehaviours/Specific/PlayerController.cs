@@ -15,6 +15,8 @@ public class PlayerController : StateMachineComponent, IService
     [HideInInspector]
     public bool isCrouching = false;
     [HideInInspector]
+    public bool isSprinting = false;
+    [HideInInspector]
     public float gravity = -9.81f;
     [HideInInspector]
     public float gravityMultiplier = 3f;
