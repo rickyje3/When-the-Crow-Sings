@@ -23,6 +23,12 @@ public partial class DialogueParser
         
     }
 
+    // TODO: Figure out how to sort things so "blocks" can be structured.
+    DialogueTitle currentTitle = null;
+    DialogueTitleBlock currentTitleBlock = null;
+
+    DialogueChoiceBlock currentChoiceBlock = null;
+
 
     void Prepare(string text)
     {
@@ -31,11 +37,7 @@ public partial class DialogueParser
 
         
 
-        // TODO: Figure out how to sort things so "blocks" can be structured.
-        DialogueTitle currentTitle = null;
-        DialogueTitleBlock currentTitleBlock = null;
-
-        DialogueChoiceBlock currentChoiceBlock = null;
+        
 
         
         foreach (DialogueBase i in dialogueResource.dialogueLines)
@@ -50,19 +52,39 @@ public partial class DialogueParser
                 Debug.Log("We've encountered a title.");
                 continue;
             }
-
             if (dialogueResource.dialogueTitleBlocks.Count == 0) continue;
+            
 
+            // Since this line is not a title, the current line to the TitleBlock.
             if (currentTitleBlock == null) throw new System.Exception("Uh wait this shouldn't be possible hold up.");
-
             currentTitleBlock.dialogueLines.Add(i);
 
-            if (i is DialogueChoice)
-            {
-                DialogueChoice _i = (DialogueChoice)i;
+            // if currentchoiceblock != null and if this line is a lower indentation than the block, then create a new choice block.
+            // but also, if the next line is the same indentation and NOT a choice block, then create a new choice block.
 
-                if (currentChoiceBlock != null)
+
+            if (currentChoiceBlock == null)
+            {
+                if (i is DialogueChoice)
                 {
+                    DialogueChoice _i = (DialogueChoice)i;
+
+                    currentChoiceBlock = new DialogueChoiceBlock();
+                    currentTitleBlock.dialogueChoiceBlocks.Add(currentChoiceBlock);
+
+                    currentChoiceBlock.choiceTabCount = _i.tabCount;
+
+                    currentChoiceBlock.dialogueChoices.Add(_i);
+                }
+            }
+            else
+            {
+                if (i is DialogueChoice)
+                {
+                    DialogueChoice _i = (DialogueChoice)i;
+
+
+
                     bool hasBeenSet = false;
                     foreach (DialogueChoiceBlock ii in currentTitleBlock.dialogueChoiceBlocks)
                     {
@@ -86,14 +108,12 @@ public partial class DialogueParser
                 }
                 else
                 {
-                    currentChoiceBlock = new DialogueChoiceBlock();
-                    currentTitleBlock.dialogueChoiceBlocks.Add(currentChoiceBlock);
 
-                    currentChoiceBlock.choiceTabCount = _i.tabCount;
-
-                    currentChoiceBlock.dialogueChoices.Add(_i);
                 }
             }
+
+
+            
             //DialogueChoiceBlock choiceBlock;
             //if (dialogueResource.dialogueChoiceBlocks.Count > 0)
             //{
@@ -131,6 +151,6 @@ public partial class DialogueParser
         }
     }
 
-    
+
 
 }

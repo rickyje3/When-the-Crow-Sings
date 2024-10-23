@@ -7,6 +7,5 @@ using System.Text.RegularExpressions;
 
 public partial class DialogueParser
 {
-  
 
 }
