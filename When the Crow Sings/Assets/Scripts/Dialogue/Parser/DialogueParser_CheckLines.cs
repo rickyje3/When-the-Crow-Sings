@@ -208,6 +208,7 @@ public partial class DialogueParser
         {
             string[] split = trimmedLine.Split(":", 2);
             newLine.dialogue = string.Join("", split.Skip(1));
+            newLine.dialogue = newLine.dialogue.Trim();
 
             if (split[0].Split('_').Length > 1)
             {
