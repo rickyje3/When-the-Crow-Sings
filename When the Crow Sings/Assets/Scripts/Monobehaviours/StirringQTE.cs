@@ -7,9 +7,9 @@ using TMPro;
 public class StirringQTE : MonoBehaviour
 {
     public GameObject displayBox;
-    public int currentStep = 0;
-    public bool correctKey;
-    public bool countingDown;
+    private int currentStep = 0;
+    private bool correctKey;
+    private bool countingDown;
 
     private KeyCode[] keySequence = { KeyCode.W, KeyCode.D, KeyCode.S, KeyCode.A }; // Rotating sequence
 
