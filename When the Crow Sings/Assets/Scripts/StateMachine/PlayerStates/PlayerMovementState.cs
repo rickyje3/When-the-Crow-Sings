@@ -134,6 +134,13 @@ public class PlayerMovementState : StateMachineState
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-
+        if (context.performed)
+        {
+            if (s.qteInteract.playerInRange)
+            {
+                //activate when interact key is pressed
+                s.qteInteract.ActivateTimingMeter();
+            }
+        }
     }
 }

@@ -23,6 +23,7 @@ public class PlayerController : StateMachineComponent, IService
     [HideInInspector]
     public float velocity;
     public CharacterController characterController;
+    public QTEInteract qteInteract;
 
     private void Awake()
     {
