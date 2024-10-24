@@ -31,6 +31,9 @@ public class PlayerController : StateMachineComponent, IService
 
         characterController = GetComponent<CharacterController>();
 
+        if(qteInteract != null)
+        qteInteract = FindObjectOfType<QTEInteract>();
+
         speed = 8;
 
         stateMachine = new StateMachine(this);

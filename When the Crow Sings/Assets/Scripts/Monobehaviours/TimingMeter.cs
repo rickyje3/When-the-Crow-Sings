@@ -23,6 +23,8 @@ public class TimingMeter : MonoBehaviour
     {
         SetTargetRangeMarkers();
         RandomizeMeter();
+        //leave out when implementation added
+        //startQTE();
     }
 
     // Update is called once per frame

@@ -83,6 +83,7 @@ public class PlayerMovementState : StateMachineState
         {
             s.playerAnimator.SetBool("animIsMoving", false);
         }
+
     }
 
     private void OnSprint(InputAction.CallbackContext context)
@@ -134,13 +135,13 @@ public class PlayerMovementState : StateMachineState
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-       // if (context.performed)
-       // {
+       //if (context.performed)
+       //{
             //if (s.qteInteract.playerInRange)
             //{
-                //activate when interact key is pressed
-                s.qteInteract.ActivateTimingMeter();
-           // }
-       // }
+            //activate when interact key is pressed
+            //s.qteInteract.ActivateTimingMeter();
+            //}
+       //}
     }
 }
