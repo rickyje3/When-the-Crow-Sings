@@ -100,6 +100,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Sprint"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""e94c20af-d257-42c9-a1e4-0deb78e3ca84"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Quit"",
                     ""type"": ""Button"",
                     ""id"": ""e070741b-e6bd-4803-ac71-50d81890995b"",
@@ -393,6 +402,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a76470d9-e9b3-4311-b995-ad841104eaac"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -988,6 +1008,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Choice1 = m_Player.FindAction("Choice1", throwIfNotFound: true);
         m_Player_Choice2 = m_Player.FindAction("Choice2", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
+        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Quit = m_Player.FindAction("Quit", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -1070,6 +1091,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Choice1;
     private readonly InputAction m_Player_Choice2;
     private readonly InputAction m_Player_Crouch;
+    private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Quit;
     public struct PlayerActions
     {
@@ -1083,6 +1105,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Choice1 => m_Wrapper.m_Player_Choice1;
         public InputAction @Choice2 => m_Wrapper.m_Player_Choice2;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
+        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Quit => m_Wrapper.m_Player_Quit;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -1117,6 +1140,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
             @Quit.started += instance.OnQuit;
             @Quit.performed += instance.OnQuit;
             @Quit.canceled += instance.OnQuit;
@@ -1148,6 +1174,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
             @Quit.started -= instance.OnQuit;
             @Quit.performed -= instance.OnQuit;
             @Quit.canceled -= instance.OnQuit;
@@ -1341,6 +1370,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnChoice1(InputAction.CallbackContext context);
         void OnChoice2(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
         void OnQuit(InputAction.CallbackContext context);
     }
     public interface IUIActions
