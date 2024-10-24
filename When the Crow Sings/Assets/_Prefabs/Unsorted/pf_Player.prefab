@@ -25,14 +25,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160703231417517345}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.316604, y: -0, z: -0, w: 0.9485578}
-  m_LocalPosition: {x: 0, y: 17, z: -18}
+  m_LocalRotation: {x: 0.27982908, y: -0, z: -0, w: 0.96004987}
+  m_LocalPosition: {x: 0, y: 15.5, z: -17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2326643804533989976}
   m_Father: {fileID: 6605035451907473929}
-  m_LocalEulerAnglesHint: {x: 36.915, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 32.5, y: 0, z: 0}
 --- !u!114 &4271781111558746939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,13 +385,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8637185622401210243}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.316604, y: -0, z: -0, w: 0.9485578}
-  m_LocalPosition: {x: 0, y: 17, z: -18}
+  m_LocalRotation: {x: 0.27982908, y: -0, z: -0, w: 0.96004987}
+  m_LocalPosition: {x: 0, y: 15.5, z: -17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6605035451907473929}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 37.159, y: 0, z: 0}
 --- !u!20 &2845398644574571625
 Camera:
   m_ObjectHideFlags: 0
@@ -627,10 +627,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 16, z: -18}
-  m_XDamping: 0.7
-  m_YDamping: 0.7
-  m_ZDamping: 0.7
+  m_FollowOffset: {x: 0, y: 14.5, z: -17}
+  m_XDamping: 0.5
+  m_YDamping: 0.5
+  m_ZDamping: 0.5
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -696,6 +696,7 @@ MonoBehaviour:
   pfBirdseedProjectile: {fileID: 6028207027951552103, guid: 7ce579de01b4ca149902ac291e1b93f5,
     type: 3}
   isCrouching: 0
+  isSprinting: 0
   gravity: -9.81
   gravityMultiplier: 3
   velocity: 0
@@ -816,6 +817,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e070741b-e6bd-4803-ac71-50d81890995b
     m_ActionName: Player/Quit[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e94c20af-d257-42c9-a1e4-0deb78e3ca84
+    m_ActionName: Player/Sprint[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

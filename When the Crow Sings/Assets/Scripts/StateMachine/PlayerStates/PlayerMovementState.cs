@@ -91,11 +91,11 @@ public class PlayerMovementState : StateMachineState
         //Set animator to sprint
         if (s.isSprinting)
         {
-            s.speed = 15;
+            s.speed = 14;
         }
         else
         {
-            s.speed = 8;
+            s.speed = 9;
         }
     }
 
