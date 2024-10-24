@@ -7,7 +7,7 @@ public static class SaveData
 {
     public static Dictionary<string, bool> boolFlags = new Dictionary<string, bool>()
     {
-        { "AngelTaskOffered",false },
+        { "AngelTaskOffered",true },
         { "AngelTaskCompleted",false },
         { "AngelBaseComplete",false },
         { "AngelExhausted",false },
