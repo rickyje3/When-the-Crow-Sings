@@ -65,14 +65,18 @@ public class GameStateManager : MonoBehaviour, IService
         Debug.Log("Desired spawn index is " + targetSpawnIndex);
         
         PlayerSpawnPoint spawnPoint = null;
+        List<PlayerSpawnPoint> spawnPointsWithMatchingIndex = new List<PlayerSpawnPoint>();
         foreach (PlayerSpawnPoint i in FindObjectsOfType<PlayerSpawnPoint>())
         {
             if (i.entranceIndex == targetSpawnIndex)
             {
-                spawnPoint = i;
+                //spawnPoint = i;
+                spawnPointsWithMatchingIndex.Add(i);
             }
         }
-        if (spawnPoint == null) throw new System.Exception("Error! No spawn point found that matches the desired index!");
+        if (spawnPointsWithMatchingIndex.Count > 1) throw new System.Exception("More than one spawn point found with the same index.");
+        if (spawnPointsWithMatchingIndex.Count < 1) throw new System.Exception("Error! No spawn point found that matches the desired index!");
+        spawnPoint = spawnPointsWithMatchingIndex[0];
 
         playerHolder = Instantiate(_playerPrefab);
         playerContent = playerHolder.GetComponent<PlayerHolder>().playerContent;
