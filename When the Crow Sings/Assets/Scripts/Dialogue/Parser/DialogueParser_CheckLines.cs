@@ -19,7 +19,7 @@ public partial class DialogueParser
             CountTabs(i, ref myTabCount);
 
             // Skip empty lines.
-            if (string.IsNullOrEmpty(trimmedLine))
+            if (string.IsNullOrEmpty(trimmedLine) || trimmedLine.StartsWith("//"))
             {
                 dialogueResource.dialogueLines.Add(new DialogueEmpty());
                 continue;
