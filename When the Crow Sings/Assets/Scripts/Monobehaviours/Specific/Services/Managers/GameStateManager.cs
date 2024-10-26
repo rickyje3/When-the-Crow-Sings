@@ -182,7 +182,7 @@ public class GameStateManager : MonoBehaviour, IService
     {
         if (currentLevelData.Count(x => x.sceneType == LevelData.SceneType.LEVEL) != 1)
             throw new System.Exception("Not EXACTLY one LEVEL-type scene is currently loaded!");
-        else { Debug.Log("All's well!"); }
+        //else { Debug.Log("All's well!"); }
     }
     void Validate_No_UNASSIGNED()
     {

@@ -7,6 +7,7 @@ public class DialogueChoiceBlock : DialogueBlock
     public List<DialogueChoice> dialogueChoices = new List<DialogueChoice>();
     public int choiceTabCount = -1;
 
+    public bool choiceHasBeenMade = false;
 
     // CURRENTLY UNUSED!!!
     // Where the block starts.
