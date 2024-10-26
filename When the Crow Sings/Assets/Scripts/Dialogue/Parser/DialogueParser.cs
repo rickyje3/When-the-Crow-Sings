@@ -51,6 +51,14 @@ public partial class DialogueParser
                 currentChoiceBlock = null;
             }
 
+            // Check if indentation indicates the current condition block has ended.
+            if (currentConditionBlock != null &&
+                i.tabCount <= currentConditionBlock.conditionTabCount && i is not DialogueCondition)
+            {
+                currentConditionBlock.endIndex = current_loop;
+                currentConditionBlock = null;
+            }
+
             // Start a new block for every title we encounter.
             if (i is DialogueTitle)
             {
@@ -60,66 +68,110 @@ public partial class DialogueParser
                 continue;
             }
             if (dialogueResource.dialogueTitleBlocks.Count == 0) continue;
-            
+
 
             // Since this line is not a title, the current line to the TitleBlock.
             if (currentTitleBlock == null) throw new System.Exception("Uh wait this shouldn't be possible hold up.");
             currentTitleBlock.dialogueLines.Add(i);
 
+            OrganizeChoiceBlocks(i);
+            OrganizeConditionBlocks(i);
 
-            // Organize the choice blocks.
-            if (currentChoiceBlock == null)
+        }
+    }
+
+    private void OrganizeConditionBlocks(DialogueBase i)
+    {
+        if (currentConditionBlock == null)
+        {
+            if (i is DialogueCondition)
             {
-                if (i is DialogueChoice)
-                {
-                    DialogueChoice _i = (DialogueChoice)i;
+                DialogueCondition _i = (DialogueCondition)i;
 
+                currentConditionBlock = new DialogueConditionBlock();
+                currentTitleBlock.dialogueConditionBlocks.Add(currentConditionBlock);
+
+                currentConditionBlock.conditionTabCount = _i.tabCount;
+
+                currentConditionBlock.AddCondition(_i);
+            }
+        }
+        else
+        {
+            if (i is DialogueCondition)
+            {
+                DialogueCondition _i = (DialogueCondition)i;
+
+                bool hasBeenSet = false;
+                foreach (DialogueConditionBlock ii in currentTitleBlock.dialogueConditionBlocks)
+                {
+                    // Check indentation
+                    if (ii.conditionTabCount == _i.tabCount && !ii.allConditinos.Contains(_i))
+                    {
+                        ii.AddCondition(_i);
+                        hasBeenSet = true;
+                    }
+                }
+
+                if (!hasBeenSet)
+                {
+                    currentConditionBlock = new DialogueConditionBlock();
+                    currentTitleBlock.dialogueConditionBlocks.Add(currentConditionBlock);
+
+                    currentConditionBlock.conditionTabCount = _i.tabCount;
+
+                    currentConditionBlock.AddCondition(_i);
+                }
+            }
+        }
+    }
+
+    private void OrganizeChoiceBlocks(DialogueBase i)
+    {
+        // Organize the choice blocks.
+        if (currentChoiceBlock == null)
+        {
+            if (i is DialogueChoice)
+            {
+                DialogueChoice _i = (DialogueChoice)i;
+
+                currentChoiceBlock = new DialogueChoiceBlock();
+                currentTitleBlock.dialogueChoiceBlocks.Add(currentChoiceBlock);
+
+                currentChoiceBlock.choiceTabCount = _i.tabCount;
+
+                currentChoiceBlock.dialogueChoices.Insert(0, _i);
+            }
+        }
+        else
+        {
+            if (i is DialogueChoice)
+            {
+                DialogueChoice _i = (DialogueChoice)i;
+
+                bool hasBeenSet = false;
+                foreach (DialogueChoiceBlock ii in currentTitleBlock.dialogueChoiceBlocks)
+                {
+                    // Check indentation
+                    if (ii.choiceTabCount == _i.tabCount && !ii.dialogueChoices.Contains(_i))
+                    {
+                        ii.dialogueChoices.Insert(0, _i);
+                        hasBeenSet = true;
+                    }
+                }
+
+                if (!hasBeenSet)
+                {
                     currentChoiceBlock = new DialogueChoiceBlock();
                     currentTitleBlock.dialogueChoiceBlocks.Add(currentChoiceBlock);
 
                     currentChoiceBlock.choiceTabCount = _i.tabCount;
 
-                    currentChoiceBlock.dialogueChoices.Insert(0,_i);
+                    currentChoiceBlock.dialogueChoices.Insert(0, _i);
                 }
             }
-            else
-            {
-                if (i is DialogueChoice)
-                {
-                    DialogueChoice _i = (DialogueChoice)i;
-
-                    bool hasBeenSet = false;
-                    foreach (DialogueChoiceBlock ii in currentTitleBlock.dialogueChoiceBlocks)
-                    {
-                        // Check indentation
-                        if (ii.choiceTabCount == _i.tabCount && !ii.dialogueChoices.Contains(_i))
-                        {
-                            ii.dialogueChoices.Insert(0,_i);
-                            hasBeenSet = true;
-                        }
-                    }
-
-                    if (!hasBeenSet)
-                    {
-                        currentChoiceBlock = new DialogueChoiceBlock();
-                        currentTitleBlock.dialogueChoiceBlocks.Add(currentChoiceBlock);
-
-                        currentChoiceBlock.choiceTabCount = _i.tabCount;
-
-                        currentChoiceBlock.dialogueChoices.Insert(0,_i);
-                    }
-                }
-            }
-
-            if (currentConditionBlock == null)
-            {
-
-            }
-            else
-            {
-
-            }
-
         }
     }
+
+
 }

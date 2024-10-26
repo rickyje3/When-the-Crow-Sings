@@ -17,7 +17,7 @@ public class DialogueManager : MonoBehaviour, IService
     [SerializeField] private GameObject dialogueUI;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private GameObject dialogueChoicesHolder;
+    [SerializeField] private GameObject dialogueChoiceButtonsHolder;
     [SerializeField] private List<GameObject> dialogueChoiceButtons;
 
     [Header("Signals")]
@@ -30,6 +30,7 @@ public class DialogueManager : MonoBehaviour, IService
     public List<GameSignal> signalsDialogueCanUse;
 
     DialogueChoiceBlock activeChoiceBlock = null;
+    DialogueConditionBlock activeConditionBlock = null;
 
     #region StartMethods()
     private void Awake()
@@ -65,7 +66,7 @@ public class DialogueManager : MonoBehaviour, IService
 
         //InputManager.playerInputActions.Player.Disable();
         dialogueUI.SetActive(true);
-        dialogueChoicesHolder.SetActive(false);
+        dialogueChoiceButtonsHolder.SetActive(false);
 
         DialogueParser parser = new DialogueParser(dialogueResource);
         //DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
@@ -96,10 +97,15 @@ public class DialogueManager : MonoBehaviour, IService
         if (activeChoiceBlock != null && activeChoiceBlock.choiceHasBeenMade && newLine.tabCount <= activeChoiceBlock.choiceTabCount)
         {
             activeChoiceBlock.choiceHasBeenMade = false;
-            //ResetChoiceBlocks();
-            Debug.Log(activeChoiceBlock.endIndex);
             ControlLineBehavior(activeChoiceBlock.endIndex, newLine.tabCount);
             return;
+        }
+
+        // Check if we need to skip to after a condition block.
+        if (activeConditionBlock != null && activeConditionBlock.conditionHasBeenDecided && newLine.tabCount <= activeConditionBlock.conditionTabCount)
+        {
+            activeConditionBlock.conditionHasBeenDecided = false;
+            ControlLineBehavior(activeConditionBlock.endIndex, newLine.tabCount);
         }
 
 
@@ -130,8 +136,7 @@ public class DialogueManager : MonoBehaviour, IService
 
         else if (newLine is DialogueChoice)
         {
-            dialogueChoicesHolder.SetActive(true);
-            Debug.Log("Set the choices holder active!");
+            dialogueChoiceButtonsHolder.SetActive(true);
 
             //activeChoiceBlock = null;
             foreach (DialogueTitleBlock i in dialogueResource.dialogueTitleBlocks)
@@ -147,36 +152,55 @@ public class DialogueManager : MonoBehaviour, IService
                 }
                 //Debug.Log("Well, nothing in that title block.");
             }
-            Debug.Log(activeChoiceBlock);
-            
+
 
             if (activeChoiceBlock == null) { throw new Exception("THE THING IS BLANK YOU SILLY GOOSE"); }
 
-            
-            foreach (GameObject i in dialogueChoiceButtons)
-            {
-                i.SetActive(false);
-            }
-            int loop = 0;
-            foreach (DialogueChoice i in activeChoiceBlock.dialogueChoices)
-            {
-                dialogueChoiceButtons[loop].SetActive(true);
-                dialogueChoiceButtons[loop].GetComponentInChildren<TextMeshProUGUI>().text = i.choiceText;
-                dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueLineIndex = i.choiceIndex;
-                dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueChoice = i;
-                loop++;
-            }
+            SetChoiceButtons();
 
         }
 
         else if (newLine is DialogueCondition)
         {
+            foreach (DialogueTitleBlock i in dialogueResource.dialogueTitleBlocks)
+            {
+                foreach (DialogueConditionBlock ii in i.dialogueConditionBlocks)
+                {
+                    if (ii.allConditinos.Contains(newLine))
+                    {
+                        activeConditionBlock = ii;
+                        break;
+                    }
+                }
+            }
+            
+            if (activeConditionBlock == null) { throw new Exception("THE CONDITION BLOCK IS BLANK YOU SILLY DUCK"); }
+
+            DoConditionalDialogueLogic((DialogueCondition)newLine);
+
 
         }
 
         else // In case of an EmptyLine
         {
             ControlLineBehavior(index+1,previousLineTabCount);
+        }
+    }
+
+    private void SetChoiceButtons()
+    {
+        foreach (GameObject i in dialogueChoiceButtons)
+        {
+            i.SetActive(false);
+        }
+        int loop = 0;
+        foreach (DialogueChoice i in activeChoiceBlock.dialogueChoices)
+        {
+            dialogueChoiceButtons[loop].SetActive(true);
+            dialogueChoiceButtons[loop].GetComponentInChildren<TextMeshProUGUI>().text = i.choiceText;
+            dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueLineIndex = i.choiceIndex;
+            dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueChoice = i;
+            loop++;
         }
     }
 
@@ -193,7 +217,7 @@ public class DialogueManager : MonoBehaviour, IService
 
     public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
     {
-        dialogueChoicesHolder.SetActive(false);
+        dialogueChoiceButtonsHolder.SetActive(false);
 
         //activeChoiceBlock.Reset();
         activeChoiceBlock.choiceHasBeenMade = true;
@@ -203,6 +227,7 @@ public class DialogueManager : MonoBehaviour, IService
 
         ControlLineBehavior(nextLine, choiceTabCount);
     }
+
 
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text, int index)
     {
