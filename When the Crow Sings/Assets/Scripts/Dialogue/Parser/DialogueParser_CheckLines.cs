@@ -58,7 +58,7 @@ public partial class DialogueParser
         // else if, else if, else if, else if, else if...
         if (CheckLine_IsGoto(myTabCount)) return;
         if (CheckLine_IsChoice(i, myTabCount)) return;
-        if (CheckLine_IsConditional(myTabCount)) return;
+        if (CheckLine_IsConditional(i, myTabCount)) return;
         if (CheckLine_IsMutation(myTabCount)) return;
 
         // else
@@ -133,7 +133,7 @@ public partial class DialogueParser
     }
   
 
-    private bool CheckLine_IsConditional(int myTabCount) // Conditional
+    private bool CheckLine_IsConditional(int i, int myTabCount) // Conditional
     {
         if (
             (trimmedLine.StartsWith("if ") || trimmedLine.StartsWith("elif ") || trimmedLine.StartsWith("else"))
@@ -141,6 +141,8 @@ public partial class DialogueParser
         {
             DialogueCondition newLine = new DialogueCondition();
             newLine.tabCount = myTabCount;
+            newLine.conditionIndex = i;
+            Debug.Log("We've done a conditional line!" + i);
 
             PrepareConditional(trimmedLine, ref newLine);
 

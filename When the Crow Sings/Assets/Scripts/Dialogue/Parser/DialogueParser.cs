@@ -106,7 +106,7 @@ public partial class DialogueParser
                 foreach (DialogueConditionBlock ii in currentTitleBlock.dialogueConditionBlocks)
                 {
                     // Check indentation
-                    if (ii.conditionTabCount == _i.tabCount && !ii.allConditinos.Contains(_i))
+                    if (ii.conditionTabCount == _i.tabCount && !ii.allConditions.Contains(_i))
                     {
                         ii.AddCondition(_i);
                         hasBeenSet = true;

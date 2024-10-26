@@ -105,6 +105,7 @@ public class DialogueManager : MonoBehaviour, IService
         if (activeConditionBlock != null && activeConditionBlock.conditionHasBeenDecided && newLine.tabCount <= activeConditionBlock.conditionTabCount)
         {
             activeConditionBlock.conditionHasBeenDecided = false;
+            Debug.Log("Should be "+ ((DialogueResponse)dialogueResource.dialogueLines[activeConditionBlock.endIndex]).dialogue);
             ControlLineBehavior(activeConditionBlock.endIndex, newLine.tabCount);
         }
 
@@ -166,7 +167,7 @@ public class DialogueManager : MonoBehaviour, IService
             {
                 foreach (DialogueConditionBlock ii in i.dialogueConditionBlocks)
                 {
-                    if (ii.allConditinos.Contains(newLine))
+                    if (ii.allConditions.Contains(newLine))
                     {
                         activeConditionBlock = ii;
                         break;
@@ -176,7 +177,7 @@ public class DialogueManager : MonoBehaviour, IService
             
             if (activeConditionBlock == null) { throw new Exception("THE CONDITION BLOCK IS BLANK YOU SILLY DUCK"); }
 
-            DoConditionalDialogueLogic((DialogueCondition)newLine);
+            DoConditionalDialogueLogic();
 
 
         }
@@ -215,18 +216,7 @@ public class DialogueManager : MonoBehaviour, IService
         }
     }
 
-    public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
-    {
-        dialogueChoiceButtonsHolder.SetActive(false);
-
-        //activeChoiceBlock.Reset();
-        activeChoiceBlock.choiceHasBeenMade = true;
-
-        int nextLine = choiceButton.dialogueLineIndex + 1;
-        int choiceTabCount = choiceButton.dialogueChoice.tabCount;
-
-        ControlLineBehavior(nextLine, choiceTabCount);
-    }
+    
 
 
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text, int index)
@@ -268,44 +258,69 @@ public class DialogueManager : MonoBehaviour, IService
         
     }
 
-    void DoConditionalDialogueLogic(DialogueCondition dialogueCondition)
+    public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
     {
-        switch (dialogueCondition.logicType)
+        dialogueChoiceButtonsHolder.SetActive(false);
+
+        //activeChoiceBlock.Reset();
+        activeChoiceBlock.choiceHasBeenMade = true;
+
+        int nextLine = choiceButton.dialogueLineIndex + 1;
+        int choiceTabCount = choiceButton.dialogueChoice.tabCount;
+
+        ControlLineBehavior(nextLine, choiceTabCount);
+    }
+
+    void DoConditionalDialogueLogic()
+    {
+        foreach (DialogueCondition i in activeConditionBlock.allConditions)
         {
-            case DialogueCondition.LogicType.IF:
-                switch (dialogueCondition.operatorType)
-                {
-                    case DialogueCondition.OperatorType.EQUAL_TO:
-
-                        break;
-
-                    case DialogueCondition.OperatorType.GREATER_THAN:
-
-                        break;
-
-                    case DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO:
-
-                        break;
-
-                    case DialogueCondition.OperatorType.LESS_THAN:
-
-                        break;
-
-                    case DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO:
-
-                        break;
-
-                    case DialogueCondition.OperatorType.NOT_EQUAL_TO:
-
-                        break;
-                }
-                break;
-                
-            case DialogueCondition.LogicType.ELIF:
-                break;
-            case DialogueCondition.LogicType.ELSE:
-                break;
+            Debug.Log("Condition is " + i.variableKeyString + " and datatype is " + i.dataType);
         }
+
+        activeConditionBlock.conditionHasBeenDecided = true;
+
+        Debug.Log("Target index is "+(activeConditionBlock.ifStatement.conditionIndex + 1));
+        ControlLineBehavior(activeConditionBlock.ifStatement.conditionIndex+1, activeConditionBlock.ifStatement.tabCount);
+
+
+
+        //switch (dialogueCondition.logicType)
+        //{
+        //    case DialogueCondition.LogicType.IF:
+        //        switch (dialogueCondition.operatorType)
+        //        {
+        //            case DialogueCondition.OperatorType.EQUAL_TO:
+
+        //                break;
+
+        //            case DialogueCondition.OperatorType.GREATER_THAN:
+
+        //                break;
+
+        //            case DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO:
+
+        //                break;
+
+        //            case DialogueCondition.OperatorType.LESS_THAN:
+
+        //                break;
+
+        //            case DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO:
+
+        //                break;
+
+        //            case DialogueCondition.OperatorType.NOT_EQUAL_TO:
+
+        //                break;
+        //        }
+        //        break;
+                
+        //    case DialogueCondition.LogicType.ELIF:
+        //        break;
+        //    case DialogueCondition.LogicType.ELSE:
+        //        break;
+        //}
     }
 
 

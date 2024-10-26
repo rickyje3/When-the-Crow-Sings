@@ -8,7 +8,7 @@ public class DialogueConditionBlock : DialogueBlock
     public List<DialogueCondition> elifStatements = new List<DialogueCondition>();
     public DialogueCondition elseStatement = null;
 
-    public List<DialogueCondition> allConditinos = new List<DialogueCondition>();
+    public List<DialogueCondition> allConditions = new List<DialogueCondition>();
 
     public int conditionTabCount = -1;
     public bool conditionHasBeenDecided = false;
@@ -30,6 +30,6 @@ public class DialogueConditionBlock : DialogueBlock
             elseStatement = condition;
         }
 
-        allConditinos.Add(condition);
+        allConditions.Add(condition);
     }
 }

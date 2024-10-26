@@ -51,8 +51,9 @@ public partial class DialogueParser
             }
 
             // Set the terms on each side of the operator (as strings).
-            newLine.variableKey1 = variableKeys[0];
-            newLine.variableKey2 = variableKeys[1];
+            newLine.variableKeyString = variableKeys[0];
+            //newLine.variableValueString = variableKeys[1];
+            newLine.SetValue(variableKeys[1]);
         }
         else
         {
