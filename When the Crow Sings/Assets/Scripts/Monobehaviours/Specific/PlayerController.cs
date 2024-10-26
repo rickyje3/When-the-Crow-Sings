@@ -14,10 +14,27 @@ public class PlayerController : StateMachineComponent, IService
     private BirdseedController pfBirdseedProjectile;
     [HideInInspector]
     public bool isCrouching = false;
+    [HideInInspector]
+    public bool isSprinting = false;
+    [HideInInspector]
+    public float gravity = -9.81f;
+    [HideInInspector]
+    public float gravityMultiplier = 3f;
+    [HideInInspector]
+    public float velocity;
+    public CharacterController characterController;
+    public QTEInteract qteInteract;
 
     private void Awake()
     {
         RegisterSelfAsService();
+
+        characterController = GetComponent<CharacterController>();
+
+        if(qteInteract != null)
+        qteInteract = FindObjectOfType<QTEInteract>();
+
+        speed = 8;
 
         stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
@@ -69,8 +86,8 @@ public class PlayerController : StateMachineComponent, IService
 
     // Ricky code
 
-    [HideInInspector]
-    public float speed = 5.0f;
+    //[HideInInspector]
+    public float speed;
     [HideInInspector]
     public Vector3 movementInput;
 
