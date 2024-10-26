@@ -152,9 +152,15 @@ public class DialogueManager : MonoBehaviour, IService
 
             if (activeChoiceBlock == null) { throw new Exception("THE THING IS BLANK YOU SILLY GOOSE"); }
 
+            
+            foreach (GameObject i in dialogueChoiceButtons)
+            {
+                i.SetActive(false);
+            }
             int loop = 0;
             foreach (DialogueChoice i in activeChoiceBlock.dialogueChoices)
-            { 
+            {
+                dialogueChoiceButtons[loop].SetActive(true);
                 dialogueChoiceButtons[loop].GetComponentInChildren<TextMeshProUGUI>().text = i.choiceText;
                 dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueLineIndex = i.choiceIndex;
                 dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueChoice = i;
