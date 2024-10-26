@@ -80,7 +80,7 @@ public partial class DialogueParser
 
                     currentChoiceBlock.choiceTabCount = _i.tabCount;
 
-                    currentChoiceBlock.dialogueChoices.Add(_i);
+                    currentChoiceBlock.dialogueChoices.Insert(0,_i);
                 }
             }
             else
@@ -97,7 +97,7 @@ public partial class DialogueParser
                         // Check indentation
                         if (ii.choiceTabCount == _i.tabCount && !ii.dialogueChoices.Contains(_i))
                         {
-                            ii.dialogueChoices.Add(_i);
+                            ii.dialogueChoices.Insert(0,_i);
                             hasBeenSet = true;
                         }
                     }
@@ -109,7 +109,7 @@ public partial class DialogueParser
 
                         currentChoiceBlock.choiceTabCount = _i.tabCount;
 
-                        currentChoiceBlock.dialogueChoices.Add(_i);
+                        currentChoiceBlock.dialogueChoices.Insert(0,_i);
                     }
                 }
                 else
