@@ -99,6 +99,7 @@ public class DialogueManager : MonoBehaviour, IService
             //ResetChoiceBlocks();
             Debug.Log(activeChoiceBlock.endIndex);
             ControlLineBehavior(activeChoiceBlock.endIndex, newLine.tabCount);
+            return;
         }
 
 
@@ -130,6 +131,7 @@ public class DialogueManager : MonoBehaviour, IService
         else if (newLine is DialogueChoice)
         {
             dialogueChoicesHolder.SetActive(true);
+            Debug.Log("Set the choices holder active!");
 
             //activeChoiceBlock = null;
             foreach (DialogueTitleBlock i in dialogueResource.dialogueTitleBlocks)

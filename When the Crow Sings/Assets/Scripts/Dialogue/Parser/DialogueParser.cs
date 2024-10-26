@@ -35,9 +35,17 @@ public partial class DialogueParser
         // Identify all DialogueBase line types and add them to dialogueResource.dialogueLines.
         IdentifyAndAssignDialogueLines(text);
 
+        int current_loop = -1;
         foreach (DialogueBase i in dialogueResource.dialogueLines)
         {
-           
+            current_loop++;
+
+            if (currentChoiceBlock != null &&
+                i.tabCount <= currentChoiceBlock.choiceTabCount && i is not DialogueChoice)
+            {
+                currentChoiceBlock.endIndex = current_loop;
+                currentChoiceBlock = null;
+            }
 
             // Start a new block for every title we encounter.
             if (i is DialogueTitle)
@@ -59,10 +67,7 @@ public partial class DialogueParser
             // if currentchoiceblock != null and if this line is a lower indentation than the block, then create a new choice block.
             // but also, if the next line is the same indentation and NOT a choice block, then create a new choice block.
 
-            if (currentChoiceBlock != null && i.tabCount <= currentChoiceBlock.choiceTabCount && i is not DialogueChoice)
-            {
-                currentChoiceBlock.endIndex = 1;
-            }
+            
 
             if (currentChoiceBlock == null)
             {
