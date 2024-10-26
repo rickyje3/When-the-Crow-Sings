@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueChoiceBlock
+public class DialogueChoiceBlock : DialogueBlock
 {
     public List<DialogueChoice> dialogueChoices = new List<DialogueChoice>();
     public int choiceTabCount = -1;
