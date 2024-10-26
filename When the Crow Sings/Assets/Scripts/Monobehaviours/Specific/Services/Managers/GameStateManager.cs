@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,10 +13,13 @@ using UnityEngine.UI;
 public class GameStateManager : MonoBehaviour, IService
 {
     public GameObject _playerPrefab;
-    public GameObject player = null;
+    public GameObject playerHolder = null;
+    public GameObject playerContent = null;
 
     public GameSignal levelLoadStartSignal;
     public GameSignal levelLoadFinishSignal;
+
+    private int targetSpawnIndex = 0;
 
     List<LevelData> currentLevelData = new List<LevelData>();
 
@@ -39,51 +43,63 @@ public class GameStateManager : MonoBehaviour, IService
         if (args.objectArgs[0] is not LevelDataResource) { throw new Exception("No valid LevelDataResource assigned to the load trigger!"); }
 
         //ServiceLocator.Get<PlayerController>().gameObject.SetActive(false);
-        
 
-        
 
+
+        targetSpawnIndex = args.intArgs[0];
         LoadRoom((LevelDataResource)args.objectArgs[0]);
         //LoadRoom(args.intArgs[0]);
     }
     public void OnLoadFinish(SignalArguments args)
     {
         ValidateScenes();
-        if (args.intArgs[0] == 1)
+        if (args.intArgs[0] == 1) // If this signal was sent by a LEVEL being loaded
         {
-            //ServiceLocator.Get<PlayerController>().gameObject.SetActive(true);
-            
-
-            // get all of the spawners, determine which one to use based on which room was left
-            FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
-            FindObjectOfType<PlayerController>().movementInput = Vector3.zero;
+            SpawnPlayer();
         }
-        
     }
 
     // ---------------------------------------------------------------------------
 
+    void SpawnPlayer()
+    {
+        Debug.Log("Desired spawn index is " + targetSpawnIndex);
+        
+        PlayerSpawnPoint spawnPoint = null;
+        foreach (PlayerSpawnPoint i in FindObjectsOfType<PlayerSpawnPoint>())
+        {
+            if (i.entranceIndex == targetSpawnIndex)
+            {
+                spawnPoint = i;
+            }
+        }
+        if (spawnPoint == null) throw new System.Exception("Error! No spawn point found that matches the desired index!");
+        
+        playerHolder = Instantiate(_playerPrefab);
+        playerContent = playerHolder.GetComponent<PlayerHolder>().playerContent;
+
+        playerContent.transform.position = spawnPoint.transform.position;
+        //FindObjectOfType<PlayerController>().movementInput = Vector3.zero;
+    }
+
+
     public void LoadRoomDebug(string levelName)
     {
-        Destroy(player);
+        Destroy(playerHolder);
 
         // Unload previous scenes.
         foreach (Scene i in GetLoadedScenes())
         {
             SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
-            //SceneManager.UnloadScene(i);
         }
-
-        // Check what scenes should be loaded based on save data and exit trigger
-
         SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
-        player = Instantiate(_playerPrefab);
+        //player = Instantiate(_playerPrefab);
     }
 
 
     public void LoadRoom(LevelDataResource levelDataResource)
     {
-        Destroy(player);
+        Destroy(playerHolder);
 
         // Unload previous scenes.
         foreach (Scene i in GetLoadedScenes())
@@ -100,10 +116,8 @@ public class GameStateManager : MonoBehaviour, IService
         {
             //SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
             SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
-            Debug.Log(i.name + " was loaded!");
+            //Debug.Log(i.name + " was loaded!");
         }
-
-        player = Instantiate(_playerPrefab);
     }
     void ValidateScenes()
     {
@@ -182,7 +196,7 @@ public class GameStateManager : MonoBehaviour, IService
     {
         if (currentLevelData.Count(x => x.sceneType == LevelData.SceneType.LEVEL) != 1)
             throw new System.Exception("Not EXACTLY one LEVEL-type scene is currently loaded!");
-        else { Debug.Log("All's well!"); }
+        //else { Debug.Log("All's well!"); }
     }
     void Validate_No_UNASSIGNED()
     {
