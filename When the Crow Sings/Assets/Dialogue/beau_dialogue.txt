@@ -1,0 +1,38 @@
+﻿~beau_first_int
+        Beau:Ey! Don’t suppose you brought any Timmies?
+        Chance:Any what?
+        Beau:Timmies! Coffee! It’s what my parents always called it. No idea why.
+        [beau_smile] Beau:My name is Beau! You must be the newest addition to our lovely gated compound, where the snow never falls and you can never leave.
+-. . .
+        => beau_awkward
+-Yeah.
+        => beau_nawkward
+~beau_awkward
+        [beau_awkward]Beau: You don’t talk much do ya bud.
+~beau_nawkward
+        Chance: I just got here (conditional dialogue referring to the time either specifically or generally).
+~beau_first_int_cont
+        Beau:How are you liking it here?
+        Chance:I don’t know. Something seems…
+-Conditional reply
+        => beau_first_int_lastnight
+-Unconditional reply
+        => beau_first_int_sleep
+~beau_first_int_lastnight
+        Chance:I didn’t get much sleep. Someone came banging on my window last night…
+        [beau_awkward]Beau:Oh, that was your room? Not a very warm welcome…
+        Beau:I’d thought they would’ve wandered off by this point, it’s been a while.
+        Beau:Sorry to have your first night so disturbed.
+~beau_first_int_sleep
+        Chance:I haven’t been getting much sleep.
+        [beau_awkward]Beau: Oh well that’s no good, bud!
+~beau_first_int_cont_2
+        Beau:Listen, bud. Would you do me a solid and pick up some food from the greenhouse?
+        Beau:I’ve got to swap out some stock for Angel, put the new food in the freezer and give him the wiltier stuff. 
+        -Sure.
+                Chance:Yeah, sure.
+                Beau:Thanks bud, I’ll owe ya one.
+                => END
+        -Not now.
+                Chance:Um, not right now.
+                        => END
