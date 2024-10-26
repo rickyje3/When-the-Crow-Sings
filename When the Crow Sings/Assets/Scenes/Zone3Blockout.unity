@@ -1084,6 +1084,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1945539909}
   - {fileID: 2083701269}
   - {fileID: 1849042511}
   - {fileID: 1890299397}
@@ -3186,7 +3187,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 199465037}
     m_Modifications:
     - target: {fileID: 731138157514791700, guid: bf1e893de17bcb44ab884d24992a7c5a,
         type: 3}
@@ -3202,7 +3203,7 @@ PrefabInstance:
     - target: {fileID: 1904647277209247867, guid: bf1e893de17bcb44ab884d24992a7c5a,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.0075
+      value: 0.0075000003
       objectReference: {fileID: 0}
     - target: {fileID: 1904647277209247867, guid: bf1e893de17bcb44ab884d24992a7c5a,
         type: 3}
@@ -3217,17 +3218,17 @@ PrefabInstance:
     - target: {fileID: 1904647277209247867, guid: bf1e893de17bcb44ab884d24992a7c5a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.1
+      value: -48.800003
       objectReference: {fileID: 0}
     - target: {fileID: 1904647277209247867, guid: bf1e893de17bcb44ab884d24992a7c5a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.7
+      value: -0.39161134
       objectReference: {fileID: 0}
     - target: {fileID: 1904647277209247867, guid: bf1e893de17bcb44ab884d24992a7c5a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.6
+      value: -13.4
       objectReference: {fileID: 0}
     - target: {fileID: 1904647277209247867, guid: bf1e893de17bcb44ab884d24992a7c5a,
         type: 3}
@@ -10632,6 +10633,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2058887093}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1945539909 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1904647277209247867, guid: bf1e893de17bcb44ab884d24992a7c5a,
+    type: 3}
+  m_PrefabInstance: {fileID: 558323614}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1969328586
 GameObject:
   m_ObjectHideFlags: 0
@@ -11618,7 +11625,6 @@ SceneRoots:
   - {fileID: 963614193}
   - {fileID: 1827194513}
   - {fileID: 274204963}
-  - {fileID: 558323614}
   - {fileID: 632747051}
   - {fileID: 1898516661}
   - {fileID: 469421586}
