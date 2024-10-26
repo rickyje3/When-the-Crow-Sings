@@ -20,6 +20,7 @@ public class GameStateManager : MonoBehaviour, IService
     public GameSignal levelLoadFinishSignal;
 
     private int targetSpawnIndex = 0;
+    private bool canLoad = true;
 
     List<LevelData> currentLevelData = new List<LevelData>();
 
@@ -40,15 +41,13 @@ public class GameStateManager : MonoBehaviour, IService
 
     public void OnLoadStart(SignalArguments args)
     {
-        if (args.objectArgs[0] is not LevelDataResource) { throw new Exception("No valid LevelDataResource assigned to the load trigger!"); }
+        if (canLoad)
+        {
+            if (args.objectArgs[0] is not LevelDataResource) { throw new Exception("No valid LevelDataResource assigned to the load trigger!"); }
 
-        //ServiceLocator.Get<PlayerController>().gameObject.SetActive(false);
-
-
-
-        targetSpawnIndex = args.intArgs[0];
-        LoadRoom((LevelDataResource)args.objectArgs[0]);
-        //LoadRoom(args.intArgs[0]);
+            targetSpawnIndex = args.intArgs[0];
+            LoadRoom((LevelDataResource)args.objectArgs[0]);
+        }
     }
     public void OnLoadFinish(SignalArguments args)
     {
@@ -74,26 +73,30 @@ public class GameStateManager : MonoBehaviour, IService
             }
         }
         if (spawnPoint == null) throw new System.Exception("Error! No spawn point found that matches the desired index!");
-        
+
         playerHolder = Instantiate(_playerPrefab);
         playerContent = playerHolder.GetComponent<PlayerHolder>().playerContent;
 
         playerContent.transform.position = spawnPoint.transform.position;
-        //FindObjectOfType<PlayerController>().movementInput = Vector3.zero;
+        playerContent.GetComponent<CharacterController>().enabled = true;
     }
 
 
     public void LoadRoomDebug(string levelName)
     {
-        Destroy(playerHolder);
-
-        // Unload previous scenes.
-        foreach (Scene i in GetLoadedScenes())
+        if (canLoad)
         {
-            SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
+            Destroy(playerHolder);
+
+            // Unload previous scenes.
+            foreach (Scene i in GetLoadedScenes())
+            {
+                SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
+            }
+            SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
+            //player = Instantiate(_playerPrefab);
         }
-        SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
-        //player = Instantiate(_playerPrefab);
+
     }
 
 
@@ -215,64 +218,81 @@ public class GameStateManager : MonoBehaviour, IService
     public List<SceneAsset> debugScenes;
     void DebugLoadInput()
     {
-        LevelDataResource testResource = new LevelDataResource();
-        if (Input.GetKeyUp(KeyCode.Alpha1))
+        if (canLoad)
         {
-            testResource.level = debugScenes[0];
-            LoadRoom(testResource);
+            LevelDataResource testResource = new LevelDataResource();
+            if (Input.GetKeyUp(KeyCode.Alpha1))
+            {
+                testResource.level = debugScenes[0];
+                targetSpawnIndex = 0;
+                LoadRoom(testResource);
+            }
+            if (Input.GetKeyUp(KeyCode.Alpha2))
+            {
+                testResource.level = debugScenes[1];
+                targetSpawnIndex = 0;
+                LoadRoom(testResource);
+            }
+            if (Input.GetKeyUp(KeyCode.Alpha3))
+            {
+                testResource.level = debugScenes[2];
+                targetSpawnIndex = 0;
+                LoadRoom(testResource);
+            }
+            if (Input.GetKeyUp(KeyCode.Alpha4))
+            {
+                testResource.level = debugScenes[3];
+                targetSpawnIndex = 0;
+                LoadRoom(testResource);
+            }
+            if (Input.GetKeyUp(KeyCode.Alpha5))
+            {
+                testResource.level = debugScenes[4];
+                targetSpawnIndex = 0;
+                LoadRoom(testResource);
+            }
+            if (Input.GetKeyUp(KeyCode.Alpha6))
+            {
+                testResource.level = debugScenes[5];
+                targetSpawnIndex = 0;
+            }
+            if (Input.GetKeyUp(KeyCode.Alpha7))
+            {
+                testResource.level = debugScenes[6];
+                targetSpawnIndex = 0;
+            }
+            if (Input.GetKeyUp(KeyCode.Alpha8))
+            {
+                testResource.level = debugScenes[7];
+                targetSpawnIndex = 0;
+            }
+            if (Input.GetKeyUp(KeyCode.Alpha9))
+            {
+                testResource.level = debugScenes[8];
+                targetSpawnIndex = 0;
+            }
+            if (Input.GetKeyUp(KeyCode.Alpha0))
+            {
+                testResource.level = debugScenes[9];
+                targetSpawnIndex = 0;
+            }
+            if (Input.GetKeyUp(KeyCode.Minus))
+            {
+                testResource.level = debugScenes[10];
+                targetSpawnIndex = 0;
+            }
+            if (Input.GetKeyUp(KeyCode.Z))
+            {
+                testResource.level = debugScenes[11];
+                targetSpawnIndex = 0;
+            }
+            if (Input.GetKeyUp(KeyCode.X))
+            {
+                testResource.level = debugScenes[12];
+                targetSpawnIndex = 0;
+            }
         }
-        if (Input.GetKeyUp(KeyCode.Alpha2))
-        {
-            testResource.level = debugScenes[1];
-            LoadRoom(testResource);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha3))
-        {
-            testResource.level = debugScenes[2];
-            LoadRoom(testResource);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha4))
-        {
-            testResource.level = debugScenes[3];
-            LoadRoom(testResource);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha5))
-        {
-            testResource.level = debugScenes[4];
-            LoadRoom(testResource);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha6))
-        {
-            testResource.level = debugScenes[5];
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha7))
-        {
-            testResource.level = debugScenes[6];
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha8))
-        {
-            testResource.level = debugScenes[7];
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha9))
-        {
-            testResource.level = debugScenes[8];
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha0))
-        {
-            testResource.level = debugScenes[9];
-        }
-        if (Input.GetKeyUp(KeyCode.Minus))
-        {
-            testResource.level = debugScenes[10];
-        }
-        if (Input.GetKeyUp(KeyCode.Z))
-        {
-            testResource.level = debugScenes[11];
-        }
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-            testResource.level = debugScenes[12];
-        }
+        
         
     }
 }
