@@ -105,15 +105,17 @@ public class DialogueManager : MonoBehaviour, IService
         if (activeConditionBlock != null && activeConditionBlock.conditionHasBeenDecided && newLine.tabCount <= activeConditionBlock.conditionTabCount)
         {
             activeConditionBlock.conditionHasBeenDecided = false;
-            Debug.Log("Should be "+ ((DialogueResponse)dialogueResource.dialogueLines[activeConditionBlock.endIndex]).dialogue);
+            //Debug.Log("Should be "+ ((DialogueResponse)dialogueResource.dialogueLines[activeConditionBlock.endIndex]).dialogue);
             ControlLineBehavior(activeConditionBlock.endIndex, newLine.tabCount);
+            return;
         }
 
 
         if (newLine is DialogueResponse)
         {
+            
             DialogueResponse newLine2 = (DialogueResponse)newLine;
-
+            Debug.Log(newLine2.dialogue);
             nameText.text = newLine2.characterName;
             StartCoroutine(TypeText(dialogueText, newLine2.dialogue,index));
         }
@@ -177,6 +179,7 @@ public class DialogueManager : MonoBehaviour, IService
             
             if (activeConditionBlock == null) { throw new Exception("THE CONDITION BLOCK IS BLANK YOU SILLY DUCK"); }
 
+            Debug.Log("About to call DoConditionalDialogueLogic()");
             DoConditionalDialogueLogic();
 
 
@@ -268,6 +271,7 @@ public class DialogueManager : MonoBehaviour, IService
         int nextLine = choiceButton.dialogueLineIndex + 1;
         int choiceTabCount = choiceButton.dialogueChoice.tabCount;
 
+        
         ControlLineBehavior(nextLine, choiceTabCount);
     }
 
