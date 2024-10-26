@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueTitleBlock
+public class DialogueTitleBlock : DialogueBlock
 {
     public DialogueTitle dialogueTitle;
     public List<DialogueBase> dialogueLines = new List<DialogueBase>();

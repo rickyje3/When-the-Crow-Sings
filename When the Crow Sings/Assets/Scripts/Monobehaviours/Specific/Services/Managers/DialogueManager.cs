@@ -29,6 +29,9 @@ public class DialogueManager : MonoBehaviour, IService
     public float pauseMultiplier = 10f;
     public List<GameSignal> signalsDialogueCanUse;
 
+    DialogueChoiceBlock activeChoiceBlock = null;
+
+    #region StartMethods()
     private void Awake()
     {
         RegisterSelfAsService();
@@ -39,7 +42,7 @@ public class DialogueManager : MonoBehaviour, IService
     {
         ServiceLocator.Register<DialogueManager>(this);
     }
-
+    #endregion
 
 
 
@@ -89,6 +92,16 @@ public class DialogueManager : MonoBehaviour, IService
         currentLine = index;
         DialogueBase newLine = dialogueResource.dialogueLines[index];
         
+        // Check if we need to skip to after a choice block.
+        if (activeChoiceBlock != null && activeChoiceBlock.choiceHasBeenMade && newLine.tabCount <= activeChoiceBlock.choiceTabCount)
+        {
+            activeChoiceBlock.choiceHasBeenMade = false;
+            //ResetChoiceBlocks();
+            Debug.Log(activeChoiceBlock.endIndex);
+            ControlLineBehavior(activeChoiceBlock.endIndex, newLine.tabCount);
+            return;
+        }
+
 
         if (newLine is DialogueResponse)
         {
@@ -100,6 +113,8 @@ public class DialogueManager : MonoBehaviour, IService
        
         else if (newLine is DialogueGoto)
         {
+            ResetChoiceBlocks();
+
             DialogueGoto newLine2 = (DialogueGoto)newLine;
             if (newLine2.isEnd)
             {
@@ -109,43 +124,48 @@ public class DialogueManager : MonoBehaviour, IService
             {
                 DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Find(x => x.titleName == newLine2.gotoTitleName);
                 Debug.Log(newLine2.gotoTitleName + " so we're going to " + tempHolderForTheTargetIndex.titleIndex);
-                ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex,previousLineTabCount);
+                ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex, previousLineTabCount);
             }
         }
 
         else if (newLine is DialogueChoice)
         {
             dialogueChoicesHolder.SetActive(true);
+            Debug.Log("Set the choices holder active!");
 
-            DialogueChoiceBlock choiceBlock = null;
+            //activeChoiceBlock = null;
             foreach (DialogueTitleBlock i in dialogueResource.dialogueTitleBlocks)
             {
                 foreach (DialogueChoiceBlock ii in i.dialogueChoiceBlocks)
                 {
                     if (ii.dialogueChoices.Contains(newLine))
                     {
-                        choiceBlock = ii;
-                        Debug.Log("alasdhflaskgdjhklasdfh");
+                        activeChoiceBlock = ii;
+                        //Debug.Log("alasdhflaskgdjhklasdfh");
                         break;
                     }
                 }
-                Debug.Log("Well, nothing in that title block.");
+                //Debug.Log("Well, nothing in that title block.");
             }
-            Debug.Log(choiceBlock);
+            Debug.Log(activeChoiceBlock);
             
 
-            if (choiceBlock == null) { throw new Exception("THE THING IS BLANK YOU SILLY GOOSE"); }
+            if (activeChoiceBlock == null) { throw new Exception("THE THING IS BLANK YOU SILLY GOOSE"); }
 
+            
+            foreach (GameObject i in dialogueChoiceButtons)
+            {
+                i.SetActive(false);
+            }
             int loop = 0;
-            foreach (DialogueChoice i in choiceBlock.dialogueChoices)
-            { 
+            foreach (DialogueChoice i in activeChoiceBlock.dialogueChoices)
+            {
+                dialogueChoiceButtons[loop].SetActive(true);
                 dialogueChoiceButtons[loop].GetComponentInChildren<TextMeshProUGUI>().text = i.choiceText;
                 dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueLineIndex = i.choiceIndex;
                 dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueChoice = i;
                 loop++;
             }
-
-            // TODO: Populate the buttons. Then, wait for an inputevent from one of them to call ControlLineBehavior() again.
 
         }
 
@@ -156,10 +176,28 @@ public class DialogueManager : MonoBehaviour, IService
         }
     }
 
+    private void ResetChoiceBlocks()
+    {
+        foreach (DialogueTitleBlock i in dialogueResource.dialogueTitleBlocks)
+        {
+            foreach (DialogueChoiceBlock ii in i.dialogueChoiceBlocks)
+            {
+                ii.choiceHasBeenMade = false;
+            }
+        }
+    }
+
     public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
     {
         dialogueChoicesHolder.SetActive(false);
-        ControlLineBehavior(choiceButton.dialogueLineIndex + 1,choiceButton.dialogueChoice.tabCount);
+
+        //activeChoiceBlock.Reset();
+        activeChoiceBlock.choiceHasBeenMade = true;
+
+        int nextLine = choiceButton.dialogueLineIndex + 1;
+        int choiceTabCount = choiceButton.dialogueChoice.tabCount;
+
+        ControlLineBehavior(nextLine, choiceTabCount);
     }
 
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text, int index)
