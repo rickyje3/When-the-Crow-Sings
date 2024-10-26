@@ -125,42 +125,6 @@ public partial class DialogueParser
             newLine.choiceText = trimmedLine;
             newLine.choiceIndex = i;
 
-
-            //DialogueChoiceBlock choiceBlock;
-            //if (dialogueResource.dialogueChoiceBlocks.Count > 0)
-            //{
-            //    bool hasBeenSet = false;
-            //    foreach (DialogueChoiceBlock ii in dialogueResource.dialogueChoiceBlocks)
-            //    {
-            //        // Check indentation
-            //        if (ii.choiceTabCount == myTabCount && !ii.dialogueChoices.Contains(newLine))
-            //        {
-            //            ii.dialogueChoices.Add(newLine);
-            //            hasBeenSet = true;
-            //        }
-            //    }
-            //    if (!hasBeenSet)
-            //    {
-            //        choiceBlock = new DialogueChoiceBlock();
-            //        dialogueResource.dialogueChoiceBlocks.Add(choiceBlock);
-
-            //        choiceBlock.choiceTabCount = myTabCount;
-
-            //        choiceBlock.dialogueChoices.Add(newLine);
-            //    }
-
-            //}
-            //else
-            //{
-            //    choiceBlock = new DialogueChoiceBlock();
-            //    dialogueResource.dialogueChoiceBlocks.Add(choiceBlock);
-
-            //    choiceBlock.choiceTabCount = myTabCount;
-
-            //    choiceBlock.dialogueChoices.Add(newLine);
-
-            //}
-
             dialogueResource.dialogueLines.Add(newLine);
             
             return true;
@@ -172,12 +136,13 @@ public partial class DialogueParser
     private bool CheckLine_IsConditional(int myTabCount) // Conditional
     {
         if (
-            (trimmedLine.StartsWith("if") || trimmedLine.StartsWith("elif") || trimmedLine.StartsWith("else"))
+            (trimmedLine.StartsWith("if ") || trimmedLine.StartsWith("elif ") || trimmedLine.StartsWith("else"))
                     && trimmedLine.EndsWith(":"))
         {
             DialogueCondition newLine = new DialogueCondition();
             newLine.tabCount = myTabCount;
-            PrepareConditional(trimmedLine, newLine);
+
+            PrepareConditional(trimmedLine, ref newLine);
 
             dialogueResource.dialogueLines.Add(newLine);
 

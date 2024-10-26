@@ -5,6 +5,11 @@ using UnityEngine;
 public class DialogueConditionBlock : DialogueBlock
 {
     public DialogueCondition ifStatement = null;
-    public DialogueCondition[] elifStatements = null;
+    public List<DialogueCondition> elifStatements = null;
     public DialogueCondition elseStatement = null;
+
+    public int conditionTabCount = -1;
+    public bool conditionHasBeenDecided = false;
+
+    public int endIndex = -1;
 }

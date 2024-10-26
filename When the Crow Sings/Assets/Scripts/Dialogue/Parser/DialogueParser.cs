@@ -12,6 +12,13 @@ public partial class DialogueParser
     string rawText;
     string trimmedLine;
 
+    // TODO: Figure out how to sort things so "blocks" can be structured.
+    DialogueTitle currentTitle = null;
+    DialogueTitleBlock currentTitleBlock = null;
+
+    DialogueChoiceBlock currentChoiceBlock = null;
+    DialogueConditionBlock currentConditionBlock = null;
+
     public DialogueParser(DialogueResource targetDialogueResource)
     {
         dialogueResource = targetDialogueResource;
@@ -23,11 +30,7 @@ public partial class DialogueParser
         
     }
 
-    // TODO: Figure out how to sort things so "blocks" can be structured.
-    DialogueTitle currentTitle = null;
-    DialogueTitleBlock currentTitleBlock = null;
 
-    DialogueChoiceBlock currentChoiceBlock = null;
 
 
     void PrepareDialogueResource(string text) // 
@@ -40,6 +43,7 @@ public partial class DialogueParser
         {
             current_loop++;
 
+            // Check if indentation indicates the current choice block has ended.
             if (currentChoiceBlock != null &&
                 i.tabCount <= currentChoiceBlock.choiceTabCount && i is not DialogueChoice)
             {
@@ -53,8 +57,6 @@ public partial class DialogueParser
                 currentTitle = (DialogueTitle)i;
                 currentTitleBlock = new DialogueTitleBlock(currentTitle);
                 dialogueResource.dialogueTitleBlocks.Add(currentTitleBlock);
-
-                //Debug.Log("We've encountered a title.");
                 continue;
             }
             if (dialogueResource.dialogueTitleBlocks.Count == 0) continue;
@@ -64,11 +66,8 @@ public partial class DialogueParser
             if (currentTitleBlock == null) throw new System.Exception("Uh wait this shouldn't be possible hold up.");
             currentTitleBlock.dialogueLines.Add(i);
 
-            // if currentchoiceblock != null and if this line is a lower indentation than the block, then create a new choice block.
-            // but also, if the next line is the same indentation and NOT a choice block, then create a new choice block.
 
-            
-
+            // Organize the choice blocks.
             if (currentChoiceBlock == null)
             {
                 if (i is DialogueChoice)
@@ -88,8 +87,6 @@ public partial class DialogueParser
                 if (i is DialogueChoice)
                 {
                     DialogueChoice _i = (DialogueChoice)i;
-
-
 
                     bool hasBeenSet = false;
                     foreach (DialogueChoiceBlock ii in currentTitleBlock.dialogueChoiceBlocks)
@@ -112,11 +109,17 @@ public partial class DialogueParser
                         currentChoiceBlock.dialogueChoices.Insert(0,_i);
                     }
                 }
-                else
-                {
-
-                }
             }
+
+            if (currentConditionBlock == null)
+            {
+
+            }
+            else
+            {
+
+            }
+
         }
     }
 }

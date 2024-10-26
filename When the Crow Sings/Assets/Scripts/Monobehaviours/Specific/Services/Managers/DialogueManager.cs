@@ -169,10 +169,14 @@ public class DialogueManager : MonoBehaviour, IService
 
         }
 
+        else if (newLine is DialogueCondition)
+        {
+
+        }
+
         else // In case of an EmptyLine
         {
             ControlLineBehavior(index+1,previousLineTabCount);
-            
         }
     }
 

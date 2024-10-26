@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogueCondition : DialogueBase
 {
-    public enum LogicType
+   public enum LogicType
     {
         IF,
         ELIF,
