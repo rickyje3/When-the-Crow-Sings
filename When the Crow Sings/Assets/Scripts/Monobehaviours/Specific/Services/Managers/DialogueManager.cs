@@ -123,6 +123,7 @@ public class DialogueManager : MonoBehaviour, IService
         else if (newLine is DialogueGoto)
         {
             ResetChoiceBlocks();
+            ResetConditionBlocks();
 
             DialogueGoto newLine2 = (DialogueGoto)newLine;
             if (newLine2.isEnd)
@@ -218,6 +219,16 @@ public class DialogueManager : MonoBehaviour, IService
             }
         }
     }
+    private void ResetConditionBlocks()
+    {
+        foreach (DialogueTitleBlock i in dialogueResource.dialogueTitleBlocks)
+        {
+            foreach (DialogueConditionBlock ii in i.dialogueConditionBlocks)
+            {
+                ii.conditionHasBeenDecided = false;
+            }
+        }
+    }
 
     
 
@@ -282,13 +293,6 @@ public class DialogueManager : MonoBehaviour, IService
             Debug.Log("Condition is " + i.variableKeyString + " and datatype is " + i.dataType);
         }
 
-        activeConditionBlock.conditionHasBeenDecided = true;
-
-        Debug.Log("Target index is "+(activeConditionBlock.ifStatement.conditionIndex + 1));
-        ControlLineBehavior(activeConditionBlock.ifStatement.conditionIndex+1, activeConditionBlock.ifStatement.tabCount);
-
-
-
         //switch (dialogueCondition.logicType)
         //{
         //    case DialogueCondition.LogicType.IF:
@@ -319,12 +323,33 @@ public class DialogueManager : MonoBehaviour, IService
         //                break;
         //        }
         //        break;
-                
+
         //    case DialogueCondition.LogicType.ELIF:
         //        break;
         //    case DialogueCondition.LogicType.ELSE:
         //        break;
         //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        activeConditionBlock.conditionHasBeenDecided = true;
+        Debug.Log("Target index is "+(activeConditionBlock.ifStatement.conditionIndex + 1));
+        ControlLineBehavior(activeConditionBlock.ifStatement.conditionIndex+1, activeConditionBlock.ifStatement.tabCount);
+
+
+
+        
     }
 
 
