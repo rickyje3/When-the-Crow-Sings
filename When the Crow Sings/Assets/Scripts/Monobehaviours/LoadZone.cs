@@ -9,6 +9,7 @@ public class LoadZone : MonoBehaviour
     public int targetSpawnPointIndex = 0;
     public LevelDataResource levelDataResource;
 
+    [Header("Built-In")]
     public GameSignal startLoadSignal;
     private void OnTriggerEnter(Collider other)
     {

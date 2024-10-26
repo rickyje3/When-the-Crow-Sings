@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,10 +13,14 @@ using UnityEngine.UI;
 public class GameStateManager : MonoBehaviour, IService
 {
     public GameObject _playerPrefab;
-    public GameObject player = null;
+    public GameObject playerHolder = null;
+    public GameObject playerContent = null;
 
     public GameSignal levelLoadStartSignal;
     public GameSignal levelLoadFinishSignal;
+
+    private int targetSpawnIndex = 0;
+    private bool canLoad = true;
 
     List<LevelData> currentLevelData = new List<LevelData>();
 
@@ -36,54 +41,72 @@ public class GameStateManager : MonoBehaviour, IService
 
     public void OnLoadStart(SignalArguments args)
     {
-        if (args.objectArgs[0] is not LevelDataResource) { throw new Exception("No valid LevelDataResource assigned to the load trigger!"); }
+        if (canLoad)
+        {
+            if (args.objectArgs[0] is not LevelDataResource) { throw new Exception("No valid LevelDataResource assigned to the load trigger!"); }
 
-        //ServiceLocator.Get<PlayerController>().gameObject.SetActive(false);
-        
-
-        
-
-        LoadRoom((LevelDataResource)args.objectArgs[0]);
-        //LoadRoom(args.intArgs[0]);
+            targetSpawnIndex = args.intArgs[0];
+            LoadRoom((LevelDataResource)args.objectArgs[0]);
+        }
     }
     public void OnLoadFinish(SignalArguments args)
     {
         ValidateScenes();
-        if (args.intArgs[0] == 1)
+        if (args.intArgs[0] == 1) // If this signal was sent by a LEVEL being loaded
         {
-            //ServiceLocator.Get<PlayerController>().gameObject.SetActive(true);
-            
-
-            // get all of the spawners, determine which one to use based on which room was left
-            FindObjectOfType<PlayerController>().transform.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
-            FindObjectOfType<PlayerController>().movementInput = Vector3.zero;
+            SpawnPlayer();
         }
-        
     }
 
     // ---------------------------------------------------------------------------
 
+    void SpawnPlayer()
+    {
+        Debug.Log("Desired spawn index is " + targetSpawnIndex);
+        
+        PlayerSpawnPoint spawnPoint = null;
+        List<PlayerSpawnPoint> spawnPointsWithMatchingIndex = new List<PlayerSpawnPoint>();
+        foreach (PlayerSpawnPoint i in FindObjectsOfType<PlayerSpawnPoint>())
+        {
+            if (i.entranceIndex == targetSpawnIndex)
+            {
+                //spawnPoint = i;
+                spawnPointsWithMatchingIndex.Add(i);
+            }
+        }
+        if (spawnPointsWithMatchingIndex.Count > 1) throw new System.Exception("More than one spawn point found with the same index.");
+        if (spawnPointsWithMatchingIndex.Count < 1) throw new System.Exception("Error! No spawn point found that matches the desired index!");
+        spawnPoint = spawnPointsWithMatchingIndex[0];
+
+        playerHolder = Instantiate(_playerPrefab);
+        playerContent = playerHolder.GetComponent<PlayerHolder>().playerContent;
+
+        playerContent.transform.position = spawnPoint.transform.position;
+        playerContent.GetComponent<CharacterController>().enabled = true;
+    }
+
+
     public void LoadRoomDebug(string levelName)
     {
-        Destroy(player);
-
-        // Unload previous scenes.
-        foreach (Scene i in GetLoadedScenes())
+        if (canLoad)
         {
-            SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
-            //SceneManager.UnloadScene(i);
+            Destroy(playerHolder);
+
+            // Unload previous scenes.
+            foreach (Scene i in GetLoadedScenes())
+            {
+                SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
+            }
+            SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
+            //player = Instantiate(_playerPrefab);
         }
 
-        // Check what scenes should be loaded based on save data and exit trigger
-
-        SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
-        player = Instantiate(_playerPrefab);
     }
 
 
     public void LoadRoom(LevelDataResource levelDataResource)
     {
-        Destroy(player);
+        Destroy(playerHolder);
 
         // Unload previous scenes.
         foreach (Scene i in GetLoadedScenes())
@@ -100,10 +123,8 @@ public class GameStateManager : MonoBehaviour, IService
         {
             //SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
             SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
-            Debug.Log(i.name + " was loaded!");
+            //Debug.Log(i.name + " was loaded!");
         }
-
-        player = Instantiate(_playerPrefab);
     }
     void ValidateScenes()
     {
@@ -198,67 +219,33 @@ public class GameStateManager : MonoBehaviour, IService
 
     // ---------------------------------------------------------------------------
 
-    public List<SceneAsset> debugScenes;
+    public List<LevelDataResource> debugScenes;
     void DebugLoadInput()
     {
-        LevelDataResource testResource = new LevelDataResource();
-        if (Input.GetKeyUp(KeyCode.Alpha1))
+        if (canLoad)
         {
-            testResource.level = debugScenes[0];
+            LevelDataResource testResource = new LevelDataResource();
+
+            DebugLoadLevel(0,KeyCode.Alpha1,testResource);
+            DebugLoadLevel(1,KeyCode.Alpha2,testResource);
+            DebugLoadLevel(2,KeyCode.Alpha3,testResource);
+            DebugLoadLevel(3,KeyCode.Alpha4,testResource);
+            DebugLoadLevel(4,KeyCode.Alpha5,testResource);
+            DebugLoadLevel(5,KeyCode.Alpha6,testResource);
+            DebugLoadLevel(6,KeyCode.Alpha7,testResource);
+            DebugLoadLevel(7,KeyCode.Alpha8,testResource);
+            DebugLoadLevel(8,KeyCode.Alpha9,testResource);
+            DebugLoadLevel(9,KeyCode.Alpha0,testResource);
+        }
+    }
+    void DebugLoadLevel(int myIndex, KeyCode keyCode, LevelDataResource testResource)
+    {
+        if (Input.GetKeyUp(keyCode))
+        {
+            testResource = debugScenes[myIndex];
+            Debug.Log(testResource);
+            targetSpawnIndex = 0;
             LoadRoom(testResource);
         }
-        if (Input.GetKeyUp(KeyCode.Alpha2))
-        {
-            testResource.level = debugScenes[1];
-            LoadRoom(testResource);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha3))
-        {
-            testResource.level = debugScenes[2];
-            LoadRoom(testResource);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha4))
-        {
-            testResource.level = debugScenes[3];
-            LoadRoom(testResource);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha5))
-        {
-            testResource.level = debugScenes[4];
-            LoadRoom(testResource);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha6))
-        {
-            testResource.level = debugScenes[5];
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha7))
-        {
-            testResource.level = debugScenes[6];
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha8))
-        {
-            testResource.level = debugScenes[7];
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha9))
-        {
-            testResource.level = debugScenes[8];
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha0))
-        {
-            testResource.level = debugScenes[9];
-        }
-        if (Input.GetKeyUp(KeyCode.Minus))
-        {
-            testResource.level = debugScenes[10];
-        }
-        if (Input.GetKeyUp(KeyCode.Z))
-        {
-            testResource.level = debugScenes[11];
-        }
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-            testResource.level = debugScenes[12];
-        }
-        
     }
 }
