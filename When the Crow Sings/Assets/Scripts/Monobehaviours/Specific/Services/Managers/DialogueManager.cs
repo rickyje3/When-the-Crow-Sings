@@ -115,6 +115,9 @@ public class DialogueManager : MonoBehaviour, IService
             DialogueResponse newLine2 = (DialogueResponse)newLine;
             Debug.Log(newLine2.dialogue);
             nameText.text = newLine2.characterName;
+
+            SetPortraits(newLine2);
+
             StartCoroutine(TypeText(dialogueText, newLine2.dialogue, index));
         }
 
@@ -407,5 +410,23 @@ public class DialogueManager : MonoBehaviour, IService
 
         activeConditionBlock.conditionHasBeenDecided = true;
         ControlLineBehavior(next_index+1, activeConditionBlock.ifStatement.tabCount);
+    }
+
+
+    void SetPortraits(DialogueResponse response)
+    {
+        //newLine2.characterName;
+        //newLine2.characterEmotion;
+        if (response.characterName == "Chance")
+        {
+            npcImageUi.gameObject.SetActive(false);
+            playerImageUi.gameObject.SetActive(true);
+        }
+        else
+        {
+            npcImageUi.gameObject.SetActive(true);
+            playerImageUi.gameObject.SetActive(false);
+        }
+
     }
 }
