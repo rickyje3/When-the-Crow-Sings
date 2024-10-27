@@ -27,7 +27,8 @@ public class DialogueResponse : DialogueBase
     public string dialogue = "";
 
     public string characterName;
-    public string characterEmotion; // enum?
+    //public string characterEmotion; // enum?
+    public Constants.EMOTIONS characterEmotion = Constants.EMOTIONS.DEFAULT;
 
     public Dictionary<int,float> pauses; // TODO: figure out type. int index and float length?
 }

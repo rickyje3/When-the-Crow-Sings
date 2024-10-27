@@ -5,5 +5,15 @@ using UnityEngine;
 public class Constants
 {
     const string KEY_TITLE = "~";
-    
+
+
+    public enum EMOTIONS { DEFAULT, HAPPY, ANGRY, SAD, SCARED, BS, SMILE,
+        STARE, WORRIED, THINKING,
+        TEASING, AWKWARD,
+        WINK, DISGRUNTLED,
+        SHIVER, EXCITED,
+        DAZED, PANICKED, MILD_SURPRISE, SIGH_OF_RELIEF, ANNOYED,
+        INTELLIGENT, STARTLED,
+        STUNNED, EXHAUSTED
+    }
 }
