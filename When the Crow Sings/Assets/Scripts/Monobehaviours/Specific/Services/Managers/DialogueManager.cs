@@ -322,7 +322,7 @@ public class DialogueManager : MonoBehaviour, IService
         //        return true;
         //    }
         //}
-        
+        //CSharpScript
 
 
         return false;
@@ -338,58 +338,42 @@ public class DialogueManager : MonoBehaviour, IService
             if (Conditions(i, ref next_index)) break;
         }
 
-            //switch (dialogueCondition.logicType)
-            //{
-            //    case DialogueCondition.LogicType.IF:
-            //        switch (dialogueCondition.operatorType)
-            //        {
-            //            case DialogueCondition.OperatorType.EQUAL_TO:
+        //switch (dialogueCondition.logicType)
+        //{
+        //    case DialogueCondition.LogicType.IF:
+        //        switch (dialogueCondition.operatorType)
+        //        {
+        //            case DialogueCondition.OperatorType.EQUAL_TO:
 
-            //                break;
+        //                break;
 
-            //            case DialogueCondition.OperatorType.GREATER_THAN:
+        //            case DialogueCondition.OperatorType.GREATER_THAN:
 
-            //                break;
+        //                break;
 
-            //            case DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO:
+        //            case DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO:
 
-            //                break;
+        //                break;
 
-            //            case DialogueCondition.OperatorType.LESS_THAN:
+        //            case DialogueCondition.OperatorType.LESS_THAN:
 
-            //                break;
+        //                break;
 
-            //            case DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO:
+        //            case DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO:
 
-            //                break;
+        //                break;
 
-            //            case DialogueCondition.OperatorType.NOT_EQUAL_TO:
+        //            case DialogueCondition.OperatorType.NOT_EQUAL_TO:
 
-            //                break;
-            //        }
-            //        break;
+        //                break;
+        //        }
+        //        break;
 
-            //    case DialogueCondition.LogicType.ELIF:
-            //        break;
-            //    case DialogueCondition.LogicType.ELSE:
-            //        break;
-            //}
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //    case DialogueCondition.LogicType.ELIF:
+        //        break;
+        //    case DialogueCondition.LogicType.ELSE:
+        //        break;
+        //}
 
         activeConditionBlock.conditionHasBeenDecided = true;
         ControlLineBehavior(next_index+1, activeConditionBlock.ifStatement.tabCount);
