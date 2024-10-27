@@ -10,8 +10,15 @@ public class StirringQTE : MonoBehaviour
     private int currentStep = 0;
     private bool correctKey;
     private bool countingDown;
+    public int score = 0;
 
-    private KeyCode[] keySequence = { KeyCode.W, KeyCode.D, KeyCode.S, KeyCode.A }; // Rotating sequence
+
+    private KeyCode[] keySequence = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D }; // Rotating sequence
+
+    private void Awake()
+    {
+
+    }
 
     private void Update()
     {
@@ -54,21 +61,26 @@ public class StirringQTE : MonoBehaviour
     // Coroutine to handle feedback and proceed to the next step
     private IEnumerator KeyPressing()
     {
-        countingDown = true;
-        displayBox.GetComponent<Image>().color = correctKey ? Color.green : Color.red;
-
-        yield return new WaitForSeconds(.3f); // Display feedback for 1.5 seconds
-
-        displayBox.GetComponent<Image>().color = Color.white;
-
-        if (correctKey)
+        if (displayBox != null)
         {
-            // Move to the next step, cycling back to the start if needed
-            currentStep = (currentStep + 1) % keySequence.Length;
-        }
+            countingDown = true;               //display green if correctkey is true and red if false
+            displayBox.GetComponent<Image>().color = correctKey ? Color.green : Color.red;
 
-        correctKey = false;
-        countingDown = false; // Ready for the next input
+            yield return new WaitForSeconds(.15f); // Time between transition
+
+            displayBox.GetComponent<Image>().color = Color.white;
+
+            if (correctKey)
+            {
+                // Move to the next step cycle back to the start if needed
+                currentStep = (currentStep + 1) % keySequence.Length;
+                score++;
+            }
+            else score--;
+
+            correctKey = false;
+            countingDown = false; // Ready for the next input
+        }
     }
 
     private IEnumerator Countdown()

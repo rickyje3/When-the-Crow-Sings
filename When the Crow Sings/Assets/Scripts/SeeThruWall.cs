@@ -10,7 +10,7 @@ public class SeeThruWall : MonoBehaviour
 
     public static int PosID = Shader.PropertyToID("_Position");
     public static int SizeID = Shader.PropertyToID("_Size");
-    public static int TintID = Shader.PropertyToID("_Tint");
+    //public static int TintID = Shader.PropertyToID("_Tint");
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class SeeThruWall : MonoBehaviour
         //if raycast in range, increase the seethru material size
         if (Physics.Raycast(ray, 3000, mask))
         {
-            SeeThruMaterial.SetFloat(SizeID, 0.5f);
+            SeeThruMaterial.SetFloat(SizeID, 1f);
         }
         else SeeThruMaterial.SetFloat(SizeID, 0);
 
