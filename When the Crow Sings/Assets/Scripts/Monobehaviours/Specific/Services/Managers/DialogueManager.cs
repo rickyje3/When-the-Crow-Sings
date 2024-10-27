@@ -22,6 +22,7 @@ public class DialogueManager : MonoBehaviour, IService
     [SerializeField] private List<GameObject> dialogueChoiceButtons;
     public Image npcImageUi;
     public Image playerImageUi;
+    public DialoguePortraits dialoguePortraits;
 
     [Header("Signals")]
     public GameSignal startDialogueSignal;
@@ -417,16 +418,23 @@ public class DialogueManager : MonoBehaviour, IService
     {
         //newLine2.characterName;
         //newLine2.characterEmotion;
+        //string filePath = "Assets/Art/Sprites/"+response.characterName+"/"+response.characterName+"Sprite"+response.characterEmotion+".png";//Theodore (Character 9)/theodoreSpriteAnger.png";
+        //Debug.Log(filePath);
+        Image activeImageObject = null;
         if (response.characterName == "Chance")
         {
             npcImageUi.gameObject.SetActive(false);
             playerImageUi.gameObject.SetActive(true);
+            activeImageObject = playerImageUi;
         }
         else
         {
             npcImageUi.gameObject.SetActive(true);
             playerImageUi.gameObject.SetActive(false);
+            activeImageObject = npcImageUi;
         }
+        activeImageObject.sprite = dialoguePortraits.GetPortrait(response.characterName, response.characterEmotion);
+
 
     }
 }
