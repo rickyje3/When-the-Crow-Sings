@@ -32,6 +32,8 @@ public class GameStateManager : MonoBehaviour, IService
     private void Start()
     {
         GetLoadedScenes(); // I THINK there was a reason for this to be here??
+
+        SaveData.ReadData();
     }
     private void Update()
     {
@@ -62,7 +64,6 @@ public class GameStateManager : MonoBehaviour, IService
 
     void SpawnPlayer()
     {
-        Debug.Log("Desired spawn index is " + targetSpawnIndex);
         
         PlayerSpawnPoint spawnPoint = null;
         List<PlayerSpawnPoint> spawnPointsWithMatchingIndex = new List<PlayerSpawnPoint>();
@@ -224,7 +225,7 @@ public class GameStateManager : MonoBehaviour, IService
     {
         if (canLoad)
         {
-            LevelDataResource testResource = new LevelDataResource();
+            LevelDataResource testResource = ScriptableObject.CreateInstance<LevelDataResource>();
 
             DebugLoadLevel(0,KeyCode.Alpha1,testResource);
             DebugLoadLevel(1,KeyCode.Alpha2,testResource);
@@ -243,7 +244,6 @@ public class GameStateManager : MonoBehaviour, IService
         if (Input.GetKeyUp(keyCode))
         {
             testResource = debugScenes[myIndex];
-            Debug.Log(testResource);
             targetSpawnIndex = 0;
             LoadRoom(testResource);
         }

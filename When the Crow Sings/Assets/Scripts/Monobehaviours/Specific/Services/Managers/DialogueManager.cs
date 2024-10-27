@@ -397,7 +397,7 @@ public class DialogueManager : MonoBehaviour, IService
             if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO) return !result;
             return result;
         }
-        return false;
+        //return false;
     }
 
     void DoConditionalDialogueLogic()
