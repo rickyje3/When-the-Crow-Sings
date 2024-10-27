@@ -226,7 +226,7 @@ public class GameStateManager : MonoBehaviour, IService
     {
         if (canLoad)
         {
-            LevelDataResource testResource = new LevelDataResource();
+            LevelDataResource testResource = ScriptableObject.CreateInstance<LevelDataResource>();
 
             DebugLoadLevel(0,KeyCode.Alpha1,testResource);
             DebugLoadLevel(1,KeyCode.Alpha2,testResource);
