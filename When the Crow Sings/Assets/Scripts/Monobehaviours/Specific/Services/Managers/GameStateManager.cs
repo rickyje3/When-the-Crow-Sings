@@ -32,6 +32,8 @@ public class GameStateManager : MonoBehaviour, IService
     private void Start()
     {
         GetLoadedScenes(); // I THINK there was a reason for this to be here??
+
+        SaveData.ReadData();
     }
     private void Update()
     {

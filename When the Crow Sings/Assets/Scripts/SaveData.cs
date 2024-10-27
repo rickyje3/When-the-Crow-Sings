@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -99,5 +101,51 @@ public static class SaveData
     public static void SetFlag(string key, string value)
     {
         stringFlags[key] = value;
+    }
+
+    //public static bool GetFlag<Bool>(string key)
+    //{
+    //    return boolFlags[key];
+    //}
+    //public static int GetFlag<Int>(string key)
+    //{
+    //    return intFlags[key];
+    //}
+    //public static string GetFlag<String>(string key)
+    //{
+    //    return stringFlags[key];
+    //}
+
+    
+    public static void WriteData()
+    {
+        string filePath = Application.persistentDataPath + "/save.wtcs";
+
+        FileStream fileStream = new FileStream(filePath, FileMode.Create);
+
+        int offset = 0;
+        foreach (KeyValuePair<string,bool> i in boolFlags)
+        {
+            byte valueByte = i.Value ? (byte)1 : (byte)0;
+
+            fileStream.WriteByte(valueByte);
+            //Debug.Log(valueByte);
+            offset++;
+        }
+
+
+        fileStream.Close();
+    }
+    public static void ReadData()
+    {
+        string filePath = Application.persistentDataPath + "/save.wtcs";
+        byte[] fileBytes = File.ReadAllBytes(filePath);
+
+        foreach (byte i in fileBytes)
+        {
+            Debug.Log(i);
+        }
+
+        //FileStream fileStream = new FileStream(filePath, FileMode.Open);
     }
 }
