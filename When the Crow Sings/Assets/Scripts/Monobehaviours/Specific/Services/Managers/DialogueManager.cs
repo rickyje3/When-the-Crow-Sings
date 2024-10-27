@@ -67,16 +67,11 @@ public class DialogueManager : MonoBehaviour, IService
         {
             throw new Exception("Error! The component emitting the signal does not have a DialogueResource as its first ObjectArgument.");
         }
-
-        //InputManager.playerInputActions.Player.Disable();
         dialogueUI.SetActive(true);
         dialogueChoiceButtonsHolder.SetActive(false);
 
         DialogueParser parser = new DialogueParser(dialogueResource);
-        //DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
         DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
-
-        //dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Count(x => x.titleName == newLine.titleName)
 
         ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex, tempHolderForTheTargetIndex.tabCount);
 
@@ -84,7 +79,6 @@ public class DialogueManager : MonoBehaviour, IService
 
     public void EndDialogue()
     {
-        //InputManager.playerInputActions.Player.Enable();
         dialogueUI.SetActive(false);
         finishDialogueSignal.Emit();
     }
@@ -256,7 +250,6 @@ public class DialogueManager : MonoBehaviour, IService
             yield return new WaitForSeconds(pauseBetweenChars);
             textMesh.maxVisibleCharacters += 1;
         }
-        //ControlLineBehavior(index+1);
         canNextLine = true;
     }
 
@@ -264,23 +257,16 @@ public class DialogueManager : MonoBehaviour, IService
     private bool canNextLine = false;
     public void NextLine()
     {
-        // SUDO: if goto, empty, or conditional, get/"do"(?) the next-next line automatically. Otherwise, wait for input/signal/whatever.
-        // only exception is Choices, which need to be "got" on "finished typing" not "on input").
-
         if (canNextLine)
         {
-            //DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == newLine2.gotoTitleName);
 
             ControlLineBehavior(currentLine + 1, dialogueResource.dialogueLines[currentLine].tabCount);
         }
-
     }
 
     public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
     {
         dialogueChoiceButtonsHolder.SetActive(false);
-
-        //activeChoiceBlock.Reset();
         activeChoiceBlock.choiceHasBeenMade = true;
 
         int nextLine = choiceButton.dialogueLineIndex + 1;
@@ -306,14 +292,6 @@ public class DialogueManager : MonoBehaviour, IService
                     result = true;
                 }
             }
-            //else if (i.logicType == DialogueCondition.LogicType.ELIF)
-            //{
-            //    if (dictionaryToCheck[i.variableKeyString] == i.boolData)
-            //    {
-            //        next_index = i.conditionIndex;
-            //        foo = true;
-            //    }
-            //}
             else
             {
                 next_index = i.conditionIndex;
@@ -402,7 +380,6 @@ public class DialogueManager : MonoBehaviour, IService
                 next_index = i.conditionIndex;
                 result = true;
             }
-//            if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO) return !result;
             return result;
         }
         
@@ -416,8 +393,6 @@ public class DialogueManager : MonoBehaviour, IService
             if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO) return !result;
             return result;
         }
-
-
         return false;
     }
 
@@ -427,54 +402,10 @@ public class DialogueManager : MonoBehaviour, IService
 
         foreach (DialogueCondition i in activeConditionBlock.allConditions)
         {
-            //Debug.Log("Condition is " + i.variableKeyString + " and datatype is " + i.dataType);
             if (Conditions(i, ref next_index)) break;
         }
 
-        //switch (dialogueCondition.logicType)
-        //{
-        //    case DialogueCondition.LogicType.IF:
-        //        switch (dialogueCondition.operatorType)
-        //        {
-        //            case DialogueCondition.OperatorType.EQUAL_TO:
-
-        //                break;
-
-        //            case DialogueCondition.OperatorType.GREATER_THAN:
-
-        //                break;
-
-        //            case DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO:
-
-        //                break;
-
-        //            case DialogueCondition.OperatorType.LESS_THAN:
-
-        //                break;
-
-        //            case DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO:
-
-        //                break;
-
-        //            case DialogueCondition.OperatorType.NOT_EQUAL_TO:
-
-        //                break;
-        //        }
-        //        break;
-
-        //    case DialogueCondition.LogicType.ELIF:
-        //        break;
-        //    case DialogueCondition.LogicType.ELSE:
-        //        break;
-        //}
-
         activeConditionBlock.conditionHasBeenDecided = true;
         ControlLineBehavior(next_index+1, activeConditionBlock.ifStatement.tabCount);
-
-
-
-        
     }
-
-
 }
