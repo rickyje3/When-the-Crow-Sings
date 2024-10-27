@@ -286,46 +286,57 @@ public class DialogueManager : MonoBehaviour, IService
         ControlLineBehavior(nextLine, choiceTabCount);
     }
 
+
+
+    bool Conditions(DialogueCondition i, ref int next_index)
+    {
+        Dictionary<string, bool> dictionaryToCheck = SaveData.boolFlags;
+        //if (i.dataType == DialogueCondition.DataType.BOOL)
+        //{
+        //    // dictionaryToCheck == the flag dictionary
+        //}
+        //// then elif away for the other types..
+
+
+        //if (i.dataType == DialogueCondition.DataType.BOOL || i.dataType == DialogueCondition.DataType.UNASSIGNED)
+        //{
+        //    if (i.logicType == DialogueCondition.LogicType.IF)
+        //    {
+        //        if (dictionaryToCheck[i.variableKeyString] == i.boolData)
+        //        {
+        //            next_index = i.conditionIndex;
+        //            return true;
+        //        }
+        //    }
+        //    else if (i.logicType == DialogueCondition.LogicType.ELIF)
+        //    {
+        //        if (dictionaryToCheck[i.variableKeyString] == i.boolData)
+        //        {
+        //            next_index = i.conditionIndex;
+        //            return true;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        next_index = i.conditionIndex;
+        //        return true;
+        //    }
+        //}
+        
+
+
+        return false;
+    }
+
     void DoConditionalDialogueLogic()
     {
         int next_index = -1;
 
         foreach (DialogueCondition i in activeConditionBlock.allConditions)
         {
-            Debug.Log("Condition is " + i.variableKeyString + " and datatype is " + i.dataType);
-
-            Dictionary<string, bool> dictionaryToCheck = SaveData.boolFlags;
-            if (i.dataType == DialogueCondition.DataType.BOOL)
-            {
-                // dictionaryToCheck == the flag dictionary
-            }
-            // then elif away for the other types..
-
-
-            if (i.dataType == DialogueCondition.DataType.BOOL || i.dataType == DialogueCondition.DataType.UNASSIGNED)
-            {
-                if (i.logicType == DialogueCondition.LogicType.IF)
-                {
-                    if (dictionaryToCheck[i.variableKeyString] == i.boolData)
-                    {
-                        next_index = i.conditionIndex;
-                        break;
-                    }
-                }
-                else if (i.logicType == DialogueCondition.LogicType.ELIF)
-                {
-                    if (dictionaryToCheck[i.variableKeyString] == i.boolData)
-                    {
-                        next_index = i.conditionIndex;
-                        break;
-                    }
-                }
-                else
-                {
-                    next_index = i.conditionIndex;
-                    break;
-                }
-            }
+            //Debug.Log("Condition is " + i.variableKeyString + " and datatype is " + i.dataType);
+            if (Conditions(i, ref next_index)) break;
+        }
 
             //switch (dialogueCondition.logicType)
             //{
