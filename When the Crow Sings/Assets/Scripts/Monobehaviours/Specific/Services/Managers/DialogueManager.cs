@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour, IService
 {
@@ -19,6 +20,8 @@ public class DialogueManager : MonoBehaviour, IService
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private GameObject dialogueChoiceButtonsHolder;
     [SerializeField] private List<GameObject> dialogueChoiceButtons;
+    public Image npcImageUi;
+    public Image playerImageUi;
 
     [Header("Signals")]
     public GameSignal startDialogueSignal;
@@ -31,6 +34,7 @@ public class DialogueManager : MonoBehaviour, IService
 
     DialogueChoiceBlock activeChoiceBlock = null;
     DialogueConditionBlock activeConditionBlock = null;
+
 
     #region StartMethods()
     private void Awake()
