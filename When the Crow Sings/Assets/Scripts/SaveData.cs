@@ -87,4 +87,17 @@ public static class SaveData
 
         {"exampleString","myString" },
     };
+
+    public static void SetFlag(string key, bool value)
+    {
+        boolFlags[key] = value;
+    }
+    public static void SetFlag(string key, int value)
+    {
+        intFlags[key] = value;
+    }
+    public static void SetFlag(string key, string value)
+    {
+        stringFlags[key] = value;
+    }
 }
