@@ -9,9 +9,9 @@ using System;
 public class DialogueManager : MonoBehaviour, IService
 {
 
-    
+
     private DialogueResource dialogueResource;
-    
+
 
     [Header("Dialogue UI Elements")]
     [SerializeField] private GameObject dialogueUI;
@@ -37,7 +37,7 @@ public class DialogueManager : MonoBehaviour, IService
     {
         RegisterSelfAsService();
         dialogueUI.SetActive(false);
-        
+
     }
     public void RegisterSelfAsService()
     {
@@ -74,7 +74,7 @@ public class DialogueManager : MonoBehaviour, IService
 
         //dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Count(x => x.titleName == newLine.titleName)
 
-        ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex,tempHolderForTheTargetIndex.tabCount);
+        ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex, tempHolderForTheTargetIndex.tabCount);
 
     }
 
@@ -92,7 +92,7 @@ public class DialogueManager : MonoBehaviour, IService
         canNextLine = false;
         currentLine = index;
         DialogueBase newLine = dialogueResource.dialogueLines[index];
-        
+
         // Check if we need to skip to after a choice block.
         if (activeChoiceBlock != null && activeChoiceBlock.choiceHasBeenMade && newLine.tabCount <= activeChoiceBlock.choiceTabCount)
         {
@@ -113,13 +113,13 @@ public class DialogueManager : MonoBehaviour, IService
 
         if (newLine is DialogueResponse)
         {
-            
+
             DialogueResponse newLine2 = (DialogueResponse)newLine;
             Debug.Log(newLine2.dialogue);
             nameText.text = newLine2.characterName;
-            StartCoroutine(TypeText(dialogueText, newLine2.dialogue,index));
+            StartCoroutine(TypeText(dialogueText, newLine2.dialogue, index));
         }
-       
+
         else if (newLine is DialogueGoto)
         {
             ResetChoiceBlocks();
@@ -177,7 +177,7 @@ public class DialogueManager : MonoBehaviour, IService
                     }
                 }
             }
-            
+
             if (activeConditionBlock == null) { throw new Exception("THE CONDITION BLOCK IS BLANK YOU SILLY DUCK"); }
 
             Debug.Log("About to call DoConditionalDialogueLogic()");
@@ -188,7 +188,7 @@ public class DialogueManager : MonoBehaviour, IService
 
         else // In case of an EmptyLine
         {
-            ControlLineBehavior(index+1,previousLineTabCount);
+            ControlLineBehavior(index + 1, previousLineTabCount);
         }
     }
 
@@ -230,7 +230,7 @@ public class DialogueManager : MonoBehaviour, IService
         }
     }
 
-    
+
 
 
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text, int index)
@@ -241,7 +241,7 @@ public class DialogueManager : MonoBehaviour, IService
         while (textMesh.maxVisibleCharacters <= textMesh.text.Length)
         {
             float pauseBetweenChars = textSpeed;
-            char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1,0,textMesh.text.Length)];
+            char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1, 0, textMesh.text.Length)];
             foreach (char i in ".!?")
             {
                 if (character == i)
@@ -266,10 +266,10 @@ public class DialogueManager : MonoBehaviour, IService
         if (canNextLine)
         {
             //DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == newLine2.gotoTitleName);
-            
+
             ControlLineBehavior(currentLine + 1, dialogueResource.dialogueLines[currentLine].tabCount);
         }
-        
+
     }
 
     public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
@@ -282,7 +282,7 @@ public class DialogueManager : MonoBehaviour, IService
         int nextLine = choiceButton.dialogueLineIndex + 1;
         int choiceTabCount = choiceButton.dialogueChoice.tabCount;
 
-        
+
         ControlLineBehavior(nextLine, choiceTabCount);
     }
 
@@ -290,39 +290,59 @@ public class DialogueManager : MonoBehaviour, IService
 
     bool Conditions(DialogueCondition i, ref int next_index)
     {
-        Dictionary<string, bool> dictionaryToCheck = SaveData.boolFlags;
-        //if (i.dataType == DialogueCondition.DataType.BOOL)
-        //{
-        //    // dictionaryToCheck == the flag dictionary
-        //}
-        //// then elif away for the other types..
+        if (i.dataType == DialogueCondition.DataType.BOOL)
+        {
+            Dictionary<string, bool> dictionaryToCheck = SaveData.boolFlags;
+            bool result = false;
+            if (i.logicType == DialogueCondition.LogicType.IF)
+            {
+                if (dictionaryToCheck[i.variableKeyString] == i.boolData)
+                {
+                    next_index = i.conditionIndex;
+                    result = true;
+                }
+            }
+            //else if (i.logicType == DialogueCondition.LogicType.ELIF)
+            //{
+            //    if (dictionaryToCheck[i.variableKeyString] == i.boolData)
+            //    {
+            //        next_index = i.conditionIndex;
+            //        foo = true;
+            //    }
+            //}
+            else
+            {
+                next_index = i.conditionIndex;
+                result = true;
+            }
+            if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO) return !result;
+            return result;
+        }
+        else if (i.dataType == DialogueCondition.DataType.STRING)
+        {
+            Dictionary<string, string> dictionaryToCheck = SaveData.stringFlags;
+            bool result = false;
+            if (i.logicType == DialogueCondition.LogicType.IF)
+            {
+                if (dictionaryToCheck[i.variableKeyString] == i.stringData)
+                {
+                    next_index = i.conditionIndex;
+                    result = true;
+                }
+            }
+            else
+            {
+                next_index = i.conditionIndex;
+                result = true;
+            }
+            if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO) return !result;
+            return result;
+        }
+        else if (i.dataType == DialogueCondition.DataType.INT)
+        {
 
-
-        //if (i.dataType == DialogueCondition.DataType.BOOL || i.dataType == DialogueCondition.DataType.UNASSIGNED)
-        //{
-        //    if (i.logicType == DialogueCondition.LogicType.IF)
-        //    {
-        //        if (dictionaryToCheck[i.variableKeyString] == i.boolData)
-        //        {
-        //            next_index = i.conditionIndex;
-        //            return true;
-        //        }
-        //    }
-        //    else if (i.logicType == DialogueCondition.LogicType.ELIF)
-        //    {
-        //        if (dictionaryToCheck[i.variableKeyString] == i.boolData)
-        //        {
-        //            next_index = i.conditionIndex;
-        //            return true;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        next_index = i.conditionIndex;
-        //        return true;
-        //    }
-        //}
-        //CSharpScript
+        }
+ 
 
 
         return false;

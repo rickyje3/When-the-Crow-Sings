@@ -72,4 +72,9 @@ public static class SaveData
         {"numberOfTasksCompleted",0 },
         {"TBD_OnLoadSpawnPoint_OrSomething",0 },
     };
+
+    public static Dictionary<string, string> stringFlags = new Dictionary<string, string>()
+    {
+        {"exampleString","myString" },
+    };
 }
