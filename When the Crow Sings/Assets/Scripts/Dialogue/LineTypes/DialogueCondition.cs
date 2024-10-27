@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DialogueCondition : DialogueBase
 {
-    public enum LogicType
+   public int conditionIndex = -1;
+   public enum LogicType
     {
         IF,
         ELIF,
@@ -24,8 +25,44 @@ public class DialogueCondition : DialogueBase
     }
     public OperatorType operatorType = OperatorType.EQUAL_TO;
 
-    public string variableKey1;
-    public string variableKey2;
+    public string variableKeyString;
+
+    public enum DataType
+    {
+        UNASSIGNED,
+        BOOL,
+        INT,
+        STRING
+    }
+    public DataType dataType = DataType.UNASSIGNED;
+
+    public bool boolData;
+    public int intData;
+    public string stringData;
+
+    public void SetValue(string valueString)
+    {
+
+        if (valueString == "true")
+        {
+            dataType = DataType.BOOL;
+            boolData = true;
+        }
+        else if (valueString == "false")
+        {
+            dataType = DataType.BOOL;
+            boolData = false;
+        }
+        else if (int.TryParse(valueString, out intData))
+        {
+            dataType = DataType.INT;
+        }
+        else
+        {
+            dataType = DataType.STRING;
+            stringData = valueString;
+        }
+    }
 
     // A line that acts as a logic gate. Can be if, elif, or else.
     // ...yeah not sure how to do this yet.

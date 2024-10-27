@@ -9,15 +9,15 @@ using System;
 public class DialogueManager : MonoBehaviour, IService
 {
 
-    
+
     private DialogueResource dialogueResource;
-    
+
 
     [Header("Dialogue UI Elements")]
     [SerializeField] private GameObject dialogueUI;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private GameObject dialogueChoicesHolder;
+    [SerializeField] private GameObject dialogueChoiceButtonsHolder;
     [SerializeField] private List<GameObject> dialogueChoiceButtons;
 
     [Header("Signals")]
@@ -30,13 +30,14 @@ public class DialogueManager : MonoBehaviour, IService
     public List<GameSignal> signalsDialogueCanUse;
 
     DialogueChoiceBlock activeChoiceBlock = null;
+    DialogueConditionBlock activeConditionBlock = null;
 
     #region StartMethods()
     private void Awake()
     {
         RegisterSelfAsService();
         dialogueUI.SetActive(false);
-        
+
     }
     public void RegisterSelfAsService()
     {
@@ -65,7 +66,7 @@ public class DialogueManager : MonoBehaviour, IService
 
         //InputManager.playerInputActions.Player.Disable();
         dialogueUI.SetActive(true);
-        dialogueChoicesHolder.SetActive(false);
+        dialogueChoiceButtonsHolder.SetActive(false);
 
         DialogueParser parser = new DialogueParser(dialogueResource);
         //DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
@@ -73,7 +74,7 @@ public class DialogueManager : MonoBehaviour, IService
 
         //dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Count(x => x.titleName == newLine.titleName)
 
-        ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex,tempHolderForTheTargetIndex.tabCount);
+        ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex, tempHolderForTheTargetIndex.tabCount);
 
     }
 
@@ -91,29 +92,38 @@ public class DialogueManager : MonoBehaviour, IService
         canNextLine = false;
         currentLine = index;
         DialogueBase newLine = dialogueResource.dialogueLines[index];
-        
+
         // Check if we need to skip to after a choice block.
         if (activeChoiceBlock != null && activeChoiceBlock.choiceHasBeenMade && newLine.tabCount <= activeChoiceBlock.choiceTabCount)
         {
             activeChoiceBlock.choiceHasBeenMade = false;
-            //ResetChoiceBlocks();
-            Debug.Log(activeChoiceBlock.endIndex);
             ControlLineBehavior(activeChoiceBlock.endIndex, newLine.tabCount);
+            return;
+        }
+
+        // Check if we need to skip to after a condition block.
+        if (activeConditionBlock != null && activeConditionBlock.conditionHasBeenDecided && newLine.tabCount <= activeConditionBlock.conditionTabCount)
+        {
+            activeConditionBlock.conditionHasBeenDecided = false;
+            //Debug.Log("Should be "+ ((DialogueResponse)dialogueResource.dialogueLines[activeConditionBlock.endIndex]).dialogue);
+            ControlLineBehavior(activeConditionBlock.endIndex, newLine.tabCount);
             return;
         }
 
 
         if (newLine is DialogueResponse)
         {
-            DialogueResponse newLine2 = (DialogueResponse)newLine;
 
+            DialogueResponse newLine2 = (DialogueResponse)newLine;
+            Debug.Log(newLine2.dialogue);
             nameText.text = newLine2.characterName;
-            StartCoroutine(TypeText(dialogueText, newLine2.dialogue,index));
+            StartCoroutine(TypeText(dialogueText, newLine2.dialogue, index));
         }
-       
+
         else if (newLine is DialogueGoto)
         {
             ResetChoiceBlocks();
+            ResetConditionBlocks();
 
             DialogueGoto newLine2 = (DialogueGoto)newLine;
             if (newLine2.isEnd)
@@ -130,8 +140,7 @@ public class DialogueManager : MonoBehaviour, IService
 
         else if (newLine is DialogueChoice)
         {
-            dialogueChoicesHolder.SetActive(true);
-            Debug.Log("Set the choices holder active!");
+            dialogueChoiceButtonsHolder.SetActive(true);
 
             //activeChoiceBlock = null;
             foreach (DialogueTitleBlock i in dialogueResource.dialogueTitleBlocks)
@@ -147,32 +156,56 @@ public class DialogueManager : MonoBehaviour, IService
                 }
                 //Debug.Log("Well, nothing in that title block.");
             }
-            Debug.Log(activeChoiceBlock);
-            
+
 
             if (activeChoiceBlock == null) { throw new Exception("THE THING IS BLANK YOU SILLY GOOSE"); }
 
-            
-            foreach (GameObject i in dialogueChoiceButtons)
+            SetChoiceButtons();
+
+        }
+
+        else if (newLine is DialogueCondition)
+        {
+            foreach (DialogueTitleBlock i in dialogueResource.dialogueTitleBlocks)
             {
-                i.SetActive(false);
+                foreach (DialogueConditionBlock ii in i.dialogueConditionBlocks)
+                {
+                    if (ii.allConditions.Contains(newLine))
+                    {
+                        activeConditionBlock = ii;
+                        break;
+                    }
+                }
             }
-            int loop = 0;
-            foreach (DialogueChoice i in activeChoiceBlock.dialogueChoices)
-            {
-                dialogueChoiceButtons[loop].SetActive(true);
-                dialogueChoiceButtons[loop].GetComponentInChildren<TextMeshProUGUI>().text = i.choiceText;
-                dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueLineIndex = i.choiceIndex;
-                dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueChoice = i;
-                loop++;
-            }
+
+            if (activeConditionBlock == null) { throw new Exception("THE CONDITION BLOCK IS BLANK YOU SILLY DUCK"); }
+
+            Debug.Log("About to call DoConditionalDialogueLogic()");
+            DoConditionalDialogueLogic();
+
 
         }
 
         else // In case of an EmptyLine
         {
-            ControlLineBehavior(index+1,previousLineTabCount);
-            
+            ControlLineBehavior(index + 1, previousLineTabCount);
+        }
+    }
+
+    private void SetChoiceButtons()
+    {
+        foreach (GameObject i in dialogueChoiceButtons)
+        {
+            i.SetActive(false);
+        }
+        int loop = 0;
+        foreach (DialogueChoice i in activeChoiceBlock.dialogueChoices)
+        {
+            dialogueChoiceButtons[loop].SetActive(true);
+            dialogueChoiceButtons[loop].GetComponentInChildren<TextMeshProUGUI>().text = i.choiceText;
+            dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueLineIndex = i.choiceIndex;
+            dialogueChoiceButtons[loop].GetComponent<DialogueChoiceButton>().dialogueChoice = i;
+            loop++;
         }
     }
 
@@ -186,19 +219,19 @@ public class DialogueManager : MonoBehaviour, IService
             }
         }
     }
-
-    public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
+    private void ResetConditionBlocks()
     {
-        dialogueChoicesHolder.SetActive(false);
-
-        //activeChoiceBlock.Reset();
-        activeChoiceBlock.choiceHasBeenMade = true;
-
-        int nextLine = choiceButton.dialogueLineIndex + 1;
-        int choiceTabCount = choiceButton.dialogueChoice.tabCount;
-
-        ControlLineBehavior(nextLine, choiceTabCount);
+        foreach (DialogueTitleBlock i in dialogueResource.dialogueTitleBlocks)
+        {
+            foreach (DialogueConditionBlock ii in i.dialogueConditionBlocks)
+            {
+                ii.conditionHasBeenDecided = false;
+            }
+        }
     }
+
+
+
 
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text, int index)
     {
@@ -208,7 +241,7 @@ public class DialogueManager : MonoBehaviour, IService
         while (textMesh.maxVisibleCharacters <= textMesh.text.Length)
         {
             float pauseBetweenChars = textSpeed;
-            char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1,0,textMesh.text.Length)];
+            char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1, 0, textMesh.text.Length)];
             foreach (char i in ".!?")
             {
                 if (character == i)
@@ -233,50 +266,210 @@ public class DialogueManager : MonoBehaviour, IService
         if (canNextLine)
         {
             //DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueTitles.Find(x => x.titleName == newLine2.gotoTitleName);
-            
+
             ControlLineBehavior(currentLine + 1, dialogueResource.dialogueLines[currentLine].tabCount);
         }
-        
+
     }
 
-    void DoConditionalDialogueLogic(DialogueCondition dialogueCondition)
+    public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
     {
-        switch (dialogueCondition.logicType)
+        dialogueChoiceButtonsHolder.SetActive(false);
+
+        //activeChoiceBlock.Reset();
+        activeChoiceBlock.choiceHasBeenMade = true;
+
+        int nextLine = choiceButton.dialogueLineIndex + 1;
+        int choiceTabCount = choiceButton.dialogueChoice.tabCount;
+
+
+        ControlLineBehavior(nextLine, choiceTabCount);
+    }
+
+
+
+    bool Conditions(DialogueCondition i, ref int next_index)
+    {
+        if (i.dataType == DialogueCondition.DataType.BOOL)
         {
-            case DialogueCondition.LogicType.IF:
-                switch (dialogueCondition.operatorType)
+            Dictionary<string, bool> dictionaryToCheck = SaveData.boolFlags;
+            bool result = false;
+            if (i.logicType == DialogueCondition.LogicType.IF)
+            {
+                if (dictionaryToCheck[i.variableKeyString] == i.boolData)
                 {
-                    case DialogueCondition.OperatorType.EQUAL_TO:
-
-                        break;
-
-                    case DialogueCondition.OperatorType.GREATER_THAN:
-
-                        break;
-
-                    case DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO:
-
-                        break;
-
-                    case DialogueCondition.OperatorType.LESS_THAN:
-
-                        break;
-
-                    case DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO:
-
-                        break;
-
-                    case DialogueCondition.OperatorType.NOT_EQUAL_TO:
-
-                        break;
+                    next_index = i.conditionIndex;
+                    result = true;
                 }
-                break;
-                
-            case DialogueCondition.LogicType.ELIF:
-                break;
-            case DialogueCondition.LogicType.ELSE:
-                break;
+            }
+            //else if (i.logicType == DialogueCondition.LogicType.ELIF)
+            //{
+            //    if (dictionaryToCheck[i.variableKeyString] == i.boolData)
+            //    {
+            //        next_index = i.conditionIndex;
+            //        foo = true;
+            //    }
+            //}
+            else
+            {
+                next_index = i.conditionIndex;
+                result = true;
+            }
+            if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO) return !result;
+            return result;
         }
+        else if (i.dataType == DialogueCondition.DataType.STRING)
+        {
+            Dictionary<string, string> dictionaryToCheck = SaveData.stringFlags;
+            bool result = false;
+            if (i.logicType == DialogueCondition.LogicType.IF)
+            {
+                if (dictionaryToCheck[i.variableKeyString] == i.stringData)
+                {
+                    next_index = i.conditionIndex;
+                    result = true;
+                }
+            }
+            else
+            {
+                next_index = i.conditionIndex;
+                result = true;
+            }
+            if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO) return !result;
+            return result;
+        }
+        else if (i.dataType == DialogueCondition.DataType.INT)
+        {
+            Dictionary<string, int> dictionaryToCheck = SaveData.intFlags;
+            bool result = false;
+            if (i.logicType == DialogueCondition.LogicType.IF)
+            {
+                if (i.operatorType == DialogueCondition.OperatorType.EQUAL_TO)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] == i.intData)
+                    {
+                        next_index = i.conditionIndex;
+                        result = true;
+                    }
+                }
+                if (i.operatorType == DialogueCondition.OperatorType.GREATER_THAN)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] > i.intData)
+                    {
+                        next_index = i.conditionIndex;
+                        result = true;
+                    }
+                }
+                if (i.operatorType == DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] >= i.intData)
+                    {
+                        next_index = i.conditionIndex;
+                        result = true;
+                    }
+                }
+                if (i.operatorType == DialogueCondition.OperatorType.LESS_THAN)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] < i.intData)
+                    {
+                        next_index = i.conditionIndex;
+                        result = true;
+                    }
+                }
+                if (i.operatorType == DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] <= i.intData)
+                    {
+                        next_index = i.conditionIndex;
+                        result = true;
+                    }
+                }
+                if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] != i.intData)
+                    {
+                        next_index = i.conditionIndex;
+                        result = true;
+                    }
+                }
+            }
+            else
+            {
+                next_index = i.conditionIndex;
+                result = true;
+            }
+//            if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO) return !result;
+            return result;
+        }
+        
+        
+        else // "else" for UNASSIGNED
+        {
+            bool result = false; 
+            next_index = i.conditionIndex;
+            result = true;
+
+            if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO) return !result;
+            return result;
+        }
+
+
+        return false;
+    }
+
+    void DoConditionalDialogueLogic()
+    {
+        int next_index = -1;
+
+        foreach (DialogueCondition i in activeConditionBlock.allConditions)
+        {
+            //Debug.Log("Condition is " + i.variableKeyString + " and datatype is " + i.dataType);
+            if (Conditions(i, ref next_index)) break;
+        }
+
+        //switch (dialogueCondition.logicType)
+        //{
+        //    case DialogueCondition.LogicType.IF:
+        //        switch (dialogueCondition.operatorType)
+        //        {
+        //            case DialogueCondition.OperatorType.EQUAL_TO:
+
+        //                break;
+
+        //            case DialogueCondition.OperatorType.GREATER_THAN:
+
+        //                break;
+
+        //            case DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO:
+
+        //                break;
+
+        //            case DialogueCondition.OperatorType.LESS_THAN:
+
+        //                break;
+
+        //            case DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO:
+
+        //                break;
+
+        //            case DialogueCondition.OperatorType.NOT_EQUAL_TO:
+
+        //                break;
+        //        }
+        //        break;
+
+        //    case DialogueCondition.LogicType.ELIF:
+        //        break;
+        //    case DialogueCondition.LogicType.ELSE:
+        //        break;
+        //}
+
+        activeConditionBlock.conditionHasBeenDecided = true;
+        ControlLineBehavior(next_index+1, activeConditionBlock.ifStatement.tabCount);
+
+
+
+        
     }
 
 

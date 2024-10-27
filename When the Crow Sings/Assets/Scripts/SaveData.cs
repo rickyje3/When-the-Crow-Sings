@@ -7,6 +7,11 @@ public static class SaveData
 {
     public static Dictionary<string, bool> boolFlags = new Dictionary<string, bool>()
     {
+        { "TestingFlag1",false },
+        { "TestingFlag2",true },
+        { "TestingFlag3",false },
+        { "TestingFlag4",true },
+
         { "AngelTaskOffered",false },
         { "AngelTaskCompleted",false },
         { "AngelBaseComplete",false },
@@ -62,9 +67,24 @@ public static class SaveData
 
     public static Dictionary<string, int> intFlags = new Dictionary<string, int>()
     {
+        { "TestingFlag1",0 },
+        { "TestingFlag2",1 },
+        { "TestingFlag3",2 },
+        { "TestingFlag4",3 },
+
         {"day",0 },
         {"timeOfDay",0 },
         {"numberOfTasksCompleted",0 },
         {"TBD_OnLoadSpawnPoint_OrSomething",0 },
+    };
+
+    public static Dictionary<string, string> stringFlags = new Dictionary<string, string>()
+    {
+        { "TestingFlag1","firstString" },
+        { "TestingFlag2","secondString" },
+        { "TestingFlag3","thirdString" },
+        { "TestingFlag4","fourthString" },
+
+        {"exampleString","myString" },
     };
 }

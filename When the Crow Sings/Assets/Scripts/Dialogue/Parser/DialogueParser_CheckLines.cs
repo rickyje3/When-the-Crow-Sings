@@ -58,7 +58,7 @@ public partial class DialogueParser
         // else if, else if, else if, else if, else if...
         if (CheckLine_IsGoto(myTabCount)) return;
         if (CheckLine_IsChoice(i, myTabCount)) return;
-        if (CheckLine_IsConditional(myTabCount)) return;
+        if (CheckLine_IsConditional(i, myTabCount)) return;
         if (CheckLine_IsMutation(myTabCount)) return;
 
         // else
@@ -125,42 +125,6 @@ public partial class DialogueParser
             newLine.choiceText = trimmedLine;
             newLine.choiceIndex = i;
 
-
-            //DialogueChoiceBlock choiceBlock;
-            //if (dialogueResource.dialogueChoiceBlocks.Count > 0)
-            //{
-            //    bool hasBeenSet = false;
-            //    foreach (DialogueChoiceBlock ii in dialogueResource.dialogueChoiceBlocks)
-            //    {
-            //        // Check indentation
-            //        if (ii.choiceTabCount == myTabCount && !ii.dialogueChoices.Contains(newLine))
-            //        {
-            //            ii.dialogueChoices.Add(newLine);
-            //            hasBeenSet = true;
-            //        }
-            //    }
-            //    if (!hasBeenSet)
-            //    {
-            //        choiceBlock = new DialogueChoiceBlock();
-            //        dialogueResource.dialogueChoiceBlocks.Add(choiceBlock);
-
-            //        choiceBlock.choiceTabCount = myTabCount;
-
-            //        choiceBlock.dialogueChoices.Add(newLine);
-            //    }
-
-            //}
-            //else
-            //{
-            //    choiceBlock = new DialogueChoiceBlock();
-            //    dialogueResource.dialogueChoiceBlocks.Add(choiceBlock);
-
-            //    choiceBlock.choiceTabCount = myTabCount;
-
-            //    choiceBlock.dialogueChoices.Add(newLine);
-
-            //}
-
             dialogueResource.dialogueLines.Add(newLine);
             
             return true;
@@ -169,15 +133,18 @@ public partial class DialogueParser
     }
   
 
-    private bool CheckLine_IsConditional(int myTabCount) // Conditional
+    private bool CheckLine_IsConditional(int i, int myTabCount) // Conditional
     {
         if (
-            (trimmedLine.StartsWith("if") || trimmedLine.StartsWith("elif") || trimmedLine.StartsWith("else"))
+            (trimmedLine.StartsWith("if ") || trimmedLine.StartsWith("elif ") || trimmedLine.StartsWith("else"))
                     && trimmedLine.EndsWith(":"))
         {
             DialogueCondition newLine = new DialogueCondition();
             newLine.tabCount = myTabCount;
-            PrepareConditional(trimmedLine, newLine);
+            newLine.conditionIndex = i;
+            Debug.Log("We've done a conditional line!" + i);
+
+            PrepareConditional(trimmedLine, ref newLine);
 
             dialogueResource.dialogueLines.Add(newLine);
 

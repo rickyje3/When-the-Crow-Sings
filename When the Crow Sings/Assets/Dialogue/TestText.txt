@@ -10,6 +10,18 @@ Well, I guess we never reached the second title.
 => END
 
 ~ my_second_title
+
+Let's test conditions.
+if TestingFlag1 != 1:
+	Hello! 1 was true.
+else:
+	Nothing was true. There is no life in the void.
+This is ending text.
+This is super-ending text.
+
+=> END
+
+~ choice_testing_title
 Let's test choices.
 - 1 Choice
 	You chose 1.
@@ -26,16 +38,9 @@ This is the end text.
 This is the second title now.
 - TEXT TEXT
 	Hi I'm more text.
-	- this one
-		yeah idk
-		it's weird
-	- 2
-		uhhhh nonono
-		=> END
-- oh no
-	- 3
 	=> END
-	- 4
+- oh no
+	hi
 hi
 - No3.
 - No4.
@@ -44,3 +49,47 @@ hi
 
 ~ my_second_title BUT BETTER
 This should't be allowed, it's a duplicate title!
+
+~yule_first_int
+Yule: . . .
+Chance: Uh, hi.
+Yule: Hi.
+Chance: . . .
+Yule: . . .
+Chance: Um, Quinn sent me?
+Yule: I know.
+Chance: Right, um. Did Quinn tell you what I wanted to talk about?
+Yule: Pagers have a short message limit.
+Chance: Oh. Er, okay. Well, I wanted to ask about the person who roams around at night, in the center. Do you know anything about that?
+Yule: Yes, I know about it.
+Chance: . . . Could you tell me about it?
+Yule: Sure, I can. Not right now, though. I’m busy.
+Chance: Doing… what, exactly?
+Yule: Fishing.
+Chance: Uh, with what?
+Yule: A rod, ideally.
+Chance: I don’t see one.
+Yule: I don’t have one.
+Chance: . . . Do you need one?
+Yule: Yep, that’s the problem.
+Chance: What happened to your old one?
+Yule: An unruly fish took it from me years ago. I’ve been net fishing since but, the urge beset upon me once again.
+Chance: So… If you get one, will you no longer be busy?
+Yule: That makes sense.
+Chance: Do you want me to get you one?
+Yule: Do you want to get me one?
+-Yes.
+	Chance: If it will make you not busy, then yes.
+	Yule: If you say so. 
+	Chance: Uh, what do I need to make you a fishing rod?
+	Yule: Oh let’s see… A young flexible branch for the rod, some wire for the guides, and some fiber for line.
+	Chance: And I can find all that here?
+	Yule: Should be able to.
+	Chance: Okay, I’ll see what I can do.
+	=>END
+-No.
+	Chance: No, not right now.
+	Yule: Okay.
+	Chance: . . .
+	Yule: . . .
+	=>END
