@@ -288,47 +288,84 @@ public class DialogueManager : MonoBehaviour, IService
 
     void DoConditionalDialogueLogic()
     {
+        int next_index = -1;
+
         foreach (DialogueCondition i in activeConditionBlock.allConditions)
         {
             Debug.Log("Condition is " + i.variableKeyString + " and datatype is " + i.dataType);
+
+            Dictionary<string, bool> dictionaryToCheck = SaveData.boolFlags;
+            if (i.dataType == DialogueCondition.DataType.BOOL)
+            {
+                // dictionaryToCheck == the flag dictionary
+            }
+            // then elif away for the other types..
+
+
+            if (i.dataType == DialogueCondition.DataType.BOOL || i.dataType == DialogueCondition.DataType.UNASSIGNED)
+            {
+                if (i.logicType == DialogueCondition.LogicType.IF)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] == i.boolData)
+                    {
+                        next_index = i.conditionIndex;
+                        break;
+                    }
+                }
+                else if (i.logicType == DialogueCondition.LogicType.ELIF)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] == i.boolData)
+                    {
+                        next_index = i.conditionIndex;
+                        break;
+                    }
+                }
+                else
+                {
+                    next_index = i.conditionIndex;
+                    break;
+                }
+            }
+
+            //switch (dialogueCondition.logicType)
+            //{
+            //    case DialogueCondition.LogicType.IF:
+            //        switch (dialogueCondition.operatorType)
+            //        {
+            //            case DialogueCondition.OperatorType.EQUAL_TO:
+
+            //                break;
+
+            //            case DialogueCondition.OperatorType.GREATER_THAN:
+
+            //                break;
+
+            //            case DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO:
+
+            //                break;
+
+            //            case DialogueCondition.OperatorType.LESS_THAN:
+
+            //                break;
+
+            //            case DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO:
+
+            //                break;
+
+            //            case DialogueCondition.OperatorType.NOT_EQUAL_TO:
+
+            //                break;
+            //        }
+            //        break;
+
+            //    case DialogueCondition.LogicType.ELIF:
+            //        break;
+            //    case DialogueCondition.LogicType.ELSE:
+            //        break;
+            //}
         }
 
-        //switch (dialogueCondition.logicType)
-        //{
-        //    case DialogueCondition.LogicType.IF:
-        //        switch (dialogueCondition.operatorType)
-        //        {
-        //            case DialogueCondition.OperatorType.EQUAL_TO:
 
-        //                break;
-
-        //            case DialogueCondition.OperatorType.GREATER_THAN:
-
-        //                break;
-
-        //            case DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO:
-
-        //                break;
-
-        //            case DialogueCondition.OperatorType.LESS_THAN:
-
-        //                break;
-
-        //            case DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO:
-
-        //                break;
-
-        //            case DialogueCondition.OperatorType.NOT_EQUAL_TO:
-
-        //                break;
-        //        }
-        //        break;
-
-        //    case DialogueCondition.LogicType.ELIF:
-        //        break;
-        //    case DialogueCondition.LogicType.ELSE:
-        //        break;
-        //}
 
 
 
@@ -344,8 +381,7 @@ public class DialogueManager : MonoBehaviour, IService
 
 
         activeConditionBlock.conditionHasBeenDecided = true;
-        Debug.Log("Target index is "+(activeConditionBlock.ifStatement.conditionIndex + 1));
-        ControlLineBehavior(activeConditionBlock.ifStatement.conditionIndex+1, activeConditionBlock.ifStatement.tabCount);
+        ControlLineBehavior(next_index+1, activeConditionBlock.ifStatement.tabCount);
 
 
 
