@@ -340,9 +340,78 @@ public class DialogueManager : MonoBehaviour, IService
         }
         else if (i.dataType == DialogueCondition.DataType.INT)
         {
-
+            Dictionary<string, int> dictionaryToCheck = SaveData.intFlags;
+            bool result = false;
+            if (i.logicType == DialogueCondition.LogicType.IF)
+            {
+                if (i.operatorType == DialogueCondition.OperatorType.EQUAL_TO)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] == i.intData)
+                    {
+                        next_index = i.conditionIndex;
+                        result = true;
+                    }
+                }
+                if (i.operatorType == DialogueCondition.OperatorType.GREATER_THAN)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] > i.intData)
+                    {
+                        next_index = i.conditionIndex;
+                        result = true;
+                    }
+                }
+                if (i.operatorType == DialogueCondition.OperatorType.GREATER_THAN_OR_EQUAL_TO)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] >= i.intData)
+                    {
+                        next_index = i.conditionIndex;
+                        result = true;
+                    }
+                }
+                if (i.operatorType == DialogueCondition.OperatorType.LESS_THAN)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] < i.intData)
+                    {
+                        next_index = i.conditionIndex;
+                        result = true;
+                    }
+                }
+                if (i.operatorType == DialogueCondition.OperatorType.LESS_THAN_OR_EQUAL_TO)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] <= i.intData)
+                    {
+                        next_index = i.conditionIndex;
+                        result = true;
+                    }
+                }
+                if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO)
+                {
+                    if (dictionaryToCheck[i.variableKeyString] != i.intData)
+                    {
+                        next_index = i.conditionIndex;
+                        result = true;
+                    }
+                }
+            }
+            else
+            {
+                next_index = i.conditionIndex;
+                result = true;
+            }
+//            if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO) return !result;
+            return result;
         }
- 
+        
+        
+        else // "else" for UNASSIGNED
+        {
+            bool result = false; 
+            next_index = i.conditionIndex;
+            result = true;
+
+            if (i.operatorType == DialogueCondition.OperatorType.NOT_EQUAL_TO) return !result;
+            return result;
+        }
 
 
         return false;

@@ -67,6 +67,11 @@ public static class SaveData
 
     public static Dictionary<string, int> intFlags = new Dictionary<string, int>()
     {
+        { "TestingFlag1",0 },
+        { "TestingFlag2",1 },
+        { "TestingFlag3",2 },
+        { "TestingFlag4",3 },
+
         {"day",0 },
         {"timeOfDay",0 },
         {"numberOfTasksCompleted",0 },
@@ -75,6 +80,11 @@ public static class SaveData
 
     public static Dictionary<string, string> stringFlags = new Dictionary<string, string>()
     {
+        { "TestingFlag1","firstString" },
+        { "TestingFlag2","secondString" },
+        { "TestingFlag3","thirdString" },
+        { "TestingFlag4","fourthString" },
+
         {"exampleString","myString" },
     };
 }
