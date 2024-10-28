@@ -4,33 +4,66 @@ using UnityEngine;
 
 public class SeeThruWall : MonoBehaviour
 {
-    public Material SeeThruMaterial; //assign to seethrumaterial
+    public List<Material> SeeThruMaterials = new List<Material>(); // List of matching materials
     public Camera Camera;
-    public LayerMask mask; //assign to wall
+    public LayerMask mask; // Assign this to wall layer
 
     public static int PosID = Shader.PropertyToID("_Position");
     public static int SizeID = Shader.PropertyToID("_Size");
-    //public static int TintID = Shader.PropertyToID("_Tint");
+
+    public string seeThruWalls = "Shader Graphs/SeeThruWalls"; // Shader name to search for
 
     private void Awake()
     {
-        Camera = FindObjectOfType<Camera>();
+        if (Camera == null)
+        {
+            Camera = FindObjectOfType<Camera>();
+        }
     }
 
-    // Update is called once per frame
+    private void Start()
+    {
+        FindMaterialsWithShader(seeThruWalls);
+    }
+
     void Update()
     {
         var dir = Camera.transform.position - transform.position;
         var ray = new Ray(transform.position, dir.normalized);
 
-        //if raycast in range, increase the seethru material size
-        if (Physics.Raycast(ray, 3000, mask))
-        {
-            SeeThruMaterial.SetFloat(SizeID, 1f);
-        }
-        else SeeThruMaterial.SetFloat(SizeID, 0);
+        bool isInView = Physics.Raycast(ray, 3000, mask);
 
-        var view = Camera.WorldToViewportPoint(transform.position);
-        SeeThruMaterial.SetVector(PosID, view);
+        foreach (var material in SeeThruMaterials)
+        {
+            material.SetFloat(SizeID, isInView ? 1f : 0);
+
+            var view = Camera.WorldToViewportPoint(transform.position);
+            material.SetVector(PosID, view);
+        }
+    }
+
+    void FindMaterialsWithShader(string shaderName)
+    {
+        Renderer[] renderers = FindObjectsOfType<Renderer>(); // Get all renderers in the scene
+        Debug.Log("Renderers: " + renderers.Length);
+        foreach (var renderer in renderers)
+        {
+            foreach (var material in renderer.sharedMaterials) // Use shared materials to avoid instantiation
+            {
+                Debug.Log($"Checking material: {material.name} with shader: {material.shader.name}");
+
+                if (material.shader.name == shaderName)
+                {
+                    if (material != null && material.shader.name == shaderName)
+                    {
+                        SeeThruMaterials.Add(material);
+                        Debug.Log($"Added material: {material.name} to the SeeThruMaterials list");
+                    }
+                }
+            }
+        }
+
+        Debug.Log($"Found {SeeThruMaterials.Count} materials with the shader: {seeThruWalls}");
     }
 }
+
