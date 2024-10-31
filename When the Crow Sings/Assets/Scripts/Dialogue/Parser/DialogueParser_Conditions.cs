@@ -8,30 +8,14 @@ using System.Text.RegularExpressions;
 public partial class DialogueParser
 {
 
-    void PrepareConditional(string trimmedLine, DialogueCondition newLine)
+    void PrepareConditional(string trimmedLine, ref DialogueCondition newLine)
     {
-        if (trimmedLine.StartsWith("if"))
-        {
-            newLine.logicType = DialogueCondition.LogicType.IF;
-            trimmedLine = Utilities.RemoveFirstOccurence("if ", trimmedLine);
-            trimmedLine = Utilities.RemoveFirstOccurence(":", trimmedLine);
-            // TODO Use "if" as a way to determine "blocks of conditionals" to group together.
-            // Presumably all else-ifs and elses of the same tabCount or something like that.
-        }
-        else if (trimmedLine.StartsWith("elif"))
-        {
-            newLine.logicType = DialogueCondition.LogicType.ELIF;
-            trimmedLine = Utilities.RemoveFirstOccurence("elif ", trimmedLine);
-            trimmedLine = Utilities.RemoveFirstOccurence(":", trimmedLine);
-        }
-        else
-        {
-            newLine.logicType = DialogueCondition.LogicType.ELSE;
-            trimmedLine = Utilities.RemoveFirstOccurence("else:", trimmedLine);
-        }
+        trimmedLine = AssignConditionalType(ref trimmedLine, ref newLine);
 
-        string[] variableKeys = null;
-        trimmedLine = Regex.Replace(trimmedLine, @"\s+", ""); // We're removing all whitespace.
+        trimmedLine = Regex.Replace(trimmedLine, @"\s+", ""); // Remove all whitespace.
+
+
+        string[] variableKeys = null; // Holder for conditional logic.
 
         if (newLine.logicType != DialogueCondition.LogicType.ELSE)
         {
@@ -67,8 +51,9 @@ public partial class DialogueParser
             }
 
             // Set the terms on each side of the operator (as strings).
-            newLine.variableKey1 = variableKeys[0];
-            newLine.variableKey2 = variableKeys[1];
+            newLine.variableKeyString = variableKeys[0];
+            //newLine.variableValueString = variableKeys[1];
+            newLine.SetValue(variableKeys[1]);
         }
         else
         {
@@ -78,4 +63,28 @@ public partial class DialogueParser
 
     }
 
+    private static string AssignConditionalType(ref string trimmedLine, ref DialogueCondition newLine)
+    {
+        if (trimmedLine.StartsWith("if "))
+        {
+            newLine.logicType = DialogueCondition.LogicType.IF;
+            trimmedLine = Utilities.RemoveFirstOccurence("if ", trimmedLine);
+            trimmedLine = Utilities.RemoveFirstOccurence(":", trimmedLine);
+            // TODO Use "if" as a way to determine "blocks of conditionals" to group together.
+            // Presumably all else-ifs and elses of the same tabCount or something like that.
+        }
+        else if (trimmedLine.StartsWith("elif "))
+        {
+            newLine.logicType = DialogueCondition.LogicType.ELIF;
+            trimmedLine = Utilities.RemoveFirstOccurence("elif ", trimmedLine);
+            trimmedLine = Utilities.RemoveFirstOccurence(":", trimmedLine);
+        }
+        else
+        {
+            newLine.logicType = DialogueCondition.LogicType.ELSE;
+            trimmedLine = Utilities.RemoveFirstOccurence("else:", trimmedLine);
+        }
+
+        return trimmedLine;
+    }
 }
