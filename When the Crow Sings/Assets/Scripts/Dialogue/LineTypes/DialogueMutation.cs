@@ -17,6 +17,7 @@ public class DialogueMutation : DialogueBase
     public int intData;
     public string stringData;
     public bool boolData;
+
     public enum OperatorType
     {
         EQUALS,

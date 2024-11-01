@@ -448,8 +448,7 @@ public class DialogueManager : MonoBehaviour, IService
         switch (mutation.actionType)
         {
             case DialogueMutation.ActionType.SET:
-                SaveData.SetFlag()
-
+                DoMutationSetMath(mutation);
                 break;
             case DialogueMutation.ActionType.EMIT:
                 break;
@@ -460,5 +459,38 @@ public class DialogueManager : MonoBehaviour, IService
         }
     }
 
+    void DoMutationSetMath(DialogueMutation mutation)
+    {
+        switch (mutation.operatorType)
+        {
+            case DialogueMutation.OperatorType.EQUALS:
+                switch (mutation.dataType)
+                {
+                    case DialogueMutation.DataType.STRING:
+                        SaveData.SetFlag(mutation.actionKey, mutation.stringData);
+                        break;
+                    case DialogueMutation.DataType.INT:
+                        SaveData.SetFlag(mutation.actionKey, mutation.intData);
+                        break;
+                    case DialogueMutation.DataType.BOOL:
+                        SaveData.SetFlag(mutation.actionKey,mutation.boolData);
+                        break;
+                }
+                break;
+            case DialogueMutation.OperatorType.PLUS_EQUALS:
+                if (mutation.dataType == DialogueMutation.DataType.INT)
+                {
+                    SaveData.SetFlag(mutation.actionKey, SaveData.intFlags[mutation.actionKey]+mutation.intData);
+                }
+                break;
+            case DialogueMutation.OperatorType.MINUS_EQUALS:
+                if (mutation.dataType == DialogueMutation.DataType.INT)
+                {
+                    SaveData.SetFlag(mutation.actionKey, SaveData.intFlags[mutation.actionKey] - mutation.intData);
+                }
+                break;
+        }
+        
+    }
 
 }
