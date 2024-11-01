@@ -201,12 +201,15 @@ public partial class DialogueParser
             {
                 newLine.actionType = DialogueMutation.ActionType.EMIT;
                 trimmedLine = Utilities.RemoveFirstOccurence("emit", trimmedLine);
-                //string[] splits = trimmedLine.Split(':');
+
+                newLine.SetValue(trimmedLine); // Theorhetically all that remains should be a signal name (or possibly index).
             }
             else if (trimmedLine.StartsWith("call"))
             {
                 newLine.actionType = DialogueMutation.ActionType.CALL;
                 trimmedLine = Utilities.RemoveFirstOccurence("call", trimmedLine);
+
+                newLine.SetValue(trimmedLine); // Theorehtically all that remains should be a method name.
             }
             else
             {

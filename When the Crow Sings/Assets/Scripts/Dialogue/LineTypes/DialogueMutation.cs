@@ -13,7 +13,6 @@ public class DialogueMutation : DialogueBase
     public ActionType actionType = ActionType.CHELLE_YOU_STINKY;
 
     public string actionKey = "";
-
     
     public int intData;
     public string stringData;
