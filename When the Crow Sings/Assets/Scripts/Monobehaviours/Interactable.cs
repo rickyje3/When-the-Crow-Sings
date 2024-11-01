@@ -18,6 +18,10 @@ public class Interactable : MonoBehaviour
         {
             GetComponent<DialogueInteractable>().EmitStartDialogueSignal();
         }
+        /*else if getcomponent qte interactable
+        {
+            do thing;
+        }*/
     }
 
     public void OnDialogueFinished(SignalArguments args)

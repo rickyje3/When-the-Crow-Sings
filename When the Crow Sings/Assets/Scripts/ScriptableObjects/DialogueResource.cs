@@ -12,9 +12,6 @@ public class DialogueResource : ScriptableObject
     public List<DialogueTitleBlock> dialogueTitleBlocks = new List<DialogueTitleBlock>();
 
 
-    
-
-
     //[HideInInspector]
     //public List<DialogueTitle> dialogueTitles = new List<DialogueTitle>();
 }

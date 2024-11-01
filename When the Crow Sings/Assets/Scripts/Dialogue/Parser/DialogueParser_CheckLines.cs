@@ -58,7 +58,7 @@ public partial class DialogueParser
         // else if, else if, else if, else if, else if...
         if (CheckLine_IsGoto(myTabCount)) return;
         if (CheckLine_IsChoice(i, myTabCount)) return;
-        if (CheckLine_IsConditional(myTabCount)) return;
+        if (CheckLine_IsConditional(i, myTabCount)) return;
         if (CheckLine_IsMutation(myTabCount)) return;
 
         // else
@@ -125,42 +125,6 @@ public partial class DialogueParser
             newLine.choiceText = trimmedLine;
             newLine.choiceIndex = i;
 
-
-            //DialogueChoiceBlock choiceBlock;
-            //if (dialogueResource.dialogueChoiceBlocks.Count > 0)
-            //{
-            //    bool hasBeenSet = false;
-            //    foreach (DialogueChoiceBlock ii in dialogueResource.dialogueChoiceBlocks)
-            //    {
-            //        // Check indentation
-            //        if (ii.choiceTabCount == myTabCount && !ii.dialogueChoices.Contains(newLine))
-            //        {
-            //            ii.dialogueChoices.Add(newLine);
-            //            hasBeenSet = true;
-            //        }
-            //    }
-            //    if (!hasBeenSet)
-            //    {
-            //        choiceBlock = new DialogueChoiceBlock();
-            //        dialogueResource.dialogueChoiceBlocks.Add(choiceBlock);
-
-            //        choiceBlock.choiceTabCount = myTabCount;
-
-            //        choiceBlock.dialogueChoices.Add(newLine);
-            //    }
-
-            //}
-            //else
-            //{
-            //    choiceBlock = new DialogueChoiceBlock();
-            //    dialogueResource.dialogueChoiceBlocks.Add(choiceBlock);
-
-            //    choiceBlock.choiceTabCount = myTabCount;
-
-            //    choiceBlock.dialogueChoices.Add(newLine);
-
-            //}
-
             dialogueResource.dialogueLines.Add(newLine);
             
             return true;
@@ -169,15 +133,18 @@ public partial class DialogueParser
     }
   
 
-    private bool CheckLine_IsConditional(int myTabCount) // Conditional
+    private bool CheckLine_IsConditional(int i, int myTabCount) // Conditional
     {
         if (
-            (trimmedLine.StartsWith("if") || trimmedLine.StartsWith("elif") || trimmedLine.StartsWith("else"))
+            (trimmedLine.StartsWith("if ") || trimmedLine.StartsWith("elif ") || trimmedLine.StartsWith("else"))
                     && trimmedLine.EndsWith(":"))
         {
             DialogueCondition newLine = new DialogueCondition();
             newLine.tabCount = myTabCount;
-            PrepareConditional(trimmedLine, newLine);
+            newLine.conditionIndex = i;
+            Debug.Log("We've done a conditional line!" + i);
+
+            PrepareConditional(trimmedLine, ref newLine);
 
             dialogueResource.dialogueLines.Add(newLine);
 
@@ -214,12 +181,45 @@ public partial class DialogueParser
             {
                 string[] split2 = split[0].Split('_');
                 newLine.characterName = split2[0];
-                newLine.characterEmotion = split2[1];
+                if (split2[1] == "Happy") newLine.characterEmotion = Constants.EMOTIONS.HAPPY;
+                else if (split2[1] == "Angry") newLine.characterEmotion = Constants.EMOTIONS.ANGRY;
+                else if (split2[1] == "Sad") newLine.characterEmotion = Constants.EMOTIONS.SAD;
+                else if (split2[1] == "Scared") newLine.characterEmotion = Constants.EMOTIONS.SCARED;
+                else if (split2[1] == "Bs") newLine.characterEmotion = Constants.EMOTIONS.BS;
+                else if (split2[1] == "Smile") newLine.characterEmotion = Constants.EMOTIONS.SMILE;
+
+                else if (split2[1] == "Stare") newLine.characterEmotion = Constants.EMOTIONS.STARE;
+                else if (split2[1] == "Worried") newLine.characterEmotion = Constants.EMOTIONS.WORRIED;
+                else if (split2[1] == "Thinking") newLine.characterEmotion = Constants.EMOTIONS.THINKING;
+
+                else if (split2[1] == "Teasing") newLine.characterEmotion = Constants.EMOTIONS.TEASING;
+                else if (split2[1] == "Awkward") newLine.characterEmotion = Constants.EMOTIONS.AWKWARD;
+
+                else if (split2[1] == "Wink") newLine.characterEmotion = Constants.EMOTIONS.WINK;
+                else if (split2[1] == "Disgruntled") newLine.characterEmotion = Constants.EMOTIONS.DISGRUNTLED;
+
+                else if (split2[1] == "Shiver") newLine.characterEmotion = Constants.EMOTIONS.SHIVER;
+                else if (split2[1] == "Excited") newLine.characterEmotion = Constants.EMOTIONS.EXCITED;
+
+                else if (split2[1] == "Dazed") newLine.characterEmotion = Constants.EMOTIONS.DAZED;
+                else if (split2[1] == "Panicked") newLine.characterEmotion = Constants.EMOTIONS.PANICKED;
+                else if (split2[1] == "MildSurprise") newLine.characterEmotion = Constants.EMOTIONS.MILD_SURPRISE;
+                else if (split2[1] == "SighOfRelief") newLine.characterEmotion = Constants.EMOTIONS.SIGH_OF_RELIEF;
+                else if (split2[1] == "Annoyed") newLine.characterEmotion = Constants.EMOTIONS.ANNOYED;
+
+                else if (split2[1] == "Intelligent") newLine.characterEmotion = Constants.EMOTIONS.INTELLIGENT;
+                else if (split2[1] == "Startled") newLine.characterEmotion = Constants.EMOTIONS.STARTLED;
+
+                else if (split2[1] == "Stunned") newLine.characterEmotion = Constants.EMOTIONS.STUNNED;
+                else if (split2[1] == "Exhausted") newLine.characterEmotion = Constants.EMOTIONS.EXHAUSTED;
+               
+                else newLine.characterEmotion = Constants.EMOTIONS.DEFAULT;
+
             }
             else
             {
                 newLine.characterName = split[0];
-                newLine.characterEmotion = "default";
+                newLine.characterEmotion = Constants.EMOTIONS.DEFAULT;
             }
         }
         else
