@@ -1,6 +1,6 @@
 ~ angel_first_int
 Angel_Smile: (This would be a conditional greeting.), are you settling in alright?
-Chance: . . .
+Chance_Sad: . . .
 Angel_Worried: Oh, well that's...
 - Out past curfew?
 	=> angel_past_curfew
@@ -8,17 +8,17 @@ Angel_Worried: Oh, well that's...
 	=> angel_window
 
 ~ angel_past_curfew
-Chance: Are there normally people out at night past curfew?
+Chance_Sad: Are there normally people out at night past curfew?
 => angel_first_int_cont
 
 ~ angel_window
-Chance: Someone came banging on my window.
+Chance_Angry: Someone came banging on my window in the middle of the night.
 => angel_first_int_cont
 
 ~ angel_first_int_cont
 Angel_Stare: . . .
 Angel_Smile: Well I wouldn't know anything about that! Did you want to help me in the kitchen?
-Angel: Might take your mind off things, and I could always use an extra hand!
+Angel_Smile: Might take your mind off things, and I could always use an extra hand!
 - Sure.
 	Chance: . . . Yeah, sure.
 	Angel_Smile: Thanks! I just need you to stir our forever soup!
@@ -43,10 +43,10 @@ Angel: Did you have time to lend me a hand?
 
 ~ angel_task_fin
 Angel_Smile: Thanks so much! Gave me time to prep.
-Angel: . . .
+Angel_Thinking: . . .
 Angel_Worried: Um.. If you're worried about whatever, maybe you could talk to Miss Jazmyne?
 Angel: She knows just about everyone.  I know she doesn't get much sleep helping with the little ones.
-Angel_Smile: There's also Quinn! They're always up taking care of the night blooms.
+Angel_Thinking: There's also Quinn! They're always up taking care of the night blooms.
 Chance: Thanks, I appreciate it.
 Angel_Smile: No problem!! Don't be a stranger!
 Angel_Stare: I mean, I'll see you at meal time anyway but. . .
