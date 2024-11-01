@@ -45,25 +45,25 @@ public class SeeThruWall : MonoBehaviour
     void FindMaterialsWithShader(string shaderName)
     {
         Renderer[] renderers = FindObjectsOfType<Renderer>(); // Get all renderers in the scene
-        Debug.Log("Renderers: " + renderers.Length);
+        //Debug.Log("Renderers: " + renderers.Length);
         foreach (var renderer in renderers)
         {
             foreach (var material in renderer.sharedMaterials) // Use shared materials to avoid instantiation
             {
-                Debug.Log($"Checking material: {material.name} with shader: {material.shader.name}");
+                //Debug.Log($"Checking material: {material.name} with shader: {material.shader.name}");
 
                 if (material.shader.name == shaderName)
                 {
                     if (material != null && material.shader.name == shaderName)
                     {
                         SeeThruMaterials.Add(material);
-                        Debug.Log($"Added material: {material.name} to the SeeThruMaterials list");
+                        //Debug.Log($"Added material: {material.name} to the SeeThruMaterials list");
                     }
                 }
             }
         }
 
-        Debug.Log($"Found {SeeThruMaterials.Count} materials with the shader: {seeThruWalls}");
+        //Debug.Log($"Found {SeeThruMaterials.Count} materials with the shader: {seeThruWalls}");
     }
 }
 
