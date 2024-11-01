@@ -1,47 +1,54 @@
-ï»¿~angel_first_interaction
-[angel_smile] Angel: (This would be a conditional greeting.), are you settling in alright?
-        Chance: . . .
-        [angel_worried] Angel: Oh, well thatâ€™sâ€¦
-        - Out past curfew?
-                => angel_past_curfew
-        - My windowâ€¦        
-                => angel_window
-~angel_past_curfew
-        Chance: Are there normally people out at night past curfew?
-        => angel_first_interaction_reply
-~angel_window
-        Chance: Someone came banging on my window.
-        => angel_first_interaction_reply
-~angel_first_interaction_reply
-        [angel_stare] Angel: . . .
-        [angel_smile] Angel: Well I wouldnâ€™t know anything about that! Did you want to help me in the kitchen?
-        Angel: Might take your mind off things, and I could always use an extra hand!
-        - Sure.
-                Chance: . . . Yeah, sure.
-                [angel_smile] Angel: Thanks! I just need you to stir our forever soup!
-Angel: It has to be stirred a couple times a day, and if you do it I can take care of some other things.
-[angel_stare] Angel: Itâ€™s been here since before I got hereâ€¦.
-        => END
-        - Maybe later.
-                Chance: Um, maybe later.
-                => END
-~angel_no_task
-        [angel_smile] Oh youâ€™re back!!!
-        Did you have time to lend me a hand?
-- Yeah, sure.
-        [angel_smile] Angel: Thanks! I just need you to stir our forever soup!
-Angel: It has to be stirred a couple times a day, and if you do it I can take care of some other things.
-[angel_stare] Angel: Itâ€™s been here since before I got hereâ€¦.
+~ angel_first_int
+Angel_Smile: (This would be a conditional greeting.), are you settling in alright?
+Chance: . . .
+Angel_Worried: Oh, well that’s…
+- Out past curfew?
+	=> angel_past_curfew
+- My window…	
+	=> angel_window
+
+~ angel_past_curfew
+Chance: Are there normally people out at night past curfew?
+=> angel_first_interaction_reply
+
+~ angel_window
+Chance: Someone came banging on my window.
+=> angel_first_interaction_reply
+
+~ angel_first_int_cont
+Angel_Stare: . . .
+Angel_Smile: Well I wouldn’t know anything about that! Did you want to help me in the kitchen?
+Angel: Might take your mind off things, and I could always use an extra hand!
+- Sure.
+	Chance: . . . Yeah, sure.
+	Angel_Smile: Thanks! I just need you to stir our forever soup!
+	Angel: It has to be stirred a couple times a day, and if you do it I can take care of some other things.
+	Angel_Stare: It’s been here since before I got here….
+	=> END
 - Maybe later.
-        => END
-~angel_task_fin
-        [angel_smile] Angel: Thanks so much! Gave me time to prep.
-        Angel: . . .
-        [angel_worried] Angel: Um.. If youâ€™re worried about whatever, maybe you could talk to Miss Jazmyne?
-        Angel: She knows just about everyone.  I know she doesnâ€™t get much sleep helping with the little ones.
-        [angel_smile] Angel: Thereâ€™s also Quinn! Theyâ€™re always up taking care of the night blooms.
-        Chance: Thanks, I appreciate it.
-        [angel_smile] Angel: No problem!! Donâ€™t be a stranger!
-        [angel_stare] Angel: I mean, Iâ€™ll see you at meal time anyway but. . .
-        [angel_smile] Angel: Bye!
-                => END
+	Chance: Um, maybe later.
+	=> END
+
+~angel_no_task
+Angel_Smile: Oh you’re back!!!
+Angel: Did you have time to lend me a hand?
+- Yeah, sure.
+	Chance: Yeah, sure.
+	Angel_Smile: Thanks! I just need you to stir our forever soup!
+	Angel: It has to be stirred a couple times a day, and if you do it I can take care of some other things.
+	Angel_Stare: It’s been here since before I got here….
+	=> END
+- Maybe later.
+	=> END
+
+~ angel_task_fin
+Angel_Smile: Thanks so much! Gave me time to prep.
+Angel: . . .
+Angel_Worried: Um.. If you’re worried about whatever, maybe you could talk to Miss Jazmyne?
+Angel: She knows just about everyone.  I know she doesn’t get much sleep helping with the little ones.
+Angel_Smile: There’s also Quinn! They’re always up taking care of the night blooms.
+Chance: Thanks, I appreciate it.
+Angel_Smile: No problem!! Don’t be a stranger!
+Angel_Stare: I mean, I’ll see you at meal time anyway but. . .
+Angel_Smile: Bye!
+=> END
