@@ -1,0 +1,43 @@
+~ jazmyne_first_int
+Jazmyne: Oh hello. I haven't seen you before, are you here to register a child?
+Chance: Uh, no?
+Jazmyne: . . . No! Right! Of course not, you're the new resident. Sorry!
+Jazmyne: Well it's nice to meet you! What can I help you with?
+- Caleb sent me.
+	Chance: Caleb said that you had a, uh.. Delinquent who might know something interesting about the stuff in the outer zones?
+	Jazmyne: Did he?
+	=> jazmyne_first_int_cont
+- Angel sent me.
+	Chance: Angel said that you know everyone, that you might know about who would be out past curfew.
+	Jazmyne:Well I'm up late but I'm always here with the kids. Most of them anyway. . .
+	=> jazmyne_first_int_cont
+
+~ jazmyne_first_int_cont
+A baby is crying.
+Jazmyne: Oh no!
+Jazmyne: I didn't get nearly enough time to clean up.. Oh!
+Jazmyne: Could you help me and clean up out here? Just the toys in the chestand then the drawings on the board!
+Jazmyne: I can talk more once the babies are back to sleep!
+=> END
+
+~ jazmyne_no_task
+There is the sound of hushing and fussing on the other side of the door. Best to leave it alone.
+=> END
+
+~ jazmyne_task_fin
+Jazmyne: Ugh, it took forever to get them back down. The little EVOs have been so fussy lately, they barely sleep at night and are so tired but resistant during the day. What has gotten into them...
+Jazmyne: Oh! You did what I asked you to!
+Chance: Yeah, it wasn't too bad. I am used to cleaning up after kids.
+Jazmyne: Oh really? Well I appreciate it so so so much. What was it you wanted to talk about again?
+Chance: The-
+Jazmyne: Oh, I remember! Lately I couldn't tell you what goes on at night since I'm kept up at all hours helping with the babies. One cries, wakes another, like screaming dominoes...
+Jazmyne: But um.. Teddy. He does sneak through that fence to the quarry, to Zone 2. He's been so rebellious since we had to move here. I mean I know it was difficult but-
+Jazmyne: Ahem. I'm not sure what he's looking for out there exactly, but lately he's there almost every day. He's probably still out there now. Maybe you can get more out of him than I can...
+Chance: Uh... Thanks. I appreciate it.
+Jazmyne: Of course! If you're used to babies, I could always use a hand. Oh! And we do have weekly movie nights. Though, we are running a little low on movies...
+- Sure.
+	Chance: Sure, I will. See you later.
+	=> END
+- Maybe.
+	Chance: Uh, maybe. See you.
+	=> END

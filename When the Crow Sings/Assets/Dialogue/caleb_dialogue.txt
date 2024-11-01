@@ -1,46 +1,80 @@
-﻿~caleb_first_int
-        Caleb:Oh, good (conditional dialogue here). You must be the new resident Farida was talking about.
-        Conditional choice here that doesn’t show up unless flagged.
-        Chance:Yep, that’s me.
-        Caleb:Nice to meet you, I’m Caleb. What’s your name again?
-        Chance:Chance.
-        Caleb:That’s a fine name. Guess I could take a-
-        [caleb_wink]Caleb:CHANCE on you, huh?
-        -funny
-                Chance:Hah.
-                        =>caleb_first_int_cont
-        -unfunny
-                Chance:. . .
-                [caleb_smile]Caleb: !
-                        =>caleb_first_int_cont
-~caleb_first_int_cont
-        Caleb:Well I’m just here doing some solar panel work. I’m our head electrician around here.
-        Chance:This place runs on solar?
-        Chance:(something to indicate an inner thought) Just like home…
-        [caleb_smile]Caleb: Yep. This place used to run off some other energy source, but at some point it failed and they shipped me out and installed the panels.
-        Caleb:Came here just for this job. It’s a simple one for me.
-        Chance:(something to indicate an inner thought) . . . ?
-        Chance:Other energy source?
-Chance:(something to indicate an inner thought)There’s no big water sources out here… Wonder what it was.
-        Caleb:Oooh yeah. I don’t know a whole lot about it but…
-        [caleb_think]Caleb:If you’re curious about it, maybe I could spend some time thinking while you do me a favor?
-        -Uh, sure?
-                Chance:Uh, sure?
-                        =>caleb_first_cont_2
-        -Really?
-                Chance:You can’t just tell me?
-                [caleb_wink]Caleb: ;)
-                Chance:. . .
-                Chance: Fine.
-                        =>caleb_first_cont_2
-        -Not a Chance.
-                [chance_upset]Chance:Not a chance.
-                Caleb:HAH!
-                Caleb:Well you come back if you want me to slide some knowledge your way, kid.
-                        =>END
-~caleb_first_cont_2
-        [caleb_smile]Caleb:Great!
-        [caleb_disgruntled]Caleb:Now listen. These damned crows are bad enough, weighing down the power lines connecting the buildings and making me do maintenance on the connectors.
-        [caleb_disgruntled]Caleb:Then, they started taking my wires! They’ve been making nests over by the south east gate, near the old quarter. 
-[caleb_smile]Caleb:If you could go and grab some back for me, I’d be mighty grateful.
-        =>END
+~ caleb_first_int
+Caleb: Oh, good (conditional dialogue here). You must be the new resident Farida was talking about.
+Conditional choice here that doesn't show up unless flagged.
+Chance: Yep, that's me.
+Caleb: Nice to meet you, I'm Caleb. What's your name again?
+Chance: Chance.
+Caleb: That's a fine name. Guess I could take a-
+Caleb_Wink: CHANCE on you, huh?
+- Funny.
+	Chance: Hah. Very funny. Never heard that one before.
+	=> caleb_first_int_cont
+- . . .
+	Chance: . . .
+	=> caleb_first_int_cont
+
+~ caleb_first_int_cont
+Caleb_Smile: :)
+Caleb: Well I'm just here doing some solar panel work. I'm our head electrician around here.
+Just like back home...
+Caleb_Smile: This place used to run off some other energy source, but at some point it failed and they shipped me out and installed the panels.
+Caleb: Came here just for this job. It's a simple one for me.
+ . . . ?
+Chance: Other energy source?
+There's no big water sources out here. No wind turbines..
+Caleb: Oooh yeah. I don't know a whole lot about it but..
+Caleb_Think: If you're curious about it, maybe I could spend some time thinking while you do me a favor?
+- Uh, sure?
+	Chance:Uh, sure?
+	=> caleb_first_cont_2
+- Really?
+	Chance: Really? You can't just tell me?
+	Caleb_Wink: ;)
+	Chance: . . .
+	Chance: Fine.
+	=> caleb_first_cont_2
+- Not a Chance.
+	Chance_Upset: Not a chance.
+	Caleb_Smile: HAH!
+	Caleb: Well you come back if you want me to slide some knowledge your way, kid.
+	=> END
+
+~ caleb_first_cont_2
+Caleb_Smile: Great!
+Caleb_Disgruntled: Now listen. These damned crows are bad enough, weighing down the power lines connecting the buildings and making me do maintenance on the connectors.
+Caleb_Disgruntled: Then, they started taking my wires! They've been making nests over by the south east gate, near the old quarter. 
+Caleb_Smile: If you could go and grab some back for me, I'd be mighty grateful.
+=> END
+
+~ caleb_no_task
+Caleb_Smile: Decide to take a chance on helping me out?
+- I guess.
+	Chance: I guess so.
+	=> caleb_first_cont_2
+- Ugh.
+	Chance_Upset: Ugh.
+	=> END
+
+~ caleb_task_fin
+Caleb: Already kid, I yield. You did good.
+Caleb: If you want to know more about the old energy source, for whatever reason, you would probably want to talk with Farida.
+Caleb: But I don't think you should have me sending you.. Not that we don't get along! It's just..
+- Met Farida.
+	Chance: I've already spoken with Farida.
+	Caleb: Oh yeah? And was she a bucket of kittens and rainbows?
+	Chance: I don't know if I'd say that...
+	Caleb: Yeah. Well, it might not hurt to talk to who I was going to send you to anyway.
+	=> caleb_task_fin_cont
+- . . .
+	Caleb: Well, anyway if you wanted to talk to her..
+	=> caleb_task_fin_cont
+
+~ caleb_task_fin_cont
+Caleb: You should probably go to my Francisco. They're science buddies, and he's one of the smartest people I know.
+Caleb: Or if you wanted something less sciency there's Jazmyne. She watches my little princess Calliope.
+Caleb: She probably wouldn't know it, but I know she has some kid ruffling her fur. Sneaking out past curfew, hopping fences, you know the type. But hey, adventurers learn things, right?
+Chance: That's not really information.
+Caleb_Wink: Well you know what they say. It's not what you know, it's who you know.
+Chance_Upset: That's stupid. There's only like a dozen people here. Surely you all know each other.
+Caleb_Wink: ;)
+	=> END

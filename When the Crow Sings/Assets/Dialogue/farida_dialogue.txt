@@ -1,0 +1,75 @@
+~ farida_first_int
+Farida: WHAT?!
+Farida: . . .
+Farida: Ugh. Come in!
+=> END
+
+~ farida_sec_int
+Farida: Did you need something?
+- Francisco sent me.
+	Chance: Francisco sent me.
+	Farida: Okay. And?
+	Chance: . . . Uh, he said that you might be able to tell me about the old system you guys had.
+	=> farida_francisco
+- Beau sent me.
+	Chance: Beau sent me.
+	Farida: Okay. And?
+	Chance: . . . Someone banged on my window. Beau said you might know about security here. 
+	Farida: What? . . .
+	Farida: Look. I am aware there are a few. . . Disturbances around the compound, but everything is under control. You don't need to worry about it.
+	=> farida_sec_int_cont 
+
+~ farida_francisco
+- Curious.
+	Chance: I was curious about it.
+- Back home.
+	Chance: I've only lived off of solar before.
+Farida: Even if I wanted to tell you about it, I couldn't. The gauges connected to the old power source were broken by the time I got placed here. 
+Farida: Whoever they sent me to replace didn't leave anything useful, and she-
+Farida: The solar was already up and running. Why do you even want to know?
+Chance: Things just seem. . . I don't know, weird around here. Especially at night, with that humming sound. And the glow. 
+Farida: Well they're not! 
+Farida: Weird, I mean. Okay?
+=> farida_sec_int_cont 
+
+~ farida_sec_int_cont 
+Chance: . . .
+Farida: What?
+Chance: I was just hoping to learn more.
+Farida: Why.
+Chance: You read my application, didn't you? You approved my placement here?
+Chance: I just don't want something like that to happen again.
+Farida: . . .
+Farida: I'm.. Busy, right now. Look, why don't you make yourself useful. Sit and take some readings and maybe while you're doing that I can think of something to make you feel.. better.
+- Okay.
+	Chance: Okay, I can help.
+	Farida: Alright just' stand over there. Wait for the gauges to hit the red section and mark the time when it happens. Do that four times then bring it back.
+	=> END
+- Maybe later.
+	Chance: Maybe later, I'll come back.
+	=> END
+
+~ farida_no_task
+Farida: You're back. I take it you can't just settle for a nice quiet place to live?
+- Nope.
+	Chance: Nope, afraid not. Maybe if it actually was.
+	Farida: Really?
+	Farida: Alright, just... stand over there, wait for the gauge to hit the red part, mark the time when it happens. Do that four times, then bring it back to me.
+	=> END
+- Whatever.
+	Chance: Whatever.
+	=> END
+
+~ farida_task_fin
+	Farida: This looks.. good. Thank you.
+	Farida: There's.. someone you might want to talk to. She was the person who trained me, tried to get me settled in after I got moved here. She worked on the old power system.
+	Farida: She lives in the abandoned quarter, she left the lodging a little while after we met. I guess she just couldn't take it in here anymore...
+	Farida: The ones who wander around at night used to come through that gate sometimes. She locked herself on the other side of it. She might know more about them or what happened here than she talked about.
+	Farida: Just be gentle with her, please. Her mind is not what it used to be, and causing her grief won't do you any good.
+	Chance: Okay, I'll try.
+	Farida: ... Here.
+	It's a small brass key. The brand name has been rubbed off.
+	Farida: This will open the padlock to the abandoned quarter's gate. I go to check on her sometimes.
+	Chance: Thank you, Farida.
+	Farida: Right...
+	=> END
