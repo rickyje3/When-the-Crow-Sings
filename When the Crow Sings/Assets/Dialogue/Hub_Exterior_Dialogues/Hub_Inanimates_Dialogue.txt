@@ -1,0 +1,172 @@
+~ cafeteria_table
+Lots of room and seating. Are there even enough people here to fill the chairs?
+They're probably just inside or working. Somewhere.
+=> END
+
+~ cafeteria_serving station
+Coffee, water, vegetables. A nice spread.
+=> END
+
+~ wood_pile
+A pile of wooden planks leaning against the fence. Maybe it was used to make the playset.
+=> END
+
+~ pot_of_soup
+It's soup.
+Good soup.
+=> END
+
+~ pipsissewa
+if day == 1
+A pretty pink flower. Its leaves look thorny. Better not touch it. 
+=> END
+if day == 2
+	A vibrant pink flower. It looks radioactive. 
+	=> END
+if day == 3
+	A glowing pink flower. It's dripping some luminous mucus type substance.
+=> END
+
+~ shiny_dirt
+Something shiny is in the dirt ... Better not steal from the crows.
+=> END
+
+~ veggie_basket
+A basket of fresh vegetables. Wonder why it's out here?
+=> END
+
+~ utility_pole
+if day == 1
+    A utility pole. Seems like the local fauna really gravitate towards the power lines.
+    => END
+if day == 2
+	The power lines seem taught on the utility pole. Must be more weight than they're used to.
+	=> END
+if day == 3
+	If I didn't know better, I would think that the number of crows was making the poles lean a little. Not sure if I do know better.
+	=> END
+
+~ monkey_bars
+Monkey bars. Oh, to be young again. Now I can reach them while standing.
+=> END
+
+~ play_place
+A nice looking playset. Mostly made from wood, probably handmade. Lucky kids.
+=> END
+
+~ solar_panel
+Lined up solar panels, recently wiped down and clear of dust.
+=> END
+
+~ clinic_sign
+"Local Clinic"
+=> END
+
+~ energy_hq_sign
+"Energy Regulation Office"
+=> END
+
+~ cold_storage_sign
+"Underground Cold Storage"
+=> END
+
+~ greenhouse_sign
+"Quinn's Greenhouse"
+'Quinn's' seems to be carved in with a knife.
+=> END
+
+~ bench_1
+A sturdy bench. Looks comfortable... I don't have time to lounge around right now.
+=> END
+
+~ bench_2
+I really should be focusing. It is a nice bench though.
+=> END
+
+~ bench_3
+I'm not sitting down right now, no matter how inviting the bench is.
+=> END
+
+~ bench_4
+Once I figure out what's going on and stop getting stalked by some purple hellscape beast, I will spend so much time sitting on this bench.
+=> END
+
+~ bench_5
+This town is full of monsters. How can you just sit there?
+=> END
+
+~ bench_6
+Enough bench.
+=> END
+
+~ directory_sign
+Depends on where it is.
+=> END
+
+~ ground_crack
+That.. can't be normal.
+=> END
+
+~ fountain
+An old fountain. The pool has been filled in with flowers, and it doesn't seem to run. How cute.
+=> END
+
+ 
+
+// —-------------- DOORS —---------------
+
+~ zone_door_1
+if FranciscoTaskCompleted == true
+	Just need to put in the code that Francisco gave me and...
+	Open. Voila.
+	=> END
+else
+The door is rusty. Looks like it hasn't been used in a while. 
+=> END
+
+~ zone_door_2
+The door is completely stuck. There's no way to open it even if I wanted to.
+=> END
+
+~ zone_door_3
+if FaridaBaseCompleted == true
+	This must be the door that Farida was talking about.
+	The key unlocked the padlock. It opens with a little bit of effort.
+	=> END
+else
+The door looks like it gets some use now and then, but it's locked with a padlock.
+=> END
+
+~ zone_door_4
+if QuinnTaskCompleted == true
+	Pressing on the intercom button, the door lock releases after a few seconds and swings freely.
+	=> END
+else
+ A pristine door. Must get used often. There is a button on an intercom, but I don't think buzzing someone without reason is a good idea.
+=> END
+
+~rec_center_door
+Sounds like there are some kids running around inside. Best to wait until I have a reason to be here.
+=> END
+
+~ clinic_door
+The door's locked, someone is probably in an appointment. Don't want to intrude.
+=> END
+
+~ energy_hq_door
+There's definitely someone inside. 
+... Pretty sure they're ignoring me on purpose.
+=> END
+
+~greenhouse_door
+Someone is shuffling around inside, I don't think they can hear me.
+=> END
+
+~ cold_storage_door
+I don't have a reason to go in there. I don't think I've ever felt a temperature below 70 fahrenheit.
+... I wonder what the winters here are like.
+=> END
+
+~ lodging_door
+I'm not gonna waste my time sitting around in my room. Who knows what will happen with that thing...
+=> END
