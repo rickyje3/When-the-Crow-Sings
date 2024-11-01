@@ -33,6 +33,7 @@ public class DialogueManager : MonoBehaviour, IService
     public float pauseMultiplier = 10f;
     public List<GameSignal> signalsDialogueCanUse;
 
+
     DialogueChoiceBlock activeChoiceBlock = null;
     DialogueConditionBlock activeConditionBlock = null;
 
@@ -440,4 +441,24 @@ public class DialogueManager : MonoBehaviour, IService
         }
 
     }
+
+
+    void DoMutationLogic(DialogueMutation mutation)
+    {
+        switch (mutation.actionType)
+        {
+            case DialogueMutation.ActionType.SET:
+                SaveData.SetFlag()
+
+                break;
+            case DialogueMutation.ActionType.EMIT:
+                break;
+            case DialogueMutation.ActionType.CALL:
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }
