@@ -56,8 +56,18 @@ public class DialoguePortraits : ScriptableObject
             case "Yule":
                 portraits = yulePortraits;
                 break;
+            default:
+                portraits = new List<Sprite>();
+                break;
         }
-
-        return portraits[(int)emotion];
+        if (portraits.Count != 0)
+        {
+            return portraits[(int)emotion];
+        }
+        else
+        {
+            return null;
+        }
+        
     }
 }
