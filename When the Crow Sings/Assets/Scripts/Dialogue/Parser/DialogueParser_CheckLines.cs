@@ -142,7 +142,7 @@ public partial class DialogueParser
             DialogueCondition newLine = new DialogueCondition();
             newLine.tabCount = myTabCount;
             newLine.conditionIndex = i;
-            Debug.Log("We've done a conditional line!" + i);
+            //Debug.Log("We've done a conditional line!" + i);
 
             PrepareConditional(trimmedLine, ref newLine);
 

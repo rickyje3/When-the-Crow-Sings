@@ -115,7 +115,7 @@ public class DialogueManager : MonoBehaviour, IService
         {
 
             DialogueResponse newLine2 = (DialogueResponse)newLine;
-            Debug.Log(newLine2.dialogue);
+            //Debug.Log(newLine2.dialogue);
             nameText.text = newLine2.characterName;
 
             SetPortraits(newLine2);
@@ -187,6 +187,12 @@ public class DialogueManager : MonoBehaviour, IService
             DoConditionalDialogueLogic();
 
 
+        }
+
+        else if (newLine is DialogueMutation)
+        {
+            DoMutationLogic((DialogueMutation)newLine);
+            ControlLineBehavior(index + 1, previousLineTabCount);
         }
 
         else // In case of an EmptyLine
@@ -451,8 +457,18 @@ public class DialogueManager : MonoBehaviour, IService
                 DoMutationSetMath(mutation);
                 break;
             case DialogueMutation.ActionType.EMIT:
+                GameSignal signalToEmit = signalsDialogueCanUse[mutation.intData];
+                signalToEmit.Emit();
                 break;
             case DialogueMutation.ActionType.CALL:
+                if (mutation.stringData == "ExampleDialogueMethod()")
+                {
+                    ExampleDialogueMethod();
+                }
+                else
+                {
+                    throw new Exception("Invalid method name!");
+                }
                 break;
             default:
                 break;
@@ -491,6 +507,12 @@ public class DialogueManager : MonoBehaviour, IService
                 break;
         }
         
+    }
+
+
+    void ExampleDialogueMethod()
+    {
+        Debug.Log("Dialogue called this method!");
     }
 
 }
