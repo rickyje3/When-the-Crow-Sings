@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Tasks/TaskAsset")]
 public class TaskAsset : ScriptableObject
 {
     //public string taskName;
-    public TaskStepBase taskSteps;
+    public List<TaskStepBase> taskSteps;
 }
