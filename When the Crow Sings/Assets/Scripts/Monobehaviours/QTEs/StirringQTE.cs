@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class StirringQTE : MonoBehaviour
+public class StirringQTE : QuickTimeEvent
 {
     public GameObject displayBox;
     private int currentStep = 0;

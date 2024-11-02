@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimingMeter : MonoBehaviour
+public class TimingMeter : QuickTimeEvent
 {
     public Slider sliderMeter;
     public float speed = 2f;
