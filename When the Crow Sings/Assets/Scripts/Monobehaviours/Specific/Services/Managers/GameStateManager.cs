@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Eflatun.SceneReference;
 
 public class GameStateManager : MonoBehaviour, IService
 {
@@ -116,10 +117,10 @@ public class GameStateManager : MonoBehaviour, IService
 
 
         // then load them all
-        foreach (SceneAsset i in GetScenesToLoad(levelDataResource))
+        foreach (SceneReference i in GetScenesToLoad(levelDataResource))
         {
             //SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
-            SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
+            SceneManager.LoadScene(i.Name, LoadSceneMode.Additive);
             //Debug.Log(i.name + " was loaded!");
         }
     }
@@ -131,9 +132,9 @@ public class GameStateManager : MonoBehaviour, IService
     }
 
 
-    List<SceneAsset> GetScenesToLoad(LevelDataResource levelDataResource)
+    List<SceneReference> GetScenesToLoad(LevelDataResource levelDataResource)
     {
-        List<SceneAsset> scenes = new List<SceneAsset>();
+        List<SceneReference> scenes = new List<SceneReference>();
 
         scenes.Add(levelDataResource.level);
 
