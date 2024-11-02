@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEditor;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 [System.Serializable]
