@@ -8,4 +8,7 @@ public class DebugManager : MonoBehaviour
 
     // Change this to toggle debug behavior easily.
     public static bool debugEnabled = true;
+
+    // Invisible walls, dialogue triggers, loading zones, QTE triggers, etc.
+    public static bool showCollidersAndTriggers = true;
 }
