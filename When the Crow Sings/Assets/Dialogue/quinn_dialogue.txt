@@ -1,0 +1,62 @@
+~quinn_first_int
+Quinn: You must be Chance.
+Chance: Uhuh.
+Quinn: Nice to meet you. Officially. What brings you to the greenhouse? 
+Quinn_Excited: Here to try my turnip carrot hybrid?
+- Angel sent me.
+	Chance: Angel said you're up late, and that you might know something about people roaming around at night. That you're up late.
+	=> quinn_first_int_cont
+- Beau sent me.
+	Chance: Beau said that you know everyone around here. That you'd know if things were' out of the ordinary.
+	=> quinn_first_int_cont
+
+~ quinn_first_int_cont
+Quinn: Mmm. Did he?
+Quinn: Well, I'm up late and I provide something to just about everyone in some way or another. So, I guess he sent you somewhere good. What exactly has you worried?
+Chance: Someone was out past curfew and banged on my window.
+Quinn: Yep.
+Chance_Scared: !
+Quinn: I've noticed some strays around lately. Never saw them banging on any windows. They look a little funny but they just sort of roam around.
+Quinn: Well, as far as I know. Nobdoy really messes with them so they might be violent.
+Chance_Scared: !!
+Quinn: But I don't really know anything about them. Never knew them or anything.
+Quinn: Probably only someone who lives outside of the central hub would know about it, since they don't really get in here often.
+Chance: Outside? I thought we all lived in the lodgings or the recreational center.
+Quinn: Well kind of, not all of us. Once Farida took over that's how it's gone, far as I can tell, but some people were here before that.
+Quinn: . . . You know, I could get you in touch with our resident outsider. He's lived here for a long while, so if something changed with any residents or the strays, he would know. 
+Quinn_Excited: You couuuuld lend me a hand. And I could tell Farida to open his gate for you to go in and talk to him about it.
+Chance: Doing what exactly?
+Quinn: Oh I just need a hand with some seed bags. It's about time to start incubating the ones that will sprout in spring. Problem is, the crows that have been coming in have taken a liking to the seed bags and...
+Quinn_Scared: I'm just not a big fan of birds.
+Quinn: The feral ones, I mean. Not the EVOs. Obviously.
+- I guess.
+	Chance: Um, I guess I can.
+	Quinn: Cool. Cool cool cool. There should be a few bags just outside, get them and bring them in here to me and I'll see what I can do for ya.
+	=> END
+- Later.
+	Chance_Sad: Maybe later.
+		=> END
+
+~ quinn_no_task
+Quinn_Excited: Oh, you're back. Here to try my carnop?
+Quinn: Turnott?.. I'm workshopping it.
+- Guy outside.
+	Chance: I wanted to talk to your guy who lives outside.
+	Quinn: Sure sure. Just go get those seeds for me, and I'll page Farida about a delivery for Yule and give him a headsup.
+	=> END
+- No thanks.
+	Chance: Er, no thanks.
+	Quinn: Pff. Suit yourself.
+	=> END
+
+~ quinn_task_fin
+Quinn_Excited: Hey there, just in time!
+Quinn: I let Farida know I've got Yule bringing in some irregular deliveries due to the season change coming up, so you should be alright just to come and go through the gate when you buzz it now.
+Quinn: About the big guy. Be patient, he's old and quiet. Been here a long time, not the most social. I'm sure he'll tell you what you wanna know but he's a little quirky. Moves to his own rhythm, you know?
+Chance: Uh, sure.
+Quinn: I'm basically the only person he talks to other than maybe Beau once in a while. Or the fish.
+Cahnce: The fish?
+Quinn_Scared: The fish.
+Quinn: Thanks for your help, by the way.
+Chance_Smile: Sure, no problem.
+=> END
