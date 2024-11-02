@@ -1,85 +1,38 @@
-~ beau_first_int
-Beau: Ey! Don't suppose you brought any Timmies?
-Chance: Any what?
-Beau_Smile: Timmies! Coffee! It's what my parents always called it. No idea why.
-Beau: My name is Beau! You must be the newest addition to our lovely gated compound, where the snow never falls and you can never leave.
-- . . .
-	=> beau_awkward
-- Yeah.
-	=> beau_nawkward
-
-~ beau_awkward
-Beau_Awkward: Well, aren't you a ray of sunshine.
-=> beau_first_int_cont
-
+﻿~beau_first_int
+        Beau:Ey! Don’t suppose you brought any Timmies?
+        Chance:Any what?
+        Beau:Timmies! Coffee! It’s what my parents always called it. No idea why.
+        [beau_smile] Beau:My name is Beau! You must be the newest addition to our lovely gated compound, where the snow never falls and you can never leave.
+-. . .
+        => beau_awkward
+-Yeah.
+        => beau_nawkward
+~beau_awkward
+        [beau_awkward]Beau: You don’t talk much do ya bud.
 ~beau_nawkward
-Chance: Yeah, I just got here (conditional dialogue referring to the time either specifically or generally).
-Beau_Teasing: Ah, the experience of being fresh meat.
-=> beau_first_int_cont
-
-~ beau_first_int_cont
-Beau: How are you liking it here?
-Chance_Sad: I don't know. Something seems...
-- Conditional reply
-	=> beau_first_int_lastnight
-- Unconditional reply
-	=> beau_first_int_sleep
-
-~ beau_first_int_lastnight
-Chance_Sad: I didn't get much sleep. Someone came banging on my window last night...
-Beau_Awkward: Oh, that was your room? Not a very warm welcome...
-Beau: I'd thought they would've wandered off by this point, it's been a while.
-Beau: Sorry to have your first night so disturbed.
-=> beau_first_int_cont_2
-
-~ beau_first_int_sleep
-Chance_Sad: I haven't been getting much sleep.
-Beau_Awkward: Oh well that's no good, bud!
-=> beau_first_int_cont_2
-
-~ beau_first_int_cont_2
-Beau: Listen, bud. Would you do me a solid and pick up some food from the greenhouse?
-Beau_Smile: I've got to swap out some stock for Angel, put the new food in the freezer and give him the wiltier stuff. 
-- Sure.
-	Chance: Yeah, sure.
-	Beau: Thanks bud, I'll owe ya one.
-	=> END
-- Not now.
-	Chance_Sad: Um, not right now.
-	=> END
-
-~ beau_no_task
-Beau_Teasing: Back for more Beau?
-- Yeah.
-	Chance_Smile: Yeah, I'm free to help now.
-	Beau_Smile: Thanks bud, I owe ya one.
-	=> END
-- No.
-	Chance: . . . No.
-	=> END
-
-~ beau_task_fin
-Beau: Alright bud, look. I can tell you're having some trouble settling in here. You did me a solid, so let me give you a little advice.
-Chance: ?
-Beau_Smile: Things get a little weird around here, but it's harmless! Least since I've been here.
-Beau: If you want some reassurance you could go talk to Quinn, the gardener you just grabbed a delivery from for me. 
-- Met Quinn.
-	Chance: I already met Quinn.
-	Beau_Smile: Oh yeah? And did they talk ya down?
-	Chance_Sad: Not exactly.They're nice, though.
-	Beau_Awkward: Yeah, they sure are. Hm..
-	=> beau_task_fin_cont
-=> beau_task_fin_cont
-
-~ beau_task_fin_cont
-Beau: There's also Farida. She's our security 'round here.
-- Met Farida.
-	Chance_Sad: I've met Farida. She's uh...
-	Beau_Awkward: Yeah. A bit. 
-	=> beau_task_fin_cont_3
-=> beau_task_fin_cont_3
-
-~ beau_task_fin_cont_3
-Chance_Smile: Um, thanks.
-Beau_Teasing: No problem, ey? Not to be a keener but, wouldn't want you to be uncomfortable livin' here.
-=> END
+        Chance: I just got here (conditional dialogue referring to the time either specifically or generally).
+~beau_first_int_cont
+        Beau:How are you liking it here?
+        Chance:I don’t know. Something seems…
+-Conditional reply
+        => beau_first_int_lastnight
+-Unconditional reply
+        => beau_first_int_sleep
+~beau_first_int_lastnight
+        Chance:I didn’t get much sleep. Someone came banging on my window last night…
+        [beau_awkward]Beau:Oh, that was your room? Not a very warm welcome…
+        Beau:I’d thought they would’ve wandered off by this point, it’s been a while.
+        Beau:Sorry to have your first night so disturbed.
+~beau_first_int_sleep
+        Chance:I haven’t been getting much sleep.
+        [beau_awkward]Beau: Oh well that’s no good, bud!
+~beau_first_int_cont_2
+        Beau:Listen, bud. Would you do me a solid and pick up some food from the greenhouse?
+        Beau:I’ve got to swap out some stock for Angel, put the new food in the freezer and give him the wiltier stuff. 
+        -Sure.
+                Chance:Yeah, sure.
+                Beau:Thanks bud, I’ll owe ya one.
+                => END
+        -Not now.
+                Chance:Um, not right now.
+                        => END
