@@ -12,16 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e59c0b8b99987840ac14f63d77b3fe2, type: 3}
   m_Name: Example_LevelInfo
   m_EditorClassIdentifier: 
-  level: {fileID: 102900000, guid: b7620c84c6fc81547a084de7f7cd178c, type: 3}
+  level:
+    asset: {fileID: 102900000, guid: b7620c84c6fc81547a084de7f7cd178c, type: 3}
+    guid: b7620c84c6fc81547a084de7f7cd178c
   subScenes:
-  - subScene: {fileID: 102900000, guid: 22d81211cf042a340b71b3d485880aa6, type: 3}
+  - subScene:
+      asset: {fileID: 102900000, guid: 22d81211cf042a340b71b3d485880aa6, type: 3}
+      guid: 22d81211cf042a340b71b3d485880aa6
     subSceneLogics:
     - associatedDataKey: AngelTaskOffered
       valueType: 0
       boolValue: 0
       intValue: 3
       associatedOperator: 0
-  - subScene: {fileID: 102900000, guid: 230d8aac90216d84bb8be16ec87ecdc8, type: 3}
+  - subScene:
+      asset: {fileID: 102900000, guid: 230d8aac90216d84bb8be16ec87ecdc8, type: 3}
+      guid: 230d8aac90216d84bb8be16ec87ecdc8
     subSceneLogics:
     - associatedDataKey: timeOfDay
       valueType: 1
