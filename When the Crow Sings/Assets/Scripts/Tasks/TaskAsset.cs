@@ -6,5 +6,6 @@ using UnityEngine;
 public class TaskAsset : ScriptableObject
 {
     //public string taskName;
-    public List<TaskStepBase> taskSteps;
+    //public List<TaskStepBase> taskSteps;
+    public TaskStepBase steps;
 }
