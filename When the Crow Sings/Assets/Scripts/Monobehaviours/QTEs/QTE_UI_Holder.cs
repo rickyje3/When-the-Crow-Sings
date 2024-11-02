@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class QTE_UI_Holder : MonoBehaviour
 {
-    void loadQte(QuickTimeEvent qte)
+    public void LoadQte(QuickTimeEvent qte)
     {
-
+        Debug.Log(qte);
     }
 }

@@ -16,4 +16,10 @@ public class TaskManager : MonoBehaviour
     {
 
     }
+
+    public void OnQteStarted(SignalArguments signalArgs)
+    {
+        QuickTimeEvent qteToLoad = (QuickTimeEvent)signalArgs.objectArgs[0];
+        qteUiHolder.LoadQte(qteToLoad);
+    }
 }
