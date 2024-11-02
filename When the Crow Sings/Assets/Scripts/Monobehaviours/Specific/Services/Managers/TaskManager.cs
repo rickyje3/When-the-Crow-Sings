@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class TaskManager : MonoBehaviour
 {
-    public List<TaskAsset> allTasks;
-
     // Where we keep track of quest stuff, as well as the interface to handle them.
+
+
+    public List<TaskAsset> allTasks;
+    
+    public QTE_UI_Holder qteUiHolder;
+
 
     public void StartQTE(int whichQTETempVarJustAsAnExapleDontReadTooMuchIntoIt)
     {

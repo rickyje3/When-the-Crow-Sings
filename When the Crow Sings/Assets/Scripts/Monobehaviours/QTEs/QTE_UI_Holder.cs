@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QTE_UI_Holder : MonoBehaviour
 {
-    void loadQte()
+    void loadQte(QuickTimeEvent qte)
     {
 
     }
