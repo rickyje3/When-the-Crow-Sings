@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class TaskManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Where we keep track of quest stuff, as well as the interface to handle them.
 
-    // Update is called once per frame
-    void Update()
+    public void StartQTE(int whichQTETempVarJustAsAnExapleDontReadTooMuchIntoIt)
     {
-        
+
     }
 }

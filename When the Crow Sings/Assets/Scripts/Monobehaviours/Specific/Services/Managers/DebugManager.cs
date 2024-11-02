@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class DebugManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Should be where all debug functionality can be controlled from.
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // Change this to toggle debug behavior easily.
+    public static bool debugEnabled = true;
 }
