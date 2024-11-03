@@ -1,6 +1,7 @@
 using Eflatun.SceneReference;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,6 +26,7 @@ public class MainMenu : MonoBehaviour
             var x = Instantiate(sceneLoadButtonPrefab);
             x.transform.SetParent(sceneLoadButtonsHolder.transform, false);
             x.onClick.AddListener(() => OnSceneLoadButtonPressed(i));
+            x.GetComponentInChildren<TextMeshProUGUI>().text = i.name;
         }
 
         mainMenuDebugLoadHolder.resourceToLoad = null;
