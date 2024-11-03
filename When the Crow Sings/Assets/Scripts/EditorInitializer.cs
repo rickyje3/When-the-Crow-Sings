@@ -1,4 +1,6 @@
+#if UnityEditor
 using UnityEditor;
+
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -67,3 +69,4 @@ public class EditorInitializer
         }
     }
 }
+#endif

@@ -205,14 +205,14 @@ public static class SaveData
         //int loadedSaveDataVersion = fileBytes[loop];
         
         int loadedSaveDataVersion = ReadInt(fileStream);
-        Debug.Log("Save data version is "+loadedSaveDataVersion);
+        //Debug.Log("Save data version is "+loadedSaveDataVersion);
 
         Dictionary<string,bool> tempBoolFlags = new Dictionary<string,bool>();
         foreach (KeyValuePair<string, bool> i in boolFlags)
         {
             tempBoolFlags.Add(i.Key, i.Value);
             tempBoolFlags[i.Key] = fileStream.ReadByte() == 1; //BitConverter.ToBoolean(fileBytes, loop);
-            Debug.Log(tempBoolFlags[i.Key]);
+            //Debug.Log(tempBoolFlags[i.Key]);
         }
         boolFlags = tempBoolFlags;
 
@@ -221,7 +221,7 @@ public static class SaveData
         {
             tempIntFlags.Add(i.Key, i.Value);
             tempIntFlags[i.Key] = ReadInt(fileStream);
-            Debug.Log(tempIntFlags[i.Key]);
+            //Debug.Log(tempIntFlags[i.Key]);
         }
         intFlags = tempIntFlags;
 
@@ -230,7 +230,7 @@ public static class SaveData
         {
             tempStringFlags.Add(i.Key, i.Value);
             tempStringFlags[i.Key] = ReadString(fileStream);
-            Debug.Log(tempStringFlags[i.Key]);
+            //Debug.Log(tempStringFlags[i.Key]);
         }
         stringFlags = tempStringFlags;
 
