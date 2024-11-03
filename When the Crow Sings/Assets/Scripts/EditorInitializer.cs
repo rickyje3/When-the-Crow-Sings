@@ -1,4 +1,4 @@
-#if UnityEditor
+#if Unity_Editor
 using UnityEditor;
 
 using UnityEditor.SceneManagement;

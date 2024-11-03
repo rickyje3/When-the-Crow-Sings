@@ -18,6 +18,10 @@ public class Interactable : MonoBehaviour
         {
             GetComponent<DialogueInteractable>().EmitStartDialogueSignal();
         }
+        else if (GetComponent<QTEInteractable>())
+        {
+            GetComponent<QTEInteractable>().EmitStartQteSignal();
+        }
         /*else if getcomponent qte interactable
         {
             do thing;

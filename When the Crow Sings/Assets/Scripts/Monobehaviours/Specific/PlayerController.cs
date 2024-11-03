@@ -23,16 +23,12 @@ public class PlayerController : StateMachineComponent, IService
     [HideInInspector]
     public float velocity;
     public CharacterController characterController;
-    public QTEInteract qteInteract;
 
     private void Awake()
     {
         RegisterSelfAsService();
 
         characterController = GetComponent<CharacterController>();
-
-        if(qteInteract != null)
-        qteInteract = FindObjectOfType<QTEInteract>();
 
         speed = 8;
 
