@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    public MainMenuDebugLoadHolder mainMenuDebugLoadHolder;
+
     public SceneReference mainScene;
 
     public Button sceneLoadButtonPrefab;
@@ -22,8 +24,10 @@ public class MainMenu : MonoBehaviour
             //i.onClick.AddListener(() => OnSceneLoadButtonPressed(sceneLoadButtonList.IndexOf(i)));
             var x = Instantiate(sceneLoadButtonPrefab);
             x.transform.SetParent(sceneLoadButtonsHolder.transform, false);
-            x.onClick.AddListener(() => OnSceneLoadButtonPressed(levelDataResources.IndexOf(i)));
+            x.onClick.AddListener(() => OnSceneLoadButtonPressed(i));
         }
+
+        mainMenuDebugLoadHolder.resourceToLoad = null;
     }
 
     public void LoadMainScene()
@@ -31,8 +35,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(mainScene.Name);
     }
 
-    public void OnSceneLoadButtonPressed(int index)
+    public void OnSceneLoadButtonPressed(LevelDataResource levelDataResource)
     {
-        Debug.Log(index);
+        //Debug.Log(index);
+        mainMenuDebugLoadHolder.resourceToLoad = levelDataResource;
+        SceneManager.LoadScene(mainScene.Name);
     }
 }
