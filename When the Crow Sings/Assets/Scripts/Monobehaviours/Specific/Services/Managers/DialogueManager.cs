@@ -434,7 +434,10 @@ public class DialogueManager : MonoBehaviour, IService
             activeImageObject = npcImageUi;
         }
         activeImageObject.sprite = dialoguePortraits.GetPortrait(response.characterName, response.characterEmotion);
-
+        if (activeImageObject.sprite == null)
+        {
+            activeImageObject.gameObject.SetActive(false);
+        }
 
     }
 }
