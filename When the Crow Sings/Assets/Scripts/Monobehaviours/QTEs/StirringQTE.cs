@@ -88,6 +88,11 @@ public class StirringQTE : QuickTimeEvent
         yield return new WaitForSeconds(10);
         //failstate
     }
+
+    public override void StartQTE()
+    {
+        throw new System.NotImplementedException();
+    }
 }
 
 

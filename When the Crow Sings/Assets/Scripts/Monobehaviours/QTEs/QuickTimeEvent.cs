@@ -4,5 +4,5 @@ using UnityEngine;
 
 abstract public class QuickTimeEvent : MonoBehaviour
 {
-
+    abstract public void StartQTE();
 }

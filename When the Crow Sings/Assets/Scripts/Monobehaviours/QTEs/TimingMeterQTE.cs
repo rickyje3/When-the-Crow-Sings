@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimingMeter : QuickTimeEvent
+public class TimingMeterQTE : QuickTimeEvent
 {
     public Slider sliderMeter;
     public float speed = 2f;
@@ -40,8 +40,9 @@ public class TimingMeter : QuickTimeEvent
         }
     }
 
-    public void startQTE()
+    public override void StartQTE()
     {
+        Debug.Log("Started!");
         timingMeterAnimator.SetBool("isOpen", true);
         meterActive = true;
         SetTargetRangeMarkers();
