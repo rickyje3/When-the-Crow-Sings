@@ -9,14 +9,20 @@ public class MainMenu : MonoBehaviour
 {
     public SceneReference mainScene;
 
-    public List<Button> sceneLoadButtonList;
+    public Button sceneLoadButtonPrefab;
+    public GridLayoutGroup sceneLoadButtonsHolder;
+
+    public List<LevelDataResource> levelDataResources;
 
     private void Awake()
     {
 
-        foreach (Button i in sceneLoadButtonList)
+        foreach (LevelDataResource i in levelDataResources)
         {
-            i.onClick.AddListener(() => OnSceneLoadButtonPressed(sceneLoadButtonList.IndexOf(i)));
+            //i.onClick.AddListener(() => OnSceneLoadButtonPressed(sceneLoadButtonList.IndexOf(i)));
+            var x = Instantiate(sceneLoadButtonPrefab);
+            x.transform.SetParent(sceneLoadButtonsHolder.transform, false);
+            x.onClick.AddListener(() => OnSceneLoadButtonPressed(levelDataResources.IndexOf(i)));
         }
     }
 
