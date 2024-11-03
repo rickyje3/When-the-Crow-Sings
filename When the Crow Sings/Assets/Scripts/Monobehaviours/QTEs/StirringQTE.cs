@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class StirringQTE : MonoBehaviour
+public class StirringQTE : QuickTimeEvent
 {
     public GameObject displayBox;
     private int currentStep = 0;
@@ -87,6 +87,11 @@ public class StirringQTE : MonoBehaviour
     {
         yield return new WaitForSeconds(10);
         //failstate
+    }
+
+    public override void StartQTE()
+    {
+        throw new System.NotImplementedException();
     }
 }
 

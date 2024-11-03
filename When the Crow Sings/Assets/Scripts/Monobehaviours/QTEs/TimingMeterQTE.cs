@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimingMeter : MonoBehaviour
+public class TimingMeterQTE : QuickTimeEvent
 {
     public Slider sliderMeter;
     public float speed = 2f;
@@ -24,7 +24,7 @@ public class TimingMeter : MonoBehaviour
         SetTargetRangeMarkers();
         RandomizeMeter();
         //leave out when implementation added
-        //startQTE();
+        StartQTE();
     }
 
     // Update is called once per frame
@@ -40,8 +40,9 @@ public class TimingMeter : MonoBehaviour
         }
     }
 
-    public void startQTE()
+    public override void StartQTE()
     {
+        Debug.Log("Started!");
         timingMeterAnimator.SetBool("isOpen", true);
         meterActive = true;
         SetTargetRangeMarkers();
@@ -85,6 +86,12 @@ public class TimingMeter : MonoBehaviour
             EndQTE();
         }
     }
+    public void EndQTE()
+    {
+        timingMeterAnimator.SetBool("isOpen", false);
+        meterActive = false;
+        globalFinishedQteSignal.Emit();
+    }
 
     public void RandomizeMeter()
     {
@@ -96,7 +103,7 @@ public class TimingMeter : MonoBehaviour
         targetMax = Random.Range(0.6f, 0.9f);
         meterActive = true;
         
-        EndQTE();
+        //EndQTE();
     }
 
     //Set the target markers based off target range
@@ -120,9 +127,5 @@ public class TimingMeter : MonoBehaviour
         Debug.Log(targetRangeHighlight.sizeDelta + targetRangeHighlight.anchoredPosition);
     }
 
-    public void EndQTE()
-    {
-        timingMeterAnimator.SetBool("isOpen", false);
-        meterActive = false;
-    }
+
 }
