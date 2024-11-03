@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 1765020097}
   - component: {fileID: 1765020098}
   - component: {fileID: 1765020099}
+  - component: {fileID: 1765020100}
   m_Layer: 0
   m_Name: TaskManager
   m_TagString: Untagged
@@ -390,6 +391,34 @@ MonoBehaviour:
       - m_Target: {fileID: 1765020098}
         m_TargetAssemblyTypeName: TaskManager, Assembly-CSharp
         m_MethodName: OnQteStarted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1765020100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765020096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8f2792aa4e5a841805d6ab219c0209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSignal: {fileID: 11400000, guid: 364cf8ca6f8671f468bd1277940b1a03, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1765020098}
+        m_TargetAssemblyTypeName: TaskManager, Assembly-CSharp
+        m_MethodName: OnQteFinished
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

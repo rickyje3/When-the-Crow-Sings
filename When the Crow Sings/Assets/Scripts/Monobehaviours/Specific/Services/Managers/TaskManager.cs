@@ -22,4 +22,9 @@ public class TaskManager : MonoBehaviour
         QuickTimeEvent qteToLoad = (QuickTimeEvent)signalArgs.objectArgs[0];
         qteUiHolder.LoadQte(qteToLoad);
     }
+
+    public void OnQteFinished(SignalArguments signalArgs)
+    {
+        qteUiHolder.DestroyQte();
+    }
 }

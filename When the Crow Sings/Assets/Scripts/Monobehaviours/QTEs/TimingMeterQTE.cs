@@ -24,7 +24,7 @@ public class TimingMeterQTE : QuickTimeEvent
         SetTargetRangeMarkers();
         RandomizeMeter();
         //leave out when implementation added
-        //startQTE();
+        StartQTE();
     }
 
     // Update is called once per frame
@@ -86,6 +86,12 @@ public class TimingMeterQTE : QuickTimeEvent
             EndQTE();
         }
     }
+    public void EndQTE()
+    {
+        timingMeterAnimator.SetBool("isOpen", false);
+        meterActive = false;
+        globalFinishedQteSignal.Emit();
+    }
 
     public void RandomizeMeter()
     {
@@ -97,7 +103,7 @@ public class TimingMeterQTE : QuickTimeEvent
         targetMax = Random.Range(0.6f, 0.9f);
         meterActive = true;
         
-        EndQTE();
+        //EndQTE();
     }
 
     //Set the target markers based off target range
@@ -121,9 +127,5 @@ public class TimingMeterQTE : QuickTimeEvent
         Debug.Log(targetRangeHighlight.sizeDelta + targetRangeHighlight.anchoredPosition);
     }
 
-    public void EndQTE()
-    {
-        timingMeterAnimator.SetBool("isOpen", false);
-        meterActive = false;
-    }
+
 }

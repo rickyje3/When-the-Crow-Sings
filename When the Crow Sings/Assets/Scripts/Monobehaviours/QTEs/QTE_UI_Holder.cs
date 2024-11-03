@@ -5,10 +5,17 @@ using UnityEngine.UIElements;
 
 public class QTE_UI_Holder : MonoBehaviour
 {
-    public void LoadQte(QuickTimeEvent qte)
+    private QuickTimeEvent qte;
+    public void LoadQte(QuickTimeEvent _qte)
     {
-        //Debug.Log(qte);
-       Instantiate(qte).transform.SetParent(transform,false);
-       qte.StartQTE();
+        qte = Instantiate(_qte);
+        qte.transform.SetParent(transform, false);
+        //Instantiate(_qte).transform.SetParent(transform,false);
+    }
+
+    public void DestroyQte()
+    {
+        Destroy(qte.gameObject);
+        qte = null;
     }
 }
