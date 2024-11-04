@@ -31,6 +31,14 @@ public class EnemyController : StateMachineComponent
     }
     private void Start()
     {
+        //if ( enemyWaypointsHolders.Count == 0)
+        //{
+        //    enemyWaypointsHolders[0] = FindObjectOfType<EnemyWaypointsHolder>();
+        //}
+        if (enemyWaypointsHolders == null)
+        {
+            throw new System.Exception("No enemy waypoint holder assigned!");
+        }
         currentWaypoint = enemyWaypointsHolders[0].waypoints[0];
     }
 
