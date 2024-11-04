@@ -19,6 +19,7 @@ public class StirSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Sets slider to fill adjacent to stirringqte.score
         float fillValue = stirringQTE.score;
         slider.value = fillValue;
     }

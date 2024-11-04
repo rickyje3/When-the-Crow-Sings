@@ -10,7 +10,8 @@ public class StirringQTE : QuickTimeEvent
     private int currentStep = 0;
     private bool correctKey;
     private bool countingDown;
-    public int score = 0;
+    public int score = 1;
+    public float timer = 8;
 
 
     private KeyCode[] keySequence = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D }; // Rotating sequence
@@ -27,6 +28,34 @@ public class StirringQTE : QuickTimeEvent
             ShowCurrentKey();
             CheckInput();
         }
+
+        if (score == 50)
+        {
+            EndQTE();
+        }
+
+        //If 8 seconds pass 
+        if (!countingDown)
+        {
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+                updateTimer(timer);
+            }
+            else
+            {
+                Debug.Log("Time is up, QTE Failed");
+                timer = 0;
+                countingDown = false;
+                EndQTE();
+            }
+        }
+    }
+
+    void updateTimer(float currentTime)
+    {
+        currentTime += 1;
+        float time = Mathf.FloorToInt(currentTime % 60);
     }
 
     // Display the current expected key in the UI
@@ -66,7 +95,7 @@ public class StirringQTE : QuickTimeEvent
             countingDown = true;               //display green if correctkey is true and red if false
             displayBox.GetComponent<Image>().color = correctKey ? Color.green : Color.red;
 
-            yield return new WaitForSeconds(.15f); // Time between transition
+            yield return new WaitForSeconds(.12f); // Time between transition
 
             displayBox.GetComponent<Image>().color = Color.white;
 
@@ -75,6 +104,7 @@ public class StirringQTE : QuickTimeEvent
                 // Move to the next step cycle back to the start if needed
                 currentStep = (currentStep + 1) % keySequence.Length;
                 score++;
+                timer = 7;
             }
             else score--;
 
@@ -83,15 +113,15 @@ public class StirringQTE : QuickTimeEvent
         }
     }
 
-    private IEnumerator Countdown()
-    {
-        yield return new WaitForSeconds(10);
-        //failstate
-    }
-
     public override void StartQTE()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void EndQTE()
+    {
+        //timingMeterAnimator.SetBool("isOpen", false);
+        globalFinishedQteSignal.Emit();
     }
 }
 

@@ -23,6 +23,7 @@ public class PlayerController : StateMachineComponent, IService
     [HideInInspector]
     public float velocity;
     public CharacterController characterController;
+    public Canvas pauseCanvas;
 
     private void Awake()
     {
@@ -58,16 +59,18 @@ public class PlayerController : StateMachineComponent, IService
     private void OnEnable()
     {
         //InputManager.playerInputActions.Player.Enable();
-        InputManager.playerInputActions.Player.Quit.performed += OnQuit;
+        InputManager.playerInputActions.Player.Pause.performed += OnPause;
     }
     private void OnDisable()
     {
-        //InputManager.playerInputActions.Player.Disable();
+        InputManager.playerInputActions.Player.Pause.performed -= OnPause;
     }
 
-    private void OnQuit(InputAction.CallbackContext context)
+    private void OnPause(InputAction.CallbackContext context)
     {
-        Application.Quit();
+        stateMachine.Enter("PlayerDialogueState");
+        pauseCanvas.gameObject.SetActive(true);
+        Debug.Log("Paused");
     }
 
     public void OnDialogueStarted(SignalArguments signalArgs)
