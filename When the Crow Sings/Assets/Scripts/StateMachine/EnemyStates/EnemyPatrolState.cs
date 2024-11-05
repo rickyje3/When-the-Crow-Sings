@@ -34,18 +34,33 @@ public class EnemyPatrolState : EnemyState
 
     public override void StateEntered()
     {
-        s.StartCoroutine(setRandomPoint());
+        s.StartCoroutine(setNextPoint());
         s.enemyMaterial.color = Color.white;
     }
 
-    private IEnumerator setRandomPoint()
+    private IEnumerator setNextPoint()
     {
         var radius = 10;
-        s.navMeshAgent.destination = new Vector3(Random.Range(-radius, radius), Random.Range(-radius, radius), Random.Range(-radius, radius));
+
+        Debug.Log("Setting next point!");
+
+        if (s.currentWaypoint != null)
+        {
+            s.currentWaypoint = s.enemyWaypointsHolders[0].GetNextWaypoint(s.currentWaypoint);
+            s.navMeshAgent.destination = s.currentWaypoint.transform.position;
+        }
+        else
+        {
+            s.navMeshAgent.destination = new Vector3(0f, 0f, 0f);
+        }
+        
+        //s.navMeshAgent.destination = new Vector3(Random.Range(-radius, radius), Random.Range(-radius, radius), Random.Range(-radius, radius));
+
+
         yield return new WaitForSeconds(s.timeToWander);
         s.navMeshAgent.destination = s.transform.position;
         yield return new WaitForSeconds(s.timeToWaitBetweenWander);
 
-        s.StartCoroutine(setRandomPoint());
+        s.StartCoroutine(setNextPoint());
     }
 }

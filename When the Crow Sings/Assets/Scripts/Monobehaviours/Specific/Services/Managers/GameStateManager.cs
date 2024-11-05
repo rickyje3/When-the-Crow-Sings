@@ -9,6 +9,8 @@ using Eflatun.SceneReference;
 
 public class GameStateManager : MonoBehaviour, IService
 {
+    public MainMenuDebugLoadHolder mainMenuDebugLoadHolder;
+
     public GameObject _playerPrefab;
     public GameObject playerHolder = null;
     public GameObject playerContent = null;
@@ -30,6 +32,11 @@ public class GameStateManager : MonoBehaviour, IService
     {
         GetLoadedScenes(); // I THINK there was a reason for this to be here??
 
+        //SaveData.ReadData();
+        if (mainMenuDebugLoadHolder.resourceToLoad != null)
+        {
+            LoadRoom(mainMenuDebugLoadHolder.resourceToLoad);
+        }
         
     }
     private void Update()
