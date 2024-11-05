@@ -1,4 +1,4 @@
-~ demonstrate_saving
+~ demonstrate_state
 if SceneStructureFlag == false:
 	This will demonstrate how what you do affects the world.
 	Would you like to do it?
@@ -17,8 +17,17 @@ else:
 => END
 
 
-
-
+~ demonstrate_saving
+Would you like to save?
+- Save
+	call SaveGameToDisk();
+	Saved to disk as a binary format.
+- Wipe
+	call EraseGameFromDisk();
+	Erased.
+- None.
+	Then why are you here?
+=> END
 
 
 

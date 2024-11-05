@@ -137,6 +137,9 @@ public static class SaveData
             case 0:
                 WriteData_V0();
                 break;
+            default:
+                WriteData_V0();
+                break;
         }
        
     }
@@ -151,15 +154,59 @@ public static class SaveData
                 ReadData_V0();
                 break;
         }
-        
+        Debug.Log("Data read!");
     }
 
-
-    static void WriteData_V0()
+    public static IEnumerator EraseData()
     {
         string filePath = Application.persistentDataPath + "/save.wtcs";
 
-        FileStream fileStream = new FileStream(filePath, FileMode.Create);
+        while (true)
+        {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                    Debug.Log("File deleted successfully.");
+                }
+                yield break; // Exit once deletion is successful
+            }
+            catch (IOException)
+            {
+                Debug.LogWarning("File is in use by another process, retrying...");
+            }
+            yield return new WaitForSeconds(0.1f); // Retry after a delay
+        }
+    }
+
+
+    public static bool SavedDataExists()
+    {
+        if (File.Exists(Application.persistentDataPath + "/save.wtcs"))
+        {
+            return true;
+        }
+        Debug.Log("No save data exists on disk!");
+        return false;
+    }
+
+    static void WriteData_V0()
+    {
+        //EraseData();
+
+        string filePath = Application.persistentDataPath + "/save.wtcs";
+
+        FileStream fileStream;
+        //if (!File.Exists(filePath))
+        //{
+        //    fileStream = new FileStream(filePath, FileMode.Create);
+        //}
+        //else
+        //{
+        //    fileStream = new FileStream(filePath, FileMode.Truncate);
+        //}
+        fileStream = new FileStream(filePath, FileMode.Create);
 
         // Write the save data version.
         writeInt(saveDataVersion, fileStream);
@@ -241,7 +288,7 @@ public static class SaveData
         }
         stringFlags = tempStringFlags;
 
-
+        fileStream.Close();
 
         //foreach (byte i in fileBytes)
         //{
