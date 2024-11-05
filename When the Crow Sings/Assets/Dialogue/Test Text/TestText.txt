@@ -1,3 +1,35 @@
+~ demonstrate_saving
+if SceneStructureFlag == false:
+	This will demonstrate how what you do affects the world.
+	Would you like to do it?
+	- Yes
+		set SceneStructureFlag = true;
+		Then it is done.
+	- No
+		Then why are you here?
+	Go now.
+	=> END
+else:
+	You have already done it.
+	There is nothing left for you here.
+	Go now.
+	=> END
+=> END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ~ my_title
 Character 1: Hello!
 This is text. A good deal of text, actually, found inside of a text file. Help, I've been parsed!
@@ -12,13 +44,12 @@ Well, I guess we never reached the second title.
 ~ my_second_title
 Testing mutations.
 if TestingFlag1 == false:
-Hi.
+	Hi.
 Yep.
 => END
 
-~ demonstrate_saving
-This will demonstrate saving.
-=> END
+
+
 
 
 

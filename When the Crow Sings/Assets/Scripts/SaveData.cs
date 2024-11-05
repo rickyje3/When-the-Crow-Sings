@@ -10,13 +10,14 @@ using UnityEngine;
 
 public static class SaveData
 {
-    const int saveDataVersion = 0;
+    const int saveDataVersion = 1;
     public static Dictionary<string, bool> boolFlags = new Dictionary<string, bool>()
     {
         { "TestingFlag1",false },
         { "TestingFlag2",true },
         { "TestingFlag3",false },
         { "TestingFlag4",true },
+        { "SceneStructureFlag", false },
 
         { "AngelTaskOffered",false },
         { "AngelTaskCompleted",false },
@@ -144,6 +145,9 @@ public static class SaveData
         switch (saveDataVersion) // TODO: Make it so it starts reading, stops after the version number, then calls the correct method using this switch statement.
         {
             case 0:
+                ReadData_V0();
+                break;
+            default:
                 ReadData_V0();
                 break;
         }
