@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu]
 public class DialogueResource : ScriptableObject
 {
+    public TextAsset textAsset;
+    [HideInInspector]
     public string path = "Assets/Dialogue/TestText.txt";
     [HideInInspector]
     public List<DialogueBase> dialogueLines = new List<DialogueBase>();
