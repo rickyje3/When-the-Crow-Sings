@@ -52,3 +52,24 @@ Angel_Smile: No problem!! Don't be a stranger!
 Angel_Stare: I mean, I'll see you at meal time anyway but. . .
 Angel_Smile: Bye!
 => END
+
+~ angel_demo_talk
+if TestingFlag1 == false:
+	Angel_Smile: Nice to meet you!
+	Angel: This is our first time speaking. You can tell, because I'm saying this.
+	Chance: Wow that's crazy.
+	Chance: Anyway, bye.
+	set TestingFlag1 = true;
+	=> END
+else:
+	Angel: We are talking again. You can tell because of the way it is.
+	Chance: That really is the way it is.
+	Angel: Did you want to touch the soup?
+	- Yes.
+		Chance: Hell yeah.
+		set TestingFlag2 = false;
+		=> END
+	- No.
+		Chance_Angry: Hell no.
+		Angel_Worried: What the heck man?
+		=> END
