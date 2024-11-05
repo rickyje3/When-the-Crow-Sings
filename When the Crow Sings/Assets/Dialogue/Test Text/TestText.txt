@@ -11,6 +11,11 @@ Well, I guess we never reached the second title.
 
 ~ my_second_title
 Testing mutations.
+if TestingFlag1 == false:
+    Hi.
+Yep.
+=> END
+
 
 set TestingFlag1 = true;
 Should be true now.
@@ -24,7 +29,7 @@ Should be false now.
 call ExampleDialogueMethod();
 Should have printed now.
 
-emit 0;
+	emit 0;
 Should have emitted a signal.
 
 => END
