@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class EnemyController : StateMachineComponent
 {
+    public List<EnemyWaypointsHolder> enemyWaypointsHolders;
+    [HideInInspector]
+    public EnemyWaypoint currentWaypoint;
+
     [HideInInspector]
     public NavMeshAgent navMeshAgent;
 
@@ -17,11 +21,25 @@ public class EnemyController : StateMachineComponent
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        
+
         stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new EnemyPatrolState(this), "EnemyPatrolState");
         stateMachine.RegisterState(new EnemyChaseState(this), "EnemyChaseState");
         stateMachine.RegisterState(new EnemyStunnedState(this), "EnemyStunnedState");
         stateMachine.Enter("EnemyPatrolState");
+    }
+    private void Start()
+    {
+        //if ( enemyWaypointsHolders.Count == 0)
+        //{
+        //    enemyWaypointsHolders[0] = FindObjectOfType<EnemyWaypointsHolder>();
+        //}
+        if (enemyWaypointsHolders == null)
+        {
+            throw new System.Exception("No enemy waypoint holder assigned!");
+        }
+        currentWaypoint = enemyWaypointsHolders[0].waypoints[0];
     }
 
     public void TriggerEntered(Collider other)

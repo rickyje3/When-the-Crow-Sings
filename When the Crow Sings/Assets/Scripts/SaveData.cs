@@ -97,14 +97,17 @@ public static class SaveData
     public static void SetFlag(string key, bool value)
     {
         boolFlags[key] = value;
+        Debug.Log("Key is now "+ boolFlags[key]);
     }
     public static void SetFlag(string key, int value)
     {
         intFlags[key] = value;
+        Debug.Log("Key is now " + intFlags[key]);
     }
     public static void SetFlag(string key, string value)
     {
         stringFlags[key] = value;
+        Debug.Log("Key is now " + stringFlags[key]);
     }
 
     //public static bool GetFlag<Bool>(string key)

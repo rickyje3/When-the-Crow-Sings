@@ -33,6 +33,7 @@ public class DialogueManager : MonoBehaviour, IService
     public float pauseMultiplier = 10f;
     public List<GameSignal> signalsDialogueCanUse;
 
+
     DialogueChoiceBlock activeChoiceBlock = null;
     DialogueConditionBlock activeConditionBlock = null;
 
@@ -114,7 +115,7 @@ public class DialogueManager : MonoBehaviour, IService
         {
 
             DialogueResponse newLine2 = (DialogueResponse)newLine;
-            Debug.Log(newLine2.dialogue);
+            //Debug.Log(newLine2.dialogue);
             nameText.text = newLine2.characterName;
 
             SetPortraits(newLine2);
@@ -186,6 +187,12 @@ public class DialogueManager : MonoBehaviour, IService
             DoConditionalDialogueLogic();
 
 
+        }
+
+        else if (newLine is DialogueMutation)
+        {
+            DoMutationLogic((DialogueMutation)newLine);
+            ControlLineBehavior(index + 1, previousLineTabCount);
         }
 
         else // In case of an EmptyLine
@@ -440,4 +447,72 @@ public class DialogueManager : MonoBehaviour, IService
         }
 
     }
+
+
+    void DoMutationLogic(DialogueMutation mutation)
+    {
+        switch (mutation.actionType)
+        {
+            case DialogueMutation.ActionType.SET:
+                DoMutationSetMath(mutation);
+                break;
+            case DialogueMutation.ActionType.EMIT:
+                GameSignal signalToEmit = signalsDialogueCanUse[mutation.intData];
+                signalToEmit.Emit();
+                break;
+            case DialogueMutation.ActionType.CALL:
+                if (mutation.stringData == "ExampleDialogueMethod()")
+                {
+                    ExampleDialogueMethod();
+                }
+                else
+                {
+                    throw new Exception("Invalid method name!");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    void DoMutationSetMath(DialogueMutation mutation)
+    {
+        switch (mutation.operatorType)
+        {
+            case DialogueMutation.OperatorType.EQUALS:
+                switch (mutation.dataType)
+                {
+                    case DialogueMutation.DataType.STRING:
+                        SaveData.SetFlag(mutation.actionKey, mutation.stringData);
+                        break;
+                    case DialogueMutation.DataType.INT:
+                        SaveData.SetFlag(mutation.actionKey, mutation.intData);
+                        break;
+                    case DialogueMutation.DataType.BOOL:
+                        SaveData.SetFlag(mutation.actionKey,mutation.boolData);
+                        break;
+                }
+                break;
+            case DialogueMutation.OperatorType.PLUS_EQUALS:
+                if (mutation.dataType == DialogueMutation.DataType.INT)
+                {
+                    SaveData.SetFlag(mutation.actionKey, SaveData.intFlags[mutation.actionKey]+mutation.intData);
+                }
+                break;
+            case DialogueMutation.OperatorType.MINUS_EQUALS:
+                if (mutation.dataType == DialogueMutation.DataType.INT)
+                {
+                    SaveData.SetFlag(mutation.actionKey, SaveData.intFlags[mutation.actionKey] - mutation.intData);
+                }
+                break;
+        }
+        
+    }
+
+
+    void ExampleDialogueMethod()
+    {
+        Debug.Log("Dialogue called this method!");
+    }
+
 }

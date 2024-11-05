@@ -10,6 +10,28 @@ Well, I guess we never reached the second title.
 => END
 
 ~ my_second_title
+Testing mutations.
+
+set TestingFlag1 = true;
+Should be true now.
+
+set TestingFlag1 += 1;
+Should be more now.
+
+set TestingFlag1 = false;
+Should be false now.
+
+call ExampleDialogueMethod();
+Should have printed now.
+
+emit 0;
+Should have emitted a signal.
+
+=> END
+
+
+
+~ portraits
 Chance: Hello!
 Theodore: Hi!
 No character saying this one!
