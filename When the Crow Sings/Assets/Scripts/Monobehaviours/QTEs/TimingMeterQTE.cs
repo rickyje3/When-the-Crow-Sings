@@ -43,7 +43,7 @@ public class TimingMeterQTE : QuickTimeEvent
     public override void StartQTE()
     {
         Debug.Log("Started!");
-        timingMeterAnimator.SetBool("isOpen", true);
+        //timingMeterAnimator.SetBool("isOpen", true);
         meterActive = true;
         SetTargetRangeMarkers();
     }
@@ -77,19 +77,21 @@ public class TimingMeterQTE : QuickTimeEvent
         if(sliderMeter.value >= targetMin && sliderMeter.value <= targetMax)
         {
             Debug.Log("Successful QTE");
-            RandomizeMeter();
+            //RandomizeMeter();
+            EndQTE();
         }
         else
         {
             Debug.Log("Failed QTE");
-            RandomizeMeter();
+            //SetTargetRangeMarkers();
+            //RandomizeMeter();
             EndQTE();
         }
     }
     public void EndQTE()
     {
-        timingMeterAnimator.SetBool("isOpen", false);
-        meterActive = false;
+        //timingMeterAnimator.SetBool("isOpen", false);
+        //meterActive = false;
         globalFinishedQteSignal.Emit();
     }
 
@@ -99,8 +101,9 @@ public class TimingMeterQTE : QuickTimeEvent
         targetMin = targetValue - 0.1f;
         targetMax = targetValue + 0.1f;*/
 
-        targetMin = Random.Range(0.1f, 0.4f);
-        targetMax = Random.Range(0.6f, 0.9f);
+        //change these range values for accessibility settings
+        targetMin = Random.Range(0.3f, 0.49f);
+        targetMax = Random.Range(0.51f, 0.7f);
         meterActive = true;
         
         //EndQTE();

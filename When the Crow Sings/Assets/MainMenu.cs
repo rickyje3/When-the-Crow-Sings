@@ -43,4 +43,9 @@ public class MainMenu : MonoBehaviour
         mainMenuDebugLoadHolder.resourceToLoad = levelDataResource;
         SceneManager.LoadScene(mainScene.Name);
     }
+
+    public void quitGame()
+    {
+        Application.Quit();
+    }
 }
