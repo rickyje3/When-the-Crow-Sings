@@ -8,10 +8,16 @@ public class EnemyWaypointsHolder : MonoBehaviour
     [HideInInspector]
     public List<EnemyWaypoint> waypoints;
 
+
+    private void Awake()
+    {
+        waypoints = GetComponentsInChildren<EnemyWaypoint>().ToList();
+        Debug.Log("Waypoints are " + waypoints);
+    }
     private void Start()
     {
-        //waypoints = FindObjectsOfType<EnemyWaypoint>().ToList();
-        waypoints = GetComponentsInChildren<EnemyWaypoint>().ToList();
+        //waypoints = GetComponentsInChildren<EnemyWaypoint>().ToList();
+        //Debug.Log("Waypoints are "+waypoints);
     }
 
     public EnemyWaypoint GetNextWaypoint(EnemyWaypoint currentWaypoint)
