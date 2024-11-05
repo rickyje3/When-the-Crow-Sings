@@ -25,7 +25,7 @@ public partial class DialogueParser
 
         if (dialogueResource.dialogueLines.Count == 0)
         {
-            PrepareDialogueResource(File.ReadAllText(dialogueResource.path));
+            PrepareDialogueResource(dialogueResource.textAsset.text);
         }
         
     }
