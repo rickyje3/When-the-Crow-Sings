@@ -1,19 +1,18 @@
 ~ test_block
-set TestingFlag1 = false;
 if TestingFlag1 == true:
-    This flag was true.
-    => END
+	This flag was true.
+	=> END
 else:
-    It was not true.
-    => test_block_2
+	It was not true.
+	=> test_block_2
 
 ~ test_block_2
 Would you like to make it true?
 - Yes.
-    set TestingFlag1 = true;
-    => END
+	set TestingFlag1 = true;
+	=> END
 - No.
-    => END
+	=> END
 
 
 ~ test_block_3
@@ -21,8 +20,8 @@ Hi.
 set TestingFlag1 = true;
 Should be true.
 if TestingFlag1 == true:
-    It's true.
+	It's true.
 else:
-    It didn't work.
+	It didn't work.
 Yep.
 => END
