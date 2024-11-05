@@ -40,6 +40,11 @@ public partial class DialogueParser
                 myTabCount = myTabCount + 1;
                 trimmedLine = trimmedLine.Remove(0, 1); // Remove the tab before checking for any more.
             }
+            else if (trimmedLine.StartsWith("    "))
+            {
+                myTabCount = myTabCount + 1;
+                trimmedLine = trimmedLine.Remove(0, 4); // Remove the 4 spaces before checking for any more.
+            }
             else
             {
                 hasFinishedCountingTabs = true;
