@@ -19,10 +19,18 @@ public class EnemyPatrolState : EnemyState
 
 
 
-
+    private float enemySpeed = 0f;// = Vector3.zero;
+    private Vector3 lastPosition;
     public override void FixedUpdate()
     {
         //if (Physics.Raycast(s.transform,))
+        if (lastPosition == null)
+        {
+            lastPosition = s.transform.position;
+        }
+
+        enemySpeed = (s.transform.position - lastPosition).magnitude;
+        lastPosition = s.transform.position;
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -48,16 +56,21 @@ public class EnemyPatrolState : EnemyState
         {
             s.currentWaypoint = s.enemyWaypointsHolders[0].GetNextWaypoint(s.currentWaypoint);
             s.navMeshAgent.destination = s.currentWaypoint.transform.position;
+            yield return new WaitUntil(() => enemySpeed <= 0.01f);
+            yield return new WaitForSeconds(1f);
+            yield return new WaitUntil(() => enemySpeed <= 0.01f);
         }
         else
         {
             s.navMeshAgent.destination = new Vector3(0f, 0f, 0f);
+            yield return new WaitForSeconds(s.timeToWander);
         }
-        
+
         //s.navMeshAgent.destination = new Vector3(Random.Range(-radius, radius), Random.Range(-radius, radius), Random.Range(-radius, radius));
 
 
-        yield return new WaitForSeconds(s.timeToWander);
+        //yield return new WaitForSeconds(s.timeToWander);
+        
         s.navMeshAgent.destination = s.transform.position;
         yield return new WaitForSeconds(s.timeToWaitBetweenWander);
 
