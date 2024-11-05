@@ -142,7 +142,7 @@ public partial class DialogueParser
             DialogueCondition newLine = new DialogueCondition();
             newLine.tabCount = myTabCount;
             newLine.conditionIndex = i;
-            Debug.Log("We've done a conditional line!" + i);
+            //Debug.Log("We've done a conditional line!" + i);
 
             PrepareConditional(trimmedLine, ref newLine);
 
@@ -155,10 +155,71 @@ public partial class DialogueParser
 
     private bool CheckLine_IsMutation(int myTabCount) // Mutation
     {
-        if (trimmedLine.StartsWith("do ") && trimmedLine.EndsWith(';')) 
+        if ((trimmedLine.StartsWith("call ") || trimmedLine.StartsWith("set ") || trimmedLine.StartsWith("emit ") )
+            && trimmedLine.EndsWith(';'))
         {
             DialogueMutation newLine = new DialogueMutation();
             newLine.tabCount = myTabCount;
+
+            trimmedLine = Regex.Replace(trimmedLine, @"\s+", ""); // Remove white space
+            trimmedLine = trimmedLine.TrimEnd(';');
+            if (trimmedLine.StartsWith("set"))
+            {
+                newLine.actionType = DialogueMutation.ActionType.SET;
+                trimmedLine = Utilities.RemoveFirstOccurence("set", trimmedLine);
+
+                // Check operator.
+                if (trimmedLine.Contains("="))
+                {
+                    newLine.operatorType = DialogueMutation.OperatorType.EQUALS;
+                    string[] splits = trimmedLine.Split('=');
+                    
+                    newLine.actionKey = splits[0];
+                    newLine.SetValue(splits[1]);
+
+                    //variableKeys = trimmedLine.Split(new string[] { "==" }, System.StringSplitOptions.None);
+                }
+                else if (trimmedLine.Contains("+="))
+                {
+                    newLine.operatorType = DialogueMutation.OperatorType.PLUS_EQUALS;
+                    string[] splits = trimmedLine.Split(new string[] { "+=" }, System.StringSplitOptions.None);
+
+                    newLine.actionKey = splits[0];
+                    newLine.SetValue(splits[1]);
+                }
+                else if (trimmedLine.Contains("-="))
+                {
+                    newLine.operatorType = DialogueMutation.OperatorType.MINUS_EQUALS;
+                    string[] splits = trimmedLine.Split(new string[] { "-=" }, System.StringSplitOptions.None);
+
+                    newLine.actionKey = splits[0];
+                    newLine.SetValue(splits[1]);
+                }
+
+            }
+            else if (trimmedLine.StartsWith("emit"))
+            {
+                newLine.actionType = DialogueMutation.ActionType.EMIT;
+                trimmedLine = Utilities.RemoveFirstOccurence("emit", trimmedLine);
+
+                newLine.SetValue(trimmedLine); // Theorhetically all that remains should be a signal name (or possibly index).
+            }
+            else if (trimmedLine.StartsWith("call"))
+            {
+                newLine.actionType = DialogueMutation.ActionType.CALL;
+                trimmedLine = Utilities.RemoveFirstOccurence("call", trimmedLine);
+
+                newLine.SetValue(trimmedLine); // Theorehtically all that remains should be a method name.
+            }
+            else
+            {
+                newLine.actionType = DialogueMutation.ActionType.CHELLE_YOU_STINKY;
+            }
+            
+            
+
+            
+            //newLine.actionValue = splits[1];
 
             dialogueResource.dialogueLines.Add(newLine);
 
