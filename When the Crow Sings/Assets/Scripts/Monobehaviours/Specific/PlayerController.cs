@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,6 +25,8 @@ public class PlayerController : StateMachineComponent, IService
     public float velocity;
     public CharacterController characterController;
     public Canvas pauseCanvas;
+
+    public GameSignal pauseSignalTEMP;
 
     private void Awake()
     {
@@ -68,8 +71,9 @@ public class PlayerController : StateMachineComponent, IService
 
     private void OnPause(InputAction.CallbackContext context)
     {
-        stateMachine.Enter("PlayerDialogueState");
+        //stateMachine.Enter("PlayerDialogueState");
         pauseCanvas.gameObject.SetActive(true);
+        pauseSignalTEMP.Emit();
         Debug.Log("Paused");
     }
 
