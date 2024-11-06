@@ -465,6 +465,16 @@ public class DialogueManager : MonoBehaviour, IService
                 {
                     ExampleDialogueMethod();
                 }
+                else if (mutation.stringData == "SaveGameToDisk()")
+                {
+                    Debug.Log("Saved!");
+                    SaveData.WriteData();
+                }
+                else if (mutation.stringData == "EraseGameFromDisk()")
+                {
+                    Debug.Log("Erased!");
+                    StartCoroutine(SaveData.EraseData());
+                }
                 else
                 {
                     throw new Exception("Invalid method name!");
