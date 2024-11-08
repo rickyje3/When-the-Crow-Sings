@@ -1,5 +1,28 @@
+~ angel_directory
+if AngelBaseComplete == false:
+	=> angel_directory_2
+else:
+	=> angel_beyond_base
+
+~ angel_directory_2
+if AngelTaskOffered == false:
+	=> angel_first_int
+if AngelTaskAccepted == false:
+	=> angel_no_task
+else:
+	=> angel_directory_3
+
+~ angel_directory_3
+if AngelTaskCompleted == false:
+	=> angel_task_unfin
+else:
+	=> angel_task_fin
+
 ~ angel_first_int
-Angel_Smile: (This would be a conditional greeting.), are you settling in alright?
+if timeOfDay == 0:
+	Angel_Smile: Good morning, are you settling in alright?
+if timeOfDay == 1:
+	Angel_Smile: Good afternoon, are you settling in alright?
 Chance_Sad: . . .
 Angel_Worried: Oh, well that's...
 - Out past curfew?
@@ -16,10 +39,12 @@ Chance_Angry: Someone came banging on my window in the middle of the night.
 => angel_first_int_cont
 
 ~ angel_first_int_cont
+set AngelTaskOffered = true;
 Angel_Stare: . . .
 Angel_Smile: Well I wouldn't know anything about that! Did you want to help me in the kitchen?
 Angel_Smile: Might take your mind off things, and I could always use an extra hand!
 - Sure.
+	set AngelTaskAccepted = true;
 	Chance: . . . Yeah, sure.
 	Angel_Smile: Thanks! I just need you to stir our forever soup!
 	Angel: It has to be stirred a couple times a day, and if you do it I can take care of some other things.
@@ -33,6 +58,7 @@ Angel_Smile: Might take your mind off things, and I could always use an extra ha
 Angel_Smile: Oh you're back!!!
 Angel: Did you have time to lend me a hand?
 - Yeah, sure.
+	set AngelTaskAccepted = true;
 	Chance: Yeah, sure.
 	Angel_Smile: Thanks! I just need you to stir our forever soup!
 	Angel: It has to be stirred a couple times a day, and if you do it I can take care of some other things.
@@ -41,7 +67,20 @@ Angel: Did you have time to lend me a hand?
 - Maybe later.
 	=> END
 
+~ angel_task_unfin
+Angel_Worried: Uh, are you okay? Did you forget what I asked you to do?
+- Yep.
+	Chance_Sad: Yeah, I did.
+	Angel_Worried: <size=50%> I told you just a minute ago...
+	Angel_Stare: Just go stir the soup, please.
+	=> END
+- No...
+	Chance_Angry: No?! Of course not.
+	Angel_Worried: Right...
+	=> END
+
 ~ angel_task_fin
+set AngelBaseCompleted = true;
 Angel_Smile: Thanks so much! Gave me time to prep.
 Angel_Thinking: . . .
 Angel_Worried: Um.. If you're worried about whatever, maybe you could talk to Miss Jazmyne?
@@ -73,3 +112,8 @@ else:
 		Chance_Angry: Hell no.
 		Angel_Worried: What the heck man?
 		=> END
+
+~ angel_beyond_base
+Angel: I ain't got nothin to say. There's nothing here! Get screwed, loser.
+=> END
+	
