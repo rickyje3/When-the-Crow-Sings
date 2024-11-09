@@ -1,3 +1,23 @@
+~ beau_directory
+if BeauBaseComplete == false:
+	=> beau_directory_2
+else:
+	=> beau_beyond_base
+
+~ beau_directory_2
+if BeauTaskOffered == false:
+	=> beau_first_int
+if BeauTaskAccepted == false:
+	=> beau_no_task
+else:
+	=> beau_directory_3
+
+~ beau_directory_3
+if BeauTaskCompleted == false:
+	=> beau_task_unfin
+else:
+	=> beau_task_fin
+
 ~ beau_first_int
 Beau: Ey! Don't suppose you brought any Timmies?
 Chance: Any what?
@@ -13,17 +33,22 @@ Beau_Awkward: Well, aren't you a ray of sunshine.
 => beau_first_int_cont
 
 ~beau_nawkward
-Chance: Yeah, I just got here (conditional dialogue referring to the time either specifically or generally).
+if day == 0:
+	Chance: Yeah, I just got here last night.
+else:
+	Chance: Yeah, it hasn't been too long.
 Beau_Teasing: Ah, the experience of being fresh meat.
 => beau_first_int_cont
 
 ~ beau_first_int_cont
 Beau: How are you liking it here?
 Chance_Sad: I don't know. Something seems...
-- Conditional reply
-	=> beau_first_int_lastnight
-- Unconditional reply
-	=> beau_first_int_sleep
+if day == 0:
+	- Last night..
+		=> beau_first_int_lastnight
+else:
+	- Not sleeping.
+		=> beau_first_int_sleep
 
 ~ beau_first_int_lastnight
 Chance_Sad: I didn't get much sleep. Someone came banging on my window last night...
@@ -38,9 +63,11 @@ Beau_Awkward: Oh well that's no good, bud!
 => beau_first_int_cont_2
 
 ~ beau_first_int_cont_2
+set BeauTaskOffered = true;
 Beau: Listen, bud. Would you do me a solid and pick up some food from the greenhouse?
 Beau_Smile: I've got to swap out some stock for Angel, put the new food in the freezer and give him the wiltier stuff. 
 - Sure.
+	set BeauTaskAccepted = true;
 	Chance: Yeah, sure.
 	Beau: Thanks bud, I'll owe ya one.
 	=> END
@@ -51,6 +78,7 @@ Beau_Smile: I've got to swap out some stock for Angel, put the new food in the f
 ~ beau_no_task
 Beau_Teasing: Back for more Beau?
 - Yeah.
+	set BeauTaskAccepted = true;
 	Chance_Smile: Yeah, I'm free to help now.
 	Beau_Smile: Thanks bud, I owe ya one.
 	=> END
@@ -58,28 +86,46 @@ Beau_Teasing: Back for more Beau?
 	Chance: . . . No.
 	=> END
 
+~ beau_task_unfin
+Beau: You're back.
+Beau_Awkward: With no veggies. Did something happen, or?
+	- I forgot.
+		Chance_Sad: I forgot where to go.
+		Beau_Teasing: Oh no worries bud. I'm a little absent minded myself, I get it. Just trot on over to Quinn's and scoop up that veggie delivery, then bring it back.
+		Chance: Okay, got it.
+		=> END
+	- No!
+		Chance_Angry: No. I just wasn't ready to do it yet!
+		Beau_Awkward: Riiiiiight... Whatever you say bud.
+		=> END
+
 ~ beau_task_fin
 Beau: Alright bud, look. I can tell you're having some trouble settling in here. You did me a solid, so let me give you a little advice.
 Chance: ?
 Beau_Smile: Things get a little weird around here, but it's harmless! Least since I've been here.
 Beau: If you want some reassurance you could go talk to Quinn, the gardener you just grabbed a delivery from for me. 
-- Met Quinn.
-	Chance: I already met Quinn.
-	Beau_Smile: Oh yeah? And did they talk ya down?
-	Chance_Sad: Not exactly.They're nice, though.
-	Beau_Awkward: Yeah, they sure are. Hm..
+if QuinnTaskOffered == true:
+	- Met Quinn.
+		Chance: I already met Quinn.
+		Beau_Smile: Oh yeah? And did they talk ya down?
+		Chance_Sad: Not exactly.They're nice, though.
+		Beau_Awkward: Yeah, they sure are. Hm..
+		=> beau_task_fin_cont
+else:
 	=> beau_task_fin_cont
-=> beau_task_fin_cont
 
 ~ beau_task_fin_cont
 Beau: There's also Farida. She's our security 'round here.
-- Met Farida.
-	Chance_Sad: I've met Farida. She's uh...
-	Beau_Awkward: Yeah. A bit. 
+if FaridaTaskOffered == true:
+	- Met Farida.
+		Chance_Sad: I've met Farida. She's uh...
+		Beau_Awkward: Yeah. A bit. 
+		=> beau_task_fin_cont_3
+else:
 	=> beau_task_fin_cont_3
-=> beau_task_fin_cont_3
 
 ~ beau_task_fin_cont_3
+set BeauBaseComplete = true;
 Chance_Smile: Um, thanks.
 Beau_Teasing: No problem, ey? Not to be a keener but, wouldn't want you to be uncomfortable livin' here.
 => END
@@ -97,3 +143,9 @@ Beau_Awkward: Don't you think so?
 	Chance: No dude.
 	Beau_Awkward: What the hell bro
 	=> END
+
+~ beau_beyond_base
+Beau: Oh shit, a rat.
+Beau: A rat.
+Beau: Oh shit.
+=> END

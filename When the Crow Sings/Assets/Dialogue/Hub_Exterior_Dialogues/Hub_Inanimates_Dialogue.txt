@@ -24,8 +24,6 @@ else:
 	Good soup.
 	=> END
 
-
-
 ~ pipsissewa
 if day == 1
 A pretty pink flower. Its leaves look thorny. Better not touch it. 
@@ -42,8 +40,13 @@ Something shiny is in the dirt ... Better not steal from the crows.
 => END
 
 ~ veggie_basket
-A basket of fresh vegetables. Wonder why it's out here?
-=> END
+if BeauTaskAccepted == true:
+	Gee I am sure pickin up these veggies.
+	set BeauTaskCompleted = true;
+	=> END
+else:
+	A basket of fresh vegetables. Wonder why it's out here?
+	=> END
 
 ~ utility_pole
 if day == 1
