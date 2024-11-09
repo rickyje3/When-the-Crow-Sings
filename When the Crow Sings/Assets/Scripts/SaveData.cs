@@ -145,24 +145,28 @@ public static class SaveData
         switch (saveDataVersion)
         {
             case 0:
+#pragma warning disable CS0162 // Unreachable code detected
                 WriteData_V0();
                 break;
             default:
                 WriteData_V0();
                 break;
+#pragma warning restore CS0162 // Unreachable code detected
         }
-       
+
     }
     public static void ReadData()
     {
         switch (saveDataVersion) // TODO: Make it so it starts reading, stops after the version number, then calls the correct method using this switch statement.
         {
             case 0:
+#pragma warning disable CS0162 // Unreachable code detected
                 ReadData_V0();
                 break;
             default:
                 ReadData_V0();
                 break;
+#pragma warning restore CS0162 // Unreachable code detected
         }
         Debug.Log("Data read!");
     }
