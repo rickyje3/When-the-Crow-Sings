@@ -24,9 +24,4 @@ public class DynamicEnable : MonoBehaviour
     {
         ServiceLocator.Get<GameManager>().dynamicEnables.Remove(this);
     }
-
-
- 
-
-    
 }
