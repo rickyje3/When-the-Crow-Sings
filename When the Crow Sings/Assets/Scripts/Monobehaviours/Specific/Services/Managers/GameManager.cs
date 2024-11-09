@@ -31,31 +31,31 @@ public class GameManager : MonoBehaviour, IService
                 case DynamicEnable.VALUE_TYPE.BOOL:
                     if (SaveData.boolFlags[i.associatedDataKey] == i.boolValue)
                     {
-                        i.gameObject.SetActive(false);
+                        i.gameObject.SetActive(true);
                     }
                     else
                     {
-                        i.gameObject.SetActive(true);
+                        i.gameObject.SetActive(false);
                     }
                     break;
                 case DynamicEnable.VALUE_TYPE.INT:
                     if (SaveData.intFlags[i.associatedDataKey] == i.intValue)
                     {
-                        i.gameObject.SetActive(false);
+                        i.gameObject.SetActive(true);
                     }
                     else
                     {
-                        i.gameObject.SetActive(true);
+                        i.gameObject.SetActive(false);
                     }
                     break;
                 case DynamicEnable.VALUE_TYPE.STRING:
                     if (SaveData.stringFlags[i.associatedDataKey] == i.stringValue)
                     {
-                        i.gameObject.SetActive(false);
+                        i.gameObject.SetActive(true);
                     }
                     else
                     {
-                        i.gameObject.SetActive(true);
+                        i.gameObject.SetActive(false);
                     }
                     break;
             }
