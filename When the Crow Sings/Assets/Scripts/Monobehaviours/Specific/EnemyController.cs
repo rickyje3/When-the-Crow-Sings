@@ -39,7 +39,11 @@ public class EnemyController : StateMachineComponent
         {
             throw new System.Exception("No enemy waypoint holder assigned!");
         }
-        currentWaypoint = enemyWaypointsHolders[0].waypoints[0];
+        else
+        {
+            currentWaypoint = enemyWaypointsHolders[0].waypoints[0];
+        }
+        
     }
 
     public void TriggerEntered(Collider other)

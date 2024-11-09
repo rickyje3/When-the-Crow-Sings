@@ -26,7 +26,7 @@ public class MainMenu : MonoBehaviour
             var x = Instantiate(sceneLoadButtonPrefab);
             x.transform.SetParent(sceneLoadButtonsHolder.transform, false);
             x.onClick.AddListener(() => OnSceneLoadButtonPressed(i));
-            x.GetComponentInChildren<TextMeshProUGUI>().text = i.name;
+            x.GetComponentInChildren<TextMeshProUGUI>().text = i.level.Name;
         }
 
         mainMenuDebugLoadHolder.resourceToLoad = null;

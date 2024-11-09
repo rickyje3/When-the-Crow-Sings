@@ -32,7 +32,11 @@ public class GameStateManager : MonoBehaviour, IService
     {
         GetLoadedScenes(); // I THINK there was a reason for this to be here??
 
-        //SaveData.ReadData();
+        if (SaveData.SavedDataExists())
+        {
+            SaveData.ReadData();
+        }
+
         if (mainMenuDebugLoadHolder.resourceToLoad != null)
         {
             LoadRoom(mainMenuDebugLoadHolder.resourceToLoad);
