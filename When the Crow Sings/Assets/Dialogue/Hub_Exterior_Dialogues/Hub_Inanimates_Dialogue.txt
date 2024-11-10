@@ -3,8 +3,8 @@ Lots of room and seating. Are there even enough people here to fill the chairs?
 They're probably just inside or working. Somewhere.
 => END
 
-~ cafeteria_serving station
-Coffee, water, vegetables. A nice spread.
+~ cafeteria_serving_station
+Coffee, water, fruits, vegetables. A nice spread.
 => END
 
 ~ wood_pile
@@ -12,22 +12,27 @@ A pile of wooden planks leaning against the fence. Maybe it was used to make the
 => END
 
 ~ pot_of_soup
-It's soup.
-Good soup.
-=> END
-
-~ pipsissewa
-if day == 1:
-A pretty pink flower. Its leaves look thorny. Better not touch it. 
-=> END
-if day == 2:
-	A vibrant pink flower. It looks radioactive. 
+if AngelTaskCompleted == true:
+	Soup, professionally stirred by yours truly.
 	=> END
-if day == 3:
-	A glowing pink flower. It's dripping some luminous mucus type substance.
+if AngelTaskAccepted == true:
+	Oh gee oh golly I am stirring this soup.
+	set AngelTaskCompleted = true;
 	=> END
 else:
-	Seems to be day zero. Huh. Nothing to see here.
+	It's soup.
+	Good soup.
+	=> END
+
+~ pipsissewa
+if day == 1
+A pretty pink flower. Its leaves look thorny. Better not touch it. 
+=> END
+if day == 2
+	A vibrant pink flower. It looks radioactive. 
+	=> END
+if day == 3
+	A glowing pink flower. It's dripping some luminous mucus type substance.
 => END
 
 ~ shiny_dirt
@@ -35,21 +40,23 @@ Something shiny is in the dirt ... Better not steal from the crows.
 => END
 
 ~ veggie_basket
-A basket of fresh vegetables. Wonder why it's out here?
-=> END
-
-~ utility_pole
-if day == 1:
-    A utility pole. Seems like the local fauna really gravitate towards the power lines.
-    => END
-if day == 2:
-	The power lines seem taught on the utility pole. Must be more weight than they're used to.
-	=> END
-if day == 3:
-	If I didn't know better, I would think that the number of crows was making the poles lean a little. Not sure if I do know better.
+if BeauTaskAccepted == true:
+	Gee I am sure pickin up these veggies.
+	set BeauTaskCompleted = true;
 	=> END
 else:
-	Doesn't seem to be a numbered day, so this is just a utility pole.
+	A basket of fresh vegetables. Wonder why it's out here?
+	=> END
+
+~ utility_pole
+if day == 1
+    A utility pole. Seems like the local fauna really gravitate towards the power lines.
+    => END
+if day == 2
+	The power lines seem taught on the utility pole. Must be more weight than they're used to.
+	=> END
+if day == 3
+	If I didn't know better, I would think that the number of crows was making the poles lean a little. Not sure if I do know better.
 	=> END
 
 ~ monkey_bars
@@ -122,11 +129,11 @@ An old fountain. The pool has been filled in with flowers, and it doesn't seem t
 // —-------------- DOORS —---------------
 
 ~ zone_door_1
-if FranciscoTaskCompleted == true:
+if FranciscoTaskCompleted == true
 	Just need to put in the code that Francisco gave me and...
 	Open. Voila.
 	=> END
-else:
+else
 The door is rusty. Looks like it hasn't been used in a while. 
 => END
 
@@ -135,19 +142,19 @@ The door is completely stuck. There's no way to open it even if I wanted to.
 => END
 
 ~ zone_door_3
-if FaridaBaseCompleted == true:
+if FaridaBaseCompleted == true
 	This must be the door that Farida was talking about.
 	The key unlocked the padlock. It opens with a little bit of effort.
 	=> END
-else:
+else
 The door looks like it gets some use now and then, but it's locked with a padlock.
 => END
 
 ~ zone_door_4
-if QuinnTaskCompleted == true:
+if QuinnTaskCompleted == true
 	Pressing on the intercom button, the door lock releases after a few seconds and swings freely.
 	=> END
-else:
+else
  A pristine door. Must get used often. There is a button on an intercom, but I don't think buzzing someone without reason is a good idea.
 => END
 
