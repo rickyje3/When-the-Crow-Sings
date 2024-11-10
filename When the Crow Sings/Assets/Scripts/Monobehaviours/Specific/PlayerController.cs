@@ -15,7 +15,7 @@ public class PlayerController : StateMachineComponent, IService
     private BirdseedController pfBirdseedProjectile;
     [HideInInspector]
     public bool isCrouching = false;
-    [HideInInspector]
+    //[HideInInspector]
     public bool isSprinting = false;
     [HideInInspector]
     public float gravity = -9.81f;

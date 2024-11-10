@@ -10,7 +10,6 @@ public class PlayerMovementState : StateMachineState
         s = component;
     }
 
-
     public override void StateEntered()
     {
         //Debug.Log("Entering MovementState");
@@ -88,23 +87,14 @@ public class PlayerMovementState : StateMachineState
 
     private void OnSprint(InputAction.CallbackContext context)
     {
-        /*s.isSprinting = !s.isSprinting;
-        //Set animator to sprint
-        if (s.isSprinting)
-        {
-            s.speed = 14;
-        }
-        else
-        {
-            s.speed = 8;
-        }*/
-
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
+            s.isSprinting = true;
             s.speed = 14;
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
         {
+            s.isSprinting = false;
             s.speed = 8;
         }
     }
@@ -140,6 +130,7 @@ public class PlayerMovementState : StateMachineState
 
     private void OnAction(InputAction.CallbackContext context)
     {
+
     }
 
     private void OnInteract(InputAction.CallbackContext context)
