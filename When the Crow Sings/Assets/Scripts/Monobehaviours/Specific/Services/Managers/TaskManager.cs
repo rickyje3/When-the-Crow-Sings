@@ -17,9 +17,12 @@ public class TaskManager : MonoBehaviour
 
     }
 
+
+    SuccessAndFailValues currentQTESuccessAndFailValues = null;
     public void OnQTEStartRequested(SignalArguments signalArgs)
     {
         QuickTimeEvent qteToLoad = (QuickTimeEvent)signalArgs.objectArgs[0];
+        currentQTESuccessAndFailValues = (SuccessAndFailValues)signalArgs.objectArgs[1];
         qteUiHolder.LoadQte(qteToLoad);
     }
 
@@ -31,5 +34,20 @@ public class TaskManager : MonoBehaviour
     public void OnQteFinished(SignalArguments signalArgs)
     {
         qteUiHolder.DestroyQte();
+        if (signalArgs.boolArgs[0])
+        {
+            foreach(KeyValuePair<string,bool> i in currentQTESuccessAndFailValues.success)
+            {
+                SaveData.SetFlag(i.Key, i.Value);
+            }
+        }
+        else
+        {
+            foreach (KeyValuePair<string, bool> i in currentQTESuccessAndFailValues.fail)
+            {
+                SaveData.SetFlag(i.Key, i.Value);
+            }
+        }
+        currentQTESuccessAndFailValues = null;
     }
 }

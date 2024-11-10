@@ -121,13 +121,17 @@ public class StirringQTE : QuickTimeEvent
     public override void SucceedQTE()
     {
         //timingMeterAnimator.SetBool("isOpen", false);
-        globalFinishedQteSignal.Emit();
+        SignalArguments args = new SignalArguments();
+        args.boolArgs.Add(true);
+        globalFinishedQteSignal.Emit(args);
     }
 
     public override void FailQTE()
     {
         Debug.Log("Time is up, QTE Failed");
-        globalFinishedQteSignal.Emit();
+        SignalArguments args = new SignalArguments();
+        args.boolArgs.Add(false);
+        globalFinishedQteSignal.Emit(args);
     }
 }
 

@@ -92,11 +92,15 @@ public class TimingMeterQTE : QuickTimeEvent
     {
         //timingMeterAnimator.SetBool("isOpen", false);
         //meterActive = false;
-        globalFinishedQteSignal.Emit();
+        SignalArguments args = new SignalArguments();
+        args.boolArgs.Add(true);
+        globalFinishedQteSignal.Emit(args);
     }
     public override void FailQTE()
     {
-        globalFinishedQteSignal.Emit();
+        SignalArguments args = new SignalArguments();
+        args.boolArgs.Add(false);
+        globalFinishedQteSignal.Emit(args);
     }
 
     public void RandomizeMeter()
