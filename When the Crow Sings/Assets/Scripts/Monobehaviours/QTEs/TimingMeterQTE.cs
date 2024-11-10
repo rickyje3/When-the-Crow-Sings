@@ -78,20 +78,24 @@ public class TimingMeterQTE : QuickTimeEvent
         {
             Debug.Log("Successful QTE");
             //RandomizeMeter();
-            EndQTE();
+            SucceedQTE();
         }
         else
         {
             Debug.Log("Failed QTE");
             //SetTargetRangeMarkers();
             //RandomizeMeter();
-            EndQTE();
+            FailQTE();
         }
     }
-    public void EndQTE()
+    public override void SucceedQTE()
     {
         //timingMeterAnimator.SetBool("isOpen", false);
         //meterActive = false;
+        globalFinishedQteSignal.Emit();
+    }
+    public override void FailQTE()
+    {
         globalFinishedQteSignal.Emit();
     }
 
