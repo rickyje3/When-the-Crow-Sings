@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d9420af2de3574aae05ef0a8da07a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dynamicEnables: []
 --- !u!850595691 &1144161087
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -369,8 +370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2bbef9998938cc4db5345afa17f0ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allTasks:
-  - {fileID: 11400000, guid: b439c955fefacd547b8640057d2f5b08, type: 2}
   qteUiHolder: {fileID: 1674788033}
 --- !u!114 &1765020099
 MonoBehaviour:
@@ -390,7 +389,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1765020098}
         m_TargetAssemblyTypeName: TaskManager, Assembly-CSharp
-        m_MethodName: OnQteStarted
+        m_MethodName: OnQTEStartRequested
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
