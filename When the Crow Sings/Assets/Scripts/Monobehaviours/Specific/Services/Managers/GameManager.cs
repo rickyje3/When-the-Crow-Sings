@@ -6,8 +6,11 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour, IService
 {
     // Likely where we keep track of general stuff going on in the game. Possibly birdseed.
+    [HideInInspector]
     public List<DynamicEnable> dynamicEnables = new List<DynamicEnable>();
-
+    [HideInInspector]
+    public List<BirdseedController> landedBirdseed = new List<BirdseedController>(); // Birbseeb
+    public CrowHolder crowHolder;
 
     private void Awake()
     {
@@ -22,6 +25,13 @@ public class GameManager : MonoBehaviour, IService
     {
         DynamicEnableLogic();
     }
+
+    public void OnBirdseedLanded(SignalArguments args)
+    {
+        landedBirdseed.Add((BirdseedController)args.objectArgs[0]);
+        crowHolder.AddCrowTargetIfNoneExists(((BirdseedController)args.objectArgs[0]).transform.position);
+    }
+
     private void DynamicEnableLogic()
     {
         foreach (DynamicEnable i in dynamicEnables)
@@ -60,7 +70,5 @@ public class GameManager : MonoBehaviour, IService
                     break;
             }
         }
-
-        
     }
 }
