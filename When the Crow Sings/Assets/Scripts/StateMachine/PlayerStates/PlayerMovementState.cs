@@ -88,7 +88,7 @@ public class PlayerMovementState : StateMachineState
 
     private void OnSprint(InputAction.CallbackContext context)
     {
-        s.isSprinting = !s.isSprinting;
+        /*s.isSprinting = !s.isSprinting;
         //Set animator to sprint
         if (s.isSprinting)
         {
@@ -96,7 +96,16 @@ public class PlayerMovementState : StateMachineState
         }
         else
         {
-            s.speed = 9;
+            s.speed = 8;
+        }*/
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            s.speed = 14;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            s.speed = 8;
         }
     }
 
