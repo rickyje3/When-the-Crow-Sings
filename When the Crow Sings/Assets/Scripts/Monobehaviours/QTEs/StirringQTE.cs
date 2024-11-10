@@ -31,7 +31,7 @@ public class StirringQTE : QuickTimeEvent
 
         if (score == 50)
         {
-            EndQTE();
+            SucceedQTE();
         }
 
         //If 8 seconds pass 
@@ -44,10 +44,10 @@ public class StirringQTE : QuickTimeEvent
             }
             else
             {
-                Debug.Log("Time is up, QTE Failed");
+                
                 timer = 0;
                 countingDown = false;
-                EndQTE();
+                FailQTE();
             }
         }
     }
@@ -118,10 +118,20 @@ public class StirringQTE : QuickTimeEvent
         throw new System.NotImplementedException();
     }
 
-    public void EndQTE()
+    public override void SucceedQTE()
     {
         //timingMeterAnimator.SetBool("isOpen", false);
-        globalFinishedQteSignal.Emit();
+        SignalArguments args = new SignalArguments();
+        args.boolArgs.Add(true);
+        globalFinishedQteSignal.Emit(args);
+    }
+
+    public override void FailQTE()
+    {
+        Debug.Log("Time is up, QTE Failed");
+        SignalArguments args = new SignalArguments();
+        args.boolArgs.Add(false);
+        globalFinishedQteSignal.Emit(args);
     }
 }
 
