@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class TimingMeterQTE : QuickTimeEvent
 {
@@ -23,8 +24,9 @@ public class TimingMeterQTE : QuickTimeEvent
     {
         SetTargetRangeMarkers();
         RandomizeMeter();
-        //leave out when implementation added
+
         StartQTE();
+        Debug.Log(meterActive);
     }
 
     // Update is called once per frame
@@ -33,7 +35,7 @@ public class TimingMeterQTE : QuickTimeEvent
         if (meterActive)
         {
             MoveMeter();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || (Input.GetKeyDown(KeyCode.Joystick1Button1)))
             {
                 CheckSuccess();
             }
@@ -42,14 +44,17 @@ public class TimingMeterQTE : QuickTimeEvent
 
     public override void StartQTE()
     {
-        Debug.Log("Started!");
-        //timingMeterAnimator.SetBool("isOpen", true);
-        meterActive = true;
-        SetTargetRangeMarkers();
+        //meterActive = true;
+        if (meterActive)
+        {
+            Debug.Log("Started!");
+            //timingMeterAnimator.SetBool("isOpen", true);
+            SetTargetRangeMarkers();
+        }
     }
 
-    //Moves the handle up and down
-    private void MoveMeter()
+        //Moves the handle up and down
+        private void MoveMeter()
     {
         if (movingRight)
         {
@@ -88,10 +93,11 @@ public class TimingMeterQTE : QuickTimeEvent
             EndQTE();
         }
     }
+
     public void EndQTE()
     {
         //timingMeterAnimator.SetBool("isOpen", false);
-        //meterActive = false;
+        meterActive = false;
         globalFinishedQteSignal.Emit();
     }
 
@@ -104,7 +110,7 @@ public class TimingMeterQTE : QuickTimeEvent
         //change these range values for accessibility settings
         targetMin = Random.Range(0.3f, 0.49f);
         targetMax = Random.Range(0.51f, 0.7f);
-        meterActive = true;
+        //meterActive = true;
         
         //EndQTE();
     }
