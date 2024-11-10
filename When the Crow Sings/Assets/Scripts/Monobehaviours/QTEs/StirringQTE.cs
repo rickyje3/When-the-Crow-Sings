@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class StirringQTE : QuickTimeEvent
 {
@@ -13,116 +14,143 @@ public class StirringQTE : QuickTimeEvent
     public int score = 1;
     public float timer = 8;
 
+    private KeyCode[] keySequence = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D }; // Keyboard sequence
+    private Vector2[] joystickSequence = { Vector2.up, Vector2.left, Vector2.down, Vector2.right }; // Joystick sequence
+    private float inputThreshold = 0.8f; // Threshold for recognizing a joystick direction
 
-    private KeyCode[] keySequence = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D }; // Rotating sequence
-
-    private void Awake()
-    {
-
-    }
+    //private bool isControllerConnected;
 
     private void Update()
     {
         if (!countingDown)
         {
-            ShowCurrentKey();
-            CheckInput();
-        }
-
-        if (score == 50)
-        {
-            EndQTE();
-        }
-
-        //If 8 seconds pass 
-        if (!countingDown)
-        {
-            if (timer > 0)
+            if (InputManager.IsControllerConnected)
             {
-                timer -= Time.deltaTime;
-                updateTimer(timer);
+                ShowCurrentDirection();
+                CheckJoystickInput();
             }
             else
             {
-                Debug.Log("Time is up, QTE Failed");
-                timer = 0;
-                countingDown = false;
-                EndQTE();
+                ShowCurrentKey();
+                CheckKeyboardInput();
             }
+        }
+
+        // Check for QTE completion
+        if (score >= 50)
+        {
+            SucceedQTE();
+        }
+
+        // Timer countdown logic
+        if (!countingDown && timer > 0)
+        {
+            timer -= Time.deltaTime;
+            UpdateTimer(timer);
+        }
+        else if (timer <= 0)
+        {
+            Debug.Log("Time is up, QTE Failed");
+            FailQTE();
         }
     }
 
-    void updateTimer(float currentTime)
+    private void UpdateTimer(float currentTime)
     {
-        currentTime += 1;
         float time = Mathf.FloorToInt(currentTime % 60);
     }
 
-    // Display the current expected key in the UI
+    //keyboard
     private void ShowCurrentKey()
     {
         KeyCode currentKey = keySequence[currentStep];
         displayBox.GetComponentInChildren<TextMeshProUGUI>().text = currentKey.ToString();
     }
 
-    // Check if the correct key is pressed
-    private void CheckInput()
+    //controller
+    private void ShowCurrentDirection()
     {
-        if (Input.anyKeyDown) // Only trigger on a key press
+        string direction = joystickSequence[currentStep].ToString();
+        displayBox.GetComponentInChildren<TextMeshProUGUI>().text = direction;
+    }
+
+    private void CheckKeyboardInput()
+    {
+        if (Input.anyKeyDown)
         {
             KeyCode expectedKey = keySequence[currentStep];
 
             if (Input.GetKeyDown(expectedKey))
             {
-                Debug.Log($"Correct Key: {expectedKey}");
                 correctKey = true;
-                StartCoroutine(KeyPressing());
+                StartCoroutine(KeyPressFeedback());
             }
             else
             {
-                Debug.Log("Incorrect Key");
                 correctKey = false;
-                StartCoroutine(KeyPressing());
+                StartCoroutine(KeyPressFeedback());
             }
         }
     }
 
-    // Coroutine to handle feedback and proceed to the next step
-    private IEnumerator KeyPressing()
+    private void CheckJoystickInput()
     {
-        if (displayBox != null)
+        Vector2 expectedDirection = joystickSequence[currentStep];
+        Vector2 joystickInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        if (Vector2.Dot(joystickInput.normalized, expectedDirection) > inputThreshold)
         {
-            countingDown = true;               //display green if correctkey is true and red if false
-            displayBox.GetComponent<Image>().color = correctKey ? Color.green : Color.red;
-
-            yield return new WaitForSeconds(.12f); // Time between transition
-
-            displayBox.GetComponent<Image>().color = Color.white;
-
-            if (correctKey)
-            {
-                // Move to the next step cycle back to the start if needed
-                currentStep = (currentStep + 1) % keySequence.Length;
-                score++;
-                timer = 7;
-            }
-            else score--;
-
-            correctKey = false;
-            countingDown = false; // Ready for the next input
+            correctKey = true;
+            StartCoroutine(KeyPressFeedback());
         }
+    }
+
+    private IEnumerator KeyPressFeedback()
+    {
+        countingDown = true;
+
+        if(correctKey) 
+            displayBox.GetComponent<Image>().color = Color.green;
+
+        yield return new WaitForSeconds(0.07f); // Time between transitions (less = faster)
+
+        displayBox.GetComponent<Image>().color = Color.white;
+
+        if (correctKey)
+        {
+            currentStep = (currentStep + 1) % keySequence.Length;
+            score++;
+            timer = 7; // Reset timer
+        }
+        else
+        {
+            //score = Mathf.Max(0, score - 1);
+        }
+
+        correctKey = false;
+        countingDown = false; // Ready for next input
+    }
+
+    public override void SucceedQTE()
+    {
+        SignalArguments args = new SignalArguments();
+        args.boolArgs.Add(true);
+        globalFinishedQteSignal.Emit(args);
+    }
+
+    public override void FailQTE()
+    {
+        SignalArguments args = new SignalArguments();
+        args.boolArgs.Add(false);
+        globalFinishedQteSignal.Emit(args);
     }
 
     public override void StartQTE()
     {
         throw new System.NotImplementedException();
-    }
-
-    public void EndQTE()
-    {
-        //timingMeterAnimator.SetBool("isOpen", false);
-        globalFinishedQteSignal.Emit();
+        //just kinda have this in here cuz quicktimeevent was getting mad at me :(
     }
 }
+
 
 
