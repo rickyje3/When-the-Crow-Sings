@@ -1,6 +1,28 @@
+~ 	caleb_directory
+if 	CalebBaseCompleted == false:
+	=> 	caleb_directory_2
+else:
+	=> 	caleb_beyond_base
+
+~ 	caleb_directory_2
+if 	CalebTaskOffered == false:
+	=> 	caleb_first_int
+if 	CalebTaskAccepted == false:
+	=> 	caleb_no_task
+else:
+	=> 	caleb_directory_3
+
+~ 	caleb_directory_3
+if 	CalebTaskCompleted == false:
+	=> 	caleb_task_unfin
+else:
+	=> 	caleb_task_fin
+
 ~ caleb_first_int
-Caleb: Oh, good (conditional dialogue here). You must be the new resident Farida was talking about.
-// Conditional choice here that doesn't show up unless flagged.
+if timeOfDay == 0:
+	Caleb: Oh, good morning. You must be the new resident Farida was talking about.
+if timeOfDay == 1:
+	Caleb: Oh, good afternoon. You must be the new resident Farida was talking about.
 Chance: Yep, that's me.
 Caleb_Smile: Nice to meet you, I'm Caleb. What's your name again?
 Chance: Chance.
@@ -14,9 +36,10 @@ Caleb_Wink: CHANCE on you, huh?
 	=> caleb_first_int_cont
 
 ~ caleb_first_int_cont
+set CalebTaskOffered = true;
 Caleb_Smile: :)
 Caleb: Well I'm just here doing some solar panel work. I'm our head electrician around here.
-: Just like back home...
+: Solar, just like back home.
 Caleb_Smile: This place used to run off some other energy source, but at some point it failed and they shipped me out and installed the panels.
 Caleb: Came here just for this job. It's a simple one for me.
  . . . ?
@@ -40,6 +63,7 @@ Caleb_Thinking: If you're curious about it, maybe I could spend some time thinki
 	=> END
 
 ~ caleb_first_cont_2
+set CalebTaskAccepted = true;
 Caleb_Smile: Great!
 Caleb_Annoyed: Now listen. These damned crows are bad enough, weighing down the power lines connecting the buildings and making me do maintenance on the connectors.
 Caleb_Annoyed: Then, they started taking my wires! They've been making nests over by the south east gate, near the old quarter. 
@@ -49,22 +73,37 @@ Caleb_Smile: If you could go and grab some back for me, I'd be mighty grateful.
 ~ caleb_no_task
 Caleb_Smile: Decide to take a chance on helping me out?
 - I guess.
+	set CalebTaskAccepted = true;
 	Chance: I guess so.
 	=> caleb_first_cont_2
 - Ugh.
 	Chance_Angry: Ugh.
 	=> END
 
+~ caleb_task_unfin
+Caleb_Thinking: I don't see any wire on you. Why're you back?
+- Where?
+	Chance_Sad: I forgot where you said to go.
+	Caleb_Annoyed: Uhuh. The crows are making nests by the southeast door.
+	Chance: Thanks.
+	=> END
+- Nunya
+	Chance_Angry: None of your business old man, I just didn't get around to it yet!
+	Caleb_Annoyed: Uhuh.
+	=> END
+
 ~ caleb_task_fin
+set CalebBaseCompleted = true;
 Caleb_Smile: Already kid, I yield. You did good.
 Caleb_Thinking: If you want to know more about the old energy source, for whatever reason, you would probably want to talk with Farida.
 Caleb_Annoyed: But I don't think you should have me sending you.. Not that we don't get along! It's just..
-- Met Farida.
-	Chance: I've already spoken with Farida.
-	Caleb: Oh yeah? And was she a bucket of kittens and rainbows?
-	Chance_Sad: I don't know if I'd say that...
-	Caleb: Yeah. Well, it might not hurt to talk to who I was going to send you to anyway.
-	=> caleb_task_fin_cont
+if FaridaTaskOffered == true:
+	- Met Farida.
+		Chance: I've already spoken with Farida.
+		Caleb: Oh yeah? And was she a bucket of kittens and rainbows?
+		Chance_Sad: I don't know if I'd say that...
+		Caleb: Yeah. Well, it might not hurt to talk to who I was going to send you to anyway.
+		=> caleb_task_fin_cont
 - . . .
 	Caleb: Well, anyway if you wanted to talk to her..
 	=> caleb_task_fin_cont
@@ -78,3 +117,7 @@ Caleb_Wink: Well you know what they say. It's not what you know, it's who you kn
 Chance_Angry: That's stupid. There's only like a dozen people here. Surely you all know each other.
 Caleb_Wink: ;)
 	=> END
+
+~ caleb_beyond_base
+Caleb_Annoyed: I ain't got shit to say to you, get lost.
+=> END

@@ -22,19 +22,19 @@ public static class SaveData
         { "AngelTaskOffered",false },
         { "AngelTaskAccepted",false },
         { "AngelTaskCompleted",false },
-        { "AngelBaseComplete",false },
+        { "AngelBaseCompleted",false },
         { "AngelExhausted",false },
 
         { "BeauTaskOffered",false },
         { "BeauTaskAccepted",false },
         { "BeauTaskCompleted",false },
-        { "BeauBaseComplete",false },
+        { "BeauBaseCompleted",false },
         { "BeauExhausted",false },
         
         { "CalebTaskOffered",false },
         { "CalebTaskAccepted",false },
         { "CalebTaskCompleted",false },
-        { "CalebBaseComplete",false },
+        { "CalebBaseCompleted",false },
         { "CalebExhausted",false },
         
         { "FaridaIntroduction",false },
@@ -53,7 +53,7 @@ public static class SaveData
         { "JazmyneTaskOffered",false },
         { "JazmyneTaskAccepted",false },
         { "JazmyneTaskCompleted",false },
-        { "JazmyneBaseComplete",false },
+        { "JazmyneBaseCompleted",false },
         { "JazmyneExhausted",false },
         
         { "FranciscoTaskOffered",false },

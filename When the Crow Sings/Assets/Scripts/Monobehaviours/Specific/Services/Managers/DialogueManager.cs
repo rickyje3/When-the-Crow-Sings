@@ -465,6 +465,10 @@ public class DialogueManager : MonoBehaviour, IService
                 {
                     ExampleDialogueMethod();
                 }
+                else if (mutation.stringData == "ReloadScene()")
+                {
+                    Debug.Log("Reloaded scene :3 stinky");
+                }
                 else if (mutation.stringData == "SaveGameToDisk()")
                 {
                     Debug.Log("Saved!");
