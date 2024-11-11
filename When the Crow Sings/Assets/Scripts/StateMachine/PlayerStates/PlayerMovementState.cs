@@ -47,6 +47,8 @@ public class PlayerMovementState : StateMachineState
         InputManager.playerInputActions.Player.Crouch.performed -= OnCrouched;
 
         s.playerAnimator.SetBool("animIsMoving", false);
+        s.isSprinting = false;
+        s.speed = 8;
     }
 
 
