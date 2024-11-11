@@ -16265,8 +16265,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
         type: 3}
+      propertyPath: UVModule.mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
+        type: 3}
       propertyPath: simulationSpeed
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
+        type: 3}
+      propertyPath: UVModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
+        type: 3}
+      propertyPath: UVModule.timeMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
         type: 3}
@@ -16290,13 +16305,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
         type: 3}
-      propertyPath: InitialModule.startSize.scalar
+      propertyPath: UVModule.uvChannelMask
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
+        type: 3}
+      propertyPath: UVModule.startFrame.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
+        type: 3}
+      propertyPath: UVModule.sprites.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
+        type: 3}
+      propertyPath: InitialModule.startSizeY.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
+        type: 3}
+      propertyPath: InitialModule.startSizeZ.scalar
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
+        type: 3}
+      propertyPath: UVModule.frameOverTime.minMaxState
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
         type: 3}
@@ -16313,6 +16358,18 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
+        type: 3}
+      propertyPath: UVModule.sprites.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d8900e1f805b04148b4af2644831e72f,
+        type: 3}
+    - target: {fileID: 893304396772402630, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
+        type: 3}
+      propertyPath: UVModule.sprites.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 993f347498bfecc44b35bea6f6bda368,
+        type: 3}
     - target: {fileID: 2153344099961740592, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16362,6 +16419,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395911844226460330, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
+        type: 3}
+      propertyPath: m_AllowRoll
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2395911844226460330, guid: 3ada3a6cc6bd03b49ab135ed7a641872,
         type: 3}

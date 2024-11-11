@@ -33,7 +33,7 @@ public class TimingMeterQTE : QuickTimeEvent
         if (meterActive)
         {
             MoveMeter();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button1))
             {
                 CheckSuccess();
             }
