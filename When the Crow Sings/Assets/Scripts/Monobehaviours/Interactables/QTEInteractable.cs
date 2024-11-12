@@ -10,12 +10,30 @@ public class QTEInteractable : MonoBehaviour
     [Header("Built-In")]
     public GameSignal globalQteSignal;
 
+    public SerializableDictionary successDict;
+    public SerializableDictionary failureDict;
+
     private SignalArguments signalArgs;
     private void Awake()
     {
         signalArgs = new SignalArguments();
         signalArgs.objectArgs.Add(qte);
-        // TODO maybe task/step???
+
+        if (successDict.elements.Count == 0) throw new System.Exception("QTE does not have success dict!");
+        if (failureDict.elements.Count == 0) throw new System.Exception("QTE does not have failure dict!");
+        successDict.ValidateNotBlank();
+        failureDict.ValidateNotBlank();
+
+        SuccessAndFailValues successAndFailValues = new SuccessAndFailValues();
+        foreach (SerializableDictionaryElement i in successDict.elements)
+        {
+            successAndFailValues.success[i.key] = i.value;
+        }
+        foreach (SerializableDictionaryElement i in failureDict.elements)
+        {
+            successAndFailValues.fail[i.key] = i.value;
+        }
+        signalArgs.objectArgs.Add(successAndFailValues);
     }
 
     public void EmitStartQteSignal()

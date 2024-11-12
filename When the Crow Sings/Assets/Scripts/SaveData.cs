@@ -10,62 +10,73 @@ using UnityEngine;
 
 public static class SaveData
 {
-    const int saveDataVersion = 0;
+    const int saveDataVersion = 1;
     public static Dictionary<string, bool> boolFlags = new Dictionary<string, bool>()
     {
         { "TestingFlag1",false },
         { "TestingFlag2",true },
         { "TestingFlag3",false },
         { "TestingFlag4",true },
+        { "SceneStructureFlag", false },
 
         { "AngelTaskOffered",false },
+        { "AngelTaskAccepted",false },
         { "AngelTaskCompleted",false },
-        { "AngelBaseComplete",false },
+        { "AngelBaseCompleted",false },
         { "AngelExhausted",false },
 
         { "BeauTaskOffered",false },
+        { "BeauTaskAccepted",false },
         { "BeauTaskCompleted",false },
-        { "BeauBaseComplete",false },
+        { "BeauBaseCompleted",false },
         { "BeauExhausted",false },
         
         { "CalebTaskOffered",false },
+        { "CalebTaskAccepted",false },
         { "CalebTaskCompleted",false },
-        { "CalebBaseComplete",false },
+        { "CalebBaseCompleted",false },
         { "CalebExhausted",false },
         
         { "FaridaIntroduction",false },
         { "FaridaTaskOffered",false },
+        { "FaridaTaskAccepted",false },
         { "FaridaTaskCompleted",false },
         { "FaridaBaseCompleted",false },
         { "FaridaExhausted",false },
         
         { "QuinnTaskOffered",false },
+        { "QuinnTaskAccepted",false },
         { "QuinnTaskCompleted",false },
         { "QuinnBaseCompleted",false },
         { "QuinnExhausted",false },
         
         { "JazmyneTaskOffered",false },
+        { "JazmyneTaskAccepted",false },
         { "JazmyneTaskCompleted",false },
-        { "JazmyneBaseComplete",false },
+        { "JazmyneBaseCompleted",false },
         { "JazmyneExhausted",false },
         
         { "FranciscoTaskOffered",false },
+        { "FranciscoTaskAccepted",false },
         { "FranciscoTaskCompleted",false },
         { "FranciscoBaseCompleted",false },
         { "FranciscoExhausted",false },
         
         { "YuleTaskOffered",false },
+        { "YuleTaskAccepted",false },
         { "YuleTaskCompleted",false },
         { "YuleBaseCompleted",false },
         { "YuleExhausted",false },
         
         { "PhilomenaTaskOffered",false },
+        { "PhilomenaTaskAccepted",false },
         { "PhilomenaTaskCompleted",false },
         { "PhilomenaBaseCompleted",false },
         { "PhilomenaExhausted",false },
         
         { "TheodoreIntroduction",false },
         { "TheodoreTaskOffered",false },
+        { "TheodoreTaskAccepted",false },
         { "TheodoreTaskCompleted",false },
         { "TheodoreBaseCompleted",false },
         { "TheodoreExhausted",false },
@@ -134,28 +145,82 @@ public static class SaveData
         switch (saveDataVersion)
         {
             case 0:
+#pragma warning disable CS0162 // Unreachable code detected
                 WriteData_V0();
                 break;
+            default:
+                WriteData_V0();
+                break;
+#pragma warning restore CS0162 // Unreachable code detected
         }
-       
+
     }
     public static void ReadData()
     {
         switch (saveDataVersion) // TODO: Make it so it starts reading, stops after the version number, then calls the correct method using this switch statement.
         {
             case 0:
+#pragma warning disable CS0162 // Unreachable code detected
                 ReadData_V0();
                 break;
+            default:
+                ReadData_V0();
+                break;
+#pragma warning restore CS0162 // Unreachable code detected
         }
-        
+        Debug.Log("Data read!");
     }
 
-
-    static void WriteData_V0()
+    public static IEnumerator EraseData()
     {
         string filePath = Application.persistentDataPath + "/save.wtcs";
 
-        FileStream fileStream = new FileStream(filePath, FileMode.Create);
+        while (true)
+        {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                    Debug.Log("File deleted successfully.");
+                }
+                yield break; // Exit once deletion is successful
+            }
+            catch (IOException)
+            {
+                Debug.LogWarning("File is in use by another process, retrying...");
+            }
+            yield return new WaitForSeconds(0.1f); // Retry after a delay
+        }
+    }
+
+
+    public static bool SavedDataExists()
+    {
+        if (File.Exists(Application.persistentDataPath + "/save.wtcs"))
+        {
+            return true;
+        }
+        Debug.Log("No save data exists on disk!");
+        return false;
+    }
+
+    static void WriteData_V0()
+    {
+        //EraseData();
+
+        string filePath = Application.persistentDataPath + "/save.wtcs";
+
+        FileStream fileStream;
+        //if (!File.Exists(filePath))
+        //{
+        //    fileStream = new FileStream(filePath, FileMode.Create);
+        //}
+        //else
+        //{
+        //    fileStream = new FileStream(filePath, FileMode.Truncate);
+        //}
+        fileStream = new FileStream(filePath, FileMode.Create);
 
         // Write the save data version.
         writeInt(saveDataVersion, fileStream);
@@ -237,7 +302,7 @@ public static class SaveData
         }
         stringFlags = tempStringFlags;
 
-
+        fileStream.Close();
 
         //foreach (byte i in fileBytes)
         //{

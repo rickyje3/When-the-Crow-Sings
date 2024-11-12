@@ -7,6 +7,7 @@ public class SeeThruWall : MonoBehaviour
     public List<Material> SeeThruMaterials = new List<Material>(); // List of matching materials
     public Camera Camera;
     public LayerMask mask; // Assign this to wall layer
+    private float sphereRadius = 1.05f; //determines size of raycast
 
     public static int PosID = Shader.PropertyToID("_Position");
     public static int SizeID = Shader.PropertyToID("_Size");
@@ -31,7 +32,7 @@ public class SeeThruWall : MonoBehaviour
         var dir = Camera.transform.position - transform.position;
         var ray = new Ray(transform.position, dir.normalized);
 
-        bool isInView = Physics.Raycast(ray, 3000, mask);
+        bool isInView = Physics.SphereCast(ray, sphereRadius, 3000, mask);
 
         foreach (var material in SeeThruMaterials)
         {

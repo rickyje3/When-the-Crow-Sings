@@ -32,7 +32,11 @@ public class GameStateManager : MonoBehaviour, IService
     {
         GetLoadedScenes(); // I THINK there was a reason for this to be here??
 
-        //SaveData.ReadData();
+        if (SaveData.SavedDataExists())
+        {
+            SaveData.ReadData();
+        }
+
         if (mainMenuDebugLoadHolder.resourceToLoad != null)
         {
             LoadRoom(mainMenuDebugLoadHolder.resourceToLoad);
@@ -91,26 +95,9 @@ public class GameStateManager : MonoBehaviour, IService
     }
 
 
-    public void LoadRoomDebug(string levelName)
-    {
-        if (canLoad)
-        {
-            Destroy(playerHolder);
-
-            // Unload previous scenes.
-            foreach (Scene i in GetLoadedScenes())
-            {
-                SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
-            }
-            SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
-            //player = Instantiate(_playerPrefab);
-        }
-
-    }
-
-
     public void LoadRoom(LevelDataResource levelDataResource)
     {
+        lastLoadedScene = levelDataResource;
         Destroy(playerHolder);
 
         // Unload previous scenes.
@@ -250,6 +237,16 @@ public class GameStateManager : MonoBehaviour, IService
             testResource = debugScenes[myIndex];
             targetSpawnIndex = 0;
             LoadRoom(testResource);
+        }
+    }
+
+    LevelDataResource lastLoadedScene;
+    public void ReloadCurrentScene(int spawnIndex)
+    {
+        if (canLoad)
+        {
+            targetSpawnIndex = spawnIndex;
+            LoadRoom(lastLoadedScene);
         }
     }
 }

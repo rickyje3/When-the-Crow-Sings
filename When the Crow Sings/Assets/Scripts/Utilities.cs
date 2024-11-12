@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public static class Utilities
@@ -27,6 +28,17 @@ public static class Utilities
             ? fromThis
             : fromThis.Remove(index, removeThis.Length);
         return newString;
+    }
+
+    public static int GetSingleIntFromString(string str)
+    {
+        Match result = Regex.Match(str, @"-?\d+");
+
+        if (result.Success)
+        {
+            return int.Parse(result.Value);
+        }
+        return 0;
     }
 
 

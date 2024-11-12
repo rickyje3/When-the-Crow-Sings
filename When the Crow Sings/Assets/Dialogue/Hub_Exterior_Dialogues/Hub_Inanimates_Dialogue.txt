@@ -12,16 +12,16 @@ A pile of wooden planks leaning against the fence. Maybe it was used to make the
 => END
 
 ~ pot_of_soup
-It's soup.
-Good soup.
-=> END
-
-~ soup_demo
-if TestingFlag2 == true:
-	Chance: Woah I don't have permission to touch this soup.
+if AngelTaskCompleted == true:
+	Soup, professionally stirred by yours truly.
+	=> END
+if AngelTaskAccepted == true:
+	Oh gee oh golly I am stirring this soup.
+	set AngelTaskCompleted = true;
 	=> END
 else:
-	Chance: Awesome, I'm gonna touch the soup.
+	It's soup.
+	Good soup.
 	=> END
 
 ~ pipsissewa
@@ -40,8 +40,13 @@ Something shiny is in the dirt ... Better not steal from the crows.
 => END
 
 ~ veggie_basket
-A basket of fresh vegetables. Wonder why it's out here?
-=> END
+if BeauTaskAccepted == true:
+	Gee I am sure pickin up these veggies.
+	set BeauTaskCompleted = true;
+	=> END
+else:
+	A basket of fresh vegetables. Wonder why it's out here?
+	=> END
 
 ~ utility_pole
 if day == 1

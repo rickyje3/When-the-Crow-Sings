@@ -1,3 +1,58 @@
+~ demonstrate_state
+if SceneStructureFlag == false:
+	This will demonstrate how what you do affects the world.
+	Would you like to do it?
+	- Yes
+		set SceneStructureFlag = true;
+		Then it is done.
+	- No
+		Then why are you here?
+	Go now.
+	=> END
+else:
+	You have already done it.
+	There is nothing left for you here.
+	Go now.
+	=> END
+=> END
+
+
+~ demonstrate_saving
+Would you like to save?
+- Save
+	call SaveGameToDisk();
+	Saved to disk as a binary format.
+- Wipe
+	call EraseGameFromDisk();
+	Erased.
+- None.
+	Then why are you here?
+=> END
+
+~ dynamic_enabling
+Flipping the flag.
+- True
+	set TestingFlag1 = true;
+- False
+	set TestingFlag1 = false;
+=> END
+
+~ demonstrate_reload
+Choose spawn point.
+- None
+	call ReloadScene();
+- 0
+	call ReloadScene(0);
+- 1
+	call ReloadScene(1);
+=> END
+
+
+
+
+
+
+
 ~ my_title
 Character 1: Hello!
 This is text. A good deal of text, actually, found inside of a text file. Help, I've been parsed!
@@ -12,11 +67,16 @@ Well, I guess we never reached the second title.
 ~ my_second_title
 Testing mutations.
 if TestingFlag1 == false:
-    Hi.
+	Hi.
 Yep.
 => END
 
 
+
+
+
+
+~ mutation_testing
 set TestingFlag1 = true;
 Should be true now.
 

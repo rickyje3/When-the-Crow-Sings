@@ -1,11 +1,14 @@
+using ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : StateMachineComponent
+public class PauseMenu : MonoBehaviour
 {
     public Canvas pauseCanvas;
+
+    public GameSignal unpauseSignalTEMP;
 
     private void Start()
     {
@@ -14,8 +17,9 @@ public class PauseMenu : StateMachineComponent
 
     public void resume()
     {
-        pauseCanvas.enabled = false;
-        stateMachine.Enter("PlayerMovementState");
+        unpauseSignalTEMP.Emit();
+        pauseCanvas.gameObject.SetActive(false);
+        //stateMachine.Enter("PlayerMovementState");
     }
 
     public void journal()
