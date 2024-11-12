@@ -6,6 +6,7 @@ using TMPro;
 using System.Linq;
 using System;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class DialogueManager : MonoBehaviour, IService
 {
@@ -448,7 +449,6 @@ public class DialogueManager : MonoBehaviour, IService
 
     }
 
-
     void DoMutationLogic(DialogueMutation mutation)
     {
         switch (mutation.actionType)
@@ -465,9 +465,10 @@ public class DialogueManager : MonoBehaviour, IService
                 {
                     ExampleDialogueMethod();
                 }
-                else if (mutation.stringData == "ReloadScene()")
+                else if (mutation.stringData.Contains("ReloadScene("))
                 {
-                    Debug.Log("Reloaded scene :3 stinky");
+                    int argument = Utilities.GetSingleIntFromString(mutation.stringData);
+                    ReloadScene(argument);
                 }
                 else if (mutation.stringData == "SaveGameToDisk()")
                 {
@@ -527,6 +528,13 @@ public class DialogueManager : MonoBehaviour, IService
     void ExampleDialogueMethod()
     {
         Debug.Log("Dialogue called this method!");
+    }
+
+    void ReloadScene(int spawnIndex)
+    {
+        EndDialogue();
+
+        ServiceLocator.Get<GameStateManager>().ReloadCurrentScene(spawnIndex);
     }
 
 }
