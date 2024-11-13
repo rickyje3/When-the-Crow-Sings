@@ -80,6 +80,20 @@ public static class SaveData
         { "TheodoreTaskCompleted",false },
         { "TheodoreBaseCompleted",false },
         { "TheodoreExhausted",false },
+
+        { "RecCenterDoorUnlocked",false },
+        { "GreenhouseDoorUnlocked",false },
+        { "EnergyHQDoorUnlocked",false},
+        { "ClinicDoorUnlocked",false },
+        { "Zone1DoorUnlocked",false },
+        { "Zone2DoorUnlocked",false },
+        { "Zone3DoorUnlocked",false },
+        { "Zone4DoorUnlocked",false },
+
+        { "KeyInformation1",false },
+        { "KeyInformation2",false },
+        { "KeyInformation3",false },
+
     };
 
     public static Dictionary<string, int> intFlags = new Dictionary<string, int>()
