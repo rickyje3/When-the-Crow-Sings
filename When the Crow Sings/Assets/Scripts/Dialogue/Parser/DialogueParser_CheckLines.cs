@@ -271,7 +271,7 @@ public partial class DialogueParser
                 else if (split2[1] == "Dazed") newLine.characterEmotion = Constants.EMOTIONS.DAZED;
                 else if (split2[1] == "Panicked") newLine.characterEmotion = Constants.EMOTIONS.PANICKED;
                 else if (split2[1] == "MildSurprise") newLine.characterEmotion = Constants.EMOTIONS.MILD_SURPRISE;
-                else if (split2[1] == "SighOfRelief") newLine.characterEmotion = Constants.EMOTIONS.SIGH_OF_RELIEF;
+                else if (split2[1] == "Sigh") newLine.characterEmotion = Constants.EMOTIONS.SIGH;
                 else if (split2[1] == "Annoyed") newLine.characterEmotion = Constants.EMOTIONS.ANNOYED;
 
                 else if (split2[1] == "Intelligent") newLine.characterEmotion = Constants.EMOTIONS.INTELLIGENT;
