@@ -2,10 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Pipes;
-using System.Linq;
 using System.Text;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public static class SaveData
@@ -135,19 +132,6 @@ public static class SaveData
         Debug.Log("Key is now " + stringFlags[key]);
     }
 
-    //public static bool GetFlag<Bool>(string key)
-    //{
-    //    return boolFlags[key];
-    //}
-    //public static int GetFlag<Int>(string key)
-    //{
-    //    return intFlags[key];
-    //}
-    //public static string GetFlag<String>(string key)
-    //{
-    //    return stringFlags[key];
-    //}
-
     static void writeInt(int integer, FileStream fileStream)
     {
         byte[] valueBytes = BitConverter.GetBytes(integer);
@@ -158,14 +142,14 @@ public static class SaveData
     {
         switch (saveDataVersion)
         {
+#pragma warning disable CS0162 // Ignore warning for save data version.
             case 0:
-#pragma warning disable CS0162 // Unreachable code detected
                 WriteData_V0();
                 break;
             default:
                 WriteData_V0();
                 break;
-#pragma warning restore CS0162 // Unreachable code detected
+#pragma warning restore CS0162 // End ignore warning.
         }
 
     }
@@ -173,14 +157,14 @@ public static class SaveData
     {
         switch (saveDataVersion) // TODO: Make it so it starts reading, stops after the version number, then calls the correct method using this switch statement.
         {
+#pragma warning disable CS0162 // Okay this one it doesn't need.
             case 0:
-#pragma warning disable CS0162 // Unreachable code detected
                 ReadData_V0();
                 break;
             default:
                 ReadData_V0();
                 break;
-#pragma warning restore CS0162 // Unreachable code detected
+#pragma warning restore CS0162 // still doesn't need this!
         }
         Debug.Log("Data read!");
     }
