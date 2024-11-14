@@ -984,7 +984,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3476741302182911858}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7723408575361868834}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: quitToMain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7107754820027272602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,6 +1117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseCanvas: {fileID: 8957687331524394022}
+  unpauseSignalTEMP: {fileID: 11400000, guid: 518f0b22789fb6a4d9238bc63244e891, type: 2}
 --- !u!1 &7392848687731501622
 GameObject:
   m_ObjectHideFlags: 0

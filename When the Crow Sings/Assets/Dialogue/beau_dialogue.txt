@@ -1,5 +1,5 @@
 ~ beau_directory
-if BeauBasecompleted== false:
+if BeauBaseCompleted == false:
 	=> beau_directory_2
 else:
 	=> beau_beyond_base
@@ -101,7 +101,7 @@ Beau_Awkward: With no veggies. Did something happen, or?
 
 ~ beau_task_fin
 Beau: Alright bud, look. I can tell you're having some trouble settling in here. You did me a solid, so let me give you a little advice.
-Chance: ?
+Chance: Hm?
 Beau_Smile: Things get a little weird around here, but it's harmless! Least since I've been here.
 Beau: If you want some reassurance you could go talk to Quinn, the gardener you just grabbed a delivery from for me. 
 if QuinnTaskOffered == true:
@@ -125,7 +125,9 @@ else:
 	=> beau_task_fin_cont_3
 
 ~ beau_task_fin_cont_3
-set BeauBasecompleted= true;
+set BeauBaseCompleted = true;
+set GreenhouseDoorUnlocked = true;
+set EnergyHQDoorUnlocked = true;
 Chance_Smile: Um, thanks.
 Beau_Teasing: No problem, ey? Not to be a keener but, wouldn't want you to be uncomfortable livin' here.
 => END

@@ -37,7 +37,15 @@ Flipping the flag.
 	set TestingFlag1 = false;
 => END
 
-
+~ demonstrate_reload
+Choose spawn point.
+- None
+	call ReloadScene();
+- 0
+	call ReloadScene(0);
+- 1
+	call ReloadScene(1);
+=> END
 
 
 
