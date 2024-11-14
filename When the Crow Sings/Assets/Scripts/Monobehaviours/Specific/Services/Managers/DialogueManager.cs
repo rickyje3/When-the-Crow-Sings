@@ -284,15 +284,8 @@ public class DialogueManager : MonoBehaviour, IService
     private bool isSkipping = false;
     public void OnNextLineButtonPressed()
     {
-        if (canNextLine)
-        {
-
-            ControlLineBehavior(currentLine + 1, dialogueResource.dialogueLines[currentLine].tabCount);
-        }
-        else
-        {
-            isSkipping = true;
-        }
+        if (canNextLine) ControlLineBehavior(currentLine + 1, dialogueResource.dialogueLines[currentLine].tabCount);
+        else isSkipping = true;
     }
 
     public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
@@ -302,7 +295,6 @@ public class DialogueManager : MonoBehaviour, IService
 
         int nextLine = choiceButton.dialogueLineIndex + 1;
         int choiceTabCount = choiceButton.dialogueChoice.tabCount;
-
 
         ControlLineBehavior(nextLine, choiceTabCount);
     }
@@ -443,10 +435,6 @@ public class DialogueManager : MonoBehaviour, IService
 
     void SetPortraits(DialogueResponse response)
     {
-        //newLine2.characterName;
-        //newLine2.characterEmotion;
-        //string filePath = "Assets/Art/Sprites/"+response.characterName+"/"+response.characterName+"Sprite"+response.characterEmotion+".png";//Theodore (Character 9)/theodoreSpriteAnger.png";
-        //Debug.Log(filePath);
         Image activeImageObject = null;
         if (response.characterName == "Chance")
         {
@@ -543,7 +531,7 @@ public class DialogueManager : MonoBehaviour, IService
         
     }
 
-
+    #region Dialogue Callable Methods
     void ExampleDialogueMethod()
     {
         Debug.Log("Dialogue called this method!");
@@ -555,5 +543,6 @@ public class DialogueManager : MonoBehaviour, IService
 
         ServiceLocator.Get<GameStateManager>().ReloadCurrentScene(spawnIndex);
     }
+    #endregion
 
 }

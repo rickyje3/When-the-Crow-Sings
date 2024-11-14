@@ -1,3 +1,25 @@
+~ demonstrate_features
+if TestingFlag1 == false:
+	(This is text.)
+	Chance: Hi, I'm talking!
+	Chance_Happy: I'm happy to talk!
+	Angel: Yes, I get it.
+	Angel: Would you like a decision? This branches out the dialogue.
+	- Yes
+		Angel: Hm, very good. Here, have a cylinder.
+		set TestingFlag1 = true;
+		Angel: I hope you enjoy your cylinder.
+	- No
+		Angel: You have created a paradox.
+		=> END
+	(This has been a brief demonstration of a few dialogue features. Dialogue will now end.)
+else:
+	(Why are you back? Just to demonstrate conditional logic?)
+	(How strange.)
+=> END
+
+
+
 ~ demonstrate_state
 if SceneStructureFlag == false:
 	This will demonstrate how what you do affects the world.
