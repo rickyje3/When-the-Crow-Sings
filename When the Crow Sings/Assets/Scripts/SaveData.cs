@@ -205,23 +205,14 @@ public static class SaveData
 
     static void WriteData_V0()
     {
-        //EraseData();
-
         string filePath = Application.persistentDataPath + "/save.wtcs";
 
         FileStream fileStream;
-        //if (!File.Exists(filePath))
-        //{
-        //    fileStream = new FileStream(filePath, FileMode.Create);
-        //}
-        //else
-        //{
-        //    fileStream = new FileStream(filePath, FileMode.Truncate);
-        //}
         fileStream = new FileStream(filePath, FileMode.Create);
 
         // Write the save data version.
         writeInt(saveDataVersion, fileStream);
+
         // Write the length of boolFlags
         //writeInt(boolFlags.Count, fileStream);
         // Write the length of intFlags
@@ -240,7 +231,7 @@ public static class SaveData
         }
         foreach (KeyValuePair<string,string> i in stringFlags)
         {
-            byte[] valueBytes = Encoding.UTF8.GetBytes(i.Value); //BitConverter.GetBytes(i.Value);
+            byte[] valueBytes = Encoding.UTF8.GetBytes(i.Value);
             byte[] valueBytesLengthBytes = BitConverter.GetBytes(valueBytes.Length);
             fileStream.Write(valueBytesLengthBytes,0, valueBytesLengthBytes.Length);
             fileStream.Write(valueBytes, 0, valueBytes.Length);
@@ -265,20 +256,15 @@ public static class SaveData
     static void ReadData_V0()
     {
         string filePath = Application.persistentDataPath + "/save.wtcs";
-        //byte[] fileBytes = File.ReadAllBytes(filePath);
         FileStream fileStream = new FileStream(filePath, FileMode.Open);
-
-        //int loadedSaveDataVersion = fileBytes[loop];
         
         int loadedSaveDataVersion = ReadInt(fileStream);
-        //Debug.Log("Save data version is "+loadedSaveDataVersion);
 
         Dictionary<string,bool> tempBoolFlags = new Dictionary<string,bool>();
         foreach (KeyValuePair<string, bool> i in boolFlags)
         {
             tempBoolFlags.Add(i.Key, i.Value);
-            tempBoolFlags[i.Key] = fileStream.ReadByte() == 1; //BitConverter.ToBoolean(fileBytes, loop);
-            //Debug.Log(tempBoolFlags[i.Key]);
+            tempBoolFlags[i.Key] = fileStream.ReadByte() == 1;
         }
         boolFlags = tempBoolFlags;
 
@@ -287,7 +273,6 @@ public static class SaveData
         {
             tempIntFlags.Add(i.Key, i.Value);
             tempIntFlags[i.Key] = ReadInt(fileStream);
-            //Debug.Log(tempIntFlags[i.Key]);
         }
         intFlags = tempIntFlags;
 
@@ -296,17 +281,9 @@ public static class SaveData
         {
             tempStringFlags.Add(i.Key, i.Value);
             tempStringFlags[i.Key] = ReadString(fileStream);
-            //Debug.Log(tempStringFlags[i.Key]);
         }
         stringFlags = tempStringFlags;
 
         fileStream.Close();
-
-        //foreach (byte i in fileBytes)
-        //{
-        //    Debug.Log(i);
-        //}
-
-        //FileStream fileStream = new FileStream(filePath, FileMode.Open);
     }
 }
