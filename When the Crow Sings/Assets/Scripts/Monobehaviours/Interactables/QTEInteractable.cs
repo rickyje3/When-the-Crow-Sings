@@ -19,10 +19,19 @@ public class QTEInteractable : MonoBehaviour
         signalArgs = new SignalArguments();
         signalArgs.objectArgs.Add(qte);
 
-        if (successDict.elements.Count == 0) throw new System.Exception("QTE does not have success dict!");
-        if (failureDict.elements.Count == 0) throw new System.Exception("QTE does not have failure dict!");
-        successDict.ValidateNotBlank();
-        failureDict.ValidateNotBlank();
+        //if (successDict.elements.Count == 0) throw new System.Exception("QTE does not have success dict!");
+        //if (failureDict.elements.Count == 0) throw new System.Exception("QTE does not have failure dict!");
+        //successDict.ValidateNotBlank();
+        //failureDict.ValidateNotBlank();
+
+        if (successDict.elements.Count != 0)
+        {
+            successDict.ValidateNotBlank();
+        }
+        if (failureDict.elements.Count != 0)
+        {
+            failureDict.ValidateNotBlank();
+        }
 
         SuccessAndFailValues successAndFailValues = new SuccessAndFailValues();
         foreach (SerializableDictionaryElement i in successDict.elements)
