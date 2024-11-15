@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2221866474921187063}
+  - component: {fileID: 3678657906038624643}
   m_Layer: 0
   m_Name: pf_TrashCan
   m_TagString: Untagged
@@ -26,12 +27,35 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9402556, y: 0.9402556, z: 0.9402556}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8432976519107053949}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &3678657906038624643
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4149612882194259088}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.8541636
+  m_Height: 4.0631256
+  m_Direction: 1
+  m_Center: {x: -1.14613694e-10, y: -0.053372227, z: 0.004452271}
 --- !u!1001 &8254335105865838230
 PrefabInstance:
   m_ObjectHideFlags: 0
