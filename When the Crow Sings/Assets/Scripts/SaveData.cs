@@ -105,7 +105,7 @@ public static class SaveData
         {"numberOfTasksCompleted",0 },
         {"TBD_OnLoadSpawnPoint_OrSomething",0 },
 
-        {"penguin_cult",0 }, // Don't ask, Chelle. Just don't ask.
+        {"penguin_cult",0 },
     };
 
     public static Dictionary<string, string> stringFlags = new Dictionary<string, string>()
