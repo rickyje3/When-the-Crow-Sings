@@ -126,10 +126,10 @@ else:
 
 ~ beau_task_fin_cont_3
 set BeauBaseCompleted = true;
-set GreenhouseDoorUnlocked = true;
-set EnergyHQDoorUnlocked = true;
 Chance_Smile: Um, thanks.
 Beau_Teasing: No problem, ey? Not to be a keener but, wouldn't want you to be uncomfortable livin' here.
+set timeOfDay += 1;
+call ReloadScene();
 => END
 
 ~ beau_demo_talk

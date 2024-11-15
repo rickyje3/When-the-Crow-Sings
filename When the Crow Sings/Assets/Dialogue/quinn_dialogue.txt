@@ -1,4 +1,26 @@
-~quinn_first_int
+~ quinn_directory
+if QuinnBaseCompleted == false:
+	=> quinn_directory_2
+else:
+	=> quinn_beyond_base
+
+~ quinn_directory_2
+if QuinnTaskOffered == false:
+	=> quinn_first_int
+if QuinnTaskAccepted == false:
+	=> quinn_no_task
+else:
+	=> quinn_directory_3
+
+~ quinn_directory_3
+if QuinnTaskCompeleted == false:
+	=> quinn_task_unfin
+else:
+	=> quinn_task_fin
+
+
+~ quinn_first_int
+set QuinnTaskOffered = true;
 Quinn: You must be Chance.
 Chance: Uhuh.
 Quinn: Nice to meet you. Officially. What brings you to the greenhouse? 
@@ -30,6 +52,7 @@ Quinn: Oh I just need a hand with some seed bags. It's about time to start incub
 Quinn_Scared: I'm just not a big fan of birds.
 Quinn: The feral ones, I mean. Not the EVOs. Obviously.
 - I guess.
+	set QuinnTaskAccepted = true;
 	Chance: Um, I guess I can.
 	Quinn: Cool. Cool cool cool. There should be a few bags just outside, get them and bring them in here to me and I'll see what I can do for ya.
 	=> END
@@ -41,6 +64,7 @@ Quinn: The feral ones, I mean. Not the EVOs. Obviously.
 Quinn_Excited: Oh, you're back. Here to try my carnop?
 Quinn: Turnott?.. I'm workshopping it.
 - Guy outside.
+	set QuinnTaskAccepted = true;
 	Chance: I wanted to talk to your guy who lives outside.
 	Quinn: Sure sure. Just go get those seeds for me, and I'll page Farida about a delivery for Yule and give him a headsup.
 	=> END
@@ -49,7 +73,21 @@ Quinn: Turnott?.. I'm workshopping it.
 	Quinn: Pff. Suit yourself.
 	=> END
 
+~ quinn_task_unfin
+Quinn: Really dude?
+Chance: What?
+Quinn: Uhhh, I totally asked you to do something.
+- What was it?
+	Chance_Sad: I forgot, what was it?
+	Quinn: You sure are a weird kid. I just need you to get those seed bags from the crows around the building.
+	=> END
+- Yeah I know.
+	Chance: Yeah, I know. Just haven't gotten around to it yet.
+	Quinn: Alright, whatever dude. Beat of your own drum, I guess. Even if it's a slow one.
+	=> END
+
 ~ quinn_task_fin
+set QuinnBaseCompleted = true;
 Quinn_Excited: Hey there, just in time!
 Quinn: I let Farida know I've got Yule bringing in some irregular deliveries due to the season change coming up, so you should be alright just to come and go through the gate when you buzz it now.
 Quinn: About the big guy. Be patient, he's old and quiet. Been here a long time, not the most social. I'm sure he'll tell you what you wanna know but he's a little quirky. Moves to his own rhythm, you know?
@@ -59,4 +97,10 @@ Cahnce: The fish?
 Quinn_Scared: The fish.
 Quinn: Thanks for your help, by the way.
 Chance_Smile: Sure, no problem.
+set timeOfDay += 1;
+call ReloadScene();
+=> END
+
+~ quinn_beyond_base
+Quinn: Back for more hybrid plants? I wonder what would happen if I could splice a human with plants....
 => END

@@ -53,7 +53,11 @@ Chance: Uh... Thanks. I appreciate it.
 Jazmyne: Of course! If you're used to babies, I could always use a hand. Oh! And we do have weekly movie nights. Though, we are running a little low on movies...
 - Sure.
 	Chance: Sure, I will. See you later.
+	set timeOfDay += 1;
+	call ReloadScene();
 	=> END
 - Maybe.
 	Chance: Uh, maybe. See you.
+	set timeOfDay += 1;
+	call ReloadScene();
 	=> END
