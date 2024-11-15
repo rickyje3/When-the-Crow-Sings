@@ -135,7 +135,7 @@ public class TimingMeterQTE : QuickTimeEvent
         float highlightWidth = maxXPos - minXPos;  // Width of the highlighted area
         targetRangeHighlight.sizeDelta = new Vector2(highlightWidth, targetRangeHighlight.sizeDelta.y); // Adjust width
         targetRangeHighlight.anchoredPosition = new Vector2(minXPos + 0.5f, targetRangeHighlight.anchoredPosition.y); // Adjust position
-        Debug.Log(targetRangeHighlight.sizeDelta + targetRangeHighlight.anchoredPosition);
+        //Debug.Log(targetRangeHighlight.sizeDelta + targetRangeHighlight.anchoredPosition);
     }
 
 

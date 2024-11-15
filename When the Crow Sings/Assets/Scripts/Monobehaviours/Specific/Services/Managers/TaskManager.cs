@@ -23,6 +23,7 @@ public class TaskManager : MonoBehaviour
     {
         QuickTimeEvent qteToLoad = (QuickTimeEvent)signalArgs.objectArgs[0];
         currentQTESuccessAndFailValues = (SuccessAndFailValues)signalArgs.objectArgs[1];
+
         qteUiHolder.LoadQte(qteToLoad);
     }
 
@@ -34,20 +35,28 @@ public class TaskManager : MonoBehaviour
     public void OnQteFinished(SignalArguments signalArgs)
     {
         qteUiHolder.DestroyQte();
+
         if (signalArgs.boolArgs[0])
         {
-            foreach(KeyValuePair<string,bool> i in currentQTESuccessAndFailValues.success)
+            if (currentQTESuccessAndFailValues.success != null)
             {
-                SaveData.SetFlag(i.Key, i.Value);
+                foreach (KeyValuePair<string, bool> i in currentQTESuccessAndFailValues.success)
+                {
+                    SaveData.SetFlag(i.Key, i.Value);
+                }
             }
         }
         else
         {
-            foreach (KeyValuePair<string, bool> i in currentQTESuccessAndFailValues.fail)
+            if (currentQTESuccessAndFailValues.fail != null)
             {
-                SaveData.SetFlag(i.Key, i.Value);
+                foreach (KeyValuePair<string, bool> i in currentQTESuccessAndFailValues.fail)
+                {
+                    SaveData.SetFlag(i.Key, i.Value);
+                }
             }
         }
         currentQTESuccessAndFailValues = null;
+        
     }
 }
