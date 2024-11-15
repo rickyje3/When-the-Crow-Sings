@@ -25,6 +25,23 @@ public class PlayerInteractionArea : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        List<Interactable> interactablesToRemove = new List<Interactable>();
+        foreach (Interactable i in interactablesInRange)
+        {
+            if (!i.gameObject.activeInHierarchy)
+            {
+                interactablesToRemove.Add(i);
+            }
+        }
+        foreach (Interactable i in interactablesToRemove)
+        {
+            interactablesInRange.Remove(i);
+        }
+        
+    }
+
     private void Start()
     {
         InputManager.playerInputActions.Player.Interact.performed += OnInteract;
