@@ -84,7 +84,7 @@ Caleb_Smile: Decide to take a chance on helping me out?
 Caleb_Thinking: I don't see any wire on you. Why're you back?
 - Where?
 	Chance_Sad: I forgot where you said to go.
-	Caleb_Annoyed: Uhuh. The crows are making nests by the southeast door.
+	Caleb_Annoyed: Uhuh. The crows are making nests by the south east gate.
 	Chance: Thanks.
 	=> END
 - Nunya
@@ -118,6 +118,8 @@ Chance_Angry: That's not really information.
 Caleb_Wink: Well you know what they say. It's not what you know, it's who you know.
 Chance_Angry: That's stupid. There's only like a dozen people here. Surely you all know each other.
 Caleb_Wink: ;)
+set timeOfDay += 1;
+call ReloadScene();
 	=> END
 
 ~ caleb_beyond_base
