@@ -175,17 +175,7 @@ public partial class DialogueParser
                 trimmedLine = Utilities.RemoveFirstOccurence("set", trimmedLine);
 
                 // Check operator.
-                if (trimmedLine.Contains("="))
-                {
-                    newLine.operatorType = DialogueMutation.OperatorType.EQUALS;
-                    string[] splits = trimmedLine.Split('=');
-                    
-                    newLine.actionKey = splits[0];
-                    newLine.SetValue(splits[1]);
-
-                    //variableKeys = trimmedLine.Split(new string[] { "==" }, System.StringSplitOptions.None);
-                }
-                else if (trimmedLine.Contains("+="))
+                if (trimmedLine.Contains("+="))
                 {
                     newLine.operatorType = DialogueMutation.OperatorType.PLUS_EQUALS;
                     string[] splits = trimmedLine.Split(new string[] { "+=" }, System.StringSplitOptions.None);
@@ -197,6 +187,14 @@ public partial class DialogueParser
                 {
                     newLine.operatorType = DialogueMutation.OperatorType.MINUS_EQUALS;
                     string[] splits = trimmedLine.Split(new string[] { "-=" }, System.StringSplitOptions.None);
+
+                    newLine.actionKey = splits[0];
+                    newLine.SetValue(splits[1]);
+                }
+                else if (trimmedLine.Contains("="))
+                {
+                    newLine.operatorType = DialogueMutation.OperatorType.EQUALS;
+                    string[] splits = trimmedLine.Split('=');
 
                     newLine.actionKey = splits[0];
                     newLine.SetValue(splits[1]);
