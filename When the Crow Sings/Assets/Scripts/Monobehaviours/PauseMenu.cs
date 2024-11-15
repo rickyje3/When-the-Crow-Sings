@@ -31,4 +31,9 @@ public class PauseMenu : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenuScene");
     }
+
+    public void quitquit()
+    {
+        Application.Quit();
+    }
 }

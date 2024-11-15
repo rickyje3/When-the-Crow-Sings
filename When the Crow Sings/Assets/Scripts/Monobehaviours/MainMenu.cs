@@ -17,6 +17,10 @@ public class MainMenu : MonoBehaviour
 
     public List<LevelDataResource> levelDataResources;
 
+    public GameObject newGameButtons;
+    public GameObject continueGameButtons;
+    public GameObject mainMenuPage;
+
     private void Awake()
     {
 
@@ -30,11 +34,23 @@ public class MainMenu : MonoBehaviour
         }
 
         mainMenuDebugLoadHolder.resourceToLoad = null;
+
+        if (SaveData.SavedDataExists())
+        {
+            newGameButtons.SetActive(false);
+            continueGameButtons.SetActive(true);
+        }
+        else
+        {
+            newGameButtons.SetActive(true);
+            continueGameButtons.SetActive(false);
+        }
     }
 
     public void LoadMainScene()
     {
         SceneManager.LoadScene(mainScene.Name);
+        mainMenuPage.SetActive(false);
     }
 
     public void OnSceneLoadButtonPressed(LevelDataResource levelDataResource)
