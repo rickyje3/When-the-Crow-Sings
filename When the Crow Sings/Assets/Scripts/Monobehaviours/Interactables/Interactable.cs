@@ -6,6 +6,8 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public CinemachineVirtualCamera virtualCamera;
+    public SpriteRenderer interactArrow;
+
 
     public void DoInteraction()
     {
