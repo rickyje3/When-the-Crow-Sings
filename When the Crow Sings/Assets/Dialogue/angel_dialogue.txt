@@ -45,6 +45,7 @@ Angel_Smile: Well I wouldn't know anything about that! Did you want to help me i
 Angel_Smile: Might take your mind off things, and I could always use an extra hand!
 - Sure.
 	set AngelTaskAccepted = true;
+	set AngelTaskOn = true;
 	Chance: . . . Yeah, sure.
 	Angel_Smile: Thanks! I just need you to stir our forever soup!
 	Angel: It has to be stirred a couple times a day, and if you do it I can take care of some other things.
@@ -59,6 +60,7 @@ Angel_Smile: Oh you're back!!!
 Angel: Did you have time to lend me a hand?
 - Yeah, sure.
 	set AngelTaskAccepted = true;
+	set AngelTaskOn = true;
 	Chance: Yeah, sure.
 	Angel_Smile: Thanks! I just need you to stir our forever soup!
 	Angel: It has to be stirred a couple times a day, and if you do it I can take care of some other things.
@@ -81,8 +83,6 @@ Angel_Worried: Uh, are you okay? Did you forget what I asked you to do?
 
 ~ angel_task_fin
 set AngelBaseCompleted = true;
-set RecCenterDoorUnlocked = true;
-set GreenhouseDoorUnlocked = true;
 Angel_Smile: Thanks so much! Gave me time to prep.
 Angel_Thinking: . . .
 Angel_Worried: Um.. If you're worried about whatever, maybe you could talk to Miss Jazmyne?
