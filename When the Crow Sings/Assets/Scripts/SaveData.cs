@@ -96,6 +96,7 @@ public static class SaveData
         { "EnergyHQDoorUnlocked",false},
         { "ClinicDoorUnlocked",false },
         { "Zone1DoorUnlocked",false },
+        { "WoodPileMovable", false}
         { "Zone2DoorUnlocked",false },
         { "Zone3DoorUnlocked",false },
         { "Zone4DoorUnlocked",false },
