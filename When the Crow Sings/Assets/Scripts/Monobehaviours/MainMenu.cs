@@ -19,6 +19,7 @@ public class MainMenu : MonoBehaviour
 
     public GameObject newGameButtons;
     public GameObject continueGameButtons;
+    public GameObject mainMenuPage;
 
     private void Awake()
     {
@@ -49,6 +50,7 @@ public class MainMenu : MonoBehaviour
     public void LoadMainScene()
     {
         SceneManager.LoadScene(mainScene.Name);
+        mainMenuPage.SetActive(false);
     }
 
     public void OnSceneLoadButtonPressed(LevelDataResource levelDataResource)
