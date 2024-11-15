@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public static class SaveData
 {
