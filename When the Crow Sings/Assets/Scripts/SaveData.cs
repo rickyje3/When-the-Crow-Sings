@@ -2,10 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Pipes;
-using System.Linq;
 using System.Text;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public static class SaveData
@@ -107,6 +104,8 @@ public static class SaveData
         {"timeOfDay",0 },
         {"numberOfTasksCompleted",0 },
         {"TBD_OnLoadSpawnPoint_OrSomething",0 },
+
+        {"penguin_cult",0 }, // Don't ask, Chelle. Just don't ask.
     };
 
     public static Dictionary<string, string> stringFlags = new Dictionary<string, string>()
@@ -324,5 +323,11 @@ public static class SaveData
         //}
 
         //FileStream fileStream = new FileStream(filePath, FileMode.Open);
+    }
+
+
+    private static void PenguinCultAttemptsToScheduleAMeeting()
+    {
+        SetFlag("penguin_cult",UnityEngine.Random.Range(0,623));
     }
 }
