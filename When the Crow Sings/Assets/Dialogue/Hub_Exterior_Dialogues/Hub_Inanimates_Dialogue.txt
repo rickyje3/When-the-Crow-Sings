@@ -41,11 +41,20 @@ Something shiny is in the dirt ... Better not steal from the crows.
 
 ~ veggie_basket
 if BeauTaskAccepted == true:
-	Gee I am sure pickin up these veggies.
+	These must be the vegetables that Beau asked for. Better grab them.
 	set BeauTaskCompleted = true;
 	=> END
 else:
 	A basket of fresh vegetables. Wonder why it's out here?
+	=> END
+
+~ seed_bags
+if QuinnTaskAccepted == true:
+	Finally, the seed bags. I gotta run these inside.
+	set QuinnTaskCompleted = true;
+	=> END
+else:
+	Some open bags of seed. Seems unwise, with the town's avian population.
 	=> END
 
 ~ utility_pole

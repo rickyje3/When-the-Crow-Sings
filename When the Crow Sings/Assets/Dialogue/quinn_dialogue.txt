@@ -13,7 +13,7 @@ else:
 	=> quinn_directory_3
 
 ~ quinn_directory_3
-if QuinnTaskCompeleted == false:
+if QuinnTaskCompleted == false:
 	=> quinn_task_unfin
 else:
 	=> quinn_task_fin
@@ -25,12 +25,17 @@ Quinn: You must be Chance.
 Chance: Uhuh.
 Quinn: Nice to meet you. Officially. What brings you to the greenhouse? 
 Quinn_Excited: Here to try my turnip carrot hybrid?
-- Angel sent me.
-	Chance: Angel said you're up late, and that you might know something about people roaming around at night. That you're up late.
-	=> quinn_first_int_cont
-- Beau sent me.
-	Chance: Beau said that you know everyone around here. That you'd know if things were' out of the ordinary.
-	=> quinn_first_int_cont
+if AngelTaskCompleted == true:
+	- Angel sent me.
+		Chance: Angel said you're up late, and that you might know something about people roaming around at night. That you're up late.
+		=> quinn_first_int_cont
+if BeauTaskCompleted == true:
+	- Beau sent me.
+		Chance: Beau said that you know everyone around here. That you'd know if things were' out of the ordinary.
+		=> quinn_first_int_cont
+else:
+	Quinn: How the fuck did you get in here? What the fuck? DEMON!!
+	=> END
 
 ~ quinn_first_int_cont
 Quinn: Mmm. Did he?
