@@ -18,7 +18,6 @@ public class SaveEditMenu : MonoBehaviour
         {
             AddBoolFlagPrefab(i);
             boolHeight += additionalSpacing;
-            
         }
         boolContentHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(0, boolHeight);
         
@@ -28,7 +27,6 @@ public class SaveEditMenu : MonoBehaviour
             if (i.Key == "penguin_cult") continue;
             AddIntFlagPrefab(i);
             intHeight += additionalSpacing;
-            
         }
         intContentHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(0, intHeight);
     }
