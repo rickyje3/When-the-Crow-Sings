@@ -19,9 +19,9 @@ else:
 	=> 	caleb_task_fin
 
 ~ caleb_first_int
-if timeOfDay == 0:
-	Caleb: Oh, good morning. You must be the new resident Farida was talking about.
 if timeOfDay == 1:
+	Caleb: Oh, good morning. You must be the new resident Farida was talking about.
+if timeOfDay == 2:
 	Caleb: Oh, good afternoon. You must be the new resident Farida was talking about.
 Chance: Yep, that's me.
 Caleb_Smile: Nice to meet you, I'm Caleb. What's your name again?
@@ -96,7 +96,7 @@ Caleb_Thinking: I don't see any wire on you. Why're you back?
 set CalebBaseCompleted = true;
 set ClinicDoorUnlocked = true;
 set RecCenterDoorUnlocked = true;
-Caleb_Smile: Already kid, I yield. You did good.
+Caleb_Smile: Alrighty kid, I yield. You did good.
 Caleb_Thinking: If you want to know more about the old energy source, for whatever reason, you would probably want to talk with Farida.
 Caleb_Annoyed: But I don't think you should have me sending you.. Not that we don't get along! It's just..
 if FaridaTaskOffered == true:
