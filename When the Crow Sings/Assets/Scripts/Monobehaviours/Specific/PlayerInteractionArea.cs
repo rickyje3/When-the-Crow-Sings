@@ -6,7 +6,13 @@ using UnityEngine.InputSystem;
 public class PlayerInteractionArea : MonoBehaviour
 {
     public List<Interactable> interactablesInRange = new List<Interactable>();
-
+    public bool canInteract
+    {
+        get
+        {
+            return interactablesInRange.Count > 0;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Interactable>())
@@ -30,6 +36,23 @@ public class PlayerInteractionArea : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        List<Interactable> interactablesToRemove = new List<Interactable>();
+        foreach (Interactable i in interactablesInRange)
+        {
+            if (!i.gameObject.activeInHierarchy)
+            {
+                interactablesToRemove.Add(i);
+            }
+        }
+        foreach (Interactable i in interactablesToRemove)
+        {
+            interactablesInRange.Remove(i);
+        }
+        
+    }
+
     private void Start()
     {
         InputManager.playerInputActions.Player.Interact.performed += OnInteract;
@@ -37,7 +60,7 @@ public class PlayerInteractionArea : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        if (interactablesInRange.Count > 0)
+        if (canInteract)
         {
             interactablesInRange[0].DoInteraction();
         }

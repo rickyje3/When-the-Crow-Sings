@@ -36,16 +36,33 @@ if day == 3
 => END
 
 ~ shiny_dirt
-Something shiny is in the dirt ... Better not steal from the crows.
-=> END
+if CalebTaskCompleted == true:
+	No more shinies for the crows. Bet they're pissed. I'd be pissed.
+	=> END
+if CalebTaskAccepted == true:
+	Whew, time to snatch these wires while the crows are distracted.
+	set CalebTaskCompleted = true;
+	=> END
+else:
+	Something shiny is in the dirt ... Better not steal from the crows.
+	=> END
 
 ~ veggie_basket
 if BeauTaskAccepted == true:
-	Gee I am sure pickin up these veggies.
+	These must be the vegetables that Beau asked for. Better grab them.
 	set BeauTaskCompleted = true;
 	=> END
 else:
 	A basket of fresh vegetables. Wonder why it's out here?
+	=> END
+
+~ seed_bags
+if QuinnTaskAccepted == true:
+	Finally, the seed bags. I gotta run these inside.
+	set QuinnTaskCompleted = true;
+	=> END
+else:
+	Some open bags of seed. Seems unwise, with the town's avian population.
 	=> END
 
 ~ utility_pole

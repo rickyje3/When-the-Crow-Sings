@@ -2,13 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Pipes;
-using System.Linq;
 using System.Text;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
-
 public static class SaveData
 {
     const int saveDataVersion = 1;
@@ -23,18 +18,21 @@ public static class SaveData
         { "AngelTaskOffered",false },
         { "AngelTaskAccepted",false },
         { "AngelTaskCompleted",false },
+        { "AngelTaskOn",false },
         { "AngelBaseCompleted",false },
         { "AngelExhausted",false },
 
         { "BeauTaskOffered",false },
         { "BeauTaskAccepted",false },
         { "BeauTaskCompleted",false },
+        { "BeauTaskOn",false },
         { "BeauBaseCompleted",false },
         { "BeauExhausted",false },
         
         { "CalebTaskOffered",false },
         { "CalebTaskAccepted",false },
         { "CalebTaskCompleted",false },
+        { "CalebTaskOn",false },
         { "CalebBaseCompleted",false },
         { "CalebExhausted",false },
         
@@ -42,36 +40,42 @@ public static class SaveData
         { "FaridaTaskOffered",false },
         { "FaridaTaskAccepted",false },
         { "FaridaTaskCompleted",false },
+        { "FaridaTaskOn",false },
         { "FaridaBaseCompleted",false },
         { "FaridaExhausted",false },
         
         { "QuinnTaskOffered",false },
         { "QuinnTaskAccepted",false },
         { "QuinnTaskCompleted",false },
+        { "QuinnTaskOn",false },
         { "QuinnBaseCompleted",false },
         { "QuinnExhausted",false },
         
         { "JazmyneTaskOffered",false },
         { "JazmyneTaskAccepted",false },
         { "JazmyneTaskCompleted",false },
+        { "JazmyneTaskOn",false },
         { "JazmyneBaseCompleted",false },
         { "JazmyneExhausted",false },
         
         { "FranciscoTaskOffered",false },
         { "FranciscoTaskAccepted",false },
         { "FranciscoTaskCompleted",false },
+        { "FranciscoTaskOn",false },
         { "FranciscoBaseCompleted",false },
         { "FranciscoExhausted",false },
         
         { "YuleTaskOffered",false },
         { "YuleTaskAccepted",false },
         { "YuleTaskCompleted",false },
+        { "YuleTaskOn",false },
         { "YuleBaseCompleted",false },
         { "YuleExhausted",false },
         
         { "PhilomenaTaskOffered",false },
         { "PhilomenaTaskAccepted",false },
         { "PhilomenaTaskCompleted",false },
+        { "PhilomenaTaskOn",false },
         { "PhilomenaBaseCompleted",false },
         { "PhilomenaExhausted",false },
         
@@ -79,6 +83,7 @@ public static class SaveData
         { "TheodoreTaskOffered",false },
         { "TheodoreTaskAccepted",false },
         { "TheodoreTaskCompleted",false },
+        { "TheodoreTaskOn",false },
         { "TheodoreBaseCompleted",false },
         { "TheodoreExhausted",false },
 
@@ -87,6 +92,7 @@ public static class SaveData
         { "EnergyHQDoorUnlocked",false},
         { "ClinicDoorUnlocked",false },
         { "Zone1DoorUnlocked",false },
+        { "WoodPileMovable", false},
         { "Zone2DoorUnlocked",false },
         { "Zone3DoorUnlocked",false },
         { "Zone4DoorUnlocked",false },
@@ -105,9 +111,11 @@ public static class SaveData
         { "TestingFlag4",3 },
 
         {"day",0 },
-        {"timeOfDay",0 },
+        {"timeOfDay",1 },
         {"numberOfTasksCompleted",0 },
         {"TBD_OnLoadSpawnPoint_OrSomething",0 },
+
+        {"penguin_cult",0 },
     };
 
     public static Dictionary<string, string> stringFlags = new Dictionary<string, string>()
@@ -128,6 +136,7 @@ public static class SaveData
     public static void SetFlag(string key, int value)
     {
         intFlags[key] = value;
+        if (intFlags["timeOfDay"] > 3) intFlags["timeOfDay"] = 1;
         Debug.Log("Key is now " + intFlags[key]);
     }
     public static void SetFlag(string key, string value)
@@ -325,5 +334,11 @@ public static class SaveData
         //}
 
         //FileStream fileStream = new FileStream(filePath, FileMode.Open);
+    }
+
+
+    private static void PenguinCultAttemptsToScheduleAMeeting()
+    {
+        SetFlag("penguin_cult",UnityEngine.Random.Range(0,623));
     }
 }
