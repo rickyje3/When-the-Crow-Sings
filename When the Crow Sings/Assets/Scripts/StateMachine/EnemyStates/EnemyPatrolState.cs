@@ -48,7 +48,9 @@ public class EnemyPatrolState : EnemyState
 
     private IEnumerator setNextPoint()
     {
+#pragma warning disable CS0219 // Variable is assigned but its value is never used
         var radius = 10;
+#pragma warning restore CS0219 // Variable is assigned but its value is never used
 
         Debug.Log("Setting next point!");
 
