@@ -21,7 +21,6 @@ public static class SaveData
         { "AngelTaskOn",false },
         { "AngelBaseCompleted",false },
         { "AngelExhausted",false },
-        { "AngelTaskOn",false },
 
         { "BeauTaskOffered",false },
         { "BeauTaskAccepted",false },
