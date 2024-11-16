@@ -26,7 +26,6 @@ public class MainMenu : MonoBehaviour
 
         foreach (LevelDataResource i in levelDataResources)
         {
-            //i.onClick.AddListener(() => OnSceneLoadButtonPressed(sceneLoadButtonList.IndexOf(i)));
             var x = Instantiate(sceneLoadButtonPrefab);
             x.transform.SetParent(sceneLoadButtonsHolder.transform, false);
             x.onClick.AddListener(() => OnSceneLoadButtonPressed(i));
@@ -55,7 +54,6 @@ public class MainMenu : MonoBehaviour
 
     public void OnSceneLoadButtonPressed(LevelDataResource levelDataResource)
     {
-        //Debug.Log(index);
         mainMenuDebugLoadHolder.resourceToLoad = levelDataResource;
         SceneManager.LoadScene(mainScene.Name);
     }
