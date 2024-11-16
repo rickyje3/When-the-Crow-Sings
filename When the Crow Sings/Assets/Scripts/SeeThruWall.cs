@@ -53,14 +53,18 @@ public class SeeThruWall : MonoBehaviour
             {
                 //Debug.Log($"Checking material: {material.name} with shader: {material.shader.name}");
 
-                if (material.shader.name == shaderName)
+                if (material != null)
                 {
-                    if (material != null && material.shader.name == shaderName)
+                    if (material.shader.name == shaderName)
                     {
-                        SeeThruMaterials.Add(material);
-                        //Debug.Log($"Added material: {material.name} to the SeeThruMaterials list");
+                        if (material != null && material.shader.name == shaderName)
+                        {
+                            SeeThruMaterials.Add(material);
+                            //Debug.Log($"Added material: {material.name} to the SeeThruMaterials list");
+                        }
                     }
                 }
+                
             }
         }
 
