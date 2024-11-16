@@ -136,6 +136,7 @@ public static class SaveData
     public static void SetFlag(string key, int value)
     {
         intFlags[key] = value;
+        if (intFlags["timeOfDay"] > 3) intFlags["timeOfDay"] = 1;
         Debug.Log("Key is now " + intFlags[key]);
     }
     public static void SetFlag(string key, string value)
