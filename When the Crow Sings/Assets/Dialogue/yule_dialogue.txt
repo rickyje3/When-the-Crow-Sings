@@ -69,6 +69,7 @@ Chance: Uh, okay.
 => END
 
 ~ yule_task_fin
+set KeyInformation1 = true;
 Yule: That's a nice looking fish. Came up easy, too. It's a good rod.
 Chance: Yeah, it is.
 It made me feel like when I used to fish at home.
@@ -106,4 +107,6 @@ Yule: Yes. Wherever he ran off to, I hope he doesn't get a good night's sleep fo
 Chance: Yeah...
 Chance: Thanks for the info, big guy.
 Yule: Sure. Come and see me again, if you want.
+set timeOfDay += 1;
+call ReloadScene();
 => END

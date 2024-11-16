@@ -6,6 +6,7 @@ using TMPro;
 using System.Linq;
 using System;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class DialogueManager : MonoBehaviour, IService
 {
@@ -247,31 +248,50 @@ public class DialogueManager : MonoBehaviour, IService
         dialogueText.maxVisibleCharacters = 0;
         textMesh.text = text;
 
+        isSkipping = false; // 100% necessary right here.
+
         while (textMesh.maxVisibleCharacters <= textMesh.text.Length)
         {
-            float pauseBetweenChars = textSpeed;
-            char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1, 0, textMesh.text.Length)];
-            foreach (char i in ".!?")
+            if (isSkipping)
             {
-                if (character == i)
-                {
-                    pauseBetweenChars *= pauseMultiplier;
-                }
+                textMesh.maxVisibleCharacters = textMesh.text.Length + 1;
+                break;
             }
-            yield return new WaitForSeconds(pauseBetweenChars);
-            textMesh.maxVisibleCharacters += 1;
+            else
+            {
+                float pauseBetweenChars = textSpeed;
+                char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1, 0, textMesh.text.Length)];
+                foreach (char i in ".!?")
+                {
+                    if (character == i)
+                    {
+                        pauseBetweenChars *= pauseMultiplier;
+                    }
+                }
+                yield return new WaitForSeconds(pauseBetweenChars);
+                textMesh.maxVisibleCharacters += 1;
+            }
+
+            
         }
+
+        isSkipping = false; // This may be redundant, may not be.
         canNextLine = true;
     }
 
     private int currentLine;
     private bool canNextLine = false;
-    public void NextLine()
+    private bool isSkipping = false;
+    public void OnNextLineButtonPressed()
     {
         if (canNextLine)
         {
 
             ControlLineBehavior(currentLine + 1, dialogueResource.dialogueLines[currentLine].tabCount);
+        }
+        else
+        {
+            isSkipping = true;
         }
     }
 
@@ -448,7 +468,6 @@ public class DialogueManager : MonoBehaviour, IService
 
     }
 
-
     void DoMutationLogic(DialogueMutation mutation)
     {
         switch (mutation.actionType)
@@ -464,6 +483,11 @@ public class DialogueManager : MonoBehaviour, IService
                 if (mutation.stringData == "ExampleDialogueMethod()")
                 {
                     ExampleDialogueMethod();
+                }
+                else if (mutation.stringData.Contains("ReloadScene("))
+                {
+                    int argument = Utilities.GetSingleIntFromString(mutation.stringData);
+                    ReloadScene(argument);
                 }
                 else if (mutation.stringData == "SaveGameToDisk()")
                 {
@@ -523,6 +547,13 @@ public class DialogueManager : MonoBehaviour, IService
     void ExampleDialogueMethod()
     {
         Debug.Log("Dialogue called this method!");
+    }
+
+    void ReloadScene(int spawnIndex)
+    {
+        EndDialogue();
+
+        ServiceLocator.Get<GameStateManager>().ReloadCurrentScene(spawnIndex);
     }
 
 }

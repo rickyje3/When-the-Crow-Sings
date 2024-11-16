@@ -71,7 +71,6 @@ public class PlayerController : StateMachineComponent, IService
 
     private void OnPause(InputAction.CallbackContext context)
     {
-        //stateMachine.Enter("PlayerDialogueState");
         pauseCanvas.gameObject.SetActive(true);
         pauseSignalTEMP.Emit();
         Debug.Log("Paused");

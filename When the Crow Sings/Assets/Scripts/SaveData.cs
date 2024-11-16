@@ -2,12 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Pipes;
-using System.Linq;
 using System.Text;
-using Unity.VisualScripting;
 using UnityEngine;
-
 public static class SaveData
 {
     const int saveDataVersion = 1;
@@ -22,55 +18,64 @@ public static class SaveData
         { "AngelTaskOffered",false },
         { "AngelTaskAccepted",false },
         { "AngelTaskCompleted",false },
-        { "AngelBaseComplete",false },
+        { "AngelTaskOn",false },
+        { "AngelBaseCompleted",false },
         { "AngelExhausted",false },
 
         { "BeauTaskOffered",false },
         { "BeauTaskAccepted",false },
         { "BeauTaskCompleted",false },
-        { "BeauBaseComplete",false },
+        { "BeauTaskOn",false },
+        { "BeauBaseCompleted",false },
         { "BeauExhausted",false },
         
         { "CalebTaskOffered",false },
         { "CalebTaskAccepted",false },
         { "CalebTaskCompleted",false },
-        { "CalebBaseComplete",false },
+        { "CalebTaskOn",false },
+        { "CalebBaseCompleted",false },
         { "CalebExhausted",false },
         
         { "FaridaIntroduction",false },
         { "FaridaTaskOffered",false },
         { "FaridaTaskAccepted",false },
         { "FaridaTaskCompleted",false },
+        { "FaridaTaskOn",false },
         { "FaridaBaseCompleted",false },
         { "FaridaExhausted",false },
         
         { "QuinnTaskOffered",false },
         { "QuinnTaskAccepted",false },
         { "QuinnTaskCompleted",false },
+        { "QuinnTaskOn",false },
         { "QuinnBaseCompleted",false },
         { "QuinnExhausted",false },
         
         { "JazmyneTaskOffered",false },
         { "JazmyneTaskAccepted",false },
         { "JazmyneTaskCompleted",false },
-        { "JazmyneBaseComplete",false },
+        { "JazmyneTaskOn",false },
+        { "JazmyneBaseCompleted",false },
         { "JazmyneExhausted",false },
         
         { "FranciscoTaskOffered",false },
         { "FranciscoTaskAccepted",false },
         { "FranciscoTaskCompleted",false },
+        { "FranciscoTaskOn",false },
         { "FranciscoBaseCompleted",false },
         { "FranciscoExhausted",false },
         
         { "YuleTaskOffered",false },
         { "YuleTaskAccepted",false },
         { "YuleTaskCompleted",false },
+        { "YuleTaskOn",false },
         { "YuleBaseCompleted",false },
         { "YuleExhausted",false },
         
         { "PhilomenaTaskOffered",false },
         { "PhilomenaTaskAccepted",false },
         { "PhilomenaTaskCompleted",false },
+        { "PhilomenaTaskOn",false },
         { "PhilomenaBaseCompleted",false },
         { "PhilomenaExhausted",false },
         
@@ -78,8 +83,24 @@ public static class SaveData
         { "TheodoreTaskOffered",false },
         { "TheodoreTaskAccepted",false },
         { "TheodoreTaskCompleted",false },
+        { "TheodoreTaskOn",false },
         { "TheodoreBaseCompleted",false },
         { "TheodoreExhausted",false },
+
+        { "RecCenterDoorUnlocked",false },
+        { "GreenhouseDoorUnlocked",false },
+        { "EnergyHQDoorUnlocked",false},
+        { "ClinicDoorUnlocked",false },
+        { "Zone1DoorUnlocked",false },
+        { "WoodPileMovable", false},
+        { "Zone2DoorUnlocked",false },
+        { "Zone3DoorUnlocked",false },
+        { "Zone4DoorUnlocked",false },
+
+        { "KeyInformation1",false },
+        { "KeyInformation2",false },
+        { "KeyInformation3",false },
+
     };
 
     public static Dictionary<string, int> intFlags = new Dictionary<string, int>()
@@ -90,9 +111,11 @@ public static class SaveData
         { "TestingFlag4",3 },
 
         {"day",0 },
-        {"timeOfDay",0 },
+        {"timeOfDay",1 },
         {"numberOfTasksCompleted",0 },
         {"TBD_OnLoadSpawnPoint_OrSomething",0 },
+
+        {"penguin_cult",0 },
     };
 
     public static Dictionary<string, string> stringFlags = new Dictionary<string, string>()
@@ -113,6 +136,7 @@ public static class SaveData
     public static void SetFlag(string key, int value)
     {
         intFlags[key] = value;
+        if (intFlags["timeOfDay"] > 3) intFlags["timeOfDay"] = 1;
         Debug.Log("Key is now " + intFlags[key]);
     }
     public static void SetFlag(string key, string value)
@@ -145,24 +169,28 @@ public static class SaveData
         switch (saveDataVersion)
         {
             case 0:
+#pragma warning disable CS0162 // Unreachable code detected
                 WriteData_V0();
                 break;
             default:
                 WriteData_V0();
                 break;
+#pragma warning restore CS0162 // Unreachable code detected
         }
-       
+
     }
     public static void ReadData()
     {
         switch (saveDataVersion) // TODO: Make it so it starts reading, stops after the version number, then calls the correct method using this switch statement.
         {
             case 0:
+#pragma warning disable CS0162 // Unreachable code detected
                 ReadData_V0();
                 break;
             default:
                 ReadData_V0();
                 break;
+#pragma warning restore CS0162 // Unreachable code detected
         }
         Debug.Log("Data read!");
     }
@@ -306,5 +334,11 @@ public static class SaveData
         //}
 
         //FileStream fileStream = new FileStream(filePath, FileMode.Open);
+    }
+
+
+    private static void PenguinCultAttemptsToScheduleAMeeting()
+    {
+        SetFlag("penguin_cult",UnityEngine.Random.Range(0,623));
     }
 }

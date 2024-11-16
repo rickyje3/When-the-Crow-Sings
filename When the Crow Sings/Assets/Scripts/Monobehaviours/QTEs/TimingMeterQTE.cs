@@ -33,7 +33,7 @@ public class TimingMeterQTE : QuickTimeEvent
         if (meterActive)
         {
             MoveMeter();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button1))
             {
                 CheckSuccess();
             }
@@ -78,21 +78,29 @@ public class TimingMeterQTE : QuickTimeEvent
         {
             Debug.Log("Successful QTE");
             //RandomizeMeter();
-            EndQTE();
+            SucceedQTE();
         }
         else
         {
             Debug.Log("Failed QTE");
             //SetTargetRangeMarkers();
             //RandomizeMeter();
-            EndQTE();
+            FailQTE();
         }
     }
-    public void EndQTE()
+    public override void SucceedQTE()
     {
         //timingMeterAnimator.SetBool("isOpen", false);
         //meterActive = false;
-        globalFinishedQteSignal.Emit();
+        SignalArguments args = new SignalArguments();
+        args.boolArgs.Add(true);
+        globalFinishedQteSignal.Emit(args);
+    }
+    public override void FailQTE()
+    {
+        SignalArguments args = new SignalArguments();
+        args.boolArgs.Add(false);
+        globalFinishedQteSignal.Emit(args);
     }
 
     public void RandomizeMeter()
@@ -127,7 +135,7 @@ public class TimingMeterQTE : QuickTimeEvent
         float highlightWidth = maxXPos - minXPos;  // Width of the highlighted area
         targetRangeHighlight.sizeDelta = new Vector2(highlightWidth, targetRangeHighlight.sizeDelta.y); // Adjust width
         targetRangeHighlight.anchoredPosition = new Vector2(minXPos + 0.5f, targetRangeHighlight.anchoredPosition.y); // Adjust position
-        Debug.Log(targetRangeHighlight.sizeDelta + targetRangeHighlight.anchoredPosition);
+        //Debug.Log(targetRangeHighlight.sizeDelta + targetRangeHighlight.anchoredPosition);
     }
 
 

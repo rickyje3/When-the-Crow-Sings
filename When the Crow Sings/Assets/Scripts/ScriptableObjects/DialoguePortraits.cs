@@ -50,7 +50,7 @@ public class DialoguePortraits : ScriptableObject
             case "Jazmyne":
                 portraits = jazmynePortraits;
                 break;
-            case "Fransisco":
+            case "Francisco":
                 portraits = fransiscoPortraits;
                 break;
             case "Yule":
