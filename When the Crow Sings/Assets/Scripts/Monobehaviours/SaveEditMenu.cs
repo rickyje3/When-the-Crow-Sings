@@ -16,17 +16,19 @@ public class SaveEditMenu : MonoBehaviour
         {
             AddBoolFlagPrefab(i);
             boolHeight += 30+boolContentHolder.GetComponent<VerticalLayoutGroup>().spacing;
-            boolContentHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(0, boolHeight);
+            
         }
-
+        boolContentHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(0, boolHeight);
+        
         float intHeight = 0;
         foreach (KeyValuePair<string, int> i in SaveData.intFlags)
         {
             if (i.Key == "penguin_cult") continue;
             AddIntFlagPrefab(i);
             intHeight += 30 + intContentHolder.GetComponent<VerticalLayoutGroup>().spacing;
-            intContentHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(0, intHeight);
+            
         }
+        intContentHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(0, intHeight);
     }
 
     void AddIntFlagPrefab(KeyValuePair<string,int> i)
