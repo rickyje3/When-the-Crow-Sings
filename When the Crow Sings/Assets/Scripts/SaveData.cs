@@ -21,7 +21,6 @@ public static class SaveData
         { "AngelTaskOn",false },
         { "AngelBaseCompleted",false },
         { "AngelExhausted",false },
-        { "AngelTaskOn",false },
 
         { "BeauTaskOffered",false },
         { "BeauTaskAccepted",false },
@@ -112,7 +111,7 @@ public static class SaveData
         { "TestingFlag4",3 },
 
         {"day",0 },
-        {"timeOfDay",0 },
+        {"timeOfDay",1 },
         {"numberOfTasksCompleted",0 },
         {"TBD_OnLoadSpawnPoint_OrSomething",0 },
 
