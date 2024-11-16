@@ -6,6 +6,13 @@ using UnityEngine.InputSystem;
 public class PlayerInteractionArea : MonoBehaviour
 {
     public List<Interactable> interactablesInRange = new List<Interactable>();
+    public bool canInteract
+    {
+        get
+        {
+            return interactablesInRange.Count > 0;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Interactable>())
