@@ -36,8 +36,16 @@ if day == 3
 => END
 
 ~ shiny_dirt
-Something shiny is in the dirt ... Better not steal from the crows.
-=> END
+if CalebTaskCompleted == true:
+	No more shinies for the crows. Bet they're pissed. I'd be pissed.
+	=> END
+if CalebTaskAccepted == true:
+	Whew, time to snatch these wires while the crows are distracted.
+	set CalebTaskCompleted = true;
+	=> END
+else:
+	Something shiny is in the dirt ... Better not steal from the crows.
+	=> END
 
 ~ veggie_basket
 if BeauTaskAccepted == true:
