@@ -6,12 +6,15 @@ using UnityEngine.InputSystem;
 public class PlayerInteractionArea : MonoBehaviour
 {
     public List<Interactable> interactablesInRange = new List<Interactable>();
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Interactable>())
         {
+            Interactable interactable = other.GetComponent<Interactable>();
             Debug.Log("He's here he's here he's heeereee");
             interactablesInRange.Add(other.GetComponent<Interactable>());
+            interactable.interactArrow.enabled = true;
         }
 
     }
@@ -19,8 +22,10 @@ public class PlayerInteractionArea : MonoBehaviour
     {
         if (other.GetComponent<Interactable>())
         {
+            Interactable interactable = other.GetComponent<Interactable>();
             Debug.Log("Oh never mind whew oh i hate socializing SO much.");
             interactablesInRange.Remove(other.GetComponent<Interactable>());
+            interactable.interactArrow.enabled = false;
         }
 
     }
