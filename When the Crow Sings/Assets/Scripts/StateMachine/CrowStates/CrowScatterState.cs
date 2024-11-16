@@ -20,7 +20,6 @@ public class CrowScatterState : StateMachineState
 
     public override void StateEntered()
     {
-        Debug.Log("SCATTER");
         dir = new Vector3(Random.Range(-1.0f,1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) *.1f;
     }
 }

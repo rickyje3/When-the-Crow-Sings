@@ -7,7 +7,7 @@ public class CrowHolder : MonoBehaviour
     List<BirdBrain> crows = new List<BirdBrain>();
     public GameObject CrowPrefab;
     //public GameObject CrowTargetPrefab;
-    public GameObject CrowTarget;
+    public CrowTarget CrowTarget;
 
     public Vector3 averageCrowPosition
     {
@@ -24,15 +24,16 @@ public class CrowHolder : MonoBehaviour
         SpawnCrows(25);
     }
 
-    public void AddCrowTargetIfNoneExists(Vector3 feast)
+    public void AddCrowTargetIfNoneExists(BirdseedController birdseedToFeastUpon)//Vector3 feast)
     {
 
         //Instantiate(CrowTargetPrefab,feast, Quaternion.identity);
 
         if (!CrowTarget.GetComponent<CrowTarget>().isActiveTarget)
         {
-            CrowTarget.transform.position = feast;
+            CrowTarget.transform.position = birdseedToFeastUpon.transform.position;
             CrowTarget.GetComponent<CrowTarget>().SetActiveTarget();
+            ServiceLocator.Get<GameManager>().activeBirdseed = birdseedToFeastUpon;
         }
         
 
@@ -62,6 +63,6 @@ public class CrowHolder : MonoBehaviour
     {
         GameObject birdBrain = Instantiate(CrowPrefab, transform);
         crows.Add(birdBrain.GetComponent<BirdBrain>());
-        birdBrain.GetComponent <BirdBrain>().crowHolder = this;
+        birdBrain.GetComponent<BirdBrain>().crowHolder = this;
     }
 }

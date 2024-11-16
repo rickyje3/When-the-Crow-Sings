@@ -1,6 +1,5 @@
 using ScriptableObjects;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CrowTarget : MonoBehaviour
@@ -8,6 +7,7 @@ public class CrowTarget : MonoBehaviour
     public float SecondsToAttractCrows = 5.0f;
     [HideInInspector]
     public bool isActiveTarget = false;
+    
 
     public GameObject visualDebug;
 
@@ -26,7 +26,11 @@ public class CrowTarget : MonoBehaviour
     {
         yield return new WaitForSeconds(SecondsToAttractCrows);
         isActiveTarget = false;
+
+        Destroy(ServiceLocator.Get<GameManager>().activeBirdseed.gameObject);
+        ServiceLocator.Get<GameManager>().activeBirdseed = null;
         disabledSignal.Emit();
+        
         visualDebug.SetActive(false);
     }
 }

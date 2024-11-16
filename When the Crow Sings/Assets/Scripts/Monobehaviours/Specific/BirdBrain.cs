@@ -6,6 +6,10 @@ public class BirdBrain : StateMachineComponent
 {
     public CharacterController controller;
     public CrowHolder crowHolder;
+
+    public float secondsToPeck;
+
+
     private void Awake()
     {
         stateMachine = new StateMachine(this);

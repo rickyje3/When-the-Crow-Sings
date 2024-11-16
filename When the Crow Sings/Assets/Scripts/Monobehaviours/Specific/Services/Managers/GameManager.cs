@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour, IService
     public List<BirdseedController> landedBirdseed = new List<BirdseedController>(); // Birbseeb
     public CrowHolder crowHolder;
 
+    [HideInInspector]
+    public BirdseedController activeBirdseed;
+
     private void Awake()
     {
         RegisterSelfAsService();
@@ -29,7 +32,7 @@ public class GameManager : MonoBehaviour, IService
     public void OnBirdseedLanded(SignalArguments args)
     {
         landedBirdseed.Add((BirdseedController)args.objectArgs[0]);
-        crowHolder.AddCrowTargetIfNoneExists(((BirdseedController)args.objectArgs[0]).transform.position);
+        crowHolder.AddCrowTargetIfNoneExists((BirdseedController)args.objectArgs[0]);
     }
 
     private void DynamicEnableLogic()
