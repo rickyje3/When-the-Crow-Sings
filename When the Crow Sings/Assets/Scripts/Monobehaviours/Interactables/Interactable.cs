@@ -6,6 +6,8 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public CinemachineVirtualCamera virtualCamera;
+    public SpriteRenderer pfInteractArrow;
+
 
     public void DoInteraction()
     {
@@ -34,5 +36,11 @@ public class Interactable : MonoBehaviour
         {
             virtualCamera.Priority = 10;
         }
+    }
+
+    public void setInteractableArrow(bool enabledOrDisabled)
+    {
+        //if (interactArrow != null)
+        pfInteractArrow.enabled = enabledOrDisabled;
     }
 }

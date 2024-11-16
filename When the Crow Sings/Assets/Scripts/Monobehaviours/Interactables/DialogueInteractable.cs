@@ -20,6 +20,7 @@ public class DialogueInteractable : MonoBehaviour
     private void Start()
     {
         //StartCoroutine(MyMethod());
+
     }
 
     //IEnumerator MyMethod()
