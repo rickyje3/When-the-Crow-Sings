@@ -12,10 +12,12 @@ public class SaveEditMenu : MonoBehaviour
     private void Awake()
     {
         float boolHeight = 0;
+        float additionalSpacing = 30 + boolContentHolder.GetComponent<VerticalLayoutGroup>().spacing;
+
         foreach (KeyValuePair<string, bool> i in SaveData.boolFlags)
         {
             AddBoolFlagPrefab(i);
-            boolHeight += 30+boolContentHolder.GetComponent<VerticalLayoutGroup>().spacing;
+            boolHeight += additionalSpacing;
             
         }
         boolContentHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(0, boolHeight);
@@ -25,7 +27,7 @@ public class SaveEditMenu : MonoBehaviour
         {
             if (i.Key == "penguin_cult") continue;
             AddIntFlagPrefab(i);
-            intHeight += 30 + intContentHolder.GetComponent<VerticalLayoutGroup>().spacing;
+            intHeight += additionalSpacing;
             
         }
         intContentHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(0, intHeight);
