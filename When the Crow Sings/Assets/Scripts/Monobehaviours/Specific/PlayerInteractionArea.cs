@@ -56,7 +56,7 @@ public class PlayerInteractionArea : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        if (interactablesInRange.Count > 0)
+        if (canInteract)
         {
             interactablesInRange[0].DoInteraction();
         }
