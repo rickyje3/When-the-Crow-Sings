@@ -24,10 +24,10 @@ public class Interactable : MonoBehaviour
         {
             GetComponent<QTEInteractable>().EmitStartQteSignal();
         }
-        /*else if getcomponent qte interactable
+        else if (GetComponent<ImagePopupInteractable>())
         {
-            do thing;
-        }*/
+            GetComponent<ImagePopupInteractable>().EmitImagePopupSignal();
+        }
     }
 
     public void OnDialogueFinished(SignalArguments args)
