@@ -1,8 +1,8 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+
 
 namespace ScriptableObjects
 {
@@ -47,7 +47,7 @@ namespace ScriptableObjects
 
             foreach (GameSignalListener i in listeners)
             {
-                args.sender = i.gameObject;
+                args.sender = i.gameObject; // is... this right?? i don't think this is right. What?
                 i.OnSignalEmitted(args);
             }
         }

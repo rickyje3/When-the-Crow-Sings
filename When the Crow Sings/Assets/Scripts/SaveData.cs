@@ -55,6 +55,8 @@ public static class SaveData
         { "JazmyneTaskAccepted",false },
         { "JazmyneTaskCompleted",false },
         { "JazmyneTaskOn",false },
+        { "PapersUp",false },
+        { "PapersDown",false },
         { "JazmyneBaseCompleted",false },
         { "JazmyneExhausted",false },
         
@@ -62,6 +64,9 @@ public static class SaveData
         { "FranciscoTaskAccepted",false },
         { "FranciscoTaskCompleted",false },
         { "FranciscoTaskOn",false },
+        { "FlowerOne",false },
+        { "FlowerTwo",false },
+        { "FlowerThree",false },
         { "FranciscoBaseCompleted",false },
         { "FranciscoExhausted",false },
         
@@ -132,6 +137,12 @@ public static class SaveData
     {
         boolFlags[key] = value;
         Debug.Log("Key is now "+ boolFlags[key]);
+
+
+        if (boolFlags["FlowerOne"] && boolFlags["FlowerTwo"] && boolFlags["FlowerThree"]) boolFlags["FranciscoTaskCompleted"] = true;
+        else boolFlags["FranciscoTaskCompleted"] = false;
+
+
     }
     public static void SetFlag(string key, int value)
     {

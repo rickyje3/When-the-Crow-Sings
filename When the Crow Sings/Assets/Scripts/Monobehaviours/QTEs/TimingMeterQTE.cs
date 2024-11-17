@@ -16,6 +16,10 @@ public class TimingMeterQTE : QuickTimeEvent
     public RectTransform targetMaxMarker;
     public RectTransform targetRangeHighlight;
 
+    [HideInInspector]
+    public int winCount;
+    public int winCounter;
+
     private bool movingRight = true; //Meter movement direction
     public bool meterActive = false;
 
@@ -72,13 +76,24 @@ public class TimingMeterQTE : QuickTimeEvent
     //Check if qte was successful
     private void CheckSuccess()
     {
-        meterActive = false;
+        //meterActive = false;
 
-        if(sliderMeter.value >= targetMin && sliderMeter.value <= targetMax)
+        if (sliderMeter.value >= targetMin && sliderMeter.value <= targetMax)
         {
-            Debug.Log("Successful QTE");
-            //RandomizeMeter();
-            SucceedQTE();
+            winCount++;
+            Debug.Log(winCount + "/" + winCounter);
+            if (winCount >= winCounter)
+            {
+                Debug.Log("Successful QTE");
+                //RandomizeMeter();
+                SucceedQTE();
+            }
+            else if (winCounter > winCount)
+            {
+                Debug.Log("Else ifed");
+                RandomizeMeter();
+                SetTargetRangeMarkers();
+            }
         }
         else
         {
@@ -88,6 +103,7 @@ public class TimingMeterQTE : QuickTimeEvent
             FailQTE();
         }
     }
+
     public override void SucceedQTE()
     {
         //timingMeterAnimator.SetBool("isOpen", false);
@@ -110,9 +126,10 @@ public class TimingMeterQTE : QuickTimeEvent
         targetMax = targetValue + 0.1f;*/
 
         //change these range values for accessibility settings
-        targetMin = Random.Range(0.3f, 0.49f);
-        targetMax = Random.Range(0.51f, 0.7f);
+        targetMin = Random.Range(0.3f, 0.4f);
+        targetMax = Random.Range(0.6f, 0.7f);
         meterActive = true;
+        Debug.Log("Randomized");
         
         //EndQTE();
     }
@@ -136,6 +153,8 @@ public class TimingMeterQTE : QuickTimeEvent
         targetRangeHighlight.sizeDelta = new Vector2(highlightWidth, targetRangeHighlight.sizeDelta.y); // Adjust width
         targetRangeHighlight.anchoredPosition = new Vector2(minXPos + 0.5f, targetRangeHighlight.anchoredPosition.y); // Adjust position
         //Debug.Log(targetRangeHighlight.sizeDelta + targetRangeHighlight.anchoredPosition);
+
+        Debug.Log("Markers reset");
     }
 
 

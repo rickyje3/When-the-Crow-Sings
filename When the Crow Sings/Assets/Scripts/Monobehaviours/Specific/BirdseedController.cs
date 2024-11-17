@@ -1,12 +1,14 @@
+using ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BirdseedController : MonoBehaviour
 {
-    public Transform pfCrowsTemp;
+    public GameSignal birdseedLanded;
     public GameObject throwVisual;
     public GameObject landedVisual;
+    public GameObject crowTargetPrefab;
 
     private bool _isLanded = false;
 
@@ -32,11 +34,17 @@ public class BirdseedController : MonoBehaviour
         return birdseed;
     }
 
-    private IEnumerator SpawnCrows()
+    private IEnumerator SpawnCrows() // This needs to get Eliminated at some point.
     {
         yield return new WaitForSeconds(crowDelayInSeconds);
-        Instantiate(pfCrowsTemp,transform.position, Quaternion.identity);
-        Destroy(gameObject, birdseedLifeAfterGround);
+        //Instantiate(pfCrowsTemp,transform.position, Quaternion.identity);
+
+
+        SignalArguments args = new SignalArguments();
+        args.objectArgs.Add(this);
+        birdseedLanded.Emit(args);
+
+        if (ServiceLocator.Get<GameManager>().activeBirdseed != this) Destroy(gameObject, birdseedLifeAfterGround);
     }
 
     private void Init(Vector3 direction)
@@ -68,6 +76,4 @@ public class BirdseedController : MonoBehaviour
         }
         
     }
-
-
 }
