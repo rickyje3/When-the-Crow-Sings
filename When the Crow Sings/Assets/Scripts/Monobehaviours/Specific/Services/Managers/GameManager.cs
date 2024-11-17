@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour, IService
     [HideInInspector]
     public List<BirdseedController> landedBirdseed = new List<BirdseedController>(); // Birbseeb
     public CrowHolder crowHolder;
+
+    [HideInInspector]
+    public List<CrowRestPoint> crowRestPoints = new List<CrowRestPoint>();
     
     [HideInInspector]
     public BirdseedController activeBirdseed;
@@ -21,7 +24,7 @@ public class GameManager : MonoBehaviour, IService
     }
     public void RegisterSelfAsService()
     {
-        ServiceLocator.Register<GameManager>(this);
+        ServiceLocator.Register(this);
     }
 
     private void Update()
@@ -29,11 +32,24 @@ public class GameManager : MonoBehaviour, IService
         DynamicEnableLogic();
     }
 
+
+
+    #region CrowLogic
     public void OnBirdseedLanded(SignalArguments args)
     {
         landedBirdseed.Add((BirdseedController)args.objectArgs[0]);
         crowHolder.AddCrowTargetIfNoneExists((BirdseedController)args.objectArgs[0]);
     }
+
+    public void RegisterCrowRestPoint(CrowRestPoint crowRestPoint)
+    {
+        crowRestPoints.Add(crowRestPoint);
+    }
+    public void UnregisterCrowRestPoint(CrowRestPoint crowRestPoint)
+    {
+        crowRestPoints.Remove(crowRestPoint);
+    }
+    #endregion
 
     private void DynamicEnableLogic()
     {
