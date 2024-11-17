@@ -53,10 +53,14 @@ public class CrowHolder : MonoBehaviour
     }
     public void SpawnCrows(List<CrowRestPoint> _crowRestPoints)
     {
-        foreach (CrowRestPoint i in _crowRestPoints)
+        if (_crowRestPoints.Count > 0)
         {
-            AddCrow(i);
+            foreach (CrowRestPoint i in _crowRestPoints)
+            {
+                AddCrow(i);
+            }
         }
+        
     }
 
     private void AddCrow(CrowRestPoint _crowRestPoint)
