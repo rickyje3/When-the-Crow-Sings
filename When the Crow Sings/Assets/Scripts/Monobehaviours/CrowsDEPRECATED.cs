@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Crows : MonoBehaviour
+public class CrowsDEPRECATED : MonoBehaviour
 {
     public float durationInSeconds = 6.0f;
 
