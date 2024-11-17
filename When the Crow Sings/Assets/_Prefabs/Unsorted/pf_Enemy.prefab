@@ -254,6 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3647983877849693947}
   - component: {fileID: 352431288771330108}
+  - component: {fileID: 2647749604145224751}
   m_Layer: 8
   m_Name: GrabTrigger
   m_TagString: Untagged
@@ -299,6 +300,20 @@ CapsuleCollider:
   m_Height: 2.81
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2647749604145224751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936281868424011640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143c36edbde135a499bb7180d353bc90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyCaughtPlayerSignal: {fileID: 11400000, guid: 3e6d38ac4b77ffe4493d871fd47c1057,
+    type: 2}
 --- !u!1 &5266600726387048090
 GameObject:
   m_ObjectHideFlags: 0
