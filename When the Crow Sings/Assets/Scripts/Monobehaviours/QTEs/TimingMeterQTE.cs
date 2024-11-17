@@ -16,6 +16,9 @@ public class TimingMeterQTE : QuickTimeEvent
     public RectTransform targetMaxMarker;
     public RectTransform targetRangeHighlight;
 
+    private int winCount;
+    public int winCounter;
+
     private bool movingRight = true; //Meter movement direction
     public bool meterActive = false;
 
@@ -74,11 +77,21 @@ public class TimingMeterQTE : QuickTimeEvent
     {
         meterActive = false;
 
-        if(sliderMeter.value >= targetMin && sliderMeter.value <= targetMax)
+        if (sliderMeter.value >= targetMin && sliderMeter.value <= targetMax)
         {
-            Debug.Log("Successful QTE");
-            //RandomizeMeter();
-            SucceedQTE();
+            winCount++;
+            Debug.Log(winCount + "/" + winCounter);
+            if (winCount >= winCounter)
+            {
+                Debug.Log("Successful QTE");
+                //RandomizeMeter();
+                SucceedQTE();
+            }
+            else if (winCounter > winCount)
+            {
+                SetTargetRangeMarkers();
+                RandomizeMeter();
+            }
         }
         else
         {
@@ -88,6 +101,7 @@ public class TimingMeterQTE : QuickTimeEvent
             FailQTE();
         }
     }
+
     public override void SucceedQTE()
     {
         //timingMeterAnimator.SetBool("isOpen", false);
