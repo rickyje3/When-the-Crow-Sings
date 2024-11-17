@@ -91,13 +91,22 @@ public class PlayerMovementState : StateMachineState
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
-            s.isSprinting = true;
-            s.speed = 14;
+            if (!s.isCrouching)
+            {
+                s.isSprinting = !s.isSprinting;
+                s.playerAnimator.SetBool("animIsSprinting", s.isSprinting);
+                s.isSprinting = true;
+                s.speed = 14;
+                Debug.Log("issprinting");
+            }
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
         {
-            s.isSprinting = false;
-            s.speed = 8;
+            if (!s.isCrouching)
+            {
+                s.isSprinting = false;
+                s.speed = 8;
+            }
         }
     }
 
