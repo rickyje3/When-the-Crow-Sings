@@ -17,8 +17,10 @@ public class PlayerInteractionArea : MonoBehaviour
     {
         if (other.GetComponent<Interactable>())
         {
+            Interactable interactable = other.GetComponent<Interactable>();
             Debug.Log("He's here he's here he's heeereee");
-            interactablesInRange.Add(other.GetComponent<Interactable>());
+            interactablesInRange.Add(interactable);
+            interactable.setInteractableArrow(true);
         }
 
     }
@@ -26,8 +28,10 @@ public class PlayerInteractionArea : MonoBehaviour
     {
         if (other.GetComponent<Interactable>())
         {
+            Interactable interactable = other.GetComponent<Interactable>();
             Debug.Log("Oh never mind whew oh i hate socializing SO much.");
-            interactablesInRange.Remove(other.GetComponent<Interactable>());
+            interactablesInRange.Remove(interactable);
+            interactable.setInteractableArrow(false);
         }
 
     }

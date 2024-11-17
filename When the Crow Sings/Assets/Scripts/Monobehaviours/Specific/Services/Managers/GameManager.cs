@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour, IService
     [HideInInspector]
     public List<BirdseedController> landedBirdseed = new List<BirdseedController>(); // Birbseeb
     public CrowHolder crowHolder;
-
+    
     [HideInInspector]
     public BirdseedController activeBirdseed;
 
@@ -73,5 +73,10 @@ public class GameManager : MonoBehaviour, IService
                     break;
             }
         }
+    }
+
+    public void PopupImage(SignalArguments args)
+    {
+        Debug.Log("Popped up image!");
     }
 }

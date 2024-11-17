@@ -63,6 +63,8 @@ Chance_Sad: I just don't want something like that to happen again.
 Farida_Stunned: . . .
 Farida_Exhausted: I'm.. Busy, right now. Look, why don't you make yourself useful. Sit and take some readings and maybe while you're doing that I can think of something to make you feel.. better.
 - Okay.
+	set FaridaTaskAccepted = true;
+	set FaridaTaskOn = true;
 	Chance: Okay, I can help.
 	Farida: Alright just' stand over there. Wait for the gauges to hit the red section and mark the time when it happens. Do that four times then bring it back.
 	=> END
@@ -73,6 +75,8 @@ Farida_Exhausted: I'm.. Busy, right now. Look, why don't you make yourself usefu
 ~ farida_no_task
 Farida: You're back. I take it you can't just settle for a nice quiet place to live?
 - Nope.
+	set FaridaTaskAccepted = true;
+	set FaridaTaskOn = true;
 	Chance: Nope, afraid not. Maybe if it actually was.
 	Farida_Annoyed: Really?
 	Farida: Alright, just... stand over there, wait for the gauge to hit the red part, mark the time when it happens. Do that four times, then bring it back to me.
@@ -82,16 +86,16 @@ Farida: You're back. I take it you can't just settle for a nice quiet place to l
 	=> END
 
 ~ farida_task_unfin
-Farida: The clipboard I gave you is blank. Is the pen out of ink? Do you need glasses? What gives?
+Farida: The clipboard I gave you is blank. Is the pen out of ink? Do you need glasses?
 - I forgot.
 	Chance_Sad: I forgot what you asked me to do.
-	Farida_Annoyed: <size = 50%> You're going to go through all of this trouble to get into here and disrupt my day and you can't even remember the simple instructions I gave you? Are you kidding me? Did you lose all your brain cells between the coast and here? Why did I even accept your application?!
+	Farida_Annoyed: <size=50%> You're going to go through all of this trouble to get into here and disrupt my day and you can't even remember the simple instructions I gave you? Are you kidding me? Did you lose all your brain cells between the coast and here? Why did I even accept your application?!
 	Farida_Exhausted: Stand over there, wait for the gauge to hit the red part, mark the time when it happens. Do that four times, then bring it back to me.
 	=> END
 - The vibe was off.
 	Chance_Angry: The vibes were off, I'm waiting for them to be right to do it.
 	Farida_Stunned: . . .
-	Farida_Annoyed: <size = 50%> I'm never accepted a new resident application again. I can't deal with this.
+	Farida_Annoyed: <size=50%> I'm never accepting a new resident application again. I can't deal with this.
 	=> END
 
 ~ farida_task_fin
@@ -109,7 +113,6 @@ Farida: This will open the padlock to the abandoned quarter's gate. I go to chec
 Chance_Smile: Thank you, Farida.
 Farida_Exhausted: Right...
 set timeOfDay += 1;
-call ReloadScene();
 => END
 
 ~ farida_beyond_base
