@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour, IService
     [HideInInspector]
     public BirdseedController activeBirdseed;
 
+    public GameStateManager gameStateManager;
+
     private void Awake()
     {
         RegisterSelfAsService();
@@ -94,5 +96,10 @@ public class GameManager : MonoBehaviour, IService
     public void PopupImage(SignalArguments args)
     {
         Debug.Log("Popped up image!");
+    }
+
+    public void OnEnemyCaughtPlayer()
+    {
+        gameStateManager.ReloadCurrentScene(0);
     }
 }
