@@ -21,7 +21,7 @@ public class CrowHolder : MonoBehaviour
 
     private void Start()
     {
-        SpawnCrows(25);
+        //SpawnCrows(25);
     }
 
     public void AddCrowTargetIfNoneExists(BirdseedController birdseedToFeastUpon)//Vector3 feast)
@@ -51,9 +51,9 @@ public class CrowHolder : MonoBehaviour
         }
         crows.Clear();
     }
-    public void SpawnCrows(int quantity)
+    public void SpawnCrows(List<CrowRestPoint> _crowRestPoints)
     {
-        for (int i = 0; i < quantity; i++)
+        for (int i = 0; i < _crowRestPoints.Count; i++)
         {
             AddCrow();
         }

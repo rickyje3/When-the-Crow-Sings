@@ -65,7 +65,9 @@ public class GameStateManager : MonoBehaviour, IService
         if (args.intArgs[0] == 1) // If this signal was sent by a LEVEL being loaded
         {
             SpawnPlayer();
+            
         }
+        ServiceLocator.Get<GameManager>().crowHolder.GetComponent<CrowHolder>().SpawnCrows(ServiceLocator.Get<GameManager>().crowRestPoints); // This may need to be delayed to avoid duplicates?
     }
 
     // ---------------------------------------------------------------------------
@@ -98,7 +100,10 @@ public class GameStateManager : MonoBehaviour, IService
     public void LoadRoom(LevelDataResource levelDataResource)
     {
         lastLoadedScene = levelDataResource;
-        Destroy(playerHolder);
+
+        DestroyActors();
+
+
 
         // Unload previous scenes.
         foreach (Scene i in GetLoadedScenes())
@@ -118,6 +123,15 @@ public class GameStateManager : MonoBehaviour, IService
             //Debug.Log(i.name + " was loaded!");
         }
     }
+
+    private void DestroyActors()
+    {
+        Destroy(playerHolder);
+
+        //foreach (CrowRestPoint i in ServiceLocator.Get<GameManager>().crowRestPoints)
+        ServiceLocator.Get<GameManager>().crowHolder.GetComponent<CrowHolder>().DestroyCrows();
+    }
+
     void ValidateScenes()
     {
         currentLevelData = FindObjectsOfType<LevelData>().ToList<LevelData>(); // TODO: Investigate Object.FindObjectByType instead. BY type, not OF type.
