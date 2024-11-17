@@ -53,16 +53,17 @@ public class CrowHolder : MonoBehaviour
     }
     public void SpawnCrows(List<CrowRestPoint> _crowRestPoints)
     {
-        for (int i = 0; i < _crowRestPoints.Count; i++)
+        foreach (CrowRestPoint i in _crowRestPoints)
         {
-            AddCrow();
+            AddCrow(i);
         }
     }
 
-    private void AddCrow()
+    private void AddCrow(CrowRestPoint _crowRestPoint)
     {
         GameObject birdBrain = Instantiate(CrowPrefab, transform);
         crows.Add(birdBrain.GetComponent<BirdBrain>());
         birdBrain.GetComponent<BirdBrain>().crowHolder = this;
+        birdBrain.GetComponent<BirdBrain>().SetRestPoint(_crowRestPoint.transform);
     }
 }

@@ -9,6 +9,8 @@ public class BirdBrain : StateMachineComponent
 
     public float secondsToPeck;
 
+    [HideInInspector]
+    public Transform restPoint;
 
     private void Awake()
     {
@@ -35,5 +37,12 @@ public class BirdBrain : StateMachineComponent
     public void OnCrowTargetDeactivated(SignalArguments args)
     {
         stateMachine.Enter("CrowScatterState");
+    }
+
+    public void SetRestPoint(Transform _restPoint)
+    {
+        restPoint = _restPoint;
+        transform.position = restPoint.position;
+        // TODO: Add rotation.
     }
 }

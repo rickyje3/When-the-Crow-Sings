@@ -65,9 +65,11 @@ public class GameStateManager : MonoBehaviour, IService
         if (args.intArgs[0] == 1) // If this signal was sent by a LEVEL being loaded
         {
             SpawnPlayer();
-            
+            ServiceLocator.Get<GameManager>().
+                crowHolder.GetComponent<CrowHolder>().
+                SpawnCrows(ServiceLocator.Get<GameManager>().crowRestPoints); // This may need to be moved to allow for subscenes to have crows.
         }
-        ServiceLocator.Get<GameManager>().crowHolder.GetComponent<CrowHolder>().SpawnCrows(ServiceLocator.Get<GameManager>().crowRestPoints); // This may need to be delayed to avoid duplicates?
+        
     }
 
     // ---------------------------------------------------------------------------
