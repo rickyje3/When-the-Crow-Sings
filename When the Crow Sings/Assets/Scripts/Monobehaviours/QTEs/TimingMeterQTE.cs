@@ -16,6 +16,8 @@ public class TimingMeterQTE : QuickTimeEvent
     public RectTransform targetMaxMarker;
     public RectTransform targetRangeHighlight;
 
+    public QTEInteractable qteInteractable;
+
     [HideInInspector]
     public int winCount;
     public int winCounter;
@@ -25,6 +27,8 @@ public class TimingMeterQTE : QuickTimeEvent
 
     private void Start()
     {
+        qteInteractable = FindObjectOfType<QTEInteractable>();
+
         SetTargetRangeMarkers();
         RandomizeMeter();
         //leave out when implementation added
@@ -86,6 +90,7 @@ public class TimingMeterQTE : QuickTimeEvent
             {
                 Debug.Log("Successful QTE");
                 //RandomizeMeter();
+                qteInteractable.audioSource.PlayOneShot(qteInteractable.successSound);
                 SucceedQTE();
             }
             else if (winCounter > winCount)
@@ -93,6 +98,7 @@ public class TimingMeterQTE : QuickTimeEvent
                 Debug.Log("Else ifed");
                 RandomizeMeter();
                 SetTargetRangeMarkers();
+                qteInteractable.audioSource.PlayOneShot(qteInteractable.successSound);
             }
         }
         else
@@ -100,6 +106,7 @@ public class TimingMeterQTE : QuickTimeEvent
             Debug.Log("Failed QTE");
             //SetTargetRangeMarkers();
             //RandomizeMeter();
+            qteInteractable.audioSource.PlayOneShot(qteInteractable.failSound);
             FailQTE();
         }
     }

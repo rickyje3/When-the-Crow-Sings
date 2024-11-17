@@ -12,12 +12,16 @@ public class QTEInteractable : MonoBehaviour
 
     public SerializableDictionary successDict;
     public SerializableDictionary failureDict;
+    public AudioClip successSound;
+    public AudioClip failSound;
+    public AudioSource audioSource;
 
     private SignalArguments signalArgs;
     private void Awake()
     {
         signalArgs = new SignalArguments();
         signalArgs.objectArgs.Add(qte);
+        audioSource = GetComponent<AudioSource>();
 
         //if (successDict.elements.Count == 0) throw new System.Exception("QTE does not have success dict!");
         //if (failureDict.elements.Count == 0) throw new System.Exception("QTE does not have failure dict!");
@@ -49,6 +53,8 @@ public class QTEInteractable : MonoBehaviour
     {
         globalQteSignal.Emit(signalArgs);
     }
+
+    public AudioSource GetAudioSource() { return audioSource; }
 
     //public GameObject visualCue;
     //public bool playerInRange;
