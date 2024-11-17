@@ -35,10 +35,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6196932118911638922}
   - {fileID: 5426588948380721118}
   - {fileID: 5436449751066937999}
   - {fileID: 6887183385692077409}
+  - {fileID: 3647983877849693947}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2878057926788062340
@@ -53,6 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d80d6d7a5de3a4493e188f3358aad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyWaypointsHolders: []
+  currentWaypoint: {fileID: 0}
   navMeshAgent: {fileID: 0}
   enemyMaterial: {fileID: 2100000, guid: 4bd5ec13fe23f6c4aab4fc483b0f47f7, type: 2}
   timeToWander: 4
@@ -242,6 +244,61 @@ CapsuleCollider:
   m_Height: 6.06
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4936281868424011640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3647983877849693947}
+  - component: {fileID: 352431288771330108}
+  m_Layer: 8
+  m_Name: GrabTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3647983877849693947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936281868424011640}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3527592405294833649}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &352431288771330108
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936281868424011640}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.81
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5266600726387048090
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +447,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.18, z: 0}
   m_LocalScale: {x: 1.1465, y: 3.7485058, z: 1.1465}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6196932118911638922}
   m_Father: {fileID: 3527592405294833649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &6241155567005795643
@@ -470,11 +528,11 @@ Transform:
   m_GameObject: {fileID: 8362149603278763434}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.18000007, z: 0.676}
-  m_LocalScale: {x: 0.7652983, y: 1.6200979, z: 0.5721336}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5896206}
+  m_LocalScale: {x: 0.66750836, y: 0.4321983, z: 0.49902627}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3527592405294833649}
+  m_Father: {fileID: 6887183385692077409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8854948332816516484
 MeshFilter:
