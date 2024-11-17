@@ -18,10 +18,16 @@ public class StirringQTE : QuickTimeEvent
     private Vector2[] joystickSequence = { Vector2.up, Vector2.left, Vector2.down, Vector2.right }; // Joystick sequence
     private float inputThreshold = 0.8f; // Threshold for recognizing a joystick direction
 
+    public QTEInteractable qteInteractable;
+    public Slider slider;
+
     //private bool isControllerConnected;
 
     private void Update()
     {
+        qteInteractable = FindObjectOfType<QTEInteractable>();
+        slider = GetComponentInChildren<Slider>();
+
         if (!countingDown)
         {
             if (InputManager.IsControllerConnected)
@@ -37,8 +43,9 @@ public class StirringQTE : QuickTimeEvent
         }
 
         // Check for QTE completion
-        if (score >= 50)
+        if (score >= slider.maxValue)
         {
+            qteInteractable.audioSource.PlayOneShot(qteInteractable.successSound);
             SucceedQTE();
         }
 
@@ -51,6 +58,7 @@ public class StirringQTE : QuickTimeEvent
         else if (timer <= 0)
         {
             Debug.Log("Time is up, QTE Failed");
+            qteInteractable.audioSource.PlayOneShot(qteInteractable.failSound);
             FailQTE();
         }
     }
