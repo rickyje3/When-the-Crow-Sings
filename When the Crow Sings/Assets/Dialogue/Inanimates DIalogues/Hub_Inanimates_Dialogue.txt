@@ -7,9 +7,14 @@ They're probably just inside or working. Somewhere.
 Coffee, water, fruits, vegetables. A nice spread.
 => END
 
-~ wood_pile
-A pile of wooden planks leaning against the fence. Maybe it was used to make the playset.
-=> END
+~ wood_pile_unmoved
+if WoodPileMovable == true:
+	This must've been what Jazmyne was talking about. Let me just...
+	set Zone2DoorUnlocked = true;
+	=> END
+else:
+	A pile of wooden planks leaning against the fence. Maybe it was used to make the playset.
+	=> END
 
 ~ pot_of_soup
 if AngelTaskCompleted == true:

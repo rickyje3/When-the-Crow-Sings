@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6803497763721583419}
   - component: {fileID: 158499437496051691}
   - component: {fileID: 1875406335147647528}
-  - component: {fileID: 6165941451760414067}
+  - component: {fileID: 2497022635328601373}
   m_Layer: 0
-  m_Name: pf_QteInteractable
+  m_Name: pf_ImagePopupInteractable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6165941451760414067
+--- !u!114 &2497022635328601373
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,15 +80,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2658357030368060936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95401f45f8815de4fb1f6dfed293570a, type: 3}
+  m_Script: {fileID: 11500000, guid: 59d33f157f384c54ab051d4f52b43814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  qte: {fileID: 0}
-  globalQteSignal: {fileID: 11400000, guid: 2241f19dd97e274478e011625b833c15, type: 2}
-  successDict:
-    elements: []
-  failureDict:
-    elements: []
+  popupImage: {fileID: 0}
+  gameSignal: {fileID: 11400000, guid: b1265efb62005ec4193f7d65be844793, type: 2}
 --- !u!1 &4654524222143933120
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +146,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ad8f5102082d2524fab75976875533d3, type: 2}
+  - {fileID: 2100000, guid: f982162ea3e6fd445b1ab1ddce599a2d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

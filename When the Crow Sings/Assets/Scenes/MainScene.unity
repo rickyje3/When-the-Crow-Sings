@@ -177,6 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 943808688}
   - component: {fileID: 943808689}
+  - component: {fileID: 943808690}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -212,6 +213,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dynamicEnables: []
+--- !u!114 &943808690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943808687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8f2792aa4e5a841805d6ab219c0209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSignal: {fileID: 11400000, guid: b1265efb62005ec4193f7d65be844793, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 943808689}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PopupImage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!850595691 &1144161087
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -946,7 +975,7 @@ PrefabInstance:
     - target: {fileID: 3556083670162774548, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
       propertyPath: m_fontSize
-      value: 40
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3556083670162774548, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
@@ -957,7 +986,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: af9c61cc6ed22214f9197931801daafb,
+      objectReference: {fileID: 11400000, guid: 3dc67824a47611f4d80336579ef98457,
         type: 2}
     - target: {fileID: 3556083670162774548, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
@@ -967,18 +996,18 @@ PrefabInstance:
     - target: {fileID: 3556083670162774548, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
       propertyPath: m_lineSpacing
-      value: -26.3
+      value: -15.67
       objectReference: {fileID: 0}
     - target: {fileID: 3556083670162774548, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 40
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3556083670162774548, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1367743766305806238, guid: af9c61cc6ed22214f9197931801daafb,
+      objectReference: {fileID: -7823943739780238488, guid: 3dc67824a47611f4d80336579ef98457,
         type: 2}
     - target: {fileID: 3556083670162774548, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
@@ -1123,22 +1152,44 @@ PrefabInstance:
     - target: {fileID: 8753042411374657949, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
       propertyPath: m_text
-      value: THE NAME
+      value: Francisco
       objectReference: {fileID: 0}
     - target: {fileID: 8753042411374657949, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
       propertyPath: m_fontSize
-      value: 45
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753042411374657949, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_margin.w
+      value: 120.35418
       objectReference: {fileID: 0}
     - target: {fileID: 8753042411374657949, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
       propertyPath: m_margin.y
-      value: 46.900387
+      value: 34.13596
       objectReference: {fileID: 0}
     - target: {fileID: 8753042411374657949, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5fa524e351990ea4bb18d83c4ebc3c99,
+        type: 2}
+    - target: {fileID: 8753042411374657949, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
       propertyPath: m_fontSizeBase
-      value: 45
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753042411374657949, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -57242791700376762, guid: 5fa524e351990ea4bb18d83c4ebc3c99,
+        type: 2}
+    - target: {fileID: 8753042411374657949, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8808769737722841208, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}

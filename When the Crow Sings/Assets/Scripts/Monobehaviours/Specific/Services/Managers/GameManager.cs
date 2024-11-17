@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour, IService
     // Likely where we keep track of general stuff going on in the game. Possibly birdseed.
     public List<DynamicEnable> dynamicEnables = new List<DynamicEnable>();
 
+    
 
     private void Awake()
     {
@@ -62,5 +63,10 @@ public class GameManager : MonoBehaviour, IService
         }
 
         
+    }
+
+    public void PopupImage(SignalArguments args)
+    {
+        Debug.Log("Popped up image!");
     }
 }
