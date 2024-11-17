@@ -57,6 +57,7 @@ Chance: Um, do you need help?
 Francisco: Ah! Yes! You want something, I need something. I need to get a medley put together for the little one, but I'm missing an ingredient. You get me the ingredient, I tell you what you need to know. Sound like a deal?
 -I guess so.
 	set FranciscoTaskAccepted = true;
+	set FranciscoTaskOn = true;
 	Chance: I guess so. What do you need?
 	Francisco: There is this little pink flower you may have seen around, pipsissewa they call it. The leaves help with some of the discomfort. 
 	Francisco: They're a little spiky though, so be careful while picking them. Three plants worth will do, you can find them up by the locked up gate to the north west.
@@ -70,6 +71,7 @@ Francisco: Ah! Yes! You want something, I need something. I need to get a medley
 Francisco: I'm sorry but I really can't chat until I get this done. Did you still need to talk?
 - I do.
 	set FranciscoTaskAccepted = true;
+	set FranciscoTaskOn = true;
 	Chance: Turns out I do. What did you need?
 	Francisco: There is this little pink flower you may have seen around, pipsissewa they call it. The leaves help with some of the discomfort. 
 	Francisco: They're a little spiky though, so be careful while picking them. Three plants worth will do, you can find them up by the locked up gate to the north west.
@@ -80,7 +82,7 @@ Francisco: I'm sorry but I really can't chat until I get this done. Did you stil
 
 ~ francisco_task_unfin
 Francisco: Oh you're back! You've got what I asked for?
-- No, I forgot what to get.
+- What to get?
 	Chance_Sad: No, I forgot what you said to get.
 	Francisco_Yap: Ah! No worries friend. Just collect me the leaves from three flowers near the north west outer fence.
 	=> END
@@ -138,7 +140,6 @@ Francisco: Yes, but the lock is manual, so the buttons should still work. The co
 Chance: Oh, okay. Thanks Francisco.
 Francisco: Of course. Um, let me know if you find anything out. It was nice to talk to you.
 set timeOfDay += 1;
-call ReloadScene();
 => END
 
 ~ francisco_beyond_base

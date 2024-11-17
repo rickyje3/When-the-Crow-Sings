@@ -5,6 +5,8 @@ else:
 	=> jazmyne_beyond_base
 
 ~ jazmyne_directory_2
+if JazmyneTaskAccepted == false:
+	=> jazmyne_first_int
 if JazmyneTaskCompleted == false:
 	=> jazmyne_task_unfin
 else:
@@ -12,7 +14,6 @@ else:
 
 ~ jazmyne_first_int
 set RecCenterDoorUnlocked = false;
-set JazmyneTaskAccepted = true;
 Jazmyne: Oh hello. I haven't seen you before, are you here to register a child?
 Chance: Uh, no?
 Jazmyne: . . . No! Right! Of course not, you're the new resident. Sorry!
@@ -32,6 +33,8 @@ Jazmyne: Oh no!
 Jazmyne: I didn't get nearly enough time to clean up.. Oh!
 Jazmyne: Could you help me and clean up out here? Just the toys in the chestand then the drawings on the board!
 Jazmyne: I can talk more once the babies are back to sleep!
+set JazmyneTaskAccepted = true;
+set JazmyneTaskOn =  true;
 => END
 
 ~ jazmyne_task_unfin
@@ -55,10 +58,8 @@ Jazmyne: Of course! If you're used to babies, I could always use a hand. Oh! And
 - Sure.
 	Chance: Sure, I will. See you later.
 	set timeOfDay += 1;
-	call ReloadScene();
 	=> END
 - Maybe.
 	Chance: Uh, maybe. See you.
 	set timeOfDay += 1;
-	call ReloadScene();
 	=> END
