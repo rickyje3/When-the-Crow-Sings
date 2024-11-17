@@ -132,6 +132,10 @@ public static class SaveData
     {
         boolFlags[key] = value;
         Debug.Log("Key is now "+ boolFlags[key]);
+
+
+        //if (boolFlags[])
+        
     }
     public static void SetFlag(string key, int value)
     {
