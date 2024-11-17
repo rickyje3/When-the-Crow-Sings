@@ -139,8 +139,10 @@ public static class SaveData
         Debug.Log("Key is now "+ boolFlags[key]);
 
 
-        //if (boolFlags[])
-        
+        if (boolFlags["FlowerOne"] && boolFlags["FlowerTwo"] && boolFlags["FlowerThree"]) boolFlags["FranciscoTaskCompleted"] = true;
+        else boolFlags["FranciscoTaskCompleted"] = false;
+
+
     }
     public static void SetFlag(string key, int value)
     {
