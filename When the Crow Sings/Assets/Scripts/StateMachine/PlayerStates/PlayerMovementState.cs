@@ -58,6 +58,15 @@ public class PlayerMovementState : StateMachineState
         // Apply gravity to velocity
         s.velocity += s.gravity * s.gravityMultiplier * deltaTime;
 
+        //Converts movement input to a float because vector3 cant be lerped :(((((
+        float inputMagnitude = s.movementInput.magnitude;
+
+        if (!s.isSprinting)
+        {
+            //Smoothly blend speed off of joystick input (8 is the max walking speed)
+            s.speed = Mathf.Lerp(s.speed, s.movementInput.magnitude * 8, Time.deltaTime * s.acceleration);
+        }
+
         // move!!
         Vector3 movement = new Vector3(s.movementInput.x, 0, s.movementInput.y).normalized * s.speed;
 
@@ -89,15 +98,24 @@ public class PlayerMovementState : StateMachineState
 
     private void OnSprint(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.JoystickButton1))
         {
-            s.isSprinting = true;
-            s.speed = 14;
+            if (!s.isCrouching)
+            {
+                s.isSprinting = !s.isSprinting;
+                s.playerAnimator.SetBool("animIsSprinting", s.isSprinting);
+                s.isSprinting = true;
+                s.speed = 14;
+                Debug.Log("issprinting");
+            }
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift) || Input.GetKeyUp(KeyCode.JoystickButton1))
         {
-            s.isSprinting = false;
-            s.speed = 8;
+            if (!s.isCrouching)
+            {
+                s.isSprinting = false;
+                s.speed = 8;
+            }
         }
     }
 
