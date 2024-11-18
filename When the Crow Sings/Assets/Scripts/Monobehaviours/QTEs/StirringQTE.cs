@@ -14,8 +14,18 @@ public class StirringQTE : QuickTimeEvent
     public int score = 1;
     public float timer = 8;
 
+    public Image upJoystick;
+    public Image rightJoystick;
+    public Image downJoystick;
+    public Image leftJoystick;
+
+    public Image wKey;
+    public Image aKey;
+    public Image sKey;
+    public Image dKey;
+
     private KeyCode[] keySequence = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D }; // Keyboard sequence
-    private Vector2[] joystickSequence = { Vector2.up, Vector2.left, Vector2.down, Vector2.right }; // Joystick sequence
+    private Vector2[] joystickSequence = { Vector2.up, Vector2.right, Vector2.down, Vector2.left }; // Joystick sequence
     private float inputThreshold = 0.8f; // Threshold for recognizing a joystick direction
 
     public QTEInteractable qteInteractable;
@@ -72,14 +82,43 @@ public class StirringQTE : QuickTimeEvent
     private void ShowCurrentKey()
     {
         KeyCode currentKey = keySequence[currentStep];
-        displayBox.GetComponentInChildren<TextMeshProUGUI>().text = currentKey.ToString();
+        //displayBox.GetComponentInChildren<TextMeshProUGUI>().text = currentKey.ToString();
     }
 
     //controller
     private void ShowCurrentDirection()
     {
-        string direction = joystickSequence[currentStep].ToString();
-        displayBox.GetComponentInChildren<TextMeshProUGUI>().text = direction;
+        if (currentStep == 0)
+        {
+            upJoystick.enabled = true;
+            rightJoystick.enabled = false;
+            downJoystick.enabled = false;
+            leftJoystick.enabled = false;
+        }
+        else if (currentStep == 1)
+        {
+            upJoystick.enabled = false;
+            rightJoystick.enabled = true;
+            downJoystick.enabled = false;
+            leftJoystick.enabled = true;
+        }
+        else if (currentStep == 2)
+        {
+            upJoystick.enabled = false;
+            rightJoystick.enabled = false;
+            downJoystick.enabled = true;
+            leftJoystick.enabled = false;
+        }
+        else if (currentStep == 3)
+        {
+            upJoystick.enabled = false;
+            rightJoystick.enabled = false;
+            downJoystick.enabled = false;
+            leftJoystick.enabled = true;
+        }
+
+        //string direction = joystickSequence[currentStep].ToString();
+        //displayBox.GetComponentInChildren<TextMeshProUGUI>().text = direction;
     }
 
     private void CheckKeyboardInput()
@@ -117,12 +156,12 @@ public class StirringQTE : QuickTimeEvent
     {
         countingDown = true;
 
-        if(correctKey) 
-            displayBox.GetComponent<Image>().color = Color.green;
+        //if(correctKey) 
+            //displayBox.GetComponent<Image>().color = Color.green;
 
         yield return new WaitForSeconds(0.07f); // Time between transitions (less = faster)
 
-        displayBox.GetComponent<Image>().color = Color.white;
+        //displayBox.GetComponent<Image>().color = Color.white;
 
         if (correctKey)
         {

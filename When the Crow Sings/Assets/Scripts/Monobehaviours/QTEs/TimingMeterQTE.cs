@@ -16,7 +16,7 @@ public class TimingMeterQTE : QuickTimeEvent
     public RectTransform targetMaxMarker;
     public RectTransform targetRangeHighlight;
     public Image spacebar;
-    public Image aKey;
+    public Image bKey;
 
     public QTEInteractable qteInteractable;
 
@@ -33,13 +33,13 @@ public class TimingMeterQTE : QuickTimeEvent
 
         if (InputManager.IsControllerConnected)
         {
-            aKey.enabled = true;
+            bKey.enabled = true;
             spacebar.enabled = false;
         }
         else
         {
             spacebar.enabled = true;
-            aKey.enabled = false;
+            bKey.enabled = false;
         }
 
         SetTargetRangeMarkers();
