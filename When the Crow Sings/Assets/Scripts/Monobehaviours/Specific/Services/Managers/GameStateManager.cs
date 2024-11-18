@@ -111,26 +111,19 @@ public class GameStateManager : MonoBehaviour, IService
         foreach (Scene i in GetLoadedScenes())
         {
             SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
-            //SceneManager.UnloadScene(i);
         }
-
-        // Check what scenes should be loaded based on save data and exit trigger
 
 
         // then load them all
         foreach (SceneReference i in GetScenesToLoad(levelDataResource))
         {
-            //SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
             SceneManager.LoadScene(i.Name, LoadSceneMode.Additive);
-            //Debug.Log(i.name + " was loaded!");
         }
     }
 
     private void DestroyActors()
     {
         Destroy(playerHolder);
-
-        //foreach (CrowRestPoint i in ServiceLocator.Get<GameManager>().crowRestPoints)
         ServiceLocator.Get<GameManager>().crowHolder.GetComponent<CrowHolder>().DestroyCrows();
     }
 
@@ -167,7 +160,6 @@ public class GameStateManager : MonoBehaviour, IService
                     else if (ii.valueType == SubSceneLogicBase.VALUE_TYPE.INT)
                     {
                         int intFlag = SaveData.intFlags[ii.associatedDataKey];
-                        //Debug.Log("Flag is == " + intFlag);
 
                         if (ii.associatedOperator == SubSceneLogicBase.OPERATOR.EQUALS)
                         {
@@ -187,9 +179,6 @@ public class GameStateManager : MonoBehaviour, IService
                 scenes.Add(i.subScene);
             }
         }
-
-        //scenes.Add(SceneManager.GetSceneByBuildIndex(whichTEMP+1));
-
         return scenes;
     }
 
@@ -211,7 +200,6 @@ public class GameStateManager : MonoBehaviour, IService
     {
         if (currentLevelData.Count(x => x.sceneType == LevelData.SceneType.LEVEL) != 1)
             throw new System.Exception("Not EXACTLY one LEVEL-type scene is currently loaded!");
-        //else { Debug.Log("All's well!"); }
     }
     void Validate_No_UNASSIGNED()
     {
@@ -220,12 +208,6 @@ public class GameStateManager : MonoBehaviour, IService
             if (i.sceneType == LevelData.SceneType.UNASSIGNED) throw new System.Exception("Attempting to load a level of type UNASSIGNED!");
         }
     }
-
-    // ---------------------------------------------------------------------------
-    void LoadPersistentData() { }
-    void SavePersistentData() { }
-
-    // ---------------------------------------------------------------------------
 
     public List<LevelDataResource> debugScenes;
     void DebugLoadInput()
