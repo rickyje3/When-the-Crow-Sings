@@ -43,4 +43,14 @@ public class SaveEditMenu : MonoBehaviour
         ii.GetComponent<DebugBoolFlagOption>().key = i.Key;
         ii.transform.SetParent(boolContentHolder.transform, false);
     }
+
+
+    public void OnSaveButtonPressed()
+    {
+        SaveData.WriteData();
+    }
+    public void OnWipeSaveButtonPressed()
+    {
+        StartCoroutine(SaveData.EraseData());
+    }
 }

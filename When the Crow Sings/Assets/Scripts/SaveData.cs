@@ -283,6 +283,7 @@ public static class SaveData
             fileStream.Write(valueBytes, 0, valueBytes.Length);
         }
         fileStream.Close();
+        Debug.Log("File saved to disk!");
     }
 
     static int ReadInt(FileStream fileStream)
