@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Eflatun.SceneReference;
+using System.Collections;
 
 public class GameStateManager : MonoBehaviour, IService
 {
@@ -115,10 +116,46 @@ public class GameStateManager : MonoBehaviour, IService
 
 
         // then load them all
-        foreach (SceneReference i in GetScenesToLoad(levelDataResource))
+        StartCoroutine(LoadSceneAsync(GetScenesToLoad(levelDataResource)));
+        //foreach (SceneReference i in GetScenesToLoad(levelDataResource))
+        //{
+        //    SceneManager.LoadScene(i.Name, LoadSceneMode.Additive);
+            
+        //}
+    }
+
+    IEnumerator LoadSceneAsync(List<SceneReference> sceneReferences)
+    {
+        List<AsyncOperation> asyncOperations = new List<AsyncOperation>();
+        foreach (SceneReference i in sceneReferences)
         {
-            SceneManager.LoadScene(i.Name, LoadSceneMode.Additive);
+            asyncOperations.Add(SceneManager.LoadSceneAsync(i.Name, LoadSceneMode.Additive));
         }
+
+        while (!AsyncOperationsAreDone(asyncOperations))
+        {
+            float progressValue = AsyncOperationsProgress(asyncOperations);//Mathf.Clamp01(asyncOperation.progress);// / 0.9f);
+            Debug.Log("Loading Progres: "+progressValue);
+            yield return null;
+        }
+    }
+
+    bool AsyncOperationsAreDone(List<AsyncOperation> asyncOperations)
+    {
+        foreach (AsyncOperation asyncOperation in asyncOperations)
+        {
+            if (!asyncOperation.isDone) return false;
+        }
+        return true;
+    }
+    float AsyncOperationsProgress(List<AsyncOperation> asyncOperations)
+    {
+        float totalProgress = 0.0f;
+        foreach (AsyncOperation asyncOperation in asyncOperations)
+        {
+            totalProgress += asyncOperation.progress;
+        }
+        return totalProgress; // TODO: Divide by the number of operations or something to clamp it to 100% instead of 500% or whatever it's doing here.
     }
 
     private void DestroyActors()
