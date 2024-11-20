@@ -40,12 +40,17 @@ public class PlayerController : StateMachineComponent, IService
         stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
         stateMachine.RegisterState(new PlayerThrowBirdseedState(this), "PlayerThrowBirdseedState");
         stateMachine.RegisterState(new PlayerDialogueState(this), "PlayerDialogueState");
-        
     }
     private void Start()
     {
         InputManager.playerInputActions.Player.Enable();
         stateMachine.Enter("PlayerMovementState");
+    }
+
+    private void OnDestroy()
+    {
+        stateMachine.RegisterState(new DestroyState(this), "DestroyState");
+        stateMachine.Enter("DestroyState");
     }
 
     public void RegisterSelfAsService()
