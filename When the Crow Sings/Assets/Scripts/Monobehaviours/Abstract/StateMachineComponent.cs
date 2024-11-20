@@ -16,4 +16,6 @@ abstract public class StateMachineComponent : MonoBehaviour
     {
         stateMachine.OnTriggerExit(other);
     }
+
+    
 }
