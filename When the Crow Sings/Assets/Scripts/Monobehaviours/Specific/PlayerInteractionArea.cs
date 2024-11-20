@@ -36,6 +36,11 @@ public class PlayerInteractionArea : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        interactablesInRange.Clear();
+    }
+
     private void Update()
     {
         List<Interactable> interactablesToRemove = new List<Interactable>();
