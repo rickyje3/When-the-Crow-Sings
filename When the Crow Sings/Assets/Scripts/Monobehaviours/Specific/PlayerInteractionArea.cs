@@ -70,12 +70,12 @@ public class PlayerInteractionArea : MonoBehaviour
         
     }
 
-    private void Start()
-    {
-        InputManager.playerInputActions.Player.Interact.performed += OnInteract;
-    }
+    //private void Start()
+    //{
+    //    InputManager.playerInputActions.Player.Interact.performed += OnInteract;
+    //}
 
-    private void OnInteract(InputAction.CallbackContext context)
+    public void OnInteract(InputAction.CallbackContext context)
     {
         if (canInteract)
         {

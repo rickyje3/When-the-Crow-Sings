@@ -28,6 +28,9 @@ public class PlayerController : StateMachineComponent, IService
 
     public GameSignal pauseSignalTEMP;
 
+    [HideInInspector]
+    PlayerInteractionArea interactionArea;
+
     private void Awake()
     {
         RegisterSelfAsService();
@@ -66,12 +69,16 @@ public class PlayerController : StateMachineComponent, IService
     }
     private void OnEnable()
     {
+        Debug.Log("PlayerController enabled! 1");
         //InputManager.playerInputActions.Player.Enable();
         InputManager.playerInputActions.Player.Pause.performed += OnPause;
+        InputManager.playerInputActions.Player.Interact.performed += interactionArea.OnInteract;
+        Debug.Log("PlayerController enabled! 2");
     }
     private void OnDisable()
     {
         InputManager.playerInputActions.Player.Pause.performed -= OnPause;
+        InputManager.playerInputActions.Player.Interact.performed -= interactionArea.OnInteract;
     }
 
     private void OnPause(InputAction.CallbackContext context)
