@@ -184,7 +184,7 @@ public class DialogueManager : MonoBehaviour, IService
 
             if (activeConditionBlock == null) { throw new Exception("THE CONDITION BLOCK IS BLANK YOU SILLY DUCK"); }
 
-            Debug.Log("About to call DoConditionalDialogueLogic()");
+            //Debug.Log("About to call DoConditionalDialogueLogic()");
             DoConditionalDialogueLogic();
 
 
