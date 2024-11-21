@@ -193,8 +193,6 @@ public static class SaveData
     }
     public static void ReadData()
     {
-        PenguinCultAttemptsToScheduleAMeeting();
-
         switch (saveDataVersion) // TODO: Make it so it starts reading, stops after the version number, then calls the correct method using this switch statement.
         {
             case 0:
@@ -207,6 +205,7 @@ public static class SaveData
 #pragma warning restore CS0162 // Unreachable code detected
         }
         Debug.Log("Data read!");
+        PenguinCultAttemptsToScheduleAMeeting();
     }
 
     public static IEnumerator EraseData()
