@@ -23,11 +23,11 @@ if timeOfDay == 0:
 	Angel_Smile: Good morning, are you settling in alright?
 if timeOfDay == 1:
 	Angel_Smile: Good afternoon, are you settling in alright?
-Chance_Sad: . . .
-Angel_Worried: Oh, well that's...
-- Out past curfew?
+Chance_Sad: Uh..
+Angel_Worried: Oh. Well.
+- Past curfew?
 	=> angel_past_curfew
-- My window...
+- My window.
 	=> angel_window
 
 ~ angel_past_curfew
@@ -41,15 +41,15 @@ Chance_Angry: Someone came banging on my window in the middle of the night.
 ~ angel_first_int_cont
 set AngelTaskOffered = true;
 Angel_Stare: . . .
-Angel_Smile: Well I wouldn't know anything about that! Did you want to help me in the kitchen?
-Angel_Smile: Might take your mind off things, and I could always use an extra hand!
+Angel_Smile: Well I wouldn't know anything about that! 
+Angel_Smile: Did you want to help me in the kitchen? Might take your mind off things, and I could always use an extra hand!
 - Sure.
 	set AngelTaskAccepted = true;
 	set AngelTaskOn = true;
 	Chance: . . . Yeah, sure.
 	Angel_Smile: Thanks! I just need you to stir our forever soup!
 	Angel: It has to be stirred a couple times a day, and if you do it I can take care of some other things.
-	Angel_Stare: It's been here since before I got here...
+	Angel_Stare: It's been here since before I got here. Probably older than some of my siblings...
 	=> END
 - Maybe later.
 	Chance: Um, maybe later.
@@ -61,10 +61,10 @@ Angel: Did you have time to lend me a hand?
 - Yeah, sure.
 	set AngelTaskAccepted = true;
 	set AngelTaskOn = true;
-	Chance: Yeah, sure.
+	Chance_Smile: Yeah, sure.
 	Angel_Smile: Thanks! I just need you to stir our forever soup!
 	Angel: It has to be stirred a couple times a day, and if you do it I can take care of some other things.
-	Angel_Stare: It's been here since before I got here...
+	Angel_Stare: It's been here since before I got here. Probably older than some of my siblings...
 	=> END
 - Maybe later.
 	=> END
@@ -74,11 +74,11 @@ Angel_Worried: Uh, are you okay? Did you forget what I asked you to do?
 - Yep.
 	Chance_Sad: Yeah, I did.
 	Angel_Worried: <size=50%> I told you just a minute ago...
-	Angel_Stare: Just go stir the soup, please.
+	Angel_Stare: I just need you to stir the soup for me, please.
 	=> END
 - No...
 	Chance_Angry: No?! Of course not.
-	Angel_Worried: Right...
+	Angel_Worried: Um, okay..
 	=> END
 
 ~ angel_task_fin
@@ -88,14 +88,15 @@ set RecCenterDoorUnlocked = true;
 Angel_Smile: Thanks so much! Gave me time to prep.
 Angel_Thinking: . . .
 Angel_Worried: Um.. If you're worried about whatever, maybe you could talk to Miss Jazmyne?
-Angel: She knows just about everyone.  I know she doesn't get much sleep helping with the little ones.
-Angel_Thinking: There's also Quinn! They're always up taking care of the night blooms.
+Angel: She's up at all hours taking care of the little ones, and she's got some juveniles who are troublesome.
+Angel_Smile: Theo does love a good prank!
+Angel_Thinking: There's also Quinn! They're always up taking care of the night blooms, so if someone was wandering around, they'd know.
 Chance: Thanks, I appreciate it.
-Angel_Smile: No problem!! Don't be a stranger!
+Angel_Smile: No problem! Don't be a stranger!
 Angel_Stare: I mean, I'll see you at meal time anyway but. . .
 Angel_Smile: Bye!
 set timeOfDay += 1;
-call ReloadScene();
+call ReloadScene(6);
 => END
 
 ~ angel_demo_talk

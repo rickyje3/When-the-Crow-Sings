@@ -26,18 +26,23 @@ Farida: Ugh. Come in!
 
 ~ farida_sec_int
 Farida: Did you need something?
-- Francisco sent me.
-	Chance: Francisco sent me.
-	Farida_Annoyed: Okay. And?
-	Chance_Scared: . . . Uh, he said that you might be able to tell me about the old system you guys had.
-	=> farida_francisco
-- Beau sent me.
-	Chance: Beau sent me.
-	Farida_Annoyed: Okay. And?
-	Chance_Scared: . . . Someone banged on my window. Beau said you might know about security here. 
-	Farida_Stunned: What? . . .
-	Farida_Exhausted: Look. I am aware there are a few. . . Disturbances around the compound, but everything is under control. You don't need to worry about it.
-	=> farida_sec_int_cont 
+if FranciscoBaseCompleted == true:
+	- Francisco sent me.
+		Chance: Francisco sent me.
+		Farida_Annoyed: Okay. And?
+		Chance_Scared: . . . Uh, he said that you might be able to tell me about the old system you guys had.
+		=> farida_francisco
+if BeauBaseCompleted == true:		
+	- Beau sent me.
+		Chance: Beau sent me.
+		Farida_Annoyed: Okay. And?
+		Chance_Scared: . . . Someone banged on my window. Beau said you might know about security here. 
+		Farida_Stunned: What? . . .
+		Farida_Exhausted: Look. I am aware there are a few. . . Disturbances around the compound, but everything is under control. You don't need to worry about it.
+		=> farida_sec_int_cont 
+else:
+	Farida: How the fuck did you get in here? What the fuck??
+	=> END
 
 ~ farida_francisco
 - Curious.
@@ -47,7 +52,9 @@ Farida: Did you need something?
 Farida: Even if I wanted to tell you about it, I couldn't. The gauges connected to the old power source were broken by the time I got placed here. 
 Farida_Annoyed: Whoever they sent me to replace didn't leave anything useful, and she-
 Farida_Exhausted: The solar was already up and running. Why do you even want to know?
-Chance_Sad: Things just seem. . . I don't know, weird around here. Especially at night, with that humming sound. And the glow. 
+Chance_Sad: Things just seem. . . I don't know, weird around here. Especially at night, with that humming sound. 
+if day == 2:
+	Chance: And the glow. 
 Farida_Annoyed: Well they're not! 
 Farida: Weird, I mean. Okay?
 => farida_sec_int_cont 
@@ -100,7 +107,6 @@ Farida: The clipboard I gave you is blank. Is the pen out of ink? Do you need gl
 
 ~ farida_task_fin
 set FaridaBaseCompleted = true;
-set Zone3DoorUnlocked = true;
 Farida_Stunned: This looks.. good. Thank you.
 Farida: There's.. someone you might want to talk to. She was the person who trained me, tried to get me settled in after I got moved here. She worked on the old power system.
 Farida_Exhausted: She lives in the abandoned quarter, she left the lodging a little while after we met. I guess she just couldn't take it in here anymore...
