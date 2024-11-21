@@ -21,14 +21,16 @@ else:
 ~ francisco_first_int
 set FranciscoTaskOffered = true;
 Francisco: Ah hello! You must be our new resident Chance, yes? I don't think I've sent out the request for your entry checkup yet, did I need something?
-- Caleb sent me.
-	Chance: Caleb said you might know something about the old energy source here, whatever was used before the solar panels.
-	Francisco: Oh? Tio-
-	Francisco: I-I mean Caleb! He sent you to me? Why not Farida?
-	=> francisco_caleb
--Farida
-	Chance: Farida said you might know something about the energy grid that she wouldn't, since she was sent here after the solar panels got installed. Something about an alternative energy source?
-	=> francisco_first_int_cont
+if CalebBaseCompleted == true:
+	- Caleb sent me.
+		Chance: Caleb said you might know something about the old energy source here, whatever was used before the solar panels.
+		Francisco: Oh? Tio-
+		Francisco: I-I mean Caleb! He sent you to me? Why not Farida?
+		=> francisco_caleb
+if FaridaBaseCompleted == true:
+	- Farida said..
+		Chance: Farida said you might know something about the energy grid that she wouldn't, since she was sent here after the solar panels got installed. Something about an alternative energy source?
+		=> francisco_first_int_cont
 
 ~ francisco_caleb
 - Don't get along.
@@ -36,7 +38,8 @@ Francisco: Ah hello! You must be our new resident Chance, yes? I don't think I'v
 	Francisco: Well they're just two very different types of people! Farida takes her job very seriously, but tio is more relaxed.
 	Francisco: I mean Caleb! Ay dios mio.. A-Anyway.
 	=> francisco_first_int_cont
-- Already spoke.
+if FaridaBaseCompleted == true:
+	- Already spoke to Farida.
 	Chance: I already spoke to Farida about it, but she said you might know more because you were actually here before the solar panels were installed.
 	=> francisco_first_int_cont
 
@@ -93,7 +96,6 @@ Francisco: Oh you're back! You've got what I asked for?
 
 ~francisco_task_fin
 set FranciscoBaseCompleted = true;
-set Zone1DoorUnlocked = true;
 Francisco: Ah, perfect timing. You've got what I asked for?
 Chance: Yeah, here you go.
 Francisco: You know, this herb is something that has been used in this area for centuries. A long time ago, it even almost went extinct.

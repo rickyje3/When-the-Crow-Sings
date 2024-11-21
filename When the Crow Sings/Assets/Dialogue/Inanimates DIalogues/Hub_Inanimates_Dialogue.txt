@@ -30,13 +30,13 @@ else:
 	=> END
 
 ~ pipsissewa
-if day == 1
+if day == 1:
 A pretty pink flower. Its leaves look thorny. Better not touch it. 
 => END
-if day == 2
+if day == 2:
 	A vibrant pink flower. It looks radioactive. 
 	=> END
-if day == 3
+if day == 3:
 	A glowing pink flower. It's dripping some luminous mucus type substance.
 => END
 
@@ -71,13 +71,13 @@ else:
 	=> END
 
 ~ utility_pole
-if day == 1
+if day == 1:
 	A utility pole. Seems like the local fauna really gravitate towards the power lines.
 	=> END
-if day == 2
+if day == 2:
 	The power lines seem taught on the utility pole. Must be more weight than they're used to.
 	=> END
-if day == 3
+if day == 3:
 	If I didn't know better, I would think that the number of crows was making the poles lean a little. Not sure if I do know better.
 	=> END
 
@@ -151,9 +151,10 @@ An old fountain. The pool has been filled in with flowers, and it doesn't seem t
 // —-------------- DOORS —---------------
 
 ~ zone_door_1
-if FranciscoTaskCompleted == true
+if FranciscoBaseCompleted == true:
 	Just need to put in the code that Francisco gave me and...
 	Open. Voila.
+	set Zone1DoorUnlocked = true;
 	=> END
 else
 The door is rusty. Looks like it hasn't been used in a while. 
@@ -164,21 +165,23 @@ The door is completely stuck. There's no way to open it even if I wanted to.
 => END
 
 ~ zone_door_3
-if FaridaBaseCompleted == true
+if FaridaBaseCompleted == true:
 	This must be the door that Farida was talking about.
 	The key unlocked the padlock. It opens with a little bit of effort.
+	set Zone3DoorUnlocked = true;
 	=> END
-else
-The door looks like it gets some use now and then, but it's locked with a padlock.
-=> END
+else:
+	The door looks like it gets some use now and then, but it's locked with a padlock.
+	=> END
 
 ~ zone_door_4
-if QuinnTaskCompleted == true
+if QuinnBaseCompleted == true:
 	Pressing on the intercom button, the door lock releases after a few seconds and swings freely.
+	set Zone4DoorUnlocked = true;
 	=> END
-else
- A pristine door. Must get used often. There is a button on an intercom, but I don't think buzzing someone without reason is a good idea.
-=> END
+else:
+	A pristine door. Must get used often. There is a button on an intercom, but I don't think buzzing someone without reason is a good idea.
+	=> END
 
 ~rec_center_door
 Sounds like there are some kids running around inside. Best to wait until I have a reason to be here.
