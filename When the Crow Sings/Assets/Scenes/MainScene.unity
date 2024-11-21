@@ -697,6 +697,7 @@ MonoBehaviour:
   - {fileID: 3964812964968339759}
   - {fileID: 5535475831099360906}
   - {fileID: 8726066341736005689}
+  nextButton: {fileID: 8445506424929340263}
   npcImageUi: {fileID: 7656827429492186696}
   playerImageUi: {fileID: 8638694447840450254}
   dialoguePortraits: {fileID: 11400000, guid: 40978ffc62fbc1244953405ec4519b71, type: 2}
@@ -1244,6 +1245,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6324364399803015724, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6324364399803015724, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 769733860930222430}
@@ -1424,6 +1430,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd32890dca4c9b94cbc28282e8fee8b6, type: 3}
+--- !u!1 &8445506424929340263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6273874996990896682, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 8445506424929340262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8577104820689323124
 MonoBehaviour:
   m_ObjectHideFlags: 0
