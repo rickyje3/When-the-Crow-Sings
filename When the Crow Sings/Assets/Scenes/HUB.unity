@@ -11783,7 +11783,7 @@ PrefabInstance:
     - target: {fileID: 6165941451760414067, guid: db33533f86c1d654cb1aea5bda1807b2,
         type: 3}
       propertyPath: successDict.elements.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6165941451760414067, guid: db33533f86c1d654cb1aea5bda1807b2,
         type: 3}
@@ -11792,23 +11792,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6165941451760414067, guid: db33533f86c1d654cb1aea5bda1807b2,
         type: 3}
+      propertyPath: successDict.elements.Array.data[1].key
+      value: FranciscoTaskOn
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165941451760414067, guid: db33533f86c1d654cb1aea5bda1807b2,
+        type: 3}
       propertyPath: successDict.elements.Array.data[0].value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165941451760414067, guid: db33533f86c1d654cb1aea5bda1807b2,
+        type: 3}
+      propertyPath: successDict.elements.Array.data[1].value
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6803497763721583419, guid: db33533f86c1d654cb1aea5bda1807b2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.18730545
+      value: -0.005
       objectReference: {fileID: 0}
     - target: {fileID: 6803497763721583419, guid: db33533f86c1d654cb1aea5bda1807b2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.07967186
+      value: 0.94
       objectReference: {fileID: 0}
     - target: {fileID: 6803497763721583419, guid: db33533f86c1d654cb1aea5bda1807b2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.1536789
+      value: 0.207
       objectReference: {fileID: 0}
     - target: {fileID: 6803497763721583419, guid: db33533f86c1d654cb1aea5bda1807b2,
         type: 3}
@@ -11848,7 +11858,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2658357030368060936, guid: db33533f86c1d654cb1aea5bda1807b2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 556130736}
   m_SourcePrefab: {fileID: 100100000, guid: db33533f86c1d654cb1aea5bda1807b2, type: 3}
 --- !u!4 &556130734 stripped
 Transform:
@@ -11856,6 +11870,29 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 556130733}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &556130735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2658357030368060936, guid: db33533f86c1d654cb1aea5bda1807b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 556130733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &556130736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556130735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667f2b3ba8abca241b0518e36d7be825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  associatedDataKey: FranciscoTaskOn
+  valueType: 0
+  boolValue: 1
+  intValue: 0
+  stringValue: 
 --- !u!43 &556449620
 Mesh:
   m_ObjectHideFlags: 0
@@ -20509,7 +20546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1116520762
 Transform:
   m_ObjectHideFlags: 0
@@ -21878,7 +21915,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b8f17666af31440428886ef12ed72e2e, type: 2}
+  - {fileID: 2100000, guid: e395b502449c3c5468e089d85318750e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
