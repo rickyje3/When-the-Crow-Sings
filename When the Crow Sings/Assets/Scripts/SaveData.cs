@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 public static class SaveData
 {
     const int saveDataVersion = 1;
@@ -136,7 +137,7 @@ public static class SaveData
     public static void SetFlag(string key, bool value)
     {
         boolFlags[key] = value;
-        Debug.Log("Key is now "+ boolFlags[key]);
+        Debug.Log(key + " is now "+ boolFlags[key]);
 
 
         if (boolFlags["FlowerOne"] && boolFlags["FlowerTwo"] && boolFlags["FlowerThree"]) boolFlags["FranciscoTaskCompleted"] = true;
@@ -148,12 +149,12 @@ public static class SaveData
     {
         intFlags[key] = value;
         if (intFlags["timeOfDay"] > 3) intFlags["timeOfDay"] = 1;
-        Debug.Log("Key is now " + intFlags[key]);
+        Debug.Log(key + " is now " + intFlags[key]);
     }
     public static void SetFlag(string key, string value)
     {
         stringFlags[key] = value;
-        Debug.Log("Key is now " + stringFlags[key]);
+        Debug.Log(key + " is now " + stringFlags[key]);
     }
 
     //public static bool GetFlag<Bool>(string key)
