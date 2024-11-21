@@ -141,7 +141,7 @@ public static class SaveData
 
 
         if (boolFlags["FlowerOne"] && boolFlags["FlowerTwo"] && boolFlags["FlowerThree"]) boolFlags["FranciscoTaskCompleted"] = true;
-        else boolFlags["FranciscoTaskCompleted"] = false;
+        //else boolFlags["FranciscoTaskCompleted"] = false; // Commented out rn because for testing we only have 1 QTE.
 
 
     }
