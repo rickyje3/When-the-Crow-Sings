@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 public static class SaveData
 {
     const int saveDataVersion = 1;
@@ -92,15 +93,15 @@ public static class SaveData
         { "TheodoreBaseCompleted",false },
         { "TheodoreExhausted",false },
 
-        { "RecCenterDoorUnlocked",true },
-        { "GreenhouseDoorUnlocked",true },
-        { "EnergyHQDoorUnlocked",true },
-        { "ClinicDoorUnlocked",true },
-        { "Zone1DoorUnlocked",true },
+        { "RecCenterDoorUnlocked",false },
+        { "GreenhouseDoorUnlocked",false },
+        { "EnergyHQDoorUnlocked",false },
+        { "ClinicDoorUnlocked",false },
+        { "Zone1DoorUnlocked",false },
         { "WoodPileMovable", false},
-        { "Zone2DoorUnlocked",true },
-        { "Zone3DoorUnlocked",true },
-        { "Zone4DoorUnlocked",true },
+        { "Zone2DoorUnlocked",false },
+        { "Zone3DoorUnlocked",false },
+        { "Zone4DoorUnlocked",false },
 
         { "KeyInformation1",false },
         { "KeyInformation2",false },
@@ -136,11 +137,11 @@ public static class SaveData
     public static void SetFlag(string key, bool value)
     {
         boolFlags[key] = value;
-        Debug.Log("Key is now "+ boolFlags[key]);
+        Debug.Log(key + " is now "+ boolFlags[key]);
 
 
         if (boolFlags["FlowerOne"] && boolFlags["FlowerTwo"] && boolFlags["FlowerThree"]) boolFlags["FranciscoTaskCompleted"] = true;
-        else boolFlags["FranciscoTaskCompleted"] = false;
+        //else boolFlags["FranciscoTaskCompleted"] = false; // Commented out rn because for testing we only have 1 QTE.
 
 
     }
@@ -148,12 +149,12 @@ public static class SaveData
     {
         intFlags[key] = value;
         if (intFlags["timeOfDay"] > 3) intFlags["timeOfDay"] = 1;
-        Debug.Log("Key is now " + intFlags[key]);
+        Debug.Log(key + " is now " + intFlags[key]);
     }
     public static void SetFlag(string key, string value)
     {
         stringFlags[key] = value;
-        Debug.Log("Key is now " + stringFlags[key]);
+        Debug.Log(key + " is now " + stringFlags[key]);
     }
 
     //public static bool GetFlag<Bool>(string key)

@@ -137,7 +137,7 @@ public class DialogueManager : MonoBehaviour, IService
             else
             {
                 DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Find(x => x.titleName == newLine2.gotoTitleName);
-                Debug.Log(newLine2.gotoTitleName + " so we're going to " + tempHolderForTheTargetIndex.titleIndex);
+                //Debug.Log(newLine2.gotoTitleName + " so we're going to " + tempHolderForTheTargetIndex.titleIndex);
                 ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex, previousLineTabCount);
             }
         }
@@ -184,7 +184,7 @@ public class DialogueManager : MonoBehaviour, IService
 
             if (activeConditionBlock == null) { throw new Exception("THE CONDITION BLOCK IS BLANK YOU SILLY DUCK"); }
 
-            Debug.Log("About to call DoConditionalDialogueLogic()");
+            //Debug.Log("About to call DoConditionalDialogueLogic()");
             DoConditionalDialogueLogic();
 
 
