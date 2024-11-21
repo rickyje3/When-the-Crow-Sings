@@ -25,11 +25,11 @@ Quinn: You must be Chance.
 Chance: Uhuh.
 Quinn: Nice to meet you. Officially. What brings you to the greenhouse? 
 Quinn_Excited: Here to try my turnip carrot hybrid?
-if AngelTaskCompleted == true:
+if AngelBaseCompleted == true:
 	- Angel sent me.
 		Chance: Angel said you're up late, and that you might know something about people roaming around at night. That you're up late.
 		=> quinn_first_int_cont
-if BeauTaskCompleted == true:
+if BeauBaseCompleted == true:
 	- Beau sent me.
 		Chance: Beau said that you know everyone around here. That you'd know if things were' out of the ordinary.
 		=> quinn_first_int_cont
@@ -93,7 +93,6 @@ Quinn: Uhhh, I totally asked you to do something.
 
 ~ quinn_task_fin
 set QuinnBaseCompleted = true;
-set Zone4DoorUnlocked = true;
 Quinn_Excited: Hey there, just in time!
 Quinn: I let Farida know I've got Yule bringing in some irregular deliveries due to the season change coming up, so you should be alright just to come and go through the gate when you buzz it now.
 Quinn: About the big guy. Be patient, he's old and quiet. Been here a long time, not the most social. I'm sure he'll tell you what you wanna know but he's a little quirky. Moves to his own rhythm, you know?

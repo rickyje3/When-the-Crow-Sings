@@ -5,7 +5,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteractionArea : MonoBehaviour
 {
-    public List<Interactable> interactablesInRange = new List<Interactable>();
+    private List<Interactable> _interactablesInRange = new List<Interactable>();
+
+    public List<Interactable> interactablesInRange
+    {
+        get
+        {
+            //foreach (Interactable i in _interactablesInRange)
+            //{
+            //    if (i == null) _interactablesInRange.Remove(i);
+            //}
+            return _interactablesInRange;
+        }
+    }
     public bool canInteract
     {
         get
@@ -18,7 +30,7 @@ public class PlayerInteractionArea : MonoBehaviour
         if (other.GetComponent<Interactable>())
         {
             Interactable interactable = other.GetComponent<Interactable>();
-            Debug.Log("He's here he's here he's heeereee");
+            //Debug.Log("He's here he's here he's heeereee");
             interactablesInRange.Add(interactable);
             interactable.setInteractableArrow(true);
         }
@@ -29,7 +41,7 @@ public class PlayerInteractionArea : MonoBehaviour
         if (other.GetComponent<Interactable>())
         {
             Interactable interactable = other.GetComponent<Interactable>();
-            Debug.Log("Oh never mind whew oh i hate socializing SO much.");
+            //Debug.Log("Oh never mind whew oh i hate socializing SO much.");
             interactablesInRange.Remove(interactable);
             interactable.setInteractableArrow(false);
         }

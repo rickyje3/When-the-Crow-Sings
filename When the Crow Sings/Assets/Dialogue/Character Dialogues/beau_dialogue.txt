@@ -21,8 +21,9 @@ else:
 ~ beau_first_int
 Beau: Ey! Don't suppose you brought any Timmies?
 Chance: Any what?
-Beau_Smile: Timmies! Coffee! It's what my parents always called it. No idea why.
-Beau: My name is Beau! You must be the newest addition to our lovely gated compound, where the snow never falls and you can never leave.
+Beau_Smile: Timmies! Coffee! It's what my parents always called it.
+Beau: I sure could use some, monitoring the cold storage is boring work.
+Beau: My name is Beau! You must be the newest addition to our lovely gated compound.
 - . . .
 	=> beau_awkward
 - Yeah.
@@ -33,10 +34,10 @@ Beau_Awkward: Well, aren't you a ray of sunshine.
 => beau_first_int_cont
 
 ~beau_nawkward
-if day == 0:
+if day == 1:
 	Chance: Yeah, I just got here last night.
 else:
-	Chance: Yeah, it hasn't been too long.
+	Chance: Yeah, that's me.
 Beau_Teasing: Ah, the experience of being fresh meat.
 => beau_first_int_cont
 
@@ -44,32 +45,32 @@ Beau_Teasing: Ah, the experience of being fresh meat.
 Beau: How are you liking it here?
 Chance_Sad: I don't know. Something seems...
 if day == 0:
-	- Last night..
+	- Last night-
 		=> beau_first_int_lastnight
 else:
 	- Not sleeping.
 		=> beau_first_int_sleep
 
 ~ beau_first_int_lastnight
-Chance_Sad: I didn't get much sleep. Someone came banging on my window last night...
-Beau_Awkward: Oh, that was your room? Not a very warm welcome...
-Beau: I'd thought they would've wandered off by this point, it's been a while.
-Beau: Sorry to have your first night so disturbed.
+Chance_Sad: I didn't get much sleep. Someone came banging on my window, scared the crap out of me.
+Beau_Awkward: Oh, that was your room? Not a very warm welcome.
+Beau: <size=75%> I woulda thought they'd have wandered off by this point, it's been a while.
+Beau: Sorry to have your first night so disturbed. It's not always like that...
 => beau_first_int_cont_2
 
 ~ beau_first_int_sleep
 Chance_Sad: I haven't been getting much sleep.
-Beau_Awkward: Oh well that's no good, bud!
+Beau_Awkward: Oh well that's no good bud.
 => beau_first_int_cont_2
 
 ~ beau_first_int_cont_2
 set BeauTaskOffered = true;
-Beau: Listen, bud. Would you do me a solid and pick up some food from the greenhouse?
+Beau: Listen, would you do me a solid and pick up some food from the greenhouse? Seems like you could use something to keep yourself busy until you get assigned.
 Beau_Smile: I've got to swap out some stock for Angel, put the new food in the freezer and give him the wiltier stuff. 
 - Sure.
 	set BeauTaskAccepted = true;
 	Chance: Yeah, sure.
-	Beau: Thanks bud, I'll owe ya one.
+	Beau_Smile: Thanks bud, I'll owe ya one.
 	=> END
 - Not now.
 	Chance_Sad: Um, not right now.
@@ -95,8 +96,8 @@ Beau_Awkward: With no veggies. Did something happen, or?
 		Chance: Okay, got it.
 		=> END
 	- No!
-		Chance_Angry: No. I just wasn't ready to do it yet!
-		Beau_Awkward: Riiiiiight... Whatever you say bud.
+		Chance_Angry: No! I just wasn't ready to do it yet!
+		Beau_Awkward: Riiiiiight, whatever you say bud.
 		=> END
 
 ~ beau_task_fin
@@ -128,25 +129,12 @@ else:
 set BeauBaseCompleted = true;
 set GreenhouseDoorUnlocked = true;
 set EnergyHQDoorUnlocked = true;
-Chance_Smile: Um, thanks.
+Chance: I'll look into it. Thanks.
 Beau_Teasing: No problem, ey? Not to be a keener but, wouldn't want you to be uncomfortable livin' here.
+Beau_Awkward: <size=75%> Not like you got anywhere else to go.
 set timeOfDay += 1;
-call ReloadScene();
+call ReloadScene(5);
 => END
-
-~ beau_demo_talk
-Beau: Aren't I so cute?
-Beau_Smile: Look how chill and cute I am.
-Beau_Teasing: I'm just the cutest.
-Beau_Awkward: Don't you think so?
-- Yes.
-	Chance: Yeah dude.
-	Beau: Sweet.
-	=> END
-- No.
-	Chance: No dude.
-	Beau_Awkward: What the hell bro
-	=> END
 
 ~ beau_beyond_base
 Beau: Oh shit, a rat.

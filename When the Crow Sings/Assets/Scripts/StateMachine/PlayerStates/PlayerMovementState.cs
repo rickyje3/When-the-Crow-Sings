@@ -106,7 +106,7 @@ public class PlayerMovementState : StateMachineState
                 s.playerAnimator.SetBool("animIsSprinting", s.isSprinting);
                 s.isSprinting = true;
                 s.speed = 14;
-                Debug.Log("issprinting");
+                //Debug.Log("issprinting");
             }
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift) || Input.GetKeyUp(KeyCode.JoystickButton1))
