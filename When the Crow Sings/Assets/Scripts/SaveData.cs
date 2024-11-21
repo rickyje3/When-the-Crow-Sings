@@ -116,8 +116,8 @@ public static class SaveData
         { "TestingFlag3",2 },
         { "TestingFlag4",3 },
 
-        {"day",0 },
-        {"timeOfDay",1 },
+        {"day",1 },
+        {"timeOfDay",3 },
         {"numberOfTasksCompleted",0 },
         {"TBD_OnLoadSpawnPoint_OrSomething",0 },
 
