@@ -192,6 +192,8 @@ public static class SaveData
     }
     public static void ReadData()
     {
+        PenguinCultAttemptsToScheduleAMeeting();
+
         switch (saveDataVersion) // TODO: Make it so it starts reading, stops after the version number, then calls the correct method using this switch statement.
         {
             case 0:
