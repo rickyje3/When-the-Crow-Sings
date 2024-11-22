@@ -299,6 +299,26 @@ public class DialogueManager : MonoBehaviour, IService
     private int currentLine;
     private bool canNextLine = false;
     private bool isSkipping = false;
+
+    private bool isInDialogue
+    {
+        get { return dialogueUI.activeInHierarchy; }
+    }
+    private void Update()
+    {
+        if (isInDialogue && EventSystem.current.currentSelectedGameObject == null)
+        {
+            if (nextButton.activeInHierarchy)
+            {
+                EventSystem.current.SetSelectedGameObject(nextButton.gameObject);
+            }
+            else if (dialogueChoiceButtons[0].activeInHierarchy)
+            {
+                EventSystem.current.SetSelectedGameObject(dialogueChoiceButtons[0].gameObject);
+            }
+        }
+    }
+
     public void OnNextLineButtonPressed()
     {
         if (canNextLine)
