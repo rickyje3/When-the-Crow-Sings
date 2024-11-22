@@ -66,7 +66,6 @@ public class PlayerController : StateMachineComponent, IService
     }
     private void OnEnable()
     {
-        //InputManager.playerInputActions.Player.Enable();
         InputManager.playerInputActions.Player.Pause.performed += OnPause;
     }
     private void OnDisable()
