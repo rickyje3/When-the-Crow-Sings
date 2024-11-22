@@ -15,9 +15,11 @@ public class PlayerDialogueState : StateMachineState
     public override void StateEntered()
     {
         InputManager.playerInputActions.Player.Disable();
+        InputManager.playerInputActions.UI.Enable();
     }
     public override void StateExited()
     {
         InputManager.playerInputActions.Player.Enable();
+        InputManager.playerInputActions.UI.Disable();
     }
 }

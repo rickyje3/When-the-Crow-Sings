@@ -7,6 +7,7 @@ using System.Linq;
 using System;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using UnityEngine.EventSystems;
 
 public class DialogueManager : MonoBehaviour, IService
 {
@@ -21,6 +22,7 @@ public class DialogueManager : MonoBehaviour, IService
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private GameObject dialogueChoiceButtonsHolder;
     [SerializeField] private List<GameObject> dialogueChoiceButtons;
+    [SerializeField] private GameObject nextButton;
     public Image npcImageUi;
     public Image playerImageUi;
     public DialoguePortraits dialoguePortraits;
@@ -71,7 +73,7 @@ public class DialogueManager : MonoBehaviour, IService
             throw new Exception("Error! The component emitting the signal does not have a DialogueResource as its first ObjectArgument.");
         }
         dialogueUI.SetActive(true);
-        dialogueChoiceButtonsHolder.SetActive(false);
+        DisableChoiceButtons();
 
         DialogueParser parser = new DialogueParser(dialogueResource);
         DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
@@ -144,7 +146,7 @@ public class DialogueManager : MonoBehaviour, IService
 
         else if (newLine is DialogueChoice)
         {
-            dialogueChoiceButtonsHolder.SetActive(true);
+            EnableChoiceButtons();
 
             //activeChoiceBlock = null;
             foreach (DialogueTitleBlock i in dialogueResource.dialogueTitleBlocks)
@@ -200,6 +202,21 @@ public class DialogueManager : MonoBehaviour, IService
         {
             ControlLineBehavior(index + 1, previousLineTabCount);
         }
+
+        
+    }
+
+    void EnableChoiceButtons()
+    {
+        nextButton.SetActive(false);
+        dialogueChoiceButtonsHolder.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(dialogueChoiceButtons[0].gameObject);
+    }
+    private void DisableChoiceButtons()
+    {
+        dialogueChoiceButtonsHolder.SetActive(false);
+        nextButton.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(nextButton);
     }
 
     private void SetChoiceButtons()
@@ -282,6 +299,26 @@ public class DialogueManager : MonoBehaviour, IService
     private int currentLine;
     private bool canNextLine = false;
     private bool isSkipping = false;
+
+    private bool isInDialogue
+    {
+        get { return dialogueUI.activeInHierarchy; }
+    }
+    private void Update()
+    {
+        if (isInDialogue && EventSystem.current.currentSelectedGameObject == null)
+        {
+            if (nextButton.activeInHierarchy)
+            {
+                EventSystem.current.SetSelectedGameObject(nextButton.gameObject);
+            }
+            else if (dialogueChoiceButtons[0].activeInHierarchy)
+            {
+                EventSystem.current.SetSelectedGameObject(dialogueChoiceButtons[0].gameObject);
+            }
+        }
+    }
+
     public void OnNextLineButtonPressed()
     {
         if (canNextLine)
@@ -297,7 +334,7 @@ public class DialogueManager : MonoBehaviour, IService
 
     public void OnDialogueChoiceButtonClicked(DialogueChoiceButton choiceButton)
     {
-        dialogueChoiceButtonsHolder.SetActive(false);
+        DisableChoiceButtons();
         activeChoiceBlock.choiceHasBeenMade = true;
 
         int nextLine = choiceButton.dialogueLineIndex + 1;
@@ -307,7 +344,7 @@ public class DialogueManager : MonoBehaviour, IService
         ControlLineBehavior(nextLine, choiceTabCount);
     }
 
-
+    
 
     bool Conditions(DialogueCondition i, ref int next_index)
     {
