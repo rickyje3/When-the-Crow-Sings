@@ -61,7 +61,7 @@ public class PlayerMovementState : StateMachineState
         //Converts movement input to a float because vector3 cant be lerped :(((((
         float inputMagnitude = s.movementInput.magnitude;
 
-        if (!s.isSprinting)
+        if (!s.isSprinting && !s.isCrouching)
         {
             //Smoothly blend speed off of joystick input (8 is the max walking speed)
             s.speed = Mathf.Lerp(s.speed, s.movementInput.magnitude * 8, Time.deltaTime * s.acceleration);
