@@ -82,4 +82,13 @@ public class PlayerInteractionArea : MonoBehaviour
             interactablesInRange[0].DoInteraction();
         }
     }
+
+    private void OnEnable()
+    {
+        InputManager.playerInputActions.Player.Interact.performed += OnInteract;
+    }
+    private void OnDisable()
+    {
+        InputManager.playerInputActions.Player.Interact.performed -= OnInteract;
+    }
 }
