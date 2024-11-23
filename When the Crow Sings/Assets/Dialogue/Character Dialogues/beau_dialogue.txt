@@ -60,7 +60,7 @@ Beau: Sorry to have your first night so disturbed. It's not always like that...
 
 ~ beau_first_int_sleep
 Chance_Sad: I haven't been getting much sleep.
-Beau_Awkward: Oh well that's no good bud.
+Beau_Awkward: Oh, well, that's no good bud.
 => beau_first_int_cont_2
 
 ~ beau_first_int_cont_2
@@ -92,24 +92,24 @@ Beau: You're back.
 Beau_Awkward: With no veggies. Did something happen, or?
 	- I forgot.
 		Chance_Sad: I forgot where to go.
-		Beau_Teasing: Oh no worries bud. I'm a little absent minded myself, I get it. Just trot on over to Quinn's and scoop up that veggie delivery, then bring it back.
+		Beau_Teasing: Oh no worries bud. I'm a little absent-minded myself, I get it. Just trot on over to Quinn's and scoop up that veggie delivery, then bring it back.
 		Chance: Okay, got it.
 		=> END
 	- No!
 		Chance_Angry: No! I just wasn't ready to do it yet!
-		Beau_Awkward: Riiiiiight, whatever you say bud.
+		Beau_Awkward: Riiiiiight. Whatever you say bud.
 		=> END
 
 ~ beau_task_fin
 Beau: Alright bud, look. I can tell you're having some trouble settling in here. You did me a solid, so let me give you a little advice.
 Chance: Hm?
 Beau_Smile: Things get a little weird around here, but it's harmless! Least since I've been here.
-Beau: If you want some reassurance you could go talk to Quinn, the gardener you just grabbed a delivery from for me. 
+Beau: If you want some reassurance you could go talk to Quinn, the gardener you just grabbed that delivery from. 
 if QuinnTaskOffered == true:
 	- Met Quinn.
 		Chance: I already met Quinn.
 		Beau_Smile: Oh yeah? And did they talk ya down?
-		Chance_Sad: Not exactly.They're nice, though.
+		Chance_Sad: Not exactly. They're nice, though.
 		Beau_Awkward: Yeah, they sure are. Hm..
 		=> beau_task_fin_cont
 else:
