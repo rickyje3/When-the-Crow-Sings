@@ -16,7 +16,18 @@ public class PlayerController : StateMachineComponent, IService
     [HideInInspector]
     public bool isCrouching = false;
     //[HideInInspector]
-    public bool isSprinting = false;
+
+    private bool _isSprinting;
+    public bool isSprinting
+    {
+        set
+        {
+            _isSprinting = value;
+            if (playerAnimator != null) playerAnimator.SetBool("animIsSprinting", value);
+
+        }
+        get { return _isSprinting; }
+    }
     [HideInInspector]
     public float gravity = -9.81f;
     [HideInInspector]
@@ -25,6 +36,7 @@ public class PlayerController : StateMachineComponent, IService
     public float velocity;
     [HideInInspector] public float maxWalkSpeed = 5f;
     [HideInInspector] public float minWalkClamp = .5f;
+    [HideInInspector] public float sprintSpeed = 14f;
     public float slideSpeedCorrection = 0.19f;
     public CharacterController characterController;
     public Canvas pauseCanvas;
