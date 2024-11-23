@@ -13,8 +13,8 @@ public class GameStateManager : MonoBehaviour, IService
     public MainMenuDebugLoadHolder mainMenuDebugLoadHolder;
 
     public GameObject _playerPrefab;
-    public GameObject playerHolder = null;
-    public GameObject playerContent = null;
+    [HideInInspector] public GameObject playerHolder = null;
+    [HideInInspector] public GameObject playerContent = null;
 
     public GameSignal levelLoadStartSignal;
     public GameSignal levelLoadFinishSignal;
@@ -46,7 +46,7 @@ public class GameStateManager : MonoBehaviour, IService
     }
     private void Update()
     {
-        DebugLoadInput(); // Loads individual scenes via keyboard inputs. Hacky implementation of this.
+        //DebugLoadInput(); // Loads individual scenes via keyboard inputs. Hacky implementation of this.
     }
     // ---------------------------------------------------------------------------
 
@@ -245,7 +245,7 @@ public class GameStateManager : MonoBehaviour, IService
             if (i.sceneType == LevelData.SceneType.UNASSIGNED) throw new System.Exception("Attempting to load a level of type UNASSIGNED!");
         }
     }
-
+    [HideInInspector]
     public List<LevelDataResource> debugScenes;
     void DebugLoadInput()
     {
