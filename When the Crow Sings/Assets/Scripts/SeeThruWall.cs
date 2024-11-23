@@ -9,6 +9,7 @@ public class SeeThruWall : MonoBehaviour
     public LayerMask mask; // Assign this to wall layer
     //private float sphereRadius = 0.9f; //determines size of raycast
     public float occluderSize = 0;
+    public float occluderMaxSize = 1.2f;
     public float lerpFactor = 0f;
 
     public static int PosID = Shader.PropertyToID("_Position");
@@ -39,30 +40,29 @@ public class SeeThruWall : MonoBehaviour
         // Gradually increase or decrease lerpFactor based on isInView
         if (isInView)
         {
-            lerpFactor += Time.deltaTime * 0.001f; 
+            lerpFactor += Time.deltaTime * 0.005f; 
         }
         else
         {
-            lerpFactor -= Time.deltaTime * 0.01f; 
+            lerpFactor -= Time.deltaTime * 0.0001f; 
         }
+
         //Clamp the lerpFactor between 0 and 1
-        lerpFactor = Mathf.Clamp01(lerpFactor);
+        lerpFactor = Mathf.Clamp(lerpFactor, 0f, occluderMaxSize);
 
         foreach (var material in SeeThruMaterials)
         {
-            //Blend between the current occluderSize 0
-            if (isInView)
-            {
-                occluderSize = Mathf.Lerp(occluderSize, 1f, lerpFactor);
-            }
-            else
-            {
-                occluderSize = Mathf.Lerp(occluderSize, 0f, lerpFactor);
-            }
+            //Determine target size based on whether the object is in view or not
+            float targetSize = isInView ? occluderMaxSize : 0f;
 
-            material.SetFloat(SizeID, isInView ? occluderSize : 0);
+            //Smoothly transition between occluderSize and target size
+            occluderSize = Mathf.Lerp(occluderSize, targetSize, lerpFactor);
+
+            //Set the size to the material
+            material.SetFloat(SizeID, occluderSize);
             Debug.Log("Occluder size = " + occluderSize);
 
+            //Optionally set the position
             var view = Camera.WorldToViewportPoint(transform.position);
             material.SetVector(PosID, view);
         }
