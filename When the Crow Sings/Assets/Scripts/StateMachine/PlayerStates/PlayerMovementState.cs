@@ -60,13 +60,14 @@ public class PlayerMovementState : StateMachineState
 
         //Converts movement input to a float because vector3 cant be lerped :(((((
         float inputMagnitude = Mathf.Clamp(s.movementInput.magnitude,s.minWalkClamp,1.0f);
-        SetWalkAnimSpeed(inputMagnitude);
+        //SetWalkAnimSpeed(inputMagnitude);
 
         if (!s.isSprinting)
         {
             //Smoothly blend speed off of joystick input (8 is the max walking speed)
             s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.maxWalkSpeed, Time.deltaTime * s.acceleration);
         }
+        SetWalkAnimSpeed(s.speed);
 
         // move!!
         Vector3 movement = new Vector3(s.movementInput.x, 0, s.movementInput.y).normalized * s.speed;
@@ -99,8 +100,7 @@ public class PlayerMovementState : StateMachineState
 
     private void SetWalkAnimSpeed(float inputMagnitude)
     {
-        float slideSpeedCorrection = 1.1f;
-        s.playerAnimator.SetFloat("currentWalkVelocity", inputMagnitude* slideSpeedCorrection);
+        s.playerAnimator.SetFloat("currentWalkVelocity", inputMagnitude* s.slideSpeedCorrection);
     }
 
     private void OnSprint(InputAction.CallbackContext context)
