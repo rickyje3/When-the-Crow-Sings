@@ -55,9 +55,10 @@ public class EnemyPatrolState : EnemyState
         else
         {
             s.navMeshAgent.destination = new Vector3(0f, 0f, 0f);
-            yield return new WaitForSeconds(s.timeToWanderIfNoWaypoint);
+            //yield return new WaitForSeconds(s.timeToWanderIfNoWaypoint);
         }
-        
+        Debug.Log("Reached the next point!");
+
         s.navMeshAgent.destination = s.transform.position;
         s.enemyAnimator.SetBool("animIsPatrolWalking", false);
         yield return new WaitForSeconds(s.timeToWaitBetweenWander);
