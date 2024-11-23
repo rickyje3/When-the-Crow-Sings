@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class SeeThruWall : MonoBehaviour
 {
-    public List<Material> SeeThruMaterials = new List<Material>(); // List of matching materials
+    public List<Material> SeeThruMaterials = new List<Material>(); //List of matching materials
     public Camera Camera;
     public LayerMask mask; // Assign this to wall layer
-    private float sphereRadius = 0.9f; //determines size of raycast
-    public float occluderLimit = 10;
-    public float occluderSize = 1;
+    //private float sphereRadius = 0.9f; //determines size of raycast
+    public float occluderSize = 0;
+    public float lerpFactor = 0f;
 
     public static int PosID = Shader.PropertyToID("_Position");
     public static int SizeID = Shader.PropertyToID("_Size");
 
-    public string seeThruWalls = "Shader Graphs/SeeThruWalls"; // Shader name to search for
+    public string seeThruWalls = "Shader Graphs/SeeThruWalls"; //Shader name to search for
 
     private void Awake()
     {
@@ -34,43 +34,47 @@ public class SeeThruWall : MonoBehaviour
         var dir = Camera.transform.position - transform.position;
         var ray = new Ray(transform.position, dir.normalized);
 
-        bool isInView = Physics.SphereCast(ray, sphereRadius, 3000, mask);
+        bool isInView = Physics.Raycast(ray, 3000, mask);
 
-        foreach (var material in SeeThruMaterials)
-        {
-            material.SetFloat(SizeID, isInView ? occluderSize : 0);
-
-            var view = Camera.WorldToViewportPoint(transform.position);
-            material.SetVector(PosID, view);
-        }
-
+        // Gradually increase or decrease lerpFactor based on isInView
         if (isInView)
         {
-            for (occluderSize = 0; occluderSize < 1; occluderSize++)
-            {
-                occluderSize = occluderSize + 0.1f;
-                Debug.Log("Growing");
-                Debug.Log("Occluder size = " + occluderSize);
-            }
+            lerpFactor += Time.deltaTime * 0.001f; 
         }
         else
         {
-            for (int i = 0; i > 0; i--)
+            lerpFactor -= Time.deltaTime * 0.01f; 
+        }
+        //Clamp the lerpFactor between 0 and 1
+        lerpFactor = Mathf.Clamp01(lerpFactor);
+
+        foreach (var material in SeeThruMaterials)
+        {
+            //Blend between the current occluderSize 0
+            if (isInView)
             {
-                occluderSize = occluderSize - 0.1f;
-                Debug.Log("Shrinking");
-                Debug.Log("Occluder size = " + occluderSize);
+                occluderSize = Mathf.Lerp(occluderSize, 1f, lerpFactor);
             }
+            else
+            {
+                occluderSize = Mathf.Lerp(occluderSize, 0f, lerpFactor);
+            }
+
+            material.SetFloat(SizeID, isInView ? occluderSize : 0);
+            Debug.Log("Occluder size = " + occluderSize);
+
+            var view = Camera.WorldToViewportPoint(transform.position);
+            material.SetVector(PosID, view);
         }
     }
 
     void FindMaterialsWithShader(string shaderName)
     {
-        Renderer[] renderers = FindObjectsOfType<Renderer>(); // Get all renderers in the scene
+        Renderer[] renderers = FindObjectsOfType<Renderer>(); //Get all renderers in the scene
         //Debug.Log("Renderers: " + renderers.Length);
         foreach (var renderer in renderers)
         {
-            foreach (var material in renderer.sharedMaterials) // Use shared materials to avoid instantiation
+            foreach (var material in renderer.sharedMaterials) //Use shared materials to avoid instantiation
             {
                 //Debug.Log($"Checking material: {material.name} with shader: {material.shader.name}");
 
