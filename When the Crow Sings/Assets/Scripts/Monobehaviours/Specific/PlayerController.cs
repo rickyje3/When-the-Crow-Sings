@@ -16,17 +16,43 @@ public class PlayerController : StateMachineComponent, IService
     [HideInInspector]
     public bool isCrouching = false;
     //[HideInInspector]
-    public bool isSprinting = false;
+
+    private bool _isSprinting;
+    public bool isSprinting
+    {
+        set
+        {
+            _isSprinting = value;
+            if (playerAnimator != null) playerAnimator.SetBool("animIsSprinting", value);
+
+        }
+        get { return _isSprinting; }
+    }
     [HideInInspector]
     public float gravity = -9.81f;
     [HideInInspector]
     public float gravityMultiplier = 3f;
     [HideInInspector]
-    public float velocity;
+    public float gravityVelocity;
+    [HideInInspector] public float maxWalkSpeed = 5f;
+    [HideInInspector] public float minWalkClamp = .5f;
+    [HideInInspector] public float sprintSpeed = 14f;
+    public float slideSpeedCorrection = 0.19f;
     public CharacterController characterController;
     public Canvas pauseCanvas;
 
     public GameSignal pauseSignalTEMP;
+
+    public void ApplyGravity(float deltaTime)
+    {
+        // Apply gravity to velocity
+        gravityVelocity += gravity * gravityMultiplier * deltaTime;
+
+        if (characterController.isGrounded && gravityVelocity < 0)
+        {
+            gravityVelocity = 0; // Reset vertical velocity
+        }
+    }
 
     private void Awake()
     {
@@ -37,14 +63,14 @@ public class PlayerController : StateMachineComponent, IService
         speed = 8;
 
         stateMachine = new StateMachine(this);
+        stateMachine.RegisterState(new PlayerFrozenState(this), "PlayerFrozenState");
         stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
         stateMachine.RegisterState(new PlayerThrowBirdseedState(this), "PlayerThrowBirdseedState");
-        stateMachine.RegisterState(new PlayerDialogueState(this), "PlayerDialogueState");
     }
     private void Start()
     {
         InputManager.playerInputActions.Player.Enable();
-        stateMachine.Enter("PlayerMovementState");
+        stateMachine.Enter("PlayerFrozenState");
     }
 
     private void OnDestroy()
@@ -66,7 +92,6 @@ public class PlayerController : StateMachineComponent, IService
     }
     private void OnEnable()
     {
-        //InputManager.playerInputActions.Player.Enable();
         InputManager.playerInputActions.Player.Pause.performed += OnPause;
     }
     private void OnDisable()
@@ -83,11 +108,24 @@ public class PlayerController : StateMachineComponent, IService
 
     public void OnDialogueStarted(SignalArguments signalArgs)
     {
-        stateMachine.Enter("PlayerDialogueState");
+        stateMachine.Enter("PlayerFrozenState");
     }
     public void OnDialogueFinished()
     {
         stateMachine.Enter("PlayerMovementState");
+    }
+
+    public void OnFullyLoadFinished(SignalArguments args)
+    {
+        stateMachine.Enter("PlayerMovementState");
+    }
+
+    public void OnAnimationFinished(SignalArguments args)
+    {
+        if (args.stringArgs[0] == "Throw")
+        {
+            stateMachine.Enter("PlayerMovementState");
+        }
     }
 
 

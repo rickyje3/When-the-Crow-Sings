@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cc31d64005ea878469bac956e114a3e6,
         type: 3}
       propertyPath: m_Name
-      value: geo_CafeTable
+      value: pf_CafeTable
       objectReference: {fileID: 0}
     - target: {fileID: 5139547259422708149, guid: cc31d64005ea878469bac956e114a3e6,
         type: 3}
@@ -91,5 +91,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7309988543359753726, guid: cc31d64005ea878469bac956e114a3e6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8236421210802025171}
   m_SourcePrefab: {fileID: 100100000, guid: cc31d64005ea878469bac956e114a3e6, type: 3}
+--- !u!1 &5659764785748006733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7309988543359753726, guid: cc31d64005ea878469bac956e114a3e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 3168790090397010611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8236421210802025171
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5659764785748006733}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.72797805, y: 0.73607206, z: 0.03577599}
+  m_Center: {x: 0, y: 0, z: -0.00000011920929}

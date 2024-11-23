@@ -73,13 +73,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0daff6c4f04c9774988dc4a91650b28f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ea78b86358d114442964062972b51500, type: 2}
     - target: {fileID: 919132149155446097, guid: 0daff6c4f04c9774988dc4a91650b28f,
         type: 3}
       propertyPath: m_Name
-      value: geo_CurtainOpened
+      value: pf_ClinicCurtainOpen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0daff6c4f04c9774988dc4a91650b28f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 760497482118609153}
   m_SourcePrefab: {fileID: 100100000, guid: 0daff6c4f04c9774988dc4a91650b28f, type: 3}
+--- !u!1 &1150586527020353827 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0daff6c4f04c9774988dc4a91650b28f,
+    type: 3}
+  m_PrefabInstance: {fileID: 231616008357098610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &760497482118609153
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150586527020353827}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 84.58673, y: 7.5039115, z: 92.057205}
+  m_Center: {x: 8.526513e-14, y: 0.0000028610236, z: -1.7053034e-13}

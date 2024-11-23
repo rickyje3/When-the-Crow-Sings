@@ -1,4 +1,37 @@
+~ yule_directory
+if YuleBaseCompleted == false:
+	=> yule_directory_2
+else:
+	=> yule_beyond_base
+
+~ yule_directory_2
+if YuleTaskOffered == false:
+	=> yule_first_int
+if YuleTaskAccepted == false:
+	=> yule_no_task
+else:
+	=> yule_directory_3
+
+~ yule_directory_3
+if YuleTaskPartCompleted == false:
+	=> yule_task_part_unfin
+else:
+	=> yule_directory_4
+
+~ yule_directory_4
+if YuleTaskCompleted == false:
+	=> yule_directory_5
+else:
+	=> yule_task_fin
+
+~ yule_directory_5
+if YuleFishingRod == false:
+	=> yule_task_part_fin
+else:
+	=> yule_task_unfin
+
 ~yule_first_int
+set YuleTaskOffered = true;
 Yule: . . .
 Chance: Uh, hi.
 Yule: Hi.
@@ -12,7 +45,7 @@ Chance: Oh. Er, okay. Well, I wanted to ask about the person who roams around at
 Yule: Yes, I know about it.
 Chance: . . . Could you tell me about it?
 Yule: Sure, I can. Not right now, though. I'm busy.
-Chance: Doing' what, exactly?
+Chance: Doin' what, exactly?
 Yule: Fishing.
 Chance: Uh, with what?
 Yule: A rod, ideally.
@@ -21,12 +54,14 @@ Yule: I don't have one.
 Chance: . . . Do you need one?
 Yule: Yep, that's the problem.
 Chance: What happened to your old one?
-Yule: An unruly fish took it from me years ago. I've been net fishing since but, the urge beset upon me once again.
+Yule: An unruly fish took it from me years ago. I've been net fishing since, but the urge beset upon me once again.
 Chance: So.. If you get one, will you no longer be busy?
 Yule: That makes sense.
 Chance: Do you want me to get you one?
 Yule: Do you want to get me one?
 - Yes.
+	set YuleTaskAccepted = true;
+	set YuleTaskOn = true;
 	Chance: If it will make you not busy, then yes.
 	Yule: If you say so. 
 	Chance: Uh, what do I need to make you a fishing rod?
@@ -47,6 +82,8 @@ Yule: You're back.
 Chance: Yeah, I wanted to talk to you about what I mentioned before.
 Yule: Once I'm done fishing.
 - I'll help.
+	set YuleTaskAccepted = true;
+	set YuleTaskOn = true;
 	Chance: I'll help you, what do I need to make you a fishing rod?
 	Yule: Oh let's see.. A young flexible branch for the rod, some wire for the guides, and some fiber for line.
 	Chance: And I can find all that here?
@@ -56,7 +93,25 @@ Yule: Once I'm done fishing.
 - Right.
 	=> END
 
+~ yule_task_part_unfin
+Yule: Mm. You're back.
+Chance: Yup.
+Yule: Why?
+- What was I doing?
+	Chance: What was I doing, again?
+	Yule: You were getting the ingredients for a fishing rod.
+	Chance_Smile: Ahh, right. Thanks!
+	Yule: Mm..
+	=> END
+- No reason.
+	Chance: No reason.
+	Yule: Okay.
+	Chance: . . .
+	Yule: . . . 
+	=> END
+
 ~ yule_task_part_fin
+set YuleFishingRod = true;
 Chance: Alright, I got all the stuff you asked for.
 Yule: It looks good. Let me have it.
 Yule: . . .
@@ -68,8 +123,13 @@ Yule: Yes.
 Chance: Uh, okay.
 => END
 
+~ yule_task_unfin
+Yule: You went through all the trouble to get the pieces for the rod, don't keep me in suspense. Catch a fish!
+=> END
+
 ~ yule_task_fin
 set KeyInformation1 = true;
+set YuleBaseCompleted = true;
 Yule: That's a nice looking fish. Came up easy, too. It's a good rod.
 Chance: Yeah, it is.
 It made me feel like when I used to fish at home.
@@ -109,4 +169,8 @@ Chance: Thanks for the info, big guy.
 Yule: Sure. Come and see me again, if you want.
 set timeOfDay += 1;
 call ReloadScene();
+=> END
+
+~ yule_beyond_base
+This guy doesn't talk much, I'm gonna fuck off.
 => END

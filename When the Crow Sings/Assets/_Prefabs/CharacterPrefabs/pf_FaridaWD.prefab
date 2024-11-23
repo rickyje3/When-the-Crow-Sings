@@ -245,7 +245,7 @@ PrefabInstance:
     - target: {fileID: 1038528658469302067, guid: 35141d5eb79f50c45b78aa97e17ad3f0,
         type: 3}
       propertyPath: m_Name
-      value: CHAR_Farida Variant
+      value: pf_FaridaWD
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -258,7 +258,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5489702310502086455}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1038528658469302067, guid: 35141d5eb79f50c45b78aa97e17ad3f0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1581483477206805910}
   m_SourcePrefab: {fileID: 100100000, guid: 35141d5eb79f50c45b78aa97e17ad3f0, type: 3}
 --- !u!4 &2534555974414208583 stripped
 Transform:
@@ -266,3 +270,32 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2742346679421107150}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2911398585041802493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1038528658469302067, guid: 35141d5eb79f50c45b78aa97e17ad3f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 2742346679421107150}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1581483477206805910
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2911398585041802493}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 4.734389
+  m_Direction: 1
+  m_Center: {x: -0, y: 1.8671944, z: 0}
