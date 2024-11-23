@@ -23,6 +23,8 @@ public class PlayerController : StateMachineComponent, IService
     public float gravityMultiplier = 3f;
     [HideInInspector]
     public float velocity;
+    [HideInInspector] public float maxWalkSpeed = 5f;
+    [HideInInspector] public float minWalkClamp = .5f;
     public CharacterController characterController;
     public Canvas pauseCanvas;
 
