@@ -11,6 +11,8 @@ public class SeeThruWall : MonoBehaviour
     public float occluderSize = 0;
     public float occluderMaxSize = 1.2f;
     public float lerpFactor = 0f;
+    public float growSpeed = 0.001f;
+    public float shrinkSpeed = 0.003f;
 
     public static int PosID = Shader.PropertyToID("_Position");
     public static int SizeID = Shader.PropertyToID("_Size");
@@ -37,32 +39,36 @@ public class SeeThruWall : MonoBehaviour
 
         bool isInView = Physics.Raycast(ray, 3000, mask);
 
-        // Gradually increase or decrease lerpFactor based on isInView
+        //Gradually increase or decrease lerpFactor based on isInView
         if (isInView)
         {
-            lerpFactor += Time.deltaTime * 0.005f; 
+            lerpFactor += Time.deltaTime * growSpeed; 
         }
         else
         {
-            lerpFactor -= Time.deltaTime * 0.0001f; 
+            lerpFactor -= Time.deltaTime * shrinkSpeed; 
         }
 
-        //Clamp the lerpFactor between 0 and 1
-        lerpFactor = Mathf.Clamp(lerpFactor, 0f, occluderMaxSize);
+        //Clamp the lerpFactor between 0 and max size
+        lerpFactor = Mathf.Clamp(lerpFactor, 0, occluderMaxSize);
 
         foreach (var material in SeeThruMaterials)
         {
-            //Determine target size based on whether the object is in view or not
-            float targetSize = isInView ? occluderMaxSize : 0f;
+            //Blend between the current occluderSize 0
+            if (isInView)
+            {
+                occluderSize = Mathf.Lerp(occluderSize, occluderMaxSize, lerpFactor);
+            }
+            else
+            {
+                occluderSize = Mathf.Lerp(occluderSize, 0f, lerpFactor);
+            }
 
-            //Smoothly transition between occluderSize and target size
-            occluderSize = Mathf.Lerp(occluderSize, targetSize, lerpFactor);
-
-            //Set the size to the material
+            //Sets the size to the material
             material.SetFloat(SizeID, occluderSize);
             Debug.Log("Occluder size = " + occluderSize);
 
-            //Optionally set the position
+            //optionally set position 
             var view = Camera.WorldToViewportPoint(transform.position);
             material.SetVector(PosID, view);
         }
