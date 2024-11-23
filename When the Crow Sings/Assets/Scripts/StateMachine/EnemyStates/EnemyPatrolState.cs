@@ -43,7 +43,7 @@ public class EnemyPatrolState : EnemyState
     public override void StateEntered()
     {
         s.StartCoroutine(setNextPoint());
-        s.enemyMaterial.color = Color.white;
+        //s.enemyMaterial.color = Color.white;
     }
 
     private IEnumerator setNextPoint()

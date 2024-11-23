@@ -18,7 +18,7 @@ public class EnemyStunnedState : EnemyState
     public override void StateEntered()
     {
         Debug.Log("Get them off! Get them off!");
-        s.enemyMaterial.color = Color.blue;
+        //s.enemyMaterial.color = Color.blue;
         s.StartCoroutine(exitStateAfterTime());
     }
     public override void StateExited()

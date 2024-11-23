@@ -9,10 +9,12 @@ public class EnemyController : StateMachineComponent
     [HideInInspector]
     public EnemyWaypoint currentWaypoint;
 
+    public Animator enemyAnimator;
+
     [HideInInspector]
     public NavMeshAgent navMeshAgent;
 
-    public Material enemyMaterial;
+    //public Material enemyMaterial;
 
     public float timeToWander = 4.0f;
     public float timeToWaitBetweenWander = 2.0f;
