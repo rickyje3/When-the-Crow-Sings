@@ -801,6 +801,7 @@ GameObject:
   - component: {fileID: 1893993378101308611}
   - component: {fileID: 7248940084304405967}
   - component: {fileID: 7673182981073098669}
+  - component: {fileID: 768087352989844745}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -845,12 +846,13 @@ MonoBehaviour:
   pfBirdseedProjectile: {fileID: 6028207027951552103, guid: 7ce579de01b4ca149902ac291e1b93f5,
     type: 3}
   isCrouching: 0
-  isSprinting: 0
   gravity: -9.81
   gravityMultiplier: 3
   velocity: 0
   maxWalkSpeed: 5
   minWalkClamp: 0.5
+  sprintSpeed: 14
+  slideSpeedCorrection: 0.19
   characterController: {fileID: 5870364044150093514}
   pauseCanvas: {fileID: 7320776688176385024}
   pauseSignalTEMP: {fileID: 11400000, guid: 46f67eb6b653cbe4a992cc406e4dbbb6, type: 2}
@@ -1238,6 +1240,34 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnDialogueFinished
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &768087352989844745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9195737949493200412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8f2792aa4e5a841805d6ab219c0209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSignal: {fileID: 11400000, guid: 426ab0b590d72d84aa37104558bda6f3, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3124118830521834551}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnAnimationFinished
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 public class PlayerThrowBirdseedState : StateMachineState
 {
     PlayerController s;
+    bool canThrow = false;
+
+
     public PlayerThrowBirdseedState(PlayerController component)
     {
         s = component;
@@ -14,9 +17,12 @@ public class PlayerThrowBirdseedState : StateMachineState
 
     public override void StateEntered()
     {
-        InputManager.playerInputActions.Player.Fire.canceled += OnFire;
-        s.throwTarget.SetActive(true);
+        s.StartCoroutine(WaitBeforeThrowing());
         s.playerAnimator.SetLayerWeight(1, 1f);
+        InputManager.playerInputActions.Player.Fire.canceled += OnFire;
+
+        s.throwTarget.SetActive(true);
+        
     }
     public override void StateExited()
     {
@@ -25,17 +31,28 @@ public class PlayerThrowBirdseedState : StateMachineState
 
     private void OnFire(InputAction.CallbackContext context)
     {
-        InputManager.playerInputActions.Player.Fire.canceled -= OnFire;
-        s.throwTarget.SetActive(false);
-        s.ThrowBirdseed();
-        s.StartCoroutine(ExitStateAfterDelay());
+        s.StartCoroutine(ThrowBirdseedOnceAble());
     }
 
-
-    private IEnumerator ExitStateAfterDelay()
+    private IEnumerator WaitBeforeThrowing()
     {
+        canThrow = false;
         yield return new WaitForSeconds(.25f);
-        s.stateMachine.Enter("PlayerMovementState");
+        canThrow = true;
+    }
+
+    private IEnumerator ThrowBirdseedOnceAble()
+    {
+        InputManager.playerInputActions.Player.Fire.canceled -= OnFire;
+
+        while (!canThrow) yield return null;
+        
+        
+        s.ThrowBirdseed();
+
+        s.playerAnimator.SetTrigger("animThrow");
+
+        s.throwTarget.SetActive(false);
     }
 
 

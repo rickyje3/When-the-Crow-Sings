@@ -104,6 +104,14 @@ public class PlayerController : StateMachineComponent, IService
         stateMachine.Enter("PlayerMovementState");
     }
 
+    public void OnAnimationFinished(SignalArguments args)
+    {
+        if (args.stringArgs[0] == "Throw")
+        {
+            stateMachine.Enter("PlayerMovementState");
+        }
+    }
+
 
     // Ricky code
 
