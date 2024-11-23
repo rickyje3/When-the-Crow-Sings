@@ -19,6 +19,8 @@ public class GameStateManager : MonoBehaviour, IService
     public GameSignal levelLoadStartSignal;
     public GameSignal levelLoadFinishSignal;
 
+    public GameObject loadScreen;
+
     private int targetSpawnIndex = 0;
     private bool canLoad = true;
 
@@ -117,11 +119,6 @@ public class GameStateManager : MonoBehaviour, IService
 
         // then load them all
         StartCoroutine(LoadSceneAsync(GetScenesToLoad(levelDataResource)));
-        //foreach (SceneReference i in GetScenesToLoad(levelDataResource))
-        //{
-        //    SceneManager.LoadScene(i.Name, LoadSceneMode.Additive);
-            
-        //}
     }
 
     IEnumerator LoadSceneAsync(List<SceneReference> sceneReferences)
@@ -155,7 +152,9 @@ public class GameStateManager : MonoBehaviour, IService
         {
             totalProgress += asyncOperation.progress;
         }
-        return totalProgress; // TODO: Divide by the number of operations or something to clamp it to 100% instead of 500% or whatever it's doing here.
+        //return totalProgress; // TODO: Divide by the number of operations or something to clamp it to 100% instead of 500% or whatever it's doing here.
+        float normalizedProgress = totalProgress / asyncOperations.Count;
+        return normalizedProgress;
     }
 
     private void DestroyActors()
