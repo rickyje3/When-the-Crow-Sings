@@ -16,10 +16,11 @@ public class PlayerThrowBirdseedState : StateMachineState
     {
         InputManager.playerInputActions.Player.Fire.canceled += OnFire;
         s.throwTarget.SetActive(true);
+        s.playerAnimator.SetLayerWeight(1, 1f);
     }
     public override void StateExited()
     {
-        
+        s.playerAnimator.SetLayerWeight(1, 0f);
     }
 
     private void OnFire(InputAction.CallbackContext context)
