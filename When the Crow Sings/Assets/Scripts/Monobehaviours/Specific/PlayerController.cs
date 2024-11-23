@@ -31,6 +31,8 @@ public class PlayerController : StateMachineComponent, IService
 
     public GameSignal pauseSignalTEMP;
 
+    private string currentAnimation = "";
+
     private void Awake()
     {
         RegisterSelfAsService();
@@ -61,6 +63,15 @@ public class PlayerController : StateMachineComponent, IService
         ServiceLocator.Register<PlayerController>(this);
     }
 
+    public void ChangeAnimation(string animationName, float crossfade = 0.02f)
+    {
+        if (currentAnimation != animationName)
+        {
+            currentAnimation = animationName;
+            playerAnimator.CrossFade(animationName, crossfade);
+        }
+        
+    }
 
     public void ThrowBirdseed()
     {

@@ -46,7 +46,8 @@ public class PlayerMovementState : StateMachineState
         InputManager.playerInputActions.Player.Sprint.performed -= OnSprint;
         InputManager.playerInputActions.Player.Crouch.performed -= OnCrouched;
 
-        s.playerAnimator.SetBool("animIsMoving", false);
+        //s.playerAnimator.SetBool("animIsMoving", false);
+        s.ChangeAnimation("rig|Idle");
         s.isSprinting = false;
         s.speed = 8;
     }
@@ -89,11 +90,14 @@ public class PlayerMovementState : StateMachineState
             Quaternion toRotation = Quaternion.LookRotation(new Vector3(movement.x, 0, movement.z));
             s.transform.rotation = Quaternion.RotateTowards(s.transform.rotation, toRotation, 1000 * deltaTime);
 
-            s.playerAnimator.SetBool("animIsMoving", true);
+            //s.playerAnimator.SetBool("animIsMoving", true);
+            s.ChangeAnimation("rig|WalkF");
+            //s.ChangeAnimation("Movement");
         }
         else
         {
-            s.playerAnimator.SetBool("animIsMoving", false);
+            //s.playerAnimator.SetBool("animIsMoving", false);
+            s.ChangeAnimation("rig|Idle");
         }
 
     }
@@ -129,13 +133,15 @@ public class PlayerMovementState : StateMachineState
     private void OnCrouched(InputAction.CallbackContext context)
     {
         s.isCrouching = !s.isCrouching;
-        s.playerAnimator.SetBool("animIsCrouching", s.isCrouching);
+        //s.playerAnimator.SetBool("animIsCrouching", s.isCrouching);
         if (s.isCrouching)
         {
             s.speed = 4;
             //s.GetComponent<CapsuleCollider>().center.Set(0,0,0);
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0);
             s.GetComponent<CapsuleCollider>().height = 2;
+
+            s.ChangeAnimation("rig|Crouch");
         }
         else
         {
@@ -143,6 +149,8 @@ public class PlayerMovementState : StateMachineState
             //s.GetComponent<CapsuleCollider>().center.Set(0, 1, 0);
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
             s.GetComponent<CapsuleCollider>().height = 4;
+
+            s.ChangeAnimation("rig|Idle");
         }
     }
     private void OnFired(InputAction.CallbackContext context)
