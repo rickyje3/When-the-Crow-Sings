@@ -29,11 +29,10 @@ public class EnemyPatrolState : EnemyState
     public override void StateEntered()
     {
         s.StartCoroutine(setNextPoint());
-        s.enemyAnimator.SetBool("animIsPatrolling", true);
     }
     public override void StateExited()
     {
-        s.enemyAnimator.SetBool("animIsPatrolling", false);
+        s.enemyAnimator.SetBool("animIsPatrolWalking", false);
     }
 
     private IEnumerator setNextPoint()
@@ -43,6 +42,7 @@ public class EnemyPatrolState : EnemyState
 #pragma warning restore CS0219 // Variable is assigned but its value is never used
 
         Debug.Log("Setting next point!");
+        s.enemyAnimator.SetBool("animIsPatrolWalking", true);
 
         if (s.currentWaypoint != null)
         {
@@ -59,8 +59,8 @@ public class EnemyPatrolState : EnemyState
         }
         
         s.navMeshAgent.destination = s.transform.position;
+        s.enemyAnimator.SetBool("animIsPatrolWalking", false);
         yield return new WaitForSeconds(s.timeToWaitBetweenWander);
-
         s.StartCoroutine(setNextPoint());
     }
 }
