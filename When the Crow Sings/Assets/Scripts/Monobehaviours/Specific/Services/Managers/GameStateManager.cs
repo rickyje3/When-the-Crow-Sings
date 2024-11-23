@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Eflatun.SceneReference;
+using System.Collections;
 
 public class GameStateManager : MonoBehaviour, IService
 {
@@ -111,26 +112,55 @@ public class GameStateManager : MonoBehaviour, IService
         foreach (Scene i in GetLoadedScenes())
         {
             SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
-            //SceneManager.UnloadScene(i);
         }
-
-        // Check what scenes should be loaded based on save data and exit trigger
 
 
         // then load them all
-        foreach (SceneReference i in GetScenesToLoad(levelDataResource))
+        StartCoroutine(LoadSceneAsync(GetScenesToLoad(levelDataResource)));
+        //foreach (SceneReference i in GetScenesToLoad(levelDataResource))
+        //{
+        //    SceneManager.LoadScene(i.Name, LoadSceneMode.Additive);
+            
+        //}
+    }
+
+    IEnumerator LoadSceneAsync(List<SceneReference> sceneReferences)
+    {
+        List<AsyncOperation> asyncOperations = new List<AsyncOperation>();
+        foreach (SceneReference i in sceneReferences)
         {
-            //SceneManager.LoadScene(i.name, LoadSceneMode.Additive);
-            SceneManager.LoadScene(i.Name, LoadSceneMode.Additive);
-            //Debug.Log(i.name + " was loaded!");
+            asyncOperations.Add(SceneManager.LoadSceneAsync(i.Name, LoadSceneMode.Additive));
         }
+
+        while (!AsyncOperationsAreDone(asyncOperations))
+        {
+            float progressValue = AsyncOperationsProgress(asyncOperations);//Mathf.Clamp01(asyncOperation.progress);// / 0.9f);
+            Debug.Log("Loading Progres: "+progressValue);
+            yield return null;
+        }
+    }
+
+    bool AsyncOperationsAreDone(List<AsyncOperation> asyncOperations)
+    {
+        foreach (AsyncOperation asyncOperation in asyncOperations)
+        {
+            if (!asyncOperation.isDone) return false;
+        }
+        return true;
+    }
+    float AsyncOperationsProgress(List<AsyncOperation> asyncOperations)
+    {
+        float totalProgress = 0.0f;
+        foreach (AsyncOperation asyncOperation in asyncOperations)
+        {
+            totalProgress += asyncOperation.progress;
+        }
+        return totalProgress; // TODO: Divide by the number of operations or something to clamp it to 100% instead of 500% or whatever it's doing here.
     }
 
     private void DestroyActors()
     {
         Destroy(playerHolder);
-
-        //foreach (CrowRestPoint i in ServiceLocator.Get<GameManager>().crowRestPoints)
         ServiceLocator.Get<GameManager>().crowHolder.GetComponent<CrowHolder>().DestroyCrows();
     }
 
@@ -167,7 +197,6 @@ public class GameStateManager : MonoBehaviour, IService
                     else if (ii.valueType == SubSceneLogicBase.VALUE_TYPE.INT)
                     {
                         int intFlag = SaveData.intFlags[ii.associatedDataKey];
-                        //Debug.Log("Flag is == " + intFlag);
 
                         if (ii.associatedOperator == SubSceneLogicBase.OPERATOR.EQUALS)
                         {
@@ -187,9 +216,6 @@ public class GameStateManager : MonoBehaviour, IService
                 scenes.Add(i.subScene);
             }
         }
-
-        //scenes.Add(SceneManager.GetSceneByBuildIndex(whichTEMP+1));
-
         return scenes;
     }
 
@@ -211,7 +237,6 @@ public class GameStateManager : MonoBehaviour, IService
     {
         if (currentLevelData.Count(x => x.sceneType == LevelData.SceneType.LEVEL) != 1)
             throw new System.Exception("Not EXACTLY one LEVEL-type scene is currently loaded!");
-        //else { Debug.Log("All's well!"); }
     }
     void Validate_No_UNASSIGNED()
     {
@@ -220,12 +245,6 @@ public class GameStateManager : MonoBehaviour, IService
             if (i.sceneType == LevelData.SceneType.UNASSIGNED) throw new System.Exception("Attempting to load a level of type UNASSIGNED!");
         }
     }
-
-    // ---------------------------------------------------------------------------
-    void LoadPersistentData() { }
-    void SavePersistentData() { }
-
-    // ---------------------------------------------------------------------------
 
     public List<LevelDataResource> debugScenes;
     void DebugLoadInput()
