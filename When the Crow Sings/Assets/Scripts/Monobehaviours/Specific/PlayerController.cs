@@ -33,7 +33,7 @@ public class PlayerController : StateMachineComponent, IService
     [HideInInspector]
     public float gravityMultiplier = 3f;
     [HideInInspector]
-    public float velocity;
+    public float gravityVelocity;
     [HideInInspector] public float maxWalkSpeed = 5f;
     [HideInInspector] public float minWalkClamp = .5f;
     [HideInInspector] public float sprintSpeed = 14f;
@@ -42,6 +42,17 @@ public class PlayerController : StateMachineComponent, IService
     public Canvas pauseCanvas;
 
     public GameSignal pauseSignalTEMP;
+
+    public void ApplyGravity(float deltaTime)
+    {
+        // Apply gravity to velocity
+        gravityVelocity += gravity * gravityMultiplier * deltaTime;
+
+        if (characterController.isGrounded && gravityVelocity < 0)
+        {
+            gravityVelocity = 0; // Reset vertical velocity
+        }
+    }
 
     private void Awake()
     {
@@ -52,14 +63,14 @@ public class PlayerController : StateMachineComponent, IService
         speed = 8;
 
         stateMachine = new StateMachine(this);
+        stateMachine.RegisterState(new PlayerFrozenState(this), "PlayerFrozenState");
         stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
         stateMachine.RegisterState(new PlayerThrowBirdseedState(this), "PlayerThrowBirdseedState");
-        stateMachine.RegisterState(new PlayerDialogueState(this), "PlayerDialogueState");
     }
     private void Start()
     {
         InputManager.playerInputActions.Player.Enable();
-        stateMachine.Enter("PlayerMovementState");
+        stateMachine.Enter("PlayerFrozenState");
     }
 
     private void OnDestroy()
@@ -97,9 +108,14 @@ public class PlayerController : StateMachineComponent, IService
 
     public void OnDialogueStarted(SignalArguments signalArgs)
     {
-        stateMachine.Enter("PlayerDialogueState");
+        stateMachine.Enter("PlayerFrozenState");
     }
     public void OnDialogueFinished()
+    {
+        stateMachine.Enter("PlayerMovementState");
+    }
+
+    public void OnFullyLoadFinished(SignalArguments args)
     {
         stateMachine.Enter("PlayerMovementState");
     }

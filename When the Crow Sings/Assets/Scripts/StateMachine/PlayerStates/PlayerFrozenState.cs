@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerDialogueState : StateMachineState
+public class PlayerFrozenState : StateMachineState
 {
     PlayerController s;
 
-    public PlayerDialogueState(PlayerController component)
+    public PlayerFrozenState(PlayerController component)
     {
         s = component;
     }
@@ -21,5 +21,11 @@ public class PlayerDialogueState : StateMachineState
     {
         InputManager.playerInputActions.Player.Enable();
         InputManager.playerInputActions.UI.Disable();
+    }
+
+    public override void Update(float deltaTime)
+    {
+        s.ApplyGravity(deltaTime);
+        s.characterController.Move(new Vector3(0f,s.gravityVelocity,0f));
     }
 }
