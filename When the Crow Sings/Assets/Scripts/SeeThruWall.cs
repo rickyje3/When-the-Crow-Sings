@@ -7,7 +7,9 @@ public class SeeThruWall : MonoBehaviour
     public List<Material> SeeThruMaterials = new List<Material>(); // List of matching materials
     public Camera Camera;
     public LayerMask mask; // Assign this to wall layer
-    private float sphereRadius = 1.1f; //determines size of raycast
+    private float sphereRadius = 0.9f; //determines size of raycast
+    public float occluderLimit = 10;
+    public float occluderSize = 1;
 
     public static int PosID = Shader.PropertyToID("_Position");
     public static int SizeID = Shader.PropertyToID("_Size");
@@ -36,10 +38,29 @@ public class SeeThruWall : MonoBehaviour
 
         foreach (var material in SeeThruMaterials)
         {
-            material.SetFloat(SizeID, isInView ? 1f : 0);
+            material.SetFloat(SizeID, isInView ? occluderSize : 0);
 
             var view = Camera.WorldToViewportPoint(transform.position);
             material.SetVector(PosID, view);
+        }
+
+        if (isInView)
+        {
+            for (occluderSize = 0; occluderSize < 1; occluderSize++)
+            {
+                occluderSize = occluderSize + 0.1f;
+                Debug.Log("Growing");
+                Debug.Log("Occluder size = " + occluderSize);
+            }
+        }
+        else
+        {
+            for (int i = 0; i > 0; i--)
+            {
+                occluderSize = occluderSize - 0.1f;
+                Debug.Log("Shrinking");
+                Debug.Log("Occluder size = " + occluderSize);
+            }
         }
     }
 
