@@ -108,14 +108,14 @@ public class GameStateManager : MonoBehaviour, IService
     {
         lastLoadedScene = levelDataResource;
 
-        DestroyActors();
-
         StartCoroutine(UnloadAndLoad(levelDataResource));
     }
 
     IEnumerator UnloadAndLoad(LevelDataResource levelDataResource)
     {
+        DestroyActors();
         yield return StartCoroutine(FadeLoadingScreen(true));
+        //yield return new WaitForSeconds(5f);
 
         // Unload previous scenes.
         foreach (Scene i in GetLoadedScenes())
@@ -134,17 +134,26 @@ public class GameStateManager : MonoBehaviour, IService
 
     IEnumerator FadeLoadingScreen(bool fadeIn)
     {
+        float fadeSpeed = 1f;
+        float maxAlpha = .5f;
         if (fadeIn)
         {
-            loadScreen.GetComponent<CanvasGroup>().alpha = .5f;
-            yield return new WaitForSeconds(1.0f);
+            while (loadScreen.GetComponent<CanvasGroup>().alpha < maxAlpha)
+            {
+                loadScreen.GetComponent<CanvasGroup>().alpha += fadeSpeed * Time.deltaTime;
+                Mathf.Clamp(loadScreen.GetComponent<CanvasGroup>().alpha, 0, maxAlpha);
+                yield return null;
+            }
         }
         else
         {
-            yield return new WaitForSeconds(1.0f);
-            loadScreen.GetComponent<CanvasGroup>().alpha = 0f;
+            while (loadScreen.GetComponent<CanvasGroup>().alpha > 0f)
+            {
+                loadScreen.GetComponent<CanvasGroup>().alpha -= fadeSpeed * Time.deltaTime;
+                Mathf.Clamp(loadScreen.GetComponent<CanvasGroup>().alpha,0,maxAlpha);
+                yield return null;
+            }
         }
-        
     }
 
     IEnumerator LoadSceneAsync(List<SceneReference> sceneReferences)
