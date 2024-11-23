@@ -18,7 +18,6 @@ public class PlayerThrowBirdseedState : StateMachineState
     public override void StateEntered()
     {
         s.StartCoroutine(WaitBeforeThrowing());
-        s.playerAnimator.SetLayerWeight(1, 1f);
         InputManager.playerInputActions.Player.Fire.canceled += OnFire;
 
         s.throwTarget.SetActive(true);
@@ -37,7 +36,15 @@ public class PlayerThrowBirdseedState : StateMachineState
     private IEnumerator WaitBeforeThrowing()
     {
         canThrow = false;
-        yield return new WaitForSeconds(.25f);
+        float weight = 0.0f;
+        float transitionSpeed = 7.0f;
+        while (weight < 1.0f)
+        {
+            weight += transitionSpeed * Time.deltaTime;
+            weight = Mathf.Clamp01(weight);
+            s.playerAnimator.SetLayerWeight(1, weight);
+            yield return null;
+        }
         canThrow = true;
     }
 
@@ -53,12 +60,5 @@ public class PlayerThrowBirdseedState : StateMachineState
         s.playerAnimator.SetTrigger("animThrow");
 
         s.throwTarget.SetActive(false);
-    }
-
-
-
-    public override void Update(float deltaTime)
-    {
-        //Debug.Log("State 2 is updating!");
     }
 }
