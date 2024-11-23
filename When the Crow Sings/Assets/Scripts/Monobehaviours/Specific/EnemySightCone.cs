@@ -11,7 +11,7 @@ public class EnemySightCone : MonoBehaviour
 
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Birdseed")
         {
-            controller.TriggerEntered(other);
+            controller.SightConeTriggerEntered(other);
         }
     }
 
@@ -27,7 +27,7 @@ public class EnemySightCone : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Birdseed")
         {
-            controller.TriggerExited(other);
+            controller.SightConeTriggerExited(other);
         }
            
     }

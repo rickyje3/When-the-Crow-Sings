@@ -30,7 +30,8 @@ public class EnemyController : StateMachineComponent
         stateMachine.RegisterState(new EnemyPatrolState(this), "EnemyPatrolState");
         stateMachine.RegisterState(new EnemyChaseState(this), "EnemyChaseState");
         stateMachine.RegisterState(new EnemyStunnedState(this), "EnemyStunnedState");
-        stateMachine.Enter("EnemyPatrolState");
+        stateMachine.RegisterState(new EnemyIdleState(this), "EnemyIdleState");
+        stateMachine.Enter("EnemyIdleState");
     }
     private void Start()
     {
@@ -45,11 +46,11 @@ public class EnemyController : StateMachineComponent
         
     }
 
-    public void TriggerEntered(Collider other)
+    public void SightConeTriggerEntered(Collider other)
     {
         //stateMachine.OnTriggerEnter(other);
     }
-    public void TriggerExited(Collider other)
+    public void SightConeTriggerExited(Collider other)
     {
         //stateMachine.OnTriggerExit(other);
         LineRenderer lineRenderer = GetComponent<LineRenderer>();

@@ -21,47 +21,37 @@ public class EnemyPatrolState : EnemyState
 
     public override void OnTriggerEnter(Collider other)
     {
-        Debug.Log("I SEE YOU THERE IS NO LIFE IN THE VOID DIE NOW");
-        s.stateMachine.Enter("EnemyChaseState");
+        //Debug.Log("I SEE YOU THERE IS NO LIFE IN THE VOID DIE NOW");
+        //s.stateMachine.Enter("EnemyChaseState");
+        if (other.GetComponent<EnemyWaypoint>() == s.currentWaypoint)
+        {
+            s.stateMachine.Enter("EnemyIdleState");
+        }
     }
 
 
     public override void StateEntered()
     {
-        s.StartCoroutine(setNextPoint());
+        s.enemyAnimator.SetBool("animIsPatrolWalking", true);
+        setNextPoint();
     }
     public override void StateExited()
     {
         s.enemyAnimator.SetBool("animIsPatrolWalking", false);
     }
 
-    private IEnumerator setNextPoint()
+    private void setNextPoint()
     {
-#pragma warning disable CS0219 // Variable is assigned but its value is never used
-        var radius = 10;
-#pragma warning restore CS0219 // Variable is assigned but its value is never used
-
         Debug.Log("Setting next point!");
-        s.enemyAnimator.SetBool("animIsPatrolWalking", true);
-
+        
         if (s.currentWaypoint != null)
         {
             s.currentWaypoint = s.enemyWaypointsHolders[0].GetNextWaypoint(s.currentWaypoint);
             s.navMeshAgent.destination = s.currentWaypoint.transform.position;
-            yield return new WaitUntil(() => enemySpeed <= 0.01f);
-            yield return new WaitForSeconds(1f);
-            yield return new WaitUntil(() => enemySpeed <= 0.01f);
         }
         else
         {
             s.navMeshAgent.destination = new Vector3(0f, 0f, 0f);
-            //yield return new WaitForSeconds(s.timeToWanderIfNoWaypoint);
         }
-        Debug.Log("Reached the next point!");
-
-        s.navMeshAgent.destination = s.transform.position;
-        s.enemyAnimator.SetBool("animIsPatrolWalking", false);
-        yield return new WaitForSeconds(s.timeToWaitBetweenWander);
-        s.StartCoroutine(setNextPoint());
     }
 }
