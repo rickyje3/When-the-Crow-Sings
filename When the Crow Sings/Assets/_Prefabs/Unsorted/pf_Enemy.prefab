@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2878057926788062340}
   - component: {fileID: 6927032940599626117}
   - component: {fileID: 9099458239503796105}
-  - component: {fileID: 4517060189245592930}
   - component: {fileID: 4748030565633445404}
+  - component: {fileID: 4517060189245592930}
   - component: {fileID: 7489657694225672266}
   m_Layer: 8
   m_Name: pf_Enemy
@@ -56,10 +56,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyWaypointsHolders: []
   currentWaypoint: {fileID: 0}
+  enemyAnimator: {fileID: 5549008216811023264}
   navMeshAgent: {fileID: 0}
-  enemyMaterial: {fileID: 2100000, guid: 4bd5ec13fe23f6c4aab4fc483b0f47f7, type: 2}
-  timeToWander: 4
-  timeToWaitBetweenWander: 2
+  timeToWanderIfNoWaypoint: 4
+  timeToWaitBetweenWander: 5
+  timeToBeStunned: 2
   lookAtHeight: 2.5
 --- !u!195 &6927032940599626117
 NavMeshAgent:
@@ -95,29 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e936dc86cd3bbb547ba97c39e388752a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &4517060189245592930
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3477123717623650676}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.67
-  m_Height: 3.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!120 &4748030565633445404
 LineRenderer:
   serializedVersion: 2
@@ -222,6 +200,29 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!136 &4517060189245592930
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3477123717623650676}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.67
+  m_Height: 3.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &7489657694225672266
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -709,6 +710,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2047057808821458481}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &5549008216811023264 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 53be2b27f84e63842ae669e6ab9caea1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2047057808821458481}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5546358054526020964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -785,8 +792,13 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: db9f26f38ad263b49a6f15ec51b43d15,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: db9f26f38ad263b49a6f15ec51b43d15,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1fae3ca03c1e54749ae126ae525005d9, type: 2}
     - target: {fileID: 919132149155446097, guid: db9f26f38ad263b49a6f15ec51b43d15,
         type: 3}
       propertyPath: m_Name
