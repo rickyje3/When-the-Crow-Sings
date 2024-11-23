@@ -6,18 +6,15 @@ public class EnemyPatrolState : EnemyState
 {
     public EnemyPatrolState(EnemyController component) : base(component) {}
 
-    private float enemySpeed = 0f;
-    private Vector3 lastPosition;
-    public override void FixedUpdate()
-    {
-        if (lastPosition == null)
-        {
-            lastPosition = s.transform.position;
-        }
+    //private float enemySpeed = 0;
+    //private Vector3 lastPosition;
+    //public override void FixedUpdate()
+    //{
+    //    if (lastPosition == null) lastPosition = s.transform.position;
 
-        enemySpeed = (s.transform.position - lastPosition).magnitude;
-        lastPosition = s.transform.position;
-    }
+    //    enemySpeed = (s.transform.position - lastPosition).magnitude;
+    //    lastPosition = s.transform.position;
+    //}
 
     public override void OnTriggerEnter(Collider other)
     {
@@ -25,6 +22,7 @@ public class EnemyPatrolState : EnemyState
         //s.stateMachine.Enter("EnemyChaseState");
         if (other.GetComponent<EnemyWaypoint>() == s.currentWaypoint)
         {
+            Debug.Log("Reached the next waypoint!");
             s.stateMachine.Enter("EnemyIdleState");
         }
     }
