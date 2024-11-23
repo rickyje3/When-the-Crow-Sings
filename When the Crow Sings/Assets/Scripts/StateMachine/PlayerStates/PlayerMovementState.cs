@@ -53,13 +53,11 @@ public class PlayerMovementState : StateMachineState
         s.speed = 8;
     }
 
-
+    
 
     public override void Update(float deltaTime)
     {
-        // Apply gravity to velocity
-        s.velocity += s.gravity * s.gravityMultiplier * deltaTime;
-
+        s.ApplyGravity(deltaTime);
         //Converts movement input to a float because vector3 cant be lerped :(((((
         float inputMagnitude = Mathf.Clamp(s.movementInput.magnitude,s.minWalkClamp,1.0f);
         //SetWalkAnimSpeed(inputMagnitude);
@@ -75,15 +73,10 @@ public class PlayerMovementState : StateMachineState
         Vector3 movement = new Vector3(s.movementInput.x, 0, s.movementInput.y).normalized * s.speed;
 
         // gravity!!
-        movement.y = s.velocity;
+        movement.y = s.gravityVelocity;
 
         // Move the character using the CharacterController
         s.characterController.Move(movement * deltaTime);
-
-        if (s.characterController.isGrounded && s.velocity < 0)
-        {
-            s.velocity = 0; // Reset vertical velocity
-        }
 
         // Rotate the player if moving on the XZ plane
         if (movement.x != 0 || movement.z != 0)

@@ -33,7 +33,7 @@ public class PlayerController : StateMachineComponent, IService
     [HideInInspector]
     public float gravityMultiplier = 3f;
     [HideInInspector]
-    public float velocity;
+    public float gravityVelocity;
     [HideInInspector] public float maxWalkSpeed = 5f;
     [HideInInspector] public float minWalkClamp = .5f;
     [HideInInspector] public float sprintSpeed = 14f;
@@ -42,6 +42,17 @@ public class PlayerController : StateMachineComponent, IService
     public Canvas pauseCanvas;
 
     public GameSignal pauseSignalTEMP;
+
+    public void ApplyGravity(float deltaTime)
+    {
+        // Apply gravity to velocity
+        gravityVelocity += gravity * gravityMultiplier * deltaTime;
+
+        if (characterController.isGrounded && gravityVelocity < 0)
+        {
+            gravityVelocity = 0; // Reset vertical velocity
+        }
+    }
 
     private void Awake()
     {

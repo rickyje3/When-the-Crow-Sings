@@ -22,4 +22,10 @@ public class PlayerFrozenState : StateMachineState
         InputManager.playerInputActions.Player.Enable();
         InputManager.playerInputActions.UI.Disable();
     }
+
+    public override void Update(float deltaTime)
+    {
+        s.ApplyGravity(deltaTime);
+        s.characterController.Move(new Vector3(0f,s.gravityVelocity,0f));
+    }
 }
