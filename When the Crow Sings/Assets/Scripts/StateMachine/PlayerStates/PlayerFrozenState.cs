@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerDialogueState : StateMachineState
+public class PlayerFrozenState : StateMachineState
 {
     PlayerController s;
 
-    public PlayerDialogueState(PlayerController component)
+    public PlayerFrozenState(PlayerController component)
     {
         s = component;
     }

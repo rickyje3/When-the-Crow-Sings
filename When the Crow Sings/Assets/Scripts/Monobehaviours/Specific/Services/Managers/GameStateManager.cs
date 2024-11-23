@@ -19,6 +19,8 @@ public class GameStateManager : MonoBehaviour, IService
     public GameSignal levelLoadStartSignal;
     public GameSignal levelLoadFinishSignal;
 
+    public GameSignal fullyFinishedLoadSignal;
+
     public GameObject loadScreen;
 
     private int targetSpawnIndex = 0;
@@ -62,7 +64,7 @@ public class GameStateManager : MonoBehaviour, IService
             LoadRoom((LevelDataResource)args.objectArgs[0]);
         }
     }
-    public void OnLoadFinish(SignalArguments args)
+    public void OnLevelDataLoadFinished(SignalArguments args)
     {
         ValidateScenes();
         if (args.intArgs[0] == 1) // If this signal was sent by a LEVEL being loaded
@@ -108,7 +110,12 @@ public class GameStateManager : MonoBehaviour, IService
 
         DestroyActors();
 
-        StartCoroutine(FadeLoadingScreen(true));
+        StartCoroutine(UnloadAndLoad(levelDataResource));
+    }
+
+    IEnumerator UnloadAndLoad(LevelDataResource levelDataResource)
+    {
+        yield return StartCoroutine(FadeLoadingScreen(true));
 
         // Unload previous scenes.
         foreach (Scene i in GetLoadedScenes())
@@ -118,20 +125,26 @@ public class GameStateManager : MonoBehaviour, IService
 
 
         // then load them all
-        StartCoroutine(LoadSceneAsync(GetScenesToLoad(levelDataResource)));
+        yield return StartCoroutine(LoadSceneAsync(GetScenesToLoad(levelDataResource)));
+        
+        yield return StartCoroutine(FadeLoadingScreen(false));
+        fullyFinishedLoadSignal.Emit();
+        Debug.Log("It is done.");
     }
 
     IEnumerator FadeLoadingScreen(bool fadeIn)
     {
         if (fadeIn)
         {
-            loadScreen.GetComponent<CanvasGroup>().alpha = 1.0f;
+            loadScreen.GetComponent<CanvasGroup>().alpha = .5f;
+            yield return new WaitForSeconds(1.0f);
         }
         else
         {
+            yield return new WaitForSeconds(1.0f);
             loadScreen.GetComponent<CanvasGroup>().alpha = 0f;
         }
-        yield return null;
+        
     }
 
     IEnumerator LoadSceneAsync(List<SceneReference> sceneReferences)
@@ -145,11 +158,9 @@ public class GameStateManager : MonoBehaviour, IService
         while (!AsyncOperationsAreDone(asyncOperations))
         {
             float progressValue = AsyncOperationsProgress(asyncOperations);//Mathf.Clamp01(asyncOperation.progress);// / 0.9f);
-            Debug.Log("Loading Progres: "+progressValue);
+            //Debug.Log("Loading Progres: "+progressValue);
             yield return null;
         }
-
-        StartCoroutine(FadeLoadingScreen(false));
     }
 
     bool AsyncOperationsAreDone(List<AsyncOperation> asyncOperations)

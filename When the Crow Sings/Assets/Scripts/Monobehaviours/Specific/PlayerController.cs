@@ -52,14 +52,14 @@ public class PlayerController : StateMachineComponent, IService
         speed = 8;
 
         stateMachine = new StateMachine(this);
+        stateMachine.RegisterState(new PlayerFrozenState(this), "PlayerFrozenState");
         stateMachine.RegisterState(new PlayerMovementState(this), "PlayerMovementState");
         stateMachine.RegisterState(new PlayerThrowBirdseedState(this), "PlayerThrowBirdseedState");
-        stateMachine.RegisterState(new PlayerDialogueState(this), "PlayerDialogueState");
     }
     private void Start()
     {
         InputManager.playerInputActions.Player.Enable();
-        stateMachine.Enter("PlayerMovementState");
+        stateMachine.Enter("PlayerFrozenState");
     }
 
     private void OnDestroy()
@@ -97,9 +97,14 @@ public class PlayerController : StateMachineComponent, IService
 
     public void OnDialogueStarted(SignalArguments signalArgs)
     {
-        stateMachine.Enter("PlayerDialogueState");
+        stateMachine.Enter("PlayerFrozenState");
     }
     public void OnDialogueFinished()
+    {
+        stateMachine.Enter("PlayerMovementState");
+    }
+
+    public void OnFullyLoadFinished(SignalArguments args)
     {
         stateMachine.Enter("PlayerMovementState");
     }
