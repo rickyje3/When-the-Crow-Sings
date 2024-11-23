@@ -27,6 +27,7 @@ public class PlayerMovementState : StateMachineState
         InputManager.playerInputActions.Player.Fire.performed += OnFired;
 
         InputManager.playerInputActions.Player.Sprint.performed += OnSprint;
+        InputManager.playerInputActions.Player.Sprint.canceled += OnSprint;
         InputManager.playerInputActions.Player.Crouch.performed += OnCrouched;
     }
 
@@ -44,6 +45,7 @@ public class PlayerMovementState : StateMachineState
         InputManager.playerInputActions.Player.Fire.performed -= OnFired;
 
         InputManager.playerInputActions.Player.Sprint.performed -= OnSprint;
+        InputManager.playerInputActions.Player.Sprint.canceled -= OnSprint;
         InputManager.playerInputActions.Player.Crouch.performed -= OnCrouched;
 
         s.playerAnimator.SetBool("animIsMoving", false);
@@ -94,6 +96,7 @@ public class PlayerMovementState : StateMachineState
         else
         {
             s.playerAnimator.SetBool("animIsMoving", false);
+            s.isSprinting = false;
         }
 
     }
@@ -105,24 +108,14 @@ public class PlayerMovementState : StateMachineState
 
     private void OnSprint(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.JoystickButton1))
+        if (context.performed && !s.isCrouching)
         {
-            if (!s.isCrouching)
-            {
-                s.isSprinting = !s.isSprinting;
-                s.playerAnimator.SetBool("animIsSprinting", s.isSprinting);
-                s.isSprinting = true;
-                s.speed = 14;
-                //Debug.Log("issprinting");
-            }
+            s.isSprinting = true;
+            s.speed = s.sprintSpeed;
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift) || Input.GetKeyUp(KeyCode.JoystickButton1))
+        else if (context.canceled && !s.isCrouching)
         {
-            if (!s.isCrouching)
-            {
-                s.isSprinting = false;
-                s.speed = 8;
-            }
+            s.isSprinting = false;
         }
     }
 
@@ -133,18 +126,18 @@ public class PlayerMovementState : StateMachineState
         if (s.isCrouching)
         {
             s.speed = 4;
-            //s.GetComponent<CapsuleCollider>().center.Set(0,0,0);
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0);
             s.GetComponent<CapsuleCollider>().height = 2;
         }
         else
         {
             s.speed = 8;
-            //s.GetComponent<CapsuleCollider>().center.Set(0, 1, 0);
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
             s.GetComponent<CapsuleCollider>().height = 4;
         }
     }
+
+
     private void OnFired(InputAction.CallbackContext context)
     {
         s.stateMachine.Enter("PlayerThrowBirdseedState");
