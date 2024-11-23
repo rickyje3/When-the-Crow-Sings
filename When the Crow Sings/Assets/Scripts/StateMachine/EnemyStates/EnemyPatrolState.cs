@@ -4,26 +4,12 @@ using UnityEngine;
 
 public class EnemyPatrolState : EnemyState
 {
-    public EnemyPatrolState(EnemyController component) : base(component)
-    {
-    }
+    public EnemyPatrolState(EnemyController component) : base(component) {}
 
-    private void Patrol()
-    {
-
-    }
-
-
-
-
-
-
-
-    private float enemySpeed = 0f;// = Vector3.zero;
+    private float enemySpeed = 0f;
     private Vector3 lastPosition;
     public override void FixedUpdate()
     {
-        //if (Physics.Raycast(s.transform,))
         if (lastPosition == null)
         {
             lastPosition = s.transform.position;
@@ -43,7 +29,11 @@ public class EnemyPatrolState : EnemyState
     public override void StateEntered()
     {
         s.StartCoroutine(setNextPoint());
-        //s.enemyMaterial.color = Color.white;
+        s.enemyAnimator.SetBool("animIsPatrolling", true);
+    }
+    public override void StateExited()
+    {
+        s.enemyAnimator.SetBool("animIsPatrolling", false);
     }
 
     private IEnumerator setNextPoint()
@@ -65,13 +55,8 @@ public class EnemyPatrolState : EnemyState
         else
         {
             s.navMeshAgent.destination = new Vector3(0f, 0f, 0f);
-            yield return new WaitForSeconds(s.timeToWander);
+            yield return new WaitForSeconds(s.timeToWanderIfNoWaypoint);
         }
-
-        //s.navMeshAgent.destination = new Vector3(Random.Range(-radius, radius), Random.Range(-radius, radius), Random.Range(-radius, radius));
-
-
-        //yield return new WaitForSeconds(s.timeToWander);
         
         s.navMeshAgent.destination = s.transform.position;
         yield return new WaitForSeconds(s.timeToWaitBetweenWander);
