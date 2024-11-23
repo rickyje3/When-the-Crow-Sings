@@ -108,7 +108,7 @@ public class GameStateManager : MonoBehaviour, IService
 
         DestroyActors();
 
-
+        StartCoroutine(FadeLoadingScreen(true));
 
         // Unload previous scenes.
         foreach (Scene i in GetLoadedScenes())
@@ -119,6 +119,19 @@ public class GameStateManager : MonoBehaviour, IService
 
         // then load them all
         StartCoroutine(LoadSceneAsync(GetScenesToLoad(levelDataResource)));
+    }
+
+    IEnumerator FadeLoadingScreen(bool fadeIn)
+    {
+        if (fadeIn)
+        {
+            loadScreen.GetComponent<CanvasGroup>().alpha = 1.0f;
+        }
+        else
+        {
+            loadScreen.GetComponent<CanvasGroup>().alpha = 0f;
+        }
+        yield return null;
     }
 
     IEnumerator LoadSceneAsync(List<SceneReference> sceneReferences)
@@ -135,6 +148,8 @@ public class GameStateManager : MonoBehaviour, IService
             Debug.Log("Loading Progres: "+progressValue);
             yield return null;
         }
+
+        StartCoroutine(FadeLoadingScreen(false));
     }
 
     bool AsyncOperationsAreDone(List<AsyncOperation> asyncOperations)
