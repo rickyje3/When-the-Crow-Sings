@@ -1,6 +1,6 @@
 ~ cafeteria_table
 Lots of room and seating. Are there even enough people here to fill the chairs?
-They're probably just inside or working. Somewhere.
+They're probably just inside, or off working somewhere.
 => END
 
 ~ cafeteria_serving_station
@@ -20,10 +20,6 @@ else:
 if AngelTaskCompleted == true:
 	Soup, professionally stirred by yours truly.
 	=> END
-if AngelTaskAccepted == true:
-	Oh gee oh golly I am stirring this soup.
-	set AngelTaskCompleted = true;
-	=> END
 else:
 	It's soup.
 	Good soup.
@@ -31,14 +27,16 @@ else:
 
 ~ pipsissewa
 if day == 1:
-A pretty pink flower. Its leaves look thorny. Better not touch it. 
-=> END
+	A pretty pink flower. Its leaves look thorny. Better not touch it. 
+	=> END
 if day == 2:
-	A vibrant pink flower. It looks radioactive. 
+	A vibrant pink flower. It almost looks like it's glowing.
 	=> END
 if day == 3:
 	A glowing pink flower. It's dripping some luminous mucus type substance.
-=> END
+	=> END
+else:
+	=> END
 
 ~ shiny_dirt
 if CalebTaskCompleted == true:
@@ -58,16 +56,16 @@ if BeauTaskAccepted == true:
 	set BeauTaskCompleted = true;
 	=> END
 else:
-	A basket of fresh vegetables. Wonder why it's out here?
+	A basket of fresh vegetables. Wonder why it's out here.
 	=> END
 
 ~ seed_bags
 if QuinnTaskAccepted == true:
-	Finally, the seed bags. I gotta run these inside.
+	I gotta run these inside quick before the crows return.
 	set QuinnTaskCompleted = true;
 	=> END
 else:
-	Some open bags of seed. Seems unwise, with the town's avian population.
+	Big burlap sacks filled to the brim with seed. The crows are definitely enjoying this careless placement.
 	=> END
 
 ~ utility_pole
@@ -75,18 +73,21 @@ if day == 1:
 	A utility pole. Seems like the local fauna really gravitate towards the power lines.
 	=> END
 if day == 2:
-	The power lines seem taught on the utility pole. Must be more weight than they're used to.
+	The power lines seem taut on the utility pole. Must be more weight than they're used to.
 	=> END
 if day == 3:
-	If I didn't know better, I would think that the number of crows was making the poles lean a little. Not sure if I do know better.
+	It's starting to look like the poles are leaning from the weight of all the crows. Let's hope they leave soon..
+	=> END
+else:
+	You have escaped time. Oops.
 	=> END
 
 ~ monkey_bars
-Monkey bars. Oh, to be young again. Now I can reach them while standing.
+Monkey bars! Oh, to be young again. Now I can reach the bars standing.
 => END
 
 ~ play_place
-A nice looking playset. Mostly made from wood, probably handmade. Lucky kids.
+A sturdy playset made of nicely treated wood. Lucky kids, all I had back home was a tire hanging from a tree.
 => END
 
 ~ solar_panel
@@ -94,7 +95,7 @@ Lined up solar panels, recently wiped down and clear of dust.
 => END
 
 ~ clinic_sign
-"Local Clinic"
+"Hand in Hand Clinic<br>Human and EVO care"
 => END
 
 ~ energy_hq_sign
@@ -106,36 +107,28 @@ Lined up solar panels, recently wiped down and clear of dust.
 => END
 
 ~ greenhouse_sign
-"Quinn's Greenhouse"
+"<size=60%>Quinn's</size><br>Greenhouse"
 'Quinn's' seems to be carved in with a knife.
 => END
 
 ~ bench_1
-A sturdy bench. Looks comfortable... I don't have time to lounge around right now.
-=> END
-
-~ bench_2
-I really should be focusing. It is a nice bench though.
-=> END
-
-~ bench_3
-I'm not sitting down right now, no matter how inviting the bench is.
-=> END
-
-~ bench_4
-Once I figure out what's going on and stop getting stalked by some purple hellscape beast, I will spend so much time sitting on this bench.
-=> END
-
-~ bench_5
-This town is full of monsters. How can you just sit there?
-=> END
-
-~ bench_6
-Enough bench.
+if benchcounter == 0:
+	A sturdy bench. Looks comfortable... I don't have time to lounge around right now.
+if benchcounter == 1:
+	I really should be focusing. It is a nice bench though.
+if benchcounter == 2:
+	I'm not sitting down right now, no matter how inviting the bench is.
+if benchcounter == 3:
+	Once I figure out what's going on and stop getting stalked by some purple hellscape beast, I will spend so much time sitting on this bench.
+if benchcounter == 4:
+	This town is full of monsters. How can you just sit there?
+if benchcounter == 5:
+	Enough bench.
+set benchcounter += 1;
 => END
 
 ~ directory_sign
-Depends on where it is.
+A directory sign.
 => END
 
 ~ ground_crack
@@ -143,7 +136,7 @@ That.. can't be normal.
 => END
 
 ~ fountain
-An old fountain. The pool has been filled in with flowers, and it doesn't seem to run. How cute.
+An old fountain that looks like it stopped functioning a while ago. The resevoire has been filled in with soil and flowers.
 => END
 
  
@@ -156,9 +149,9 @@ if FranciscoBaseCompleted == true:
 	Open. Voila.
 	set Zone1DoorUnlocked = true;
 	=> END
-else
-The door is rusty. Looks like it hasn't been used in a while. 
-=> END
+else:
+	The door is rusty. Looks like it hasn't been used in a while. 
+	=> END
 
 ~ zone_door_2
 The door is completely stuck. There's no way to open it even if I wanted to.
@@ -166,8 +159,8 @@ The door is completely stuck. There's no way to open it even if I wanted to.
 
 ~ zone_door_3
 if FaridaBaseCompleted == true:
-	This must be the door that Farida was talking about.
-	The key unlocked the padlock. It opens with a little bit of effort.
+	This must be the door that Farida was talking about. Where's that key she gave me...
+	Ah, there we go. With a little bit of elbow grease, the padlock pops off.
 	set Zone3DoorUnlocked = true;
 	=> END
 else:
@@ -206,5 +199,5 @@ I don't have a reason to go in there. I don't think I've ever felt a temperature
 => END
 
 ~ lodging_door
-I'm not gonna waste my time sitting around in my room. Who knows what will happen with that thing...
+I'm not gonna waste my time sitting around in my room. Who knows what will happen if that <color=#a11bbe>thing</color> roams around unchecked.
 => END

@@ -122,6 +122,7 @@ public static class SaveData
         {"TBD_OnLoadSpawnPoint_OrSomething",0 },
 
         {"penguin_cult",0 },
+        {"benchcounter",0 },
     };
 
     public static Dictionary<string, string> stringFlags = new Dictionary<string, string>()

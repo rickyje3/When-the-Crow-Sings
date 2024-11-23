@@ -96,7 +96,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000004, guid: 50080d67e1ce499458f80b738ff6d365,
+    type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -148,37 +149,37 @@ PrefabInstance:
     - target: {fileID: 27647900587653849, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.45903277
+      value: 0.46093687
       objectReference: {fileID: 0}
     - target: {fileID: 27647900587653849, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.6890189
+      value: 0.68910056
       objectReference: {fileID: 0}
     - target: {fileID: 27647900587653849, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.024988532
+      value: -0.0226427
       objectReference: {fileID: 0}
     - target: {fileID: 27647900587653849, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5602834
+      value: -0.5587172
       objectReference: {fileID: 0}
     - target: {fileID: 27647900587653849, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 37.197
+      value: 37.587
       objectReference: {fileID: 0}
     - target: {fileID: 27647900587653849, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -86.455
+      value: -86.436
       objectReference: {fileID: 0}
     - target: {fileID: 27647900587653849, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -136.451
+      value: -136.42
       objectReference: {fileID: 0}
     - target: {fileID: 1661478233487107899, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
@@ -193,12 +194,12 @@ PrefabInstance:
     - target: {fileID: 2066315669431654582, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.5613208
+      value: 0.759434
       objectReference: {fileID: 0}
     - target: {fileID: 2066315669431654582, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.84048027
+      value: 0.9091195
       objectReference: {fileID: 0}
     - target: {fileID: 2066315669431654582, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
@@ -208,12 +209,7 @@ PrefabInstance:
     - target: {fileID: 2066315669431654582, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
       propertyPath: m_Intensity
-      value: 1.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066315669431654582, guid: 962c51fba95658e42919990a7481bb29,
-        type: 3}
-      propertyPath: m_ShadowAngle
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2066315669431654582, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
@@ -222,28 +218,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2066315669431654582, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
-      propertyPath: m_Shadows.m_Type
-      value: 2
+      propertyPath: m_BoundingSphereOverride.w
+      value: 3.2789203e-34
       objectReference: {fileID: 0}
     - target: {fileID: 2066315669431654582, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
-      propertyPath: m_BounceIntensity
-      value: 3
+      propertyPath: m_BoundingSphereOverride.x
+      value: 3.153832e+14
       objectReference: {fileID: 0}
     - target: {fileID: 2066315669431654582, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
-      propertyPath: m_Shadows.m_Strength
-      value: 0.737
+      propertyPath: m_BoundingSphereOverride.y
+      value: -1.4940694e-35
       objectReference: {fileID: 0}
     - target: {fileID: 2066315669431654582, guid: 962c51fba95658e42919990a7481bb29,
         type: 3}
-      propertyPath: m_Shadows.m_NormalBias
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6877970973818668589, guid: 962c51fba95658e42919990a7481bb29,
-        type: 3}
-      propertyPath: m_UsePipelineSettings
-      value: 0
+      propertyPath: m_BoundingSphereOverride.z
+      value: 1.0690544e-20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
