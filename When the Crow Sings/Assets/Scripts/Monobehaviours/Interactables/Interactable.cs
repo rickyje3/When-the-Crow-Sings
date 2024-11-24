@@ -8,6 +8,7 @@ public class Interactable : MonoBehaviour
     public CinemachineVirtualCamera virtualCamera;
     public SpriteRenderer pfInteractArrow;
 
+    public bool autoInteract = false;
 
     public void DoInteraction()
     {
@@ -27,6 +28,10 @@ public class Interactable : MonoBehaviour
         else if (GetComponent<ImagePopupInteractable>())
         {
             GetComponent<ImagePopupInteractable>().EmitImagePopupSignal();
+        }
+        else if (GetComponent<EnemyChangeWaypointsTrigger>())
+        {
+            GetComponent<EnemyChangeWaypointsTrigger>().EmitChangeWaypointSignal();
         }
     }
 
