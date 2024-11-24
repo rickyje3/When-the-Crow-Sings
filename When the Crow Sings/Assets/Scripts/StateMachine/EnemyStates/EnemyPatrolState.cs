@@ -23,7 +23,10 @@ public class EnemyPatrolState : EnemyState
         if (other.GetComponent<EnemyWaypoint>() == s.currentWaypoint)
         {
             //Debug.Log("Reached the next waypoint!");
-            s.stateMachine.Enter("EnemyIdleState");
+            s.timeToWaitBetweenWander = other.GetComponent<EnemyWaypoint>().timeToWait;
+            if (s.timeToWaitBetweenWander > 0)
+                s.stateMachine.Enter("EnemyIdleState");
+            else setNextPoint();
         }
     }
 
