@@ -62,9 +62,17 @@ public class PlayerMovementState : StateMachineState
         float inputMagnitude = Mathf.Clamp(s.movementInput.magnitude,s.minWalkClamp,1.0f);
         //SetWalkAnimSpeed(inputMagnitude);
 
-        if (!s.isSprinting && !s.isCrouching)
+        if (s.isSprinting && !s.isCrouching)
         {
-            //Smoothly blend speed off of joystick input (8 is the max walking speed)
+            //Smoothly blend speed off of joystick input
+            s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.sprintSpeed, Time.deltaTime * s.acceleration);
+        }
+        else if (!s.isSprinting && s.isCrouching)
+        {
+            s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.crouchSpeed, Time.deltaTime * s.acceleration);
+        }
+        else if (!s.isSprinting && !s.isCrouching)
+        {
             s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.maxWalkSpeed, Time.deltaTime * s.acceleration);
         }
         SetWalkAnimSpeed(s.speed);
@@ -104,7 +112,7 @@ public class PlayerMovementState : StateMachineState
         if (context.performed && !s.isCrouching)
         {
             s.isSprinting = true;
-            s.speed = s.sprintSpeed;
+            //s.speed = s.sprintSpeed;
         }
         else if (context.canceled && !s.isCrouching)
         {
@@ -118,13 +126,14 @@ public class PlayerMovementState : StateMachineState
         s.playerAnimator.SetBool("animIsCrouching", s.isCrouching);
         if (s.isCrouching)
         {
-            s.speed = 4;
+            //s.speed = 4;
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0);
             s.GetComponent<CapsuleCollider>().height = 2;
         }
-        else
+        else if(!s.isCrouching && !s.isSprinting)
         {
-            s.speed = 8;
+            s.playerAnimator.SetBool("animIsCrouching", false);
+            //s.speed = 8;
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
             s.GetComponent<CapsuleCollider>().height = 4;
         }

@@ -60,13 +60,13 @@ Beau: Sorry to have your first night so disturbed. It's not always like that...
 
 ~ beau_first_int_sleep
 Chance_Sad: I haven't been getting much sleep.
-Beau_Awkward: Oh well that's no good bud.
+Beau_Awkward: Oh, well, that's no good bud.
 => beau_first_int_cont_2
 
 ~ beau_first_int_cont_2
 set BeauTaskOffered = true;
-Beau: Listen, would you do me a solid and pick up some food from the greenhouse? Seems like you could use something to keep yourself busy until you get assigned.
-Beau_Smile: I've got to swap out some stock for Angel, put the new food in the freezer and give him the wiltier stuff. 
+Beau: Listen, would you do me a solid and pick up some food from the greenhouse? Seems like you could use something to keep yourself busy.
+Beau_Smile: I've got to swap out some stock for <color=#813408>Angel</color>, put the new food in the freezer and give him the wiltier stuff. 
 - Sure.
 	set BeauTaskAccepted = true;
 	Chance: Yeah, sure.
@@ -77,7 +77,7 @@ Beau_Smile: I've got to swap out some stock for Angel, put the new food in the f
 	=> END
 
 ~ beau_no_task
-Beau_Teasing: Back for more Beau?
+Beau_Teasing: Back for more <color=#813408>Beau</color>?
 - Yeah.
 	set BeauTaskAccepted = true;
 	Chance_Smile: Yeah, I'm free to help now.
@@ -92,38 +92,42 @@ Beau: You're back.
 Beau_Awkward: With no veggies. Did something happen, or?
 	- I forgot.
 		Chance_Sad: I forgot where to go.
-		Beau_Teasing: Oh no worries bud. I'm a little absent minded myself, I get it. Just trot on over to Quinn's and scoop up that veggie delivery, then bring it back.
+		Beau_Teasing: Oh no worries bud. I'm a little absent-minded myself, I get it. Just trot on over to <color=#813408>Quinn</color>'s and scoop up that veggie delivery, then bring it back.
 		Chance: Okay, got it.
 		=> END
 	- No!
 		Chance_Angry: No! I just wasn't ready to do it yet!
-		Beau_Awkward: Riiiiiight, whatever you say bud.
+		Beau_Awkward: Riiiiiight. Whatever you say bud.
 		=> END
 
 ~ beau_task_fin
 Beau: Alright bud, look. I can tell you're having some trouble settling in here. You did me a solid, so let me give you a little advice.
 Chance: Hm?
 Beau_Smile: Things get a little weird around here, but it's harmless! Least since I've been here.
-Beau: If you want some reassurance you could go talk to Quinn, the gardener you just grabbed a delivery from for me. 
+Beau: If you want some reassurance? Go talk to <color=#813408>Quinn</color>, the gardener you just grabbed that delivery from.
+Beau_Smile: They might be able to help explain things. 
 if QuinnTaskOffered == true:
 	- Met Quinn.
-		Chance: I already met Quinn.
+		Chance: I already met <color=#813408>Quinn</color>.
 		Beau_Smile: Oh yeah? And did they talk ya down?
-		Chance_Sad: Not exactly.They're nice, though.
+		Chance_Sad: Not exactly. They're nice, though.
 		Beau_Awkward: Yeah, they sure are. Hm..
 		=> beau_task_fin_cont
 else:
 	=> beau_task_fin_cont
 
 ~ beau_task_fin_cont
-Beau: There's also Farida. She's our security 'round here.
+Beau: There's also <color=#813408>Farida</color>. She's our security 'round here.
 if FaridaTaskOffered == true:
 	- Met Farida.
-		Chance_Sad: I've met Farida. She's uh...
+		Chance_Sad: I've met <color=#813408>Farida</color>. She's uh...
 		Beau_Awkward: Yeah. A bit. 
 		=> beau_task_fin_cont_3
+if day == 1:
+	Beau: If someone was coming or going from the compound, she'd know.
 else:
-	=> beau_task_fin_cont_3
+	Beau: She might be able to help ya a little. I'll warn you, though she might be human, she's pricklier than a porcupine.
+=> beau_task_fin_cont_3
 
 ~ beau_task_fin_cont_3
 set BeauBaseCompleted = true;

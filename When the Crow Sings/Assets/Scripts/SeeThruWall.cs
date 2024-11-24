@@ -66,7 +66,7 @@ public class SeeThruWall : MonoBehaviour
 
             //Sets the size to the material
             material.SetFloat(SizeID, occluderSize);
-            Debug.Log("Occluder size = " + occluderSize);
+            //Debug.Log("Occluder size = " + occluderSize);
 
             //optionally set position 
             var view = Camera.WorldToViewportPoint(transform.position);

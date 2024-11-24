@@ -37,6 +37,7 @@ public class PlayerController : StateMachineComponent, IService
     [HideInInspector] public float maxWalkSpeed = 5f;
     [HideInInspector] public float minWalkClamp = .5f;
     [HideInInspector] public float sprintSpeed = 14f;
+    [HideInInspector] public float crouchSpeed = 2f;
     public float slideSpeedCorrection = 0.19f;
     public CharacterController characterController;
     public Canvas pauseCanvas;

@@ -11,9 +11,15 @@ public class UnparentScale : MonoBehaviour
     void Start()
     {
         parent = GetComponentInParent<Transform>();
-
-        var originalScale = transform.localScale;
-        transform.parent = newParent;
-        transform.localScale = originalScale;
+        if (parent != null)
+        {
+            var originalScale = transform.localScale;
+            transform.parent = newParent;
+            transform.localScale = originalScale;
+        }
+        else
+        {
+            this.enabled = false;
+        }
     }
 }
