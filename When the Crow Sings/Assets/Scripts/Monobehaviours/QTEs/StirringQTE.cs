@@ -11,7 +11,7 @@ public class StirringQTE : QuickTimeEvent
     private int currentStep = 0;
     private bool correctKey;
     private bool countingDown;
-    public int score = 1;
+    public int score = 0;
     public float timer = 8;
 
     public Image upJoystick;
@@ -82,12 +82,69 @@ public class StirringQTE : QuickTimeEvent
     private void ShowCurrentKey()
     {
         KeyCode currentKey = keySequence[currentStep];
-        //displayBox.GetComponentInChildren<TextMeshProUGUI>().text = currentKey.ToString();
+        upJoystick.enabled = false;
+        rightJoystick.enabled = false;
+        downJoystick.enabled = false;
+        leftJoystick.enabled = false;
+
+        if (currentStep == 0)
+        {
+            /*wKey.enabled = true;
+            aKey.enabled = false;
+            sKey.enabled = false;
+            dKey.enabled = false;*/
+
+            wKey.color = new Color(wKey.color.r, wKey.color.g, wKey.color.b, 1);
+            aKey.color = new Color(aKey.color.r, aKey.color.g, aKey.color.b, .2f);
+            sKey.color = new Color(sKey.color.r, sKey.color.g, sKey.color.b, .2f);
+            dKey.color = new Color(dKey.color.r, dKey.color.g, dKey.color.b, .2f);
+        }
+        else if (currentStep == 1)
+        {
+            /*wKey.enabled = false;
+            aKey.enabled = true;
+            sKey.enabled = false;
+            dKey.enabled = false;*/
+
+            wKey.color = new Color(wKey.color.r, wKey.color.g, wKey.color.b, .2f);
+            aKey.color = new Color(aKey.color.r, aKey.color.g, aKey.color.b, 1);
+            sKey.color = new Color(sKey.color.r, sKey.color.g, sKey.color.b, .2f);
+            dKey.color = new Color(dKey.color.r, dKey.color.g, dKey.color.b, .2f);
+        }
+        else if (currentStep == 2)
+        {
+            /*wKey.enabled = false;
+            aKey.enabled = false;
+            sKey.enabled = true;
+            dKey.enabled = false;*/
+
+            wKey.color = new Color(wKey.color.r, wKey.color.g, wKey.color.b, .2f);
+            aKey.color = new Color(aKey.color.r, aKey.color.g, aKey.color.b, .2f);
+            sKey.color = new Color(sKey.color.r, sKey.color.g, sKey.color.b, 1);
+            dKey.color = new Color(dKey.color.r, dKey.color.g, dKey.color.b, .2f);
+        }
+        else if (currentStep == 3)
+        {
+            /*wKey.enabled = false;
+            aKey.enabled = false;
+            sKey.enabled = false;
+            dKey.enabled = true;*/
+
+            wKey.color = new Color(wKey.color.r, wKey.color.g, wKey.color.b, .1f);
+            aKey.color = new Color(aKey.color.r, aKey.color.g, aKey.color.b, .1f);
+            sKey.color = new Color(sKey.color.r, sKey.color.g, sKey.color.b, .1f);
+            dKey.color = new Color(dKey.color.r, dKey.color.g, dKey.color.b, 1);
+        }
     }
 
     //controller
     private void ShowCurrentDirection()
     {
+        wKey.enabled = false;
+        aKey.enabled = false;
+        sKey.enabled = false;
+        dKey.enabled = false;
+
         if (currentStep == 0)
         {
             upJoystick.enabled = true;
@@ -100,7 +157,7 @@ public class StirringQTE : QuickTimeEvent
             upJoystick.enabled = false;
             rightJoystick.enabled = true;
             downJoystick.enabled = false;
-            leftJoystick.enabled = true;
+            leftJoystick.enabled = false;
         }
         else if (currentStep == 2)
         {
@@ -159,7 +216,7 @@ public class StirringQTE : QuickTimeEvent
         //if(correctKey) 
             //displayBox.GetComponent<Image>().color = Color.green;
 
-        yield return new WaitForSeconds(0.07f); // Time between transitions (less = faster)
+        yield return new WaitForSeconds(0.04f); // Time between transitions (less = faster)
 
         //displayBox.GetComponent<Image>().color = Color.white;
 
