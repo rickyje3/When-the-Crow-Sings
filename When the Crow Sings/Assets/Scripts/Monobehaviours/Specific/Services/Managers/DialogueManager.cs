@@ -26,6 +26,7 @@ public class DialogueManager : MonoBehaviour, IService
     [SerializeField] private GameObject nextButton;
     public Image npcImageUi;
     public Image playerImageUi;
+    public Image nameBox;
     public DialoguePortraits dialoguePortraits;
 
     [Header("Signals")]
@@ -126,6 +127,8 @@ public class DialogueManager : MonoBehaviour, IService
             DialogueResponse newLine2 = (DialogueResponse)newLine;
             //Debug.Log(newLine2.dialogue);
             nameText.text = newLine2.characterName;
+            if (nameText.text == "") nameBox.enabled = false;
+            else nameBox.enabled = true;
 
             SetPortraits(newLine2);
 
