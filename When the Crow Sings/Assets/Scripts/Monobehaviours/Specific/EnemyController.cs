@@ -22,6 +22,10 @@ public class EnemyController : StateMachineComponent
     bool lastTime = false;
     RaycastHit hit;
 
+    [HideInInspector]
+    public bool canSeePlayer = false;
+    public bool doesSeePlayer = false;
+
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -83,12 +87,19 @@ public class EnemyController : StateMachineComponent
             {
                 if (hit.transform.CompareTag("Player"))
                 {
-                    //stateMachine.OnTriggerEnter(other);
-                    stateMachine.OnTriggerEnter(hit.transform.GetComponent<Collider>());
+                    //stateMachine.OnTriggerEnter(hit.transform.GetComponent<Collider>());
+                    canSeePlayer = true;
+                    doesSeePlayer = true;
+                    Debug.Log("SEEEE YOU");
+                }
+                else
+                {
+                    canSeePlayer= false;
+                    doesSeePlayer = false;
                 }
             }
         }
-        
+        stateMachine.FixedUpdate();
     }
 
     private void RenderRayCastLine(Vector3 targetPosition)

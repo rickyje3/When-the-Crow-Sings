@@ -25,7 +25,11 @@ public class EnemyPatrolState : EnemyState
             //Debug.Log("Reached the next waypoint!");
             s.stateMachine.Enter("EnemyIdleState");
         }
-        else if (other.GetComponent<PlayerController>())
+    }
+
+    public override void FixedUpdate()
+    {
+        if (s.doesSeePlayer)
         {
             s.stateMachine.Enter("EnemyChaseState");
         }

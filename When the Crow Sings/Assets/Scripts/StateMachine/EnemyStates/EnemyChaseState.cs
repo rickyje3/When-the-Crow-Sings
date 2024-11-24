@@ -20,6 +20,12 @@ public class EnemyChaseState : EnemyState
     }
     public override void StateEntered()
     {
+        s.enemyAnimator.SetBool("animChase", true);
         Debug.Log("Pursue!");
+    }
+    public override void StateExited()
+    {
+        s.enemyAnimator.SetBool("animChase", false);
+        Debug.Log("Not pursuing anymore.");
     }
 }
