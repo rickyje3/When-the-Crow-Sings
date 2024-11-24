@@ -122,8 +122,9 @@ public class PlayerMovementState : StateMachineState
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0);
             s.GetComponent<CapsuleCollider>().height = 2;
         }
-        else
+        else if(!s.isCrouching && !s.isSprinting)
         {
+            s.playerAnimator.SetBool("animIsCrouching", false);
             s.speed = 8;
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
             s.GetComponent<CapsuleCollider>().height = 4;
