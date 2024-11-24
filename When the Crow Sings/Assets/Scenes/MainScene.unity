@@ -914,6 +914,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2015342513 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8410813675906408222, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 8445506424929340262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &482170304666749427
 RectTransform:
   m_ObjectHideFlags: 0
@@ -962,6 +974,7 @@ MonoBehaviour:
   nextButton: {fileID: 8445506424929340263}
   npcImageUi: {fileID: 7656827429492186696}
   playerImageUi: {fileID: 8638694447840450254}
+  nameBox: {fileID: 2015342513}
   dialoguePortraits: {fileID: 11400000, guid: 40978ffc62fbc1244953405ec4519b71, type: 2}
   startDialogueSignal: {fileID: 11400000, guid: 20b772f70a9d9fd45bb90955e34f0875,
     type: 2}
@@ -1428,11 +1441,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 482170304666749427}
     m_Modifications:
+    - target: {fileID: 540753434271944545, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1171923003508137283, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 769733860930222430}
+    - target: {fileID: 4306643086200607354, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4306643086200607354, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9cac35e48822274386d5550fb649576,
+        type: 3}
+    - target: {fileID: 4306643086200607354, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9cac35e48822274386d5550fb649576,
+        type: 3}
     - target: {fileID: 4306643086200607354, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1443,6 +1478,23 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 769733860930222430}
+    - target: {fileID: 4830673579190815702, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830673579190815702, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9cac35e48822274386d5550fb649576,
+        type: 3}
+    - target: {fileID: 4830673579190815702, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9cac35e48822274386d5550fb649576,
+        type: 3}
     - target: {fileID: 4830673579190815702, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1555,6 +1607,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7586682299371577231, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586682299371577231, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9cac35e48822274386d5550fb649576,
+        type: 3}
+    - target: {fileID: 7586682299371577231, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9cac35e48822274386d5550fb649576,
+        type: 3}
+    - target: {fileID: 7586682299371577231, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 769733860930222430}
@@ -1620,6 +1689,12 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8808769737722841208, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9cac35e48822274386d5550fb649576,
+        type: 3}
     - target: {fileID: 8808769737722841208, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

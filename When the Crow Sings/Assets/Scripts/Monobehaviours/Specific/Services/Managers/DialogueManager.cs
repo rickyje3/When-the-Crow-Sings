@@ -8,6 +8,7 @@ using System;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 public class DialogueManager : MonoBehaviour, IService
 {
@@ -25,6 +26,7 @@ public class DialogueManager : MonoBehaviour, IService
     [SerializeField] private GameObject nextButton;
     public Image npcImageUi;
     public Image playerImageUi;
+    public Image nameBox;
     public DialoguePortraits dialoguePortraits;
 
     [Header("Signals")]
@@ -52,6 +54,11 @@ public class DialogueManager : MonoBehaviour, IService
     {
         ServiceLocator.Register<DialogueManager>(this);
     }
+
+    void Start()
+    {
+        if (EditorPrefs.HasKey("textSpeed")) textSpeed = EditorPrefs.GetFloat("textSpeed");
+    }
     #endregion
 
 
@@ -78,6 +85,7 @@ public class DialogueManager : MonoBehaviour, IService
         DialogueParser parser = new DialogueParser(dialogueResource);
         DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
 
+        canSkip = false;
         ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex, tempHolderForTheTargetIndex.tabCount);
 
     }
@@ -120,6 +128,8 @@ public class DialogueManager : MonoBehaviour, IService
             DialogueResponse newLine2 = (DialogueResponse)newLine;
             //Debug.Log(newLine2.dialogue);
             nameText.text = newLine2.characterName;
+            if (nameText.text == "") nameBox.enabled = false;
+            else nameBox.enabled = true;
 
             SetPortraits(newLine2);
 
@@ -277,19 +287,25 @@ public class DialogueManager : MonoBehaviour, IService
             else
             {
                 float pauseBetweenChars = textSpeed;
-                char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1, 0, textMesh.text.Length)];
+                int characterIndex = Mathf.Clamp(textMesh.maxVisibleCharacters - 1, 0, textMesh.text.Length);
+                char character = textMesh.text[characterIndex];
+                //char previousCharacter = 'x';
+                //char nextCharacter = 'x';
+                //if (characterIndex -1 >= 0) previousCharacter = textMesh.text[characterIndex-1];
+                //if (characterIndex+1 <= textMesh.maxVisibleCharacters-1) nextCharacter = textMesh.text[characterIndex + 1];
                 foreach (char i in ".!?")
                 {
-                    if (character == i)
+                    if (character == i)// && previousCharacter != i && nextCharacter != i)
                     {
                         pauseBetweenChars *= pauseMultiplier;
+                        break;
                     }
                 }
-                yield return new WaitForSeconds(pauseBetweenChars);
+                yield return new WaitForSeconds(pauseBetweenChars); // TODO: Make it so isSkipping interrupts this.
                 textMesh.maxVisibleCharacters += 1;
             }
 
-            
+            canSkip = true;
         }
 
         isSkipping = false; // This may be redundant, may not be.
@@ -299,6 +315,7 @@ public class DialogueManager : MonoBehaviour, IService
     private int currentLine;
     private bool canNextLine = false;
     private bool isSkipping = false;
+    private bool canSkip = false;
 
     private bool isInDialogue
     {
@@ -328,7 +345,7 @@ public class DialogueManager : MonoBehaviour, IService
         }
         else
         {
-            isSkipping = true;
+            if (canSkip) isSkipping = true;
         }
     }
 
