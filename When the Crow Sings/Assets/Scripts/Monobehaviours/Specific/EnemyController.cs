@@ -29,6 +29,8 @@ public class EnemyController : StateMachineComponent
     public EnemySightCone enemySightCone;
     public Transform raycastStart;
     public List<LineRenderer>  lineRenderers;
+
+    [HideInInspector] public EnemyWaypointsHolder currentWaypointHolder;
     public bool doesSeePlayer
     {
         get
@@ -57,7 +59,8 @@ public class EnemyController : StateMachineComponent
         }
         else
         {
-            currentWaypoint = enemyWaypointsHolders[0].waypoints[0];
+            currentWaypointHolder = enemyWaypointsHolders[0];
+            currentWaypoint = currentWaypointHolder.waypoints[0];
         }
         
     }
@@ -130,6 +133,17 @@ public class EnemyController : StateMachineComponent
             lineRenderer.SetPosition(1, pos);
         }
         
+    }
+
+    public void OnChangeWaypointsTriggered(SignalArguments args)
+    {
+        if (args.objectArgs[0] == this)
+        {
+            if (enemyWaypointsHolders.Contains((EnemyWaypointsHolder)args.objectArgs[1]))
+            {
+                currentWaypointHolder = (EnemyWaypointsHolder)args.objectArgs[1];
+            }
+        }
     }
 
     //private void FixedUpdate()

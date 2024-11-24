@@ -31,8 +31,17 @@ public class PlayerInteractionArea : MonoBehaviour
         {
             Interactable interactable = other.GetComponent<Interactable>();
             //Debug.Log("He's here he's here he's heeereee");
-            interactablesInRange.Add(interactable);
-            interactable.setInteractableArrow(true);
+
+            if (interactable.autoInteract)
+            {
+                interactable.DoInteraction();
+            }
+            else
+            {
+                interactablesInRange.Add(interactable);
+                interactable.setInteractableArrow(true);
+            }
+            
         }
 
     }
