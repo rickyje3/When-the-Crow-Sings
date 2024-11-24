@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,6 +27,8 @@ public class EnemyController : StateMachineComponent
     public bool canSeePlayer = false;
 
     public EnemySightCone enemySightCone;
+    public Transform raycastStart;
+    public List<LineRenderer>  lineRenderers;
     public bool doesSeePlayer
     {
         get
@@ -82,37 +85,51 @@ public class EnemyController : StateMachineComponent
         {
             Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
             targetPosition.y += lookAtHeight;
-            RenderRayCastLine(targetPosition);
 
+            List<Vector3> endPoints = new List<Vector3>();
+            endPoints.Add(targetPosition);
+            endPoints.Add(new Vector3(targetPosition.x, targetPosition.y -= 3.0f,targetPosition.z));
             if (lastTime)
             {
                 targetPosition.y -= 3.0f;
             }
             lastTime = !lastTime;
 
-            if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit))
+            //RenderRayCastLine(targetPosition);
+            //Vector3 endPoint = targetPosition;
+            
+
+
+            if (Physics.Raycast(raycastStart.position, targetPosition - transform.position, out hit))
             {
                 if (hit.transform.CompareTag("Player"))
                 {
-                    //stateMachine.OnTriggerEnter(hit.transform.GetComponent<Collider>());
                     canSeePlayer = true;
-                    Debug.Log("SEEEE YOU");
                 }
                 else
                 {
                     canSeePlayer = false;
+                    //endPoint = hit.transform.position;
                 }
+                
             }
+            RenderRayCastLine(endPoints);
         }
         stateMachine.FixedUpdate();
     }
 
-    private void RenderRayCastLine(Vector3 targetPosition)
+    private void RenderRayCastLine(List<Vector3> targetPositions)
     {
-        LineRenderer lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.enabled = true;
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, targetPosition);
+        //LineRenderer lineRenderer = GetComponent<LineRenderer>();
+        //lineRenderer.enabled = true;
+        foreach (Vector3 pos in targetPositions )
+        {
+            LineRenderer lineRenderer = lineRenderers[targetPositions.IndexOf(pos)];
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, pos);
+        }
+        
     }
 
     //private void FixedUpdate()
