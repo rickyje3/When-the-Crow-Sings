@@ -20,14 +20,14 @@ else:
 
 ~ caleb_first_int
 if timeOfDay == 1:
-	Caleb: Oh, good morning. You must be the new resident Farida was talking about.
+	Caleb: Oh, good morning. You must be the new resident <color=#813408>Farida</color> was talking about.
 if timeOfDay == 2:
-	Caleb: Oh, good afternoon. You must be the new resident Farida was talking about.
+	Caleb: Oh, good afternoon. You must be the new resident <color=#813408>Farida</color> was talking about.
 Chance: Yep, that's me.
-Caleb_Smile: Nice to meet you, I'm Caleb. What's your name again?
+Caleb_Smile: Nice to meet you, I'm <color=#813408>Caleb</color>. What's your name again?
 Chance: Chance.
 Caleb: That's a fine name. Guess I could take a-
-Caleb_Wink: CHANCE on you, huh?
+Caleb_Wink: <b>Chance</b> on you, huh?
 - Funny.
 	Chance_Angry: Hah. Very funny. Never heard that one before.
 	=> caleb_first_int_cont
@@ -40,8 +40,8 @@ set CalebTaskOffered = true;
 Caleb_Smile: Hah!
 Caleb: Well, I'm just a little busy working on the panels here, but, I can talk.
 Chance_Smile: Where I lived before ran off solar too, and some hydropower.
-Caleb_Smile: Oh, hydro! This place used to run off something else too, but at some point that stopped working. Shipped me and the panels in and now it's all we've got.
-Caleb: It's not the most efficient, and Farida will be sure to let you know all about it.
+Caleb_Smile: Oh, hydro! This place used to run off <color=#a11bbe>something else</color> too, but at some point that stopped working. Shipped me and the panels in, and now it's all we've got.
+Caleb: It's not the most efficient, and <color=#813408>Farida</color> will be sure to let you know all about it.
  . . . ?
 Chance: Something else?
 There's no big water sources out here. No wind turbines..
@@ -88,7 +88,7 @@ Caleb_Thinking: I don't see any wire on you. Why're you back?
 	Caleb_Annoyed: Uh-huh. The crows are making nests by the south east gate.
 	Chance_Sad: Thanks.
 	=> END
-- Nunya
+- Nunya.
 	Chance_Angry: None of your business old man, I just didn't get around to it yet!
 	Caleb_Annoyed: Uh-huh.
 	=> END
@@ -97,23 +97,23 @@ Caleb_Thinking: I don't see any wire on you. Why're you back?
 set CalebBaseCompleted = true;
 set ClinicDoorUnlocked = true;
 set RecCenterDoorUnlocked = true;
-Caleb_Smile: Alrighty kid, I yield. You did good.
-Caleb_Thinking: If you want to know more about the old energy source, for whatever reason, you would probably want to talk with Farida.
+Caleb_Smile: Alrighty, kid, I yield. You did good. Wires don't look like they're in too bad of shape either.
+Caleb_Thinking: If you want to know more about <color=#a11bbe>the old energy source</color>, for whatever reason, you would probably want to talk with <color=#813408>Farida</color>.
 Caleb_Annoyed: But I don't think you should have me sending you.. Not that we don't get along! It's just..
 if FaridaTaskOffered == true:
 	- Met Farida.
-		Chance: I've already spoken with Farida.
+		Chance: I've already spoken with <color=#813408>Farida</color>.
 		Caleb: Oh yeah? And was she a bucket of kittens and rainbows?
 		Chance_Sad: I don't know if I'd say that...
-		Caleb: Yeah. Well, it might not hurt to talk to who I was going to send you to anyway.
+		Caleb: Yeah. Well, it might not hurt to talk to who 'em about it anyway, or maybe...
 		=> caleb_task_fin_cont
 - . . .
 	Caleb: Well, anyway if you wanted to talk to her..
 	=> caleb_task_fin_cont
 
 ~ caleb_task_fin_cont
-Caleb: You should probably go to Francisco. They're science buddies, and he's one of the smartest people I know.
-Caleb_Smile: Or, if you wanted something less sciency, there's Jazmyne. She watches my little princess Calliope.
+Caleb: You should probably go to <color=#813408>Francisco</color>. They're science buddies, and he's one of the smartest people I know.
+Caleb_Smile: Or, if you wanted something less sciency, there's <color=#813408>Jazmyne</color>. She watches my little princess <color=#813408>Calliope</color>.
 Caleb_Thinking: She probably wouldn't know herself, but I know she has some kid ruffling her fur. Sneaking out past curfew, hopping fences, you know the type. 
 Caleb: Rebels are always learning something, right?
 Chance_Angry: That's not really information.
@@ -125,5 +125,5 @@ call ReloadScene(7);
 	=> END
 
 ~ caleb_beyond_base
-Caleb_Annoyed: I ain't got shit to say to you, get lost.
+Caleb_Annoyed: I have run outta dialogue, begone.
 => END

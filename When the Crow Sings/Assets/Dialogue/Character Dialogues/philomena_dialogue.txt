@@ -1,55 +1,62 @@
+~ phil_directory
+if PhilomenaTaskCompleted == false:
+	=> phil_directory_2
+else:
+	=> philomena_task_fin
+
+~ phil_directory_2
+if PhilTalk == 0:
+	=> philomena_first_int
+else:
+	=> phil_cat
+
 ~ philomena_first_int
 Philomena: Yes. Hello. Who are you? You're new. I haven't seen you. No, not you.
-Chance: Um, I'm Chance. Farida told me that you'd be here, that maybe you'd want to talk.
-Philomena: Farida! Lovely girl, Farida. So sweet. Tried so hard. Learned very quickly. Smart girl.
-Chance: Right. She said you would know about the old energy source.
+Chance: Um, I'm Chance. <color=#813408>Farida</color> told me that you'd be here, that maybe you'd want to talk.
+Philomena: <color=#813408>Farida</color>! Lovely girl, <color=#813408>Farida</color>. So sweet. Tried so hard. Learned very quickly. Smart girl.
+Chance: Right. She said you would know about <color=#a11bbe>the old energy source</color>.
 Philomena: Hmm.. mm...
-Chance: The old power grid? 
-//conditional dialogue
+Chance: <color=#a11bbe>The old power grid</color>? 
 Philomena: I know. I know. I know. No. Not the power grid. Something's wrong with the power.
 Chance: Wrong?
-Philomena: Wrong. Yes, he says there's something wrong with it. It's dangerous. Dangerous.
+Philomena: Wrong. Yes, he says there's something wrong with it. It's dangerous. <color=#a11bbe>Dangerous</color>.
 Philomena: Ohhh, but I don't know what to do. He's gone and I don't know what to do. 
 Chance: He's gone? Who?
-Philomena: The doctor! It was his. His discovery. His. And he left us here. Oh he left us here. 
-Philomena: And I have to stop it. I have to. I have to. They come, and they drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip 
-She seems to have become catatonic. Her lips stop moving, and she starts to hum.
+Philomena: The doctor! It was his. <color=#a11bbe>His discovery</color>. His. And he left us here. Left us here.
+if YuleBaseCompleted:
+	That guy <color=#813408>Yule</color> mentioned..
+Philomena: And I have to stop it. Have to. I have to. They come, and they drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip 
+She seems to have become catatonic. Her lips stop moving, and she starts to hum shakily.
+set PhilTalk += 1;
 => END
 
-~ philomena_first_int_cont
-She doesn't seem to be responsive. Her finger tips are tapping together, a rhythm that seems in time with her humming.
-=> END
-
-~ philomena_first_int_cont_2
-Chance: Uh, hello?
-She doesn't react at all. The hand that isn't tapping the rhythm is clenching on repeat, her knuckles clicking in a smooth cycle.
-=>END
-
-~ philomena_first_int_cont_3
-Her feet shuffle a little bit against the floor as she readjusts. 
-She stares off into nothing. She's still humming.
-=> END
-
-~ philomena_first_int_cont_4
-All of the sounds her movements make synchronize, almost like a sad song. Her lip trembles while she hums.
-=> END
-
-~ philomena_first_int_cont_5
-Nothing is going to change. Best to leave her alone until I can figure out how to help.
+~ phil_cat
+if PhilTalk == 1:
+	She doesn't seem to be responsive. Her finger tips are tapping together, a rhythm that seems in time with her humming.
+if PhilTalk == 2:
+	Chance: Uh, hello?
+	She doesn't react at all. The hand that isn't tapping the rhythm is clenching on repeat, her knuckles clicking in a smooth cycle.
+if PhilTalk == 3:
+	Her feet shuffle a little bit against the floor as she readjusts. 
+	She stares off into nothing. She's still humming.
+if PhilTalk == 4:
+	All of the sounds her movements make synchronize, almost like a sad song. Her lip trembles while she hums.
+else:
+	Nothing is going to change. Best to leave her alone until I can figure out how to help.
+set PhilTalk += 1;
 => END
 
 ~ philomena_task_fin
 set KeyInformation3 = true;
-She seems calmer now.
-Philomena: I like that song. I haven't heard it in a while. Not for a long while. Not since...
+Philomena: I like that song. I haven't heard it in a while. Not for a long while.
 Philomena: . . .
 Chance: Are you okay?
 Philomena: Yes. I.. I think you should have this.
 Chance: Thank you.
 Philomena: Mm..
 It's a birthday card.
-"Doctor, a year older. Thank you so much for all of the opportunities you've given me. I hope for another year making history with you! Happy Birthday, Philomena"
-There is a date scribbled up in the top right corner. 03/15.
+"Doctor, a year older. Thank you so much for all of the opportunities you've given me. I hope for another year making history with you! Happy Birthday, <color=#813408>Philomena</color>"
+There is a date scribbled up in the top right corner. <color=#a11bbe>03/15</color>.
 set timeOfDay += 1;
 call ReloadScene();
 => END
