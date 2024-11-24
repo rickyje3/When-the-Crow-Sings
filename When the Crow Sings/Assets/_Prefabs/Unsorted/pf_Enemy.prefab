@@ -62,6 +62,8 @@ MonoBehaviour:
   timeToWaitBetweenWander: 5
   timeToBeStunned: 2
   lookAtHeight: 2.5
+  canSeePlayer: 0
+  enemySightCone: {fileID: 351232815682289524}
 --- !u!195 &6927032940599626117
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -863,6 +865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 2878057926788062340}
+  playerInSightCone: 0
 --- !u!4 &5436449751066937999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: db9f26f38ad263b49a6f15ec51b43d15,

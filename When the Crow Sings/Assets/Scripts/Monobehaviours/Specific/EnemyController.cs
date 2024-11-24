@@ -24,7 +24,15 @@ public class EnemyController : StateMachineComponent
 
     [HideInInspector]
     public bool canSeePlayer = false;
-    public bool doesSeePlayer = false;
+
+    public EnemySightCone enemySightCone;
+    public bool doesSeePlayer
+    {
+        get
+        {
+            return canSeePlayer && enemySightCone.playerInSightCone;
+        }
+    }
 
     private void Awake()
     {
@@ -51,23 +59,22 @@ public class EnemyController : StateMachineComponent
         
     }
 
-    public void SightConeTriggerEntered(Collider other)
-    {
-        //stateMachine.OnTriggerEnter(other);
-    }
+    //public void SightConeTriggerEntered(Collider other)
+    //{
+    //    //stateMachine.OnTriggerEnter(other);
+    //}
     public void SightConeTriggerExited(Collider other)
     {
-        //stateMachine.OnTriggerExit(other);
         LineRenderer lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
     }
 
 
     
-    public void TriggerStay(Collider other)
-    {
+    //public void SightConeTriggerStay(Collider other)
+    //{
         
-    }
+    //}
 
     private void FixedUpdate()
     {
@@ -89,13 +96,11 @@ public class EnemyController : StateMachineComponent
                 {
                     //stateMachine.OnTriggerEnter(hit.transform.GetComponent<Collider>());
                     canSeePlayer = true;
-                    doesSeePlayer = true;
                     Debug.Log("SEEEE YOU");
                 }
                 else
                 {
-                    canSeePlayer= false;
-                    doesSeePlayer = false;
+                    canSeePlayer = false;
                 }
             }
         }
