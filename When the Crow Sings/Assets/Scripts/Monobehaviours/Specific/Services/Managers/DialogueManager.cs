@@ -85,6 +85,7 @@ public class DialogueManager : MonoBehaviour, IService
         DialogueParser parser = new DialogueParser(dialogueResource);
         DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
 
+        canSkip = false;
         ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex, tempHolderForTheTargetIndex.tabCount);
 
     }
@@ -276,7 +277,6 @@ public class DialogueManager : MonoBehaviour, IService
 
         isSkipping = false; // 100% necessary right here.
 
-        
         while (textMesh.maxVisibleCharacters <= textMesh.text.Length)
         {
             if (isSkipping)
@@ -305,7 +305,7 @@ public class DialogueManager : MonoBehaviour, IService
                 textMesh.maxVisibleCharacters += 1;
             }
 
-            
+            canSkip = true;
         }
 
         isSkipping = false; // This may be redundant, may not be.
@@ -315,6 +315,7 @@ public class DialogueManager : MonoBehaviour, IService
     private int currentLine;
     private bool canNextLine = false;
     private bool isSkipping = false;
+    private bool canSkip = false;
 
     private bool isInDialogue
     {
@@ -344,7 +345,7 @@ public class DialogueManager : MonoBehaviour, IService
         }
         else
         {
-            isSkipping = true;
+            if (canSkip) isSkipping = true;
         }
     }
 
