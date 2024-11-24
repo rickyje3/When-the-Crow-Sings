@@ -8,6 +8,7 @@ using System;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 public class DialogueManager : MonoBehaviour, IService
 {
@@ -51,6 +52,11 @@ public class DialogueManager : MonoBehaviour, IService
     public void RegisterSelfAsService()
     {
         ServiceLocator.Register<DialogueManager>(this);
+    }
+
+    void Start()
+    {
+        if (EditorPrefs.HasKey("textSpeed")) textSpeed = EditorPrefs.GetFloat("textSpeed");
     }
     #endregion
 
@@ -267,6 +273,7 @@ public class DialogueManager : MonoBehaviour, IService
 
         isSkipping = false; // 100% necessary right here.
 
+        
         while (textMesh.maxVisibleCharacters <= textMesh.text.Length)
         {
             if (isSkipping)
@@ -277,15 +284,21 @@ public class DialogueManager : MonoBehaviour, IService
             else
             {
                 float pauseBetweenChars = textSpeed;
-                char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1, 0, textMesh.text.Length)];
+                int characterIndex = Mathf.Clamp(textMesh.maxVisibleCharacters - 1, 0, textMesh.text.Length);
+                char character = textMesh.text[characterIndex];
+                //char previousCharacter = 'x';
+                //char nextCharacter = 'x';
+                //if (characterIndex -1 >= 0) previousCharacter = textMesh.text[characterIndex-1];
+                //if (characterIndex+1 <= textMesh.maxVisibleCharacters-1) nextCharacter = textMesh.text[characterIndex + 1];
                 foreach (char i in ".!?")
                 {
-                    if (character == i)
+                    if (character == i)// && previousCharacter != i && nextCharacter != i)
                     {
                         pauseBetweenChars *= pauseMultiplier;
+                        break;
                     }
                 }
-                yield return new WaitForSeconds(pauseBetweenChars);
+                yield return new WaitForSeconds(pauseBetweenChars); // TODO: Make it so isSkipping interrupts this.
                 textMesh.maxVisibleCharacters += 1;
             }
 
