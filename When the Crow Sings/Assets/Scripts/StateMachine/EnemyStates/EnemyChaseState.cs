@@ -19,6 +19,6 @@ public class EnemyChaseState : EnemyState
     }
     public override void StateEntered()
     {
-        s.enemyMaterial.color = Color.red;
+
     }
 }
