@@ -41,6 +41,7 @@ public class EnemyPatrolState : EnemyState
 
     public override void StateEntered()
     {
+        s.navMeshAgent.speed = s.patrolSpeed;
         s.enemyAnimator.SetBool("animIsPatrolWalking", true);
         setNextPoint();
     }

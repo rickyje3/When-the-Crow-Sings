@@ -7,6 +7,9 @@ using UnityEngine.AI;
 public class EnemyController : StateMachineComponent
 {
     public List<EnemyWaypointsHolder> enemyWaypointsHolders;
+    public float patrolSpeed = 4.5f;
+    public float pursuitSpeed = 6.0f;
+
     [HideInInspector]
     public EnemyWaypoint currentWaypoint;
 
