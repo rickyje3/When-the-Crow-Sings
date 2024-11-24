@@ -55,7 +55,7 @@ public class EnemyPatrolState : EnemyState
         
         if (s.currentWaypoint != null)
         {
-            s.currentWaypoint = s.enemyWaypointsHolders[0].GetNextWaypoint(s.currentWaypoint);
+            s.currentWaypoint = s.currentWaypointHolder.GetNextWaypoint(s.currentWaypoint);
             s.navMeshAgent.destination = s.currentWaypoint.transform.position;
         }
         else

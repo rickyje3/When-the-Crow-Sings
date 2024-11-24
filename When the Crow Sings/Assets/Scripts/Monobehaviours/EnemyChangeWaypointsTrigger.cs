@@ -13,8 +13,8 @@ public class EnemyChangeWaypointsTrigger : MonoBehaviour
     public void EmitChangeWaypointSignal()
     {
         SignalArguments args  = new SignalArguments();
-        args.objectArgs.Add(newWaypointHolder);
         args.objectArgs.Add(enemyToAffect);
+        args.objectArgs.Add(newWaypointHolder);
         enemyChangeWaypointSignal.Emit(args);
     }
 }
