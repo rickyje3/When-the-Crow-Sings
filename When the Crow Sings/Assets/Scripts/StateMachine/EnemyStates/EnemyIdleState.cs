@@ -8,6 +8,14 @@ public class EnemyIdleState : EnemyState
     {
     }
 
+    public override void FixedUpdate()
+    {
+        if (s.doesSeePlayer)
+        {
+            s.stateMachine.Enter("EnemyChaseState");
+        }
+    }
+
     private IEnumerator exitStateAfterTime()
     {
         s.navMeshAgent.destination = s.transform.position;
