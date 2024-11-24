@@ -1,22 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyController : StateMachineComponent
 {
     public List<EnemyWaypointsHolder> enemyWaypointsHolders;
+    public float patrolSpeed = 4.5f;
+    public float pursuitSpeed = 10.0f;
+
     [HideInInspector]
     public EnemyWaypoint currentWaypoint;
+
+    public Animator enemyAnimator;
 
     [HideInInspector]
     public NavMeshAgent navMeshAgent;
 
-    public Material enemyMaterial;
-
-    public float timeToWander = 4.0f;
+    public float timeToWanderIfNoWaypoint = 4.0f;
     public float timeToWaitBetweenWander = 2.0f;
+    public float timeToBeStunned = 2.0f;
     public float lookAtHeight = 2.5f;
+
+    bool lastTime = false;
+    RaycastHit hit;
+
+    [HideInInspector]
+    public bool canSeePlayer = false;
+
+    public EnemySightCone enemySightCone;
+    public Transform raycastStart;
+    public List<LineRenderer>  lineRenderers;
+
+    [HideInInspector] public EnemyWaypointsHolder currentWaypointHolder;
+    public bool doesSeePlayer
+    {
+        get
+        {
+            return canSeePlayer && enemySightCone.playerInSightCone;
+        }
+    }
 
     private void Awake()
     {
@@ -27,64 +51,100 @@ public class EnemyController : StateMachineComponent
         stateMachine.RegisterState(new EnemyPatrolState(this), "EnemyPatrolState");
         stateMachine.RegisterState(new EnemyChaseState(this), "EnemyChaseState");
         stateMachine.RegisterState(new EnemyStunnedState(this), "EnemyStunnedState");
-        stateMachine.Enter("EnemyPatrolState");
+        stateMachine.RegisterState(new EnemyIdleState(this), "EnemyIdleState");
+        stateMachine.Enter("EnemyIdleState");
     }
     private void Start()
     {
-        //if ( enemyWaypointsHolders.Count == 0)
-        //{
-        //    enemyWaypointsHolders[0] = FindObjectOfType<EnemyWaypointsHolder>();
-        //}
         if (enemyWaypointsHolders == null)
         {
             throw new System.Exception("No enemy waypoint holder assigned!");
         }
         else
         {
-            currentWaypoint = enemyWaypointsHolders[0].waypoints[0];
+            currentWaypointHolder = enemyWaypointsHolders[0];
+            currentWaypoint = currentWaypointHolder.waypoints[0];
         }
         
     }
 
-    public void TriggerEntered(Collider other)
+    //public void SightConeTriggerEntered(Collider other)
+    //{
+    //    //stateMachine.OnTriggerEnter(other);
+    //}
+    public void SightConeTriggerExited(Collider other)
     {
-        //stateMachine.OnTriggerEnter(other);
-    }
-    public void TriggerExited(Collider other)
-    {
-        //stateMachine.OnTriggerExit(other);
         LineRenderer lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
     }
 
 
-    bool lastTime = false;
-    public void TriggerStay(Collider other)
+    
+    //public void SightConeTriggerStay(Collider other)
+    //{
+        
+    //}
+
+    private void FixedUpdate()
     {
-        RaycastHit hit;
+        if ( ServiceLocator.Get<PlayerController>() != null )
+        {
+            Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
+            targetPosition.y += lookAtHeight;
 
-        Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
-        targetPosition.y += lookAtHeight;
+            List<Vector3> endPoints = new List<Vector3>();
+            endPoints.Add(targetPosition);
+            endPoints.Add(new Vector3(targetPosition.x, targetPosition.y -= 3.0f,targetPosition.z));
+            if (lastTime)
+            {
+                targetPosition.y -= 3.0f;
+            }
+            lastTime = !lastTime;
 
+            //RenderRayCastLine(targetPosition);
+            //Vector3 endPoint = targetPosition;
+            
+
+
+            if (Physics.Raycast(raycastStart.position, targetPosition - transform.position, out hit))
+            {
+                if (hit.transform.CompareTag("Player"))
+                {
+                    canSeePlayer = true;
+                }
+                else
+                {
+                    canSeePlayer = false;
+                    //endPoint = hit.transform.position;
+                }
+                
+            }
+            RenderRayCastLine(endPoints);
+        }
+        stateMachine.FixedUpdate();
+    }
+
+    private void RenderRayCastLine(List<Vector3> targetPositions)
+    {
         //LineRenderer lineRenderer = GetComponent<LineRenderer>();
         //lineRenderer.enabled = true;
-        //lineRenderer.SetPosition(0, transform.position);
-        //lineRenderer.SetPosition(1, targetPosition);
-
-        if ( lastTime)
+        foreach (Vector3 pos in targetPositions )
         {
-            targetPosition.y -= 3.0f;
+            LineRenderer lineRenderer = lineRenderers[targetPositions.IndexOf(pos)];
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, pos);
         }
-        lastTime = !lastTime;
-
-
         
+    }
 
-        if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit))
+    public void OnChangeWaypointsTriggered(SignalArguments args)
+    {
+        if (args.objectArgs[0] == this)
         {
-            if(hit.transform.tag == "Player")
+            if (enemyWaypointsHolders.Contains((EnemyWaypointsHolder)args.objectArgs[1]))
             {
-                stateMachine.OnTriggerEnter(other);
+                currentWaypointHolder = (EnemyWaypointsHolder)args.objectArgs[1];
             }
         }
     }
@@ -103,7 +163,7 @@ public class EnemyController : StateMachineComponent
     //    lineRenderer.SetPosition(1, targetPosition);
 
 
-        
+
     //    if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit))
     //    {
     //        if (hit.transform.tag == "Player")

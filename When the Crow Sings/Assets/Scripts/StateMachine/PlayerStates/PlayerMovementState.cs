@@ -62,7 +62,7 @@ public class PlayerMovementState : StateMachineState
         float inputMagnitude = Mathf.Clamp(s.movementInput.magnitude,s.minWalkClamp,1.0f);
         //SetWalkAnimSpeed(inputMagnitude);
 
-        if (!s.isSprinting)
+        if (!s.isSprinting && !s.isCrouching)
         {
             //Smoothly blend speed off of joystick input (8 is the max walking speed)
             s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.maxWalkSpeed, Time.deltaTime * s.acceleration);

@@ -129,7 +129,7 @@ public class GameStateManager : MonoBehaviour, IService
         
         yield return StartCoroutine(FadeLoadingScreen(false));
         fullyFinishedLoadSignal.Emit();
-        Debug.Log("It is done.");
+        //Debug.Log("It is done.");
     }
 
     IEnumerator FadeLoadingScreen(bool fadeIn)
