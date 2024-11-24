@@ -121,7 +121,7 @@ public static class SaveData
         {"numberOfTasksCompleted",0 },
         {"TBD_OnLoadSpawnPoint_OrSomething",0 },
 
-        {"penguin_cult",0 },
+        {"penguin_cult",623 },
         {"benchcounter",0 },
     };
 
@@ -194,7 +194,7 @@ public static class SaveData
     }
     public static void ReadData()
     {
-        PenguinCultAttemptsToScheduleAMeeting();
+        //PenguinCultAttemptsToScheduleAMeeting();
 
         switch (saveDataVersion) // TODO: Make it so it starts reading, stops after the version number, then calls the correct method using this switch statement.
         {
