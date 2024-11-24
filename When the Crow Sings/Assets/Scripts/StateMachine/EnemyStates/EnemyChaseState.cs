@@ -10,7 +10,8 @@ public class EnemyChaseState : EnemyState
 
     public override void FixedUpdate()
     {
-        s.navMeshAgent.destination = ServiceLocator.Get<PlayerController>().transform.position;
+        if (ServiceLocator.Get<PlayerController>() != null)
+            s.navMeshAgent.destination = ServiceLocator.Get<PlayerController>().transform.position;
     }
 
     public override void OnTriggerExit(Collider other)
@@ -19,6 +20,6 @@ public class EnemyChaseState : EnemyState
     }
     public override void StateEntered()
     {
-
+        Debug.Log("Pursue!");
     }
 }

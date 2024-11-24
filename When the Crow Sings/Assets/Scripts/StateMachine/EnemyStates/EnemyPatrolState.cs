@@ -22,8 +22,12 @@ public class EnemyPatrolState : EnemyState
         //s.stateMachine.Enter("EnemyChaseState");
         if (other.GetComponent<EnemyWaypoint>() == s.currentWaypoint)
         {
-            Debug.Log("Reached the next waypoint!");
+            //Debug.Log("Reached the next waypoint!");
             s.stateMachine.Enter("EnemyIdleState");
+        }
+        else if (other.GetComponent<PlayerController>())
+        {
+            s.stateMachine.Enter("EnemyChaseState");
         }
     }
 
@@ -40,7 +44,7 @@ public class EnemyPatrolState : EnemyState
 
     private void setNextPoint()
     {
-        Debug.Log("Setting next point!");
+        //Debug.Log("Setting next point!");
         
         if (s.currentWaypoint != null)
         {

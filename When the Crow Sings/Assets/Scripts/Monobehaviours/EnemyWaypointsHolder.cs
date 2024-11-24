@@ -12,7 +12,7 @@ public class EnemyWaypointsHolder : MonoBehaviour
     private void Awake()
     {
         waypoints = GetComponentsInChildren<EnemyWaypoint>().ToList();
-        Debug.Log("Waypoints are " + waypoints);
+        //Debug.Log("Waypoints are " + waypoints);
     }
     private void Start()
     {

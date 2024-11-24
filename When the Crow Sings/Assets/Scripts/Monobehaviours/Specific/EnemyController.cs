@@ -14,12 +14,13 @@ public class EnemyController : StateMachineComponent
     [HideInInspector]
     public NavMeshAgent navMeshAgent;
 
-    //public Material enemyMaterial;
-
     public float timeToWanderIfNoWaypoint = 4.0f;
     public float timeToWaitBetweenWander = 2.0f;
     public float timeToBeStunned = 2.0f;
     public float lookAtHeight = 2.5f;
+
+    bool lastTime = false;
+    RaycastHit hit;
 
     private void Awake()
     {
@@ -58,31 +59,36 @@ public class EnemyController : StateMachineComponent
     }
 
 
-    bool lastTime = false;
+    
     public void TriggerStay(Collider other)
     {
-        RaycastHit hit;
+        
+    }
 
-        Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
-        targetPosition.y += lookAtHeight;
-        RenderRayCastLine(targetPosition);
-
-        if (lastTime)
+    private void FixedUpdate()
+    {
+        if ( ServiceLocator.Get<PlayerController>() != null )
         {
-            targetPosition.y -= 3.0f;
-        }
-        lastTime = !lastTime;
+            Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
+            targetPosition.y += lookAtHeight;
+            RenderRayCastLine(targetPosition);
 
-
-
-
-        if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit))
-        {
-            if (hit.transform.tag == "Player")
+            if (lastTime)
             {
-                stateMachine.OnTriggerEnter(other);
+                targetPosition.y -= 3.0f;
+            }
+            lastTime = !lastTime;
+
+            if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit))
+            {
+                if (hit.transform.CompareTag("Player"))
+                {
+                    //stateMachine.OnTriggerEnter(other);
+                    stateMachine.OnTriggerEnter(hit.transform.GetComponent<Collider>());
+                }
             }
         }
+        
     }
 
     private void RenderRayCastLine(Vector3 targetPosition)
@@ -93,27 +99,27 @@ public class EnemyController : StateMachineComponent
         lineRenderer.SetPosition(1, targetPosition);
     }
 
-    private void FixedUpdate()
-    {
-        RaycastHit hit;
+    //private void FixedUpdate()
+    //{
+    //    RaycastHit hit;
 
-        Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
-        targetPosition.y += lookAtHeight;
-
-
-        LineRenderer lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.enabled = true;
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, targetPosition);
+    //    Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
+    //    targetPosition.y += lookAtHeight;
 
 
+    //    LineRenderer lineRenderer = GetComponent<LineRenderer>();
+    //    lineRenderer.enabled = true;
+    //    lineRenderer.SetPosition(0, transform.position);
+    //    lineRenderer.SetPosition(1, targetPosition);
 
-        if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit))
-        {
-            if (hit.transform.tag == "Player")
-            {
-                Debug.Log("I SEE YOU");
-            }
-        }
-    }
+
+
+    //    if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit))
+    //    {
+    //        if (hit.transform.tag == "Player")
+    //        {
+    //            Debug.Log("I SEE YOU");
+    //        }
+    //    }
+    //}
 }
