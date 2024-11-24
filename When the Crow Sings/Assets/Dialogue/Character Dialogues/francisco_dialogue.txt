@@ -23,19 +23,19 @@ set FranciscoTaskOffered = true;
 Francisco: Ah hello! You must be our new resident Chance, yes? I don't think I've sent out the request for your entry checkup yet, did you need something?
 if CalebBaseCompleted == true:
 	- Caleb sent me.
-		Chance: <color=#813408>Caleb</color> said you might know something about the old energy source here, whatever was used before the solar panels.
+		Chance: <color=#813408>Caleb</color> said you might know something about <color=#a11bbe>the old energy source</color> here, whatever was used before the solar panels.
 		Francisco: Oh? <color=#813408>Tio</color>-
-		Francisco: I-I mean <color=#813408>Caleb</color>! He sent you to me? Why not <color=#813408>Farida</color>?
+		Francisco_Excited: I mean <color=#813408>Caleb</color>! He sent you to me? Why not <color=#813408>Farida</color>?
 		=> francisco_caleb
 if FaridaBaseCompleted == true:
 	- Farida said..
-		Chance: <color=#813408>Farida</color> said you might know something about the energy grid that she wouldn't, since she was sent here after the solar panels got installed. Something about an alternative energy source?
+		Chance: <color=#813408>Farida</color> said you might know something about the energy grid that she wouldn't, since she was sent here after the solar panels got installed. Something about an <color=#a11bbe>alternative energy source</color>?
 		=> francisco_first_int_cont
 
 ~ francisco_caleb
 - Don't get along.
 	Chance: It didn't really seem like they got along well.
-	Francisco: Well they're just two very different types of people! <color=#813408>Farida</color> takes her job very seriously, but <color=#813408>tio</color> is more relaxed.
+	Francisco_Excited: Well they're just two very different types of people! <color=#813408>Farida</color> takes her job very seriously, but <color=#813408>tio</color> is more relaxed.
 	Francisco: I mean <color=#813408>Caleb</color>! Ay dios mio.. 
 	=> francisco_first_int_cont
 if FaridaBaseCompleted == true:
@@ -44,26 +44,26 @@ if FaridaBaseCompleted == true:
 	=> francisco_first_int_cont
 
 ~ francisco_first_int_cont
-Francisco: <color=#a11bbe>The old energy source</color>, huh? That spooky old purple stuff.. Yes I lived here before the <color=#813408>old scientist</color>...
-Francisco: Disappeared? It sounds bad but I don't know if anyone really figured out where he went. He was just gone one day.
-Francisco: After that-
-Francisco: Ay!
-Francisco: Ah I'm sorry, I shouldn't be chatting while I have work to do.
-Chance: . . . 
-Francisco: One of the little EVOs is feeling unwell again. No signs of ERS, but they've been so restless lately!
-Francisco: No me diga, I'm out?!
+Francisco_Thinking: <color=#a11bbe>The old energy source</color>, huh? That spooky purple stuff.. Yeah, I lived here before the <color=#813408>old scientist</color>...
+Francisco_Scared: Disappeared? It sounds bad but I don't know if anyone really figured out where he went. He was just gone one day.
+Francisco_Sad: After that-
+Francisco_Scared: Ay!
+Francisco_Excited: Ah I'm sorry, I shouldn't be chatting while I have work to do.
+Chance_Sad: . . . 
+Francisco_Thinking: One of the little EVOs is feeling unwell again. No signs of ERS, but they've been so restless lately!
+Francisco_Scared: No me diga, I'm out?!
 Chance: . . . 
 => francisco_first_int_cont_2
 
 ~ francisco_first_int_cont_2
 Chance: Um, do you need help?
-Francisco: Ah! Yes! You want something, I need something. I need to get a medley put together for the little one, but I'm missing an ingredient. You get me the ingredient, I tell you what you need to know. Sound like a deal?
+Francisco_Excited: Ah! Yes! You want something, I need something. I need to get a medley put together for the little one, but I'm missing an ingredient. You get me the ingredient, I tell you what you need to know. Sound like a deal?
 -I guess so.
 	set FranciscoTaskAccepted = true;
 	set FranciscoTaskOn = true;
 	Chance: I guess so. What do you need?
 	Francisco: There is this little pink flower you may have seen around, pipsissewa they call it. The leaves help with some of the discomfort. 
-	Francisco: They're a little spiky though, so be careful while picking them. Three plants worth will do. If I remember right there's still a good amount by the north west fence, where the kids play.
+	Francisco_Excited: They're a little spiky though, so be careful while picking them. Three plants worth will do. If I remember right, there's still a good amount by the north west fence where the kids play.
 	Chance: Alright, I'll be back.
 	=> END
 -Maybe later.
@@ -77,7 +77,7 @@ Francisco: I'm sorry but I really can't chat until I get this done. Did you stil
 	set FranciscoTaskOn = true;
 	Chance: Turns out I do. What did you need?
 	Francisco: There is this little pink flower you may have seen around, pipsissewa they call it. The leaves help with some of the discomfort. 
-	Francisco: They're a little spiky though, so be careful while picking them. Three plants worth will do, you can find them up by the locked up gate to the north west.
+	Francisco_Excited: They're a little spiky though, so be careful while picking them. Three plants worth will do, you can find them up by the locked up gate to the north west.
 	Chance: Alright, I'll be back.
 	=> END
 - Maybe later.
@@ -87,63 +87,64 @@ Francisco: I'm sorry but I really can't chat until I get this done. Did you stil
 Francisco: Oh you're back! You've got what I asked for?
 - What to get?
 	Chance_Sad: No, I forgot what you said to get.
-	Francisco_Yap: Ah! No worries friend. Just collect me the leaves from three flowers near the north west outer fence.
+	Francisco_Excited: Ah! No worries, friend. Just collect me the leaves from three flowers near the north west outer fence.
 	=> END
 - No, not yet.
 	Chance: No, not yet.
-	Francisco_Think: Right. Well... it is kind of time sensitive. Could you be on your way?
+	Francisco_Thinking: Right. Well... it is kind of time sensitive. Could you be on your way?
 	=> END
 
 ~francisco_task_fin
 set FranciscoBaseCompleted = true;
 Francisco: Ah, perfect timing. You've got what I asked for?
 Chance: Yeah, here you go.
-Francisco: You know, this herb is something that has been used in this area for centuries. A long time ago, it even almost went extinct.
+Francisco_Excited: You know, this herb is something that has been used in this area for centuries. A long time ago, it even almost went extinct.
 - Really?
-	Francisco: Yes! The people here slowly stopped practicing herbalism as it had been labelled "uncivilized" by the people in power. Though you know, it just made room for big companies to sell similar medications to the people instead.
-	Francisco: It was only after the collapse that people returned to their more hollistic traditions. We are lucky it survived all the way till now! Especially with the environment the way it is...
+	Francisco_Excited: Yes! The people here slowly stopped practicing herbalism as it had been labelled "uncivilized" by the people in power. Though you know, it just made room for big companies to sell similar medications to the people instead.
+	Francisco_Thinking: It was only after the collapse that people returned to their more hollistic traditions. We are lucky it survived all the way till now! Especially with the environment the way it is...
 	Francisco: Ah! All done! How time flies when you're having fun.
 	=> francisco_task_fin_cont
 - Uh huh.
-	Francisco: . . . . . . Well, that's done.
+	Francisco_Sad: . . . . . . Well, that's done.
 	=> francisco_task_fin_cont
 
 ~ francisco_task_fin_cont
 Francisco: I guess it's time to fulfill my part of the deal, no?
-Francisco: <color=#a11bbe>The old power source</color>... The man who took care of it was very cold, and we didn't see him often here. He lived beyond the main compound to the north east at the old quarry. He only walked through to get to the power control station, and he only spoke to his <color=#813408>assistant</color>.
-Francisco: His work was very... secretive. I never really understood his <color=#a11bbe>"discovery"</color>, but I know it gave me the chills. That hypnotic pink haze that blurred the horizon to the west, especially at night..
-Francisco: But he's been gone for a long while now. And his <color=#a11bbe>assistant</color> holed herself up in the abandoned quarter not long after. Once he was gone, the power stopped working and the coalition sent us the solar panels along with Farida and Caleb to care for them.
+Francisco_Thinking: <color=#a11bbe>The old power source</color>... The man who took care of it was very cold, and we didn't see him often here. He lived beyond the main compound to the north east at the old quarry. He only walked through to get to the power control station, and he only spoke to his <color=#813408>assistant</color>.
+Francisco_Scared: His work was very... secretive. I never really understood his <color=#a11bbe>"discovery"</color>, but I know it gave me the chills. That hypnotic pink haze that blurred the horizon to the west, especially at night..
+Francisco_Excited: But he's been gone for a long while now. And his <color=#a11bbe>assistant</color> holed herself up in the abandoned quarter not long after. Once he was gone, the power stopped working and the coalition sent us the solar panels along with <color=#813408>Farida</color> and <color=#813408>Caleb</color> to care for them.
 Francisco: People stopped going missing so much too.
 - Going missing?
 	Chance_Scared: People went missing?
-	Francisco: Yes, before he left mostly. The compound was never big but, it was a good deal more than we have now. Mostly EVOs..
-	Francisco: My job was to check for ERS, you know? And sometimes they would have that nasty pink color to them before they-
-	Francisco: . . .
-	Francisco: Ah- anyway..
+	Francisco_Sad: Yes, before he left mostly. The compound was never big but, it was a good deal more than we have now. Mostly EVOs..
+	Francisco_Sad: My job is to check for ERS, you know? And sometimes they would have that <color=#a11bbe>nasty pink color</color> to them before they-
+	Francisco_Scared: . . .
+	Francisco_Scared: Ah- anyway..
 	=> francisco_task_fin_cont_2
 - . . .
 	=> francisco_task_fin_cont_2
 
 ~ francisco_task_fin_cont_2
-Francisco: If you wanted to know something about it, I know the old control substation is standing out there in Zone 1.
-Francisco: Though you shouldn't tell Farida, she doesn't like anyone going out past the gates unless they have to.
-- She said...
-	Chance: She said something about there being old gauges not working in the energy building. Were they connected to that substation?
-	Francisco: I suppose they could be. We never really talked about it.
-	Chance: I wonder why they were smashed..
-	Francisco: I-I'm sure time just got the best of them.
-	=> francisco_task_fin_cont_3
+Francisco: If you wanted to know something about it, I know <color=#a11bbe>the old control substation</color> is still standing out there in Zone 1.
+Francisco_Thinking: Though you shouldn't tell <color=#813408>Farida</color>, she doesn't like anyone going out past the gates unless they have to.
+if FaridaBaseCompleted == true:
+	- She said...
+		Chance: She said something about there being old gauges not working in the energy building. Were they connected to that substation?
+		Francisco_Thinking: I suppose they could be. We never really talked about it.
+		Chance_Sad: I wonder why they were smashed..
+		Francisco_Scared: I'm sure time just got the best of them.
+		=> francisco_task_fin_cont_3
 - How do I get in?
 	=> francisco_task_fin_cont_3
 
 ~ francisco_task_fin_cont_3
-Chance: How would I get in? Isn't it locked?
-Francisco: Yes, but the lock is manual, so the buttons should still work. The code is 4663, if I remember correctly.
-Chance: Oh, okay. Thanks Francisco.
+Chance_Sad: How would I get in? Isn't it locked?
+Francisco_Excited: Yes, but the lock is manual, so the buttons should still work. The code is 4663, if I remember correctly.
+Chance_Smile: Oh, okay. Thanks Francisco.
 Francisco: Of course. Um, let me know if you find anything out. It was nice to talk to you.
 set timeOfDay += 1;
 => END
 
 ~ francisco_beyond_base
-Francisco_Thinking: Begone, thot.
+Francisco_Excited: Begone, thot.
 => END

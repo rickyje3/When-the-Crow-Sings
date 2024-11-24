@@ -18,28 +18,32 @@ Theodore: What?!
 Chance: Hole. There was a hole in the wall. 
 Theodore: U G H
 Theodore: What do you want? Can't you respect a man's privacy? Who even are you?
-Chance: I'm Chance, the new resident. And you must be Teddy.
+Chance: I'm Chance, the new resident. You must be Teddy.
 Theodore: TEDDY?!!?!?!
 Theodore: @#%@#%$%^^@##@!
-Theodore: Do NOT call me that. I don't know why Jazmyne sent you here but I don't need you looking over me.
-Theodore: And my name is not Teddy. It's THEODORE.
+Theodore: Do NOT call me that. I don't know why <color=#813408>Jazmyne</color> sent you here but I don't need you looking over me.
+Theodore: And my name is not Teddy. It's <color=#813408>THEODORE</color>.
 Chance: Uh, right. She didn't send me here to spy on you.
-Theodore: Oh, really. Then why are you here, exactly? Just here to snoop around? Think 'cause you're new you get to shove your nose wherever you want?
+Theodore: Oh, really. Then why're you here, exactly? Just here to snoop around? Think 'cause you're new you get to shove your nose wherever you want?
 Chance: Isn't that what you're doing?
 Theodore: ?! 
-Chance: Look I just wanted to know if you knew anything about whatever is going on around here. The old energy grid, the person who roams around at night, anything. 
-Theodore: Why should I?
+if CalebBaseCompleted == true:
+	Chance: Look I just wanted to know if you knew anything about whatever is going on around here. The old energy grid, what roams around at night, the glowing, anything.
+else:
+	Chance: Look I just wanted to know if you knew anything about whatever is going on around here. What roams around at night, the glowing, anything.
+Theodore: So what if I did, why should I tell you?
 Chance: Because I asked. Nicely. And I went through all the effort to break in through that hole.
 Theodore: . . . Fine. But you help me first.
 Chance: Are you serious? What is with you people here and making me do stuff?
 Theodore: Do you want my help or not? 'Cause if not, the least you could do is get out of here and leave me alone.
 - Fine.
 	Chance: Fine, whatever. What do you want me to do?
-	Theodore: Help me find something good in all of this junk. I've been sifting through it but feathers-
-	Theodore: Just do it. And if I figure out that you found something sweet and didn't hand it over, I'll kick your ass.
+	Theodore: Help me find something good in all of this junk. I've been sifting through it but. . .  feathers- 
+	Theodore: Just do it! 
+	Theodore: If I figure out that you found something sweet and didn't hand it over, I'll kick your ass.
 	Chance: As if.
 	Chance: Alright, whatever.
-	Theodore: And go through all of 'em, don't slack.
+	Theodore: And go through all of 'em, don't slack!
 	Chance: I said alright, man.
 	=> END
 -As if.
@@ -51,11 +55,12 @@ Theodore: You again?
 Theodore: I made my terms clear, either you help me find something in here or my beak is SEALED.
 -Fine.
 	Chance: Fine dude, whatever.
-	Theodore: Help me find something good in all of this junk. I've been sifting through it but feathers-
-	Theodore: Just do it. And if I figure out that you found something sweet and didn't hand it over, I'll kick your ass.
+	Theodore: Help me find something good in all of this junk. I've been sifting through it but. . .  feathers- 
+	Theodore: Just do it! 
+	Theodore: If I figure out that you found something sweet and didn't hand it over, I'll kick your ass.
 	Chance: As if.
 	Chance: Alright.
-	Theodore: And go through all of 'em, don't slack.
+	Theodore: And go through all of 'em, don't slack!
 	Chance: I said alright, man.
 	=> END
 -No way.
@@ -65,26 +70,27 @@ Theodore: I made my terms clear, either you help me find something in here or my
 
 ~theodore_task_fin
 Theodore: Took you long enough, what'd you find?
-Chance: Um, some paper clips, a USB drive, and this plastic cube thing.
+Chance: Um, some paper clips, a <color=#a11bbe>USB drive</color>, and this plastic cube thing.
 Theodore: Plastic cube thing? Show me.
 Theodore: . . .
 Theodore: Give that to me.
 Chance: Ah ah ah, no way. You fulfill your part of the bargain first.
-Theodore: Uuuuuuugh'
-Theodore: I don't know anything except that I see that' thing, walking around in the compound center sometimes. I'm sure you've seen it, I don't know what to say except it looks like someone who used to live here.
+Theodore: Uuuuuuugh!
+Theodore: I don't know anything except that I see those <i>things</i>, walking around in the compound center sometimes. I'm sure you've seen them, I don't know what to say except they look like people who used to live here.
 Chance: Huh?
-Theodore: There used to be more people here. Like, not a lot but a few. Over time some of them started to go through ERS and they ran off. That one'
-Theodore: It looks like it might be one of them. I can't really remember who, I didn't really talk to anyone when I first got here and it's all messed up. But something about them is familiar.
+Theodore: There used to be more people here. Like, not a lot but, a few. Over time, some of them started to go through ERS and they ran off. Some of them. . .
+Theodore: They look like they might be people who used to live here. I can't really remember who, I didn't really talk to anyone when I first got here and, it's all messed up. Something about them is familiar.
 - This place?
 	Chance: What's up with this place? Why's it so far off?
-	Theodore: This is the old scientist's place. I never met him but once he disappeared this place got boarded up, and the gate got locked.
-	Theodore: I figured since he had his own house that maybe there was something of value up here but I haven't been able to really find anything worthwhile.
+	Theodore: This is <color=#813408>the old scientist</color>'s place. I never met him but once he disappeared this place got boarded up, and the gate got locked.
+	Theodore: I figured since he had his own house... maybe there was something of value up here but, I haven't been able to really find anything worthwhile.
 	=> theodore_task_fin_2
+if CalebBaseCompleted == true:
 - The energy grid?
-	Chance: What about the old energy grid? Caleb said that it ran on an alternative power source.
+	Chance: What about <color=#a11bbe>the old energy grid</color>? I've heard that it ran on an <color=#a11bbe>alternative power source</color>.
 	Theodore: Like I said, I didn't really talk to anyone when we first got here, okay? I don't know anything about it, other than the fact it stopped working when that dick left and we didn't have power for a week. 
-	Theodore: After that people stopped slipping away as much but something got weird with the plants.
-	Theodore: Sometimes I look over that fence to the east and it glows this scary purple pink. Just like the stuff that comes off that thing. It's hazy, and hypnotizing like..
+	Theodore: After that, people stopped slipping away as much but something got weird with the plants.
+	Theodore: Sometimes I look over that fence to the east and it glows this scary purple pink. Just like the stuff that comes off that...thing. It's hazy, and hypnotizing like..
 	=> theodore_task_fin_2
 
 ~ theodore_task_fin_2
@@ -95,7 +101,7 @@ Chance: Hey!
 Chance: Well what about the other stuff?
 Theodore: What about it? Do you think I'm up here filing paperwork? Do you see a computer? I don't care, keep it.
 Chance: Fine. See you, Teddy.
-Theodore: IT'S THEODORE!
+Theodore: IT'S <color=#813408>THEODORE</color>!
 set timeOfDay += 1;
 call ReloadScene();
 => END
