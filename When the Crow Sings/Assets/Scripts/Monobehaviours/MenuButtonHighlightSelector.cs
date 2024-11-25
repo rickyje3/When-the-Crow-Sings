@@ -14,11 +14,7 @@ public class MenuButtonHighlightSelector : MonoBehaviour//, IPointerEnterHandler
 
     private void SetSelectedGameObject(GameObject newSelected)
     {
-        //if (EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.GetComponent<MenuButtonDetector>())
-        //    lastSelected = EventSystem.current.currentSelectedGameObject.GetComponent<MenuButtonDetector>();
         EventSystem.current.SetSelectedGameObject(newSelected);
-        //if (newSelected.GetComponent<MenuButtonDetector>() != null)
-        //    lastSelected = newSelected.GetComponent<MenuButtonDetector>();
     }
     public void OnPotentialEntered(MenuButtonDetector menuButtonDetector)
     {
@@ -53,12 +49,7 @@ public class MenuButtonHighlightSelector : MonoBehaviour//, IPointerEnterHandler
         else
         {
             if (EventSystem.current.currentSelectedGameObject == null)
-                //SetSelectedGameObject(possibleSelectors[0].gameObject);
                 SetLastSelectedOrFirstPossibleSelector();
-        }
-        foreach (MenuButtonDetector i in possibleSelectors)
-        {
-            // if i.isHighlighted, then make it the selected one.
         }
 
         if (EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.GetComponent<MenuButtonDetector>())
