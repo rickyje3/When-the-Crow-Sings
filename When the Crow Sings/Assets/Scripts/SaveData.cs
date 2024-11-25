@@ -123,6 +123,7 @@ public static class SaveData
 
         {"penguin_cult",623 },
         {"benchcounter",0 },
+        {"PhilTalk", 0},
     };
 
     public static Dictionary<string, string> stringFlags = new Dictionary<string, string>()
