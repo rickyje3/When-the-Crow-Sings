@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour, IService
 
     void Start()
     {
-        if (EditorPrefs.HasKey("textSpeed")) textSpeed = EditorPrefs.GetFloat("textSpeed");
+        if (PlayerPrefs.HasKey("textSpeed")) textSpeed = PlayerPrefs.GetFloat("textSpeed");
     }
     #endregion
 
