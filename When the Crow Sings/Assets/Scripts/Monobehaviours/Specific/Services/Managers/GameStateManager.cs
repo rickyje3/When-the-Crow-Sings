@@ -238,11 +238,11 @@ public class GameStateManager : MonoBehaviour, IService
                         }
                         else if (ii.associatedOperator == SubSceneLogicBase.OPERATOR.LESS_THAN)
                         {
-                            if (ii.intValue! < intFlag) shouldContinue = true;
+                            if (ii.intValue >= intFlag) shouldContinue = true;
                         }
                         else
                         {
-                            if (ii.intValue! > intFlag) shouldContinue = true;
+                            if (ii.intValue <= intFlag) shouldContinue = true;
                         }
                     }
                 }
