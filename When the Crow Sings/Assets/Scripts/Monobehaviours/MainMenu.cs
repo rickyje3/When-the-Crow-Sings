@@ -18,7 +18,6 @@ public class MainMenu : MonoBehaviour
     public List<LevelDataResource> levelDataResources;
 
     public GameObject newGameButtons;
-    public GameObject continueGameButton;
     public GameObject mainMenuPage;
 
     private void Awake()
@@ -26,8 +25,6 @@ public class MainMenu : MonoBehaviour
         PopulateSceneLoadDebugButtons();
 
         mainMenuDebugLoadHolder.resourceToLoad = null; // I don't remember what this does exactly but it's important.
-
-        continueGameButton.SetActive(SaveData.SavedDataExists());
     }
 
     private void PopulateSceneLoadDebugButtons()
