@@ -199,7 +199,7 @@ set Zone4DoorUnlocked = true;
 => END
 
 ~rec_center_door
-if timeOfDay = 3:
+if timeOfDay == 3:
 	The door is locked, crap.
 else:
 	Sounds like there are some kids running around inside. Best to wait until I have a reason to be here.
