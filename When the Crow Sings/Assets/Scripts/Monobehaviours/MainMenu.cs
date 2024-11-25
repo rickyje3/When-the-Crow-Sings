@@ -23,16 +23,9 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
+        PopulateSceneLoadDebugButtons();
 
-        foreach (LevelDataResource i in levelDataResources)
-        {
-            var x = Instantiate(sceneLoadButtonPrefab);
-            x.transform.SetParent(sceneLoadButtonsHolder.transform, false);
-            x.onClick.AddListener(() => OnSceneLoadButtonPressed(i));
-            x.GetComponentInChildren<TextMeshProUGUI>().text = i.level.Name;
-        }
-
-        mainMenuDebugLoadHolder.resourceToLoad = null;
+        mainMenuDebugLoadHolder.resourceToLoad = null; // I don't remember what this does exactly but it's important.
 
         if (SaveData.SavedDataExists())
         {
@@ -43,6 +36,17 @@ public class MainMenu : MonoBehaviour
         {
             newGameButtons.SetActive(true);
             continueGameButtons.SetActive(false);
+        }
+    }
+
+    private void PopulateSceneLoadDebugButtons()
+    {
+        foreach (LevelDataResource i in levelDataResources)
+        {
+            var x = Instantiate(sceneLoadButtonPrefab);
+            x.transform.SetParent(sceneLoadButtonsHolder.transform, false);
+            x.onClick.AddListener(() => OnSceneLoadButtonPressed(i));
+            x.GetComponentInChildren<TextMeshProUGUI>().text = i.level.Name;
         }
     }
 
