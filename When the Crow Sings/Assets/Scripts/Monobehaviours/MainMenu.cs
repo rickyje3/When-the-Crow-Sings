@@ -18,31 +18,23 @@ public class MainMenu : MonoBehaviour
     public List<LevelDataResource> levelDataResources;
 
     public GameObject newGameButtons;
-    public GameObject continueGameButtons;
     public GameObject mainMenuPage;
 
     private void Awake()
     {
+        PopulateSceneLoadDebugButtons();
 
+        mainMenuDebugLoadHolder.resourceToLoad = null; // I don't remember what this does exactly but it's important.
+    }
+
+    private void PopulateSceneLoadDebugButtons()
+    {
         foreach (LevelDataResource i in levelDataResources)
         {
             var x = Instantiate(sceneLoadButtonPrefab);
             x.transform.SetParent(sceneLoadButtonsHolder.transform, false);
             x.onClick.AddListener(() => OnSceneLoadButtonPressed(i));
             x.GetComponentInChildren<TextMeshProUGUI>().text = i.level.Name;
-        }
-
-        mainMenuDebugLoadHolder.resourceToLoad = null;
-
-        if (SaveData.SavedDataExists())
-        {
-            newGameButtons.SetActive(false);
-            continueGameButtons.SetActive(true);
-        }
-        else
-        {
-            newGameButtons.SetActive(true);
-            continueGameButtons.SetActive(false);
         }
     }
 
