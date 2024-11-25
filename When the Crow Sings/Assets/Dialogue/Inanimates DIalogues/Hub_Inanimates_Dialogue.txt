@@ -111,7 +111,7 @@ Lined up solar panels, recently wiped down and clear of dust.
 'Quinn's' seems to be carved in with a knife.
 => END
 
-~ bench_1
+~ bench
 if benchcounter == 0:
 	A sturdy bench. Looks comfortable... I don't have time to lounge around right now.
 if benchcounter == 1:
@@ -145,13 +145,20 @@ An old fountain that looks like it stopped functioning a while ago. The resevoir
 
 ~ zone_door_1
 if FranciscoBaseCompleted == true:
-	Just need to put in the code that Francisco gave me and...
-	Open. Voila.
-	set Zone1DoorUnlocked = true;
-	=> END
+	=> zone_door_cont
 else:
 	The door is rusty. Looks like it hasn't been used in a while. 
-	=> END
+=> END
+
+~ zone_door_cont
+if timeOfDay == 3:
+	I've got to get this code in fast!
+	Ah! There we go!
+else:
+	Just need to put in the code that Francisco gave me and...
+	Open. Voila.
+set Zone1DoorUnlocked = true;
+=> END
 
 ~ zone_door_2
 The door is completely stuck. There's no way to open it even if I wanted to.
@@ -159,45 +166,78 @@ The door is completely stuck. There's no way to open it even if I wanted to.
 
 ~ zone_door_3
 if FaridaBaseCompleted == true:
-	This must be the door that Farida was talking about. Where's that key she gave me...
-	Ah, there we go. With a little bit of elbow grease, the padlock pops off.
-	set Zone3DoorUnlocked = true;
-	=> END
+	=> zone_door_3_cont
 else:
 	The door looks like it gets some use now and then, but it's locked with a padlock.
-	=> END
+=> END
+
+~ zone_door_3_cont
+if timeOfDay == 3:
+	God, where's that key!?
+	There!
+else:
+	This must be the door that Farida was talking about. Where's that key she gave me...
+	Ah, there we go. With a little bit of elbow grease, the padlock pops off.
+set Zone3DoorUnlocked = true;
+=> END
+
 
 ~ zone_door_4
 if QuinnBaseCompleted == true:
-	Pressing on the intercom button, the door lock releases after a few seconds and swings freely.
-	set Zone4DoorUnlocked = true;
-	=> END
+	=> zone_door_4_cont
 else:
 	A pristine door. Must get used often. There is a button on an intercom, but I don't think buzzing someone without reason is a good idea.
 	=> END
 
+~ zone_door_4_cont
+if timeOfDay == 3:
+	Come on, come on!
+	Ah! It opened!
+else:
+	Pressing on the intercom button, the door lock releases after a few seconds and swings freely.
+set Zone4DoorUnlocked = true;
+=> END
+
 ~rec_center_door
-Sounds like there are some kids running around inside. Best to wait until I have a reason to be here.
+if timeOfDay == 3:
+	The door is locked, crap.
+else:
+	Sounds like there are some kids running around inside. Best to wait until I have a reason to be here.
 => END
 
 ~ clinic_door
-The door's locked, someone is probably in an appointment. Don't want to intrude.
+if timeOfDay == 3:
+	The door is locked, damn.
+else:
+	The door's locked, someone is probably in an appointment. Don't want to intrude.
 => END
 
 ~ energy_hq_door
-There's definitely someone inside. 
-... Pretty sure they're ignoring me on purpose.
+if timeOfDay == 3:
+	Another locked door. Ugh.
+else:
+	There's definitely someone inside. 
+	... Pretty sure they're ignoring me on purpose.
 => END
 
 ~greenhouse_door
-Someone is shuffling around inside, I don't think they can hear me.
+if timeOfDay == 3:
+	The door is locked, even though the lights are on.
+else:
+	Someone is shuffling around inside, I don't think they can hear me.
 => END
 
 ~ cold_storage_door
-I don't have a reason to go in there. I don't think I've ever felt a temperature below 70 fahrenheit.
-... I wonder what the winters here are like.
+if timeOfDay == 3:
+	The door is shut fast.
+else:
+	I don't have a reason to go in there. I don't think I've ever felt a temperature below 70 fahrenheit.
+	... I wonder what the winters here are like.
 => END
 
 ~ lodging_door
-I'm not gonna waste my time sitting around in my room. Who knows what will happen if that <color=#a11bbe>thing</color> roams around unchecked.
+if timeOfDay == 3:
+	I can't go back in, I need to use all the time I have.
+else:
+	I'm not gonna waste my time sitting around in my room. Who knows what will happen if that <color=#a11bbe>thing</color> roams around unchecked.
 => END

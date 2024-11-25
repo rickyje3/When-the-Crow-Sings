@@ -18,14 +18,16 @@ Jazmyne: Oh hello. I haven't seen you before, are you here to register a child?
 Chance: Uh, no?
 Jazmyne_Exhausted: . . . No! Right! Of course not, you're the new resident. Sorry!
 Jazmyne: Well, it's nice to meet you! What can I help you with?
-- Caleb sent me.
-	Chance: <color=#813408>Caleb</color> said that you had a, uh.. <color=#813408>troublemaker</color> who might know something interesting about the stuff in the outer zones?
-	Jazmyne_Annoyed: Did he?
-	=> jazmyne_first_int_cont
-- Angel sent me.
-	Chance: <color=#813408>Angel</color> said that you know everyone, that you might know about who would be out past curfew.
-	Jazmyne_Annoyed: Well, I'm up late, but, I'm always here with the kids. Most of them anyway. . .
-	=> jazmyne_first_int_cont
+if CalebBaseCompleted == true:
+	- Caleb sent me.
+		Chance: <color=#813408>Caleb</color> said that you had a, uh.. <color=#813408>troublemaker</color> who might know something interesting about the stuff in the outer zones?
+		Jazmyne_Annoyed: Did he?
+		=> jazmyne_first_int_cont
+if AngelBaseCompleted == true:
+	- Angel sent me.
+		Chance: <color=#813408>Angel</color> said that you know everyone, that you might know about who would be out past curfew.
+		Jazmyne_Annoyed: Well, I'm up late, but, I'm always here with the kids. Most of them anyway. . .
+		=> jazmyne_first_int_cont
 
 ~ jazmyne_first_int_cont
 Jazmyne_Stunned: Oh no!
@@ -64,3 +66,7 @@ Jazmyne_Sigh: Though, we are running a little low on movies...
 	Chance: Uh, maybe. See you.
 	set timeOfDay += 1;
 	=> END
+
+~ jazmyne_beyond_base
+Dialogue has been exhausted.
+=> END
