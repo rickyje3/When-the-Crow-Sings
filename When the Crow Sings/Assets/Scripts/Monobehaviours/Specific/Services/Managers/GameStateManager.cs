@@ -106,30 +106,56 @@ public class GameStateManager : MonoBehaviour, IService
 
     public void LoadRoom(LevelDataResource levelDataResource)
     {
+        canLoad = false;
         lastLoadedScene = levelDataResource;
 
         StartCoroutine(UnloadAndLoad(levelDataResource));
     }
-
     IEnumerator UnloadAndLoad(LevelDataResource levelDataResource)
     {
         DestroyActors();
         yield return StartCoroutine(FadeLoadingScreen(true));
-        //yield return new WaitForSeconds(5f);
 
         // Unload previous scenes.
-        foreach (Scene i in GetLoadedScenes())
-        {
-            SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
-        }
-
+        yield return StartCoroutine(UnloadLoadedScenesAsync());
 
         // then load them all
-        yield return StartCoroutine(LoadSceneAsync(GetScenesToLoad(levelDataResource)));
-        
+        yield return StartCoroutine(LoadScenesAsync(GetScenesToLoad(levelDataResource)));
+
         yield return StartCoroutine(FadeLoadingScreen(false));
         fullyFinishedLoadSignal.Emit();
-        //Debug.Log("It is done.");
+        canLoad = true;
+        
+    }
+
+    IEnumerator UnloadLoadedScenesAsync()
+    {
+        List<AsyncOperation> asyncOperations = new List<AsyncOperation>();
+        
+        foreach (Scene i in GetLoadedScenes())
+        {
+            asyncOperations.Add(SceneManager.UnloadSceneAsync(i));
+        }
+        while (!AsyncOperationsAreDone(asyncOperations))
+        {
+            yield return null;
+        }
+    }
+
+    IEnumerator LoadScenesAsync(List<SceneReference> sceneReferences)
+    {
+        List<AsyncOperation> asyncOperations = new List<AsyncOperation>();
+        foreach (SceneReference i in sceneReferences)
+        {
+            asyncOperations.Add(SceneManager.LoadSceneAsync(i.Name, LoadSceneMode.Additive));
+        }
+
+        while (!AsyncOperationsAreDone(asyncOperations))
+        {
+            float progressValue = AsyncOperationsProgress(asyncOperations);//Mathf.Clamp01(asyncOperation.progress);// / 0.9f);
+            //Debug.Log("Loading Progres: "+progressValue);
+            yield return null;
+        }
     }
 
     IEnumerator FadeLoadingScreen(bool fadeIn)
@@ -156,21 +182,7 @@ public class GameStateManager : MonoBehaviour, IService
         }
     }
 
-    IEnumerator LoadSceneAsync(List<SceneReference> sceneReferences)
-    {
-        List<AsyncOperation> asyncOperations = new List<AsyncOperation>();
-        foreach (SceneReference i in sceneReferences)
-        {
-            asyncOperations.Add(SceneManager.LoadSceneAsync(i.Name, LoadSceneMode.Additive));
-        }
-
-        while (!AsyncOperationsAreDone(asyncOperations))
-        {
-            float progressValue = AsyncOperationsProgress(asyncOperations);//Mathf.Clamp01(asyncOperation.progress);// / 0.9f);
-            //Debug.Log("Loading Progres: "+progressValue);
-            yield return null;
-        }
-    }
+    
 
     bool AsyncOperationsAreDone(List<AsyncOperation> asyncOperations)
     {

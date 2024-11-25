@@ -215,18 +215,23 @@ public class DialogueManager : MonoBehaviour, IService
 
         
     }
-
+    public MenuButtonHighlightSelector choiceButtonsMBHS;
+    public MenuButtonHighlightSelector nextButtonMBHS;
     void EnableChoiceButtons()
     {
         nextButton.SetActive(false);
         dialogueChoiceButtonsHolder.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(dialogueChoiceButtons[0].gameObject);
+        //EventSystem.current.SetSelectedGameObject(dialogueChoiceButtons[0].gameObject);
+        choiceButtonsMBHS.enabled = true;
+        nextButtonMBHS.enabled = false;
     }
     private void DisableChoiceButtons()
     {
         dialogueChoiceButtonsHolder.SetActive(false);
         nextButton.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(nextButton);
+        //EventSystem.current.SetSelectedGameObject(nextButton);
+        choiceButtonsMBHS.enabled = false;
+        nextButtonMBHS.enabled = true;
     }
 
     private void SetChoiceButtons()
@@ -323,15 +328,28 @@ public class DialogueManager : MonoBehaviour, IService
     }
     private void Update()
     {
-        if (isInDialogue && EventSystem.current.currentSelectedGameObject == null)
+        //if (isInDialogue && EventSystem.current.currentSelectedGameObject == null)
+        //{
+        //    if (nextButton.activeInHierarchy)
+        //    {
+        //        EventSystem.current.SetSelectedGameObject(nextButton.gameObject);
+        //    }
+        //    else if (dialogueChoiceButtons[0].activeInHierarchy)
+        //    {
+        //        EventSystem.current.SetSelectedGameObject(dialogueChoiceButtons[0].gameObject);
+        //    }
+        //}
+        if (isInDialogue)
         {
             if (nextButton.activeInHierarchy)
             {
-                EventSystem.current.SetSelectedGameObject(nextButton.gameObject);
+                nextButtonMBHS.enabled = true;
+                choiceButtonsMBHS.enabled = false;
             }
             else if (dialogueChoiceButtons[0].activeInHierarchy)
             {
-                EventSystem.current.SetSelectedGameObject(dialogueChoiceButtons[0].gameObject);
+                nextButtonMBHS.enabled = false;
+                choiceButtonsMBHS.enabled = true;
             }
         }
     }
