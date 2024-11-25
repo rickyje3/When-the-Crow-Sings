@@ -15,7 +15,8 @@ public class MainMenu : MonoBehaviour
     public Button sceneLoadButtonPrefab;
     public GridLayoutGroup sceneLoadButtonsHolder;
 
-    public List<LevelDataResource> levelDataResources;
+    //public List<LevelDataResource> levelDataResources;
+    public AllLevels allLevels;
 
     public GameObject newGameButtons;
     public GameObject mainMenuPage;
@@ -29,7 +30,7 @@ public class MainMenu : MonoBehaviour
 
     private void PopulateSceneLoadDebugButtons()
     {
-        foreach (LevelDataResource i in levelDataResources)
+        foreach (LevelDataResource i in allLevels.levelDataResources)
         {
             var x = Instantiate(sceneLoadButtonPrefab);
             x.transform.SetParent(sceneLoadButtonsHolder.transform, false);
