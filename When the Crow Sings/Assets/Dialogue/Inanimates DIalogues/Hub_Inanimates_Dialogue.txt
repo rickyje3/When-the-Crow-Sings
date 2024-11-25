@@ -148,7 +148,7 @@ if FranciscoBaseCompleted == true:
 	=> zone_door_cont
 else:
 	The door is rusty. Looks like it hasn't been used in a while. 
-	=> END
+=> END
 
 ~ zone_door_cont
 if timeOfDay == 3:
@@ -169,7 +169,7 @@ if FaridaBaseCompleted == true:
 	=> zone_door_3_cont
 else:
 	The door looks like it gets some use now and then, but it's locked with a padlock.
-	=> END
+=> END
 
 ~ zone_door_3_cont
 if timeOfDay == 3:
