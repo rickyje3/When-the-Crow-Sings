@@ -9,6 +9,7 @@ public class MenuButtonHighlightSelector : MonoBehaviour//, IPointerEnterHandler
     public List<MenuButtonDetector> possibleSelectors;
     public bool exclusive = true;
     public bool selectOnEnable = true;
+    public bool clearLastSelectedOnDisable = true;
 
     private MenuButtonDetector lastSelected = null; // Only includes the lastSelected if it's part of the possibleSelectors, unlike the built-in one.
 
@@ -28,11 +29,16 @@ public class MenuButtonHighlightSelector : MonoBehaviour//, IPointerEnterHandler
             possibleSelector.menuButtonHighlightSelector = this;
         }
         if (selectOnEnable)
-            SetSelectedGameObject(possibleSelectors[0].gameObject);
+        {
+            if (clearLastSelectedOnDisable || lastSelected == null)
+                SetSelectedGameObject(possibleSelectors[0].gameObject);
+            else SetSelectedGameObject(lastSelected.gameObject);
+        }
     }
     private void OnDisable()
     {
-        lastSelected = null;
+        if (clearLastSelectedOnDisable)
+            lastSelected = null;
     }
     private void Update()
     {
