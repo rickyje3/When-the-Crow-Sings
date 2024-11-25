@@ -111,29 +111,19 @@ public class GameStateManager : MonoBehaviour, IService
 
         StartCoroutine(UnloadAndLoad(levelDataResource));
     }
-
-    bool isUnloadingAndLoading = false;
     IEnumerator UnloadAndLoad(LevelDataResource levelDataResource)
     {
-        //if (!isUnloadingAndLoading)
-        //{
-            //isUnloadingAndLoading = true;
-            DestroyActors();
-            yield return StartCoroutine(FadeLoadingScreen(true));
+        DestroyActors();
+        yield return StartCoroutine(FadeLoadingScreen(true));
 
+        // Unload previous scenes.
+        yield return StartCoroutine(UnloadLoadedScenesAsync());
 
-            yield return StartCoroutine(UnloadLoadedScenesAsync());
-            Debug.Log("This should not print until all is unloaded.");
+        // then load them all
+        yield return StartCoroutine(LoadScenesAsync(GetScenesToLoad(levelDataResource)));
 
-            // then load them all
-            yield return StartCoroutine(LoadScenesAsync(GetScenesToLoad(levelDataResource)));
-
-            yield return StartCoroutine(FadeLoadingScreen(false));
-            fullyFinishedLoadSignal.Emit();
-
-        //    isUnloadingAndLoading = false;
-        //}
-        //else throw new Exception("Error, loading is already in progress!");
+        yield return StartCoroutine(FadeLoadingScreen(false));
+        fullyFinishedLoadSignal.Emit();
         canLoad = true;
         
     }
@@ -141,18 +131,15 @@ public class GameStateManager : MonoBehaviour, IService
     IEnumerator UnloadLoadedScenesAsync()
     {
         List<AsyncOperation> asyncOperations = new List<AsyncOperation>();
-        // Unload previous scenes.
+        
         foreach (Scene i in GetLoadedScenes())
         {
-            //SceneManager.UnloadSceneAsync(i); //using Async because it yells at me otherwise
             asyncOperations.Add(SceneManager.UnloadSceneAsync(i));
         }
         while (!AsyncOperationsAreDone(asyncOperations))
         {
             yield return null;
         }
-        Debug.Log("Now all is unloaded");
-
     }
 
     IEnumerator LoadScenesAsync(List<SceneReference> sceneReferences)
