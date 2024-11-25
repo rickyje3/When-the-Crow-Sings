@@ -984,6 +984,8 @@ MonoBehaviour:
   pauseMultiplier: 10
   signalsDialogueCanUse:
   - {fileID: 11400000, guid: bd26da1725e75fb46a8f0a4045ed96b5, type: 2}
+  choiceButtonsMBHS: {fileID: 8678019367360410500}
+  nextButtonMBHS: {fileID: 8678019367360410501}
 --- !u!1 &801647054323082692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,6 +1206,8 @@ GameObject:
   - component: {fileID: 8678019367360410499}
   - component: {fileID: 769733860930222430}
   - component: {fileID: 3838670728832093628}
+  - component: {fileID: 8678019367360410501}
+  - component: {fileID: 8678019367360410500}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -1772,6 +1776,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1381248603434131218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8678019367360410500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289023823644689653}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e163927f0dbcad349bcdd70f749fb1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleSelectors:
+  - {fileID: 7420184166374127381}
+  - {fileID: 6743177052643897344}
+  - {fileID: 2522911345021849104}
+  - {fileID: 3964812964968339759}
+  - {fileID: 5535475831099360906}
+  - {fileID: 8726066341736005689}
+  exclusive: 1
+  selectOnEnable: 1
+--- !u!114 &8678019367360410501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289023823644689653}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e163927f0dbcad349bcdd70f749fb1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleSelectors:
+  - {fileID: 8445506424929340263}
+  exclusive: 1
+  selectOnEnable: 1
 --- !u!1 &8726066341736005689 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5563411137663700098, guid: bd32890dca4c9b94cbc28282e8fee8b6,
