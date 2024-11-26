@@ -53,27 +53,28 @@ public class PlayerMovementState : StateMachineState
         s.speed = 8;
     }
 
-    
 
+    private bool useLerp = false;
     public override void Update(float deltaTime)
     {
         s.ApplyGravity(deltaTime);
         //Converts movement input to a float because vector3 cant be lerped :(((((
         float inputMagnitude = Mathf.Clamp(s.movementInput.magnitude,s.minWalkClamp,1.0f);
-        //SetWalkAnimSpeed(inputMagnitude);
 
         if (s.isSprinting && !s.isCrouching)
         {
-            //Smoothly blend speed off of joystick input
-            s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.sprintSpeed, Time.deltaTime * s.acceleration);
+            if (useLerp) s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.sprintSpeed, Time.deltaTime * s.acceleration);
+            else s.speed = inputMagnitude * s.sprintSpeed;
         }
         else if (!s.isSprinting && s.isCrouching)
         {
-            s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.crouchSpeed, Time.deltaTime * s.acceleration);
+            if (useLerp) s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.crouchSpeed, Time.deltaTime * s.acceleration);
+            else s.speed = inputMagnitude*s.crouchSpeed;
         }
         else if (!s.isSprinting && !s.isCrouching)
         {
-            s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.maxWalkSpeed, Time.deltaTime * s.acceleration);
+            if (useLerp) s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.maxWalkSpeed, Time.deltaTime * s.acceleration);
+            else s.speed = inputMagnitude*s.maxWalkSpeed;
         }
         SetWalkAnimSpeed(s.speed);
 
