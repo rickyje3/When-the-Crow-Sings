@@ -137,7 +137,10 @@ Chance: I'll look into it. Thanks.
 Beau_Teasing: No problem, ey? Not to be a keener but, wouldn't want you to be uncomfortable livin' here.
 Beau_Awkward: <size=75%> Not like you got anywhere else to go.
 set timeOfDay += 1;
-call ReloadScene(5);
+if timeOfDay == 3:
+	call ReloadScene(0);
+else:
+	call ReloadScene(5);
 => END
 
 ~ beau_beyond_base
