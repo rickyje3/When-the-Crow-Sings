@@ -43,7 +43,7 @@ public class GameStateManager : MonoBehaviour, IService
 
         if (SaveDataAccess.SavedDataExists())
         {
-            SaveDataAccess.ReadData();
+            SaveDataAccess.ReadDataFromDisk();
         }
 
         LoadOnStart();

@@ -50,7 +50,7 @@ public class SaveDataAccess
         fileStream.Write(valueBytes, 0, valueBytes.Length);
     }
 
-    public static void WriteData()
+    public static void WriteDataToDisk()
     {
         switch (saveData.saveDataVersion)
         {
@@ -65,8 +65,9 @@ public class SaveDataAccess
         }
 
     }
-    public static void ReadData()
+    public static void ReadDataFromDisk()
     {
+        saveData = new SaveData();
         //PenguinCultAttemptsToScheduleAMeeting();
 
         switch (saveData.saveDataVersion) // TODO: Make it so it starts reading, stops after the version number, then calls the correct method using this switch statement.
@@ -83,7 +84,7 @@ public class SaveDataAccess
         Debug.Log("Data read!");
     }
 
-    public static IEnumerator EraseData()
+    public static IEnumerator EraseDataFromDisk()
     {
         string filePath = Application.persistentDataPath + "/save.wtcs";
 
@@ -104,6 +105,11 @@ public class SaveDataAccess
             }
             yield return new WaitForSeconds(0.1f); // Retry after a delay
         }
+    }
+
+    public static void ResetSaveData()
+    {
+        saveData = new SaveData();
     }
 
 

@@ -573,12 +573,12 @@ public class DialogueManager : MonoBehaviour, IService
                 else if (mutation.stringData == "SaveGameToDisk()")
                 {
                     Debug.Log("Saved!");
-                    SaveDataAccess.WriteData();
+                    SaveDataAccess.WriteDataToDisk();
                 }
                 else if (mutation.stringData == "EraseGameFromDisk()")
                 {
                     Debug.Log("Erased!");
-                    StartCoroutine(SaveDataAccess.EraseData());
+                    StartCoroutine(SaveDataAccess.EraseDataFromDisk());
                 }
                 else
                 {

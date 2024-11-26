@@ -47,11 +47,11 @@ public class SaveEditMenu : MonoBehaviour
 
     public void OnSaveButtonPressed()
     {
-        SaveDataAccess.WriteData();
+        SaveDataAccess.WriteDataToDisk();
     }
     public void OnWipeSaveButtonPressed()
     {
-        StartCoroutine(SaveDataAccess.EraseData());
+        StartCoroutine(SaveDataAccess.EraseDataFromDisk());
     }
     public void OnResetButtonPressed()
     {
