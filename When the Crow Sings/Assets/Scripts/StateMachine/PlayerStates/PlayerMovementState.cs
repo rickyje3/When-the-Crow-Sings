@@ -82,7 +82,6 @@ public class PlayerMovementState : StateMachineState
         
        
         s.speed = Mathf.Clamp(inputMagnitude * stateSpeed,stateClamp,stateSpeed);
-        Debug.Log(s.speed);
         SetWalkAnimSpeed(s.speed, slideSpeedCorrection);
 
         // move!!
