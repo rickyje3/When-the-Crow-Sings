@@ -116,10 +116,12 @@ public class GameStateManager : MonoBehaviour, IService
 
     public void LoadRoom(LevelDataResource levelDataResource)
     {
+        Debug.Log("Loading " + mainMenuDebugLoadHolder.resourceToLoad.name);
         canLoad = false;
         lastLoadedScene = levelDataResource;
-
+        Debug.Log("Middle!");
         StartCoroutine(UnloadAndLoad(levelDataResource));
+        Debug.Log("End!");
     }
     IEnumerator UnloadAndLoad(LevelDataResource levelDataResource)
     {
