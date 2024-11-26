@@ -60,17 +60,20 @@ public class PlayerMovementState : StateMachineState
         float inputMagnitude = s.movementInput.magnitude;// = Mathf.Clamp(s.movementInput.magnitude,s.minWalkClamp,1.0f);
         float stateClamp = s.minWalkSpeed;
         float stateSpeed = s.maxWalkSpeed;
+        float slideSpeedCorrection = s.walkSlideSpeedCorrection;
         if (s.isCrouchingToggled)
         {
             s.playerAnimator.SetBool("animIsSprinting", false);
             stateClamp = s.minCrouchSpeed;
             stateSpeed = s.maxCrouchSpeed;
+            slideSpeedCorrection = s.crouchSlideSpeedCorrection;
         }
         else if (s.isSprintingButtonHeld && inputMagnitude > 0f)
         {
             s.playerAnimator.SetBool("animIsSprinting", true);
             stateClamp = s.minSprintSpeed;
-            stateSpeed = s.maxSprintSpeed;   
+            stateSpeed = s.maxSprintSpeed;
+            slideSpeedCorrection = s.sprintSlideSpeedCorrection;
         }
         else
         {
@@ -80,7 +83,7 @@ public class PlayerMovementState : StateMachineState
        
         s.speed = Mathf.Clamp(inputMagnitude * stateSpeed,stateClamp,stateSpeed);
         Debug.Log(s.speed);
-        SetWalkAnimSpeed(s.speed);
+        SetWalkAnimSpeed(s.speed, slideSpeedCorrection);
 
         // move!!
         Vector3 movement = new Vector3(s.movementInput.x, 0, s.movementInput.y).normalized * s.speed;
@@ -106,9 +109,9 @@ public class PlayerMovementState : StateMachineState
 
     }
 
-    private void SetWalkAnimSpeed(float inputMagnitude)
+    private void SetWalkAnimSpeed(float inputMagnitude, float slideSpeedCorrection)
     {
-        s.playerAnimator.SetFloat("currentWalkVelocity", inputMagnitude* s.slideSpeedCorrection);
+        s.playerAnimator.SetFloat("currentWalkVelocity", inputMagnitude* slideSpeedCorrection);
     }
 
     private void OnSprint(InputAction.CallbackContext context)
