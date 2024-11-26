@@ -39,22 +39,34 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void LoadMainScene()
-    {
-        SceneManager.LoadScene(mainScene.Name);
-        mainMenuPage.SetActive(false);
-    }
-
     public void OnSceneLoadButtonPressed(LevelDataResource levelDataResource)
     {
         mainMenuDebugLoadHolder.resourceToLoad = levelDataResource;
         SceneManager.LoadScene(mainScene.Name);
     }
 
+    public void OnNewGameButtonPressed()
+    {
+        StartCoroutine(NewGame());
+    }
+
     public void OnContinueButtonPressed()
     {
-        int levelDataIndex = SaveData.intFlags["levelDataIndex"];
+        if (SaveDataAccess.SavedDataExistsOnDisk())
+        {
+            SaveDataAccess.ReadDataFromDisk();
+        }
+
+        int levelDataIndex = SaveDataAccess.saveData.intFlags["levelDataIndex"];
         mainMenuDebugLoadHolder.resourceToLoad = allLevels.levelDataResources[levelDataIndex];
+        SceneManager.LoadScene(mainScene.Name);
+    }
+
+    IEnumerator NewGame()
+    {
+        yield return StartCoroutine(SaveDataAccess.EraseDataFromDisk());
+        SaveDataAccess.ResetSaveData();
+        mainMenuDebugLoadHolder.resourceToLoad = allLevels.levelDataResources[1];
         SceneManager.LoadScene(mainScene.Name);
     }
 

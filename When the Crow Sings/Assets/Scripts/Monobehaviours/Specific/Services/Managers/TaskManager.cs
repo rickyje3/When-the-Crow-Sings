@@ -42,7 +42,7 @@ public class TaskManager : MonoBehaviour
             {
                 foreach (KeyValuePair<string, bool> i in currentQTESuccessAndFailValues.success)
                 {
-                    SaveData.SetFlag(i.Key, i.Value);
+                    SaveDataAccess.SetFlag(i.Key, i.Value);
                 }
             }
         }
@@ -52,7 +52,7 @@ public class TaskManager : MonoBehaviour
             {
                 foreach (KeyValuePair<string, bool> i in currentQTESuccessAndFailValues.fail)
                 {
-                    SaveData.SetFlag(i.Key, i.Value);
+                    SaveDataAccess.SetFlag(i.Key, i.Value);
                 }
             }
         }

@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour, IService
             switch (i.valueType)
             {
                 case DynamicEnable.VALUE_TYPE.BOOL:
-                    if (SaveData.boolFlags[i.associatedDataKey] == i.boolValue)
+                    if (SaveDataAccess.saveData.boolFlags[i.associatedDataKey] == i.boolValue)
                     {
                         i.gameObject.SetActive(true);
                     }
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour, IService
                     }
                     break;
                 case DynamicEnable.VALUE_TYPE.INT:
-                    if (SaveData.intFlags[i.associatedDataKey] == i.intValue)
+                    if (SaveDataAccess.saveData.intFlags[i.associatedDataKey] == i.intValue)
                     {
                         i.gameObject.SetActive(true);
                     }
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour, IService
                     }
                     break;
                 case DynamicEnable.VALUE_TYPE.STRING:
-                    if (SaveData.stringFlags[i.associatedDataKey] == i.stringValue)
+                    if (SaveDataAccess.saveData.stringFlags[i.associatedDataKey] == i.stringValue)
                     {
                         i.gameObject.SetActive(true);
                     }

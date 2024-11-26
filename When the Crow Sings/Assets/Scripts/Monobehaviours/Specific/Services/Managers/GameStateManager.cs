@@ -41,10 +41,10 @@ public class GameStateManager : MonoBehaviour, IService
     {
         GetLoadedScenes(); // I THINK there was a reason for this to be here??
 
-        if (SaveData.SavedDataExists())
-        {
-            SaveData.ReadData();
-        }
+        //if (SaveDataAccess.SavedDataExists())
+        //{
+        //    SaveDataAccess.ReadDataFromDisk();
+        //}
 
         LoadOnStart();
 
@@ -116,10 +116,12 @@ public class GameStateManager : MonoBehaviour, IService
 
     public void LoadRoom(LevelDataResource levelDataResource)
     {
+        Debug.Log("Loading " + mainMenuDebugLoadHolder.resourceToLoad.name);
         canLoad = false;
         lastLoadedScene = levelDataResource;
-
+        Debug.Log("Middle!");
         StartCoroutine(UnloadAndLoad(levelDataResource));
+        Debug.Log("End!");
     }
     IEnumerator UnloadAndLoad(LevelDataResource levelDataResource)
     {
@@ -135,7 +137,7 @@ public class GameStateManager : MonoBehaviour, IService
         yield return StartCoroutine(FadeLoadingScreen(false));
         fullyFinishedLoadSignal.Emit();
 
-        SaveData.SetFlag("levelDataIndex", allLevels.levelDataResources.IndexOf(levelDataResource));
+        SaveDataAccess.SetFlag("levelDataIndex", allLevels.levelDataResources.IndexOf(levelDataResource));
         canLoad = true;
         
     }
@@ -245,7 +247,7 @@ public class GameStateManager : MonoBehaviour, IService
                 {
                     if (ii.valueType == SubSceneLogicBase.VALUE_TYPE.BOOL)
                     {
-                        bool boolFlag = SaveData.boolFlags[ii.associatedDataKey];
+                        bool boolFlag = SaveDataAccess.saveData.boolFlags[ii.associatedDataKey];
                         if (ii.boolValue != boolFlag)
                         {
                             shouldContinue = true;
@@ -254,7 +256,7 @@ public class GameStateManager : MonoBehaviour, IService
 
                     else if (ii.valueType == SubSceneLogicBase.VALUE_TYPE.INT)
                     {
-                        int intFlag = SaveData.intFlags[ii.associatedDataKey];
+                        int intFlag = SaveDataAccess.saveData.intFlags[ii.associatedDataKey];
 
                         if (ii.associatedOperator == SubSceneLogicBase.OPERATOR.EQUALS)
                         {

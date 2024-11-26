@@ -8,6 +8,6 @@ public class WTCSMainMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        continueGameButton.SetActive(SaveData.SavedDataExists());
+        continueGameButton.SetActive(SaveDataAccess.SavedDataExistsOnDisk());
     }
 }
