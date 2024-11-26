@@ -848,13 +848,15 @@ MonoBehaviour:
   gravityMultiplier: 3
   gravityVelocity: 0
   maxWalkSpeed: 5
-  minWalkClamp: 0.5
-  sprintSpeed: 14
-  crouchSpeed: 2
+  minWalkSpeed: 2
+  minSprintSpeed: 14
+  maxSprintSpeed: 14
+  minCrouchSpeed: 2
+  maxCrouchSpeed: 2
   slideSpeedCorrection: 0.19
   characterController: {fileID: 5870364044150093514}
   pauseSignalTEMP: {fileID: 11400000, guid: 46f67eb6b653cbe4a992cc406e4dbbb6, type: 2}
-  speed: 8
+  speed: 0
   movementInput: {x: 0, y: 0, z: 0}
   acceleration: 5
 --- !u!114 &4532223004577938253

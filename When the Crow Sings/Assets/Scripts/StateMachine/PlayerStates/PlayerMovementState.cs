@@ -52,47 +52,26 @@ public class PlayerMovementState : StateMachineState
         s.isSprinting = false;
         s.speed = 8;
     }
-
-
-    private bool useLerp = false;
     public override void Update(float deltaTime)
     {
         s.ApplyGravity(deltaTime);
         //Converts movement input to a float because vector3 cant be lerped :(((((
         float inputMagnitude = s.movementInput.magnitude;// = Mathf.Clamp(s.movementInput.magnitude,s.minWalkClamp,1.0f);
-        float stateSpeed = 0.0f;
-        float stateClamp = 0.0f;
+        float stateClamp = s.minWalkSpeed;
+        float stateSpeed = s.maxWalkSpeed;
         if (s.isSprinting)
         {
-            if (useLerp) s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.maxSprintSpeed, Time.deltaTime * s.acceleration);
-            else
-            {
-                stateClamp = s.minSprintSpeed;
-                stateSpeed = s.maxSprintSpeed;
-            }
-                
+            stateClamp = s.minSprintSpeed;
+            stateSpeed = s.maxSprintSpeed;   
         }
         else if (s.isCrouching)
         {
-            if (useLerp) s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.maxCrouchSpeed, Time.deltaTime * s.acceleration);
-            else
-            {
-                stateClamp = s.minCrouchSpeed;
-                stateSpeed = s.maxCrouchSpeed;
-            }
-                
+            stateClamp = s.minCrouchSpeed;
+            stateSpeed = s.maxCrouchSpeed;
         }
-        else
-        {
-            if (useLerp) s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.maxWalkSpeed, Time.deltaTime * s.acceleration);
-            else
-            {
-                stateClamp = s.minWalkSpeed;
-                stateSpeed = s.maxWalkSpeed;
-            }
-        }
-        Debug.Log(inputMagnitude);
+       
         s.speed = Mathf.Clamp(inputMagnitude * stateSpeed,stateClamp,stateSpeed);
+        Debug.Log(s.speed);
         SetWalkAnimSpeed(s.speed);
 
         // move!!
