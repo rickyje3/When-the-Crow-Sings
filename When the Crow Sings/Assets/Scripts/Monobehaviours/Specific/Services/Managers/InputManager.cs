@@ -15,6 +15,18 @@ public class InputManager : MonoBehaviour, IService
         IsControllerConnected = Gamepad.current != null;
     }
 
+    public void EnablePlayerInput(bool enable)
+    {
+        if (enable) playerInputActions.Player.Enable();
+        else playerInputActions.Player.Disable();
+
+    }
+    public void EnableUiInput(bool enable)
+    {
+        if (enable) playerInputActions.UI.Enable();
+        else playerInputActions.UI.Disable();
+    }
+
 
     private void Awake()
     {
