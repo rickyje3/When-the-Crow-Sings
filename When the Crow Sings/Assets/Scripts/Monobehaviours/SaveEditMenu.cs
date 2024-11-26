@@ -55,10 +55,17 @@ public class SaveEditMenu : MonoBehaviour
     }
     public void OnResetButtonPressed()
     {
-        Debug.Log("Reset save data!");
+        SaveDataAccess.ResetSaveData();
     }
     public void OnLoadDataButtonPressed()
     {
-        Debug.Log("Loaded save data from disk!");
+        if (SaveDataAccess.SavedDataExistsOnDisk())
+        {
+            SaveDataAccess.ReadDataFromDisk();
+        }
+        else
+        {
+            Debug.Log("Can't load! Doesn't exist!");
+        }
     }
 }
