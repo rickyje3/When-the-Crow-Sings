@@ -61,7 +61,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnContinueButtonPressed()
     {
-        if (SaveDataAccess.SavedDataExists())
+        if (SaveDataAccess.SavedDataExistsOnDisk())
         {
             SaveDataAccess.ReadDataFromDisk();
         }

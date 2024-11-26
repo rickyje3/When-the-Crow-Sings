@@ -67,8 +67,7 @@ public class SaveDataAccess
     }
     public static void ReadDataFromDisk()
     {
-        saveData = new SaveData();
-        //PenguinCultAttemptsToScheduleAMeeting();
+        ResetSaveData();
 
         switch (saveData.saveDataVersion) // TODO: Make it so it starts reading, stops after the version number, then calls the correct method using this switch statement.
         {
@@ -113,7 +112,7 @@ public class SaveDataAccess
     }
 
 
-    public static bool SavedDataExists()
+    public static bool SavedDataExistsOnDisk()
     {
         if (File.Exists(Application.persistentDataPath + "/save.wtcs"))
         {
