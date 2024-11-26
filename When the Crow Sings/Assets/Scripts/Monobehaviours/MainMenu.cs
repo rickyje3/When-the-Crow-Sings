@@ -53,7 +53,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnContinueButtonPressed()
     {
-        int levelDataIndex = SaveDataAccess.intFlags["levelDataIndex"];
+        int levelDataIndex = SaveDataAccess.saveData.intFlags["levelDataIndex"];
         mainMenuDebugLoadHolder.resourceToLoad = allLevels.levelDataResources[levelDataIndex];
         SceneManager.LoadScene(mainScene.Name);
     }

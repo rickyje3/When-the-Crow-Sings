@@ -10,25 +10,25 @@ public class SaveDataAccess
 
     public static void SetFlag(string key, bool value)
     {
-        boolFlags[key] = value;
-        Debug.Log(key + " is now "+ boolFlags[key]);
+        saveData.boolFlags[key] = value;
+        Debug.Log(key + " is now "+ saveData.boolFlags[key]);
 
 
-        if (boolFlags["FlowerOne"] && boolFlags["FlowerTwo"] && boolFlags["FlowerThree"]) boolFlags["FranciscoTaskCompleted"] = true;
+        if (saveData.boolFlags["FlowerOne"] && saveData.boolFlags["FlowerTwo"] && saveData.boolFlags["FlowerThree"]) saveData.boolFlags["FranciscoTaskCompleted"] = true;
         //else boolFlags["FranciscoTaskCompleted"] = false; // Commented out rn because for testing we only have 1 QTE.
 
 
     }
     public static void SetFlag(string key, int value)
     {
-        intFlags[key] = value;
-        if (intFlags["timeOfDay"] > 3) intFlags["timeOfDay"] = 1;
-        Debug.Log(key + " is now " + intFlags[key]);
+        saveData.intFlags[key] = value;
+        if (saveData.intFlags["timeOfDay"] > 3) saveData.intFlags["timeOfDay"] = 1;
+        Debug.Log(key + " is now " + saveData.intFlags[key]);
     }
     public static void SetFlag(string key, string value)
     {
-        stringFlags[key] = value;
-        Debug.Log(key + " is now " + stringFlags[key]);
+        saveData.stringFlags[key] = value;
+        Debug.Log(key + " is now " + saveData.stringFlags[key]);
     }
 
     //public static bool GetFlag<Bool>(string key)
@@ -52,7 +52,7 @@ public class SaveDataAccess
 
     public static void WriteData()
     {
-        switch (saveDataVersion)
+        switch (saveData.saveDataVersion)
         {
             case 0:
 #pragma warning disable CS0162 // Unreachable code detected
@@ -69,7 +69,7 @@ public class SaveDataAccess
     {
         //PenguinCultAttemptsToScheduleAMeeting();
 
-        switch (saveDataVersion) // TODO: Make it so it starts reading, stops after the version number, then calls the correct method using this switch statement.
+        switch (saveData.saveDataVersion) // TODO: Make it so it starts reading, stops after the version number, then calls the correct method using this switch statement.
         {
             case 0:
 #pragma warning disable CS0162 // Unreachable code detected
@@ -135,7 +135,7 @@ public class SaveDataAccess
         fileStream = new FileStream(filePath, FileMode.Create);
 
         // Write the save data version.
-        writeInt(saveDataVersion, fileStream);
+        writeInt(saveData.saveDataVersion, fileStream);
         // Write the length of boolFlags
         //writeInt(boolFlags.Count, fileStream);
         // Write the length of intFlags
@@ -143,16 +143,16 @@ public class SaveDataAccess
         // Write the length of stringFlags
         //writeInt(stringFlags.Count, fileStream);
 
-        foreach (KeyValuePair<string,bool> i in boolFlags)
+        foreach (KeyValuePair<string,bool> i in saveData.boolFlags)
         {
             byte valueByte = i.Value ? (byte)1 : (byte)0;
             fileStream.WriteByte(valueByte);
         }
-        foreach (KeyValuePair<string,int> i in intFlags)
+        foreach (KeyValuePair<string,int> i in saveData.intFlags)
         {
             writeInt(i.Value, fileStream);
         }
-        foreach (KeyValuePair<string,string> i in stringFlags)
+        foreach (KeyValuePair<string,string> i in saveData.stringFlags)
         {
             byte[] valueBytes = Encoding.UTF8.GetBytes(i.Value); //BitConverter.GetBytes(i.Value);
             byte[] valueBytesLengthBytes = BitConverter.GetBytes(valueBytes.Length);
@@ -189,31 +189,31 @@ public class SaveDataAccess
         //Debug.Log("Save data version is "+loadedSaveDataVersion);
 
         Dictionary<string,bool> tempBoolFlags = new Dictionary<string,bool>();
-        foreach (KeyValuePair<string, bool> i in boolFlags)
+        foreach (KeyValuePair<string, bool> i in saveData.boolFlags)
         {
             tempBoolFlags.Add(i.Key, i.Value);
             tempBoolFlags[i.Key] = fileStream.ReadByte() == 1; //BitConverter.ToBoolean(fileBytes, loop);
             //Debug.Log(tempBoolFlags[i.Key]);
         }
-        boolFlags = tempBoolFlags;
+        saveData.boolFlags = tempBoolFlags;
 
         Dictionary<string, int> tempIntFlags = new Dictionary<string, int>();
-        foreach (KeyValuePair<string,int> i in intFlags)
+        foreach (KeyValuePair<string,int> i in saveData.intFlags)
         {
             tempIntFlags.Add(i.Key, i.Value);
             tempIntFlags[i.Key] = ReadInt(fileStream);
             //Debug.Log(tempIntFlags[i.Key]);
         }
-        intFlags = tempIntFlags;
+        saveData.intFlags = tempIntFlags;
 
         Dictionary<string, string> tempStringFlags = new Dictionary<string, string>();
-        foreach (KeyValuePair<string, string> i in stringFlags)
+        foreach (KeyValuePair<string, string> i in saveData.stringFlags)
         {
             tempStringFlags.Add(i.Key, i.Value);
             tempStringFlags[i.Key] = ReadString(fileStream);
             //Debug.Log(tempStringFlags[i.Key]);
         }
-        stringFlags = tempStringFlags;
+        saveData.stringFlags = tempStringFlags;
 
         fileStream.Close();
 

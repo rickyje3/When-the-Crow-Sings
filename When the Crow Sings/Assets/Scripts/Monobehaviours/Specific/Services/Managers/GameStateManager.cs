@@ -245,7 +245,7 @@ public class GameStateManager : MonoBehaviour, IService
                 {
                     if (ii.valueType == SubSceneLogicBase.VALUE_TYPE.BOOL)
                     {
-                        bool boolFlag = SaveDataAccess.boolFlags[ii.associatedDataKey];
+                        bool boolFlag = SaveDataAccess.saveData.boolFlags[ii.associatedDataKey];
                         if (ii.boolValue != boolFlag)
                         {
                             shouldContinue = true;
@@ -254,7 +254,7 @@ public class GameStateManager : MonoBehaviour, IService
 
                     else if (ii.valueType == SubSceneLogicBase.VALUE_TYPE.INT)
                     {
-                        int intFlag = SaveDataAccess.intFlags[ii.associatedDataKey];
+                        int intFlag = SaveDataAccess.saveData.intFlags[ii.associatedDataKey];
 
                         if (ii.associatedOperator == SubSceneLogicBase.OPERATOR.EQUALS)
                         {

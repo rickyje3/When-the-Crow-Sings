@@ -11,16 +11,16 @@ public class DebugIntFlagOption : MonoBehaviour
 
     public void Increment()
     {
-        SaveDataAccess.SetFlag(key, SaveDataAccess.intFlags[key]+1);
+        SaveDataAccess.SetFlag(key, SaveDataAccess.saveData.intFlags[key]+1);
     }
     public void Decrement()
     {
-        SaveDataAccess.SetFlag(key, SaveDataAccess.intFlags[key] - 1);
+        SaveDataAccess.SetFlag(key, SaveDataAccess.saveData.intFlags[key] - 1);
     }
 
     private void Update()
     {
-        valueText.text = SaveDataAccess.intFlags[key].ToString();
+        valueText.text = SaveDataAccess.saveData.intFlags[key].ToString();
         keyText.text = key;
     }
 

@@ -11,12 +11,12 @@ public class DebugBoolFlagOption : MonoBehaviour
 
     public void FlipFlag()
     {
-        SaveDataAccess.SetFlag(key, !SaveDataAccess.boolFlags[key]);
+        SaveDataAccess.SetFlag(key, !SaveDataAccess.saveData.boolFlags[key]);
     }
 
     private void Update()
     {
-        valueText.text = SaveDataAccess.boolFlags[key].ToString();
+        valueText.text = SaveDataAccess.saveData.boolFlags[key].ToString();
         keyText.text = key;
     }
 

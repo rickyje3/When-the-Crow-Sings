@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SaveData
 {
-    const int saveDataVersion = 1;
-    public static Dictionary<string, bool> boolFlags = new Dictionary<string, bool>()
+    public int saveDataVersion = 1;
+    public Dictionary<string, bool> boolFlags = new Dictionary<string, bool>()
     {
         { "TestingFlag1",false },
         { "TestingFlag2",true },
@@ -106,7 +106,7 @@ public class SaveData
 
     };
 
-    public static Dictionary<string, int> intFlags = new Dictionary<string, int>()
+    public Dictionary<string, int> intFlags = new Dictionary<string, int>()
     {
         { "TestingFlag1",0 },
         { "TestingFlag2",1 },
@@ -125,7 +125,7 @@ public class SaveData
         {"levelDataIndex", 1},
     };
 
-    public static Dictionary<string, string> stringFlags = new Dictionary<string, string>()
+    public Dictionary<string, string> stringFlags = new Dictionary<string, string>()
     {
         { "TestingFlag1","firstString" },
         { "TestingFlag2","secondString" },

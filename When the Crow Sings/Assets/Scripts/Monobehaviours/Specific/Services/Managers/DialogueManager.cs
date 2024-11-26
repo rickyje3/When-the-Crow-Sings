@@ -388,7 +388,7 @@ public class DialogueManager : MonoBehaviour, IService
     {
         if (i.dataType == DialogueCondition.DataType.BOOL)
         {
-            Dictionary<string, bool> dictionaryToCheck = SaveDataAccess.boolFlags;
+            Dictionary<string, bool> dictionaryToCheck = SaveDataAccess.saveData.boolFlags;
             bool result = false;
             if (i.logicType == DialogueCondition.LogicType.IF)
             {
@@ -408,7 +408,7 @@ public class DialogueManager : MonoBehaviour, IService
         }
         else if (i.dataType == DialogueCondition.DataType.STRING)
         {
-            Dictionary<string, string> dictionaryToCheck = SaveDataAccess.stringFlags;
+            Dictionary<string, string> dictionaryToCheck = SaveDataAccess.saveData.stringFlags;
             bool result = false;
             if (i.logicType == DialogueCondition.LogicType.IF)
             {
@@ -428,7 +428,7 @@ public class DialogueManager : MonoBehaviour, IService
         }
         else if (i.dataType == DialogueCondition.DataType.INT)
         {
-            Dictionary<string, int> dictionaryToCheck = SaveDataAccess.intFlags;
+            Dictionary<string, int> dictionaryToCheck = SaveDataAccess.saveData.intFlags;
             bool result = false;
             if (i.logicType == DialogueCondition.LogicType.IF)
             {
@@ -611,13 +611,13 @@ public class DialogueManager : MonoBehaviour, IService
             case DialogueMutation.OperatorType.PLUS_EQUALS:
                 if (mutation.dataType == DialogueMutation.DataType.INT)
                 {
-                    SaveDataAccess.SetFlag(mutation.actionKey, SaveDataAccess.intFlags[mutation.actionKey]+mutation.intData);
+                    SaveDataAccess.SetFlag(mutation.actionKey, SaveDataAccess.saveData.intFlags[mutation.actionKey]+mutation.intData);
                 }
                 break;
             case DialogueMutation.OperatorType.MINUS_EQUALS:
                 if (mutation.dataType == DialogueMutation.DataType.INT)
                 {
-                    SaveDataAccess.SetFlag(mutation.actionKey, SaveDataAccess.intFlags[mutation.actionKey] - mutation.intData);
+                    SaveDataAccess.SetFlag(mutation.actionKey, SaveDataAccess.saveData.intFlags[mutation.actionKey] - mutation.intData);
                 }
                 break;
         }
