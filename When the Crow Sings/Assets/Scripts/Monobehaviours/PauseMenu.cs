@@ -6,33 +6,41 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public Canvas pauseCanvas;
-
-    public GameSignal unpauseSignalTEMP;
-
-    private void Start()
+    public GameObject pauseMenuUI;
+    public InputManager inputManager;
+    public static bool isPaused
     {
-        pauseCanvas = GetComponent<Canvas>();
+        get
+        {
+            return Time.timeScale == 0f;
+        }
     }
 
-    public void resume()
+    public void OnPaused(SignalArguments args)
     {
-        unpauseSignalTEMP.Emit();
-        pauseCanvas.gameObject.SetActive(false);
-        //stateMachine.Enter("PlayerMovementState");
+        inputManager.EnablePlayerInput(false);
+        Time.timeScale = 0;
+        pauseMenuUI.SetActive(true);
     }
 
-    public void journal()
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        pauseMenuUI.SetActive(false);
+        inputManager.EnablePlayerInput(true);
+    }
+
+    public void Journal()
     {
         //journal activate here
     }
 
-    public void quitToMain()
+    public void QuitToMain()
     {
         SceneManager.LoadScene("MainMenuScene");
     }
 
-    public void quitquit()
+    public void QuitApplication()
     {
         Application.Quit();
     }

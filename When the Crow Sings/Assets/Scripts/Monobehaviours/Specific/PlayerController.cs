@@ -40,7 +40,6 @@ public class PlayerController : StateMachineComponent, IService
     [HideInInspector] public float crouchSpeed = 2f;
     public float slideSpeedCorrection = 0.19f;
     public CharacterController characterController;
-    public Canvas pauseCanvas;
 
     public GameSignal pauseSignalTEMP;
 
@@ -102,9 +101,7 @@ public class PlayerController : StateMachineComponent, IService
 
     private void OnPause(InputAction.CallbackContext context)
     {
-        pauseCanvas.gameObject.SetActive(true);
         pauseSignalTEMP.Emit();
-        Debug.Log("Paused");
     }
 
     public void OnDialogueStarted(SignalArguments signalArgs)
