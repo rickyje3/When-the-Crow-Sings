@@ -35,10 +35,12 @@ public class PlayerController : StateMachineComponent, IService
     [HideInInspector]
     public float gravityVelocity;
     [HideInInspector] public float maxWalkSpeed = 5f;
-    [HideInInspector] public float minWalkClamp = .5f;
-    [HideInInspector] public float sprintSpeed = 14f;
-    [HideInInspector] public float crouchSpeed = 2f;
-    public float slideSpeedCorrection = 0.19f;
+    [HideInInspector] public float minWalkSpeed = 2f;
+    [HideInInspector] public float minSprintSpeed = 5f;
+    [HideInInspector] public float maxSprintSpeed = 8f;
+    [HideInInspector] public float minCrouchSpeed = 1f;
+    [HideInInspector] public float maxCrouchSpeed = 2f;
+    public float slideSpeedCorrection = 0.19f; // Used for walk(?) animation.
     public CharacterController characterController;
 
     public GameSignal pauseSignalTEMP;

@@ -59,23 +59,40 @@ public class PlayerMovementState : StateMachineState
     {
         s.ApplyGravity(deltaTime);
         //Converts movement input to a float because vector3 cant be lerped :(((((
-        float inputMagnitude = Mathf.Clamp(s.movementInput.magnitude,s.minWalkClamp,1.0f);
-
-        if (s.isSprinting && !s.isCrouching)
+        float inputMagnitude = s.movementInput.magnitude;// = Mathf.Clamp(s.movementInput.magnitude,s.minWalkClamp,1.0f);
+        float stateSpeed = 0.0f;
+        float stateClamp = 0.0f;
+        if (s.isSprinting)
         {
-            if (useLerp) s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.sprintSpeed, Time.deltaTime * s.acceleration);
-            else s.speed = inputMagnitude * s.sprintSpeed;
+            if (useLerp) s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.maxSprintSpeed, Time.deltaTime * s.acceleration);
+            else
+            {
+                stateClamp = s.minSprintSpeed;
+                stateSpeed = s.maxSprintSpeed;
+            }
+                
         }
-        else if (!s.isSprinting && s.isCrouching)
+        else if (s.isCrouching)
         {
-            if (useLerp) s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.crouchSpeed, Time.deltaTime * s.acceleration);
-            else s.speed = inputMagnitude*s.crouchSpeed;
+            if (useLerp) s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.maxCrouchSpeed, Time.deltaTime * s.acceleration);
+            else
+            {
+                stateClamp = s.minCrouchSpeed;
+                stateSpeed = s.maxCrouchSpeed;
+            }
+                
         }
-        else if (!s.isSprinting && !s.isCrouching)
+        else
         {
             if (useLerp) s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.maxWalkSpeed, Time.deltaTime * s.acceleration);
-            else s.speed = inputMagnitude*s.maxWalkSpeed;
+            else
+            {
+                stateClamp = s.minWalkSpeed;
+                stateSpeed = s.maxWalkSpeed;
+            }
         }
+        Debug.Log(inputMagnitude);
+        s.speed = Mathf.Clamp(inputMagnitude * stateSpeed,stateClamp,stateSpeed);
         SetWalkAnimSpeed(s.speed);
 
         // move!!
