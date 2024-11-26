@@ -14,20 +14,20 @@ public class PlayerController : StateMachineComponent, IService
     [SerializeField]
     private BirdseedController pfBirdseedProjectile;
     [HideInInspector]
-    public bool isCrouching = false;
+    public bool isCrouchingToggled = false;
     //[HideInInspector]
 
-    private bool _isSprinting;
-    public bool isSprinting
-    {
-        set
-        {
-            _isSprinting = value;
-            if (playerAnimator != null) playerAnimator.SetBool("animIsSprinting", value);
+    //private bool _isSprinting;
+    public bool isSprintingButtonHeld;
+    //{
+    //    set
+    //    {
+    //        _isSprinting = value;
+    //        if (playerAnimator != null) playerAnimator.SetBool("animIsSprinting", value);
 
-        }
-        get { return _isSprinting; }
-    }
+    //    }
+    //    get { return _isSprinting; }
+    //}
     [HideInInspector]
     public float gravity = -9.81f;
     [HideInInspector]
@@ -64,7 +64,8 @@ public class PlayerController : StateMachineComponent, IService
 
         characterController = GetComponent<CharacterController>();
 
-        speed = 8;
+        // I don't know why this line is here, so it's just commented out.
+        //speed = 8;
 
         stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new PlayerFrozenState(this), "PlayerFrozenState");

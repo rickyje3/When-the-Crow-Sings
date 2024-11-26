@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerMovementState : StateMachineState
 {
@@ -49,7 +50,7 @@ public class PlayerMovementState : StateMachineState
         InputManager.playerInputActions.Player.Crouch.performed -= OnCrouched;
 
         s.playerAnimator.SetBool("animIsMoving", false);
-        s.isSprinting = false;
+        s.isSprintingButtonHeld = false;
         s.speed = 8;
     }
     public override void Update(float deltaTime)
@@ -59,16 +60,23 @@ public class PlayerMovementState : StateMachineState
         float inputMagnitude = s.movementInput.magnitude;// = Mathf.Clamp(s.movementInput.magnitude,s.minWalkClamp,1.0f);
         float stateClamp = s.minWalkSpeed;
         float stateSpeed = s.maxWalkSpeed;
-        if (s.isSprinting)
+        if (s.isCrouchingToggled)
         {
-            stateClamp = s.minSprintSpeed;
-            stateSpeed = s.maxSprintSpeed;   
-        }
-        else if (s.isCrouching)
-        {
+            s.playerAnimator.SetBool("animIsSprinting", false);
             stateClamp = s.minCrouchSpeed;
             stateSpeed = s.maxCrouchSpeed;
         }
+        else if (s.isSprintingButtonHeld && inputMagnitude > 0f)
+        {
+            s.playerAnimator.SetBool("animIsSprinting", true);
+            stateClamp = s.minSprintSpeed;
+            stateSpeed = s.maxSprintSpeed;   
+        }
+        else
+        {
+            s.playerAnimator.SetBool("animIsSprinting", false);
+        }
+        
        
         s.speed = Mathf.Clamp(inputMagnitude * stateSpeed,stateClamp,stateSpeed);
         Debug.Log(s.speed);
@@ -94,7 +102,6 @@ public class PlayerMovementState : StateMachineState
         else
         {
             s.playerAnimator.SetBool("animIsMoving", false);
-            s.isSprinting = false;
         }
 
     }
@@ -106,28 +113,27 @@ public class PlayerMovementState : StateMachineState
 
     private void OnSprint(InputAction.CallbackContext context)
     {
-        if (context.performed && !s.isCrouching)
+        if (context.performed)
         {
-            s.isSprinting = true;
-            //s.speed = s.sprintSpeed;
+            s.isSprintingButtonHeld = true;
         }
-        else if (context.canceled && !s.isCrouching)
+        else if (context.canceled)
         {
-            s.isSprinting = false;
+            s.isSprintingButtonHeld = false;
         }
     }
 
     private void OnCrouched(InputAction.CallbackContext context)
     {
-        s.isCrouching = !s.isCrouching;
-        s.playerAnimator.SetBool("animIsCrouching", s.isCrouching);
-        if (s.isCrouching)
+        s.isCrouchingToggled = !s.isCrouchingToggled;
+        s.playerAnimator.SetBool("animIsCrouching", s.isCrouchingToggled);
+        if (s.isCrouchingToggled)
         {
             //s.speed = 4;
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0);
             s.GetComponent<CapsuleCollider>().height = 2;
         }
-        else if(!s.isCrouching && !s.isSprinting)
+        else if(!s.isCrouchingToggled && !s.isSprintingButtonHeld)
         {
             s.playerAnimator.SetBool("animIsCrouching", false);
             //s.speed = 8;
