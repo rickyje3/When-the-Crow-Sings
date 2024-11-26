@@ -10,6 +10,8 @@ using System.Collections;
 
 public class GameStateManager : MonoBehaviour, IService
 {
+    public AllLevels allLevels;
+
     public MainMenuDebugLoadHolder mainMenuDebugLoadHolder;
 
     public GameObject _playerPrefab;
@@ -20,6 +22,8 @@ public class GameStateManager : MonoBehaviour, IService
     public GameSignal levelLoadFinishSignal;
 
     public GameSignal fullyFinishedLoadSignal;
+    
+
 
     public GameObject loadScreen;
 
@@ -42,12 +46,18 @@ public class GameStateManager : MonoBehaviour, IService
             SaveData.ReadData();
         }
 
+        LoadOnStart();
+
+    }
+
+    private void LoadOnStart()
+    {
         if (mainMenuDebugLoadHolder.resourceToLoad != null)
         {
             LoadRoom(mainMenuDebugLoadHolder.resourceToLoad);
         }
-        
     }
+
     private void Update()
     {
         //DebugLoadInput(); // Loads individual scenes via keyboard inputs. Hacky implementation of this.
@@ -124,6 +134,8 @@ public class GameStateManager : MonoBehaviour, IService
 
         yield return StartCoroutine(FadeLoadingScreen(false));
         fullyFinishedLoadSignal.Emit();
+
+        SaveData.SetFlag("levelDataIndex", allLevels.levelDataResources.IndexOf(levelDataResource));
         canLoad = true;
         
     }

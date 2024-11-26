@@ -51,6 +51,13 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(mainScene.Name);
     }
 
+    public void OnContinueButtonPressed()
+    {
+        int levelDataIndex = SaveData.intFlags["levelDataIndex"];
+        mainMenuDebugLoadHolder.resourceToLoad = allLevels.levelDataResources[levelDataIndex];
+        SceneManager.LoadScene(mainScene.Name);
+    }
+
     public void quitGame()
     {
         Application.Quit();
