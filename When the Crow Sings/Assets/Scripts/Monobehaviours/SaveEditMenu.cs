@@ -53,4 +53,12 @@ public class SaveEditMenu : MonoBehaviour
     {
         StartCoroutine(SaveData.EraseData());
     }
+    public void OnResetButtonPressed()
+    {
+        Debug.Log("Reset save data!");
+    }
+    public void OnLoadDataButtonPressed()
+    {
+        Debug.Log("Loaded save data from disk!");
+    }
 }
