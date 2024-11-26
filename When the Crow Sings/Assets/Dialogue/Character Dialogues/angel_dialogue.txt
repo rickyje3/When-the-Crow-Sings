@@ -96,7 +96,10 @@ Angel_Smile: No problem! Don't be a stranger!
 Angel_Stare: I mean, I'll see you at mealtime anyway, but. . .
 Angel_Smile: Bye!
 set timeOfDay += 1;
-call ReloadScene(6);
+if timeOfDay == 3:
+	call ReloadScene(0);
+else:
+	call ReloadScene(6);
 => END
 
 ~ angel_demo_talk

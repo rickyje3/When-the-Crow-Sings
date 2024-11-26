@@ -36,6 +36,7 @@ if day == 3:
 	A glowing pink flower. It's dripping some luminous mucus type substance.
 	=> END
 else:
+	Uhoh! You escaped time!!
 	=> END
 
 ~ shiny_dirt
@@ -122,8 +123,9 @@ if benchcounter == 3:
 	Once I figure out what's going on and stop getting stalked by some purple hellscape beast, I will spend so much time sitting on this bench.
 if benchcounter == 4:
 	This town is full of monsters. How can you just sit there?
-if benchcounter == 5:
+else:
 	Enough bench.
+	=> END
 set benchcounter += 1;
 => END
 
