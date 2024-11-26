@@ -224,10 +224,13 @@ public class DialogueManager : MonoBehaviour, IService
         //EventSystem.current.SetSelectedGameObject(dialogueChoiceButtons[0].gameObject);
         choiceButtonsMBHS.enabled = true;
         nextButtonMBHS.enabled = false;
+
+        SetDefaultChancePortrait();
     }
     private void DisableChoiceButtons()
     {
         dialogueChoiceButtonsHolder.SetActive(false);
+        playerImageUi.gameObject.SetActive(false);
         nextButton.SetActive(true);
         //EventSystem.current.SetSelectedGameObject(nextButton);
         choiceButtonsMBHS.enabled = false;
@@ -538,6 +541,12 @@ public class DialogueManager : MonoBehaviour, IService
             activeImageObject.gameObject.SetActive(false);
         }
 
+    }
+
+    void SetDefaultChancePortrait()
+    {
+        playerImageUi.gameObject.SetActive(true);
+        playerImageUi.sprite = dialoguePortraits.GetPortrait("Chance", Constants.EMOTIONS.DEFAULT);
     }
 
     void DoMutationLogic(DialogueMutation mutation)
