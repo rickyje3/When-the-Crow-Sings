@@ -388,7 +388,7 @@ public class DialogueManager : MonoBehaviour, IService
     {
         if (i.dataType == DialogueCondition.DataType.BOOL)
         {
-            Dictionary<string, bool> dictionaryToCheck = SaveData.boolFlags;
+            Dictionary<string, bool> dictionaryToCheck = SaveDataAccess.boolFlags;
             bool result = false;
             if (i.logicType == DialogueCondition.LogicType.IF)
             {
@@ -408,7 +408,7 @@ public class DialogueManager : MonoBehaviour, IService
         }
         else if (i.dataType == DialogueCondition.DataType.STRING)
         {
-            Dictionary<string, string> dictionaryToCheck = SaveData.stringFlags;
+            Dictionary<string, string> dictionaryToCheck = SaveDataAccess.stringFlags;
             bool result = false;
             if (i.logicType == DialogueCondition.LogicType.IF)
             {
@@ -428,7 +428,7 @@ public class DialogueManager : MonoBehaviour, IService
         }
         else if (i.dataType == DialogueCondition.DataType.INT)
         {
-            Dictionary<string, int> dictionaryToCheck = SaveData.intFlags;
+            Dictionary<string, int> dictionaryToCheck = SaveDataAccess.intFlags;
             bool result = false;
             if (i.logicType == DialogueCondition.LogicType.IF)
             {
@@ -573,12 +573,12 @@ public class DialogueManager : MonoBehaviour, IService
                 else if (mutation.stringData == "SaveGameToDisk()")
                 {
                     Debug.Log("Saved!");
-                    SaveData.WriteData();
+                    SaveDataAccess.WriteData();
                 }
                 else if (mutation.stringData == "EraseGameFromDisk()")
                 {
                     Debug.Log("Erased!");
-                    StartCoroutine(SaveData.EraseData());
+                    StartCoroutine(SaveDataAccess.EraseData());
                 }
                 else
                 {
@@ -598,26 +598,26 @@ public class DialogueManager : MonoBehaviour, IService
                 switch (mutation.dataType)
                 {
                     case DialogueMutation.DataType.STRING:
-                        SaveData.SetFlag(mutation.actionKey, mutation.stringData);
+                        SaveDataAccess.SetFlag(mutation.actionKey, mutation.stringData);
                         break;
                     case DialogueMutation.DataType.INT:
-                        SaveData.SetFlag(mutation.actionKey, mutation.intData);
+                        SaveDataAccess.SetFlag(mutation.actionKey, mutation.intData);
                         break;
                     case DialogueMutation.DataType.BOOL:
-                        SaveData.SetFlag(mutation.actionKey,mutation.boolData);
+                        SaveDataAccess.SetFlag(mutation.actionKey,mutation.boolData);
                         break;
                 }
                 break;
             case DialogueMutation.OperatorType.PLUS_EQUALS:
                 if (mutation.dataType == DialogueMutation.DataType.INT)
                 {
-                    SaveData.SetFlag(mutation.actionKey, SaveData.intFlags[mutation.actionKey]+mutation.intData);
+                    SaveDataAccess.SetFlag(mutation.actionKey, SaveDataAccess.intFlags[mutation.actionKey]+mutation.intData);
                 }
                 break;
             case DialogueMutation.OperatorType.MINUS_EQUALS:
                 if (mutation.dataType == DialogueMutation.DataType.INT)
                 {
-                    SaveData.SetFlag(mutation.actionKey, SaveData.intFlags[mutation.actionKey] - mutation.intData);
+                    SaveDataAccess.SetFlag(mutation.actionKey, SaveDataAccess.intFlags[mutation.actionKey] - mutation.intData);
                 }
                 break;
         }

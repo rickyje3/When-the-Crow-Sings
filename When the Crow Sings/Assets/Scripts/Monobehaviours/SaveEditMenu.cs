@@ -14,7 +14,7 @@ public class SaveEditMenu : MonoBehaviour
         float boolHeight = 0;
         float additionalSpacing = 30 + boolContentHolder.GetComponent<VerticalLayoutGroup>().spacing;
 
-        foreach (KeyValuePair<string, bool> i in SaveData.boolFlags)
+        foreach (KeyValuePair<string, bool> i in SaveDataAccess.boolFlags)
         {
             AddBoolFlagPrefab(i);
             boolHeight += additionalSpacing;
@@ -22,7 +22,7 @@ public class SaveEditMenu : MonoBehaviour
         boolContentHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(0, boolHeight);
         
         float intHeight = 0;
-        foreach (KeyValuePair<string, int> i in SaveData.intFlags)
+        foreach (KeyValuePair<string, int> i in SaveDataAccess.intFlags)
         {
             if (i.Key == "penguin_cult") continue;
             AddIntFlagPrefab(i);
@@ -47,11 +47,11 @@ public class SaveEditMenu : MonoBehaviour
 
     public void OnSaveButtonPressed()
     {
-        SaveData.WriteData();
+        SaveDataAccess.WriteData();
     }
     public void OnWipeSaveButtonPressed()
     {
-        StartCoroutine(SaveData.EraseData());
+        StartCoroutine(SaveDataAccess.EraseData());
     }
     public void OnResetButtonPressed()
     {

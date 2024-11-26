@@ -41,9 +41,9 @@ public class GameStateManager : MonoBehaviour, IService
     {
         GetLoadedScenes(); // I THINK there was a reason for this to be here??
 
-        if (SaveData.SavedDataExists())
+        if (SaveDataAccess.SavedDataExists())
         {
-            SaveData.ReadData();
+            SaveDataAccess.ReadData();
         }
 
         LoadOnStart();
@@ -135,7 +135,7 @@ public class GameStateManager : MonoBehaviour, IService
         yield return StartCoroutine(FadeLoadingScreen(false));
         fullyFinishedLoadSignal.Emit();
 
-        SaveData.SetFlag("levelDataIndex", allLevels.levelDataResources.IndexOf(levelDataResource));
+        SaveDataAccess.SetFlag("levelDataIndex", allLevels.levelDataResources.IndexOf(levelDataResource));
         canLoad = true;
         
     }
@@ -245,7 +245,7 @@ public class GameStateManager : MonoBehaviour, IService
                 {
                     if (ii.valueType == SubSceneLogicBase.VALUE_TYPE.BOOL)
                     {
-                        bool boolFlag = SaveData.boolFlags[ii.associatedDataKey];
+                        bool boolFlag = SaveDataAccess.boolFlags[ii.associatedDataKey];
                         if (ii.boolValue != boolFlag)
                         {
                             shouldContinue = true;
@@ -254,7 +254,7 @@ public class GameStateManager : MonoBehaviour, IService
 
                     else if (ii.valueType == SubSceneLogicBase.VALUE_TYPE.INT)
                     {
-                        int intFlag = SaveData.intFlags[ii.associatedDataKey];
+                        int intFlag = SaveDataAccess.intFlags[ii.associatedDataKey];
 
                         if (ii.associatedOperator == SubSceneLogicBase.OPERATOR.EQUALS)
                         {
