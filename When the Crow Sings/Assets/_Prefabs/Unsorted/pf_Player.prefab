@@ -843,18 +843,23 @@ MonoBehaviour:
   playerAnimator: {fileID: 6581866930302715867}
   pfBirdseedProjectile: {fileID: 6028207027951552103, guid: 7ce579de01b4ca149902ac291e1b93f5,
     type: 3}
-  isCrouching: 0
+  isCrouchingToggled: 0
+  isSprintingButtonHeld: 0
   gravity: -9.81
   gravityMultiplier: 3
   gravityVelocity: 0
   maxWalkSpeed: 5
-  minWalkClamp: 0.5
-  sprintSpeed: 14
-  crouchSpeed: 2
-  slideSpeedCorrection: 0.19
+  minWalkSpeed: 2
+  minSprintSpeed: 9
+  maxSprintSpeed: 14
+  minCrouchSpeed: 1.5
+  maxCrouchSpeed: 3.5
+  walkSlideSpeedCorrection: 0.19
+  crouchSlideSpeedCorrection: 0.24
+  sprintSlideSpeedCorrection: 0.07
   characterController: {fileID: 5870364044150093514}
   pauseSignalTEMP: {fileID: 11400000, guid: 46f67eb6b653cbe4a992cc406e4dbbb6, type: 2}
-  speed: 8
+  speed: 0
   movementInput: {x: 0, y: 0, z: 0}
   acceleration: 5
 --- !u!114 &4532223004577938253
