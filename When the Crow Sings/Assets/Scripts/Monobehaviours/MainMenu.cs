@@ -51,8 +51,21 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(mainScene.Name);
     }
 
+    public void OnNewGameButtonPressed()
+    {
+        SaveDataAccess.EraseDataFromDisk();
+        SaveDataAccess.ResetSaveData();
+        mainMenuDebugLoadHolder.resourceToLoad = allLevels.levelDataResources[1];
+        SceneManager.LoadScene(mainScene.Name);
+    }
+
     public void OnContinueButtonPressed()
     {
+        if (SaveDataAccess.SavedDataExists())
+        {
+            SaveDataAccess.ReadDataFromDisk();
+        }
+
         int levelDataIndex = SaveDataAccess.saveData.intFlags["levelDataIndex"];
         mainMenuDebugLoadHolder.resourceToLoad = allLevels.levelDataResources[levelDataIndex];
         SceneManager.LoadScene(mainScene.Name);

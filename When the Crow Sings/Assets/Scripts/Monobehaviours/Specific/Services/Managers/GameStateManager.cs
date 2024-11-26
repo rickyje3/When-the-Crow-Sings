@@ -41,10 +41,10 @@ public class GameStateManager : MonoBehaviour, IService
     {
         GetLoadedScenes(); // I THINK there was a reason for this to be here??
 
-        if (SaveDataAccess.SavedDataExists())
-        {
-            SaveDataAccess.ReadDataFromDisk();
-        }
+        //if (SaveDataAccess.SavedDataExists())
+        //{
+        //    SaveDataAccess.ReadDataFromDisk();
+        //}
 
         LoadOnStart();
 
