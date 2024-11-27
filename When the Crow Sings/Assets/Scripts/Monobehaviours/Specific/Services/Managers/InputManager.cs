@@ -34,10 +34,13 @@ public class InputManager : MonoBehaviour, IService
 
     private void OnInputActionForDeviceDetermination(object obj, InputActionChange context)
     {
-        InputAction receivedInputAction = (InputAction)obj;
-        InputDevice lastDevice = receivedInputAction.activeControl.device;
-        if (lastDevice.name.Equals("Keyboard") || lastDevice.name.Equals("Mouse")) inputDevice = InputDevices.MOUSE_AND_KEYBOARD;
-        else inputDevice = InputDevices.GAMEPAD;
+        if (context == InputActionChange.ActionPerformed)
+        {
+            InputAction receivedInputAction = (InputAction)obj;
+            InputDevice lastDevice = receivedInputAction.activeControl.device;
+            if (lastDevice.name.Equals("Keyboard") || lastDevice.name.Equals("Mouse")) inputDevice = InputDevices.MOUSE_AND_KEYBOARD;
+            else inputDevice = InputDevices.GAMEPAD;
+        }
     }
 
     private void Awake()

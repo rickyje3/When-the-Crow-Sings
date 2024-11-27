@@ -6,9 +6,16 @@ public class ThrowTarget : MonoBehaviour
 {
     public Transform player;
     public float radius = 5.0f;
+
+    [HideInInspector]
+    public Vector2 controllerInput = new Vector2();
+    Vector3 direction = new Vector3();
+
+    public float controllerSpeedOffset = 0.1f;
     private void Update()
     {
-        Vector3 direction = CameraManager.mouseWorldPosition - player.position;
+        if (InputManager.inputDevice == InputManager.InputDevices.MOUSE_AND_KEYBOARD) direction = CameraManager.mouseWorldPosition - player.position;
+        else direction += new Vector3(controllerInput.x* controllerSpeedOffset, 0,controllerInput.y* controllerSpeedOffset);
 
         if (direction.magnitude > radius)
         {
