@@ -13,9 +13,9 @@ public class BirdBrain : StateMachineComponent
     public Transform restPoint;
 
     [HideInInspector]
-    public bool targetIsTargetNotSpawn;
+    public bool targetIsTargetNotSpawn; // Determines whether TargetState should focus on birdseed or spawn.
     [HideInInspector]
-    public bool idleWaitingAfterPecking;
+    public bool idleWaitingAfterPecking; // Determines whether the idle state should be of infinite length or return to dispersal after a short wait.
 
     private void Awake()
     {
