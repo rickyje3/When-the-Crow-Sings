@@ -12,6 +12,11 @@ public class BirdBrain : StateMachineComponent
     [HideInInspector]
     public Transform restPoint;
 
+    [HideInInspector]
+    public bool targetIsTargetNotSpawn;
+    [HideInInspector]
+    public bool idleWaitingAfterPecking;
+
     private void Awake()
     {
         stateMachine = new StateMachine(this);
@@ -30,9 +35,15 @@ public class BirdBrain : StateMachineComponent
         // if raycast detects surface AND that surface is NOT the destination, then navigate away.
     }
 
+    public void SetTargetAsTarget(bool _target)
+    {
+        targetIsTargetNotSpawn = _target;
+        stateMachine.Enter("CrowTargetState");
+    }
+
     public void OnCrowTargetActivated(SignalArguments args)
     {
-        stateMachine.Enter("CrowTargetState");
+        SetTargetAsTarget(true);
     }
     public void OnCrowTargetDeactivated(SignalArguments args)
     {

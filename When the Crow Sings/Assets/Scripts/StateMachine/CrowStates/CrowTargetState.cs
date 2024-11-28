@@ -19,6 +19,7 @@ public class CrowTargetState : StateMachineState
     }
     public override void StateEntered()
     {
-        destination = s.crowHolder.CrowTarget.transform.position;
+        if (s.targetIsTargetNotSpawn) destination = s.crowHolder.CrowTarget.transform.position;
+        else destination = s.restPoint.transform.position;
     }
 }
