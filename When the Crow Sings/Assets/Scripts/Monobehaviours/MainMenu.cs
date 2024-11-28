@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using FMOD.Studio;
 
 public class MainMenu : MonoBehaviour
 {
@@ -21,11 +22,17 @@ public class MainMenu : MonoBehaviour
     public GameObject newGameButtons;
     public GameObject mainMenuPage;
 
+    private EventInstance MainMenuTheme;
+
     private void Awake()
     {
         PopulateSceneLoadDebugButtons();
 
+        MainMenuTheme = AudioManager.instance.CreateEventInstance(FMODEvents.instance.MainMenuTheme);
+
         mainMenuDebugLoadHolder.resourceToLoad = null; // I don't remember what this does exactly but it's important.
+
+        updateMusic();
     }
 
     private void PopulateSceneLoadDebugButtons()
@@ -43,11 +50,13 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuDebugLoadHolder.resourceToLoad = levelDataResource;
         SceneManager.LoadScene(mainScene.Name);
+        //updateMusic();
     }
 
     public void OnNewGameButtonPressed()
     {
         StartCoroutine(NewGame());
+        //updateMusic();
     }
 
     public void OnContinueButtonPressed()
@@ -60,6 +69,7 @@ public class MainMenu : MonoBehaviour
         int levelDataIndex = SaveDataAccess.saveData.intFlags["levelDataIndex"];
         mainMenuDebugLoadHolder.resourceToLoad = allLevels.levelDataResources[levelDataIndex];
         SceneManager.LoadScene(mainScene.Name);
+        //updateMusic();
     }
 
     IEnumerator NewGame()
@@ -73,5 +83,21 @@ public class MainMenu : MonoBehaviour
     public void quitGame()
     {
         Application.Quit();
+    }
+
+    private void updateMusic()
+    {
+        PLAYBACK_STATE playbackState;
+        MainMenuTheme.getPlaybackState(out playbackState);
+        if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+        {
+            MainMenuTheme.start();
+            Debug.Log("Starting main menu theme");
+        }
+        else
+        {
+            MainMenuTheme.stop(STOP_MODE.ALLOWFADEOUT);
+            Debug.Log("Stopping main menu theme");
+        }
     }
 }

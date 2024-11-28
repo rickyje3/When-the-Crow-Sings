@@ -43,6 +43,7 @@ public class BirdseedController : MonoBehaviour
         SignalArguments args = new SignalArguments();
         args.objectArgs.Add(this);
         birdseedLanded.Emit(args);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.CrowCocophony, this.transform.position);
 
         if (ServiceLocator.Get<GameManager>().activeBirdseed != this) Destroy(gameObject, birdseedLifeAfterGround);
     }
@@ -71,6 +72,7 @@ public class BirdseedController : MonoBehaviour
                 firstTime = true;
                 isLanded = true;
                 GetComponent<Rigidbody>().velocity *= 0.05f;
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.SeedHit, this.transform.position);
                 StartCoroutine(SpawnCrows());
             }
         }
