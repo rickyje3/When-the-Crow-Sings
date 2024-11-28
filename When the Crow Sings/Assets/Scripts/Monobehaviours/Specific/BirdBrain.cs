@@ -30,9 +30,12 @@ public class BirdBrain : StateMachineComponent
         stateMachine.Enter("CrowIdleState");
     }
 
+    [HideInInspector]
+    public Vector3 destination, dir;
     public void FlyNavigate()
     {
         // if raycast detects surface AND that surface is NOT the destination, then navigate away.
+        controller.Move(dir);//*Time.deltaTime);
     }
 
     public void SetTargetAsTarget(bool _target)
