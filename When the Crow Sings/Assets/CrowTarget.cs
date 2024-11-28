@@ -24,16 +24,16 @@ public class CrowTarget : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<BirdBrain>() != null && !isDisableAfterTimeRunning)
+        if (other.GetComponent<BirdBrain>() != null)
         {
-            StartCoroutine(DisableAfterTime());
+            //other.GetComponent<BirdBrain>().stateMachine.Enter("CrowPeckState");
+            if (!isDisableAfterTimeRunning) StartCoroutine(DisableAfterTime());
         }
     }
 
     bool isDisableAfterTimeRunning = true;
     IEnumerator DisableAfterTime()
     {
-        Debug.Log("Countdown beginning.");
         isDisableAfterTimeRunning = true;
         yield return new WaitForSeconds(SecondsToAttractCrows);
         isActiveTarget = false;

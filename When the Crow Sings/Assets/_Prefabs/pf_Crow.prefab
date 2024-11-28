@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7269275418895521287}
   - component: {fileID: 7491101395590694452}
   - component: {fileID: 3841574232447091061}
+  - component: {fileID: 3650327899952369636}
+  - component: {fileID: 4066688519271929169}
   m_Layer: 11
   m_Name: pf_Crow
   m_TagString: Untagged
@@ -55,6 +57,8 @@ MonoBehaviour:
   restPoint: {fileID: 0}
   targetIsTargetNotSpawn: 0
   idleWaitingAfterPecking: 0
+  destination: {x: 0, y: 0, z: 0}
+  dir: {x: 0, y: 0, z: 0}
 --- !u!143 &7269275418895521287
 CharacterController:
   m_ObjectHideFlags: 0
@@ -137,6 +141,56 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!54 &3650327899952369636
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7616777099089193631}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &4066688519271929169
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7616777099089193631}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.31
+  m_Height: 1.95
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6337601523960709371
 PrefabInstance:
   m_ObjectHideFlags: 0

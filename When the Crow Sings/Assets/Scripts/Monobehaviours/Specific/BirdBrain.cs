@@ -10,7 +10,7 @@ public class BirdBrain : StateMachineComponent
     public float secondsToPeck;
 
     [HideInInspector]
-    public Transform restPoint;
+    public CrowRestPoint restPoint;
 
     [HideInInspector]
     public bool targetIsTargetNotSpawn; // Determines whether TargetState should focus on birdseed or spawn.
@@ -41,7 +41,7 @@ public class BirdBrain : StateMachineComponent
     public void SetTargetAsTarget(bool _target)
     {
         targetIsTargetNotSpawn = _target;
-        stateMachine.Enter("CrowTargetState");
+        stateMachine.Enter("CrowScatterState");
     }
 
     public void OnCrowTargetActivated(SignalArguments args)
@@ -50,13 +50,19 @@ public class BirdBrain : StateMachineComponent
     }
     public void OnCrowTargetDeactivated(SignalArguments args)
     {
-        stateMachine.Enter("CrowScatterState");
+        SetTargetAsTarget(false);
     }
 
-    public void SetRestPoint(Transform _restPoint)
+    public void SetRestPoint(CrowRestPoint _restPoint)
     {
         restPoint = _restPoint;
-        transform.position = restPoint.position;
+        //transform.position = restPoint.position;
         // TODO: Add rotation.
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<CrowRestPoint>() == restPoint && !targetIsTargetNotSpawn) stateMachine.Enter("CrowIdleState");
+        if (other.GetComponent<CrowTarget>() && targetIsTargetNotSpawn) stateMachine.Enter("CrowPeckState");
     }
 }
