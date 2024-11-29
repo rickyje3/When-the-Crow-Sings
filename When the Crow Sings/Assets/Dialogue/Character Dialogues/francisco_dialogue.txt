@@ -58,7 +58,7 @@ Chance: . . .
 ~ francisco_first_int_cont_2
 Chance: Um, do you need help?
 Francisco_Excited: Ah! Yes! You want something, I need something. I need to get a medley put together for the little one, but I'm missing an ingredient. You get me the ingredient, I tell you what you need to know. Sound like a deal?
--I guess so.
+- I guess so.
 	set FranciscoTaskAccepted = true;
 	set FranciscoTaskOn = true;
 	Chance: I guess so. What do you need?
@@ -66,7 +66,7 @@ Francisco_Excited: Ah! Yes! You want something, I need something. I need to get 
 	Francisco_Excited: They're a little spiky though, so be careful while picking them. Three plants worth will do. If I remember right, there's still a good amount by the north west fence where the kids play.
 	Chance: Alright, I'll be back.
 	=> END
--Maybe later.
+- Maybe later.
 	Chance: I can't right now, maybe later. 
 	=> END
 
@@ -96,6 +96,7 @@ Francisco: Oh you're back! You've got what I asked for?
 
 ~francisco_task_fin
 set FranciscoBaseCompleted = true;
+set EnergyHQDoorUnlocked = true;
 Francisco: Ah, perfect timing. You've got what I asked for?
 Chance: Yeah, here you go.
 Francisco_Excited: You know, this herb is something that has been used in this area for centuries. A long time ago, it even almost went extinct.
