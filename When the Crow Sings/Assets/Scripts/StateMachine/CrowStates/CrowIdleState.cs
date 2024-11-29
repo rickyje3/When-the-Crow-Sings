@@ -13,13 +13,7 @@ public class CrowIdleState : StateMachineState
 
     public override void StateEntered()
     {
-        //s.StartCoroutine(ExitStateAfterTime());
-        
-    }
-
-    IEnumerator ExitStateAfterTime()
-    {
-        yield return new WaitForSeconds(1);
-        s.stateMachine.Enter("CrowScatterState");
+        s.transform.SetPositionAndRotation(s.restPoint.transform.position,s.restPoint.transform.rotation);
+        Debug.Log("Time to idle...");
     }
 }
