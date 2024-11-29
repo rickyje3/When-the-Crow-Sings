@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class StirringQTE : QuickTimeEvent
 {
+
     public GameObject displayBox;
     private int currentStep = 0;
     private bool correctKey;
@@ -55,7 +56,7 @@ public class StirringQTE : QuickTimeEvent
         // Check for QTE completion
         if (score >= slider.maxValue)
         {
-            qteInteractable.audioSource.PlayOneShot(qteInteractable.successSound);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.QteSucceeded, this.transform.position);
             SucceedQTE();
         }
 
@@ -68,7 +69,7 @@ public class StirringQTE : QuickTimeEvent
         else if (timer <= 0)
         {
             Debug.Log("Time is up, QTE Failed");
-            qteInteractable.audioSource.PlayOneShot(qteInteractable.failSound);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.QteFailed, this.transform.position);
             FailQTE();
         }
     }
