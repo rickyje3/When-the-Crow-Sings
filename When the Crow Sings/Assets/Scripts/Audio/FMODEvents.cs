@@ -58,6 +58,6 @@ public class FMODEvents : MonoBehaviour
         AreaMusic = music;
         Ambience = ambience;
 
-        Debug.Log($"Dynamic assignment: Music = {music.Path}, Ambience = {ambience.Path}");
+        //Debug.Log($"Dynamic assignment: Music = {music.Path}, Ambience = {ambience.Path}");
     }
 }
