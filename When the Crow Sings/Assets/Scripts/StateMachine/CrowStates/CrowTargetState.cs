@@ -10,15 +10,14 @@ public class CrowTargetState : StateMachineState
         s = birdBrain;
     }
 
-    Vector3 destination;
-    Vector3 dir;
     public override void FixedUpdate()
     {
-        dir = (destination - s.transform.position)*.01f;
-        s.controller.Move(dir);//*Time.deltaTime);
+        s.dir = (s.destination - s.transform.position)*.01f;
+        s.FlyNavigate();
     }
     public override void StateEntered()
     {
-        destination = s.crowHolder.CrowTarget.transform.position;
+        if (s.targetIsTargetNotSpawn) s.destination = s.crowHolder.CrowTarget.transform.position;
+        else s.destination = s.restPoint.transform.position;
     }
 }

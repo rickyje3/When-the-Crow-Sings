@@ -14,32 +14,39 @@ public class PlayerController : StateMachineComponent, IService
     [SerializeField]
     private BirdseedController pfBirdseedProjectile;
     [HideInInspector]
-    public bool isCrouching = false;
+    public bool isCrouchingToggled = false;
     //[HideInInspector]
 
-    private bool _isSprinting;
-    public bool isSprinting
-    {
-        set
-        {
-            _isSprinting = value;
-            if (playerAnimator != null) playerAnimator.SetBool("animIsSprinting", value);
+    //private bool _isSprinting;
+    public bool isSprintingButtonHeld;
+    //{
+    //    set
+    //    {
+    //        _isSprinting = value;
+    //        if (playerAnimator != null) playerAnimator.SetBool("animIsSprinting", value);
 
-        }
-        get { return _isSprinting; }
-    }
+    //    }
+    //    get { return _isSprinting; }
+    //}
     [HideInInspector]
     public float gravity = -9.81f;
     [HideInInspector]
     public float gravityMultiplier = 3f;
     [HideInInspector]
     public float gravityVelocity;
-    [HideInInspector] public float maxWalkSpeed = 5f;
-    [HideInInspector] public float minWalkClamp = .5f;
-    [HideInInspector] public float sprintSpeed = 14f;
-    public float slideSpeedCorrection = 0.19f;
+
+    public float maxWalkSpeed;
+    public float minWalkSpeed;
+    public float minSprintSpeed;
+    public float maxSprintSpeed;
+    public float minCrouchSpeed;
+    public float maxCrouchSpeed;
+
+    public float walkSlideSpeedCorrection = 0.19f; // Used for walk(?) animation.
+    public float crouchSlideSpeedCorrection = 0.19f; // Used for walk(?) animation.
+    public float sprintSlideSpeedCorrection = 0.19f; // Used for walk(?) animation.
+
     public CharacterController characterController;
-    public Canvas pauseCanvas;
 
     public GameSignal pauseSignalTEMP;
 
@@ -60,7 +67,8 @@ public class PlayerController : StateMachineComponent, IService
 
         characterController = GetComponent<CharacterController>();
 
-        speed = 8;
+        // I don't know why this line is here, so it's just commented out.
+        //speed = 8;
 
         stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new PlayerFrozenState(this), "PlayerFrozenState");
@@ -101,9 +109,7 @@ public class PlayerController : StateMachineComponent, IService
 
     private void OnPause(InputAction.CallbackContext context)
     {
-        pauseCanvas.gameObject.SetActive(true);
         pauseSignalTEMP.Emit();
-        Debug.Log("Paused");
     }
 
     public void OnDialogueStarted(SignalArguments signalArgs)

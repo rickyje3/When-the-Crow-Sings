@@ -20,6 +20,7 @@ public class EnemyChaseState : EnemyState
     }
     public override void StateEntered()
     {
+        s.navMeshAgent.speed = s.pursuitSpeed;
         s.enemyAnimator.SetBool("animChase", true);
         Debug.Log("Pursue!");
     }

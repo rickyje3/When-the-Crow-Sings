@@ -103,7 +103,7 @@ public class TimingMeterQTE : QuickTimeEvent
             {
                 Debug.Log("Successful QTE");
                 //RandomizeMeter();
-                qteInteractable.audioSource.PlayOneShot(qteInteractable.successSound);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.QteSucceeded, this.transform.position);
                 SucceedQTE();
             }
             else if (winCounter > winCount)
@@ -111,7 +111,7 @@ public class TimingMeterQTE : QuickTimeEvent
                 Debug.Log("Else ifed");
                 RandomizeMeter();
                 SetTargetRangeMarkers();
-                qteInteractable.audioSource.PlayOneShot(qteInteractable.successSound);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.QteSucceeded, this.transform.position);
             }
         }
         else
@@ -119,7 +119,7 @@ public class TimingMeterQTE : QuickTimeEvent
             Debug.Log("Failed QTE");
             //SetTargetRangeMarkers();
             //RandomizeMeter();
-            qteInteractable.audioSource.PlayOneShot(qteInteractable.failSound);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.QteFailed, this.transform.position);
             FailQTE();
         }
     }

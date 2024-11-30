@@ -8,6 +8,7 @@ using System;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 public class DialogueManager : MonoBehaviour, IService
 {
@@ -25,6 +26,7 @@ public class DialogueManager : MonoBehaviour, IService
     [SerializeField] private GameObject nextButton;
     public Image npcImageUi;
     public Image playerImageUi;
+    public Image nameBox;
     public DialoguePortraits dialoguePortraits;
 
     [Header("Signals")]
@@ -52,6 +54,11 @@ public class DialogueManager : MonoBehaviour, IService
     {
         ServiceLocator.Register<DialogueManager>(this);
     }
+
+    void Start()
+    {
+        if (PlayerPrefs.HasKey("textSpeed")) textSpeed = PlayerPrefs.GetFloat("textSpeed");
+    }
     #endregion
 
 
@@ -78,6 +85,7 @@ public class DialogueManager : MonoBehaviour, IService
         DialogueParser parser = new DialogueParser(dialogueResource);
         DialogueTitle tempHolderForTheTargetIndex = dialogueResource.dialogueLines.OfType<DialogueTitle>().ToList().Find(x => x.titleName == signalArgs.stringArgs[0]); // TODO: Error if no title is found. Though maybe the built-in ones are clear enough.
 
+        canSkip = false;
         ControlLineBehavior(tempHolderForTheTargetIndex.titleIndex, tempHolderForTheTargetIndex.tabCount);
 
     }
@@ -120,6 +128,8 @@ public class DialogueManager : MonoBehaviour, IService
             DialogueResponse newLine2 = (DialogueResponse)newLine;
             //Debug.Log(newLine2.dialogue);
             nameText.text = newLine2.characterName;
+            if (nameText.text == "") nameBox.enabled = false;
+            else nameBox.enabled = true;
 
             SetPortraits(newLine2);
 
@@ -205,18 +215,26 @@ public class DialogueManager : MonoBehaviour, IService
 
         
     }
-
+    public MenuButtonHighlightSelector choiceButtonsMBHS;
+    public MenuButtonHighlightSelector nextButtonMBHS;
     void EnableChoiceButtons()
     {
         nextButton.SetActive(false);
         dialogueChoiceButtonsHolder.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(dialogueChoiceButtons[0].gameObject);
+        //EventSystem.current.SetSelectedGameObject(dialogueChoiceButtons[0].gameObject);
+        choiceButtonsMBHS.enabled = true;
+        nextButtonMBHS.enabled = false;
+
+        SetDefaultChancePortrait();
     }
     private void DisableChoiceButtons()
     {
         dialogueChoiceButtonsHolder.SetActive(false);
+        playerImageUi.gameObject.SetActive(false);
         nextButton.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(nextButton);
+        //EventSystem.current.SetSelectedGameObject(nextButton);
+        choiceButtonsMBHS.enabled = false;
+        nextButtonMBHS.enabled = true;
     }
 
     private void SetChoiceButtons()
@@ -277,19 +295,25 @@ public class DialogueManager : MonoBehaviour, IService
             else
             {
                 float pauseBetweenChars = textSpeed;
-                char character = textMesh.text[Mathf.Clamp(textMesh.maxVisibleCharacters - 1, 0, textMesh.text.Length)];
+                int characterIndex = Mathf.Clamp(textMesh.maxVisibleCharacters - 1, 0, textMesh.text.Length);
+                char character = textMesh.text[characterIndex];
+                //char previousCharacter = 'x';
+                //char nextCharacter = 'x';
+                //if (characterIndex -1 >= 0) previousCharacter = textMesh.text[characterIndex-1];
+                //if (characterIndex+1 <= textMesh.maxVisibleCharacters-1) nextCharacter = textMesh.text[characterIndex + 1];
                 foreach (char i in ".!?")
                 {
-                    if (character == i)
+                    if (character == i)// && previousCharacter != i && nextCharacter != i)
                     {
                         pauseBetweenChars *= pauseMultiplier;
+                        break;
                     }
                 }
-                yield return new WaitForSeconds(pauseBetweenChars);
+                yield return new WaitForSeconds(pauseBetweenChars); // TODO: Make it so isSkipping interrupts this.
                 textMesh.maxVisibleCharacters += 1;
             }
 
-            
+            canSkip = true;
         }
 
         isSkipping = false; // This may be redundant, may not be.
@@ -299,6 +323,7 @@ public class DialogueManager : MonoBehaviour, IService
     private int currentLine;
     private bool canNextLine = false;
     private bool isSkipping = false;
+    private bool canSkip = false;
 
     private bool isInDialogue
     {
@@ -306,15 +331,28 @@ public class DialogueManager : MonoBehaviour, IService
     }
     private void Update()
     {
-        if (isInDialogue && EventSystem.current.currentSelectedGameObject == null)
+        //if (isInDialogue && EventSystem.current.currentSelectedGameObject == null)
+        //{
+        //    if (nextButton.activeInHierarchy)
+        //    {
+        //        EventSystem.current.SetSelectedGameObject(nextButton.gameObject);
+        //    }
+        //    else if (dialogueChoiceButtons[0].activeInHierarchy)
+        //    {
+        //        EventSystem.current.SetSelectedGameObject(dialogueChoiceButtons[0].gameObject);
+        //    }
+        //}
+        if (isInDialogue)
         {
             if (nextButton.activeInHierarchy)
             {
-                EventSystem.current.SetSelectedGameObject(nextButton.gameObject);
+                nextButtonMBHS.enabled = true;
+                choiceButtonsMBHS.enabled = false;
             }
             else if (dialogueChoiceButtons[0].activeInHierarchy)
             {
-                EventSystem.current.SetSelectedGameObject(dialogueChoiceButtons[0].gameObject);
+                nextButtonMBHS.enabled = false;
+                choiceButtonsMBHS.enabled = true;
             }
         }
     }
@@ -328,7 +366,7 @@ public class DialogueManager : MonoBehaviour, IService
         }
         else
         {
-            isSkipping = true;
+            if (canSkip) isSkipping = true;
         }
     }
 
@@ -350,7 +388,7 @@ public class DialogueManager : MonoBehaviour, IService
     {
         if (i.dataType == DialogueCondition.DataType.BOOL)
         {
-            Dictionary<string, bool> dictionaryToCheck = SaveData.boolFlags;
+            Dictionary<string, bool> dictionaryToCheck = SaveDataAccess.saveData.boolFlags;
             bool result = false;
             if (i.logicType == DialogueCondition.LogicType.IF)
             {
@@ -370,7 +408,7 @@ public class DialogueManager : MonoBehaviour, IService
         }
         else if (i.dataType == DialogueCondition.DataType.STRING)
         {
-            Dictionary<string, string> dictionaryToCheck = SaveData.stringFlags;
+            Dictionary<string, string> dictionaryToCheck = SaveDataAccess.saveData.stringFlags;
             bool result = false;
             if (i.logicType == DialogueCondition.LogicType.IF)
             {
@@ -390,7 +428,7 @@ public class DialogueManager : MonoBehaviour, IService
         }
         else if (i.dataType == DialogueCondition.DataType.INT)
         {
-            Dictionary<string, int> dictionaryToCheck = SaveData.intFlags;
+            Dictionary<string, int> dictionaryToCheck = SaveDataAccess.saveData.intFlags;
             bool result = false;
             if (i.logicType == DialogueCondition.LogicType.IF)
             {
@@ -505,6 +543,12 @@ public class DialogueManager : MonoBehaviour, IService
 
     }
 
+    void SetDefaultChancePortrait()
+    {
+        playerImageUi.gameObject.SetActive(true);
+        playerImageUi.sprite = dialoguePortraits.GetPortrait("Chance", Constants.EMOTIONS.DEFAULT);
+    }
+
     void DoMutationLogic(DialogueMutation mutation)
     {
         switch (mutation.actionType)
@@ -529,12 +573,12 @@ public class DialogueManager : MonoBehaviour, IService
                 else if (mutation.stringData == "SaveGameToDisk()")
                 {
                     Debug.Log("Saved!");
-                    SaveData.WriteData();
+                    SaveDataAccess.WriteDataToDisk();
                 }
                 else if (mutation.stringData == "EraseGameFromDisk()")
                 {
                     Debug.Log("Erased!");
-                    StartCoroutine(SaveData.EraseData());
+                    StartCoroutine(SaveDataAccess.EraseDataFromDisk());
                 }
                 else
                 {
@@ -554,26 +598,26 @@ public class DialogueManager : MonoBehaviour, IService
                 switch (mutation.dataType)
                 {
                     case DialogueMutation.DataType.STRING:
-                        SaveData.SetFlag(mutation.actionKey, mutation.stringData);
+                        SaveDataAccess.SetFlag(mutation.actionKey, mutation.stringData);
                         break;
                     case DialogueMutation.DataType.INT:
-                        SaveData.SetFlag(mutation.actionKey, mutation.intData);
+                        SaveDataAccess.SetFlag(mutation.actionKey, mutation.intData);
                         break;
                     case DialogueMutation.DataType.BOOL:
-                        SaveData.SetFlag(mutation.actionKey,mutation.boolData);
+                        SaveDataAccess.SetFlag(mutation.actionKey,mutation.boolData);
                         break;
                 }
                 break;
             case DialogueMutation.OperatorType.PLUS_EQUALS:
                 if (mutation.dataType == DialogueMutation.DataType.INT)
                 {
-                    SaveData.SetFlag(mutation.actionKey, SaveData.intFlags[mutation.actionKey]+mutation.intData);
+                    SaveDataAccess.SetFlag(mutation.actionKey, SaveDataAccess.saveData.intFlags[mutation.actionKey]+mutation.intData);
                 }
                 break;
             case DialogueMutation.OperatorType.MINUS_EQUALS:
                 if (mutation.dataType == DialogueMutation.DataType.INT)
                 {
-                    SaveData.SetFlag(mutation.actionKey, SaveData.intFlags[mutation.actionKey] - mutation.intData);
+                    SaveDataAccess.SetFlag(mutation.actionKey, SaveDataAccess.saveData.intFlags[mutation.actionKey] - mutation.intData);
                 }
                 break;
         }

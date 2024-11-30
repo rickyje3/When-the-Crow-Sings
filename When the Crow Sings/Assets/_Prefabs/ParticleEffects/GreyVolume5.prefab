@@ -59,13 +59,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7214948960113988852}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 5.32, z: 5.67}
+  m_LocalRotation: {x: -0, y: -0.3555523, z: -0, w: 0.93465644}
+  m_LocalPosition: {x: -4.45, y: 4.65, z: 6.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2920430206866221571}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -41.655, z: 0}
 --- !u!198 &5359939302562624873
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -202,7 +202,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.3
+      scalar: 0.1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -256,7 +256,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.9056604, g: 0.5339979, b: 0.8808829, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -705,7 +705,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 4, y: 4, z: 4}
+    m_Scale: {x: 10, y: 4, z: 25}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -903,7 +903,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 15
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1342,7 +1342,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
-        key1: {r: 1, g: 1, b: 1, a: 0.14117648}
+        key1: {r: 1, g: 1, b: 1, a: 0.078431375}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4882,5 +4882,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.0801544, y: 4.6309814, z: 3.8446255}
-  m_Center: {x: 0.21475983, y: -0.15133464, z: 0.16046429}
+  m_Size: {x: 9.816815, y: 4.6309814, z: 24.768177}
+  m_Center: {x: -0.08835142, y: -0.15133452, z: -1.483707}

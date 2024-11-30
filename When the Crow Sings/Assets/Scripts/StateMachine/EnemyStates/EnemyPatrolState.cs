@@ -23,7 +23,10 @@ public class EnemyPatrolState : EnemyState
         if (other.GetComponent<EnemyWaypoint>() == s.currentWaypoint)
         {
             //Debug.Log("Reached the next waypoint!");
-            s.stateMachine.Enter("EnemyIdleState");
+            s.timeToWaitBetweenWander = other.GetComponent<EnemyWaypoint>().timeToWait;
+            if (s.timeToWaitBetweenWander > 0)
+                s.stateMachine.Enter("EnemyIdleState");
+            else setNextPoint();
         }
     }
 
@@ -38,6 +41,7 @@ public class EnemyPatrolState : EnemyState
 
     public override void StateEntered()
     {
+        s.navMeshAgent.speed = s.patrolSpeed;
         s.enemyAnimator.SetBool("animIsPatrolWalking", true);
         setNextPoint();
     }
@@ -52,7 +56,7 @@ public class EnemyPatrolState : EnemyState
         
         if (s.currentWaypoint != null)
         {
-            s.currentWaypoint = s.enemyWaypointsHolders[0].GetNextWaypoint(s.currentWaypoint);
+            s.currentWaypoint = s.currentWaypointHolder.GetNextWaypoint(s.currentWaypoint);
             s.navMeshAgent.destination = s.currentWaypoint.transform.position;
         }
         else

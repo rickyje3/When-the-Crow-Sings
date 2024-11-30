@@ -8,6 +8,8 @@ public class EnemyWaypointsHolder : MonoBehaviour
     [HideInInspector]
     public List<EnemyWaypoint> waypoints;
 
+    public bool randomizeOrder = false;
+
 
     private void Awake()
     {
@@ -22,16 +24,24 @@ public class EnemyWaypointsHolder : MonoBehaviour
 
     public EnemyWaypoint GetNextWaypoint(EnemyWaypoint currentWaypoint)
     {
-        int currentIndex = waypoints.IndexOf(currentWaypoint);
-        currentIndex += 1;
-        if (currentIndex > waypoints.Count-1)
+        if (randomizeOrder)
         {
-            currentIndex = 0;
+            return waypoints[Random.Range(0, waypoints.Count-1)];
         }
-        else if (currentIndex < 0)
+        else
         {
-            currentIndex = waypoints.Count-1;
+            int currentIndex = waypoints.IndexOf(currentWaypoint);
+            currentIndex += 1;
+            if (currentIndex > waypoints.Count - 1)
+            {
+                currentIndex = 0;
+            }
+            else if (currentIndex < 0)
+            {
+                currentIndex = waypoints.Count - 1;
+            }
+            return waypoints[currentIndex];
         }
-        return waypoints[currentIndex];
+        
     }
 }

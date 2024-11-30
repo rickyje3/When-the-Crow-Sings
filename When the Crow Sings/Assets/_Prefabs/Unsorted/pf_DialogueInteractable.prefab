@@ -67,6 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 0}
   pfInteractArrow: {fileID: 3559112393581804139}
+  autoInteract: 0
 --- !u!135 &1875406335147647528
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -212,6 +213,11 @@ PrefabInstance:
       propertyPath: parent
       value: 
       objectReference: {fileID: 6803497763721583419}
+    - target: {fileID: 2267498693179714744, guid: a477ca45d233b724db2f5d680740acb7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6272005161203563558, guid: a477ca45d233b724db2f5d680740acb7,
         type: 3}
       propertyPath: m_LocalPosition.x

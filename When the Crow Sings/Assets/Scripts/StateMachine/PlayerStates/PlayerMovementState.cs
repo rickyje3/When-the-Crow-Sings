@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerMovementState : StateMachineState
 {
@@ -49,25 +50,39 @@ public class PlayerMovementState : StateMachineState
         InputManager.playerInputActions.Player.Crouch.performed -= OnCrouched;
 
         s.playerAnimator.SetBool("animIsMoving", false);
-        s.isSprinting = false;
+        s.isSprintingButtonHeld = false;
         s.speed = 8;
     }
-
-    
-
     public override void Update(float deltaTime)
     {
         s.ApplyGravity(deltaTime);
         //Converts movement input to a float because vector3 cant be lerped :(((((
-        float inputMagnitude = Mathf.Clamp(s.movementInput.magnitude,s.minWalkClamp,1.0f);
-        //SetWalkAnimSpeed(inputMagnitude);
-
-        if (!s.isSprinting && !s.isCrouching)
+        float inputMagnitude = s.movementInput.magnitude;// = Mathf.Clamp(s.movementInput.magnitude,s.minWalkClamp,1.0f);
+        float stateClamp = s.minWalkSpeed;
+        float stateSpeed = s.maxWalkSpeed;
+        float slideSpeedCorrection = s.walkSlideSpeedCorrection;
+        if (s.isCrouchingToggled)
         {
-            //Smoothly blend speed off of joystick input (8 is the max walking speed)
-            s.speed = Mathf.Lerp(s.speed, inputMagnitude * s.maxWalkSpeed, Time.deltaTime * s.acceleration);
+            s.playerAnimator.SetBool("animIsSprinting", false);
+            stateClamp = s.minCrouchSpeed;
+            stateSpeed = s.maxCrouchSpeed;
+            slideSpeedCorrection = s.crouchSlideSpeedCorrection;
         }
-        SetWalkAnimSpeed(s.speed);
+        else if (s.isSprintingButtonHeld && inputMagnitude > 0f)
+        {
+            s.playerAnimator.SetBool("animIsSprinting", true);
+            stateClamp = s.minSprintSpeed;
+            stateSpeed = s.maxSprintSpeed;
+            slideSpeedCorrection = s.sprintSlideSpeedCorrection;
+        }
+        else
+        {
+            s.playerAnimator.SetBool("animIsSprinting", false);
+        }
+        
+       
+        s.speed = Mathf.Clamp(inputMagnitude * stateSpeed,stateClamp,stateSpeed);
+        SetWalkAnimSpeed(s.speed, slideSpeedCorrection);
 
         // move!!
         Vector3 movement = new Vector3(s.movementInput.x, 0, s.movementInput.y).normalized * s.speed;
@@ -89,42 +104,41 @@ public class PlayerMovementState : StateMachineState
         else
         {
             s.playerAnimator.SetBool("animIsMoving", false);
-            s.isSprinting = false;
         }
 
     }
 
-    private void SetWalkAnimSpeed(float inputMagnitude)
+    private void SetWalkAnimSpeed(float inputMagnitude, float slideSpeedCorrection)
     {
-        s.playerAnimator.SetFloat("currentWalkVelocity", inputMagnitude* s.slideSpeedCorrection);
+        s.playerAnimator.SetFloat("currentWalkVelocity", inputMagnitude* slideSpeedCorrection);
     }
 
     private void OnSprint(InputAction.CallbackContext context)
     {
-        if (context.performed && !s.isCrouching)
+        if (context.performed)
         {
-            s.isSprinting = true;
-            s.speed = s.sprintSpeed;
+            s.isSprintingButtonHeld = true;
         }
-        else if (context.canceled && !s.isCrouching)
+        else if (context.canceled)
         {
-            s.isSprinting = false;
+            s.isSprintingButtonHeld = false;
         }
     }
 
     private void OnCrouched(InputAction.CallbackContext context)
     {
-        s.isCrouching = !s.isCrouching;
-        s.playerAnimator.SetBool("animIsCrouching", s.isCrouching);
-        if (s.isCrouching)
+        s.isCrouchingToggled = !s.isCrouchingToggled;
+        s.playerAnimator.SetBool("animIsCrouching", s.isCrouchingToggled);
+        if (s.isCrouchingToggled)
         {
-            s.speed = 4;
+            //s.speed = 4;
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0);
             s.GetComponent<CapsuleCollider>().height = 2;
         }
-        else
+        else if(!s.isCrouchingToggled && !s.isSprintingButtonHeld)
         {
-            s.speed = 8;
+            s.playerAnimator.SetBool("animIsCrouching", false);
+            //s.speed = 8;
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
             s.GetComponent<CapsuleCollider>().height = 4;
         }

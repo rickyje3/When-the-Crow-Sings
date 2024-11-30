@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 9099458239503796105}
   - component: {fileID: 4517060189245592930}
   - component: {fileID: 7489657694225672266}
+  - component: {fileID: 4771268871514646969}
   m_Layer: 8
   m_Name: pf_Enemy
   m_TagString: Untagged
@@ -224,6 +225,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyWaypointsHolders: []
+  patrolSpeed: 4.5
+  pursuitSpeed: 10
   currentWaypoint: {fileID: 0}
   enemyAnimator: {fileID: 5549008216811023264}
   navMeshAgent: {fileID: 0}
@@ -237,6 +240,7 @@ MonoBehaviour:
   lineRenderers:
   - {fileID: 8561991176446238206}
   - {fileID: 5861232039299990190}
+  currentWaypointHolder: {fileID: 0}
 --- !u!195 &6927032940599626117
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -317,6 +321,34 @@ CapsuleCollider:
   m_Height: 6.06
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4771268871514646969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3477123717623650676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8f2792aa4e5a841805d6ab219c0209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSignal: {fileID: 11400000, guid: ce24d9cc381736746bd3adda9c6258b3, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2878057926788062340}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: OnChangeWaypointsTriggered
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4294938424977011884
 GameObject:
   m_ObjectHideFlags: 0

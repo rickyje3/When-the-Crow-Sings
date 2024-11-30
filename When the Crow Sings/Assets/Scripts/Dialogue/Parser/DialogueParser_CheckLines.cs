@@ -127,6 +127,9 @@ public partial class DialogueParser
         if (trimmedLine.StartsWith('-'))
         {
             DialogueChoice newLine = new DialogueChoice();
+
+            trimmedLine = Utilities.RemoveFirstOccurence("- ", trimmedLine);
+
             newLine.tabCount = myTabCount;
             newLine.choiceText = trimmedLine;
             newLine.choiceIndex = i;
