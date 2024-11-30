@@ -154,7 +154,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 44329ed54a6ce674c8722afdd8b58792,
         type: 3}
       propertyPath: m_Name
-      value: fenceRegCoveredBroken
+      value: pf_FenceRegBroken
       objectReference: {fileID: 0}
     - target: {fileID: 2429456913040982685, guid: 44329ed54a6ce674c8722afdd8b58792,
         type: 3}
@@ -178,7 +178,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 431289094259387821}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1776127770167592740, guid: 44329ed54a6ce674c8722afdd8b58792,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8271295429390848837}
   m_SourcePrefab: {fileID: 100100000, guid: 44329ed54a6ce674c8722afdd8b58792, type: 3}
 --- !u!4 &264289966433467903 stripped
 Transform:
@@ -186,3 +190,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 297320242794338836}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2055429117620378928 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1776127770167592740, guid: 44329ed54a6ce674c8722afdd8b58792,
+    type: 3}
+  m_PrefabInstance: {fileID: 297320242794338836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8271295429390848837
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055429117620378928}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1059.3771, y: 57.976913, z: 1010.808}
+  m_Center: {x: -3134.7498, y: -1.9040854, z: 515.75214}
