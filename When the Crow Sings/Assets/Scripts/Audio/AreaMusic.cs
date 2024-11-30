@@ -17,7 +17,6 @@ public class AreaMusic : MonoBehaviour
     private EventInstance areaMusicInstance;
     private EventInstance ambienceInstance;
 
-
     private void Start()
     {
         if (FMODEvents.instance == null)

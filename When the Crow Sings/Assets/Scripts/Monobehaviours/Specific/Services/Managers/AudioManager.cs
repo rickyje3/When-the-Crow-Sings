@@ -43,7 +43,7 @@ public class AudioManager : MonoBehaviour
     {
         foreach (EventInstance eventInstance in eventInstances)
         {
-            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             eventInstance.release();
         }
     }
