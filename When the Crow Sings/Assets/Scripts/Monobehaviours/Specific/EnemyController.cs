@@ -69,6 +69,12 @@ public class EnemyController : StateMachineComponent
         
     }
 
+    public void OnSpotPlayerRegardlessTriggerEntered(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+            stateMachine.Enter("EnemyChaseState");
+    }
+
     public void EnterChaseStateSafe()
     {
         if (!isWaitingToCheckCanSeePlayer) StartCoroutine(checkIfStillDoesSeePlayer());
