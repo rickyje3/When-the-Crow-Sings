@@ -234,7 +234,7 @@ MonoBehaviour:
   timeToBeStunned: 2
   lookAtHeight: 2.5
   canSeePlayer: 0
-  enemySightCone: {fileID: 0}
+  enemySightCone: {fileID: 1763301387617914221}
   raycastStart: {fileID: 1994087528421052053}
   lineRenderers:
   - {fileID: 8561991176446238206}
@@ -1060,6 +1060,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 65357109529477601}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db9f26f38ad263b49a6f15ec51b43d15,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1763301387617914221}
   m_SourcePrefab: {fileID: 100100000, guid: db9f26f38ad263b49a6f15ec51b43d15, type: 3}
 --- !u!1 &4628001199582040117 stripped
 GameObject:
@@ -1089,6 +1093,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3613567641014311022, guid: db9f26f38ad263b49a6f15ec51b43d15, type: 3}
+--- !u!114 &1763301387617914221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628001199582040117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a3d99dd17661c4894b88488bc6cf4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 2878057926788062340}
+  playerInSightCone: 0
 --- !u!4 &5436449751066937999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: db9f26f38ad263b49a6f15ec51b43d15,
