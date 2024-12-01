@@ -31,6 +31,7 @@ public class BirdBrain : StateMachineComponent
     private void Start()
     {
         stateMachine.Enter("CrowIdleState");
+        controller.enabled = true;
     }
 
     [HideInInspector]
@@ -49,6 +50,11 @@ public class BirdBrain : StateMachineComponent
     {
         targetIsTargetNotSpawn = _target;
         stateMachine.Enter("CrowScatterState");
+    }
+
+    public void StillGravity()
+    {
+        controller.Move(new Vector3(0, -1f, 0));
     }
 
     public void OnCrowTargetActivated(SignalArguments args)

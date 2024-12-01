@@ -10,6 +10,10 @@ public class CrowPeckState : StateMachineState
         s = birdBrain;
     }
 
+    public override void FixedUpdate()
+    {
+        s.StillGravity();
+    }
 
     public override void StateEntered()
     {
