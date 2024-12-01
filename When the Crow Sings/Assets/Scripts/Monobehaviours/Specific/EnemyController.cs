@@ -127,33 +127,36 @@ public class EnemyController : StateMachineComponent
 
             List<Vector3> endPoints = new List<Vector3>();
             endPoints.Add(targetPosition);
-            endPoints.Add(new Vector3(targetPosition.x, targetPosition.y -= 3.0f,targetPosition.z));
-            if (lastTime)
-            {
-                targetPosition.y -= 3.0f;
-            }
-            lastTime = !lastTime;
-
-            //RenderRayCastLine(targetPosition);
-            //Vector3 endPoint = targetPosition;
+            endPoints.Add(new Vector3(targetPosition.x, targetPosition.y -= 3.0f, targetPosition.z));
+            //if (lastTime)
+            //{
+            //    targetPosition.y -= 3.0f;
+            //}
+            //lastTime = !lastTime;
 
 
-            //if (Physics.Raycast(raycastStart.position, targetPosition - transform.position, out hit))
-            if (Physics.Raycast(raycastStart.position, targetPosition - transform.position, out hit, Mathf.Infinity, ~LayerMask.GetMask("Enemy")))
-            {
-                if (hit.transform.CompareTag("Player"))
-                {
-                    canSeePlayer = true;
-                }
-                else
-                {
-                    canSeePlayer = false;
-                }
-                
-            }
+            RaycastCheck(targetPosition);
+            targetPosition.y -= 3.0f;
+            if (!canSeePlayer) RaycastCheck(targetPosition); // Check the lower one if the first one didn't see.
+
             RenderRayCastLine(endPoints);
         }
         stateMachine.FixedUpdate();
+    }
+
+    private void RaycastCheck(Vector3 targetPosition)
+    {
+        if (Physics.Raycast(raycastStart.position, targetPosition - transform.position, out hit, Mathf.Infinity, ~LayerMask.GetMask("Enemy")))
+        {
+            if (hit.transform.CompareTag("Player"))
+            {
+                canSeePlayer = true;
+            }
+            else
+            {
+                canSeePlayer = false;
+            }
+        }
     }
 
     private void RenderRayCastLine(List<Vector3> targetPositions)
