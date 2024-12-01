@@ -59,6 +59,7 @@ public class BirdBrain : StateMachineComponent
 
     public void OnCrowTargetActivated(SignalArguments args)
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.CrowCocophony, this.transform.position);
         SetTargetAsTarget(true);
     }
     public void OnCrowTargetDeactivated(SignalArguments args)

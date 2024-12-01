@@ -12,7 +12,7 @@ public class EnemyIdleState : EnemyState
     {
         if (s.doesSeePlayer)
         {
-            s.stateMachine.Enter("EnemyChaseState");
+            s.EnterChaseStateSafe();
         }
     }
 

@@ -61,19 +61,24 @@ public class PlayerMovementState : StateMachineState
         float stateClamp = s.minWalkSpeed;
         float stateSpeed = s.maxWalkSpeed;
         float slideSpeedCorrection = s.walkSlideSpeedCorrection;
-        if (s.isCrouchingToggled)
+        if (s.isSprintingButtonHeld && inputMagnitude > 0f)
+        {
+            s.playerAnimator.SetBool("animIsSprinting", true);
+
+            s.isCrouchingToggled = false;
+            s.playerAnimator.SetBool("animIsCrouching", false);
+            ResetColliderToDefault();
+
+            stateClamp = s.minSprintSpeed;
+            stateSpeed = s.maxSprintSpeed;
+            slideSpeedCorrection = s.sprintSlideSpeedCorrection;
+        }
+        else if (s.isCrouchingToggled)
         {
             s.playerAnimator.SetBool("animIsSprinting", false);
             stateClamp = s.minCrouchSpeed;
             stateSpeed = s.maxCrouchSpeed;
             slideSpeedCorrection = s.crouchSlideSpeedCorrection;
-        }
-        else if (s.isSprintingButtonHeld && inputMagnitude > 0f)
-        {
-            s.playerAnimator.SetBool("animIsSprinting", true);
-            stateClamp = s.minSprintSpeed;
-            stateSpeed = s.maxSprintSpeed;
-            slideSpeedCorrection = s.sprintSlideSpeedCorrection;
         }
         else
         {
@@ -135,15 +140,19 @@ public class PlayerMovementState : StateMachineState
             s.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0);
             s.GetComponent<CapsuleCollider>().height = 2;
         }
-        else if(!s.isCrouchingToggled && !s.isSprintingButtonHeld)
+        else if(!s.isCrouchingToggled)// && !s.isSprintingButtonHeld)
         {
             s.playerAnimator.SetBool("animIsCrouching", false);
             //s.speed = 8;
-            s.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
-            s.GetComponent<CapsuleCollider>().height = 4;
+            ResetColliderToDefault();
         }
     }
 
+    private void ResetColliderToDefault()
+    {
+        s.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
+        s.GetComponent<CapsuleCollider>().height = 4;
+    }
 
     private void OnFired(InputAction.CallbackContext context)
     {

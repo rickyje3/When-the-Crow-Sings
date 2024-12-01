@@ -20,7 +20,7 @@ public class CrowTarget : MonoBehaviour
         isDisableAfterTimeRunning = false;
         isActiveTarget = true;
         enabledSignal.Emit();
-        visualDebug.SetActive(true);
+        //visualDebug.SetActive(true);
     }
 
     //private void OnTriggerEnter(Collider other)

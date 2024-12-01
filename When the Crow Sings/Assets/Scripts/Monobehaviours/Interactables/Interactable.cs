@@ -33,6 +33,10 @@ public class Interactable : MonoBehaviour
         {
             GetComponent<EnemyChangeWaypointsTrigger>().EmitChangeWaypointSignal();
         }
+        else if (GetComponent<AutoSaveTrigger>())
+        {
+            GetComponent<AutoSaveTrigger>().AutoSave();
+        }
     }
 
     public void OnDialogueFinished(SignalArguments args)
