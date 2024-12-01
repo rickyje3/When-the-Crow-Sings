@@ -69,6 +69,20 @@ public class EnemyController : StateMachineComponent
         
     }
 
+    public void EnterChaseStateSafe()
+    {
+        if (!isWaitingToCheckCanSeePlayer) StartCoroutine(checkIfStillDoesSeePlayer());
+    }
+    bool isWaitingToCheckCanSeePlayer = false;
+    public float bufferBeforeSeesPlayer = .2f;
+    IEnumerator checkIfStillDoesSeePlayer()
+    {
+        isWaitingToCheckCanSeePlayer = true;
+        yield return new WaitForSeconds(bufferBeforeSeesPlayer);
+        if (canSeePlayer) stateMachine.Enter("EnemyChaseState");
+        isWaitingToCheckCanSeePlayer = false;
+    }
+
     //public void SightConeTriggerEntered(Collider other)
     //{
     //    //stateMachine.OnTriggerEnter(other);
@@ -145,6 +159,8 @@ public class EnemyController : StateMachineComponent
             lineRenderer.enabled = true;
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, pos);
+            if (canSeePlayer) lineRenderer.startColor = Color.red;
+            else lineRenderer.startColor = Color.green;
         }
         
     }

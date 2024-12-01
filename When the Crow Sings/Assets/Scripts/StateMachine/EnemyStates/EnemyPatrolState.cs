@@ -34,7 +34,7 @@ public class EnemyPatrolState : EnemyState
     {
         if (s.doesSeePlayer)
         {
-            s.stateMachine.Enter("EnemyChaseState");
+            s.EnterChaseStateSafe();
         }
     }
 
