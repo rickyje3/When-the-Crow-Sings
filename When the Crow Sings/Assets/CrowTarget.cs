@@ -1,6 +1,7 @@
 using ScriptableObjects;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CrowTarget : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class CrowTarget : MonoBehaviour
     public IEnumerator DisableAfterTime()
     {
         isDisableAfterTimeRunning = true;
+        GetComponent<NavMeshObstacle>().enabled = true;
         yield return new WaitForSeconds(SecondsToAttractCrows);
         isActiveTarget = false;
 
@@ -48,5 +50,6 @@ public class CrowTarget : MonoBehaviour
         
         visualDebug.SetActive(false);
         isDisableAfterTimeRunning = false;
+        GetComponent<NavMeshObstacle>().enabled = false;
     }
 }

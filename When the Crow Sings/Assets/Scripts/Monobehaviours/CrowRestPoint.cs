@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CrowRestPoint : MonoBehaviour
 {
+    public GameObject debugVisible;
     private void OnEnable()
     {
         ServiceLocator.Get<GameManager>().RegisterCrowRestPoint(this);
@@ -11,5 +12,9 @@ public class CrowRestPoint : MonoBehaviour
     private void OnDisable()
     {
         ServiceLocator.Get<GameManager>().UnregisterCrowRestPoint(this);
+    }
+    private void Awake()
+    {
+        debugVisible.SetActive(false);
     }
 }
