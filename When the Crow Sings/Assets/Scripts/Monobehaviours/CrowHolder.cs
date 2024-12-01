@@ -18,12 +18,6 @@ public class CrowHolder : MonoBehaviour
         }
     }
 
-
-    private void Start()
-    {
-        //SpawnCrows(25);
-    }
-
     public void AddCrowTargetIfNoneExists(BirdseedController birdseedToFeastUpon)//Vector3 feast)
     {
 
