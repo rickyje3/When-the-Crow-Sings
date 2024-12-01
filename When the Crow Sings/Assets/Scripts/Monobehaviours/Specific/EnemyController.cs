@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -72,6 +73,16 @@ public class EnemyController : StateMachineComponent
     //{
     //    //stateMachine.OnTriggerEnter(other);
     //}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        stateMachine.OnTriggerEnter(other); // This is in the StateMachineComponent and shouldn't be duplicated ideally...
+
+        if (other.GetComponent<BirdBrain>())
+        {
+            stateMachine.Enter("EnemyStunnedState");
+        }
+    }
     public void SightConeTriggerExited(Collider other)
     {
         LineRenderer lineRenderer = GetComponent<LineRenderer>();
