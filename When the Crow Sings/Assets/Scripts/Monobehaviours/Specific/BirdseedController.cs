@@ -43,7 +43,6 @@ public class BirdseedController : MonoBehaviour
         SignalArguments args = new SignalArguments();
         args.objectArgs.Add(this);
         birdseedLanded.Emit(args);
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.CrowCocophony, this.transform.position);
 
         if (ServiceLocator.Get<GameManager>().activeBirdseed != this) Destroy(gameObject, birdseedLifeAfterGround);
     }

@@ -15,7 +15,7 @@ public class CameraManager : MonoBehaviour
     private void SetMouseWorldPosition()
     {
         Ray ray = GetComponent<Camera>().ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, ~LayerMask.GetMask("Player")))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, LayerMask.GetMask("Floor")))//~LayerMask.GetMask("Player","Enemy")))
         {
             mouseWorldPosition = hitInfo.point;
         }
