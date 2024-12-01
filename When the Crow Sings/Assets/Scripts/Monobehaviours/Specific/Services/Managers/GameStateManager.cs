@@ -13,6 +13,7 @@ public class GameStateManager : MonoBehaviour, IService
     public AllLevels allLevels;
 
     public MainMenuDebugLoadHolder mainMenuDebugLoadHolder;
+    public TaskManager taskManager;
 
     public GameObject _playerPrefab;
     [HideInInspector] public GameObject playerHolder = null;
@@ -215,9 +216,12 @@ public class GameStateManager : MonoBehaviour, IService
         return normalizedProgress;
     }
 
+    public CrowTarget actorCrowTarget;
     private void DestroyActors()
     {
         Destroy(playerHolder);
+        taskManager.AbortQTE();
+        if (actorCrowTarget != null) actorCrowTarget.DisableTarget();
         ServiceLocator.Get<GameManager>().crowHolder.GetComponent<CrowHolder>().DestroyCrows();
     }
 

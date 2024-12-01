@@ -90,12 +90,19 @@ public class SaveData
         { "TheodoreBaseCompleted",false },
         { "TheodoreExhausted",false },
 
+        { "ifBeauAndFrancisco",false },
+        { "ifBeauAndAngel",false },
+        { "ifFaridaAndCaleb",false },
+        { "ifCalebAndAngel",false },
+
+        { "SeenBrokenGauges",false },
+
         { "RecCenterDoorUnlocked",false },
         { "GreenhouseDoorUnlocked",false },
         { "EnergyHQDoorUnlocked",false },
         { "ClinicDoorUnlocked",false },
         { "Zone1DoorUnlocked",false },
-        { "WoodPileMovable", false},
+        { "WoodPileMovable",false },
         { "Zone2DoorUnlocked",false },
         { "Zone3DoorUnlocked",false },
         { "Zone4DoorUnlocked",false },

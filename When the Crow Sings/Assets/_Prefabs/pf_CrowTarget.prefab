@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5867032581467515294}
   - component: {fileID: 3851961684978830487}
   - component: {fileID: 408751836489394719}
+  - component: {fileID: 7580997836638201251}
   m_Layer: 0
   m_Name: pf_CrowTarget
   m_TagString: Untagged
@@ -73,6 +74,7 @@ MonoBehaviour:
   visualDebug: {fileID: 9149028734863064521}
   enabledSignal: {fileID: 11400000, guid: 6f040831a86d25944ab46991604690a3, type: 2}
   disabledSignal: {fileID: 11400000, guid: 31ada72ff3210d14f9ccd76cfa10d650, type: 2}
+  isDisableAfterTimeRunning: 1
 --- !u!54 &408751836489394719
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -100,6 +102,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!208 &7580997836638201251
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6445811065819844894}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1, y: 1, z: 1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &9149028734863064521
 GameObject:
   m_ObjectHideFlags: 0

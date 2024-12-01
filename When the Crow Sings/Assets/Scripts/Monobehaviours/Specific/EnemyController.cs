@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -27,13 +28,16 @@ public class EnemyController : StateMachineComponent
     RaycastHit hit;
 
     [HideInInspector]
-    public bool canSeePlayer = false;
+    public static bool canSeePlayer = false;
 
     public EnemySightCone enemySightCone;
     public Transform raycastStart;
     public List<LineRenderer>  lineRenderers;
 
     [HideInInspector] public EnemyWaypointsHolder currentWaypointHolder;
+
+    bool isWaitingToCheckCanSeePlayer = false;
+    public float bufferBeforeSeesPlayer = .2f;
     public bool doesSeePlayer
     {
         get
@@ -68,10 +72,39 @@ public class EnemyController : StateMachineComponent
         
     }
 
+    public void OnSpotPlayerRegardlessTriggerEntered(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+            stateMachine.Enter("EnemyChaseState");
+    }
+
+    public void EnterChaseStateSafe()
+    {
+        Debug.Log("EnterChaseStateSafe() called!");
+        if (!isWaitingToCheckCanSeePlayer) StartCoroutine(checkIfStillDoesSeePlayer());
+    }
+    IEnumerator checkIfStillDoesSeePlayer()
+    {
+        isWaitingToCheckCanSeePlayer = true;
+        yield return new WaitForSeconds(bufferBeforeSeesPlayer);
+        if (canSeePlayer) stateMachine.Enter("EnemyChaseState");
+        isWaitingToCheckCanSeePlayer = false;
+    }
+
     //public void SightConeTriggerEntered(Collider other)
     //{
     //    //stateMachine.OnTriggerEnter(other);
     //}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        stateMachine.OnTriggerEnter(other); // This is in the StateMachineComponent and shouldn't be duplicated ideally...
+
+        if (other.GetComponent<BirdBrain>())
+        {
+            stateMachine.Enter("EnemyStunnedState");
+        }
+    }
     public void SightConeTriggerExited(Collider other)
     {
         LineRenderer lineRenderer = GetComponent<LineRenderer>();
@@ -79,11 +112,16 @@ public class EnemyController : StateMachineComponent
     }
 
 
-    
+
     //public void SightConeTriggerStay(Collider other)
     //{
-        
+
     //}
+
+    private void OnDestroy()
+    {
+        canSeePlayer = false;
+    }
 
     private void FixedUpdate()
     {
@@ -92,49 +130,69 @@ public class EnemyController : StateMachineComponent
             Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
             targetPosition.y += lookAtHeight;
 
-            List<Vector3> endPoints = new List<Vector3>();
-            endPoints.Add(targetPosition);
-            endPoints.Add(new Vector3(targetPosition.x, targetPosition.y -= 3.0f,targetPosition.z));
-            if (lastTime)
+            canSeePlayer = false;
+            RaycastCheck(targetPosition);
+            if (!canSeePlayer)
             {
                 targetPosition.y -= 3.0f;
+                RaycastCheck(targetPosition); // Check the lower one if the first one didn't see.
             }
-            lastTime = !lastTime;
-
-            //RenderRayCastLine(targetPosition);
-            //Vector3 endPoint = targetPosition;
-            
-
-
-            if (Physics.Raycast(raycastStart.position, targetPosition - transform.position, out hit))
-            {
-                if (hit.transform.CompareTag("Player"))
-                {
-                    canSeePlayer = true;
-                }
-                else
-                {
-                    canSeePlayer = false;
-                    //endPoint = hit.transform.position;
-                }
-                
-            }
-            RenderRayCastLine(endPoints);
         }
         stateMachine.FixedUpdate();
+    }
+    private void RaycastCheck(Vector3 targetPosition)
+    {
+        
+
+        Vector3 direction = (targetPosition - raycastStart.position).normalized;
+        if (Physics.Raycast(raycastStart.position, direction, out hit, 1000, ~LayerMask.GetMask("Enemy","Interactable","Player")))
+        {
+            if (DebugManager.showCollidersAndTriggers)
+            {
+                lineRenderers[0].SetPosition(0, raycastStart.position);
+                lineRenderers[0].enabled = true;
+                lineRenderers[0].SetPosition(1, hit.point);
+            }
+            
+
+            if (hit.transform.CompareTag("Player"))
+            {
+                Debug.Log("I can theoretically see you.");
+                canSeePlayer = true;
+            }
+            else
+            {
+                canSeePlayer = false;
+            }
+        }
+        else
+        {
+            canSeePlayer = false;
+        }
     }
 
     private void RenderRayCastLine(List<Vector3> targetPositions)
     {
-        //LineRenderer lineRenderer = GetComponent<LineRenderer>();
-        //lineRenderer.enabled = true;
-        foreach (Vector3 pos in targetPositions )
+        if (DebugManager.showCollidersAndTriggers)
         {
-            LineRenderer lineRenderer = lineRenderers[targetPositions.IndexOf(pos)];
-            lineRenderer.enabled = true;
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, pos);
+            foreach (Vector3 pos in targetPositions)
+            {
+                LineRenderer lineRenderer = lineRenderers[targetPositions.IndexOf(pos)];
+                lineRenderer.enabled = true;
+                lineRenderer.SetPosition(0, raycastStart.position);
+                lineRenderer.SetPosition(1, pos);
+                if (canSeePlayer) lineRenderer.startColor = Color.red;
+                else lineRenderer.startColor = Color.green;
+            }
         }
+        else
+        {
+            foreach (LineRenderer i in lineRenderers)
+            {
+                i.enabled = false;
+            }
+        }
+        
         
     }
 
