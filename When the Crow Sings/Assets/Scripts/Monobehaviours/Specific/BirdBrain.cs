@@ -76,6 +76,11 @@ public class BirdBrain : StateMachineComponent
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<CrowRestPoint>() == restPoint && !targetIsTargetNotSpawn) stateMachine.Enter("CrowIdleState");
-        if (other.GetComponent<CrowTarget>() && targetIsTargetNotSpawn) stateMachine.Enter("CrowPeckState");
+        if (other.GetComponent<CrowTarget>() && targetIsTargetNotSpawn)
+        {
+            other.GetComponent<CrowTarget>().StartDisable();
+            stateMachine.Enter("CrowPeckState");
+        }
+        
     }
 }
