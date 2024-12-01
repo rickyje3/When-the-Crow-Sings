@@ -28,7 +28,7 @@ public class EnemyController : StateMachineComponent
     RaycastHit hit;
 
     [HideInInspector]
-    public bool canSeePlayer = false;
+    public static bool canSeePlayer = false;
 
     public EnemySightCone enemySightCone;
     public Transform raycastStart;
@@ -112,11 +112,16 @@ public class EnemyController : StateMachineComponent
     }
 
 
-    
+
     //public void SightConeTriggerStay(Collider other)
     //{
-        
+
     //}
+
+    private void OnDestroy()
+    {
+        canSeePlayer = false;
+    }
 
     private void FixedUpdate()
     {
@@ -125,37 +130,44 @@ public class EnemyController : StateMachineComponent
             Vector3 targetPosition = ServiceLocator.Get<PlayerController>().transform.position;
             targetPosition.y += lookAtHeight;
 
-            List<Vector3> endPoints = new List<Vector3>();
-            endPoints.Add(targetPosition);
-            endPoints.Add(new Vector3(targetPosition.x, targetPosition.y -= 3.0f, targetPosition.z));
-            //if (lastTime)
-            //{
-            //    targetPosition.y -= 3.0f;
-            //}
-            //lastTime = !lastTime;
-
-
+            canSeePlayer = false;
             RaycastCheck(targetPosition);
-            targetPosition.y -= 3.0f;
-            if (!canSeePlayer) RaycastCheck(targetPosition); // Check the lower one if the first one didn't see.
-
-            RenderRayCastLine(endPoints);
+            if (!canSeePlayer)
+            {
+                targetPosition.y -= 3.0f;
+                RaycastCheck(targetPosition); // Check the lower one if the first one didn't see.
+            }
         }
         stateMachine.FixedUpdate();
     }
-
     private void RaycastCheck(Vector3 targetPosition)
     {
-        if (Physics.Raycast(raycastStart.position, targetPosition - transform.position, out hit, Mathf.Infinity, ~LayerMask.GetMask("Enemy","Interactable")))
+        
+
+        Vector3 direction = (targetPosition - raycastStart.position).normalized;
+        if (Physics.Raycast(raycastStart.position, direction, out hit, 1000, ~LayerMask.GetMask("Enemy","Interactable","Player")))
         {
+            if (DebugManager.showCollidersAndTriggers)
+            {
+                lineRenderers[0].SetPosition(0, raycastStart.position);
+                lineRenderers[0].enabled = true;
+                lineRenderers[0].SetPosition(1, hit.point);
+            }
+            
+
             if (hit.transform.CompareTag("Player"))
             {
+                Debug.Log("I can theoretically see you.");
                 canSeePlayer = true;
             }
             else
             {
                 canSeePlayer = false;
             }
+        }
+        else
+        {
+            canSeePlayer = false;
         }
     }
 
@@ -167,7 +179,7 @@ public class EnemyController : StateMachineComponent
             {
                 LineRenderer lineRenderer = lineRenderers[targetPositions.IndexOf(pos)];
                 lineRenderer.enabled = true;
-                lineRenderer.SetPosition(0, transform.position);
+                lineRenderer.SetPosition(0, raycastStart.position);
                 lineRenderer.SetPosition(1, pos);
                 if (canSeePlayer) lineRenderer.startColor = Color.red;
                 else lineRenderer.startColor = Color.green;
