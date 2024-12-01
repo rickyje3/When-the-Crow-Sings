@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1875406335147647528}
   - component: {fileID: 6165941451760414067}
   - component: {fileID: 672786577480137069}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: pf_QteInteractable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 0}
   pfInteractArrow: {fileID: 227253322206012740}
+  autoInteract: 0
 --- !u!135 &1875406335147647528
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -339,6 +340,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: pf_InteractArrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184249205739583701, guid: a477ca45d233b724db2f5d680740acb7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

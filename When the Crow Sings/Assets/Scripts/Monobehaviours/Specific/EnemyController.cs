@@ -146,7 +146,7 @@ public class EnemyController : StateMachineComponent
 
     private void RaycastCheck(Vector3 targetPosition)
     {
-        if (Physics.Raycast(raycastStart.position, targetPosition - transform.position, out hit, Mathf.Infinity, ~LayerMask.GetMask("Enemy")))
+        if (Physics.Raycast(raycastStart.position, targetPosition - transform.position, out hit, Mathf.Infinity, ~LayerMask.GetMask("Enemy","Interactable")))
         {
             if (hit.transform.CompareTag("Player"))
             {
