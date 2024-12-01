@@ -47,7 +47,7 @@ public class FMODEvents : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         Debug.Log("FMODEvents initialized.");
     }
