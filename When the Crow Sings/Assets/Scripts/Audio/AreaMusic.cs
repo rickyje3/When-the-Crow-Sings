@@ -28,8 +28,8 @@ public class AreaMusic : MonoBehaviour
         //Dynamically assign to FMODEvents
         FMODEvents.instance.SetDynamicAssignment(Music, Ambience);
 
-        areaMusicInstance = AudioManager.instance.CreateEventInstance(FMODEvents.instance.AreaMusic);
-        ambienceInstance = AudioManager.instance.CreateEventInstance(FMODEvents.instance.Ambience);
+        if (!Music.IsNull) areaMusicInstance = AudioManager.instance.CreateEventInstance(FMODEvents.instance.AreaMusic);
+        if (!Ambience.IsNull) ambienceInstance = AudioManager.instance.CreateEventInstance(FMODEvents.instance.Ambience);
 
         PlayMusic();
         PlayAmbience();
@@ -37,28 +37,36 @@ public class AreaMusic : MonoBehaviour
 
     private void PlayMusic()
     {
-        if (areaMusicInstance.isValid())
+        if (!Music.IsNull)
         {
-            areaMusicInstance.start();
-            Debug.Log("Playing Area Music.");
+            if (areaMusicInstance.isValid())
+            {
+                areaMusicInstance.start();
+                Debug.Log("Playing Area Music.");
+            }
+            else
+            {
+                Debug.LogError("Area music instance is invalid.");
+            }
         }
-        else
-        {
-            Debug.LogError("Area music instance is invalid.");
-        }
+        
     }
 
     private void PlayAmbience()
     {
-        if (ambienceInstance.isValid())
+        if (!Ambience.IsNull)
         {
-            ambienceInstance.start();
-            Debug.Log("Playing Ambience.");
+            if (ambienceInstance.isValid())
+            {
+                ambienceInstance.start();
+                Debug.Log("Playing Ambience.");
+            }
+            else
+            {
+                Debug.LogError("Ambience instance is invalid.");
+            }
         }
-        else
-        {
-            Debug.LogError("Ambience instance is invalid.");
-        }
+        
     }
 
     private void OnDestroy()
