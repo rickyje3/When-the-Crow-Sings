@@ -21,6 +21,15 @@ else:
 ~ francisco_first_int
 set FranciscoTaskOffered = true;
 Francisco: Ah hello! You must be our new resident Chance, yes? I don't think I've sent out the request for your entry checkup yet, did you need something?
+if ifFaridaAndCaleb == true:
+	- Caleb sent me.
+		Chance: <color=#813408>Caleb</color> said you might know something about <color=#a11bbe>the old energy source</color> here, whatever was used before the solar panels.
+		Francisco: Oh? <color=#813408>Tio</color>-
+		Francisco_Excited: I mean <color=#813408>Caleb</color>! He sent you to me? Why not <color=#813408>Farida</color>?
+		=> francisco_caleb
+	- Farida said..
+		Chance: <color=#813408>Farida</color> said you might know something about the energy grid that she wouldn't, since she was sent here after the solar panels got installed. Something about an <color=#a11bbe>alternative energy source</color>?
+		=> francisco_first_int_cont
 if CalebBaseCompleted == true:
 	- Caleb sent me.
 		Chance: <color=#813408>Caleb</color> said you might know something about <color=#a11bbe>the old energy source</color> here, whatever was used before the solar panels.
@@ -132,10 +141,16 @@ if FaridaBaseCompleted == true:
 	- She said...
 		Chance: She said something about there being old gauges not working in the energy building. Were they connected to that substation?
 		Francisco_Thinking: I suppose they could be. We never really talked about it.
-		Chance_Sad: I wonder why they were smashed..
-		Francisco_Scared: I'm sure time just got the best of them.
-		=> francisco_task_fin_cont_3
+		=> gauges_check
 - How do I get in?
+	=> francisco_task_fin_cont_3
+
+~ gauges_check
+if SeenBrokenGauges == true:
+	Chance_Sad: I wonder why they were smashed..
+	Francisco_Scared: I'm sure time just got the best of them.
+	=> francisco_task_fin_cont_3
+else:
 	=> francisco_task_fin_cont_3
 
 ~ francisco_task_fin_cont_3
