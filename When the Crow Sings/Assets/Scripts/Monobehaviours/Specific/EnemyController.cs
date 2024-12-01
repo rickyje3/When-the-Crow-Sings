@@ -35,6 +35,9 @@ public class EnemyController : StateMachineComponent
     public List<LineRenderer>  lineRenderers;
 
     [HideInInspector] public EnemyWaypointsHolder currentWaypointHolder;
+
+    bool isWaitingToCheckCanSeePlayer = false;
+    public float bufferBeforeSeesPlayer = .2f;
     public bool doesSeePlayer
     {
         get
@@ -80,8 +83,6 @@ public class EnemyController : StateMachineComponent
         Debug.Log("EnterChaseStateSafe() called!");
         if (!isWaitingToCheckCanSeePlayer) StartCoroutine(checkIfStillDoesSeePlayer());
     }
-    bool isWaitingToCheckCanSeePlayer = false;
-    public float bufferBeforeSeesPlayer = .2f;
     IEnumerator checkIfStillDoesSeePlayer()
     {
         isWaitingToCheckCanSeePlayer = true;
@@ -135,10 +136,10 @@ public class EnemyController : StateMachineComponent
 
             //RenderRayCastLine(targetPosition);
             //Vector3 endPoint = targetPosition;
-            
 
 
-            if (Physics.Raycast(raycastStart.position, targetPosition - transform.position, out hit))
+            //if (Physics.Raycast(raycastStart.position, targetPosition - transform.position, out hit))
+            if (Physics.Raycast(raycastStart.position, targetPosition - transform.position, out hit, Mathf.Infinity, ~LayerMask.GetMask("Enemy")))
             {
                 if (hit.transform.CompareTag("Player"))
                 {
@@ -147,7 +148,6 @@ public class EnemyController : StateMachineComponent
                 else
                 {
                     canSeePlayer = false;
-                    //endPoint = hit.transform.position;
                 }
                 
             }
