@@ -7,7 +7,7 @@ public class DebugManager : MonoBehaviour
     // Should be where all debug functionality can be controlled from.
 
     // Change this to toggle debug behavior easily.
-    public static bool debugEnabled = true;
+    public static bool debugEnabled = false;
 
     // Invisible walls, dialogue triggers, loading zones, QTE triggers, etc.
 
