@@ -22,17 +22,21 @@ public class CrowTarget : MonoBehaviour
         visualDebug.SetActive(true);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<BirdBrain>() != null)
-        {
-            //other.GetComponent<BirdBrain>().stateMachine.Enter("CrowPeckState");
-            if (!isDisableAfterTimeRunning) StartCoroutine(DisableAfterTime());
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.GetComponent<BirdBrain>() != null)
+    //    {
+    //        if (!isDisableAfterTimeRunning) StartCoroutine(DisableAfterTime());
+    //    }
+    //}
 
-    bool isDisableAfterTimeRunning = true;
-    IEnumerator DisableAfterTime()
+    public bool isDisableAfterTimeRunning = true;
+
+    public void StartDisable()
+    {
+        if (!isDisableAfterTimeRunning) StartCoroutine(DisableAfterTime());
+    }
+    public IEnumerator DisableAfterTime()
     {
         isDisableAfterTimeRunning = true;
         yield return new WaitForSeconds(SecondsToAttractCrows);

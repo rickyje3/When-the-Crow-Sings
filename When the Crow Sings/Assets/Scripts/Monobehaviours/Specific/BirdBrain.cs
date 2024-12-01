@@ -8,6 +8,9 @@ public class BirdBrain : StateMachineComponent
     public CrowHolder crowHolder;
 
     public float secondsToPeck;
+    public float flyingSpeed = .2f;
+
+    public Animator crowAnimator;
 
     [HideInInspector]
     public CrowRestPoint restPoint;
@@ -28,20 +31,30 @@ public class BirdBrain : StateMachineComponent
     private void Start()
     {
         stateMachine.Enter("CrowIdleState");
+        controller.enabled = true;
     }
 
     [HideInInspector]
-    public Vector3 destination, dir;
+    public Vector3 destination;
+    [HideInInspector]
+    public Vector3 direction;
     public void FlyNavigate()
     {
         // if raycast detects surface AND that surface is NOT the destination, then navigate away.
-        controller.Move(dir);//*Time.deltaTime);
+        direction =  (destination - transform.position).normalized*flyingSpeed;
+        transform.rotation = Quaternion.LookRotation(direction);
+        controller.Move(direction);//targetPosition);
     }
 
     public void SetTargetAsTarget(bool _target)
     {
         targetIsTargetNotSpawn = _target;
         stateMachine.Enter("CrowScatterState");
+    }
+
+    public void StillGravity()
+    {
+        controller.Move(new Vector3(0, -1f, 0));
     }
 
     public void OnCrowTargetActivated(SignalArguments args)
@@ -63,6 +76,11 @@ public class BirdBrain : StateMachineComponent
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<CrowRestPoint>() == restPoint && !targetIsTargetNotSpawn) stateMachine.Enter("CrowIdleState");
-        if (other.GetComponent<CrowTarget>() && targetIsTargetNotSpawn) stateMachine.Enter("CrowPeckState");
+        if (other.GetComponent<CrowTarget>() && targetIsTargetNotSpawn)
+        {
+            other.GetComponent<CrowTarget>().StartDisable();
+            stateMachine.Enter("CrowPeckState");
+        }
+        
     }
 }

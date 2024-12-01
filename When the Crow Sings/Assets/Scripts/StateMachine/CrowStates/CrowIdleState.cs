@@ -11,9 +11,16 @@ public class CrowIdleState : StateMachineState
         s = birdBrain;
     }
 
+    public override void FixedUpdate()
+    {
+        s.StillGravity();
+    }
+
     public override void StateEntered()
     {
         s.transform.SetPositionAndRotation(s.restPoint.transform.position,s.restPoint.transform.rotation);
-        Debug.Log("Time to idle...");
+        s.crowAnimator.SetBool("isFlying", false);
+        s.crowAnimator.SetBool("isIdle", true);
+        s.crowAnimator.SetBool("isPecking", false);
     }
 }
