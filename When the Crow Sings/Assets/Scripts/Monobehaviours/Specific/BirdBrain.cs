@@ -9,6 +9,8 @@ public class BirdBrain : StateMachineComponent
 
     public float secondsToPeck;
 
+    public Animator crowAnimator;
+
     [HideInInspector]
     public CrowRestPoint restPoint;
 
