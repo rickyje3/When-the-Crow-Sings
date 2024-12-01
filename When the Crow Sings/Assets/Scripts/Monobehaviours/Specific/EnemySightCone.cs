@@ -35,4 +35,9 @@ public class EnemySightCone : MonoBehaviour
         //}
 
     }
+
+    private void Awake()
+    {
+        GetComponent<MeshRenderer>().enabled = DebugManager.showCollidersAndTriggers;
+    }
 }

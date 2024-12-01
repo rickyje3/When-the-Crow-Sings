@@ -77,6 +77,7 @@ public class EnemyController : StateMachineComponent
 
     public void EnterChaseStateSafe()
     {
+        Debug.Log("EnterChaseStateSafe() called!");
         if (!isWaitingToCheckCanSeePlayer) StartCoroutine(checkIfStillDoesSeePlayer());
     }
     bool isWaitingToCheckCanSeePlayer = false;

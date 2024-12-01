@@ -59,4 +59,10 @@ public class TaskManager : MonoBehaviour
         currentQTESuccessAndFailValues = null;
         
     }
+
+    public void AbortQTE()
+    {
+        if (qteUiHolder != null) qteUiHolder.DestroyQte();
+        currentQTESuccessAndFailValues = null;
+    }
 }

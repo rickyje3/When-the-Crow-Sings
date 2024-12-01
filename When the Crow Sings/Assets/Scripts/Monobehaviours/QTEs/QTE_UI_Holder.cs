@@ -15,7 +15,7 @@ public class QTE_UI_Holder : MonoBehaviour
 
     public void DestroyQte()
     {
-        Destroy(qte.gameObject);
+        if (qte != null) Destroy(qte.gameObject);
         qte = null;
     }
 }
