@@ -24,4 +24,9 @@ public class ThrowTarget : MonoBehaviour
         
         transform.position = direction + player.position;
     }
+
+    private void OnEnable()
+    {
+        direction = Vector3.zero;
+    }
 }
