@@ -42,12 +42,20 @@ public class CrowTarget : MonoBehaviour
         isDisableAfterTimeRunning = true;
         GetComponent<NavMeshObstacle>().enabled = true;
         yield return new WaitForSeconds(SecondsToAttractCrows);
+        
+        
+        DisableTarget();
+    }
+
+    public void DisableTarget()
+    {
         isActiveTarget = false;
 
-        Destroy(ServiceLocator.Get<GameManager>().activeBirdseed.gameObject);
+        if (ServiceLocator.Get<GameManager>().activeBirdseed != null)
+            Destroy(ServiceLocator.Get<GameManager>().activeBirdseed.gameObject);
         ServiceLocator.Get<GameManager>().activeBirdseed = null;
         disabledSignal.Emit();
-        
+
         visualDebug.SetActive(false);
         isDisableAfterTimeRunning = false;
         GetComponent<NavMeshObstacle>().enabled = false;

@@ -215,9 +215,11 @@ public class GameStateManager : MonoBehaviour, IService
         return normalizedProgress;
     }
 
+    public CrowTarget actorCrowTarget;
     private void DestroyActors()
     {
         Destroy(playerHolder);
+        if (actorCrowTarget != null) actorCrowTarget.DisableTarget();
         ServiceLocator.Get<GameManager>().crowHolder.GetComponent<CrowHolder>().DestroyCrows();
     }
 
