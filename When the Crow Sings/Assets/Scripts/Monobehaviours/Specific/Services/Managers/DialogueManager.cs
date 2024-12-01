@@ -92,6 +92,8 @@ public class DialogueManager : MonoBehaviour, IService
 
     public void EndDialogue()
     {
+        choiceButtonsMBHS.enabled = false;
+        nextButtonMBHS.enabled = false;
         dialogueUI.SetActive(false);
         finishDialogueSignal.Emit();
     }
