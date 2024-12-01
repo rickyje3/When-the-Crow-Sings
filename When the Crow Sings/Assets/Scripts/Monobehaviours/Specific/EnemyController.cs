@@ -151,17 +151,26 @@ public class EnemyController : StateMachineComponent
 
     private void RenderRayCastLine(List<Vector3> targetPositions)
     {
-        //LineRenderer lineRenderer = GetComponent<LineRenderer>();
-        //lineRenderer.enabled = true;
-        foreach (Vector3 pos in targetPositions )
+        if (DebugManager.showCollidersAndTriggers)
         {
-            LineRenderer lineRenderer = lineRenderers[targetPositions.IndexOf(pos)];
-            lineRenderer.enabled = true;
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, pos);
-            if (canSeePlayer) lineRenderer.startColor = Color.red;
-            else lineRenderer.startColor = Color.green;
+            foreach (Vector3 pos in targetPositions)
+            {
+                LineRenderer lineRenderer = lineRenderers[targetPositions.IndexOf(pos)];
+                lineRenderer.enabled = true;
+                lineRenderer.SetPosition(0, transform.position);
+                lineRenderer.SetPosition(1, pos);
+                if (canSeePlayer) lineRenderer.startColor = Color.red;
+                else lineRenderer.startColor = Color.green;
+            }
         }
+        else
+        {
+            foreach (LineRenderer i in lineRenderers)
+            {
+                i.enabled = false;
+            }
+        }
+        
         
     }
 
