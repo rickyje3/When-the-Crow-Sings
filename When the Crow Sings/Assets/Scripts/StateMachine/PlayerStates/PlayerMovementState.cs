@@ -67,6 +67,7 @@ public class PlayerMovementState : StateMachineState
 
             s.isCrouchingToggled = false;
             s.playerAnimator.SetBool("animIsCrouching", false);
+            ResetColliderToDefault();
 
             stateClamp = s.minSprintSpeed;
             stateSpeed = s.maxSprintSpeed;
@@ -143,11 +144,15 @@ public class PlayerMovementState : StateMachineState
         {
             s.playerAnimator.SetBool("animIsCrouching", false);
             //s.speed = 8;
-            s.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
-            s.GetComponent<CapsuleCollider>().height = 4;
+            ResetColliderToDefault();
         }
     }
 
+    private void ResetColliderToDefault()
+    {
+        s.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
+        s.GetComponent<CapsuleCollider>().height = 4;
+    }
 
     private void OnFired(InputAction.CallbackContext context)
     {
