@@ -65,7 +65,7 @@ Beau_Awkward: Oh, well, that's no good bud.
 
 ~ beau_first_int_cont_2
 set BeauTaskOffered = true;
-Beau: Listen, would you do me a solid and pick up some food from the greenhouse? Seems like you could use something to keep yourself busy.
+Beau: Listen, would you do me a solid and pick up some food from the <color=#5b5b1f>greenhouse</color>? Seems like you could use something to keep yourself busy.
 Beau_Smile: I've got to swap out some stock for <color=#813408>Angel</color>, put the new food in the freezer and give him the wiltier stuff. 
 - Sure.
 	set BeauTaskAccepted = true;
@@ -101,7 +101,8 @@ Beau_Awkward: With no veggies. Did something happen, or?
 		=> END
 
 ~ beau_task_fin
-Beau: Alright bud, look. I can tell you're having some trouble settling in here. You did me a solid, so let me give you a little advice.
+Beau_Smile: Ah! Lookin' good! <color=#813408>Quinn</color> sure knows how to grow 'em. Thanks for your help.
+Beau: Bud, look. I can tell you're having some trouble settling in here. You did me a solid, so let me give you a little advice.
 Chance: Hm?
 Beau_Smile: Things get a little weird around here, but it's harmless! Least since I've been here.
 Beau: If you want some reassurance? Go talk to <color=#813408>Quinn</color>, the gardener you just grabbed that delivery from.
@@ -117,7 +118,7 @@ else:
 	=> beau_task_fin_cont
 
 ~ beau_task_fin_cont
-Beau: There's also <color=#813408>Farida</color>. She's our security 'round here.
+Beau: There's also <color=#813408>Farida</color>. She's our security 'round here. She's always in the <color=#5b5b1f>Energy HQ</color> watching the cameras, she woulda been the one that buzzed you in.
 if FaridaTaskOffered == true:
 	- Met Farida.
 		Chance_Sad: I've met <color=#813408>Farida</color>. She's uh...
