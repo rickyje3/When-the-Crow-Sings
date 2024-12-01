@@ -19,6 +19,9 @@ public class CrowScatterState : StateMachineState
     {
         s.dir = new Vector3(Random.Range(-1.0f,1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) *.1f;
         s.StartCoroutine(WaitThenEnterTargetState());
+        s.crowAnimator.SetBool("isFlying", true);
+        s.crowAnimator.SetBool("isIdle", false);
+        s.crowAnimator.SetBool("isPecking", false);
     }
 
     IEnumerator WaitThenEnterTargetState()

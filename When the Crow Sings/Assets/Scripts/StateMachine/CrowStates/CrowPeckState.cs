@@ -14,6 +14,9 @@ public class CrowPeckState : StateMachineState
     public override void StateEntered()
     {
         base.StateEntered();
+        s.crowAnimator.SetBool("isFlying", false);
+        s.crowAnimator.SetBool("isIdle", false);
+        s.crowAnimator.SetBool("isPecking", true);
     }
 
     IEnumerator ExitStateAfterSeconds()
