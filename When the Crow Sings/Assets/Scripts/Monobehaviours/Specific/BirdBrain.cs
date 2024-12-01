@@ -8,6 +8,7 @@ public class BirdBrain : StateMachineComponent
     public CrowHolder crowHolder;
 
     public float secondsToPeck;
+    public float flyingSpeed = .2f;
 
     public Animator crowAnimator;
 
@@ -33,11 +34,15 @@ public class BirdBrain : StateMachineComponent
     }
 
     [HideInInspector]
-    public Vector3 destination, dir;
+    public Vector3 destination;
+    [HideInInspector]
+    public Vector3 direction;
     public void FlyNavigate()
     {
         // if raycast detects surface AND that surface is NOT the destination, then navigate away.
-        controller.Move(dir);//*Time.deltaTime);
+        direction =  (destination - transform.position).normalized*flyingSpeed;
+        transform.rotation = Quaternion.LookRotation(direction);
+        controller.Move(direction);//targetPosition);
     }
 
     public void SetTargetAsTarget(bool _target)

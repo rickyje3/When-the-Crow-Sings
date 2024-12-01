@@ -13,7 +13,8 @@ public class CrowPeckState : StateMachineState
 
     public override void StateEntered()
     {
-        base.StateEntered();
+        s.transform.localRotation = Quaternion.Euler(0f, s.transform.localRotation.eulerAngles.y, s.transform.localRotation.eulerAngles.z);
+
         s.crowAnimator.SetBool("isFlying", false);
         s.crowAnimator.SetBool("isIdle", false);
         s.crowAnimator.SetBool("isPecking", true);
