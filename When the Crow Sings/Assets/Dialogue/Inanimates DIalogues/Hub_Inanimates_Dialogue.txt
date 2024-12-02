@@ -9,7 +9,7 @@ Coffee, water, fruits, vegetables. A nice spread.
 
 ~ wood_pile_unmoved
 if WoodPileMovable == true:
-	This must've been what Jazmyne was talking about. Let me just...
+	This must've been what <color=#813408>Jazmyne</color> was talking about. Let me just...
 	set Zone2DoorUnlocked = true;
 	=> END
 else:
@@ -53,7 +53,7 @@ else:
 
 ~ veggie_basket
 if BeauTaskAccepted == true:
-	These must be the vegetables that Beau asked for. Better grab them.
+	These must be the vegetables that <color=#813408>Beau</color> asked for. Better grab them.
 	set BeauTaskCompleted = true;
 	=> END
 else:
@@ -108,8 +108,8 @@ Lined up solar panels, recently wiped down and clear of dust.
 => END
 
 ~ greenhouse_sign
-"<size=60%>Quinn's</size><br>Greenhouse"
-'Quinn's' seems to be carved in with a knife.
+"<size=60%><color=#813408>Quinn</color>'s</size><br>Greenhouse"
+'<color=#813408>Quinn</color>'s' seems to be carved in with a knife.
 => END
 
 ~ bench
@@ -158,7 +158,7 @@ if timeOfDay == 3:
 	I've got to get this code in fast!
 	Ah! There we go!
 else:
-	Just need to put in the code that Francisco gave me and...
+	Just need to put in the code that <color=#813408>Francisco</color> gave me and...
 	Open. Voila.
 set Zone1DoorUnlocked = true;
 => END
@@ -179,7 +179,7 @@ if timeOfDay == 3:
 	God, where's that key!?
 	There!
 else:
-	This must be the door that Farida was talking about. Where's that key she gave me...
+	This must be the door that <color=#813408>Farida</color> was talking about. Where's that key she gave me...
 	Ah, there we go. With a little bit of elbow grease, the padlock pops off.
 set Zone3DoorUnlocked = true;
 => END
