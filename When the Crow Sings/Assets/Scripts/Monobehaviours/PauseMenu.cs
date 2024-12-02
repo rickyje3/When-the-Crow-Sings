@@ -2,6 +2,8 @@ using ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -21,10 +23,20 @@ public class PauseMenu : MonoBehaviour
         inputManager.EnablePlayerInput(false);
         Time.timeScale = 0;
         pauseMenuUI.SetActive(true);
+
+        InputManager.playerInputActions.UI.Enable();
+        InputManager.playerInputActions.UI.Unpause.performed += OnPauseButtonPressed;
+        
     }
 
     public void Resume()
     {
+        Debug.Log("Resuming");
+
+
+        InputManager.playerInputActions.UI.Unpause.performed -= OnPauseButtonPressed;
+        InputManager.playerInputActions.UI.Disable();
+
         Time.timeScale = 1;
         pauseMenuUI.SetActive(false);
         inputManager.EnablePlayerInput(true);
@@ -33,6 +45,12 @@ public class PauseMenu : MonoBehaviour
     public void Journal()
     {
         //journal activate here
+    }
+
+    private void OnPauseButtonPressed(InputAction.CallbackContext context)
+    {
+        Debug.Log("Unpause pressed");
+        Resume();
     }
 
     public void QuitToMain()
