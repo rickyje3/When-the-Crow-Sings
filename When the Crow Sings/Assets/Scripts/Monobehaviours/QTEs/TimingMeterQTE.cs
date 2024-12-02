@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class TimingMeterQTE : QuickTimeEvent
@@ -54,10 +55,10 @@ public class TimingMeterQTE : QuickTimeEvent
         if (meterActive)
         {
             MoveMeter();
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button1))
-            {
-                CheckSuccess();
-            }
+            //if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button1))
+            //{
+            //    CheckSuccess();
+            //}
         }
     }
 
@@ -67,6 +68,8 @@ public class TimingMeterQTE : QuickTimeEvent
         //timingMeterAnimator.SetBool("isOpen", true);
         meterActive = true;
         SetTargetRangeMarkers();
+
+        InputManager.playerInputActions.UI.QTEAccept.performed += OnQTEInput;
     }
 
     //Moves the handle up and down
@@ -91,6 +94,11 @@ public class TimingMeterQTE : QuickTimeEvent
     }
 
     //Check if qte was successful
+
+    private void OnQTEInput(InputAction.CallbackContext context)
+    {
+        CheckSuccess();
+    }
     private void CheckSuccess()
     {
         //meterActive = false;
@@ -129,12 +137,16 @@ public class TimingMeterQTE : QuickTimeEvent
         //timingMeterAnimator.SetBool("isOpen", false);
         //meterActive = false;
         SignalArguments args = new SignalArguments();
+        InputManager.playerInputActions.UI.QTEAccept.performed -= OnQTEInput;
+
         args.boolArgs.Add(true);
         globalFinishedQteSignal.Emit(args);
     }
     public override void FailQTE()
     {
         SignalArguments args = new SignalArguments();
+        InputManager.playerInputActions.UI.QTEAccept.performed -= OnQTEInput;
+
         args.boolArgs.Add(false);
         globalFinishedQteSignal.Emit(args);
     }

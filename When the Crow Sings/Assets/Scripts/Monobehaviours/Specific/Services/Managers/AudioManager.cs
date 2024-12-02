@@ -26,6 +26,16 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
 
+    public void PlayOneShot(EventReference sound) // hopefully this overload removes the spatialness?
+    {
+        RuntimeManager.PlayOneShot(sound);
+    }
+
+    public bool IsSoundPlaying(EventReference sound)
+    {
+        return false;
+    }
+
     public EventInstance CreateEventInstance(EventReference eventReference)
     {
         if (eventReference.IsNull)
