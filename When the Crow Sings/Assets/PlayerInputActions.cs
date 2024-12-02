@@ -462,17 +462,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""96b258e8-e405-49ec-915b-aca574038c57"",
-                    ""path"": ""<Keyboard>/b"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a76470d9-e9b3-4311-b995-ad841104eaac"",
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
