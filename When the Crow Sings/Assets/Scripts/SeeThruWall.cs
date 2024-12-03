@@ -62,6 +62,10 @@ public class SeeThruWall : MonoBehaviour
             else
             {
                 occluderSize = Mathf.Lerp(occluderSize, 0f, lerpFactor);
+                if (occluderSize < 0.6f)
+                {
+                    occluderSize = 0;
+                }
             }
 
             //Sets the size to the material
