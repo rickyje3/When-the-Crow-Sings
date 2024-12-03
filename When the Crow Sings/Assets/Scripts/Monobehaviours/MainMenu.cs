@@ -50,13 +50,13 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuDebugLoadHolder.resourceToLoad = levelDataResource;
         SceneManager.LoadScene(mainScene.Name);
-        //updateMusic();
+        updateMusic();
     }
 
     public void OnNewGameButtonPressed()
     {
         StartCoroutine(NewGame());
-        //updateMusic();
+        updateMusic();
     }
 
     public void OnContinueButtonPressed()
