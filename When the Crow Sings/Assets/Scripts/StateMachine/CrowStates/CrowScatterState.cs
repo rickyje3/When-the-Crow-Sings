@@ -9,17 +9,25 @@ public class CrowScatterState : StateMachineState
     {
         s = birdBrain;
     }
-
-
-
-    Vector3 dir;
+    
     public override void FixedUpdate()
     {
-        s.controller.Move(dir);//*Time.deltaTime);
+        s.FlyNavigate();
     }
 
     public override void StateEntered()
     {
-        dir = new Vector3(Random.Range(-1.0f,1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) *.1f;
+        float range = 20f;
+        s.destination = new Vector3(Random.Range(-range,range), Random.Range(range, range), Random.Range(-range, range));
+        s.StartCoroutine(WaitThenEnterTargetState());
+        s.crowAnimator.SetBool("isFlying", true);
+        s.crowAnimator.SetBool("isIdle", false);
+        s.crowAnimator.SetBool("isPecking", false);
+    }
+
+    IEnumerator WaitThenEnterTargetState()
+    {
+        yield return new WaitForSeconds(1.5f);
+        s.stateMachine.Enter("CrowTargetState");
     }
 }

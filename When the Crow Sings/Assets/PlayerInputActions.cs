@@ -341,6 +341,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9d5449f4-7371-40d4-af93-d2189ff72019"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""cbe2711b-3fad-4641-bb63-8b7fc1071805"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -571,6 +582,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""testempty"",
                     ""type"": ""Button"",
                     ""id"": ""1f0c683d-c141-4336-85ef-f47fe5257aa3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QTEAccept"",
+                    ""type"": ""Button"",
+                    ""id"": ""173bae8c-0c65-42ee-812a-53e3c107c56c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Unpause"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9aba9ff-782d-47da-818a-b6187985c982"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1039,6 +1068,50 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""testempty"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9a223d3-1c93-43d2-96fc-1c76dbe15188"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""QTEAccept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ed51f03-ea21-4061-801f-9adfeff25c93"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""QTEAccept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3990f976-425d-4b23-a3d3-4e34e80a1030"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Unpause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e54c4f5c-e983-4e4e-88b2-c239e75cb5a3"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Unpause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1131,6 +1204,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_testempty = m_UI.FindAction("testempty", throwIfNotFound: true);
+        m_UI_QTEAccept = m_UI.FindAction("QTEAccept", throwIfNotFound: true);
+        m_UI_Unpause = m_UI.FindAction("Unpause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1321,6 +1396,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_testempty;
+    private readonly InputAction m_UI_QTEAccept;
+    private readonly InputAction m_UI_Unpause;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1336,6 +1413,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
         public InputAction @testempty => m_Wrapper.m_UI_testempty;
+        public InputAction @QTEAccept => m_Wrapper.m_UI_QTEAccept;
+        public InputAction @Unpause => m_Wrapper.m_UI_Unpause;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1378,6 +1457,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @testempty.started += instance.OnTestempty;
             @testempty.performed += instance.OnTestempty;
             @testempty.canceled += instance.OnTestempty;
+            @QTEAccept.started += instance.OnQTEAccept;
+            @QTEAccept.performed += instance.OnQTEAccept;
+            @QTEAccept.canceled += instance.OnQTEAccept;
+            @Unpause.started += instance.OnUnpause;
+            @Unpause.performed += instance.OnUnpause;
+            @Unpause.canceled += instance.OnUnpause;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1415,6 +1500,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @testempty.started -= instance.OnTestempty;
             @testempty.performed -= instance.OnTestempty;
             @testempty.canceled -= instance.OnTestempty;
+            @QTEAccept.started -= instance.OnQTEAccept;
+            @QTEAccept.performed -= instance.OnQTEAccept;
+            @QTEAccept.canceled -= instance.OnQTEAccept;
+            @Unpause.started -= instance.OnUnpause;
+            @Unpause.performed -= instance.OnUnpause;
+            @Unpause.canceled -= instance.OnUnpause;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1503,5 +1594,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnTestempty(InputAction.CallbackContext context);
+        void OnQTEAccept(InputAction.CallbackContext context);
+        void OnUnpause(InputAction.CallbackContext context);
     }
 }

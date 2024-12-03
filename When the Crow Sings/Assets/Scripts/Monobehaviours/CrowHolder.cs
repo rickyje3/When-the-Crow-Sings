@@ -18,12 +18,6 @@ public class CrowHolder : MonoBehaviour
         }
     }
 
-
-    private void Start()
-    {
-        //SpawnCrows(25);
-    }
-
     public void AddCrowTargetIfNoneExists(BirdseedController birdseedToFeastUpon)//Vector3 feast)
     {
 
@@ -68,6 +62,6 @@ public class CrowHolder : MonoBehaviour
         GameObject birdBrain = Instantiate(CrowPrefab, transform);
         crows.Add(birdBrain.GetComponent<BirdBrain>());
         birdBrain.GetComponent<BirdBrain>().crowHolder = this;
-        birdBrain.GetComponent<BirdBrain>().SetRestPoint(_crowRestPoint.transform);
+        birdBrain.GetComponent<BirdBrain>().SetRestPoint(_crowRestPoint);
     }
 }

@@ -34,7 +34,8 @@ public class DialogueManager : MonoBehaviour, IService
     public GameSignal finishDialogueSignal;
 
     [Header("Settings")]
-    public float textSpeed = .05f;
+    public float textSpeed = .03f;
+    public float secondsBetweenAudioPlays = .05f;
     public float pauseMultiplier = 10f;
     public List<GameSignal> signalsDialogueCanUse;
 
@@ -92,6 +93,8 @@ public class DialogueManager : MonoBehaviour, IService
 
     public void EndDialogue()
     {
+        choiceButtonsMBHS.enabled = false;
+        nextButtonMBHS.enabled = false;
         dialogueUI.SetActive(false);
         finishDialogueSignal.Emit();
     }
@@ -277,13 +280,15 @@ public class DialogueManager : MonoBehaviour, IService
 
 
 
-
+    bool canPlayAudio = true;
     IEnumerator TypeText(TextMeshProUGUI textMesh, string text, int index)
     {
         dialogueText.maxVisibleCharacters = 0;
         textMesh.text = text;
 
         isSkipping = false; // 100% necessary right here.
+
+        canPlayAudio = true;
 
         while (textMesh.maxVisibleCharacters <= textMesh.text.Length)
         {
@@ -311,6 +316,12 @@ public class DialogueManager : MonoBehaviour, IService
                 }
                 yield return new WaitForSeconds(pauseBetweenChars); // TODO: Make it so isSkipping interrupts this.
                 textMesh.maxVisibleCharacters += 1;
+
+                if (canPlayAudio && textMesh.maxVisibleCharacters < textMesh.text.Length-1)
+                {
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.Blip, this.transform.position);
+                    StartCoroutine(DelayBeforeAudioCanPlay());
+                }
             }
 
             canSkip = true;
@@ -318,6 +329,14 @@ public class DialogueManager : MonoBehaviour, IService
 
         isSkipping = false; // This may be redundant, may not be.
         canNextLine = true;
+    }
+
+    
+    IEnumerator DelayBeforeAudioCanPlay()
+    {
+        canPlayAudio = false;
+        yield return new WaitForSeconds(secondsBetweenAudioPlays);
+        canPlayAudio = true;
     }
 
     private int currentLine;

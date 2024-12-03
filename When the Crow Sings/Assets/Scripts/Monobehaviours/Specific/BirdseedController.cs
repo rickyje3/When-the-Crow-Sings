@@ -71,6 +71,7 @@ public class BirdseedController : MonoBehaviour
                 firstTime = true;
                 isLanded = true;
                 GetComponent<Rigidbody>().velocity *= 0.05f;
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.SeedHit, this.transform.position);
                 StartCoroutine(SpawnCrows());
             }
         }

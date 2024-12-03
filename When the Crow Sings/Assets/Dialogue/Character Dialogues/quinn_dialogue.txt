@@ -25,6 +25,13 @@ Quinn: You must be Chance.
 Chance: Uh-huh.
 Quinn: Nice to meet you. Officially. What brings you to the greenhouse? 
 Quinn_Excited: Here to try my turnip-carrot hybrid?
+if ifBeauAndAngel == true:
+	- Angel sent me.
+		Chance: <color=#813408>Angel</color> said you're up late, and that you might know something about people roaming around at night.
+		=> quinn_first_int_cont
+	- Beau sent me.
+		Chance: <color=#813408>Beau</color> said that you know everyone around here. That you'd know if things were out of the ordinary.
+		=> quinn_first_int_cont
 if AngelBaseCompleted == true:
 	- Angel sent me.
 		Chance: <color=#813408>Angel</color> said you're up late, and that you might know something about people roaming around at night.

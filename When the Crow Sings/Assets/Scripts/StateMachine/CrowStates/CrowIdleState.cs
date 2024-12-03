@@ -11,15 +11,18 @@ public class CrowIdleState : StateMachineState
         s = birdBrain;
     }
 
-    public override void StateEntered()
+    public override void FixedUpdate()
     {
-        //s.StartCoroutine(ExitStateAfterTime());
-        
+        s.StillGravity();
     }
 
-    IEnumerator ExitStateAfterTime()
+    public override void StateEntered()
     {
-        yield return new WaitForSeconds(1);
-        s.stateMachine.Enter("CrowScatterState");
+        s.controller.enabled = false;
+        s.transform.SetPositionAndRotation(s.restPoint.transform.position + new Vector3(0,1,0),s.restPoint.transform.rotation);
+        s.controller.enabled = true;
+        s.crowAnimator.SetBool("isFlying", false);
+        s.crowAnimator.SetBool("isIdle", true);
+        s.crowAnimator.SetBool("isPecking", false);
     }
 }

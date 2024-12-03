@@ -7,19 +7,17 @@ public class CameraManager : MonoBehaviour
 {
     public static Vector3 mouseWorldPosition;
 
- 
-
     void Update()
     {
+        SetMouseWorldPosition();
+    }
+
+    private void SetMouseWorldPosition()
+    {
         Ray ray = GetComponent<Camera>().ScreenPointToRay(Mouse.current.position.ReadValue());
-        
-        if (Physics.Raycast(ray, out RaycastHit hitInfo,Mathf.Infinity, ~LayerMask.GetMask("Player")))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, LayerMask.GetMask("Floor")))//~LayerMask.GetMask("Player","Enemy")))
         {
-            
-            //Debug.DrawLine(ray.origin, hitInfo.point,Color.red,1f);
             mouseWorldPosition = hitInfo.point;
-            
         }
-        else { mouseWorldPosition = Vector3.zero; }
     }
 }

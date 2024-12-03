@@ -15,6 +15,10 @@ public class SaveDataAccess
 
 
         if (saveData.boolFlags["FlowerOne"] && saveData.boolFlags["FlowerTwo"] && saveData.boolFlags["FlowerThree"]) saveData.boolFlags["FranciscoTaskCompleted"] = true;
+        if (saveData.boolFlags["BeauBaseCompleted"] && saveData.boolFlags["FranciscoBaseCompleted"]) saveData.boolFlags["ifBeauAndFrancisco"] = true;
+        if (saveData.boolFlags["BeauBaseCompleted"] && saveData.boolFlags["AngelBaseCompleted"]) saveData.boolFlags["ifBeauAndAngel"] = true;
+        if (saveData.boolFlags["FaridaBaseCompleted"] && saveData.boolFlags["CalebBaseCompleted"]) saveData.boolFlags["ifFaridaAndCaleb"] = true;
+        if (saveData.boolFlags["CalebBaseCompleted"] && saveData.boolFlags["AngelBaseCompleted"]) saveData.boolFlags["ifCalebAndAngel"] = true;
         //else boolFlags["FranciscoTaskCompleted"] = false; // Commented out rn because for testing we only have 1 QTE.
 
 
