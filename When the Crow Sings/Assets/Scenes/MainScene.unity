@@ -222,15 +222,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.3962264, g: 0.15752934, b: 0.34521586, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 638b9f3cda5504d41ac23912867352de, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -396,6 +396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dangerAlpha: 0
+  lerpSpeed: 5
+  colorLerpSpeed: 20
+  overlayImage: {fileID: 358614587}
 --- !u!1 &529008941
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +465,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &821823492
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1152,7 +1155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1360381095
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1322,15 +1325,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 2a504efcf39eef746a12a1dda92b3748, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2625,6 +2628,17 @@ PrefabInstance:
       objectReference: {fileID: 769733860930222430}
     - target: {fileID: 6324364399803015724, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6324364399803015724, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f517bfc851756f64891a29e4c83a7506,
+        type: 3}
+    - target: {fileID: 6324364399803015724, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 769733860930222430}
@@ -2801,6 +2815,12 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 41.45
       objectReference: {fileID: 0}
+    - target: {fileID: 7987267137334681483, guid: bd32890dca4c9b94cbc28282e8fee8b6,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f517bfc851756f64891a29e4c83a7506,
+        type: 3}
     - target: {fileID: 8753042411374657949, guid: bd32890dca4c9b94cbc28282e8fee8b6,
         type: 3}
       propertyPath: m_text

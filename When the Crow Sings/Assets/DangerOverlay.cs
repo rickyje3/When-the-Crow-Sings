@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DangerOverlay : MonoBehaviour//, IService
 {
@@ -10,17 +12,48 @@ public class DangerOverlay : MonoBehaviour//, IService
     //    ServiceLocator.Register(this);
     //}
 
-    // Start is called before the first frame update
+    Color actualColor = Color.white;
     void Awake()
     {
-        //RegisterSelfAsService();
+        string hexColor = "#652858";
+        if (UnityEngine.ColorUtility.TryParseHtmlString(hexColor, out Color _color)) actualColor = _color;
     }
+
+    public float lerpSpeed = 1f;
+    public float colorLerpSpeed = 20f;
+
+    public Image overlayImage;
+
+    EnemyController enemyController;
+
 
     // Update is called once per frame
     void Update()
     {
-        if (EnemyController.canSeePlayer) dangerAlpha = .5f;
-        else dangerAlpha = 0f;
-        GetComponent<CanvasGroup>().alpha = dangerAlpha;
+        if (ServiceLocator.CheckIfServiceExists<EnemyController>())
+        {
+            enemyController = ServiceLocator.Get<EnemyController>();
+
+            if (enemyController.canSeePlayer || enemyController.IsChasingPlayer) dangerAlpha = Mathf.Lerp(dangerAlpha, .5f, Time.deltaTime * lerpSpeed);
+            else dangerAlpha = Mathf.Lerp(dangerAlpha, 0f, Time.deltaTime * lerpSpeed);
+            GetComponent<CanvasGroup>().alpha = dangerAlpha;
+
+            if (enemyController.IsChasingPlayer)
+            {
+                overlayImage.color = Color.Lerp(overlayImage.color, Color.red, Time.deltaTime * colorLerpSpeed);
+            }
+            else
+            {
+                overlayImage.color = Color.Lerp(overlayImage.color, actualColor, Time.deltaTime * colorLerpSpeed);
+            }
+            return;
+        }
+        else
+        {
+            dangerAlpha = Mathf.Lerp(dangerAlpha, 0f, Time.deltaTime * lerpSpeed);
+            overlayImage.color = Color.Lerp(overlayImage.color, actualColor, Time.deltaTime * colorLerpSpeed);
+        }
+
+        
     }
 }
