@@ -134,7 +134,7 @@ public class DialogueManager : MonoBehaviour, IService
             if (nameText.text == "") nameBox.enabled = false;
             else nameBox.enabled = true;
 
-            SetPortraits(newLine2);
+            SetPortraitsAndVoices(newLine2);
 
             StartCoroutine(TypeText(dialogueText, newLine2.dialogue, index));
         }
@@ -319,7 +319,7 @@ public class DialogueManager : MonoBehaviour, IService
 
                 if (canPlayAudio && textMesh.maxVisibleCharacters < textMesh.text.Length-1)
                 {
-                    AudioManager.instance.PlayOneShot(FMODEvents.instance.Blip, this.transform.position);
+                    AudioManager.instance.PlayOneShot(dialogueSoundToPlay, this.transform.position);
                     StartCoroutine(DelayBeforeAudioCanPlay());
                 }
             }
@@ -330,7 +330,7 @@ public class DialogueManager : MonoBehaviour, IService
         isSkipping = false; // This may be redundant, may not be.
         canNextLine = true;
     }
-
+    FMODUnity.EventReference dialogueSoundToPlay;
     
     IEnumerator DelayBeforeAudioCanPlay()
     {
@@ -535,7 +535,7 @@ public class DialogueManager : MonoBehaviour, IService
     }
 
 
-    void SetPortraits(DialogueResponse response)
+    void SetPortraitsAndVoices(DialogueResponse response)
     {
         //newLine2.characterName;
         //newLine2.characterEmotion;
@@ -558,6 +558,12 @@ public class DialogueManager : MonoBehaviour, IService
         if (activeImageObject.sprite == null)
         {
             activeImageObject.gameObject.SetActive(false);
+            //dialogueSoundToPlay = new FMODUnity.EventReference();
+            dialogueSoundToPlay = FMODEvents.instance.Blip_NoSound;
+        }
+        else
+        {
+            dialogueSoundToPlay = FMODEvents.instance.Blip;
         }
 
     }
