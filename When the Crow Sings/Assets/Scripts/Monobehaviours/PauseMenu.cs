@@ -63,4 +63,9 @@ public class PauseMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    private void OnDestroy()
+    {
+        InputManager.playerInputActions.UI.Unpause.performed -= OnPauseButtonPressed;
+    }
 }
