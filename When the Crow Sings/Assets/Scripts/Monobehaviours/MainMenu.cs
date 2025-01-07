@@ -69,7 +69,7 @@ public class MainMenu : MonoBehaviour
         int levelDataIndex = SaveDataAccess.saveData.intFlags["levelDataIndex"];
         mainMenuDebugLoadHolder.resourceToLoad = allLevels.levelDataResources[levelDataIndex];
         SceneManager.LoadScene(mainScene.Name);
-        //updateMusic();
+        updateMusic();
     }
 
     IEnumerator NewGame()
