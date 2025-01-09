@@ -286,7 +286,7 @@ public class GameStateManager : MonoBehaviour, IService
         List<Scene> scenes = new List<Scene>();
         foreach (int i in Enumerable.Range(0, SceneManager.sceneCount))
         {
-            if (SceneManager.GetSceneAt(i).name != "MainScene")
+            if (SceneManager.GetSceneAt(i).name != "Main_SCN")
             {
                 scenes.Add(SceneManager.GetSceneAt(i));
             }
