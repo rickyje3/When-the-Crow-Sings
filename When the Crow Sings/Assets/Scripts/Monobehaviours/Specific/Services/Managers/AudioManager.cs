@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     private List<EventInstance> eventInstances;
 
     public static AudioManager instance { get; private set; }
+    public AreaMusic areaMusic { get; private set; }
 
     private void Awake()
     {
@@ -19,6 +20,8 @@ public class AudioManager : MonoBehaviour
         instance = this;
 
         eventInstances = new List<EventInstance>();
+
+        areaMusic = FindObjectOfType<AreaMusic>();
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
