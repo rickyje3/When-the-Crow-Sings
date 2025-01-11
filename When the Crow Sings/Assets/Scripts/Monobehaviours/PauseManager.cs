@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenuUI;
     public InputManager inputManager;
@@ -20,25 +20,29 @@ public class PauseMenu : MonoBehaviour
 
     public void OnPaused(SignalArguments args)
     {
+        PauseGame();
+        pauseMenuUI.SetActive(true);
+    }
+
+    public void PauseGame()
+    {
+        Debug.Log("Pausing");
+
         inputManager.EnablePlayerInput(false);
         Time.timeScale = 0;
-        pauseMenuUI.SetActive(true);
 
         InputManager.playerInputActions.UI.Enable();
         InputManager.playerInputActions.UI.Unpause.performed += OnPauseButtonPressed;
-        
     }
 
-    public void Resume()
+    public void UnpauseGame()
     {
         Debug.Log("Resuming");
-
 
         InputManager.playerInputActions.UI.Unpause.performed -= OnPauseButtonPressed;
         InputManager.playerInputActions.UI.Disable();
 
         Time.timeScale = 1;
-        pauseMenuUI.SetActive(false);
         inputManager.EnablePlayerInput(true);
     }
 
@@ -50,7 +54,9 @@ public class PauseMenu : MonoBehaviour
     private void OnPauseButtonPressed(InputAction.CallbackContext context)
     {
         Debug.Log("Unpause pressed");
-        Resume();
+        // TODO: Close ALL pause menus, or something like that.
+        pauseMenuUI.SetActive(false);
+        UnpauseGame();
     }
 
     public void QuitToMain()
