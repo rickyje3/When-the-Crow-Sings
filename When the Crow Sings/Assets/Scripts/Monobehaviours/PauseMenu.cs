@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
+    public GameObject settingsMenuUI;
     public InputManager inputManager;
     public static bool isPaused
     {
@@ -49,11 +50,19 @@ public class PauseMenu : MonoBehaviour
 
     private void OnPauseButtonPressed(InputAction.CallbackContext context)
     {
-        Debug.Log("Unpause pressed");
-        Resume();
+        if (pauseMenuUI.activeSelf)
+        {
+            Debug.Log("Unpause pressed");
+            Resume();
+        }
+        else if (settingsMenuUI.activeSelf)
+        {
+            settingsMenuUI.SetActive(false);
+            pauseMenuUI.SetActive(true);
+        }
     }
 
-    public void QuitToMain()
+        public void QuitToMain()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu_SCN");
