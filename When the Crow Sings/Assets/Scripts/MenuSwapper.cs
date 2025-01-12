@@ -5,6 +5,7 @@ using UnityEngine;
 public class MenuSwapper : MonoBehaviour
 {
     public List<GameObject> menus;
+    public GameObject journalHolder;
 
     public void OpenMenu(int whichMenu)
     {
@@ -14,6 +15,8 @@ public class MenuSwapper : MonoBehaviour
             if (currentLoop == whichMenu)
                 menu.SetActive(true);
             else menu.SetActive(false);
+            if (whichMenu > 1) journalHolder.SetActive(true);
+            else journalHolder.SetActive(false);
             currentLoop++;
         }
     }
