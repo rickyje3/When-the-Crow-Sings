@@ -867,6 +867,9 @@ MonoBehaviour:
   sprintSlideSpeedCorrection: 0.07
   characterController: {fileID: 5870364044150093514}
   pauseSignalTEMP: {fileID: 11400000, guid: 46f67eb6b653cbe4a992cc406e4dbbb6, type: 2}
+  mapSignalTEMP: {fileID: 11400000, guid: 892526f6f597bee45a1504e13938ee76, type: 2}
+  historySignalTEMP: {fileID: 11400000, guid: 41502dc2554216f4195c08301c35ee3f, type: 2}
+  codexSignalTEMP: {fileID: 11400000, guid: f51b955aa1ff4714ea8787db5d736ec2, type: 2}
   speed: 0
   movementInput: {x: 0, y: 0, z: 0}
   acceleration: 5
@@ -1000,6 +1003,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a9aba9ff-782d-47da-818a-b6187985c982
     m_ActionName: UI/Unpause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e96e5dc0-30d0-4b2a-8f0b-e0ecd1221169
+    m_ActionName: Player/OpenMap[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5cf58be7-c802-4719-b235-2a26cc13a639
+    m_ActionName: Player/OpenHistory[/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 429190cc-164c-4045-bf8d-a312100a82aa
+    m_ActionName: Player/OpenPeopleThatSoundsSOWrong[/Keyboard/h]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

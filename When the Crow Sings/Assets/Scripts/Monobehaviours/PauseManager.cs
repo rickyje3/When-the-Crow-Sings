@@ -25,7 +25,7 @@ public class PauseManager : MonoBehaviour
         PauseGame();
         //pauseMenuUI.SetActive(true);
         pauseMenusHolder.SetActive(true);
-        pauseMenuSwapper.OpenMenu(0);
+        pauseMenuSwapper.OpenMenu(args.intArgs[0]);
     }
 
 

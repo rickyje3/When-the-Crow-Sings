@@ -116,6 +116,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenMap"",
+                    ""type"": ""Button"",
+                    ""id"": ""e96e5dc0-30d0-4b2a-8f0b-e0ecd1221169"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenHistory"",
+                    ""type"": ""Button"",
+                    ""id"": ""5cf58be7-c802-4719-b235-2a26cc13a639"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenPeopleThatSoundsSOWrong"",
+                    ""type"": ""Button"",
+                    ""id"": ""429190cc-164c-4045-bf8d-a312100a82aa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -479,6 +506,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d43eabe-d464-4662-a0a5-6f53661c8788"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""OpenMap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a23cc20-1a1b-495c-919e-c2fbff39dd5a"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""OpenHistory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9eb9675b-102e-43d9-9e80-919876ff6417"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""OpenPeopleThatSoundsSOWrong"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1191,6 +1251,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_OpenMap = m_Player.FindAction("OpenMap", throwIfNotFound: true);
+        m_Player_OpenHistory = m_Player.FindAction("OpenHistory", throwIfNotFound: true);
+        m_Player_OpenPeopleThatSoundsSOWrong = m_Player.FindAction("OpenPeopleThatSoundsSOWrong", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1277,6 +1340,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_OpenMap;
+    private readonly InputAction m_Player_OpenHistory;
+    private readonly InputAction m_Player_OpenPeopleThatSoundsSOWrong;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1291,6 +1357,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @OpenMap => m_Wrapper.m_Player_OpenMap;
+        public InputAction @OpenHistory => m_Wrapper.m_Player_OpenHistory;
+        public InputAction @OpenPeopleThatSoundsSOWrong => m_Wrapper.m_Player_OpenPeopleThatSoundsSOWrong;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1330,6 +1399,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @OpenMap.started += instance.OnOpenMap;
+            @OpenMap.performed += instance.OnOpenMap;
+            @OpenMap.canceled += instance.OnOpenMap;
+            @OpenHistory.started += instance.OnOpenHistory;
+            @OpenHistory.performed += instance.OnOpenHistory;
+            @OpenHistory.canceled += instance.OnOpenHistory;
+            @OpenPeopleThatSoundsSOWrong.started += instance.OnOpenPeopleThatSoundsSOWrong;
+            @OpenPeopleThatSoundsSOWrong.performed += instance.OnOpenPeopleThatSoundsSOWrong;
+            @OpenPeopleThatSoundsSOWrong.canceled += instance.OnOpenPeopleThatSoundsSOWrong;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1364,6 +1442,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @OpenMap.started -= instance.OnOpenMap;
+            @OpenMap.performed -= instance.OnOpenMap;
+            @OpenMap.canceled -= instance.OnOpenMap;
+            @OpenHistory.started -= instance.OnOpenHistory;
+            @OpenHistory.performed -= instance.OnOpenHistory;
+            @OpenHistory.canceled -= instance.OnOpenHistory;
+            @OpenPeopleThatSoundsSOWrong.started -= instance.OnOpenPeopleThatSoundsSOWrong;
+            @OpenPeopleThatSoundsSOWrong.performed -= instance.OnOpenPeopleThatSoundsSOWrong;
+            @OpenPeopleThatSoundsSOWrong.canceled -= instance.OnOpenPeopleThatSoundsSOWrong;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1580,6 +1667,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnOpenMap(InputAction.CallbackContext context);
+        void OnOpenHistory(InputAction.CallbackContext context);
+        void OnOpenPeopleThatSoundsSOWrong(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
