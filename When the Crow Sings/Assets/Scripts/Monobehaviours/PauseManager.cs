@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
+    public GameObject pauseMenusHolder;
+    public MenuSwapper pauseMenuSwapper;
     public GameObject pauseMenuUI;
     public InputManager inputManager;
     public static bool isPaused
@@ -21,8 +23,11 @@ public class PauseManager : MonoBehaviour
     public void OnPaused(SignalArguments args)
     {
         PauseGame();
-        pauseMenuUI.SetActive(true);
+        //pauseMenuUI.SetActive(true);
+        pauseMenusHolder.SetActive(true);
+        pauseMenuSwapper.OpenMenu(0);
     }
+
 
     public void PauseGame()
     {
@@ -51,11 +56,12 @@ public class PauseManager : MonoBehaviour
         //journal activate here
     }
 
-    private void OnPauseButtonPressed(InputAction.CallbackContext context)
+    private void OnPauseButtonPressed(InputAction.CallbackContext context) // Unpauses the game while in a menu
     {
         Debug.Log("Unpause pressed");
         // TODO: Close ALL pause menus, or something like that.
-        pauseMenuUI.SetActive(false);
+        //pauseMenuUI.SetActive(false);
+        pauseMenusHolder.SetActive(false);
         UnpauseGame();
     }
 
