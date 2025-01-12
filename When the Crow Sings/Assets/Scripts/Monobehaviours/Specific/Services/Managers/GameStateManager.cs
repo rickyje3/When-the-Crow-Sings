@@ -32,6 +32,7 @@ public class GameStateManager : MonoBehaviour, IService
     private bool canLoad = true;
 
     List<LevelData> currentLevelData = new List<LevelData>();
+    [HideInInspector] public LevelData currentLevelDataLVL;
 
     const string SCN_PATH = "Assets/Scenes/";
 
@@ -230,6 +231,7 @@ public class GameStateManager : MonoBehaviour, IService
         currentLevelData = FindObjectsOfType<LevelData>().ToList<LevelData>(); // TODO: Investigate Object.FindObjectByType instead. BY type, not OF type.
         Validate_No_UNASSIGNED();
         Validate_ExactlyOne_LEVEL();
+        SetCurrentLEVEL();
     }
 
 
@@ -304,6 +306,14 @@ public class GameStateManager : MonoBehaviour, IService
         foreach (LevelData i in currentLevelData)
         {
             if (i.sceneType == LevelData.SceneType.UNASSIGNED) throw new System.Exception("Attempting to load a level of type UNASSIGNED!");
+        }
+    }
+
+    void SetCurrentLEVEL()
+    {
+        foreach (LevelData i in currentLevelData)
+        {
+            if (i.sceneType == LevelData.SceneType.LEVEL) currentLevelDataLVL = i;
         }
     }
     [HideInInspector]

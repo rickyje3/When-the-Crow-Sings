@@ -31,7 +31,6 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("Pausing");
 
         inputManager.EnablePlayerInput(false);
         Time.timeScale = 0;
@@ -42,7 +41,6 @@ public class PauseManager : MonoBehaviour
 
     public void UnpauseGame()
     {
-        Debug.Log("Resuming");
 
         InputManager.playerInputActions.UI.Unpause.performed -= OnPauseButtonPressed;
         InputManager.playerInputActions.UI.Disable();
@@ -58,7 +56,6 @@ public class PauseManager : MonoBehaviour
 
     private void OnPauseButtonPressed(InputAction.CallbackContext context) // Unpauses the game while in a menu
     {
-        Debug.Log("Unpause pressed");
         // TODO: Close ALL pause menus, or something like that.
         //pauseMenuUI.SetActive(false);
         pauseMenusHolder.SetActive(false);
