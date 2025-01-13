@@ -11,6 +11,7 @@ public class PauseManager : MonoBehaviour
     public GameObject pauseMenusHolder;
     public MenuSwapper pauseMenuSwapper;
     public GameObject pauseMenuUI;
+    public GameObject settingsMenuUI;
     public InputManager inputManager;
     public static bool isPaused
     {
@@ -62,7 +63,7 @@ public class PauseManager : MonoBehaviour
         UnpauseGame();
     }
 
-    public void QuitToMain()
+        public void QuitToMain()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu_SCN");
