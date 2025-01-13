@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 
 public class PlayerThrowBirdseedState : StateMachineState
 {
@@ -37,6 +38,17 @@ public class PlayerThrowBirdseedState : StateMachineState
     private void OnFire(InputAction.CallbackContext context)
     {
         s.StartCoroutine(ThrowBirdseedOnceAble());
+    }
+
+    public override void Update(float deltaTime)
+    {
+        //Quaternion toRotation = Quaternion.LookRotation(new Vector3(movement.x, 0, movement.z));
+        //s.transform.rotation = Quaternion.RotateTowards(s.transform.rotation, toRotation, 1000 * deltaTime);
+
+        Vector3 rotationToTarget = - s.transform.position + s.throwTarget.transform.position;
+        rotationToTarget.y = 0f;
+        Quaternion quaternionRotation = Quaternion.LookRotation(rotationToTarget, Vector3.up);
+        s.transform.rotation = quaternionRotation;
     }
 
     private IEnumerator WaitBeforeThrowing()
