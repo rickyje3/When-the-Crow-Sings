@@ -15,6 +15,8 @@ public class BirdseedController : MonoBehaviour
     public float crowDelayInSeconds = .5f;
     public float birdseedLifeAfterGround = 1.5f;
 
+    public float groundDampeningMultiplier = .01f;
+
     [HideInInspector]
     public bool isLanded { get {return _isLanded; }
         set
@@ -55,9 +57,11 @@ public class BirdseedController : MonoBehaviour
         
     }
 
+    public float speedMultiplier = 2f;
+
     private void Shoot(Vector3 direction)
     {
-        GetComponent<Rigidbody>().velocity = direction*5;
+        GetComponent<Rigidbody>().velocity = direction*speedMultiplier;
     }
 
 
@@ -70,7 +74,7 @@ public class BirdseedController : MonoBehaviour
             {
                 firstTime = true;
                 isLanded = true;
-                GetComponent<Rigidbody>().velocity *= 0.05f;
+                GetComponent<Rigidbody>().velocity *= groundDampeningMultiplier;
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.SeedHit, this.transform.position);
                 StartCoroutine(SpawnCrows());
             }
