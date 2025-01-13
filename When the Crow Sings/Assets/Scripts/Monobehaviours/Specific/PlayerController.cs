@@ -49,6 +49,9 @@ public class PlayerController : StateMachineComponent, IService
     public CharacterController characterController;
 
     public GameSignal pauseSignalTEMP;
+    public GameSignal mapSignalTEMP;
+    public GameSignal historySignalTEMP;
+    public GameSignal codexSignalTEMP;
 
     public void ApplyGravity(float deltaTime)
     {
@@ -101,15 +104,33 @@ public class PlayerController : StateMachineComponent, IService
     private void OnEnable()
     {
         InputManager.playerInputActions.Player.Pause.performed += OnPause;
+        InputManager.playerInputActions.Player.OpenMap.performed += OnMap;
+        InputManager.playerInputActions.Player.OpenHistory.performed += OnHistory;
+        InputManager.playerInputActions.Player.OpenPeopleThatSoundsSOWrong.performed += OnCodex;
     }
     private void OnDisable()
     {
         InputManager.playerInputActions.Player.Pause.performed -= OnPause;
+        InputManager.playerInputActions.Player.OpenMap.performed -= OnMap;
+        InputManager.playerInputActions.Player.OpenHistory.performed -= OnHistory;
+        InputManager.playerInputActions.Player.OpenPeopleThatSoundsSOWrong.performed -= OnCodex;
     }
 
     private void OnPause(InputAction.CallbackContext context)
     {
         pauseSignalTEMP.Emit();
+    }
+    private void OnMap(InputAction.CallbackContext context)
+    {
+        mapSignalTEMP.Emit();
+    }
+    private void OnHistory(InputAction.CallbackContext context)
+    {
+        historySignalTEMP.Emit();
+    }
+    private void OnCodex(InputAction.CallbackContext context)
+    {
+        codexSignalTEMP.Emit();
     }
 
     public void OnDialogueStarted(SignalArguments signalArgs)

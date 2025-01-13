@@ -6,8 +6,10 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class PauseManager : MonoBehaviour
 {
+    public GameObject pauseMenusHolder;
+    public MenuSwapper pauseMenuSwapper;
     public GameObject pauseMenuUI;
     public GameObject settingsMenuUI;
     public InputManager inputManager;
@@ -21,25 +23,30 @@ public class PauseMenu : MonoBehaviour
 
     public void OnPaused(SignalArguments args)
     {
+        PauseGame();
+        //pauseMenuUI.SetActive(true);
+        pauseMenusHolder.SetActive(true);
+        pauseMenuSwapper.OpenMenu(args.intArgs[0]);
+    }
+
+
+    public void PauseGame()
+    {
+
         inputManager.EnablePlayerInput(false);
         Time.timeScale = 0;
-        pauseMenuUI.SetActive(true);
 
         InputManager.playerInputActions.UI.Enable();
         InputManager.playerInputActions.UI.Unpause.performed += OnPauseButtonPressed;
-        
     }
 
-    public void Resume()
+    public void UnpauseGame()
     {
-        Debug.Log("Resuming");
-
 
         InputManager.playerInputActions.UI.Unpause.performed -= OnPauseButtonPressed;
         InputManager.playerInputActions.UI.Disable();
 
         Time.timeScale = 1;
-        pauseMenuUI.SetActive(false);
         inputManager.EnablePlayerInput(true);
     }
 
@@ -48,18 +55,12 @@ public class PauseMenu : MonoBehaviour
         //journal activate here
     }
 
-    private void OnPauseButtonPressed(InputAction.CallbackContext context)
+    private void OnPauseButtonPressed(InputAction.CallbackContext context) // Unpauses the game while in a menu
     {
-        if (pauseMenuUI.activeSelf)
-        {
-            Debug.Log("Unpause pressed");
-            Resume();
-        }
-        else if (settingsMenuUI.activeSelf)
-        {
-            settingsMenuUI.SetActive(false);
-            pauseMenuUI.SetActive(true);
-        }
+        // TODO: Close ALL pause menus, or something like that.
+        //pauseMenuUI.SetActive(false);
+        pauseMenusHolder.SetActive(false);
+        UnpauseGame();
     }
 
         public void QuitToMain()
