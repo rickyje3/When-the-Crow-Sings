@@ -111,6 +111,7 @@ public class SaveData
         { "KeyInformation2",false },
         { "KeyInformation3",false },
 
+        { "IntroContextSeen", false},
     };
 
     public Dictionary<string, int> intFlags = new Dictionary<string, int>()
