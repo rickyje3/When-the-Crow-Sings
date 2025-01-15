@@ -96,10 +96,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638721961032329027
+  lastModified: 638725542878187364
   FileSizes:
   - Name: Desktop
-    Value: 212288
+    Value: 210144
   Exists: 1
 --- !u!114 &-7618070173603671804
 MonoBehaviour:
@@ -170,10 +170,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638721962401381343
+  lastModified: 638725542877019966
   FileSizes:
   - Name: Desktop
-    Value: 2288
+    Value: 2178
   Exists: 1
 --- !u!114 &-5141306121030973102
 MonoBehaviour:
@@ -283,6 +283,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 40351
+--- !u!114 &-4241511009737007149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Talking Sounds.bank
+  m_EditorClassIdentifier: 
+  Path: ../FMOD/Build/Desktop/Talking Sounds.bank
+  Name: Talking Sounds
+  StudioPath: bank:/Talking Sounds
+  lastModified: 638725542879037247
+  FileSizes:
+  - Name: Desktop
+    Value: 2848
+  Exists: 1
 --- !u!114 &-3205951376839643069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +454,7 @@ MonoBehaviour:
   - {fileID: 2495895438680143591}
   - {fileID: 1501634623562589285}
   - {fileID: -7682777851406180722}
+  - {fileID: -4241511009737007149}
   EditorEvents:
   - {fileID: -3205951376839643069}
   - {fileID: 4779891206514854970}
@@ -442,7 +463,6 @@ MonoBehaviour:
   - {fileID: -744336930501758087}
   - {fileID: 3812539088159654553}
   - {fileID: 2603834244406417170}
-  - {fileID: 2923002436068736072}
   - {fileID: -6510634207293158437}
   - {fileID: -8231190734021711935}
   - {fileID: -4276846722211437694}
@@ -459,12 +479,13 @@ MonoBehaviour:
   - {fileID: -7717025186152332417}
   - {fileID: -7618070173603671804}
   - {fileID: -3079011186789729681}
+  - {fileID: 3365684604771571471}
   EditorParameters: []
   MasterBanks:
   - {fileID: 2495895438680143591}
   StringsBanks:
   - {fileID: -6006758307641900004}
-  cacheTime: 638721962401381343
+  cacheTime: 638725542879037247
   cacheVersion: 131621
 --- !u!114 &1195327908653021610
 MonoBehaviour:
@@ -508,7 +529,7 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638721961031810909
+  lastModified: 638725542877501346
   FileSizes:
   - Name: Desktop
     Value: 2983232
@@ -555,10 +576,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638721962401366222
+  lastModified: 638725542877009659
   FileSizes:
   - Name: Desktop
-    Value: 1632
+    Value: 1036
   Exists: 1
 --- !u!114 &2603834244406417170
 MonoBehaviour:
@@ -582,33 +603,6 @@ MonoBehaviour:
   - {fileID: -7682777851406180722}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &2923002436068736072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Blip
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Blip
-  Guid:
-    Data1: -382514019
-    Data2: 1141233562
-    Data3: -1090039127
-    Data4: -2122351542
-  Banks:
-  - {fileID: -7682777851406180722}
-  IsStream: 0
-  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -688,6 +682,33 @@ MonoBehaviour:
     Data4: -753880845
   Banks:
   - {fileID: -7682777851406180722}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3365684604771571471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking Sounds/Blip
+  m_EditorClassIdentifier: 
+  Path: event:/Talking Sounds/Blip
+  Guid:
+    Data1: -382514019
+    Data2: 1141233562
+    Data3: -1090039127
+    Data4: -2122351542
+  Banks:
+  - {fileID: -4241511009737007149}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -818,7 +839,7 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 638721961031268614
+  lastModified: 638725542876902442
   FileSizes:
   - Name: Desktop
     Value: 12309440
