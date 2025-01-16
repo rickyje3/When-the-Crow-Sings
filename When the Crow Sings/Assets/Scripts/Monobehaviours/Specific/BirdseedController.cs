@@ -52,7 +52,7 @@ public class BirdseedController : MonoBehaviour
     private void Init(Vector3 direction)
     {
         isLanded = false;
-        transform.eulerAngles = new Vector3(0,0,Utilities.GetAngleFromVector_Deg(direction));
+        transform.eulerAngles = new Vector3(0, 0, Utilities.GetAngleFromVector_Deg(direction));
         Shoot(direction);
         
     }
@@ -61,7 +61,14 @@ public class BirdseedController : MonoBehaviour
 
     private void Shoot(Vector3 direction)
     {
+
         GetComponent<Rigidbody>().velocity = direction*speedMultiplier;
+    }
+    public float gravityMultiplier;
+    private void FixedUpdate()
+    {
+        if (!isLanded)
+            GetComponent<Rigidbody>().velocity += new Vector3(0, -gravityMultiplier, 0);
     }
 
 
