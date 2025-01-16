@@ -9,7 +9,8 @@ public class VolumeSlider : MonoBehaviour
         MASTER,
         MUSIC,
         AMBIENCE,
-        SOUNDFX
+        SOUNDFX,
+        TALKINGSOUND
     }
 
     [Header("Type")]
@@ -38,6 +39,9 @@ public class VolumeSlider : MonoBehaviour
             case VolumeType.SOUNDFX:
                 volumeSlider.value = AudioManager.instance.soundFXVolume;
                 break;
+            case VolumeType.TALKINGSOUND:
+                volumeSlider.value = AudioManager.instance.talkingSoundVolume;
+                break;
             default:
                 Debug.Log("Volume Type not supported: " + volumeType);
                 break;
@@ -59,6 +63,9 @@ public class VolumeSlider : MonoBehaviour
                 break;
             case VolumeType.SOUNDFX:
                 AudioManager.instance.soundFXVolume = volumeSlider.value;
+                break;
+            case VolumeType.TALKINGSOUND:
+                AudioManager.instance.talkingSoundVolume = volumeSlider.value;
                 break;
             default:
                 Debug.Log("Volume Type not supported: " + volumeType);

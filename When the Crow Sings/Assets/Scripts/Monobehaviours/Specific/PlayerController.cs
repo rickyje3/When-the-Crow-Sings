@@ -145,7 +145,10 @@ public class PlayerController : StateMachineComponent, IService
 
     public void OnFullyLoadFinished(SignalArguments args)
     {
-        stateMachine.Enter("PlayerMovementState");
+        if (!ServiceLocator.Get<DialogueManager>().isInDialogue)
+        {
+            stateMachine.Enter("PlayerMovementState");
+        }
     }
 
     public void OnAnimationFinished(SignalArguments args)
