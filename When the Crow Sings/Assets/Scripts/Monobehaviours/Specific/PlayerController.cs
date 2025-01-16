@@ -48,6 +48,8 @@ public class PlayerController : StateMachineComponent, IService
 
     public CharacterController characterController;
 
+    public GameObject trajectoryLine;
+
     public GameSignal pauseSignalTEMP;
     public GameSignal mapSignalTEMP;
     public GameSignal historySignalTEMP;

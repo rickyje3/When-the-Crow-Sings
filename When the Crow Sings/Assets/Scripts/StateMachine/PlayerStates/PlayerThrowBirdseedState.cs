@@ -22,6 +22,7 @@ public class PlayerThrowBirdseedState : StateMachineState
         InputManager.playerInputActions.Player.Fire.canceled += OnFire;
 
         s.throwTarget.SetActive(true);
+        s.trajectoryLine.SetActive(true);
 
         InputManager.playerInputActions.Player.Move.performed += OnMoveButBirdseedNow;
         InputManager.playerInputActions.Player.Move.canceled += OnMoveButBirdseedNow;
@@ -78,6 +79,7 @@ public class PlayerThrowBirdseedState : StateMachineState
         s.playerAnimator.SetTrigger("animThrow");
 
         s.throwTarget.SetActive(false);
+        s.trajectoryLine.SetActive(false);
     }
 
     private void OnMoveButBirdseedNow(InputAction.CallbackContext context)
