@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8879693563685368974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking Sounds/blip
+  m_EditorClassIdentifier: 
+  Path: event:/Talking Sounds/blip
+  Guid:
+    Data1: -382514019
+    Data2: 1141233562
+    Data3: -1090039127
+    Data4: -2122351542
+  Banks:
+  - {fileID: -4241511009737007149}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8430626601025218174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking Sounds/faridablip
+  m_EditorClassIdentifier: 
+  Path: event:/Talking Sounds/faridablip
+  Guid:
+    Data1: -2021901947
+    Data2: 1146566892
+    Data3: -1708950363
+    Data4: 268568138
+  Banks:
+  - {fileID: -4241511009737007149}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-8231190734021711935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +150,7 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638725542878187364
+  lastModified: 638725576400660777
   FileSizes:
   - Name: Desktop
     Value: 210144
@@ -170,11 +224,38 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638725542877019966
+  lastModified: 638725655924639671
   FileSizes:
   - Name: Desktop
-    Value: 2178
+    Value: 2612
   Exists: 1
+--- !u!114 &-5212491694400513535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking Sounds/jazmyneblip
+  m_EditorClassIdentifier: 
+  Path: event:/Talking Sounds/jazmyneblip
+  Guid:
+    Data1: -492676142
+    Data2: 1149846274
+    Data3: -2134676590
+    Data4: 1503365196
+  Banks:
+  - {fileID: -4241511009737007149}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5141306121030973102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,10 +379,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Talking Sounds.bank
   Name: Talking Sounds
   StudioPath: bank:/Talking Sounds
-  lastModified: 638725542879037247
+  lastModified: 638725655926388093
   FileSizes:
   - Name: Desktop
-    Value: 2848
+    Value: 15520
   Exists: 1
 --- !u!114 &-3205951376839643069
 MonoBehaviour:
@@ -409,6 +490,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 66000
+--- !u!114 &-1409399533375244361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking Sounds/beaublip
+  m_EditorClassIdentifier: 
+  Path: event:/Talking Sounds/beaublip
+  Guid:
+    Data1: 953203321
+    Data2: 1138141313
+    Data3: -1761619300
+    Data4: -2076852685
+  Banks:
+  - {fileID: -4241511009737007149}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-744336930501758087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,14 +587,47 @@ MonoBehaviour:
   - {fileID: -7717025186152332417}
   - {fileID: -7618070173603671804}
   - {fileID: -3079011186789729681}
-  - {fileID: 3365684604771571471}
+  - {fileID: 2834654091910525117}
+  - {fileID: 4194434874089101968}
+  - {fileID: -1409399533375244361}
+  - {fileID: -8430626601025218174}
+  - {fileID: -8879693563685368974}
+  - {fileID: -5212491694400513535}
+  - {fileID: 800144745884447901}
   EditorParameters: []
   MasterBanks:
   - {fileID: 2495895438680143591}
   StringsBanks:
   - {fileID: -6006758307641900004}
-  cacheTime: 638725542879037247
+  cacheTime: 638725655926388093
   cacheVersion: 131621
+--- !u!114 &800144745884447901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking Sounds/angelblip
+  m_EditorClassIdentifier: 
+  Path: event:/Talking Sounds/angelblip
+  Guid:
+    Data1: 1480976864
+    Data2: 1228887189
+    Data3: -2027400783
+    Data4: 841624672
+  Banks:
+  - {fileID: -4241511009737007149}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1195327908653021610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,7 +670,7 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638725542877501346
+  lastModified: 638725576400137792
   FileSizes:
   - Name: Desktop
     Value: 2983232
@@ -576,10 +717,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638725542877009659
+  lastModified: 638725655924629665
   FileSizes:
   - Name: Desktop
-    Value: 1036
+    Value: 1632
   Exists: 1
 --- !u!114 &2603834244406417170
 MonoBehaviour:
@@ -603,6 +744,33 @@ MonoBehaviour:
   - {fileID: -7682777851406180722}
   IsStream: 0
   Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2834654091910525117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking Sounds/chanceblip
+  m_EditorClassIdentifier: 
+  Path: event:/Talking Sounds/chanceblip
+  Guid:
+    Data1: -178270674
+    Data2: 1179764387
+    Data3: 620443550
+    Data4: -401515228
+  Banks:
+  - {fileID: -4241511009737007149}
+  IsStream: 0
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -689,33 +857,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &3365684604771571471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Talking Sounds/Blip
-  m_EditorClassIdentifier: 
-  Path: event:/Talking Sounds/Blip
-  Guid:
-    Data1: -382514019
-    Data2: 1141233562
-    Data3: -1090039127
-    Data4: -2122351542
-  Banks:
-  - {fileID: -4241511009737007149}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &3812539088159654553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -736,6 +877,33 @@ MonoBehaviour:
     Data4: 1039033228
   Banks:
   - {fileID: -7682777851406180722}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4194434874089101968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking Sounds/calebblip
+  m_EditorClassIdentifier: 
+  Path: event:/Talking Sounds/calebblip
+  Guid:
+    Data1: 902347870
+    Data2: 1324421589
+    Data3: 257852599
+    Data4: -1940484095
+  Banks:
+  - {fileID: -4241511009737007149}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -839,7 +1007,7 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 638725542876902442
+  lastModified: 638725576399610103
   FileSizes:
   - Name: Desktop
     Value: 12309440

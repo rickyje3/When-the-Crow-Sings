@@ -23,10 +23,14 @@ public class AudioManager : MonoBehaviour
     [Range(0, 1)]
     public float soundFXVolume = 1;
 
+    [Range(0, 1)]
+    public float talkingSoundVolume = 1;
+
     private Bus masterBus;
     private Bus musicBus;
     private Bus ambienceBus;
     private Bus soundFXBus;
+    private Bus talkingSoundBus;
 
     private void Awake()
     {
@@ -43,7 +47,8 @@ public class AudioManager : MonoBehaviour
         masterBus = RuntimeManager.GetBus("bus:/");
         musicBus = RuntimeManager.GetBus("bus:/Music");
         ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
-        soundFXBus = RuntimeManager.GetBus("bus:/Sound FX");
+        soundFXBus = RuntimeManager.GetBus("bus:/SoundFX");
+        talkingSoundBus = RuntimeManager.GetBus("bus:/TalkingSound");
     }
 
     private void Update()
@@ -52,6 +57,7 @@ public class AudioManager : MonoBehaviour
         musicBus.setVolume(musicVolume);
         ambienceBus.setVolume(ambienceVolume);
         soundFXBus.setVolume(soundFXVolume);
+        talkingSoundBus.setVolume(talkingSoundVolume);
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
