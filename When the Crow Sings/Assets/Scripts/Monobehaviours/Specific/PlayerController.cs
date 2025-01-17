@@ -48,6 +48,8 @@ public class PlayerController : StateMachineComponent, IService
 
     public CharacterController characterController;
 
+    public GameObject trajectoryLine;
+
     public GameSignal pauseSignalTEMP;
     public GameSignal mapSignalTEMP;
     public GameSignal historySignalTEMP;
@@ -98,7 +100,8 @@ public class PlayerController : StateMachineComponent, IService
 
     public void ThrowBirdseed()
     {
-        var direction = throwTarget.transform.position - transform.position;
+        var direction = throwTarget.transform.position - throwPosition.transform.position;
+        direction.y = 4;
         BirdseedController.Create(pfBirdseedProjectile, throwPosition, direction);
     }
     private void OnEnable()
@@ -144,7 +147,10 @@ public class PlayerController : StateMachineComponent, IService
 
     public void OnFullyLoadFinished(SignalArguments args)
     {
-        stateMachine.Enter("PlayerMovementState");
+        if (!ServiceLocator.Get<DialogueManager>().isInDialogue)
+        {
+            stateMachine.Enter("PlayerMovementState");
+        }
     }
 
     public void OnAnimationFinished(SignalArguments args)

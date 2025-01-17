@@ -1417,6 +1417,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddad8971359938a4abef7652fd9a3912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: 1
+  musicVolume: 1
+  ambienceVolume: 1
+  soundFXVolume: 1
+  talkingSoundVolume: 1
 --- !u!1 &868377602 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4891708759335090014, guid: ce439d3156fa60a48aad961013e76a6c,
@@ -1429,10 +1434,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1294505525379788008}
   m_PrefabAsset: {fileID: 0}
-  masterVolume: 1
-  musicVolume: 1
-  ambienceVolume: 1
-  soundFXVolume: 1
 --- !u!1 &889661472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2354,6 +2355,51 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 3054539210031781835, guid: ba9d4aae592064b46878b709ec121f23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054539210031781835, guid: ba9d4aae592064b46878b709ec121f23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054539210031781835, guid: ba9d4aae592064b46878b709ec121f23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2035421513}
+    - target: {fileID: 3054539210031781835, guid: ba9d4aae592064b46878b709ec121f23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 943808693}
+    - target: {fileID: 3054539210031781835, guid: ba9d4aae592064b46878b709ec121f23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054539210031781835, guid: ba9d4aae592064b46878b709ec121f23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054539210031781835, guid: ba9d4aae592064b46878b709ec121f23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: UnpauseGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054539210031781835, guid: ba9d4aae592064b46878b709ec121f23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PauseManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054539210031781835, guid: ba9d4aae592064b46878b709ec121f23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3363691148873610424, guid: ba9d4aae592064b46878b709ec121f23,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2466,6 +2512,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8647929250419214706, guid: ba9d4aae592064b46878b709ec121f23,
         type: 3}
+      propertyPath: possibleSelectors.Array.data[0]
+      value: 
+      objectReference: {fileID: 1194295906}
+    - target: {fileID: 8647929250419214706, guid: ba9d4aae592064b46878b709ec121f23,
+        type: 3}
       propertyPath: possibleSelectors.Array.data[1]
       value: 
       objectReference: {fileID: 1950610911}
@@ -2501,6 +2552,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1194295903}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1194295906 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 316403987914151358, guid: ba9d4aae592064b46878b709ec121f23,
+    type: 3}
+  m_PrefabInstance: {fileID: 1194295903}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7924d2f0245e01478f1f9d0a641d247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1200233466 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 453661776047515130, guid: 2af1f84fa27f8be479b6e37cc40457ed,
@@ -4111,7 +4174,49 @@ MonoBehaviour:
       Data2: 1141233562
       Data3: -1090039127
       Data4: -2122351542
-    Path: event:/SFX/Blip
+    Path: event:/Talking Sounds/Blip
+  <ChanceBlip>k__BackingField:
+    Guid:
+      Data1: -178270674
+      Data2: 1179764387
+      Data3: 620443550
+      Data4: -401515228
+    Path: event:/Talking Sounds/chanceblip
+  <AngelBlip>k__BackingField:
+    Guid:
+      Data1: 1480976864
+      Data2: 1228887189
+      Data3: -2027400783
+      Data4: 841624672
+    Path: event:/Talking Sounds/angelblip
+  <BeauBlip>k__BackingField:
+    Guid:
+      Data1: 953203321
+      Data2: 1138141313
+      Data3: -1761619300
+      Data4: -2076852685
+    Path: event:/Talking Sounds/beaublip
+  <CalebBlip>k__BackingField:
+    Guid:
+      Data1: 902347870
+      Data2: 1324421589
+      Data3: 257852599
+      Data4: -1940484095
+    Path: event:/Talking Sounds/calebblip
+  <FaridaBlip>k__BackingField:
+    Guid:
+      Data1: -2021901947
+      Data2: 1146566892
+      Data3: -1708950363
+      Data4: 268568138
+    Path: event:/Talking Sounds/faridablip
+  <JazmyneBlip>k__BackingField:
+    Guid:
+      Data1: -492676142
+      Data2: 1149846274
+      Data3: -2134676590
+      Data4: 1503365196
+    Path: event:/Talking Sounds/jazmyneblip
   <BigShock>k__BackingField:
     Guid:
       Data1: 981789238
@@ -4142,18 +4247,18 @@ MonoBehaviour:
     Path: event:/SFX/QTEFail
   <HarshWind>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -2108898455
+      Data2: 1153076133
+      Data3: -699545194
+      Data4: 381059945
+    Path: event:/Ambience/Harsh Wind
   <LightWind>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1953828087
+      Data2: 1338377433
+      Data3: 1668391063
+      Data4: 350768944
+    Path: event:/Ambience/LightWind
   <PowerRoomAmbience>k__BackingField:
     Guid:
       Data1: 0
