@@ -54,6 +54,7 @@ public class BirdseedController : MonoBehaviour
         isLanded = false;
         transform.eulerAngles = new Vector3(0, 0, Utilities.GetAngleFromVector_Deg(direction));
         Shoot(direction);
+        StartCoroutine(DeleteAfterSecondsIfGroundNotTouched());
         
     }
 
@@ -77,6 +78,8 @@ public class BirdseedController : MonoBehaviour
     {
         if (collision.gameObject.layer == 3)
         {
+            StopCoroutine(DeleteAfterSecondsIfGroundNotTouched());
+
             if (!firstTime)
             {
                 firstTime = true;
@@ -87,5 +90,12 @@ public class BirdseedController : MonoBehaviour
             }
         }
         
+    }
+
+
+    IEnumerator DeleteAfterSecondsIfGroundNotTouched()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(gameObject);
     }
 }
