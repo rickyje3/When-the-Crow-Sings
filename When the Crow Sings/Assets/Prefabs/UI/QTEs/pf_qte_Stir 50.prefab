@@ -580,7 +580,7 @@ RectTransform:
   m_GameObject: {fileID: 5818603516906580365}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6084886, y: 1.4508, z: 1.4508}
+  m_LocalScale: {x: 1.5883825, y: 1.4508, z: 1.4508}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3876724816557975172}
@@ -588,7 +588,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 8.7, y: -3.799983}
+  m_AnchoredPosition: {x: 6.5, y: -3.5}
   m_SizeDelta: {x: -16.090029, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5944010264343411072
@@ -690,16 +690,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   globalFinishedQteSignal: {fileID: 11400000, guid: 364cf8ca6f8671f468bd1277940b1a03,
     type: 2}
-  QTESuccessSound:
-    Guid:
-      Data1: -1938145755
-      Data2: 1214157363
-      Data3: -203839088
-      Data4: 838414915
-    Path: event:/QTESuccess
   displayBox: {fileID: 5944010264343411072}
-  score: 1
+  complete: 0
+  score: 0
   timer: 8
+  failed: 0
   upJoystick: {fileID: 1826857494469176299}
   rightJoystick: {fileID: 7565356449897562720}
   downJoystick: {fileID: 8288013799936802251}
