@@ -55,6 +55,7 @@ public class SaveData
         { "JazmyneTaskOn",false },
         { "PapersUp",false },
         { "PapersDown",false },
+        { "QTEOn", false},
         { "JazmyneBaseCompleted",false },
         { "JazmyneExhausted",false },
 
