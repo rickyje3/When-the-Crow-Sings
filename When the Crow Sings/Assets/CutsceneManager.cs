@@ -14,6 +14,8 @@ public class CutsceneManager : MonoBehaviour
     private void Start()
     {
         virtualCameras = virtualCameraHolder.GetComponentsInChildren<CinemachineVirtualCamera>().ToList();
+
+        StartCoroutine(simpleProgress());
     }
 
 
@@ -26,10 +28,10 @@ public class CutsceneManager : MonoBehaviour
         }
         virtualCameras[loop].Priority = 10;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
+        loop++;
 
-
-        if (loop < virtualCameras.Count - 1)
+        if (loop < virtualCameras.Count)
         StartCoroutine(simpleProgress());
     }
 
