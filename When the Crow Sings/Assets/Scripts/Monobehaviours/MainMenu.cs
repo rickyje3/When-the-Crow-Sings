@@ -55,6 +55,10 @@ public class MainMenu : MonoBehaviour
 
     public void OnNewGameButtonPressed()
     {
+        // Uncomment the following two lines to load the opening cutscene scene instead.
+            //SceneManager.LoadScene("Cutscene_SCN");
+            //return;
+
         StartCoroutine(NewGame());
         updateMusic();
     }

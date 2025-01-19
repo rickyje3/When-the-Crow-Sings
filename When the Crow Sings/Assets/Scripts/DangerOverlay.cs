@@ -51,6 +51,7 @@ public class DangerOverlay : MonoBehaviour//, IService
         else
         {
             dangerAlpha = Mathf.Lerp(dangerAlpha, 0f, Time.deltaTime * lerpSpeed);
+            GetComponent<CanvasGroup>().alpha = dangerAlpha;
             overlayImage.color = Color.Lerp(overlayImage.color, actualColor, Time.deltaTime * colorLerpSpeed);
         }
 
