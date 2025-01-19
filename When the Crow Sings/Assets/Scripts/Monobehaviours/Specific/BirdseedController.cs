@@ -69,7 +69,10 @@ public class BirdseedController : MonoBehaviour
     private void FixedUpdate()
     {
         if (!isLanded)
+        {
             GetComponent<Rigidbody>().velocity += new Vector3(0, -gravityMultiplier, 0);
+        }
+
     }
 
 
@@ -84,7 +87,9 @@ public class BirdseedController : MonoBehaviour
             {
                 firstTime = true;
                 isLanded = true;
+                //GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x * groundDampeningMultiplier, 0, GetComponent<Rigidbody>().velocity.z * groundDampeningMultiplier);
                 GetComponent<Rigidbody>().velocity *= groundDampeningMultiplier;
+
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.SeedHit, this.transform.position);
                 StartCoroutine(SpawnCrows());
             }
