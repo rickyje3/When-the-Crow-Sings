@@ -103,13 +103,16 @@ public class PlayerMovementState : StateMachineState
         {
             Quaternion toRotation = Quaternion.LookRotation(new Vector3(movement.x, 0, movement.z));
             s.transform.rotation = Quaternion.RotateTowards(s.transform.rotation, toRotation, 1000 * deltaTime);
+            //s.playerAnimator.SetFloat("currentTurnDelta", 1f);
 
             s.playerAnimator.SetBool("animIsMoving", true);
         }
         else
         {
             s.playerAnimator.SetBool("animIsMoving", false);
+            //s.playerAnimator.SetFloat("currentTurnDelta", 0f);
         }
+        Debug.Log(s.playerAnimator.GetFloat("currentTurnDelta"));
 
     }
 
