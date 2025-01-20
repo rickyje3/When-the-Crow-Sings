@@ -533,7 +533,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 6288940615611708296, guid: de8b2769b86a05946bf0b84a4cab20e7,
       type: 3}
-    m_Threshold: 0
+    m_Threshold: -1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -550,7 +550,7 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: currentTurnDelta
   m_BlendParameterY: currentWalkVelocity
-  m_MinThreshold: 0
+  m_MinThreshold: -1
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
@@ -629,7 +629,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: currentTurnDelta
     m_Type: 1
-    m_DefaultFloat: 0.5
+    m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
@@ -833,7 +833,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_EntryPosition: {x: 60, y: 90, z: 0}
   m_ExitPosition: {x: 660, y: 60, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -7824254021834684124}
