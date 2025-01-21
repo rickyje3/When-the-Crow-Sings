@@ -13,7 +13,7 @@ if WoodPileMovable == true:
 	set Zone2DoorUnlocked = true;
 	=> END
 else:
-	A pile of wooden planks leaning against the fence. Maybe it was used to make the playset.
+	A pile of wooden planks leaning against the fence.
 	=> END
 
 ~ pot_of_soup
@@ -62,7 +62,6 @@ else:
 
 ~ seed_bags
 if QuinnTaskAccepted == true:
-	I gotta run these inside quick before the crows return.
 	set QuinnTaskCompleted = true;
 	=> END
 else:
@@ -84,7 +83,7 @@ else:
 	=> END
 
 ~ monkey_bars
-Monkey bars! Oh, to be young again. Now I can reach the bars standing.
+Monkey bars! Oh, to be a kid. Now I can reach the bars standing.
 => END
 
 ~ play_place
@@ -129,17 +128,13 @@ else:
 set benchcounter += 1;
 => END
 
-~ directory_sign
-<- Cafeteria<br><- Cold Storage
-^ Rec Center<br>Greenhouse -><br>Clinic -><br>Energy HQ ->
-=> END
 
 ~ ground_crack
 That.. can't be normal.
 => END
 
 ~ fountain
-An old fountain that looks like it stopped functioning a while ago. The resevoire has been filled in with soil and flowers.
+An old fountain that looks like it stopped functioning a while ago. The reservoir has been filled in with soil and flowers.
 => END
 
 ~intro
@@ -208,6 +203,8 @@ set Zone4DoorUnlocked = true;
 => END
 
 ~rec_center_door
+if RecCenterDoorUnlocked == true:
+	=>END
 if timeOfDay == 3:
 	The door is locked, crap.
 else:

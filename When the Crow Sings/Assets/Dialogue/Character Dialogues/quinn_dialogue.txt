@@ -23,7 +23,7 @@ else:
 set QuinnTaskOffered = true;
 Quinn: You must be Chance.
 Chance: Uh-huh.
-Quinn: Nice to meet you. Officially. What brings you to the greenhouse? 
+Quinn: Nice to meet you. Officially. What brings you to the <color=#5b5b1f>greenhouse</color>? 
 Quinn_Excited: Here to try my turnip-carrot hybrid?
 if ifBeauAndAngel == true:
 	- Angel sent me.
@@ -33,11 +33,9 @@ if ifBeauAndAngel == true:
 		Chance: <color=#813408>Beau</color> said that you know everyone around here. That you'd know if things were out of the ordinary.
 		=> quinn_first_int_cont
 if AngelBaseCompleted == true:
-	- Angel sent me.
 		Chance: <color=#813408>Angel</color> said you're up late, and that you might know something about people roaming around at night.
 		=> quinn_first_int_cont
 if BeauBaseCompleted == true:
-	- Beau sent me.
 		Chance: <color=#813408>Beau</color> said that you know everyone around here. That you'd know if things were out of the ordinary.
 		=> quinn_first_int_cont
 else:
@@ -48,14 +46,14 @@ else:
 Quinn: Mmm. Did he?
 Quinn: Well, I am up late and I provide something to just about everyone in some way or another. So, I guess he sent you somewhere good. What's up?
 Chance: Someone was out past curfew and banged on my window.
-Quinn: Yep.
-Chance_Scared: Huh?!
+Quinn: Ah, yep.
+Chance_Scared: Yep?
 Quinn: I've noticed some <color=#a11bbe>strays</color> around lately. Never saw them banging on any windows. They look a little funny but they just sort of roam around.
 Quinn: Well, as far as I know. Nobody really messes with them so they might be violent.
-Chance_Scared: ?!?
+Chance_Scared: Huh?!?
 Quinn: But I don't really know anything about them. Never knew them or anything.
 Quinn: Maybe someone who lives outside of the central hub would know about it, since they don't really get in here often.
-Chance: Outside? I thought we all lived in the lodgings or the recreational center.
+Chance: Outside? I thought we all lived in the <color=#5b5b1f>lodgings</color> or the <color=#5b5b1f>recreational center</color>.
 Quinn: Well, kind of. Not all of us. As far as I can tell, <color=#813408>Farida</color> assigned the residencies inside the gates. Some people lived here before her.
 Quinn: . . . You know, I could get you in touch with our <color=#813408>resident outsider</color>. He's lived here for a long while, so if something changed with any residents or <color=#a11bbe>the strays</color>, he would know. 
 Quinn_Excited: You couuuuld lend me a hand? I could tell <color=#813408>Farida</color> to open his gate for you to go in and talk to him about it.
@@ -65,8 +63,9 @@ Quinn_Scared: I'm just not a big fan of birds.
 Quinn: The feral ones, I mean. Not the EVOs. Obviously.
 - I guess.
 	set QuinnTaskAccepted = true;
+	set MFQuinnTA = true;
 	Chance: Um, I guess I can.
-	Quinn: Cool. Cool cool cool... There should be a few bags just outside, get them and bring them in here to me and I'll see what I can do for ya.
+	Quinn: Cool. Cool cool cool... There should be a few bags down by the <color=#5b5b1f>south-west gate</color>, get them and bring them in to me and I'll see what I can do for ya.
 	=> END
 - Later.
 	Chance_Sad: Maybe later.
@@ -77,8 +76,9 @@ Quinn_Excited: Oh, you're back. Here to try my carnop?
 Quinn: Turnott?.. I'm workshopping it.
 - Guy outside.
 	set QuinnTaskAccepted = true;
+	set MFQuinnTA = true;
 	Chance: I wanted to talk to your guy who lives outside.
-	Quinn: Sure sure. Just go get those seeds for me, and I'll page <color=#813408>Farida</color> about a delivery for <color=#813408>Yule</color> and give him a heads-up.
+	Quinn: Sure sure. Just go get those seeds for me, the bags are down by the <color=#5b5b1f>south-west gate</color>. I'll page <color=#813408>Farida</color> about a delivery for <color=#813408>Yule</color> and give him a heads-up.
 	=> END
 - No thanks.
 	Chance: Er, no thanks.
@@ -91,7 +91,7 @@ Chance: What?
 Quinn: Uhhh, I totally asked you to do something.
 - What was it?
 	Chance_Sad: I forgot, what was it?
-	Quinn: You sure are a weird kid. I just need you to get those seed bags from the crows around the building.
+	Quinn: You sure are a weird kid. I just need you to get those seed bags from the crows by the <color=#5b5b1f>south-west gate</color>.
 	=> END
 - Yeah I know.
 	Chance: Yeah, I know. Just haven't gotten around to it yet.
@@ -109,6 +109,7 @@ Chance: The fish?
 Quinn_Scared: The fish.
 Quinn: Thanks for your help, by the way.
 Chance_Smile: Sure, no problem.
+set MFQuinnBC = true;
 set timeOfDay += 1;
 => END
 
