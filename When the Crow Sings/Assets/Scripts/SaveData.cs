@@ -170,6 +170,7 @@ public class SaveData
         {"penguin_cult",623 },
         {"benchcounter",0 },
         {"PhilTalk", 0},
+        {"theodoor", 0},
 
         {"levelDataIndex", 1},
     };
