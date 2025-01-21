@@ -105,7 +105,8 @@ public class PlayerMovementState : StateMachineState
         if (movement.x != 0 || movement.z != 0)
         {
             Quaternion toRotation = Quaternion.LookRotation(new Vector3(movement.x, 0, movement.z));
-            s.transform.rotation = Quaternion.RotateTowards(s.transform.rotation, toRotation, 1000 * deltaTime);
+            float turnLerpSpeed = 75f;
+            s.transform.rotation = Quaternion.Lerp(s.transform.rotation, Quaternion.RotateTowards(s.transform.rotation, toRotation, 1000 * deltaTime), turnLerpSpeed * deltaTime);
             
 
             s.playerAnimator.SetBool("animIsMoving", true);
@@ -120,9 +121,9 @@ public class PlayerMovementState : StateMachineState
         rotationDelta = Mathf.DeltaAngle(oldRotation, s.transform.rotation.eulerAngles.y);
         float turnAmount = s.playerAnimator.GetFloat("currentTurnDelta");
         float turnSpeed = 10f;
-        if (rotationDelta > 0) turnAmount = Mathf.Lerp(turnAmount, 1, turnSpeed * Time.deltaTime);
-        else if (rotationDelta < 0) turnAmount = Mathf.Lerp(turnAmount, -1, turnSpeed * Time.deltaTime);
-        else turnAmount = Mathf.Lerp(turnAmount, 0, turnSpeed*Time.deltaTime);
+        if (rotationDelta > 0) turnAmount = Mathf.Lerp(turnAmount, 1, turnSpeed * deltaTime);
+        else if (rotationDelta < 0) turnAmount = Mathf.Lerp(turnAmount, -1, turnSpeed * deltaTime);
+        else turnAmount = Mathf.Lerp(turnAmount, 0, turnSpeed * deltaTime);
         s.playerAnimator.SetFloat("currentTurnDelta", turnAmount);
 
     }
