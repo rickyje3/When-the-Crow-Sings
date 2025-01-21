@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.Rendering.DebugUI;
@@ -98,21 +99,31 @@ public class PlayerMovementState : StateMachineState
         // Move the character using the CharacterController
         s.characterController.Move(movement * deltaTime);
 
+        float oldRotation = s.transform.rotation.eulerAngles.y;
+
         // Rotate the player if moving on the XZ plane
         if (movement.x != 0 || movement.z != 0)
         {
             Quaternion toRotation = Quaternion.LookRotation(new Vector3(movement.x, 0, movement.z));
             s.transform.rotation = Quaternion.RotateTowards(s.transform.rotation, toRotation, 1000 * deltaTime);
-            s.playerAnimator.SetFloat("currentTurnDelta", 1f);
+            
 
             s.playerAnimator.SetBool("animIsMoving", true);
         }
         else
         {
+
             s.playerAnimator.SetBool("animIsMoving", false);
-            s.playerAnimator.SetFloat("currentTurnDelta", 0f);
         }
-        Debug.Log(s.playerAnimator.GetFloat("currentTurnDelta"));
+
+        float rotationDelta;
+        rotationDelta = Mathf.DeltaAngle(oldRotation, s.transform.rotation.eulerAngles.y);
+        float turnAmount = s.playerAnimator.GetFloat("currentTurnDelta");
+        float turnSpeed = 10f;
+        if (rotationDelta > 0) turnAmount = Mathf.Lerp(turnAmount, 1, turnSpeed * Time.deltaTime);
+        else if (rotationDelta < 0) turnAmount = Mathf.Lerp(turnAmount, -1, turnSpeed * Time.deltaTime);
+        else turnAmount = Mathf.Lerp(turnAmount, 0, turnSpeed*Time.deltaTime);
+        s.playerAnimator.SetFloat("currentTurnDelta", turnAmount);
 
     }
 
