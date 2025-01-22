@@ -71,8 +71,13 @@ public class SaveData
 
         { "YuleTaskOffered",false },
         { "YuleTaskAccepted",false },
+        { "YuleTaskPartCompleted",false },
         { "YuleTaskCompleted",false },
-        { "YuleTaskOn",false },
+        { "YuleTaskOneOn",false },
+        { "YuleTaskTwoOn",false },
+        { "YuleRod", false},
+        { "YuleString", false},
+        { "YuleHook", false},
         { "YuleBaseCompleted",false },
         { "YuleExhausted",false },
 
@@ -115,27 +120,35 @@ public class SaveData
         { "MFAngelTA", false},
         { "MFAngelTC", false},
         { "MFAngelBC", false},
+
         { "MFBeauTA", false},
         { "MFBeauTC", false},
         { "MFBeauBC", false},
+
         { "MFCalebTA", false},
         { "MFCalebTC", false},
         { "MFCalebBC", false},
+
         { "MFJazmyneTA", false},
         { "MFJazmyneTC", false},
         { "MFJazmyneBC", false},
+
         { "MFQuinnTA", false},
         { "MFQuinnTC", false},
         { "MFQuinnBC", false},
+
         { "MFFranciscoTA", false},
         { "MFFranciscoTC", false},
         { "MFFranciscoBC", false},
+
         { "MFFaridaTA", false},
         { "MFFaridaTC", false},
         { "MFFaridaBC", false},
+
         { "MFTheodoreTA", false},
         { "MFTheodoreTC", false},
         { "MFTheodoreBC", false},
+
         { "MFYuleTA", false},
         { "MFYuleTPC", false},
         { "MFYuleRod", false},
@@ -144,6 +157,7 @@ public class SaveData
         { "MFYuleTNC", false},
         { "MFYuleTC", false},
         { "MFYuleBC", false},
+
         { "MFPhilomenaTA", false},
         { "MFPhilomenaBatt1", false},
         { "MFPhilomenaBatt2", false},
