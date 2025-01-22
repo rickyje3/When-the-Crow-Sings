@@ -123,9 +123,9 @@ Francisco_Excited: You know, this herb is something that has been used in this a
 
 ~ francisco_task_fin_cont
 Francisco: I guess it's time to fulfill my part of the deal, no?
-Francisco_Thinking: <color=#a11bbe>The old power source</color>... The man who took care of it was very cold, and we didn't see him often here. He lived beyond the main compound to the <color=#5b5b1f>north-east at the old quarry</color>. He only walked through to get to the <color=#5b5b1f>power control station</color>, and he only spoke to his <color=#813408>assistant</color>.
+Francisco_Thinking: <color=#5b5b1f>The old power source</color>... The man who took care of it was very cold, and we didn't see him often here. He lived beyond the main compound to the <color=#5b5b1f>north-east at the old quarry</color>. He only walked through to get to the <color=#5b5b1f>power control station</color>, and he only spoke to his <color=#813408>assistant</color>.
 Francisco_Scared: His work was very... secretive. I never really understood his <color=#a11bbe>"discovery"</color>, but I know it gave me the chills. That hypnotic pink haze that blurred the horizon to the west, especially at night..
-Francisco_Excited: But he's been gone for a long while now. And his <color=#a11bbe>assistant</color> holed herself up in the abandoned <color=#5b5b1f>residential area</color> not long after. Once he was gone, the power stopped working and the coalition sent us the solar panels along with <color=#813408>Farida</color> and <color=#813408>Caleb</color> to care for them.
+Francisco_Excited: But he's been gone for a long while now. And his <color=##813408>assistant</color> holed herself up in the abandoned <color=#5b5b1f>residential area</color> not long after. Once he was gone, the power stopped working and the coalition sent us the solar panels along with <color=#813408>Farida</color> and <color=#813408>Caleb</color> to care for them.
 Francisco: People stopped going missing so much too.
 - Going missing?
 	Chance_Scared: People went missing?
@@ -146,6 +146,11 @@ if FaridaBaseCompleted == true:
 		Chance: She said something about there being old gauges not working in the <color=#5b5b1f>energy building</color>. Were they connected to that <color=#5b5b1f>power substation</color>?
 		Francisco_Thinking: I suppose they could be. We never really talked about it.
 		=> gauges_check
+- Would she be mad?
+	Chance: Would she get mad if she found out I went?
+	Francisco_Thinking: I mean... Maybe. I can't gaurantee anything, she's has a little bit of a temper.
+	Francisco_Excited: Just a little one. What she doesn't know wouldn't hurt her, eh?
+	=> francisco_task_fin_cont_3
 - How do I get in?
 	=> francisco_task_fin_cont_3
 
