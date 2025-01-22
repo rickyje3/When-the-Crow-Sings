@@ -18,6 +18,9 @@ public class CrowScatterState : StateMachineState
     public override void StateEntered()
     {
         float range = 20f;
+
+        s.distanceToDestination = 10f;
+
         s.destination = new Vector3(Random.Range(-range,range), Random.Range(range, range), Random.Range(-range, range));
         s.StartCoroutine(WaitThenEnterTargetState());
         s.crowAnimator.SetBool("isFlying", true);
