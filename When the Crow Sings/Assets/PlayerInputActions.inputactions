@@ -697,6 +697,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "TEMPPanelSwap",
+                    "type": "Button",
+                    "id": "2f55d751-be48-4570-82e2-0203024720d3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1203,6 +1212,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Unpause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cd213032-dfe4-4078-bdaa-280184898a49",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "TEMPPanelSwap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82e5b59c-4b5a-408c-ba41-785d80e357ae",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "TEMPPanelSwap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
