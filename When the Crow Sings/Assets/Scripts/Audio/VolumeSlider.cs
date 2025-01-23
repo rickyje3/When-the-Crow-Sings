@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class VolumeSlider : MonoBehaviour
 {
-    private enum VolumeType { 
+    private enum VolumeType
+    {
         MASTER,
         MUSIC,
         AMBIENCE,
@@ -21,10 +22,8 @@ public class VolumeSlider : MonoBehaviour
     private void Awake()
     {
         volumeSlider = GetComponentInChildren<Slider>();
-    }
 
-    private void Update()
-    {
+        //Load saved volume settings
         switch (volumeType)
         {
             case VolumeType.MASTER:
@@ -42,34 +41,39 @@ public class VolumeSlider : MonoBehaviour
             case VolumeType.TALKINGSOUND:
                 volumeSlider.value = AudioManager.instance.talkingSoundVolume;
                 break;
-            default:
-                Debug.Log("Volume Type not supported: " + volumeType);
-                break;
         }
+
+        //Listen for slider changes
+        volumeSlider.onValueChanged.AddListener(OnSliderValueChanged);
     }
 
-    public void OnSliderValueChanged()
+    private void OnSliderValueChanged(float value)
     {
         switch (volumeType)
         {
             case VolumeType.MASTER:
-                AudioManager.instance.masterVolume = volumeSlider.value;
+                AudioManager.instance.masterVolume = value;
+                PlayerPrefs.SetFloat("masterVolume", value);
                 break;
             case VolumeType.MUSIC:
-                AudioManager.instance.musicVolume = volumeSlider.value;
+                AudioManager.instance.musicVolume = value;
+                PlayerPrefs.SetFloat("musicVolume", value);
                 break;
             case VolumeType.AMBIENCE:
-                AudioManager.instance.ambienceVolume = volumeSlider.value;
+                AudioManager.instance.ambienceVolume = value;
+                PlayerPrefs.SetFloat("ambienceVolume", value);
                 break;
             case VolumeType.SOUNDFX:
-                AudioManager.instance.soundFXVolume = volumeSlider.value;
+                AudioManager.instance.soundFXVolume = value;
+                PlayerPrefs.SetFloat("soundFXVolume", value);
                 break;
             case VolumeType.TALKINGSOUND:
-                AudioManager.instance.talkingSoundVolume = volumeSlider.value;
-                break;
-            default:
-                Debug.Log("Volume Type not supported: " + volumeType);
+                AudioManager.instance.talkingSoundVolume = value;
+                PlayerPrefs.SetFloat("talkingSoundVolume", value);
                 break;
         }
+
+        PlayerPrefs.Save();
     }
 }
+
