@@ -24,8 +24,7 @@ public class CutsceneManager : MonoBehaviour
     private void Start()
     {
         virtualCameras = virtualCameraHolder.GetComponentsInChildren<CinemachineVirtualCamera>().ToList();
-        StartCoroutine(DelayNextArrow());
-        //StartCoroutine(simpleProgress());
+        Progress();
     }
 
     IEnumerator DelayNextArrow()
@@ -43,7 +42,6 @@ public class CutsceneManager : MonoBehaviour
 
     public void OnNextButtonPressed()
     {
-        Debug.Log("NEXT");
         nextButton.SetActive(false); // A little redundant but good to be safe.
         Progress();
     }
