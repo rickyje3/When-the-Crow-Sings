@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-[InitializeOnLoad]
+/*[InitializeOnLoad]
 public static class DefaultSceneLoader
 {
     static DefaultSceneLoader()
@@ -22,5 +22,5 @@ public static class DefaultSceneLoader
             EditorSceneManager.LoadScene(0);
         }
     }
-}
+}*/
 #endif

@@ -1,35 +1,53 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PageFlip : MonoBehaviour
 {
+    float flipSpeed = 100;
     public bool isRight;
-    float objectHeight;
-    float midPage;
-    Vector3 rotationCenter;
+    public Transform flipPoint;
+    float targetAngle;
+    private Vector3 currentEulerAngles;
+    static PageFlip currentFlippingPage = null;
 
-    private void Start()
+    private void Update()
     {
-        objectHeight = this.transform.lossyScale.y;
-        midPage = objectHeight / 2;
-        Vector3 rotationCenter = transform.position = new Vector3(0, objectHeight, midPage);
+        if (currentFlippingPage == this)
+        {
+            currentEulerAngles.y = Mathf.MoveTowards(currentEulerAngles.y, targetAngle, Time.deltaTime * flipSpeed);
+
+            flipPoint.localEulerAngles = currentEulerAngles;
+
+            if (Mathf.Abs(currentEulerAngles.y - targetAngle) < 0.01f)
+            {
+                currentEulerAngles.y = 0;
+                flipPoint.localEulerAngles = Vector3.zero;
+                //Debug.Log("Flip complete");
+                currentFlippingPage = null;
+            }
+        }
     }
 
     public void flipLeft()
     {
-        if(isRight)
+        if(!isRight && currentFlippingPage == null)
         {
-            transform.RotateAround(rotationCenter, Vector3.left, 90f);
+            currentFlippingPage = this;
+            targetAngle = -180;
+            Debug.Log("Flipping left");
         }
     }
 
     public void flipRight()
     {
-        if (!isRight)
+        if (isRight && currentFlippingPage == null)
         {
-            transform.RotateAround(rotationCenter, Vector3.right, 90f);
+            currentFlippingPage = this;
+            targetAngle = 180;
+            Debug.Log("Flipping right");
         }
     }
 }
