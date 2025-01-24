@@ -14,24 +14,9 @@ else:
 
 ~ theodore_directory_3
 if TheodoreTaskCompleted == false:
-	=> thedore_task_unfin
-else:
 	=> theodore_task_unfin
-
-
-//Move this to a different text file
-~ theodore_first_int
-Theodore: BUZZ OFF!
-set TheodoreIntroduction = true;
-=> END
-
-~ theodore_door
-Theodore: I said get lost!
-=> END
-
-~ theodore_door_2
-Theodore: CAN YOU CATCH A CLUE? GO AWAY!!!
-=> END
+else:
+	=> theodore_task_fin
 
 ~ theodore_sec_int
 set TheodoreTaskOffered = true;
@@ -48,7 +33,7 @@ Theodore: @#%@#%$%^^@##@!
 Theodore: Do NOT call me that. I don't know why <color=#813408>Jazmyne</color> sent you here but I don't need you looking over me.
 Theodore: And my name is not Teddy. It's <color=#813408>THEODORE</color>.
 Chance: Uh, right. She didn't send me here to spy on you.
-Theodore: Oh, really. Then why're you here, exactly? Just here to snoop around? Think 'cause you're new you get to shove your nose wherever you want?
+Theodore: Oh, really. Then why're you here, exactly? Just to snoop around? Think 'cause you're new you get to shove your nose wherever you want?
 Chance: Isn't that what you're doing?
 Theodore: ?! 
 if CalebBaseCompleted == true:
@@ -68,19 +53,18 @@ Theodore: Do you want my help or not? 'Cause if not, the least you could do is g
 	Theodore: Help me find something good in all of this junk. I've been sifting through it but. . .  feathers- 
 	Theodore: Just do it! 
 	Theodore: If I figure out that you found something sweet and didn't hand it over, I'll kick your ass.
-	Chance: As if.
-	Chance: Alright, whatever.
+	Chance: As if, dude.
 	Theodore: And go through all of 'em, don't slack!
 	Chance: I said alright, man.
-	=> END
--As if.
+	=>END
+- As if.
 	Chance: As if, I've got better stuff to waste my time doing right now.
-	=> END
+	=>END
 
-~theodore_no_task
+~ theodore_no_task
 Theodore: You again?
 Theodore: I made my terms clear, either you help me find something in here or my beak is SEALED.
--Fine.
+- Fine.
 	set TheodoreTaskAccepted = true;
 	set MFTheodoreTA = true;
 	set TheodoreTaskOn = true;
@@ -89,28 +73,26 @@ Theodore: I made my terms clear, either you help me find something in here or my
 	Theodore: Just do it! 
 	Theodore: If I figure out that you found something sweet and didn't hand it over, I'll kick your ass.
 	Chance: As if.
-	Chance: Alright.
 	Theodore: And go through all of 'em, don't slack!
 	Chance: I said alright, man.
-
-	=> END
--No way.
+	=>END
+- No way.
 	Chance: No way, bird brain.
 	Theodore: ?!?!
-	=> END
+	=>END
 
 ~ theodore_task_unfin
 Theodore: What? Why are you looking at me like that? Where's my stuff?
 - I'm getting it
 	Chance: I'm getting to it, stuff it bird brains.
 	Theodore: >:O
-	=> END
+	=>END
 - I forgot
 	Chance_Sad: I forgot what you asked me to do.
-	Theodore: <size=150%>ARE YOUR BRAINS SCRAMBLED? I JUST WANTED YOU TO GO THROUGH THE STUPID PILES ON THE FLOOR AND BRING ME SOMETHING USEFUL! HOW DID YOU EVEN GET ACCEPTED HERE?!?</size>
+	Theodore: <size=120%>ARE YOUR BRAINS SCRAMBLED? I JUST WANTED YOU TO GO THROUGH THE STUPID PILES ON THE FLOOR AND BRING ME SOMETHING USEFUL! HOW DID YOU EVEN GET ACCEPTED HERE?!?</size>
 	Chance: Yeesh, cool it.
 	Theodore: Guh?!?
-	=> END
+	=>END
 
 ~theodore_task_fin
 Theodore: Took you long enough, what'd you find?

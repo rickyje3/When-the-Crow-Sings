@@ -13,22 +13,20 @@ else:
 	=> yule_directory_3
 
 ~ yule_directory_3
+if YuleTaskCompleted == false:
+	=> yule_task_unfin
 if YuleTaskPartCompleted == false:
 	=> yule_task_part_unfin
 else:
 	=> yule_directory_4
 
 ~ yule_directory_4
+if YuleTaskPartCompleted == false:
+	=> yule_task_unfin
 if YuleTaskCompleted == false:
-	=> yule_directory_5
+	=> yule_task_unfin
 else:
 	=> yule_task_fin
-
-~ yule_directory_5
-if YuleFishingRod == false:
-	=> yule_task_part_fin
-else:
-	=> yule_task_unfin
 
 ~yule_first_int
 set YuleTaskOffered = true;
@@ -62,7 +60,7 @@ Yule: Do you want to get me one?
 - Yes.
 	set MFYuleTA = true;
 	set YuleTaskAccepted = true;
-	set YuleTaskOn = true;
+	set YuleTaskOneOn = true;
 	Chance: If it will make you not busy, then yes.
 	Yule: If you say so. 
 	Chance: Uh, what do I need to make you a fishing rod?
@@ -85,7 +83,7 @@ Yule: Once I'm done fishing.
 - I'll help.
 	set MFYuleTA = true;
 	set YuleTaskAccepted = true;
-	set YuleTaskOn = true;
+	set YuleTaskOneOn = true;
 	Chance: I'll help you, what do I need to make you a fishing rod?
 	Yule: Oh let's see.. A young flexible branch for the rod, some wire for the guides, and some fiber for line.
 	Chance: I can find all that here?
@@ -113,7 +111,7 @@ Yule: Why?
 	=> END
 
 ~ yule_task_part_fin
-set YuleFishingRod = true;
+set YuleTaskTwoOn = true;
 Chance: Alright, I got all the stuff you asked for.
 Yule: It looks good. Let me have it.
 Yule: . . .
