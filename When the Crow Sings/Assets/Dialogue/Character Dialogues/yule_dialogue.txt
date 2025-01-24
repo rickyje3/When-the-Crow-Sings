@@ -58,7 +58,8 @@ Yule: That makes sense.
 Chance: Do you want me to get you one?
 Yule: Do you want to get me one?
 - Yes.
-	set MFYuleTA = true;
+	set MFYuleTag = false;
+	set HFYuleTA = true;
 	set YuleTaskAccepted = true;
 	set YuleTaskOneOn = true;
 	Chance: If it will make you not busy, then yes.
@@ -68,6 +69,9 @@ Yule: Do you want to get me one?
 	Chance:I can find all that here?
 	Yule: Should be able to.
 	Chance: Okay, I'll see what I can do.
+	set MFYuleRod = true;
+	set MFYuleString = true;
+	set MFYuleHook = true;
 	=> END
 - No.
 	Chance: No, not right now.
@@ -81,7 +85,8 @@ Yule: You're back.
 Chance: Yeah, I wanted to talk to you about what I mentioned before.
 Yule: Once I'm done fishing.
 - I'll help.
-	set MFYuleTA = true;
+	set MFYuleTag = false;
+	set HFYuleTA = true;
 	set YuleTaskAccepted = true;
 	set YuleTaskOneOn = true;
 	Chance: I'll help you, what do I need to make you a fishing rod?
@@ -89,6 +94,9 @@ Yule: Once I'm done fishing.
 	Chance: I can find all that here?
 	Yule: Should be able to.
 	Chance: Okay, I'll see what I can do.
+	set MFYuleRod = true;
+	set MFYuleString = true;
+	set MFYuleHook = true;
 	=> END
 - Right.
 	=> END
@@ -120,6 +128,8 @@ Yule: Yes. But I don't know if it works.
 Chance: ... So you want me to see if it works?
 Yule: Yes.
 Chance: Uh, okay.
+set MFYuleTNC = true;
+set HFYuleTNC = true;
 => END
 
 ~ yule_task_unfin
@@ -169,7 +179,7 @@ Yule: Yes. Wherever he ran off to, I hope he doesn't get a good night's sleep fo
 Chance: Yeah...
 Chance: Thanks for the info, big guy.
 Yule: Sure. Come and see me again, if you want.
-set MFYuleBC = true;
+set HFYuleBC = true;
 set timeOfDay += 1;
 reload scene();
 => END

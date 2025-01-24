@@ -77,7 +77,8 @@ Farida_Stunned: . . .
 Farida_Exhausted: I'm.. busy, right now. Look, why don't you make yourself useful. Sit and take some readings, and, <i>maybe</i> while you're doing that I can think of something to make you feel.. better.
 - Okay.
 	set FaridaTaskAccepted = true;
-	set MFFaridaTA = true;
+	set MFFaridaTag = false;
+	set HFFaridaTA = true;
 	set FaridaTaskOn = true;
 	Chance: Okay, I can help.
 	Farida: Alright just. . . stand over there, by the gauges. Wait for the needles to hit the red section, and mark the time when it happens. Do that four times then bring it back.
@@ -90,7 +91,8 @@ Farida_Exhausted: I'm.. busy, right now. Look, why don't you make yourself usefu
 Farida: You're back. I take it you can't just settle for a nice quiet place to live?
 - Nope.
 	set FaridaTaskAccepted = true;
-	set MFFaridaTA = true;
+	set MFFaridaTag = false;
+	set HFFaridaTA = true;
 	set FaridaTaskOn = true;
 	Chance: Nope, afraid not. Maybe if it actually was.
 	Farida_Annoyed: Really?
@@ -120,6 +122,7 @@ Farida_Stunned: This looks.. good. Thank you.
 if FranciscoBaseCompleted == false:
 	Farida: About your question, I suppose you could always talk to <color=#813408>Francisco</color> about it. He works at the <color=#5b5b1f>clinic</color>, and lived here before I got sent here, meaning he probably remembers something about it.
 	Farida_Annoyed: <size=75%>Though I doubt he'd be too knowledgeable, he's more organically minded..
+	set MFFranciscoTag = true;
 Farida: There's also.. someone you might want to talk to. She was the person who trained me, tried to get me settled in after I got moved here. She worked on the old power system.
 Farida_Exhausted: She lives in the <color=#5b5b1f>residential area</color> to the <color=#5b5b1f>south-east</color>, she left the <color=#5b5b1f>lodging</color> a little while after we met. I guess she just couldn't take it in here anymore...
 Farida: The ones who wander around at night used to come through that gate sometimes. She locked herself on the other side of it. She might know more about them, or about what happened here. More than she told me, anyway..
@@ -132,7 +135,8 @@ Chance: What do I call her?
 Farida_Exhausted:... <color=#813408>Phil</color>. 
 Chance_Smile: Thank you, <color=#813408>Farida</color>.
 Farida_Exhausted: Right...
-set MFFaridaBC = true;
+set HFFaridaBC = true;
+set MFPhilomenaTag = true;
 set timeOfDay += 1;
 => END
 
