@@ -46,6 +46,7 @@ Angel_Smile: Did you want to help me in the kitchen? Might take your mind off of
 - Sure.
 	set MFAngelTA = true;
 	set HFAngelTA = true;
+	emit 1;
 	set AngelTaskAccepted = true;
 	set AngelTaskOn = true;
 	Chance: . . . Yeah, sure.
@@ -64,6 +65,7 @@ Angel: Did you have time to lend me a hand?
 	set MFAngelTA = true;
 	set AngelTaskAccepted = true;
 	set HFAngelTA = true;
+	emit 1;
 	set AngelTaskOn = true;
 	Chance_Smile: Yeah, sure.
 	Angel_Smile: Thanks! I just need you to stir our forever soup!
@@ -104,6 +106,7 @@ Angel_Smile: No problem! Don't be a stranger!
 Angel_Stare: I mean, I'll see you at mealtime anyway, but. . .
 Angel_Smile: Bye!
 set HFAngelBC = true;
+emit 1;
 set timeOfDay += 1;
 if timeOfDay == 3:
 	call ReloadScene(0);

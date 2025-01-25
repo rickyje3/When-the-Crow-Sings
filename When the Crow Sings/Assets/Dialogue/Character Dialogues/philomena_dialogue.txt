@@ -30,6 +30,7 @@ She seems to have become catatonic. Her lips stop moving, and she starts to hum 
 set PhilomenaTaskAccepted = true;
 set HFPhilomenaTA = true;
 set MFPhilomenaTag = false;
+emit 1;
 set PhilTalk += 1;
 => END
 
@@ -61,6 +62,7 @@ It's a birthday card.
 "Doctor, a year older. Thank you so much for all of the opportunities you've given me. I hope for another year making history with you! Happy Birthday, <color=#813408>Philomena</color>"
 There is a date scribbled up in the top right corner. <color=#a11bbe>03/15</color>.
 set HFPhilomenaBC = true;
+emit 1;
 set timeOfDay += 1;
 call ReloadScene();
 => END

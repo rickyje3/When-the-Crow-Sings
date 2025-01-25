@@ -81,6 +81,7 @@ Farida_Exhausted: I'm.. busy, right now. Look, why don't you make yourself usefu
 	set HFFaridaTA = true;
 	set MFFaridaTA = true;
 	set FaridaTaskOn = true;
+	emit 1;
 	Chance: Okay, I can help.
 	Farida: Alright just. . . stand over there, by the gauges. Wait for the needles to hit the red section, and mark the time when it happens. Do that four times then bring it back.
 	=> END
@@ -96,6 +97,7 @@ Farida: You're back. I take it you can't just settle for a nice quiet place to l
 	set HFFaridaTA = true;
 	set MFFaridaTA = true;
 	set FaridaTaskOn = true;
+	emit 1;
 	Chance: Nope, afraid not. Maybe if it actually was.
 	Farida_Annoyed: Really?
 	Farida: Alright, just. . . stand over there, wait for the gauge to hit the red section, mark the time when it happens. Do that four times, then bring it back to me.
@@ -139,6 +141,7 @@ Chance_Smile: Thank you, <color=#813408>Farida</color>.
 Farida_Exhausted: Right...
 set MFFaridaTC = false;
 set HFFaridaBC = true;
+emit 1;
 set MFPhilomenaTag = true;
 set timeOfDay += 1;
 => END

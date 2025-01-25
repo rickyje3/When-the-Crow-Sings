@@ -46,6 +46,7 @@ set MFJazmyneTA = true;
 set HFJazmyneTA = true;
 set JazmyneTaskAccepted = true;
 set JazmyneTaskOn =  true;
+emit 1;
 => END
 
 ~ jazmyne_task_unfin
@@ -74,12 +75,14 @@ Jazmyne_Sigh: Though, we are running a little low on movies...
 	Chance_Smile: Sure, I will. See you later.
 	set MFJazmyneTC = false;
 	set HFJazmyneBC = true;
+	emit 1;
 	set timeOfDay += 1;
 	=> END
 - Maybe.
 	Chance: Uh, maybe. See you.
 	set MFJazmyneTC = false;
 	set HFJazmyneBC = true;
+	emit 1;
 	set timeOfDay += 1;
 	=> END
 
