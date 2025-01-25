@@ -1395,6 +1395,7 @@ GameObject:
   m_Component:
   - component: {fileID: 788047070}
   - component: {fileID: 788047071}
+  - component: {fileID: 788047072}
   m_Layer: 0
   m_Name: JournalUpdateManager
   m_TagString: Untagged
@@ -1429,7 +1430,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e8a31e2ebd3194eb5cf4160b72f7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupUpdateMessage: {fileID: 11400000, guid: 00cb004706c490c4f92c244fbd842e0c, type: 2}
+  popupUpdateMessageSignal: {fileID: 11400000, guid: 00cb004706c490c4f92c244fbd842e0c,
+    type: 2}
+  notificationPrefab: {fileID: 6512051696467991292, guid: 65546589ef8e8f3409d08453cd45436a,
+    type: 3}
+  canvas: {fileID: 6315691293321232050}
+--- !u!114 &788047072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788047069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8f2792aa4e5a841805d6ab219c0209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSignal: {fileID: 11400000, guid: 00cb004706c490c4f92c244fbd842e0c, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 788047071}
+        m_TargetAssemblyTypeName: JournalUpdateManager, Assembly-CSharp
+        m_MethodName: ShowNewNotification
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &821823491
 GameObject:
   m_ObjectHideFlags: 0
@@ -3892,10 +3925,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86dbd9f8c8331ce47a572fe2bcabf812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjects:
-  - {fileID: 1521757637}
-  - {fileID: 6816453198352273915}
-  - {fileID: 868377602}
 --- !u!1 &1559957335
 GameObject:
   m_ObjectHideFlags: 0
@@ -4891,7 +4920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2035421514
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5144,6 +5173,7 @@ MonoBehaviour:
   pauseMultiplier: 10
   signalsDialogueCanUse:
   - {fileID: 11400000, guid: bd26da1725e75fb46a8f0a4045ed96b5, type: 2}
+  - {fileID: 11400000, guid: 00cb004706c490c4f92c244fbd842e0c, type: 2}
   choiceButtonsMBHS: {fileID: 8678019367360410500}
   nextButtonMBHS: {fileID: 8678019367360410501}
 --- !u!1 &801647054323082692
