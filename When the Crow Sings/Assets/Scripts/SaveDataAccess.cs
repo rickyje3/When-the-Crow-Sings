@@ -10,7 +10,7 @@ public class SaveDataAccess
     static public SaveData saveData = new SaveData();
     static public List<string> keysToTriggerPopup = new List<string> { "TestingFlag1" };
 
-    static public GameSignal popupUpdateMessage;
+    static public GameSignal popupUpdateMessageSignal;
     public static void SetFlag(string key, bool value)
     {
         saveData.boolFlags[key] = value;
@@ -52,7 +52,7 @@ public class SaveDataAccess
 
         if (keysToTriggerPopup.Contains(key) && value== "true")
         {
-            popupUpdateMessage.Emit();
+            popupUpdateMessageSignal.Emit();
         }
     }
 
