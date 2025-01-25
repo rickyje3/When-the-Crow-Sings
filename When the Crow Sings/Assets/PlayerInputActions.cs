@@ -721,9 +721,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""TEMPPanelSwap"",
+                    ""name"": ""Journal_ChangeRight"",
                     ""type"": ""Button"",
                     ""id"": ""2f55d751-be48-4570-82e2-0203024720d3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Journal_ChangeLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""d317ce5c-1c3f-48a3-ac11-7c26c8b975f2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1240,11 +1249,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cd213032-dfe4-4078-bdaa-280184898a49"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""TEMPPanelSwap"",
+                    ""action"": ""Journal_ChangeRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1255,7 +1264,29 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""TEMPPanelSwap"",
+                    ""action"": ""Journal_ChangeRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5931018d-c2a3-4fb5-b2fa-2ad574ee5833"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Journal_ChangeLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2389489e-1aca-4d97-a8d2-5df2d7844b50"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Journal_ChangeLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1355,7 +1386,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI_testempty = m_UI.FindAction("testempty", throwIfNotFound: true);
         m_UI_QTEAccept = m_UI.FindAction("QTEAccept", throwIfNotFound: true);
         m_UI_Unpause = m_UI.FindAction("Unpause", throwIfNotFound: true);
-        m_UI_TEMPPanelSwap = m_UI.FindAction("TEMPPanelSwap", throwIfNotFound: true);
+        m_UI_Journal_ChangeRight = m_UI.FindAction("Journal_ChangeRight", throwIfNotFound: true);
+        m_UI_Journal_ChangeLeft = m_UI.FindAction("Journal_ChangeLeft", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1572,7 +1604,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_testempty;
     private readonly InputAction m_UI_QTEAccept;
     private readonly InputAction m_UI_Unpause;
-    private readonly InputAction m_UI_TEMPPanelSwap;
+    private readonly InputAction m_UI_Journal_ChangeRight;
+    private readonly InputAction m_UI_Journal_ChangeLeft;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1590,7 +1623,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @testempty => m_Wrapper.m_UI_testempty;
         public InputAction @QTEAccept => m_Wrapper.m_UI_QTEAccept;
         public InputAction @Unpause => m_Wrapper.m_UI_Unpause;
-        public InputAction @TEMPPanelSwap => m_Wrapper.m_UI_TEMPPanelSwap;
+        public InputAction @Journal_ChangeRight => m_Wrapper.m_UI_Journal_ChangeRight;
+        public InputAction @Journal_ChangeLeft => m_Wrapper.m_UI_Journal_ChangeLeft;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1639,9 +1673,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Unpause.started += instance.OnUnpause;
             @Unpause.performed += instance.OnUnpause;
             @Unpause.canceled += instance.OnUnpause;
-            @TEMPPanelSwap.started += instance.OnTEMPPanelSwap;
-            @TEMPPanelSwap.performed += instance.OnTEMPPanelSwap;
-            @TEMPPanelSwap.canceled += instance.OnTEMPPanelSwap;
+            @Journal_ChangeRight.started += instance.OnJournal_ChangeRight;
+            @Journal_ChangeRight.performed += instance.OnJournal_ChangeRight;
+            @Journal_ChangeRight.canceled += instance.OnJournal_ChangeRight;
+            @Journal_ChangeLeft.started += instance.OnJournal_ChangeLeft;
+            @Journal_ChangeLeft.performed += instance.OnJournal_ChangeLeft;
+            @Journal_ChangeLeft.canceled += instance.OnJournal_ChangeLeft;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1685,9 +1722,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Unpause.started -= instance.OnUnpause;
             @Unpause.performed -= instance.OnUnpause;
             @Unpause.canceled -= instance.OnUnpause;
-            @TEMPPanelSwap.started -= instance.OnTEMPPanelSwap;
-            @TEMPPanelSwap.performed -= instance.OnTEMPPanelSwap;
-            @TEMPPanelSwap.canceled -= instance.OnTEMPPanelSwap;
+            @Journal_ChangeRight.started -= instance.OnJournal_ChangeRight;
+            @Journal_ChangeRight.performed -= instance.OnJournal_ChangeRight;
+            @Journal_ChangeRight.canceled -= instance.OnJournal_ChangeRight;
+            @Journal_ChangeLeft.started -= instance.OnJournal_ChangeLeft;
+            @Journal_ChangeLeft.performed -= instance.OnJournal_ChangeLeft;
+            @Journal_ChangeLeft.canceled -= instance.OnJournal_ChangeLeft;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1781,6 +1821,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnTestempty(InputAction.CallbackContext context);
         void OnQTEAccept(InputAction.CallbackContext context);
         void OnUnpause(InputAction.CallbackContext context);
-        void OnTEMPPanelSwap(InputAction.CallbackContext context);
+        void OnJournal_ChangeRight(InputAction.CallbackContext context);
+        void OnJournal_ChangeLeft(InputAction.CallbackContext context);
     }
 }
