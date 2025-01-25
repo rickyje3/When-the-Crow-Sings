@@ -158,6 +158,7 @@ public class SaveData
         { "MFFaridaTC",false },
 
         { "MFTheodoreTag",false },
+        { "MFTheodorePT",false },
         { "MFTheodoreTPC",false },
         { "MFTheodoreGI",false },
         { "MFTheodoreTA",false },
@@ -211,6 +212,7 @@ public class SaveData
         { "HFFaridaBC",false },
 
         { "HFTheodorePT",false },
+        { "HFTheodoreTPC",false },
         { "HFTheodoreGI",false },
         { "HFTheodoreTA",false },
         { "HFTheodoreTC",false },

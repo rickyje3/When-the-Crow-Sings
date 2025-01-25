@@ -2,6 +2,8 @@
 if theodoor == 0:
 	Theodore: BUZZ OFF!
 	set TheodoreIntroduction = true;
+	set HFTheodorePT = true;
+	set MFTheodorePT = true;
 if theodoor == 1:
 	Theodore: I said get lost!
 if theodoor == 2:
@@ -13,7 +15,9 @@ set theodoor += 1;
 
 ~ pickaxe
 if TheodoreIntroduction == true:
+	set MFTheodoreTPC = false;
 	set MFTheodoreGI = true;
+	set HFTheodoreGI = true;
 	set TheoPickaxe = true;
 	I bet I can use this to get in somehow. Here I come, little piggie.
 else:
@@ -22,10 +26,14 @@ else:
 
 ~ hole_lol
 if TheoPickaxe == true:
+	set MFTheodoreGI = false;
 	set TheodoreHole = true;
 	Ah hell yeah, hole here I come.
 if TheodoreIntroduction == true:
 	This hole is boarded up, but I bet I could get in if I had the right tool. I should look around nearby for something to pry these boards off.
+	set HFTheodoreTPC = true;
+	set MFTheodorePT = false;
+	set MFTheodoreTPC = true;
 else:
 	A boarded up hole. Why'd they patch it up if nobody lives out here anymore?
 =>END

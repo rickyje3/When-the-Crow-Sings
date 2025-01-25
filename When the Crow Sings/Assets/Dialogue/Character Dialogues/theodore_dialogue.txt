@@ -49,6 +49,7 @@ Theodore: Do you want my help or not? 'Cause if not, the least you could do is g
 	set MFTheodoreTag = false;
 	set TheodoreTaskAccepted = true;
 	set HFTheodoreTA = true;
+	set MFTheodoreTA = true;
 	set TheodoreTaskOn = true;
 	Chance: Fine, whatever. What do you want me to do?
 	Theodore: Help me find something good in all of this junk. I've been sifting through it but. . .  feathers- 
@@ -68,6 +69,7 @@ Theodore: I made my terms clear, either you help me find something in here or my
 - Fine.
 	set MFTheodoreTag = false;
 	set TheodoreTaskAccepted = true;
+	set MFTheodoreTA = true;
 	set HFTheodoreTA = true;
 	set TheodoreTaskOn = true;
 	Chance: Fine dude, whatever.
@@ -107,7 +109,7 @@ Theodore: Uuuuuuugh!
 Theodore: I don't know anything except that I see those <i>things</i>, walking around in the compound center sometimes. I'm sure you've seen them, I don't know what to say except they look like people who used to live here.
 Chance: Huh?
 Theodore: There used to be more people here. Like, not a lot but, a few. Over time, some of them started to go through ERS and they ran off. Some of them. . .
-Theodore: They look like they might be people who used to live here. I can't really remember who, I didn't really talk to anyone when I first got here and, it's all messed up. Something about them is familiar.
+Theodore: They look like they might be people who used to live here. I can't really remember who, I didn't really talk to anyone when I first got here and it's all messed up. Something about them is familiar.
 - This place?
 	Chance: What's up with this place? Why's it so far off?
 	Theodore: This is <color=#813408>the old scientist</color>'s place. I never met him, but once he disappeared this place got boarded up and the gate got locked.
@@ -115,7 +117,7 @@ Theodore: They look like they might be people who used to live here. I can't rea
 	=> theodore_task_fin_2
 - The quarry?
 	Chance: This place, it's a <color=#a11bbe>quarry</color> right? What are you out here for? Rocks?
-	Theodore: Does this place look like it has anything to do with the quarry? It was shut down way before this place was event built on top of it.
+	Theodore: Does this place look like it has anything to do with the quarry? It was shut down way before this place was even built on top of it.
 	Theodore: This is <color=#813408>the old scientist</color>'s place.
 	Theodore: I figured since he had his own house... maybe there was something of value up here but, I haven't been able to really find anything worthwhile.
 	=> theodore_task_fin_2
@@ -137,6 +139,7 @@ Chance: Well what about the other stuff?
 Theodore: What about it? Do you think I'm up here filing paperwork? Do you see a computer? I don't care, keep it.
 Chance: Fine. See you, <color=#813408>Teddy</color>.
 Theodore: IT'S <color=#813408>THEODORE</color>!
+set MFTheodoreTC = false;
 set HFTheodoreBC = true;
 set timeOfDay += 1;
 => END

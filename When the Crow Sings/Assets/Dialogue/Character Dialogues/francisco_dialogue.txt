@@ -73,6 +73,7 @@ Francisco_Excited: Ah! Yes! You want something, I need something. I need to get 
 	set MFFrancisoTag = false;
 	set FranciscoTaskOn = true;
 	set HFFranciscoTA = true;
+	set MFFranciscoTA = true;
 	Chance: I guess so. What do you need?
 	Francisco: There is this little pink flower you may have seen around, pipsissewa they call it. The leaves help with some of the discomfort. 
 	Francisco_Excited: They're a little spiky though, so be careful while picking them. Three plants worth will do. If I remember right, there's still a good amount by the <color=#5b5b1f>north-west fence</color> where the kids play.
@@ -89,6 +90,7 @@ Francisco: I'm sorry but I really can't chat until I get this done. Did you stil
 	set MFFrancisoTag = false;
 	set FranciscoTaskOn = true;
 	set HFFranciscoTA = true;
+	set MFFranciscoTA = true;
 	Chance: Turns out I do. What did you need?
 	Francisco: There is this little pink flower you may have seen around, pipsissewa they call it. The leaves help with some of the discomfort. 
 	Francisco_Excited: They're a little spiky though, so be careful while picking them. Three plants worth will do, you can find them up by the locked up gate to the <color=#5b5b1f>north-west</color>.
@@ -171,6 +173,7 @@ Chance_Sad: How would I get in? Isn't it locked?
 Francisco_Excited: Yes, but the lock is manual, so the buttons should still work. The code is <color=#a11bbe>4663</color>, if I remember correctly.
 Chance_Smile: Oh, okay. Thanks <color=#813408>Francisco</color>.
 Francisco: Of course. Um, let me know if you find anything out. It was nice to talk to you.
+set MFFranciscoTC = false;
 set HFFranciscoBC = true;
 set timeOfDay += 1;
 => END

@@ -38,7 +38,7 @@ Caleb_Wink: <b>Chance</b> on you, huh?
 ~ caleb_first_int_cont
 set CalebTaskOffered = true;
 Caleb_Smile: Hah!
-Caleb: Well, I'm just a little busy working on the panels here, but, I can talk.
+Caleb: Well, I'm just a little busy working on the panels here, but I can talk.
 Chance_Smile: Where I lived before ran off solar too, and some hydropower.
 Caleb_Smile: Oh, hydro! This place used to run off <color=#a11bbe>something else</color> too, but at some point that stopped working. Shipped me and the panels in, and now it's all we've got.
 Caleb: It's not the most efficient, and <color=#813408>Farida</color> will be sure to let you know all about it.
@@ -128,6 +128,7 @@ Chance_Angry: That's not really information.
 Caleb_Wink: Well you know what they say. It's not what you know, it's who you know.
 Chance_Angry: That's stupid. There's only like a dozen people here. Surely you all know each other.
 Caleb_Wink: Heh.
+set MFCalebTC = false;
 set HFCalebBC = true;
 set timeOfDay += 1;
 if timeOfDay == 3:

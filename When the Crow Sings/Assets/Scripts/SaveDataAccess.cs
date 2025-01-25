@@ -16,7 +16,9 @@ public class SaveDataAccess
 
         if (saveData.boolFlags["FlowerOne"] && saveData.boolFlags["FlowerTwo"] && saveData.boolFlags["FlowerThree"]) saveData.boolFlags["FranciscoTaskCompleted"] = true;
         if (saveData.boolFlags["FlowerOne"] && saveData.boolFlags["FlowerTwo"] && saveData.boolFlags["FlowerThree"]) saveData.boolFlags["MFFranciscoTC"] = true;
+        if (saveData.boolFlags["FlowerOne"] && saveData.boolFlags["FlowerTwo"] && saveData.boolFlags["FlowerThree"]) saveData.boolFlags["HFFranciscoTC"] = true;
         if (saveData.boolFlags["FlowerOne"] && saveData.boolFlags["FlowerTwo"] && saveData.boolFlags["FlowerThree"]) saveData.boolFlags["FranciscoTaskOn"] = false;
+        if (saveData.boolFlags["FlowerOne"] && saveData.boolFlags["FlowerTwo"] && saveData.boolFlags["FlowerThree"]) saveData.boolFlags["MFFranciscoTA"] = false;
 
         if (saveData.boolFlags["YuleString"] && saveData.boolFlags["YuleRod"] && saveData.boolFlags["YuleHook"]) saveData.boolFlags["YuleTaskPartCompleted"] = true;
         if (saveData.boolFlags["YuleString"] && saveData.boolFlags["YuleRod"] && saveData.boolFlags["YuleHook"]) saveData.boolFlags["MFYuleTPC"] = true;
