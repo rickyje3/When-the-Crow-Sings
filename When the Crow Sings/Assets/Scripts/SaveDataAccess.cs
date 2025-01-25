@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,9 @@ using UnityEngine;
 public class SaveDataAccess
 {
     static public SaveData saveData = new SaveData();
+    static public List<string> keysToTriggerPopup = new List<string> { "TestingFlag1" };
 
+    static public GameSignal popupUpdateMessage;
     public static void SetFlag(string key, bool value)
     {
         saveData.boolFlags[key] = value;
@@ -46,6 +49,11 @@ public class SaveDataAccess
     {
         saveData.stringFlags[key] = value;
         Debug.Log(key + " is now " + saveData.stringFlags[key]);
+
+        if (keysToTriggerPopup.Contains(key) && value== "true")
+        {
+            popupUpdateMessage.Emit();
+        }
     }
 
     //public static bool GetFlag<Bool>(string key)
