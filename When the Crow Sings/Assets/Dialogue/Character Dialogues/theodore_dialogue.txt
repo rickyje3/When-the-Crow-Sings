@@ -46,8 +46,9 @@ Theodore: . . . Fine. But you help me first.
 Chance: Are you serious? What is with you people here and making me do stuff?
 Theodore: Do you want my help or not? 'Cause if not, the least you could do is get out of here and leave me alone.
 - Fine.
+	set MFTheodoreTag = false;
 	set TheodoreTaskAccepted = true;
-	set MFTheodoreTA = true;
+	set HFTheodoreTA = true;
 	set TheodoreTaskOn = true;
 	Chance: Fine, whatever. What do you want me to do?
 	Theodore: Help me find something good in all of this junk. I've been sifting through it but. . .  feathers- 
@@ -65,8 +66,9 @@ Theodore: Do you want my help or not? 'Cause if not, the least you could do is g
 Theodore: You again?
 Theodore: I made my terms clear, either you help me find something in here or my beak is SEALED.
 - Fine.
+	set MFTheodoreTag = false;
 	set TheodoreTaskAccepted = true;
-	set MFTheodoreTA = true;
+	set HFTheodoreTA = true;
 	set TheodoreTaskOn = true;
 	Chance: Fine dude, whatever.
 	Theodore: Help me find something good in all of this junk. I've been sifting through it but. . .  feathers- 
@@ -135,7 +137,7 @@ Chance: Well what about the other stuff?
 Theodore: What about it? Do you think I'm up here filing paperwork? Do you see a computer? I don't care, keep it.
 Chance: Fine. See you, <color=#813408>Teddy</color>.
 Theodore: IT'S <color=#813408>THEODORE</color>!
-set MFTheodoreBC = true;
+set HFTheodoreBC = true;
 set timeOfDay += 1;
 => END
 
