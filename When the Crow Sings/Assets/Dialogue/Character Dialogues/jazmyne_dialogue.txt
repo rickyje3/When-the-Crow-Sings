@@ -42,6 +42,7 @@ Jazmyne_Worried: I didn't get nearly enough time to clean up.. Oh!
 Jazmyne_Worried: Could you help me and clean up out here? Just gather up all the drawings and put them on the board!
 Jazmyne_Exhausted: I can talk more once the babies are back to sleep!
 set MFJazmyneTag = false;
+set MFJazmyneTA = true;
 set HFJazmyneTA = true;
 set JazmyneTaskAccepted = true;
 set JazmyneTaskOn =  true;
@@ -71,11 +72,13 @@ Jazmyne: Of course! You know... if you're used to babies, I could always use a h
 Jazmyne_Sigh: Though, we are running a little low on movies...
 - Sure.
 	Chance_Smile: Sure, I will. See you later.
+	set MFJazmyneTC = false;
 	set HFJazmyneBC = true;
 	set timeOfDay += 1;
 	=> END
 - Maybe.
 	Chance: Uh, maybe. See you.
+	set MFJazmyneTC = false;
 	set HFJazmyneBC = true;
 	set timeOfDay += 1;
 	=> END

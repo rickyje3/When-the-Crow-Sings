@@ -44,6 +44,7 @@ Angel_Stare: . . .
 Angel_Smile: Well, I wouldn't know anything about that! 
 Angel_Smile: Did you want to help me in the kitchen? Might take your mind off of things, and I could always use an extra hand!
 - Sure.
+	set MFAngelTA = true;
 	set HFAngelTA = true;
 	set AngelTaskAccepted = true;
 	set AngelTaskOn = true;
@@ -60,6 +61,7 @@ Angel_Smile: Did you want to help me in the kitchen? Might take your mind off of
 Angel_Smile: Oh! You're back!!!
 Angel: Did you have time to lend me a hand?
 - Yeah, sure.
+	set MFAngelTA = true;
 	set AngelTaskAccepted = true;
 	set HFAngelTA = true;
 	set AngelTaskOn = true;
@@ -88,9 +90,9 @@ set AngelBaseCompleted = true;
 set GreenhouseDoorUnlocked = true;
 set RecCenterDoorUnlocked = true;
 if JazmyneTaskOffered == false:
-	MFJazmyneTag = true;
+	set MFJazmyneTag = true;
 if QuinnTaskOffered == false:
-	MFQuinnTag = true;
+	set MFQuinnTag = true;
 Angel_Smile: Thanks so much! Gave me time to prep.
 Angel_Thinking: . . .
 Angel_Worried: Um.. If you're worried about, whatever, maybe you could talk to <color=#813408>Miss Jazmyne</color> at the <color=#5b5b1f>rec center</color>?
