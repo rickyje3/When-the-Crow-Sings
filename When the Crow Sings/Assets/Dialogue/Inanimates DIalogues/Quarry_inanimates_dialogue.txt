@@ -1,0 +1,50 @@
+~ theodoor_int
+if theodoor == 0:
+	Theodore: BUZZ OFF!
+	set TheodoreIntroduction = true;
+	set HFTheodorePT = true;
+	set MFTheodorePT = true;
+if theodoor == 1:
+	Theodore: I said get lost!
+if theodoor == 2:
+	Theodore: CAN YOU CATCH A CLUE? GO AWAY!!!
+else:
+	It seems I've pissed off whoever is inside enough that they just let out an exasperated sigh when I knock. Maybe there's another way in...
+set theodoor += 1;
+=> END
+
+~ pickaxe
+if TheodoreIntroduction == true:
+	set MFTheodoreTPC = false;
+	set MFTheodoreGI = true;
+	set HFTheodoreGI = true;
+	set TheoPickaxe = true;
+	I bet I can use this to get in somehow. Here I come, little piggie.
+else:
+	Wonder who left this here.
+=>END
+
+~ hole_lol
+if TheoPickaxe == true:
+	set MFTheodoreGI = false;
+	set TheodoreHole = true;
+	Ah hell yeah, hole here I come.
+if TheodoreIntroduction == true:
+	This hole is boarded up, but I bet I could get in if I had the right tool. I should look around nearby for something to pry these boards off.
+	set HFTheodoreTPC = true;
+	set MFTheodorePT = false;
+	set MFTheodoreTPC = true;
+else:
+	A boarded up hole. Why'd they patch it up if nobody lives out here anymore?
+=>END
+
+~ telescope
+if timeOfDay == 1:
+	Can't really see much, it's very bright out. Kinda hurt my eyes.
+if timeOfDay == 2:
+	It's too light for this to be able to work.
+if timeOfDay == 3:
+	A clear look at the stars. They're so pretty!
+else:
+	I broke time again, oh no! And now there's an alien :( hes gonna get me
+=>END

@@ -45,6 +45,9 @@ if CalebTaskCompleted == true:
 	=> END
 if CalebTaskAccepted == true:
 	Whew, time to snatch these wires while the crows are distracted.
+	set MFCalebTA = false;
+	set MFCalebTC = true;
+	set HFCalebTC = true;
 	set CalebTaskCompleted = true;
 	=> END
 else:
@@ -55,6 +58,9 @@ else:
 if BeauTaskAccepted == true:
 	These must be the vegetables that <color=#813408>Beau</color> asked for. Better grab them.
 	set BeauTaskCompleted = true;
+	set MFBeauTA = false;
+	set MFBeauTC = true;
+	set HFBeauTC = true;
 	=> END
 else:
 	A basket of fresh vegetables. Wonder why it's out here.
@@ -62,6 +68,9 @@ else:
 
 ~ seed_bags
 if QuinnTaskAccepted == true:
+	set MFQuinnTA = false;
+	set MFQuinnTC = true;
+	set HFQuinnTC = true;
 	set QuinnTaskCompleted = true;
 	=> END
 else:

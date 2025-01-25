@@ -63,7 +63,9 @@ Quinn_Scared: I'm just not a big fan of birds.
 Quinn: The feral ones, I mean. Not the EVOs. Obviously.
 - I guess.
 	set QuinnTaskAccepted = true;
+	set MFQuinnTag = false;
 	set MFQuinnTA = true;
+	set HFQuinnTA = true;
 	Chance: Um, I guess I can.
 	Quinn: Cool. Cool cool cool... There should be a few bags down by the <color=#5b5b1f>south-west gate</color>, get them and bring them in to me and I'll see what I can do for ya.
 	=> END
@@ -75,8 +77,10 @@ Quinn: The feral ones, I mean. Not the EVOs. Obviously.
 Quinn_Excited: Oh, you're back. Here to try my carnop?
 Quinn: Turnott?.. I'm workshopping it.
 - Guy outside.
+	set MFQuinnTag = false;
 	set QuinnTaskAccepted = true;
 	set MFQuinnTA = true;
+	set HFQuinnTA = true;
 	Chance: I wanted to talk to your guy who lives outside.
 	Quinn: Sure sure. Just go get those seeds for me, the bags are down by the <color=#5b5b1f>south-west gate</color>. I'll page <color=#813408>Farida</color> about a delivery for <color=#813408>Yule</color> and give him a heads-up.
 	=> END
@@ -109,7 +113,9 @@ Chance: The fish?
 Quinn_Scared: The fish.
 Quinn: Thanks for your help, by the way.
 Chance_Smile: Sure, no problem.
-set MFQuinnBC = true;
+set MFYuleTag = true;
+set MFQuinnTC = false;
+set HFQuinnBC = true;
 set timeOfDay += 1;
 => END
 

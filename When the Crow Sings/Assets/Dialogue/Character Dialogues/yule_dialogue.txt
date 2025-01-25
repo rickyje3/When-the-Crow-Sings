@@ -13,22 +13,20 @@ else:
 	=> yule_directory_3
 
 ~ yule_directory_3
+if YuleTaskCompleted == false:
+	=> yule_task_unfin
 if YuleTaskPartCompleted == false:
 	=> yule_task_part_unfin
 else:
 	=> yule_directory_4
 
 ~ yule_directory_4
+if YuleTaskPartCompleted == false:
+	=> yule_task_unfin
 if YuleTaskCompleted == false:
-	=> yule_directory_5
+	=> yule_task_unfin
 else:
 	=> yule_task_fin
-
-~ yule_directory_5
-if YuleFishingRod == false:
-	=> yule_task_part_fin
-else:
-	=> yule_task_unfin
 
 ~yule_first_int
 set YuleTaskOffered = true;
@@ -60,9 +58,10 @@ Yule: That makes sense.
 Chance: Do you want me to get you one?
 Yule: Do you want to get me one?
 - Yes.
-	set MFYuleTA = true;
+	set MFYuleTag = false;
+	set HFYuleTA = true;
 	set YuleTaskAccepted = true;
-	set YuleTaskOn = true;
+	set YuleTaskOneOn = true;
 	Chance: If it will make you not busy, then yes.
 	Yule: If you say so. 
 	Chance: Uh, what do I need to make you a fishing rod?
@@ -70,6 +69,9 @@ Yule: Do you want to get me one?
 	Chance:I can find all that here?
 	Yule: Should be able to.
 	Chance: Okay, I'll see what I can do.
+	set MFYuleRod = true;
+	set MFYuleString = true;
+	set MFYuleHook = true;
 	=> END
 - No.
 	Chance: No, not right now.
@@ -83,14 +85,18 @@ Yule: You're back.
 Chance: Yeah, I wanted to talk to you about what I mentioned before.
 Yule: Once I'm done fishing.
 - I'll help.
-	set MFYuleTA = true;
+	set MFYuleTag = false;
+	set HFYuleTA = true;
 	set YuleTaskAccepted = true;
-	set YuleTaskOn = true;
+	set YuleTaskOneOn = true;
 	Chance: I'll help you, what do I need to make you a fishing rod?
 	Yule: Oh let's see.. A young flexible branch for the rod, some wire for the guides, and some fiber for line.
 	Chance: I can find all that here?
 	Yule: Should be able to.
 	Chance: Okay, I'll see what I can do.
+	set MFYuleRod = true;
+	set MFYuleString = true;
+	set MFYuleHook = true;
 	=> END
 - Right.
 	=> END
@@ -113,7 +119,7 @@ Yule: Why?
 	=> END
 
 ~ yule_task_part_fin
-set YuleFishingRod = true;
+set YuleTaskTwoOn = true;
 Chance: Alright, I got all the stuff you asked for.
 Yule: It looks good. Let me have it.
 Yule: . . .
@@ -122,6 +128,8 @@ Yule: Yes. But I don't know if it works.
 Chance: ... So you want me to see if it works?
 Yule: Yes.
 Chance: Uh, okay.
+set MFYuleTNC = true;
+set HFYuleTNC = true;
 => END
 
 ~ yule_task_unfin
@@ -171,7 +179,7 @@ Yule: Yes. Wherever he ran off to, I hope he doesn't get a good night's sleep fo
 Chance: Yeah...
 Chance: Thanks for the info, big guy.
 Yule: Sure. Come and see me again, if you want.
-set MFYuleBC = true;
+set HFYuleBC = true;
 set timeOfDay += 1;
 reload scene();
 => END

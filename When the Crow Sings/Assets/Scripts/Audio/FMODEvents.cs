@@ -14,6 +14,10 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference ThrowSeed { get; private set; }
     [field: SerializeField] public EventReference SeedHit { get; private set; }
     [field: SerializeField] public EventReference CrowCocophony { get; private set; }
+    [field: Header("UI SFX")]
+    [field: SerializeField] public EventReference Interact { get; private set; }
+    [field: SerializeField] public EventReference JournalNotif { get; private set; }
+    [field: SerializeField] public EventReference MenuClick { get; private set; }
 
     [field: Header("Dialogue Sounds")]
     [field: SerializeField] public EventReference Blip { get; private set; }
@@ -22,7 +26,11 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference BeauBlip { get; private set; }
     [field: SerializeField] public EventReference CalebBlip { get; private set; }
     [field: SerializeField] public EventReference FaridaBlip { get; private set; }
+    [field: SerializeField] public EventReference FranciscoBlip { get; private set; }
     [field: SerializeField] public EventReference JazmyneBlip { get; private set; }
+    [field: SerializeField] public EventReference PhilomenaBlip { get; private set; }
+    [field: SerializeField] public EventReference TheodoreBlip { get; private set; }
+    [field: SerializeField] public EventReference YuleBlip { get; private set; }
     [field: SerializeField] public EventReference BigShock { get; private set; }
     [field: SerializeField] public EventReference LesserShock { get; private set; }
 

@@ -45,6 +45,7 @@ Angel_Smile: Well, I wouldn't know anything about that!
 Angel_Smile: Did you want to help me in the kitchen? Might take your mind off of things, and I could always use an extra hand!
 - Sure.
 	set MFAngelTA = true;
+	set HFAngelTA = true;
 	set AngelTaskAccepted = true;
 	set AngelTaskOn = true;
 	Chance: . . . Yeah, sure.
@@ -60,8 +61,9 @@ Angel_Smile: Did you want to help me in the kitchen? Might take your mind off of
 Angel_Smile: Oh! You're back!!!
 Angel: Did you have time to lend me a hand?
 - Yeah, sure.
-	set AngelTaskAccepted = true;
 	set MFAngelTA = true;
+	set AngelTaskAccepted = true;
+	set HFAngelTA = true;
 	set AngelTaskOn = true;
 	Chance_Smile: Yeah, sure.
 	Angel_Smile: Thanks! I just need you to stir our forever soup!
@@ -87,6 +89,10 @@ Angel_Worried: Uh, are you okay? Did you forget what I asked you to do?
 set AngelBaseCompleted = true;
 set GreenhouseDoorUnlocked = true;
 set RecCenterDoorUnlocked = true;
+if JazmyneTaskOffered == false:
+	set MFJazmyneTag = true;
+if QuinnTaskOffered == false:
+	set MFQuinnTag = true;
 Angel_Smile: Thanks so much! Gave me time to prep.
 Angel_Thinking: . . .
 Angel_Worried: Um.. If you're worried about, whatever, maybe you could talk to <color=#813408>Miss Jazmyne</color> at the <color=#5b5b1f>rec center</color>?
@@ -97,34 +103,13 @@ Chance: Thanks, I appreciate it.
 Angel_Smile: No problem! Don't be a stranger!
 Angel_Stare: I mean, I'll see you at mealtime anyway, but. . .
 Angel_Smile: Bye!
-set MFAngelBC = true;
+set HFAngelBC = true;
 set timeOfDay += 1;
 if timeOfDay == 3:
 	call ReloadScene(0);
 else:
 	call ReloadScene(6);
 => END
-
-~ angel_demo_talk
-if TestingFlag1 == false:
-	Angel_Smile: Nice to meet you!
-	Angel: This is our first time speaking. You can tell, because I'm saying this.
-	Chance: Wow that's crazy.
-	Chance: Anyway, bye.
-	set TestingFlag1 = true;
-	=> END
-else:
-	Angel: We are talking again. You can tell because of the way it is.
-	Chance: That really is the way it is.
-	Angel: Did you want to touch the soup?
-	- Yes.
-		Chance: Hell yeah.
-		set TestingFlag2 = false;
-		=> END
-	- No.
-		Chance_Angry: Hell no.
-		Angel_Worried: What the heck man?
-		=> END
 
 ~ angel_beyond_base
 Angel: I ain't got nothin to say. There's nothing here! Get screwed, loser.

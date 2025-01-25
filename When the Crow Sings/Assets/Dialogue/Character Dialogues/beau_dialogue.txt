@@ -67,6 +67,7 @@ Beau: Listen, would you do me a solid and pick up some food from the <color=#5b5
 Beau_Smile: I've got to swap out some stock for <color=#813408>Angel</color>, put the new food in the freezer and give him the wiltier stuff. 
 - Sure.
 	set BeauTaskAccepted = true;
+	set HFBeauTA = true;
 	set MFBeauTA = true;
 	Chance: Yeah, sure.
 	Beau_Smile: Thanks bud, I'll owe ya one.
@@ -79,6 +80,7 @@ Beau_Smile: I've got to swap out some stock for <color=#813408>Angel</color>, pu
 Beau_Teasing: Back for more <color=#813408>Beau</color>?
 - Yeah.
 	set BeauTaskAccepted = true;
+	set HFBeauTA = true;
 	set MFBeauTA = true;
 	Chance_Smile: Yeah, I'm free to help now.
 	Beau_Smile: Thanks bud, I owe ya one.
@@ -115,6 +117,7 @@ if QuinnTaskOffered == true:
 		Beau_Awkward: Yeah, they sure are. Hm..
 		=> beau_task_fin_cont
 else:
+	set MFQuinnTag = true;
 	=> beau_task_fin_cont
 
 ~ beau_task_fin_cont
@@ -124,9 +127,8 @@ if FaridaTaskOffered == true:
 		Chance_Sad: I've met <color=#813408>Farida</color>. She's uh...
 		Beau_Awkward: Yeah. A bit. 
 		=> beau_task_fin_cont_3
-if day == 1:
-	Beau: If someone was coming or going from the compound, she'd know.
 else:
+	set MFFaridaTag = true;
 	Beau: She might be able to help ya a little. I'll warn you, though she might be human, she's pricklier than a porcupine.
 => beau_task_fin_cont_3
 
@@ -137,7 +139,8 @@ set EnergyHQDoorUnlocked = true;
 Chance: I'll look into it. Thanks.
 Beau_Teasing: No problem, ey? Not to be a keener but, wouldn't want you to be uncomfortable livin' here.
 Beau_Awkward: <size=75%> Not like you got anywhere else to go.
-set MFBeauBC = true;
+set MFBeauTC = false;
+set HFBeauBC = true;
 set timeOfDay += 1;
 if timeOfDay == 3:
 	call ReloadScene(0);
