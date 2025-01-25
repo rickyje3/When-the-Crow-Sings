@@ -14,12 +14,10 @@ public class JournalUpdateManager : MonoBehaviour
     private void Start()
     {
         SaveDataAccess.popupUpdateMessageSignal = popupUpdateMessageSignal;
-        StartCoroutine(tempspawnafterseconds());
     }
 
-    IEnumerator tempspawnafterseconds()
+    public void ShowNewNotification(SignalArguments args)
     {
-        yield return new WaitForSeconds(5f);
         GameObject notification = Instantiate(notificationPrefab);
         notification.transform.parent = canvas.transform;
     }
