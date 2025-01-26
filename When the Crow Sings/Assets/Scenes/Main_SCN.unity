@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163927f0dbcad349bcdd70f749fb1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectableButtons: []
+  possibleSelectors: []
   exclusive: 1
   selectOnEnable: 1
   clearLastSelectedOnDisable: 1
@@ -3337,12 +3337,12 @@ PrefabInstance:
     - target: {fileID: 453661776047515130, guid: 2af1f84fa27f8be479b6e37cc40457ed,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 298
+      value: 388
       objectReference: {fileID: 0}
     - target: {fileID: 453661776047515130, guid: 2af1f84fa27f8be479b6e37cc40457ed,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -165
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 453661776047515130, guid: 2af1f84fa27f8be479b6e37cc40457ed,
         type: 3}
@@ -4002,7 +4002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1521757638
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4084,7 +4084,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b7012202902aa048be29917bcc77b69, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b0185d9ca1e48484facae8e3254310a3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4173,7 +4173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -115, y: -91}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1559957337
@@ -5128,6 +5128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2035421514}
   - component: {fileID: 2035421515}
+  - component: {fileID: 2035421516}
   m_Layer: 0
   m_Name: PauseMenus
   m_TagString: Untagged
@@ -5197,6 +5198,18 @@ MonoBehaviour:
   - {fileID: 1178002632}
   - {fileID: 442832998}
   journalHolder: {fileID: 1558037851}
+--- !u!114 &2035421516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035421513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc868a8fd1c69cb4cad989bccb6c65bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2040272507
 GameObject:
   m_ObjectHideFlags: 0
@@ -5209,7 +5222,7 @@ GameObject:
   - component: {fileID: 2040272510}
   - component: {fileID: 2040272509}
   m_Layer: 0
-  m_Name: Image
+  m_Name: MapImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5224,14 +5237,14 @@ RectTransform:
   m_GameObject: {fileID: 2040272507}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 13.203686, y: 9.151431, z: 9.151431}
+  m_LocalScale: {x: 18, y: 10.3635, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1521757638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -44}
+  m_AnchoredPosition: {x: -13, y: -14}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2040272509
@@ -5254,7 +5267,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: daeec6060156d7d46ada2c3370b59477, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f8bdcac5a58f9c341922008b8e57c745, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7044,7 +7057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163927f0dbcad349bcdd70f749fb1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectableButtons: []
+  possibleSelectors: []
   exclusive: 1
   selectOnEnable: 1
   clearLastSelectedOnDisable: 1
@@ -8187,12 +8200,12 @@ PrefabInstance:
     - target: {fileID: 453661776047515130, guid: 2af1f84fa27f8be479b6e37cc40457ed,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -315
+      value: 292
       objectReference: {fileID: 0}
     - target: {fileID: 453661776047515130, guid: 2af1f84fa27f8be479b6e37cc40457ed,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 89
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 453661776047515130, guid: 2af1f84fa27f8be479b6e37cc40457ed,
         type: 3}
@@ -8246,7 +8259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163927f0dbcad349bcdd70f749fb1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectableButtons: []
+  possibleSelectors: []
   exclusive: 1
   selectOnEnable: 1
   clearLastSelectedOnDisable: 1
@@ -8262,7 +8275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163927f0dbcad349bcdd70f749fb1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectableButtons: []
+  possibleSelectors: []
   exclusive: 1
   selectOnEnable: 1
   clearLastSelectedOnDisable: 1
