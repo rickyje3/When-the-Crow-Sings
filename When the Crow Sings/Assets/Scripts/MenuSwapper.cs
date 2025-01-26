@@ -24,6 +24,7 @@ public class MenuSwapper : MonoBehaviour
             currentLoop++;
         }
     }
+
     public void OpenMenu(GameObject whichMenu)
     {
 
