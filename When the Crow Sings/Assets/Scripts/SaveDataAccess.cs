@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,9 @@ using UnityEngine;
 public class SaveDataAccess
 {
     static public SaveData saveData = new SaveData();
+    static public List<string> keysToTriggerPopup = new List<string> { "TestingFlag1" };
 
+    static public GameSignal popupUpdateMessageSignal;
     public static void SetFlag(string key, bool value)
     {
         saveData.boolFlags[key] = value;
@@ -15,6 +18,19 @@ public class SaveDataAccess
 
 
         if (saveData.boolFlags["FlowerOne"] && saveData.boolFlags["FlowerTwo"] && saveData.boolFlags["FlowerThree"]) saveData.boolFlags["FranciscoTaskCompleted"] = true;
+        if (saveData.boolFlags["FlowerOne"] && saveData.boolFlags["FlowerTwo"] && saveData.boolFlags["FlowerThree"]) saveData.boolFlags["MFFranciscoTC"] = true;
+        if (saveData.boolFlags["FlowerOne"] && saveData.boolFlags["FlowerTwo"] && saveData.boolFlags["FlowerThree"]) saveData.boolFlags["HFFranciscoTC"] = true;
+        if (saveData.boolFlags["FlowerOne"] && saveData.boolFlags["FlowerTwo"] && saveData.boolFlags["FlowerThree"]) saveData.boolFlags["FranciscoTaskOn"] = false;
+        if (saveData.boolFlags["FlowerOne"] && saveData.boolFlags["FlowerTwo"] && saveData.boolFlags["FlowerThree"]) saveData.boolFlags["MFFranciscoTA"] = false;
+
+        if (saveData.boolFlags["YuleString"] && saveData.boolFlags["YuleRod"] && saveData.boolFlags["YuleHook"]) saveData.boolFlags["YuleTaskPartCompleted"] = true;
+        if (saveData.boolFlags["YuleString"] && saveData.boolFlags["YuleRod"] && saveData.boolFlags["YuleHook"]) saveData.boolFlags["MFYuleTPC"] = true;
+        if (saveData.boolFlags["YuleString"] && saveData.boolFlags["YuleRod"] && saveData.boolFlags["YuleHook"]) saveData.boolFlags["YuleTaskOneOn"] = false;
+
+        if (saveData.boolFlags["RubiksCube"] && saveData.boolFlags["PaperClip"] && saveData.boolFlags["Thumbdrive"]) saveData.boolFlags["TheodoreTaskCompleted"] = true;
+        if (saveData.boolFlags["RubiksCube"] && saveData.boolFlags["PaperClip"] && saveData.boolFlags["Thumbdrive"]) saveData.boolFlags["MFTheodoreTC"] = true;
+        if (saveData.boolFlags["RubiksCube"] && saveData.boolFlags["PaperClip"] && saveData.boolFlags["Thumbdrive"]) saveData.boolFlags["TheodoreTaskOn"] = false;
+
         if (saveData.boolFlags["BeauBaseCompleted"] && saveData.boolFlags["FranciscoBaseCompleted"]) saveData.boolFlags["ifBeauAndFrancisco"] = true;
         if (saveData.boolFlags["BeauBaseCompleted"] && saveData.boolFlags["AngelBaseCompleted"]) saveData.boolFlags["ifBeauAndAngel"] = true;
         if (saveData.boolFlags["FaridaBaseCompleted"] && saveData.boolFlags["CalebBaseCompleted"]) saveData.boolFlags["ifFaridaAndCaleb"] = true;
@@ -33,6 +49,11 @@ public class SaveDataAccess
     {
         saveData.stringFlags[key] = value;
         Debug.Log(key + " is now " + saveData.stringFlags[key]);
+
+        if (keysToTriggerPopup.Contains(key) && value== "true")
+        {
+            popupUpdateMessageSignal.Emit();
+        }
     }
 
     //public static bool GetFlag<Bool>(string key)

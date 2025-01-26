@@ -13,7 +13,7 @@ if WoodPileMovable == true:
 	set Zone2DoorUnlocked = true;
 	=> END
 else:
-	A pile of wooden planks leaning against the fence. Maybe it was used to make the playset.
+	A pile of wooden planks leaning against the fence.
 	=> END
 
 ~ pot_of_soup
@@ -45,6 +45,9 @@ if CalebTaskCompleted == true:
 	=> END
 if CalebTaskAccepted == true:
 	Whew, time to snatch these wires while the crows are distracted.
+	set MFCalebTA = false;
+	set MFCalebTC = true;
+	set HFCalebTC = true;
 	set CalebTaskCompleted = true;
 	=> END
 else:
@@ -55,6 +58,9 @@ else:
 if BeauTaskAccepted == true:
 	These must be the vegetables that <color=#813408>Beau</color> asked for. Better grab them.
 	set BeauTaskCompleted = true;
+	set MFBeauTA = false;
+	set MFBeauTC = true;
+	set HFBeauTC = true;
 	=> END
 else:
 	A basket of fresh vegetables. Wonder why it's out here.
@@ -62,7 +68,9 @@ else:
 
 ~ seed_bags
 if QuinnTaskAccepted == true:
-	I gotta run these inside quick before the crows return.
+	set MFQuinnTA = false;
+	set MFQuinnTC = true;
+	set HFQuinnTC = true;
 	set QuinnTaskCompleted = true;
 	=> END
 else:
@@ -84,7 +92,7 @@ else:
 	=> END
 
 ~ monkey_bars
-Monkey bars! Oh, to be young again. Now I can reach the bars standing.
+Monkey bars! Oh, to be a kid. Now I can reach the bars standing.
 => END
 
 ~ play_place
@@ -129,22 +137,18 @@ else:
 set benchcounter += 1;
 => END
 
-~ directory_sign
-<- Cafeteria<br><- Cold Storage
-^ Rec Center<br>Greenhouse -><br>Clinic -><br>Energy HQ ->
-=> END
 
 ~ ground_crack
 That.. can't be normal.
 => END
 
 ~ fountain
-An old fountain that looks like it stopped functioning a while ago. The resevoire has been filled in with soil and flowers.
+An old fountain that looks like it stopped functioning a while ago. The reservoir has been filled in with soil and flowers.
 => END
 
 ~intro
 I should ask around about <color=#a11bbe>what happened last night</color>.
-Maybe that guy who greeted me last night knows something about it... I think he said he works at the <color=#5b5b1f>cafeteria</color>.
+Maybe that guy who greeted me last night knows something about it... I think he said he works at the <color=#5b5b1f>dining tent</color>.
 set IntroContextSeen = true;
 => END
 
@@ -208,6 +212,8 @@ set Zone4DoorUnlocked = true;
 => END
 
 ~rec_center_door
+if RecCenterDoorUnlocked == true:
+	=>END
 if timeOfDay == 3:
 	The door is locked, crap.
 else:

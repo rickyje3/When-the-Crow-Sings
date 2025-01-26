@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     public MainMenuDebugLoadHolder mainMenuDebugLoadHolder;
 
     public SceneReference mainScene;
+    public SceneReference cutsceneScene;
 
     public Button sceneLoadButtonPrefab;
     public GridLayoutGroup sceneLoadButtonsHolder;
@@ -55,10 +56,6 @@ public class MainMenu : MonoBehaviour
 
     public void OnNewGameButtonPressed()
     {
-        // Uncomment the following two lines to load the opening cutscene scene instead.
-            //SceneManager.LoadScene("Cutscene_SCN");
-            //return;
-
         StartCoroutine(NewGame());
         updateMusic();
     }
@@ -81,7 +78,8 @@ public class MainMenu : MonoBehaviour
         yield return StartCoroutine(SaveDataAccess.EraseDataFromDisk());
         SaveDataAccess.ResetSaveData();
         mainMenuDebugLoadHolder.resourceToLoad = allLevels.levelDataResources[1];
-        SceneManager.LoadScene(mainScene.Name);
+        //SceneManager.LoadScene(mainScene.Name);
+        SceneManager.LoadScene(cutsceneScene.Name);
     }
 
     public void quitGame()

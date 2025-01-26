@@ -49,7 +49,15 @@ public class AudioManager : MonoBehaviour
         ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
         soundFXBus = RuntimeManager.GetBus("bus:/SoundFX");
         talkingSoundBus = RuntimeManager.GetBus("bus:/TalkingSound");
+
+        masterVolume = PlayerPrefs.GetFloat("masterVolume", 1f);
+        musicVolume = PlayerPrefs.GetFloat("musicVolume", 1f);
+        ambienceVolume = PlayerPrefs.GetFloat("ambienceVolume", 1f);
+        soundFXVolume = PlayerPrefs.GetFloat("soundFXVolume", 1f);
+        talkingSoundVolume = PlayerPrefs.GetFloat("talkingSoundVolume", 1f);
     }
+
+
 
     private void Update()
     {

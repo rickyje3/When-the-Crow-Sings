@@ -13,22 +13,20 @@ else:
 	=> yule_directory_3
 
 ~ yule_directory_3
+if YuleTaskCompleted == false:
+	=> yule_task_unfin
 if YuleTaskPartCompleted == false:
 	=> yule_task_part_unfin
 else:
 	=> yule_directory_4
 
 ~ yule_directory_4
+if YuleTaskPartCompleted == false:
+	=> yule_task_unfin
 if YuleTaskCompleted == false:
-	=> yule_directory_5
+	=> yule_task_unfin
 else:
 	=> yule_task_fin
-
-~ yule_directory_5
-if YuleFishingRod == false:
-	=> yule_task_part_fin
-else:
-	=> yule_task_unfin
 
 ~yule_first_int
 set YuleTaskOffered = true;
@@ -60,8 +58,10 @@ Yule: That makes sense.
 Chance: Do you want me to get you one?
 Yule: Do you want to get me one?
 - Yes.
+	set MFYuleTag = false;
+	set HFYuleTA = true;
 	set YuleTaskAccepted = true;
-	set YuleTaskOn = true;
+	set YuleTaskOneOn = true;
 	Chance: If it will make you not busy, then yes.
 	Yule: If you say so. 
 	Chance: Uh, what do I need to make you a fishing rod?
@@ -69,6 +69,9 @@ Yule: Do you want to get me one?
 	Chance:I can find all that here?
 	Yule: Should be able to.
 	Chance: Okay, I'll see what I can do.
+	set MFYuleRod = true;
+	set MFYuleString = true;
+	set MFYuleHook = true;
 	=> END
 - No.
 	Chance: No, not right now.
@@ -82,13 +85,18 @@ Yule: You're back.
 Chance: Yeah, I wanted to talk to you about what I mentioned before.
 Yule: Once I'm done fishing.
 - I'll help.
+	set MFYuleTag = false;
+	set HFYuleTA = true;
 	set YuleTaskAccepted = true;
-	set YuleTaskOn = true;
+	set YuleTaskOneOn = true;
 	Chance: I'll help you, what do I need to make you a fishing rod?
 	Yule: Oh let's see.. A young flexible branch for the rod, some wire for the guides, and some fiber for line.
 	Chance: I can find all that here?
 	Yule: Should be able to.
 	Chance: Okay, I'll see what I can do.
+	set MFYuleRod = true;
+	set MFYuleString = true;
+	set MFYuleHook = true;
 	=> END
 - Right.
 	=> END
@@ -111,16 +119,17 @@ Yule: Why?
 	=> END
 
 ~ yule_task_part_fin
-set YuleFishingRod = true;
+set YuleTaskTwoOn = true;
 Chance: Alright, I got all the stuff you asked for.
 Yule: It looks good. Let me have it.
 Yule: . . .
-He gives back a finished fishing rod. Clearly home made, but not crude.
 Chance: Uh, isn't it for you?
 Yule: Yes. But I don't know if it works.
 Chance: ... So you want me to see if it works?
 Yule: Yes.
 Chance: Uh, okay.
+set MFYuleTNC = true;
+set HFYuleTNC = true;
 => END
 
 ~ yule_task_unfin
@@ -147,10 +156,10 @@ Yule: Well they sent us that boy <color=#813408>Francisco</color> and they thoug
 Yule: See, that syndrome us EVOs get usually just backslides you down the evolutionary line, but these people didn't do that. They got <color=#813408>different</color>. 
 Yule: Grew new bits, started hacking up this awful purple pink slime.  After a new batch of people came, that <color=#813408>scientist</color> ran off.
 if PhilomenaBaseCompleted == true:
-	Chance: And he left <color=#813408>Philomena</color> here?
+	Chance: And he left <color=#813408>Phil</color> here?
 	Yule: I suppose he did... Poor woman.
-Yule: Power went out, that grid stopped workin'. Coalition sent out new parts, new people, and everything was better. Haven't seen much of the purple ones since. Well, till now.
-Yule: And that thing still kicks on at night, humming and glowing. And the soft plants got that sickly color to 'em.
+Yule: That day, the power went out and that grid stopped workin'. Coalition sent out new parts, new people, and everything was getting better. Haven't seen much of the purple ones since. Well, till now.
+Yule: And that thing still kicks on at night, humming and glowing. And the plants to the north got that sickly color to 'em.
 Yule: Somehow I feel like it's that bastard's fault this all happened. I don't quite know, but I think that <color=#a11bbe>energy source</color> got into 'em. Maybe they woulda backslid, but they'd be normal. 
 Chance: Wow.
 Chance: You sure talk a lot once you get the chance.
@@ -164,13 +173,15 @@ Chance: Yeah I-
 Chance_Sad: I lost my last home. I don't want it to happen again.
 Yule: . . .
 Chance: . . .
-Yule: His name was Simon. The scientist. <color=#a11bbe>Simon Petrova</color>. 
+Yule: His name was <color=#a11bbe>Simon</color>. The scientist. <color=#a11bbe>Simon Petrova</color>. 
 Chance: Yeah?
 Yule: Yes. Wherever he ran off to, I hope he doesn't get a good night's sleep for the rest of his life.
 Chance: Yeah...
 Chance: Thanks for the info, big guy.
 Yule: Sure. Come and see me again, if you want.
+set HFYuleBC = true;
 set timeOfDay += 1;
+reload scene();
 => END
 
 ~ yule_beyond_base

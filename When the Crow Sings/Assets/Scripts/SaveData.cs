@@ -7,11 +7,14 @@ public class SaveData
     public int saveDataVersion = 1;
     public Dictionary<string, bool> boolFlags = new Dictionary<string, bool>()
     {
+        //Dialogue and task related flags
         { "TestingFlag1",false },
         { "TestingFlag2",true },
         { "TestingFlag3",false },
         { "TestingFlag4",true },
-        { "SceneStructureFlag", false },
+        { "SceneStructureFlag",false  },
+
+        { "IntroContextSeen",false },
 
         { "AngelTaskOffered",false },
         { "AngelTaskAccepted",false },
@@ -55,7 +58,7 @@ public class SaveData
         { "JazmyneTaskOn",false },
         { "PapersUp",false },
         { "PapersDown",false },
-        { "QTEOn", false},
+        { "QTEOn",false },
         { "JazmyneBaseCompleted",false },
         { "JazmyneExhausted",false },
 
@@ -71,8 +74,13 @@ public class SaveData
 
         { "YuleTaskOffered",false },
         { "YuleTaskAccepted",false },
+        { "YuleTaskPartCompleted",false },
         { "YuleTaskCompleted",false },
-        { "YuleTaskOn",false },
+        { "YuleTaskOneOn",false },
+        { "YuleTaskTwoOn",false },
+        { "YuleRod",false },
+        { "YuleString",false },
+        { "YuleHook",false },
         { "YuleBaseCompleted",false },
         { "YuleExhausted",false },
 
@@ -86,6 +94,9 @@ public class SaveData
         { "TheodoreIntroduction",false },
         { "TheodoreTaskOffered",false },
         { "TheodoreTaskAccepted",false },
+        { "RubiksCube",false },
+        { "PaperClip",false },
+        { "Thumbdrive",false },
         { "TheodoreTaskCompleted",false },
         { "TheodoreTaskOn",false },
         { "TheodoreBaseCompleted",false },
@@ -97,6 +108,9 @@ public class SaveData
         { "ifCalebAndAngel",false },
 
         { "SeenBrokenGauges",false },
+        { "SeenDoor",false },
+
+        //Door/loadzone relevant flags
 
         { "RecCenterDoorUnlocked",false },
         { "GreenhouseDoorUnlocked",false },
@@ -107,12 +121,119 @@ public class SaveData
         { "Zone2DoorUnlocked",false },
         { "Zone3DoorUnlocked",false },
         { "Zone4DoorUnlocked",false },
+        { "TheoPickaxe",false },
+        { "TheodoreHole",false },
+
+        //Endings relevant flags
 
         { "KeyInformation1",false },
         { "KeyInformation2",false },
         { "KeyInformation3",false },
 
-        { "IntroContextSeen", false},
+        //Map relevant flags
+        { "MFAngelTA",false },
+        { "MFAngelTC",false },
+
+        { "MFBeauTA",false },
+        { "MFBeauTC",false },
+
+        { "MFCalebTA",false },
+        { "MFCalebTC",false },
+
+        { "MFJazmyneTag",false },
+        { "MFJazmyneTA",false },
+        { "MFJazmyneTPC",false },
+        { "MFJazmyneTC",false },
+
+        { "MFQuinnTag",false },
+        { "MFQuinnTA",false },
+        { "MFQuinnTC",false },
+
+        { "MFFranciscoTag",false },
+        { "MFFranciscoTA",false },
+        { "MFFranciscoTC",false },
+
+        { "MFFaridaTag",false },
+        { "MFFaridaTA",false },
+        { "MFFaridaTC",false },
+
+        { "MFTheodoreTag",false },
+        { "MFTheodorePT",false },
+        { "MFTheodoreTPC",false },
+        { "MFTheodoreGI",false },
+        { "MFTheodoreTA",false },
+        { "MFTheodoreTC",false },
+
+        { "MFYuleTag",false },
+        { "MFYuleTA",false },
+        { "MFYuleRod",false },
+        { "MFYuleString",false },
+        { "MFYuleHook",false },
+        { "MFYuleTPC",false },
+        { "MFYuleTNC",false },
+        { "MFYuleTC",false },
+
+        { "MFPhilomenaTag",false },
+        { "MFPhilomenaTA",false },
+        { "MFPhilomenaBatt1",false },
+        { "MFPhilomenaBatt2",false },
+        { "MFPhilomenaCasette",false },
+        { "MFPhilomenaTPC",false },
+        { "MFPhilomenaTC",false },
+
+        //History relevant flags -- These NEVER get flipped off
+        { "HFAngelTA",false },
+        { "HFAngelTC",false },
+        { "HFAngelBC",false },
+
+        { "HFBeauTA",false },
+        { "HFBeauTC",false },
+        { "HFBeauBC",false },
+
+        { "HFCalebTA",false },
+        { "HFCalebTC",false },
+        { "HFCalebBC",false },
+
+        { "HFJazmyneTA",false },
+        { "HFJazmyneTPC",false },
+        { "HFJazmyneTC",false },
+        { "HFJazmyneBC",false },
+
+        { "HFQuinnTA",false },
+        { "HFQuinnTC",false },
+        { "HFQuinnBC",false },
+
+        { "HFFranciscoTA",false },
+        { "HFFranciscoTC",false },
+        { "HFFranciscoBC",false },
+
+        { "HFFaridaTA",false },
+        { "HFFaridaTC",false },
+        { "HFFaridaBC",false },
+
+        { "HFTheodorePT",false },
+        { "HFTheodoreTPC",false },
+        { "HFTheodoreGI",false },
+        { "HFTheodoreTA",false },
+        { "HFTheodoreTC",false },
+        { "HFTheodoreBC",false },
+
+        { "HFYuleTA",false },
+        { "HFYuleRod",false },
+        { "HFYuleString",false },
+        { "HFYuleHook",false },
+        { "HFYuleTPC",false },
+        { "HFYuleTNC",false },
+        { "HFYuleTC",false },
+        { "HFYuleBC",false },
+
+        { "HFPhilomenaTA",false },
+        { "HFPhilomenaBatt1",false },
+        { "HFPhilomenaBatt2",false },
+        { "HFPhilomenaCasette",false },
+        { "HFPhilomenaTPC",false },
+        { "HFPhilomenaTC",false },
+        { "HFPhilomenaBC",false },
     };
 
     public Dictionary<string, int> intFlags = new Dictionary<string, int>()
@@ -130,6 +251,7 @@ public class SaveData
         {"penguin_cult",623 },
         {"benchcounter",0 },
         {"PhilTalk", 0},
+        {"theodoor", 0},
 
         {"levelDataIndex", 1},
     };
