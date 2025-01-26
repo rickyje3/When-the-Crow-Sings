@@ -15,8 +15,12 @@ public class MenuSwapper : MonoBehaviour
             if (currentLoop == whichMenu)
                 menu.SetActive(true);
             else menu.SetActive(false);
+
+            // TODO: try to figure out the easiest way to put this in a child class maybe so it's not clogging up everything else...
             if (whichMenu > 1) journalHolder.SetActive(true);
             else journalHolder.SetActive(false);
+            
+            
             currentLoop++;
         }
     }

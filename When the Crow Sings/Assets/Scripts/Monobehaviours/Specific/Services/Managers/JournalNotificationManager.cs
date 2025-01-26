@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JournalUpdateManager : MonoBehaviour
+public class JournalNotificationManager : MonoBehaviour
 {
     public GameSignal popupUpdateMessageSignal;
     public GameObject notificationPrefab;
