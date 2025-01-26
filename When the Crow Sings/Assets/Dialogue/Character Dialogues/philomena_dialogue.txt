@@ -1,14 +1,22 @@
 ~ phil_directory
-if PhilomenaTaskCompleted == false:
+Skibidi rizz
+if PhilomenaBaseCompleted == false:
 	=> phil_directory_2
+else:
+	=> phil_beyond_base
+
+~ phil_directory_2
+scrobbled
+if PhilomenaTaskCompleted == false:
+	=> phil_directory_3
 else:
 	=> philomena_task_fin
 
-~ phil_directory_2
-if PhilTalk == 0:
-	=> philomena_first_int
-else:
+~ phil_directory_3
+if PhilTalk == 1:
 	=> phil_cat
+else:
+	=> philomena_first_int
 
 ~ philomena_first_int
 Philomena: Yes. Hello. Who are you? You're new. I haven't seen you. No, not you.
@@ -65,4 +73,8 @@ set HFPhilomenaBC = true;
 emit 1;
 set timeOfDay += 1;
 call ReloadScene();
+=> END
+
+~ phil_beyond_base
+Nothing to see here folks.
 => END
