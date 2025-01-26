@@ -218,8 +218,8 @@ public class DialogueManager : MonoBehaviour, IService
 
         
     }
-    public MenuButtonSelectionHandler choiceButtonsMBHS;
-    public MenuButtonSelectionHandler nextButtonMBHS;
+    public MenuButtonHighlightSelector choiceButtonsMBHS;
+    public MenuButtonHighlightSelector nextButtonMBHS;
     void EnableChoiceButtons()
     {
         nextButton.SetActive(false);

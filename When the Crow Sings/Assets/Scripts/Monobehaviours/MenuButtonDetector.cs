@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MenuButton : MonoBehaviour, IPointerEnterHandler
+public class MenuButtonDetector : MonoBehaviour, IPointerEnterHandler
 {
     [HideInInspector]
-    public MenuButtonSelectionHandler menuButtonHighlightSelector;
+    public MenuButtonHighlightSelector menuButtonHighlightSelector;
     public void OnPointerEnter(PointerEventData eventData)
     {
         //throw new System.NotImplementedException();
