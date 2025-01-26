@@ -4,5 +4,4 @@ using UnityEngine;
 
 public class JournalHistoryManager : MonoBehaviour
 {
-    public GameObject journalHistory;
 }
