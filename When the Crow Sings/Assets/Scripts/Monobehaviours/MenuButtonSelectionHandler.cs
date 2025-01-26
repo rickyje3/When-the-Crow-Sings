@@ -4,34 +4,34 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MenuButtonHighlightSelector : MonoBehaviour//, IPointerEnterHandler
+public class MenuButtonSelectionHandler : MonoBehaviour//, IPointerEnterHandler
 {
-    public List<MenuButtonDetector> possibleSelectors;
+    public List<MenuButton> selectableButtons;
     public bool exclusive = true;
     public bool selectOnEnable = true;
     public bool clearLastSelectedOnDisable = true;
 
-    private MenuButtonDetector lastSelected = null; // Only includes the lastSelected if it's part of the possibleSelectors, unlike the built-in one.
+    private MenuButton lastSelected = null; // Only includes the lastSelected if it's part of the possibleSelectors, unlike the built-in one.
 
     private void SetSelectedGameObject(GameObject newSelected)
     {
         EventSystem.current.SetSelectedGameObject(newSelected);
     }
-    public void OnPotentialEntered(MenuButtonDetector menuButtonDetector)
+    public void OnPotentialEntered(MenuButton menuButton)
     {
-        if (possibleSelectors.Contains(menuButtonDetector))
-            SetSelectedGameObject(menuButtonDetector.gameObject);
+        if (selectableButtons.Contains(menuButton))
+            SetSelectedGameObject(menuButton.gameObject);
     }
     private void OnEnable()
     {
-        foreach (var possibleSelector in possibleSelectors)
+        foreach (var selectableButton in selectableButtons)
         {
-            possibleSelector.menuButtonHighlightSelector = this;
+            selectableButton.menuButtonHighlightSelector = this;
         }
         if (selectOnEnable)
         {
             if (clearLastSelectedOnDisable || lastSelected == null)
-                SetSelectedGameObject(possibleSelectors[0].gameObject);
+                SetSelectedGameObject(selectableButtons[0].gameObject);
             else SetSelectedGameObject(lastSelected.gameObject);
         }
     }
@@ -48,8 +48,8 @@ public class MenuButtonHighlightSelector : MonoBehaviour//, IPointerEnterHandler
             {
                 SetLastSelectedOrFirstPossibleSelector();
             }
-            else if (!possibleSelectors.Contains(EventSystem.current.currentSelectedGameObject.GetComponent<MenuButtonDetector>()))
-                    SetSelectedGameObject(possibleSelectors[0].gameObject);
+            else if (!selectableButtons.Contains(EventSystem.current.currentSelectedGameObject.GetComponent<MenuButton>()))
+                    SetSelectedGameObject(selectableButtons[0].gameObject);
             
         }
         else
@@ -58,13 +58,13 @@ public class MenuButtonHighlightSelector : MonoBehaviour//, IPointerEnterHandler
                 SetLastSelectedOrFirstPossibleSelector();
         }
 
-        if (EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.GetComponent<MenuButtonDetector>())
-            lastSelected = EventSystem.current.currentSelectedGameObject.GetComponent<MenuButtonDetector>();
+        if (EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.GetComponent<MenuButton>())
+            lastSelected = EventSystem.current.currentSelectedGameObject.GetComponent<MenuButton>();
     }
 
     private void SetLastSelectedOrFirstPossibleSelector()
     {
         if (lastSelected != null) SetSelectedGameObject(lastSelected.gameObject);
-        else SetSelectedGameObject(possibleSelectors[0].gameObject);
+        else SetSelectedGameObject(selectableButtons[0].gameObject);
     }
 }
