@@ -5,24 +5,38 @@ using UnityEngine;
 public class MenuSwapper : MonoBehaviour
 {
     public List<GameObject> menus;
-    public GameObject journalHolder;
+
+    public int currentMenuIndex = -1;
 
     public void OpenMenu(int whichMenu)
     {
         int currentLoop = 0;
+        currentMenuIndex = whichMenu;
         foreach (var menu in menus)
         {
             if (currentLoop == whichMenu)
                 menu.SetActive(true);
             else menu.SetActive(false);
 
-            // TODO: try to figure out the easiest way to put this in a child class maybe so it's not clogging up everything else...
-            if (whichMenu > 1) journalHolder.SetActive(true);
-            else journalHolder.SetActive(false);
-            
+            AdditionalMenuLogic(whichMenu);
             
             currentLoop++;
         }
+    }
+
+    protected virtual void AdditionalMenuLogic(int whichMenu) { return; }
+
+    public void OpenNextMenu()
+    {
+        int _newIndex = currentMenuIndex + 1;
+        if (_newIndex > menus.Count) _newIndex = menus.Count;
+        OpenMenu(_newIndex);
+    }
+    public void OpenPreviousMenu()
+    {
+        int _newIndex = currentMenuIndex - 1;
+        if (_newIndex < 0) _newIndex = 0;
+        OpenMenu(_newIndex);
     }
 
     public void OpenMenu(GameObject whichMenu)
