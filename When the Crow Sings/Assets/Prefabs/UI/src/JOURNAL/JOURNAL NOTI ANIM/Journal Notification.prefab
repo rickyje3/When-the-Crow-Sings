@@ -146,8 +146,8 @@ GameObject:
   - component: {fileID: 511558955496711921}
   - component: {fileID: 4708422284583910515}
   - component: {fileID: 5844664969742775726}
-  - component: {fileID: 2624618855501918123}
   - component: {fileID: 5335456716235393015}
+  - component: {fileID: 9096608383187168912}
   m_Layer: 0
   m_Name: Journal Notification
   m_TagString: Untagged
@@ -214,23 +214,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!111 &2624618855501918123
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6512051696467991292}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 300b2749d9c261143b3fb07a3b87d963, type: 2}
-  - {fileID: 7400000, guid: 1c0097db3f149b144999b7e7385f3645, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &5335456716235393015
 Animator:
   serializedVersion: 5
@@ -252,6 +235,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9096608383187168912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6512051696467991292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40aa3ec253e9994e8d83a085eecc19e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: MSG_Not_Found
 --- !u!1 &7475405878819404930
 GameObject:
   m_ObjectHideFlags: 0
