@@ -7,7 +7,7 @@ public class JournalNotificationManager : MonoBehaviour
 {
     public GameSignal popupUpdateMessageSignal;
     public GameObject notificationPrefab;
-
+    public float verticalOffset = 20f;
 
     public Canvas canvas;
 
@@ -20,6 +20,7 @@ public class JournalNotificationManager : MonoBehaviour
     {
         GameObject notification = Instantiate(notificationPrefab);
         notification.transform.parent = canvas.transform;
+        notification.transform.localPosition = new Vector3(notification.transform.localPosition.x, verticalOffset, notification.transform.localPosition.z);
     }
 
 }

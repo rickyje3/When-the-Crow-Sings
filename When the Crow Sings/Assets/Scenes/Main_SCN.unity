@@ -1538,8 +1538,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 788047070}
-  - component: {fileID: 788047071}
-  - component: {fileID: 788047072}
   - component: {fileID: 788047073}
   m_Layer: 0
   m_Name: JournalLogic
@@ -1563,51 +1561,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1558037852}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &788047071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788047069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62e8a31e2ebd3194eb5cf4160b72f7a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupUpdateMessageSignal: {fileID: 11400000, guid: 00cb004706c490c4f92c244fbd842e0c,
-    type: 2}
-  notificationPrefab: {fileID: 6512051696467991292, guid: 65546589ef8e8f3409d08453cd45436a,
-    type: 3}
-  canvas: {fileID: 6315691293321232050}
---- !u!114 &788047072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788047069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd8f2792aa4e5a841805d6ab219c0209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameSignal: {fileID: 11400000, guid: 00cb004706c490c4f92c244fbd842e0c, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 788047071}
-        m_TargetAssemblyTypeName: JournalUpdateManager, Assembly-CSharp
-        m_MethodName: ShowNewNotification
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &788047073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3100,6 +3053,98 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8658540566664796071}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1200959750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1200959751}
+  - component: {fileID: 1200959754}
+  - component: {fileID: 1200959753}
+  - component: {fileID: 1200959752}
+  m_Layer: 0
+  m_Name: JournalNotificationsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1200959751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200959750}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1381248603434131218}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1200959752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200959750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11bff2014264eef4bade5f41851b4879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  journalHistory: {fileID: 6816453198352273915}
+--- !u!114 &1200959753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200959750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8f2792aa4e5a841805d6ab219c0209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSignal: {fileID: 11400000, guid: 00cb004706c490c4f92c244fbd842e0c, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1200959754}
+        m_TargetAssemblyTypeName: JournalUpdateManager, Assembly-CSharp
+        m_MethodName: ShowNewNotification
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1200959754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200959750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e8a31e2ebd3194eb5cf4160b72f7a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupUpdateMessageSignal: {fileID: 11400000, guid: 00cb004706c490c4f92c244fbd842e0c,
+    type: 2}
+  notificationPrefab: {fileID: 6512051696467991292, guid: 65546589ef8e8f3409d08453cd45436a,
+    type: 3}
+  canvas: {fileID: 6315691293321232050}
 --- !u!1001 &1237439756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5348,6 +5393,7 @@ Transform:
   - {fileID: 889661473}
   - {fileID: 824475831}
   - {fileID: 99644537}
+  - {fileID: 1200959751}
   m_Father: {fileID: 6160339982780498480}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1393161490761967875
