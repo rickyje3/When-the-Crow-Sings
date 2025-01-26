@@ -26,7 +26,7 @@ public class PauseManager : MonoBehaviour
         PauseGame();
         //pauseMenuUI.SetActive(true);
         pauseMenusHolder.SetActive(true);
-        pauseMenuSwapper.OpenMenu(args.intArgs[0]); // Makes sure we open to the proper menu.
+        pauseMenuSwapper.OpenMenu(args.intArgs[0]); // Makes sure we open to the default "Pause" menu.
     }
 
 
@@ -48,11 +48,6 @@ public class PauseManager : MonoBehaviour
 
         Time.timeScale = 1;
         inputManager.EnablePlayerInput(true);
-    }
-
-    public void Journal()
-    {
-        //journal activate here
     }
 
     private void OnPauseButtonPressed(InputAction.CallbackContext context) // Unpauses the game while in a menu
