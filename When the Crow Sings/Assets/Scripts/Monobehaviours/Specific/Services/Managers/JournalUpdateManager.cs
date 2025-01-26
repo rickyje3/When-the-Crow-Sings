@@ -5,11 +5,21 @@ using UnityEngine;
 
 public class JournalUpdateManager : MonoBehaviour
 {
-    public GameSignal popupUpdateMessage;
+    public GameSignal popupUpdateMessageSignal;
+    public GameObject notificationPrefab;
+
+
+    public Canvas canvas;
 
     private void Start()
     {
-        SaveDataAccess.popupUpdateMessage = popupUpdateMessage;
+        SaveDataAccess.popupUpdateMessageSignal = popupUpdateMessageSignal;
+    }
+
+    public void ShowNewNotification(SignalArguments args)
+    {
+        GameObject notification = Instantiate(notificationPrefab);
+        notification.transform.parent = canvas.transform;
     }
 
 }
