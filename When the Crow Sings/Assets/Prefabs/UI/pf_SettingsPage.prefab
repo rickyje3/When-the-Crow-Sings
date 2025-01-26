@@ -236,14 +236,13 @@ GameObject:
   - component: {fileID: 1130254942866869331}
   - component: {fileID: 5543297661305438225}
   - component: {fileID: 1249241435171244148}
-  - component: {fileID: 4161023961079262385}
   m_Layer: 0
   m_Name: pf_SettingsPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6310059578488448776
 RectTransform:
   m_ObjectHideFlags: 0
@@ -316,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163927f0dbcad349bcdd70f749fb1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleSelectors:
+  selectableButtons:
   - {fileID: 4088604120367826941}
   - {fileID: 5390753022434917563}
   - {fileID: 3165717536366763836}
@@ -327,26 +326,6 @@ MonoBehaviour:
   exclusive: 1
   selectOnEnable: 1
   clearLastSelectedOnDisable: 1
---- !u!114 &4161023961079262385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373219877548775638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89361650d08531a4fa3c7f4d9dc8b3dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Sound>k__BackingField:
-    Guid:
-      Data1: 1106571115
-      Data2: 1213393955
-      Data3: -1132582733
-      Data4: 1665973240
-    Path: event:/SFX/MenuClick
-  playOnAwake: 0
 --- !u!1 &480381455929479180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,19 +2247,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4713711086506480495}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4161023961079262385}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: PlayOneShot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1056421226365172928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3331,18 +3298,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4161023961079262385}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: PlayOneShot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 373219877548775638}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -3354,6 +3309,19 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5277793813510410406, guid: ba9d4aae592064b46878b709ec121f23,
+          type: 3}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &3037498989839732494
 MonoBehaviour:
@@ -4670,19 +4638,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4161023961079262385}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: PlayOneShot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 8556595901641729839}
+      - m_Target: {fileID: 4604005361732289079}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -4692,9 +4648,9 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 289880054241535551}
+      - m_Target: {fileID: 8556595901641729839}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -4900,19 +4856,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7533159191721430728}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4161023961079262385}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: PlayOneShot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &8961332213929971250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5442,10 +5386,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4161023961079262385}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: PlayOneShot
-        m_Mode: 1
+      - m_Target: {fileID: 8556595901641729839}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5465,18 +5409,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 289880054241535551}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 289880054241535551}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -7312,19 +7244,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4161023961079262385}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: PlayOneShot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 4604005361732289079}
+      - m_Target: {fileID: 8556595901641729839}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -7334,9 +7254,9 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 289880054241535551}
+      - m_Target: {fileID: 4604005361732289079}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -7692,19 +7612,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2520639482399529423}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4161023961079262385}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: PlayOneShot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6022632211996988078
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ public class PauseManager : MonoBehaviour
         PauseGame();
         //pauseMenuUI.SetActive(true);
         pauseMenusHolder.SetActive(true);
-        pauseMenuSwapper.OpenMenu(args.intArgs[0]);
+        pauseMenuSwapper.OpenMenu(args.intArgs[0]); // Makes sure we open to the proper menu.
     }
 
 
@@ -63,7 +63,7 @@ public class PauseManager : MonoBehaviour
         UnpauseGame();
     }
 
-        public void QuitToMain()
+    public void QuitToMain()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu_SCN");
