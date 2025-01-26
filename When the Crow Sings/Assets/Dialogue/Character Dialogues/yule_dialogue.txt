@@ -72,6 +72,7 @@ Yule: Do you want to get me one?
 	set MFYuleRod = true;
 	set MFYuleString = true;
 	set MFYuleHook = true;
+	emit 1;
 	=> END
 - No.
 	Chance: No, not right now.
@@ -97,6 +98,7 @@ Yule: Once I'm done fishing.
 	set MFYuleRod = true;
 	set MFYuleString = true;
 	set MFYuleHook = true;
+	emit 1;
 	=> END
 - Right.
 	=> END
@@ -128,8 +130,10 @@ Yule: Yes. But I don't know if it works.
 Chance: ... So you want me to see if it works?
 Yule: Yes.
 Chance: Uh, okay.
+set MFYuleTPC = false;
 set MFYuleTNC = true;
 set HFYuleTNC = true;
+emit 1;
 => END
 
 ~ yule_task_unfin
@@ -139,6 +143,7 @@ Yule: You went through all the trouble to get the pieces for the rod, don't keep
 ~ yule_task_fin
 set KeyInformation1 = true;
 set YuleBaseCompleted = true;
+set MFYuleTC = false;
 Yule: That's a nice looking fish. Came up easy, too. It's a good rod.
 Chance: Yeah, it is.
 It made me feel like when I used to fish at home.
@@ -180,6 +185,7 @@ Chance: Yeah...
 Chance: Thanks for the info, big guy.
 Yule: Sure. Come and see me again, if you want.
 set HFYuleBC = true;
+emit 1;
 set timeOfDay += 1;
 reload scene();
 => END

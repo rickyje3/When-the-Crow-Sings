@@ -49,6 +49,7 @@ if CalebTaskAccepted == true:
 	set MFCalebTC = true;
 	set HFCalebTC = true;
 	set CalebTaskCompleted = true;
+	emit 1;
 	=> END
 else:
 	Something shiny is in the dirt ... Better not steal from the crows.
@@ -61,6 +62,7 @@ if BeauTaskAccepted == true:
 	set MFBeauTA = false;
 	set MFBeauTC = true;
 	set HFBeauTC = true;
+	emit 1;
 	=> END
 else:
 	A basket of fresh vegetables. Wonder why it's out here.
@@ -68,10 +70,12 @@ else:
 
 ~ seed_bags
 if QuinnTaskAccepted == true:
+	Better grab these quick.
 	set MFQuinnTA = false;
 	set MFQuinnTC = true;
 	set HFQuinnTC = true;
 	set QuinnTaskCompleted = true;
+	emit 1;
 	=> END
 else:
 	Big burlap sacks filled to the brim with seed. The crows are definitely enjoying this careless placement.
