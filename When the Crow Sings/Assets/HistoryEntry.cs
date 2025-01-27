@@ -4,15 +4,5 @@ using UnityEngine;
 
 public class HistoryEntry : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string associatedDataKey_EnableEntry = "Chelle you forgot to put a key in!!";
 }

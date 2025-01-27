@@ -6,19 +6,24 @@ using UnityEngine;
 public class JournalHistoryManager : MonoBehaviour
 {
     public GameObject contentHolder;
-    public List<HistoryEntry> historyEntries = new List<HistoryEntry>();
-    //List<int> historyEntriesOrder = new List<int>();
 
-    List<string> _associatedDataKeys = new List<string>();
+    [HideInInspector]
+    public List<HistoryEntry> historyEntries = new List<HistoryEntry>();
 
     Dictionary<string,bool> _associatedData = new Dictionary<string,bool>();
 
     private void Awake() // Using awake because this needs to happen regardless of being Enabled.
     {
         historyEntries = contentHolder.GetComponentsInChildren<HistoryEntry>().ToList();
+
         AddHistoryOrderToSaveDataIfNewGame();
+
+        // Populate the associatedData so that it can be used in Update().  Also set all entries inactive so they don't appear at the beginning.
         foreach (HistoryEntry entry in historyEntries)
+        {
+            _associatedData.Add(entry.associatedDataKey_EnableEntry, false);
             entry.gameObject.SetActive(false);
+        }
     }
 
     private void OrganizeHistoryEntriesBySaveData()
