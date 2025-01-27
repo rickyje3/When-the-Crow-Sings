@@ -13,11 +13,10 @@ public class JournalHistoryManager : MonoBehaviour
 
     Dictionary<string,bool> _associatedData = new Dictionary<string,bool>();
 
-    private void OnEnable()
+    private void Awake() // Using awake because this needs to happen regardless of being Enabled.
     {
         historyEntries = contentHolder.GetComponentsInChildren<HistoryEntry>().ToList();
         AddHistoryOrderToSaveDataIfNewGame();
-
     }
 
     private void OrganizeHistoryEntriesBySaveData()
