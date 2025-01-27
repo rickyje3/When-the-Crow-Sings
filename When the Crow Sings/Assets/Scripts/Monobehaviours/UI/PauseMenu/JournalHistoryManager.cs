@@ -26,7 +26,12 @@ public class JournalHistoryManager : MonoBehaviour
         for (int i = 0; i < SaveDataAccess.saveData.historyEntriesOrder.Count; i++)
         {
             if (SaveDataAccess.saveData.historyEntriesOrder[i] < lowestIndexSoFar)
+            {
                 MoveHistoryEntryToStart(i);
+                lowestIndexSoFar = SaveDataAccess.saveData.historyEntriesOrder[i];
+            }
+                
+
         }
     }
 
