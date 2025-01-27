@@ -13,20 +13,18 @@ else:
 	=> yule_directory_3
 
 ~ yule_directory_3
-if YuleTaskCompleted == false:
-	=> yule_task_unfin
 if YuleTaskPartCompleted == false:
 	=> yule_task_part_unfin
 else:
 	=> yule_directory_4
 
 ~ yule_directory_4
-if YuleTaskPartCompleted == false:
-	=> yule_task_unfin
-if YuleTaskCompleted == false:
-	=> yule_task_unfin
-else:
+if YuleTaskCompleted == true:
 	=> yule_task_fin
+if YuleTaskTwoOn == false:
+	=> yule_task_part_fin
+else:
+	=> yule_task_unfin
 
 ~yule_first_int
 set YuleTaskOffered = true;
@@ -157,8 +155,8 @@ Yule: But there was <color=#813408>a scientist</color> and <color=#813408>his as
 Yule: Well, not around it physically. 'Far as I know it's a ways off, to the north. But that's why we were brought here. Me and a smattering of other folks. Families, friends. This was shortly after a few other collapses but, it was a while ago. Don't remember the names.
 Yule: Things were fine at first, but pretty quick some folk started going backwards. You know what I mean.
 I do.
-Yule: Well they sent us that boy <color=#813408>Francisco</color> and they thought they could keep a handle on it. But people started to slip so far back that they couldn't handle it anymore. Started to get wild. Usually they just ran off before anything happened, but every once in a while something was.. <color=#813408>wrong</color>.
-Yule: See, that syndrome us EVOs get usually just backslides you down the evolutionary line, but these people didn't do that. They got <color=#813408>different</color>. 
+Yule: Well they sent us that boy <color=#813408>Francisco</color> and they thought they could keep a handle on it. But people started to slip so far back that they couldn't handle it anymore. Started to get wild. Usually they just ran off before anything happened, but every once in a while something was.. <color=#a11bbe>wrong</color>.
+Yule: See, that syndrome us EVOs get usually just backslides you down the evolutionary line, but these people didn't do that. They got <color=#a11bbe>different</color>. 
 Yule: Grew new bits, started hacking up this awful purple pink slime.  After a new batch of people came, that <color=#813408>scientist</color> ran off.
 if PhilomenaBaseCompleted == true:
 	Chance: And he left <color=#813408>Phil</color> here?
@@ -187,7 +185,7 @@ Yule: Sure. Come and see me again, if you want.
 set HFYuleBC = true;
 emit 1;
 set timeOfDay += 1;
-reload scene();
+call ReloadScene(1);
 => END
 
 ~ yule_beyond_base
