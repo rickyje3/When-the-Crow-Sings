@@ -7,7 +7,7 @@ public class PlayAudio : MonoBehaviour
 {
     //Use this script to attach a single audio instance to an event
 
-    //[field: SerializeField] public EventReference Sound { get; private set; }
+    [field: SerializeField] public EventReference Sound { get; private set; }
     public bool playOnAwake;
 
     private void Start()
@@ -20,6 +20,6 @@ public class PlayAudio : MonoBehaviour
 
     public void PlayOneShot()
     {
-        //FMODUnity.RuntimeManager.PlayOneShot(Sound);
+        FMODUnity.RuntimeManager.PlayOneShot(Sound);
     }
 }
