@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class JournalHistoryManager : MonoBehaviour
+public class JournalHistoryHandler : MonoBehaviour
 {
     public GameObject contentHolder;
 
@@ -69,49 +69,41 @@ public class JournalHistoryManager : MonoBehaviour
 
     private void CheckOrderOfEntriesAgainstSaveData()
     {
+        Dictionary<string, bool> currentData = new Dictionary<string, bool>();
 
-        if (Input.GetKeyDown(KeyCode.L))
+        List<HistoryEntry> historyEntriesToMove = new List<HistoryEntry>();
+
+        for(int i = 0; i < historyEntries.Count; i++)
         {
-            Debug.Log("Key pressed.");
+            //KeyValuePair<string, bool> currentPair = new KeyValuePair<string, bool>(i.Key, SaveDataAccess.saveData.boolFlags[i.Key]);
+            string current_key = historyEntries[i].associatedDataKey_EnableEntry;
+            bool previous_value = _associatedData[current_key];
+            bool new_value = SaveDataAccess.saveData.boolFlags[current_key];
 
-            Dictionary<string, bool> currentData = new Dictionary<string, bool>();
 
-            List<HistoryEntry> historyEntriesToMove = new List<HistoryEntry>();
-
-            for(int i = 0; i < historyEntries.Count; i++)
+            if (previous_value != new_value)
             {
-                //KeyValuePair<string, bool> currentPair = new KeyValuePair<string, bool>(i.Key, SaveDataAccess.saveData.boolFlags[i.Key]);
-                string current_key = historyEntries[i].associatedDataKey_EnableEntry;
-                bool previous_value = _associatedData[current_key];
-                bool new_value = SaveDataAccess.saveData.boolFlags[current_key];
+                Debug.Log("Loop " + i.ToString() + " does not match save data.");
 
+                historyEntries[i].gameObject.SetActive(new_value);
+                historyEntriesToMove.Add(historyEntries[i]);
 
-                if (previous_value != new_value)
-                {
-                    Debug.Log("Loop " + i.ToString() + " does not match save data.");
+                // Reflect the change in the historyentriesorder.
+                int _orderIndex = SaveDataAccess.saveData.historyEntriesOrder[i];
+                SaveDataAccess.saveData.historyEntriesOrder.RemoveAt(i);
+                SaveDataAccess.saveData.historyEntriesOrder.Insert(0, _orderIndex);
 
-                    historyEntries[i].gameObject.SetActive(new_value);
-                    historyEntriesToMove.Add(historyEntries[i]);
-
-                    // Reflect the change in the historyentriesorder.
-                    int _orderIndex = SaveDataAccess.saveData.historyEntriesOrder[i];
-                    SaveDataAccess.saveData.historyEntriesOrder.RemoveAt(i);
-                    SaveDataAccess.saveData.historyEntriesOrder.Insert(0, _orderIndex);
-
-                }
-
-                currentData.Add(current_key, new_value);
             }
 
-            for (int i = 0; i < historyEntriesToMove.Count; i++)
-            {
-                MoveHistoryEntryToStart(historyEntries.IndexOf(historyEntriesToMove[i]));
-            }
-
-            _associatedData = currentData;
+            currentData.Add(current_key, new_value);
         }
 
-        
+        for (int i = 0; i < historyEntriesToMove.Count; i++)
+        {
+            MoveHistoryEntryToStart(historyEntries.IndexOf(historyEntriesToMove[i]));
+        }
+
+        _associatedData = currentData;
     }
 
 
