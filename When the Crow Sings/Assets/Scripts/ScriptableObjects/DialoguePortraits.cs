@@ -8,7 +8,7 @@ public class DialoguePortraits : ScriptableObject
 {
     public List<Sprite> chancePortraits;
     public List<Sprite> theodorePortraits;
-    public List<Sprite> philomenaPortraits;
+    public List<Sprite> philPortraits;
     public List<Sprite> faridaPortraits;
     public List<Sprite> angelPortraits;
     public List<Sprite> calebPortraits;
@@ -29,8 +29,8 @@ public class DialoguePortraits : ScriptableObject
             case "Theodore":
                 portraits = theodorePortraits;
                 break;
-            case "Philomena":
-                portraits = philomenaPortraits;
+            case "Phil":
+                portraits = philPortraits;
                 break;
             case "Farida":
                 portraits = faridaPortraits;
