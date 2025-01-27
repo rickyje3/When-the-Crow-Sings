@@ -17,6 +17,8 @@ public class JournalHistoryManager : MonoBehaviour
     {
         historyEntries = contentHolder.GetComponentsInChildren<HistoryEntry>().ToList();
         AddHistoryOrderToSaveDataIfNewGame();
+        foreach (HistoryEntry entry in historyEntries)
+            entry.gameObject.SetActive(false);
     }
 
     private void OrganizeHistoryEntriesBySaveData()
@@ -63,8 +65,10 @@ public class JournalHistoryManager : MonoBehaviour
             KeyValuePair<string, bool> currentPair = new KeyValuePair<string, bool>(i.Key, SaveDataAccess.saveData.boolFlags[i.Key]);
             if (i.Value != currentPair.Value)
             {
-                Debug.Log("History entry order doesn't match! Resorting!");
+                Debug.Log("History entry order doesn't match saved order! Sorting!");
+                
                 MoveHistoryEntryToStart(currentLoop);
+                historyEntries[currentLoop].gameObject.SetActive(currentPair.Value);
 
                 // Reflect the change in the historyentriesorder.
                 int _orderIndex = SaveDataAccess.saveData.historyEntriesOrder[currentLoop];
@@ -78,6 +82,7 @@ public class JournalHistoryManager : MonoBehaviour
             currentLoop++;
         }
     }
+
 
     private void MoveHistoryEntryToStart(int _entryToMove)
     {
