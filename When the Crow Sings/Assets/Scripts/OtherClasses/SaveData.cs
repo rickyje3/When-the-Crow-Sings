@@ -86,6 +86,10 @@ public class SaveData
 
         { "PhilomenaTaskOffered",false },
         { "PhilomenaTaskAccepted",false },
+        { "PhilBatt1",false },
+        { "PhilBatt2",false },
+        { "PhilCasette",false },
+        { "PhilomenaTaskPartCompleted",false },
         { "PhilomenaTaskCompleted",false },
         { "PhilomenaTaskOn",false },
         { "PhilomenaBaseCompleted",false },

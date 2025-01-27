@@ -25,11 +25,18 @@ public class SaveDataAccess
 
         if (saveData.boolFlags["YuleString"] && saveData.boolFlags["YuleRod"] && saveData.boolFlags["YuleHook"]) saveData.boolFlags["YuleTaskPartCompleted"] = true;
         if (saveData.boolFlags["YuleString"] && saveData.boolFlags["YuleRod"] && saveData.boolFlags["YuleHook"]) saveData.boolFlags["MFYuleTPC"] = true;
+        if (saveData.boolFlags["YuleString"] && saveData.boolFlags["YuleRod"] && saveData.boolFlags["YuleHook"]) saveData.boolFlags["MFYuleTA"] = false;
         if (saveData.boolFlags["YuleString"] && saveData.boolFlags["YuleRod"] && saveData.boolFlags["YuleHook"]) saveData.boolFlags["YuleTaskOneOn"] = false;
 
         if (saveData.boolFlags["RubiksCube"] && saveData.boolFlags["PaperClip"] && saveData.boolFlags["Thumbdrive"]) saveData.boolFlags["TheodoreTaskCompleted"] = true;
         if (saveData.boolFlags["RubiksCube"] && saveData.boolFlags["PaperClip"] && saveData.boolFlags["Thumbdrive"]) saveData.boolFlags["MFTheodoreTC"] = true;
+        if (saveData.boolFlags["RubiksCube"] && saveData.boolFlags["PaperClip"] && saveData.boolFlags["Thumbdrive"]) saveData.boolFlags["MFTheodoreTA"] = false;
         if (saveData.boolFlags["RubiksCube"] && saveData.boolFlags["PaperClip"] && saveData.boolFlags["Thumbdrive"]) saveData.boolFlags["TheodoreTaskOn"] = false;
+
+        if (saveData.boolFlags["PhilBatt1"] && saveData.boolFlags["PhilBatt2"] && saveData.boolFlags["PhilCasette"]) saveData.boolFlags["PhilomenaTaskPartCompleted"] = true;
+        if (saveData.boolFlags["PhilBatt1"] && saveData.boolFlags["PhilBatt2"] && saveData.boolFlags["PhilCasette"]) saveData.boolFlags["MFPhilomenaTPC"] = true;
+        if (saveData.boolFlags["PhilBatt1"] && saveData.boolFlags["PhilBatt2"] && saveData.boolFlags["PhilCasette"]) saveData.boolFlags["MFPhilomenaTA"] = false;
+        if (saveData.boolFlags["PhilBatt1"] && saveData.boolFlags["PhilBatt2"] && saveData.boolFlags["PhilCasette"]) saveData.boolFlags["HFPhilomenaTPC"] = true;
 
         if (saveData.boolFlags["BeauBaseCompleted"] && saveData.boolFlags["FranciscoBaseCompleted"]) saveData.boolFlags["ifBeauAndFrancisco"] = true;
         if (saveData.boolFlags["BeauBaseCompleted"] && saveData.boolFlags["AngelBaseCompleted"]) saveData.boolFlags["ifBeauAndAngel"] = true;
