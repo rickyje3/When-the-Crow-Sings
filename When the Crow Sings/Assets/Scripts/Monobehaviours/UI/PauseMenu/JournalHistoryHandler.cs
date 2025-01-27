@@ -83,7 +83,7 @@ public class JournalHistoryHandler : MonoBehaviour
 
             if (previous_value != new_value)
             {
-                Debug.Log("Loop " + i.ToString() + " does not match save data.");
+                //Debug.Log("Loop " + i.ToString() + " does not match save data.");
 
                 historyEntries[i].gameObject.SetActive(new_value);
                 historyEntriesToMove.Add(historyEntries[i]);
