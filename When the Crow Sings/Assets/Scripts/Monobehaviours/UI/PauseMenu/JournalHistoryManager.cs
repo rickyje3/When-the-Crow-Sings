@@ -14,7 +14,7 @@ public class JournalHistoryManager : MonoBehaviour
 
     private void Awake() // Using awake because this needs to happen regardless of being Enabled.
     {
-        historyEntries = contentHolder.GetComponentsInChildren<HistoryEntry>().ToList();
+        populateHistoryEntries();
 
         AddHistoryOrderToSaveDataIfNewGame();
 
@@ -24,6 +24,11 @@ public class JournalHistoryManager : MonoBehaviour
             _associatedData.Add(entry.associatedDataKey_EnableEntry, false);
             entry.gameObject.SetActive(false);
         }
+    }
+
+    void populateHistoryEntries()
+    {
+        historyEntries = contentHolder.GetComponentsInChildren<HistoryEntry>(true).ToList();
     }
 
     private void OrganizeHistoryEntriesBySaveData()
@@ -64,36 +69,58 @@ public class JournalHistoryManager : MonoBehaviour
 
     private void CheckOrderOfEntriesAgainstSaveData()
     {
-        int currentLoop = 0;
-        foreach (KeyValuePair<string, bool> i in _associatedData)
+
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            KeyValuePair<string, bool> currentPair = new KeyValuePair<string, bool>(i.Key, SaveDataAccess.saveData.boolFlags[i.Key]);
-            if (i.Value != currentPair.Value)
+            Debug.Log("Key pressed.");
+
+            Dictionary<string, bool> currentData = new Dictionary<string, bool>();
+
+            int currentLoop = 0;
+
+            List<HistoryEntry> historyEntriesToMove = new List<HistoryEntry>();
+
+            foreach (KeyValuePair<string, bool> i in _associatedData)
             {
-                Debug.Log("History entry order doesn't match saved order! Sorting!");
-                
-                MoveHistoryEntryToStart(currentLoop);
-                historyEntries[currentLoop].gameObject.SetActive(currentPair.Value);
+                KeyValuePair<string, bool> currentPair = new KeyValuePair<string, bool>(i.Key, SaveDataAccess.saveData.boolFlags[i.Key]);
+                if (i.Value != currentPair.Value)
+                {
+                    Debug.Log("Loop " + currentLoop.ToString() + " does not match save data.");
 
-                // Reflect the change in the historyentriesorder.
-                int _orderIndex = SaveDataAccess.saveData.historyEntriesOrder[currentLoop];
-                SaveDataAccess.saveData.historyEntriesOrder.RemoveAt(currentLoop);
-                SaveDataAccess.saveData.historyEntriesOrder.Insert(0, _orderIndex);
+                    historyEntries[currentLoop].gameObject.SetActive(currentPair.Value);
+                    historyEntriesToMove.Add(historyEntries[currentLoop]);
 
+                    // Reflect the change in the historyentriesorder.
+                    int _orderIndex = SaveDataAccess.saveData.historyEntriesOrder[currentLoop];
+                    SaveDataAccess.saveData.historyEntriesOrder.RemoveAt(currentLoop);
+                    SaveDataAccess.saveData.historyEntriesOrder.Insert(0, _orderIndex);
+
+                }
+
+                currentData.Add(i.Key, i.Value);
+
+                currentLoop++;
             }
 
-            _associatedData[i.Key] = currentPair.Value;
+            for (int i = 0; i < historyEntriesToMove.Count; i++)
+            {
+                MoveHistoryEntryToStart(historyEntries.IndexOf(historyEntriesToMove[i]));
+            }
 
-            currentLoop++;
+            _associatedData = currentData;
         }
+
+        
     }
+
 
 
     private void MoveHistoryEntryToStart(int _entryToMove)
     {
         historyEntries[_entryToMove].transform.SetAsFirstSibling();
-        HistoryEntry _entry = historyEntries[_entryToMove];
-        historyEntries.RemoveAt(_entryToMove);
-        historyEntries.Insert(0, _entry);
+        populateHistoryEntries();
+        //HistoryEntry _entry = historyEntries[_entryToMove];
+        //historyEntries.RemoveAt(_entryToMove);
+        //historyEntries.Insert(0, _entry);
     }
 }
