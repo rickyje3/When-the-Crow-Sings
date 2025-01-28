@@ -42,9 +42,9 @@ public class PlayerController : StateMachineComponent, IService
     public float minCrouchSpeed;
     public float maxCrouchSpeed;
 
-    public float walkSlideSpeedCorrection = 0.19f; // Used for walk(?) animation.
-    public float crouchSlideSpeedCorrection = 0.19f; // Used for walk(?) animation.
-    public float sprintSlideSpeedCorrection = 0.19f; // Used for walk(?) animation.
+    public float walkSlideSpeedCorrection = 0.19f; //Used for walk(?) animation.
+    public float crouchSlideSpeedCorrection = 0.19f; //Used for walk(?) animation.
+    public float sprintSlideSpeedCorrection = 0.19f; //Used for walk(?) animation.
 
     public CharacterController characterController;
 

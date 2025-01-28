@@ -1185,6 +1185,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 429190cc-164c-4045-bf8d-a312100a82aa
     m_ActionName: Player/OpenPeopleThatSoundsSOWrong[/Keyboard/h]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2f55d751-be48-4570-82e2-0203024720d3
+    m_ActionName: UI/Journal_ChangeRight[/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d317ce5c-1c3f-48a3-ac11-7c26c8b975f2
+    m_ActionName: UI/Journal_ChangeLeft[/Keyboard/leftArrow]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1576,8 +1584,44 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: de8b2769b86a05946bf0b84a4cab20e7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 373580720151591397}
   m_SourcePrefab: {fileID: 100100000, guid: de8b2769b86a05946bf0b84a4cab20e7, type: 3}
+--- !u!1 &503419515398784795 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: de8b2769b86a05946bf0b84a4cab20e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 738001757247191626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &373580720151591397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503419515398784795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc7c4dda414dbf48a88d62738f82501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ConcreteFootsteps>k__BackingField:
+    Guid:
+      Data1: -1838611869
+      Data2: 1158942724
+      Data3: -1902442081
+      Data4: 90830768
+    Path: event:/SFX/footstepTemp
+  <GrassFootsteps>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!4 &988348585599327649 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: de8b2769b86a05946bf0b84a4cab20e7,
