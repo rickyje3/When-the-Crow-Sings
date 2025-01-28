@@ -27,7 +27,6 @@ public class PageFlip : MonoBehaviour
                 flipPoint.localEulerAngles = Vector3.zero;
                 //Debug.Log("Flip complete");
                 currentFlippingPage = null;
-                this.gameObject.SetActive(false);
             }
         }
     }
@@ -36,7 +35,6 @@ public class PageFlip : MonoBehaviour
     {
         if(!isRight && currentFlippingPage == null)
         {
-            this.gameObject.SetActive(true);
             currentFlippingPage = this;
             targetAngle = -180;
             Debug.Log("Flipping left");
@@ -47,7 +45,6 @@ public class PageFlip : MonoBehaviour
     {
         if (isRight && currentFlippingPage == null)
         {
-            this.gameObject.SetActive(true);
             currentFlippingPage = this;
             targetAngle = 180;
             Debug.Log("Flipping right");
