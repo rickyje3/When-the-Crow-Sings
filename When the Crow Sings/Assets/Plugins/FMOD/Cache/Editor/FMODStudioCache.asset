@@ -285,10 +285,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638736652495206634
+  lastModified: 638736687350811614
   FileSizes:
   - Name: Desktop
-    Value: 281440
+    Value: 286240
   Exists: 1
 --- !u!114 &-6014020339122549108
 MonoBehaviour:
@@ -305,10 +305,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638736649695148116
+  lastModified: 638736685787721875
   FileSizes:
   - Name: Desktop
-    Value: 3274
+    Value: 3320
   Exists: 1
 --- !u!114 &-5949586715602016859
 MonoBehaviour:
@@ -604,6 +604,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 40351
+--- !u!114 &-2090559159338937253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/regularFootstep
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/regularFootstep
+  Guid:
+    Data1: -2058316992
+    Data2: 1233161362
+    Data3: 96487336
+    Data4: 1129211601
+  Banks:
+  - {fileID: -6031272985124646646}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1676424638249920946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,7 +748,7 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638736649695138099
+  lastModified: 638736685787701523
   FileSizes:
   - Name: Desktop
     Value: 1632
@@ -791,12 +818,13 @@ MonoBehaviour:
   - {fileID: 5302618480422168558}
   - {fileID: 5233090305899620577}
   - {fileID: 6110340249391293709}
+  - {fileID: -2090559159338937253}
   EditorParameters: []
   MasterBanks:
   - {fileID: -26728882161318293}
   StringsBanks:
   - {fileID: -6014020339122549108}
-  cacheTime: 638736652495206634
+  cacheTime: 638736687350811614
   cacheVersion: 131622
 --- !u!114 &178758601418518700
 MonoBehaviour:
