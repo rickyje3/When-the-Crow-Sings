@@ -737,6 +737,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Journal_Scroll"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""ac29b7bc-51c5-48c4-800f-b52e37a43845"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1289,6 +1298,72 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Journal_ChangeLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""4093e621-888d-484b-9d38-308d7c3307c3"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Journal_Scroll"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""9d62a284-8f67-41f3-9636-4361b59491a5"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Journal_Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""7c7004a9-d0b1-462b-a574-11b0e44144c3"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Journal_Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""ef328e60-8e87-4845-8dfd-cb014747a634"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Journal_Scroll"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""7c8c9fa1-c57f-4a45-afa2-62ba98e67fe3"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Journal_Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""70f46a5d-a290-4fe3-847b-7b7a8ff5e43b"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Journal_Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -1388,6 +1463,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI_Unpause = m_UI.FindAction("Unpause", throwIfNotFound: true);
         m_UI_Journal_ChangeRight = m_UI.FindAction("Journal_ChangeRight", throwIfNotFound: true);
         m_UI_Journal_ChangeLeft = m_UI.FindAction("Journal_ChangeLeft", throwIfNotFound: true);
+        m_UI_Journal_Scroll = m_UI.FindAction("Journal_Scroll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1606,6 +1682,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Unpause;
     private readonly InputAction m_UI_Journal_ChangeRight;
     private readonly InputAction m_UI_Journal_ChangeLeft;
+    private readonly InputAction m_UI_Journal_Scroll;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1625,6 +1702,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Unpause => m_Wrapper.m_UI_Unpause;
         public InputAction @Journal_ChangeRight => m_Wrapper.m_UI_Journal_ChangeRight;
         public InputAction @Journal_ChangeLeft => m_Wrapper.m_UI_Journal_ChangeLeft;
+        public InputAction @Journal_Scroll => m_Wrapper.m_UI_Journal_Scroll;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1679,6 +1757,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Journal_ChangeLeft.started += instance.OnJournal_ChangeLeft;
             @Journal_ChangeLeft.performed += instance.OnJournal_ChangeLeft;
             @Journal_ChangeLeft.canceled += instance.OnJournal_ChangeLeft;
+            @Journal_Scroll.started += instance.OnJournal_Scroll;
+            @Journal_Scroll.performed += instance.OnJournal_Scroll;
+            @Journal_Scroll.canceled += instance.OnJournal_Scroll;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1728,6 +1809,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Journal_ChangeLeft.started -= instance.OnJournal_ChangeLeft;
             @Journal_ChangeLeft.performed -= instance.OnJournal_ChangeLeft;
             @Journal_ChangeLeft.canceled -= instance.OnJournal_ChangeLeft;
+            @Journal_Scroll.started -= instance.OnJournal_Scroll;
+            @Journal_Scroll.performed -= instance.OnJournal_Scroll;
+            @Journal_Scroll.canceled -= instance.OnJournal_Scroll;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1823,5 +1907,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnUnpause(InputAction.CallbackContext context);
         void OnJournal_ChangeRight(InputAction.CallbackContext context);
         void OnJournal_ChangeLeft(InputAction.CallbackContext context);
+        void OnJournal_Scroll(InputAction.CallbackContext context);
     }
 }
