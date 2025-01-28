@@ -18,7 +18,9 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference Interact { get; private set; }
     [field: SerializeField] public EventReference JournalNotif { get; private set; }
     [field: SerializeField] public EventReference MenuClick { get; private set; }
-
+    [field: Header("SFX")]
+    [field: SerializeField] public EventReference Swirl { get; private set; }
+    [field: SerializeField] public EventReference ItemCollect { get; private set; }
     [field: Header("Dialogue Sounds")]
     [field: SerializeField] public EventReference Blip { get; private set; }
     [field: SerializeField] public EventReference ChanceBlip { get; private set; }
