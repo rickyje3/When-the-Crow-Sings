@@ -10,8 +10,8 @@ public class PlayAudio : MonoBehaviour
     public bool playOnAwake;
 
     private GameObject subject;
-    public bool SubjectHasPlayed = true; //dont pay attention to the wording this wont make sense
-    private bool hasCheckedInitialState = true;
+    //public bool SubjectHasPlayed = true; //dont pay attention to the wording this wont make sense
+    //private bool hasCheckedInitialState = true;
 
     private void Start()
     {
