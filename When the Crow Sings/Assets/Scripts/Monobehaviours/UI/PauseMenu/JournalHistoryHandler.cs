@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class JournalHistoryHandler : MonoBehaviour
 {
@@ -24,6 +25,20 @@ public class JournalHistoryHandler : MonoBehaviour
             _associatedData.Add(entry.associatedDataKey_EnableEntry, false);
             entry.gameObject.SetActive(false);
         }
+    }
+
+    private void OnEnable()
+    {
+        InputManager.playerInputActions.UI.ScrollWheel.performed += OnScrollWheelInputPerformed; // May need to be a different thing.
+    }
+    private void OnDisable()
+    {
+        InputManager.playerInputActions.UI.ScrollWheel.performed -= OnScrollWheelInputPerformed;
+    }
+
+    void OnScrollWheelInputPerformed(InputAction.CallbackContext context)
+    {
+        Debug.Log("Scroll scroll scroll your boat...");
     }
 
     void populateHistoryEntries()
