@@ -1,35 +1,48 @@
 ~ phil_directory
-if PhilomenaTaskCompleted == false:
+if PhilomenaBaseCompleted == false:
 	=> phil_directory_2
 else:
-	=> philomena_task_fin
+	=> phil_beyond_base
 
 ~ phil_directory_2
+if PhilomenaTaskCompleted == true:
+	=> philomena_task_fin
+if PhilomenaTaskPartCompleted == true:
+	=> phil_task_part_fin	
+else:
+	=> phil_directory_3
+
+~ phil_directory_3
 if PhilTalk == 0:
 	=> philomena_first_int
 else:
 	=> phil_cat
 
 ~ philomena_first_int
-Philomena: Yes. Hello. Who are you? You're new. I haven't seen you. No, not you.
+Phil: Yes. Hello. Who are you? You're new. I haven't seen you. No, not you.
 Chance: Um, I'm Chance. <color=#813408>Farida</color> told me that you'd be here, that maybe you'd want to talk.
-Philomena: <color=#813408>Farida</color>! She's lovely, <color=#813408>Farida</color>. So sweet. Tried so hard. Learned very quickly. Smart, smart.
+Phil: <color=#813408>Farida</color>! She's lovely, <color=#813408>Farida</color>. So sweet. Tried so hard. Learned very quickly. Smart, smart.
 Chance: Right. She said you would know about <color=#a11bbe>the old energy source</color>.
-Philomena: Hmm.. mm...
+Phil: Hmm.. mm...
 Chance: <color=#a11bbe>The old power grid</color>? 
-Philomena: I know. I know. I know. No. Not the power grid. Something's wrong with the power.
+Phil: I know. I know. I know. No. Not the power grid. Something's wrong with the power.
 Chance: Wrong?
-Philomena: Wrong. Yes, he says there's something wrong with it. It's dangerous. <color=#a11bbe>Dangerous</color>.
-Philomena: Ohhh, but I don't know what to do. He's gone and I don't know what to do. 
+Phil: Wrong. Yes, he says there's something wrong with it. It's dangerous. <color=#a11bbe>Dangerous</color>. He's dangerous...
+Phil: Oh- but I don't know what to do. He's gone and I don't know what to do. 
 Chance: He's gone? Who?
-Philomena: <color=#813408>The doctor</color>! It was his. <color=#a11bbe>His discovery</color>. His. And he left us here. Left us here.
-if YuleBaseCompleted:
+Phil: <color=#813408>The doctor</color>! It was his. <color=#a11bbe>His discovery</color>. His. And he left us here. Left us here.
+if YuleBaseCompleted == true:
 	That guy <color=#813408>Yule</color> mentioned..
-Philomena: And I have to stop it. Have to. I have to. They come, and they drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip 
+Phil: And I have to stop it. Have to. I have to. They come, and they drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip drip 
 She seems to have become catatonic. Her lips stop moving, and she starts to hum shakily.
 set PhilomenaTaskAccepted = true;
+set PhilomenaTaskOn = true;
 set HFPhilomenaTA = true;
 set MFPhilomenaTag = false;
+emit 1;
+set MFPhilomenaBatt1 = true;
+set MFPhilomenaBatt2 = true;
+set MFPhilomenaCasette = true;
 set PhilTalk += 1;
 => END
 
@@ -49,18 +62,27 @@ else:
 set PhilTalk += 1;
 => END
 
+~ phil_task_part_fin
+She's still unresponsive, but I have what I need to get the casette player working.
+=> END
+
 ~ philomena_task_fin
 set KeyInformation3 = true;
-Philomena: I like that song. I haven't heard it in a while. Not for a long while.
-Philomena: . . .
+Phil: I like that song. I haven't heard it in a while. Not for a long while.
+Phil: . . .
 Chance: Are you okay?
-Philomena: Yes. I.. I think you should have this.
+Phil: Yes. I.. I think you should have this.
 Chance: Thank you.
-Philomena: Mm..
+Phil: Mm..
 It's a birthday card.
 "Doctor, a year older. Thank you so much for all of the opportunities you've given me. I hope for another year making history with you! Happy Birthday, <color=#813408>Philomena</color>"
 There is a date scribbled up in the top right corner. <color=#a11bbe>03/15</color>.
 set HFPhilomenaBC = true;
+emit 1;
 set timeOfDay += 1;
-call ReloadScene();
+call ReloadScene(1);
+=> END
+
+~ phil_beyond_base
+Nothing to see here folks.
 => END

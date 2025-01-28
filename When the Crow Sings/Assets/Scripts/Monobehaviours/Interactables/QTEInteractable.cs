@@ -16,6 +16,12 @@ public class QTEInteractable : MonoBehaviour
     public AudioClip failSound;
     public AudioSource audioSource;
 
+    //This is for the qte script to use as a sound check to see which sound to play
+    public bool isSoup;
+    public bool isFishing;
+    public bool isFaridaMeter;
+    public bool isNone;
+
     private SignalArguments signalArgs;
     private void Awake()
     {

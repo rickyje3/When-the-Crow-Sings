@@ -12,6 +12,7 @@ public class StirringQTE : QuickTimeEvent
     private int currentStep = 0;
     private bool correctKey;
     private bool countingDown;
+    int i = 13; 
     [HideInInspector] public bool complete = false;
     public int score = 0;
     public float timer = 8;
@@ -137,7 +138,6 @@ public class StirringQTE : QuickTimeEvent
             sKey.enabled = false;
             dKey.enabled = false;*/
 
-            //AudioManager.instance.PlayOneShot(FMODEvents.instance.AngelBlip);  whenever stir sound is made put here
             wKey.color = new Color(wKey.color.r, wKey.color.g, wKey.color.b, .2f);
             aKey.color = new Color(aKey.color.r, aKey.color.g, aKey.color.b, 1);
             sKey.color = new Color(sKey.color.r, sKey.color.g, sKey.color.b, .2f);
@@ -186,7 +186,6 @@ public class StirringQTE : QuickTimeEvent
         }
         else if (currentStep == 1)
         {
-            //AudioManager.instance.PlayOneShot(FMODEvents.instance.Stir);  whenever stir sound is made put here
             upJoystick.enabled = false;
             rightJoystick.enabled = true;
             downJoystick.enabled = false;
@@ -221,6 +220,12 @@ public class StirringQTE : QuickTimeEvent
             {
                 correctKey = true;
                 StartCoroutine(KeyPressFeedback());
+                if (qteInteractable.isSoup)
+                {
+                    i++;
+                    if(i % 14 == 0) //Plays it every 14th press
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.Swirl);
+                }
             }
             else
             {
@@ -239,6 +244,13 @@ public class StirringQTE : QuickTimeEvent
         {
             correctKey = true;
             StartCoroutine(KeyPressFeedback());
+
+            if (qteInteractable.isSoup)
+            {
+                i++;
+                if(i % 14 == 0) //plays it every 14th press
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.Swirl);
+            }
         }
     }
 

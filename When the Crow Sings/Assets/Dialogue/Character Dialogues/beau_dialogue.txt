@@ -68,6 +68,7 @@ Beau_Smile: I've got to swap out some stock for <color=#813408>Angel</color>, pu
 - Sure.
 	set BeauTaskAccepted = true;
 	set HFBeauTA = true;
+	emit 1;
 	set MFBeauTA = true;
 	Chance: Yeah, sure.
 	Beau_Smile: Thanks bud, I'll owe ya one.
@@ -81,6 +82,7 @@ Beau_Teasing: Back for more <color=#813408>Beau</color>?
 - Yeah.
 	set BeauTaskAccepted = true;
 	set HFBeauTA = true;
+	emit 1;
 	set MFBeauTA = true;
 	Chance_Smile: Yeah, I'm free to help now.
 	Beau_Smile: Thanks bud, I owe ya one.
@@ -141,6 +143,7 @@ Beau_Teasing: No problem, ey? Not to be a keener but, wouldn't want you to be un
 Beau_Awkward: <size=75%> Not like you got anywhere else to go.
 set MFBeauTC = false;
 set HFBeauBC = true;
+emit 1;
 set timeOfDay += 1;
 if timeOfDay == 3:
 	call ReloadScene(0);

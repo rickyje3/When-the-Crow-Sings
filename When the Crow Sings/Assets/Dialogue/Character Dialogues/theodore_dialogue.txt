@@ -58,6 +58,7 @@ Theodore: Do you want my help or not? 'Cause if not, the least you could do is g
 	Chance: As if, dude.
 	Theodore: And go through all of 'em, don't slack!
 	Chance: I said alright, man.
+	emit 1;
 	=>END
 - As if.
 	Chance: As if, I've got better stuff to waste my time doing right now.
@@ -79,6 +80,7 @@ Theodore: I made my terms clear, either you help me find something in here or my
 	Chance: As if.
 	Theodore: And go through all of 'em, don't slack!
 	Chance: I said alright, man.
+	emit 1;
 	=>END
 - No way.
 	Chance: No way, bird brain.
@@ -141,6 +143,7 @@ Chance: Fine. See you, <color=#813408>Teddy</color>.
 Theodore: IT'S <color=#813408>THEODORE</color>!
 set MFTheodoreTC = false;
 set HFTheodoreBC = true;
+emit 1;
 set timeOfDay += 1;
 => END
 

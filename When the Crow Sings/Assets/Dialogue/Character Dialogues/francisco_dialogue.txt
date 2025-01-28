@@ -73,6 +73,7 @@ Francisco_Excited: Ah! Yes! You want something, I need something. I need to get 
 	set MFFrancisoTag = false;
 	set FranciscoTaskOn = true;
 	set HFFranciscoTA = true;
+	emit 1;
 	set MFFranciscoTA = true;
 	Chance: I guess so. What do you need?
 	Francisco: There is this little pink flower you may have seen around, pipsissewa they call it. The leaves help with some of the discomfort. 
@@ -90,6 +91,7 @@ Francisco: I'm sorry but I really can't chat until I get this done. Did you stil
 	set MFFrancisoTag = false;
 	set FranciscoTaskOn = true;
 	set HFFranciscoTA = true;
+	emit 1;
 	set MFFranciscoTA = true;
 	Chance: Turns out I do. What did you need?
 	Francisco: There is this little pink flower you may have seen around, pipsissewa they call it. The leaves help with some of the discomfort. 
@@ -129,7 +131,7 @@ Francisco_Excited: You know, this herb is something that has been used in this a
 Francisco: I guess it's time to fulfill my part of the deal, no?
 Francisco_Thinking: <color=#5b5b1f>The old power source</color>... The man who took care of it was very cold, and we didn't see him often here. He lived beyond the main compound to the <color=#5b5b1f>north-east at the old quarry</color>. He only walked through to get to the <color=#5b5b1f>power control station</color>, and he only spoke to his <color=#813408>assistant</color>.
 Francisco_Scared: His work was very... secretive. I never really understood his <color=#a11bbe>"discovery"</color>, but I know it gave me the chills. That hypnotic pink haze that blurred the horizon to the west, especially at night..
-Francisco_Excited: But he's been gone for a long while now. And his <color=##813408>assistant</color> holed herself up in the abandoned <color=#5b5b1f>residential area</color> not long after. Once he was gone, the power stopped working and the coalition sent us the solar panels along with <color=#813408>Farida</color> and <color=#813408>Caleb</color> to care for them.
+Francisco_Excited: But he's been gone for a long while now. And his <color=#813408>assistant</color> holed herself up in the abandoned <color=#5b5b1f>residential area</color> not long after. Once he was gone, the power stopped working and the coalition sent us the solar panels along with <color=#813408>Farida</color> and <color=#813408>Caleb</color> to care for them.
 Francisco: People stopped going missing so much too.
 - Going missing?
 	Chance_Scared: People went missing?
@@ -175,6 +177,7 @@ Chance_Smile: Oh, okay. Thanks <color=#813408>Francisco</color>.
 Francisco: Of course. Um, let me know if you find anything out. It was nice to talk to you.
 set MFFranciscoTC = false;
 set HFFranciscoBC = true;
+emit 1;
 set timeOfDay += 1;
 => END
 
