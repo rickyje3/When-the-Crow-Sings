@@ -143,6 +143,21 @@ set MFFaridaTC = false;
 set HFFaridaBC = true;
 emit 1;
 set MFPhilomenaTag = true;
+=> day_check
+
+~ day_check
+if day == 1:
+	=> curfew_check
+else:
+	=> time_forward
+
+~ curfew_check
+if timeOfDay == 2:
+	It's almost time for dinner, then I've got to be back at the lodging before curfew. Better get going.
+else:
+	=> time_forward
+
+~ time_forward
 set timeOfDay += 1;
 => END
 
