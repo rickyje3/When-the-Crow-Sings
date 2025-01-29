@@ -21,6 +21,8 @@ public class FMODEvents : MonoBehaviour
     [field: Header("SFX")]
     [field: SerializeField] public EventReference Swirl { get; private set; }
     [field: SerializeField] public EventReference ItemCollect { get; private set; }
+    [field: SerializeField] public EventReference WoodenDoor { get; private set; }
+    [field: SerializeField] public EventReference FenceGate { get; private set; }
     [field: Header("Dialogue Sounds")]
     [field: SerializeField] public EventReference Blip { get; private set; }
     [field: SerializeField] public EventReference ChanceBlip { get; private set; }
@@ -32,6 +34,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference JazmyneBlip { get; private set; }
     [field: SerializeField] public EventReference PhilomenaBlip { get; private set; }
     [field: SerializeField] public EventReference TheodoreBlip { get; private set; }
+    [field: SerializeField] public EventReference QuinnBlip { get; private set; }
     [field: SerializeField] public EventReference YuleBlip { get; private set; }
     [field: SerializeField] public EventReference BigShock { get; private set; }
     [field: SerializeField] public EventReference LesserShock { get; private set; }
