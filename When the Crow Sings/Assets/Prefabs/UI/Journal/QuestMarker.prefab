@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 453661776047515130}
   - component: {fileID: 6264042605946949781}
   - component: {fileID: 731470042159715179}
-  - component: {fileID: 6353430591894611738}
+  - component: {fileID: 2161093422025327978}
   m_Layer: 0
   m_Name: QuestMarker
   m_TagString: Untagged
@@ -59,14 +59,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8627451, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5a8042ec10897c94a8eebd617fba7266, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 668ccb7eaa3c34c44b4acb954e9514f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6353430591894611738
+--- !u!114 &2161093422025327978
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,13 +85,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5100374652444109772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcc13c66e1a6365499f1126589b3ce05, type: 3}
+  m_Script: {fileID: 11500000, guid: 667f2b3ba8abca241b0518e36d7be825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rumor_AssociatedDataKey: TestingFlag1
-  discovered_AssociatedDataKey: TestingFlag2
-  completed_AssociatedDataKey: TestingFlag3
-  imageComponent: {fileID: 731470042159715179}
-  rumorImage: {fileID: 21300000, guid: eae9f12cd955c7b40bdf1cb221494118, type: 3}
-  discoveredImage: {fileID: 21300000, guid: 5568170f86b4b5a478381071743669d9, type: 3}
-  completedImage: {fileID: 21300000, guid: e66423015b7b0a2428b3cc64e11ed4db, type: 3}
+  associatedDataKey: 
+  valueType: 0
+  boolValue: 0
+  intValue: 0
+  stringValue: 
