@@ -27,33 +27,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-8890222132603456949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Page-flip1-178322
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Page-flip1-178322
-  Guid:
-    Data1: 2121967000
-    Data2: 1216971765
-    Data3: 2086826389
-    Data4: 161033793
-  Banks:
-  - {fileID: -6031272985124646646}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-8704306287477633360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,6 +189,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7148723426677106179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Book Flip
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Book Flip
+  Guid:
+    Data1: 897922989
+    Data2: 1293232054
+    Data3: -1726495091
+    Data4: -1704564476
+  Banks:
+  - {fileID: -6031272985124646646}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-6870803509438567234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,10 +366,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638737464938936022
+  lastModified: 638737485535165743
   FileSizes:
   - Name: Desktop
-    Value: 380544
+    Value: 364960
   Exists: 1
 --- !u!114 &-6014020339122549108
 MonoBehaviour:
@@ -386,10 +386,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638737458335955034
+  lastModified: 638737485533050536
   FileSizes:
   - Name: Desktop
-    Value: 3672
+    Value: 3668
   Exists: 1
 --- !u!114 &-5949586715602016859
 MonoBehaviour:
@@ -856,7 +856,7 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638737458335945021
+  lastModified: 638737485533034979
   FileSizes:
   - Name: Desktop
     Value: 1632
@@ -932,14 +932,14 @@ MonoBehaviour:
   - {fileID: -7242428787166612100}
   - {fileID: 7105840264960186576}
   - {fileID: -8537756103124074703}
-  - {fileID: -8890222132603456949}
   - {fileID: 533332602697289522}
+  - {fileID: -7148723426677106179}
   EditorParameters: []
   MasterBanks:
   - {fileID: -26728882161318293}
   StringsBanks:
   - {fileID: -6014020339122549108}
-  cacheTime: 638737464938936022
+  cacheTime: 638737485535165743
   cacheVersion: 131622
 --- !u!114 &178758601418518700
 MonoBehaviour:
