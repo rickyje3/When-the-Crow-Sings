@@ -27,19 +27,9 @@ public class JournalHistoryHandler : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        InputManager.playerInputActions.UI.Journal_Scroll.performed += OnJournalScrollPerformed;
-    }
-    private void OnDisable()
-    {
-        InputManager.playerInputActions.UI.Journal_Scroll.performed -= OnJournalScrollPerformed;
-    }
+    
 
-    void OnJournalScrollPerformed(InputAction.CallbackContext context)
-    {
-        Debug.Log("Scroll scroll scroll your boat...");// + context.ReadValue<float>().ToString());
-    }
+    
 
     void populateHistoryEntries()
     {

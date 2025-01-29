@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
-public class JournalTabSide : JournalTab
+public class JournalTabSide : JournalTab, IPointerEnterHandler, IPointerExitHandler
 {
     public bool isActivated = false;
     public override void SetActivateTab(bool activated)
@@ -25,7 +27,7 @@ public class JournalTabSide : JournalTab
 
     private void OnEnable()
     {
-        StartCoroutine(wait());
+        //StartCoroutine(wait());
     }
 
     IEnumerator wait()
@@ -33,5 +35,15 @@ public class JournalTabSide : JournalTab
         yield return new WaitForSeconds(1f);
         SetActivateTab(!isActivated);
         StartCoroutine(wait());
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ActivateTab();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        DeactivateTab();
     }
 }
