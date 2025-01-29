@@ -178,6 +178,18 @@ Francisco: Of course. Um, let me know if you find anything out. It was nice to t
 set MFFranciscoTC = false;
 set HFFranciscoBC = true;
 emit 1;
+if day == 1:
+	=> curfew_check
+else:
+	=> time_forward
+
+~ curfew_check
+if timeOfDay == 2:
+	It's almost time for dinner, then I've got to be back at the lodging before curfew. Better get going.
+else:
+	=> time_forward
+
+~ time_forward
 set timeOfDay += 1;
 => END
 
