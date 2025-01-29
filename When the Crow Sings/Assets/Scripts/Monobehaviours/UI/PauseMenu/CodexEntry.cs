@@ -10,7 +10,7 @@ public class CodexEntry : MonoBehaviour
     public Sprite discoveredImage;
 
     public string undiscoveredName = "Unknown";
-    
+
 
 
     public string characterName = "missingno.";
