@@ -32,6 +32,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference JazmyneBlip { get; private set; }
     [field: SerializeField] public EventReference PhilomenaBlip { get; private set; }
     [field: SerializeField] public EventReference TheodoreBlip { get; private set; }
+    [field: SerializeField] public EventReference QuinnBlip { get; private set; }
     [field: SerializeField] public EventReference YuleBlip { get; private set; }
     [field: SerializeField] public EventReference BigShock { get; private set; }
     [field: SerializeField] public EventReference LesserShock { get; private set; }
