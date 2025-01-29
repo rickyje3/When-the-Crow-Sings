@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8890222132603456949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Page-flip1-178322
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Page-flip1-178322
+  Guid:
+    Data1: 2121967000
+    Data2: 1216971765
+    Data3: 2086826389
+    Data4: 161033793
+  Banks:
+  - {fileID: -6031272985124646646}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-8704306287477633360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,12 +75,39 @@ MonoBehaviour:
   Banks:
   - {fileID: 5096862952298429665}
   IsStream: 1
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 7000
+  Length: 41000
+--- !u!114 &-8537756103124074703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/dorm-door-opening-6038
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/dorm-door-opening-6038
+  Guid:
+    Data1: 104551268
+    Data2: 1084722699
+    Data3: -1998947398
+    Data4: -1052859049
+  Banks:
+  - {fileID: -6031272985124646646}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1481
 --- !u!114 &-8142549216139798635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,10 +366,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638737037719038536
+  lastModified: 638737464938936022
   FileSizes:
   - Name: Desktop
-    Value: 320576
+    Value: 380544
   Exists: 1
 --- !u!114 &-6014020339122549108
 MonoBehaviour:
@@ -332,10 +386,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638737099224684580
+  lastModified: 638737458335955034
   FileSizes:
   - Name: Desktop
-    Value: 3458
+    Value: 3672
   Exists: 1
 --- !u!114 &-5949586715602016859
 MonoBehaviour:
@@ -572,7 +626,7 @@ MonoBehaviour:
   - {fileID: 6340597670003991568}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -700,10 +754,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Talking Sounds.bank
   Name: Talking Sounds
   StudioPath: bank:/Talking Sounds
-  lastModified: 638735979263242996
+  lastModified: 638737442292682314
   FileSizes:
   - Name: Desktop
-    Value: 23552
+    Value: 25376
   Exists: 1
 --- !u!114 &-1001557159754733530
 MonoBehaviour:
@@ -802,7 +856,7 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638737099224669517
+  lastModified: 638737458335945021
   FileSizes:
   - Name: Desktop
     Value: 1632
@@ -876,12 +930,16 @@ MonoBehaviour:
   - {fileID: 3192102372283736414}
   - {fileID: -1001557159754733530}
   - {fileID: -7242428787166612100}
+  - {fileID: 7105840264960186576}
+  - {fileID: -8537756103124074703}
+  - {fileID: -8890222132603456949}
+  - {fileID: 533332602697289522}
   EditorParameters: []
   MasterBanks:
   - {fileID: -26728882161318293}
   StringsBanks:
   - {fileID: -6014020339122549108}
-  cacheTime: 638737099224684580
+  cacheTime: 638737464938936022
   cacheVersion: 131622
 --- !u!114 &178758601418518700
 MonoBehaviour:
@@ -932,11 +990,38 @@ MonoBehaviour:
   - {fileID: 6340597670003991568}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 89730
+--- !u!114 &533332602697289522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/fence-lock-rattle-158049
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/fence-lock-rattle-158049
+  Guid:
+    Data1: 888623264
+    Data2: 1271130422
+    Data3: -1874575442
+    Data4: -150554993
+  Banks:
+  - {fileID: -6031272985124646646}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &557017351059014821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1148,7 +1233,7 @@ MonoBehaviour:
   - {fileID: 6340597670003991568}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -1168,10 +1253,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 638737099224608979
+  lastModified: 638737427626665885
   FileSizes:
   - Name: Desktop
-    Value: 12721440
+    Value: 12721376
   Exists: 1
 --- !u!114 &5120921999827172078
 MonoBehaviour:
@@ -1356,7 +1441,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -6031272985124646646}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -1377,10 +1462,10 @@ MonoBehaviour:
   Path: ../FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638737096047026593
+  lastModified: 638737427628810098
   FileSizes:
   - Name: Desktop
-    Value: 13309088
+    Value: 13308576
   Exists: 1
 --- !u!114 &6583919931560967898
 MonoBehaviour:
@@ -1404,6 +1489,33 @@ MonoBehaviour:
   - {fileID: -6031272985124646646}
   IsStream: 0
   Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7105840264960186576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking Sounds/quinnblip
+  m_EditorClassIdentifier: 
+  Path: event:/Talking Sounds/quinnblip
+  Guid:
+    Data1: 1932675304
+    Data2: 1325871406
+    Data3: 534137275
+    Data4: 1642958141
+  Banks:
+  - {fileID: -1662951985092067716}
+  IsStream: 0
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -1512,7 +1624,7 @@ MonoBehaviour:
   - {fileID: 6340597670003991568}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20

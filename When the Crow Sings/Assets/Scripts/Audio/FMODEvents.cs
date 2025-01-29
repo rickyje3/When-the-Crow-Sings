@@ -21,6 +21,8 @@ public class FMODEvents : MonoBehaviour
     [field: Header("SFX")]
     [field: SerializeField] public EventReference Swirl { get; private set; }
     [field: SerializeField] public EventReference ItemCollect { get; private set; }
+    [field: SerializeField] public EventReference WoodenDoor { get; private set; }
+    [field: SerializeField] public EventReference FenceGate { get; private set; }
     [field: Header("Dialogue Sounds")]
     [field: SerializeField] public EventReference Blip { get; private set; }
     [field: SerializeField] public EventReference ChanceBlip { get; private set; }
