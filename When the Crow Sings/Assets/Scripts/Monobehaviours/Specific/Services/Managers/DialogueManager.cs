@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using UnityEngine.EventSystems;
 using UnityEditor;
+using FMODUnity;
 
 public class DialogueManager : MonoBehaviour, IService
 {
@@ -38,7 +39,6 @@ public class DialogueManager : MonoBehaviour, IService
     public float secondsBetweenAudioPlays = .05f;
     public float pauseMultiplier = 10f;
     public List<GameSignal> signalsDialogueCanUse;
-
 
     DialogueChoiceBlock activeChoiceBlock = null;
     DialogueConditionBlock activeConditionBlock = null;
@@ -319,8 +319,67 @@ public class DialogueManager : MonoBehaviour, IService
 
                 if (canPlayAudio && textMesh.maxVisibleCharacters < textMesh.text.Length-1)
                 {
-                    AudioManager.instance.PlayOneShot(FMODEvents.instance.Blip, this.transform.position);
-                    StartCoroutine(DelayBeforeAudioCanPlay());
+                    switch (dialoguePortraits.combinedConditions)
+                    {
+                        case 1:
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.ChanceBlip);
+                            StartCoroutine(DelayBeforeAudioCanPlay());
+                            Debug.Log("Chance");
+                            break;
+                        case 2:
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.TheodoreBlip);
+                            StartCoroutine(DelayBeforeAudioCanPlay());
+                            Debug.Log("Theodore");
+                            break;
+                        case 4:
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.PhilomenaBlip);
+                            StartCoroutine(DelayBeforeAudioCanPlay());
+                            Debug.Log("Phil");
+                            break;
+                        case 8:
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.FaridaBlip);
+                            StartCoroutine(DelayBeforeAudioCanPlay());
+                            Debug.Log("Farida");
+                            break;
+                        case 16:
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.AngelBlip);
+                            StartCoroutine(DelayBeforeAudioCanPlay());
+                            Debug.Log("Angel");
+                            break;
+                        case 32:
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.CalebBlip);
+                            StartCoroutine(DelayBeforeAudioCanPlay());
+                            //StartCoroutine(DelayBeforeAudioCanPlay());
+                            Debug.Log("Caleb");
+                            break;
+                        case 64:
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.BeauBlip);
+                            StartCoroutine(DelayBeforeAudioCanPlay());
+                            Debug.Log("Beau");
+                            break;
+                        case 128:
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.QuinnBlip);
+                            StartCoroutine(DelayBeforeAudioCanPlay());
+                            Debug.Log("Quinn");
+                            break;
+                        case 256:
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.JazmyneBlip);
+                            StartCoroutine(DelayBeforeAudioCanPlay());
+                            Debug.Log("Jaz");
+                            break;
+                        case 512:
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.FranciscoBlip);
+                            StartCoroutine(DelayBeforeAudioCanPlay());
+                            Debug.Log("Francisco");
+                            break;
+                        case 1024:
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.YuleBlip);
+                            StartCoroutine(DelayBeforeAudioCanPlay());
+                            Debug.Log("Yule");
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 
