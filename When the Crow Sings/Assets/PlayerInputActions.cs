@@ -740,12 +740,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Journal_Scroll"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""ac29b7bc-51c5-48c4-800f-b52e37a43845"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -1346,10 +1346,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""7c8c9fa1-c57f-4a45-afa2-62ba98e67fe3"",
-                    ""path"": ""<Mouse>/scroll/down"",
+                    ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Journal_Scroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1357,10 +1357,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""70f46a5d-a290-4fe3-847b-7b7a8ff5e43b"",
-                    ""path"": ""<Mouse>/scroll/up"",
+                    ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Journal_Scroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
