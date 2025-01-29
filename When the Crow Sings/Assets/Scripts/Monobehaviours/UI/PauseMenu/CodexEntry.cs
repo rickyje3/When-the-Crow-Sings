@@ -5,23 +5,33 @@ using UnityEngine;
 
 public class CodexEntry : MonoBehaviour
 {
+
+    public Sprite undiscoveredImage;
+    public Sprite discoveredImage;
+
     public string undiscoveredName = "Unknown";
-    [TextArea]
-    public string undiscoveredDescription = "Nothing is known about this character yet.";
+    
 
 
     public string characterName = "missingno.";
+
+    [TextArea]
+    public string undiscoveredDescription = "NoMessageWritten.";
     [TextArea]
     public string characterDescription = "NoMessageWritten";
+    [TextArea]
+    public string additionalDescription = "NoMessageWritten";
 
-    public string associatedDataKey = "TestingFlag1";
+    public string hasBeenHeardOf = "TestingFlag1";
+    public string hasBeenMetFlag = "TestingFlag1";
+    public string hasBeenFinishedFlag = "TestingFlag2";
 
     public TextMeshProUGUI characterNameLabel;
     public TextMeshProUGUI characterDescriptionLabel;
 
     private void OnEnable()
     {
-        if (SaveDataAccess.saveData.boolFlags[associatedDataKey])
+        if (SaveDataAccess.saveData.boolFlags[hasBeenFinishedFlag])
         {
             characterNameLabel.text = characterName;
             characterDescriptionLabel.text = characterDescription;
