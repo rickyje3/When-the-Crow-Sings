@@ -72,9 +72,11 @@ public class GameManager : MonoBehaviour, IService
             }
             if (newValue == false
                 && i.gameObject.activeInHierarchy
+                && gameStateManager.canLoad
                 && i.playPickupSoundOnDisable)
             {
-                Debug.Log("PICKED UP SPECIFICALLY"); // Play "pickup" sound
+                // Play "pickup" sound
+                Debug.Log("Play 'pickup' sound");
             }
             i.gameObject.SetActive(newValue);
         }

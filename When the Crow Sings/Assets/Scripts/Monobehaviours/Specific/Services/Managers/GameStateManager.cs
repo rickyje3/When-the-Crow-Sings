@@ -29,7 +29,7 @@ public class GameStateManager : MonoBehaviour, IService
     public GameObject loadScreen;
 
     private int targetSpawnIndex = 0;
-    private bool canLoad = true;
+    public bool canLoad = true;
 
     List<LevelData> currentLevelData = new List<LevelData>();
     [HideInInspector] public LevelData currentLevelDataLVL;
