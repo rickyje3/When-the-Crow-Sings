@@ -66,6 +66,7 @@ set BeauTaskOffered = true;
 Beau: Listen, would you do me a solid and pick up some food from the <color=#5b5b1f>greenhouse</color>? Seems like you could use something to keep yourself busy.
 Beau_Smile: I've got to swap out some stock for <color=#813408>Angel</color>, put the new food in the freezer and give him the wiltier stuff. 
 - Sure.
+	set MFBeauTag = false;
 	set BeauTaskAccepted = true;
 	set HFBeauTA = true;
 	emit 1;
@@ -80,6 +81,7 @@ Beau_Smile: I've got to swap out some stock for <color=#813408>Angel</color>, pu
 ~ beau_no_task
 Beau_Teasing: Back for more <color=#813408>Beau</color>?
 - Yeah.
+	set MFBeauTag = false;
 	set BeauTaskAccepted = true;
 	set HFBeauTA = true;
 	emit 1;
