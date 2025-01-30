@@ -135,12 +135,15 @@ public class SaveData
         { "KeyInformation3",false },
 
         //Map relevant flags
+        { "MFAngelTag",true },
         { "MFAngelTA",false },
         { "MFAngelTC",false },
 
+        { "MFBeauTag",true },
         { "MFBeauTA",false },
         { "MFBeauTC",false },
 
+        { "MFCalebTag",true },
         { "MFCalebTA",false },
         { "MFCalebTC",false },
 
@@ -184,6 +187,11 @@ public class SaveData
         { "MFPhilomenaCasette",false },
         { "MFPhilomenaTPC",false },
         { "MFPhilomenaTC",false },
+
+        { "MFQuarryTag", true},
+        { "MFPowerStationTag", true},
+        { "MFResidentialTag", true},
+        { "MFForestTag", true},
 
         //History relevant flags -- These NEVER get flipped off
         { "HFAngelTA",false },
