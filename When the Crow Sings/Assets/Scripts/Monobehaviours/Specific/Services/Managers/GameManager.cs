@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour, IService
                 && gameStateManager.canLoad
                 && i.playPickupSoundOnDisable)
             {
-                // Play "pickup" sound
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.ItemCollect);
                 Debug.Log("Play 'pickup' sound");
             }
             i.gameObject.SetActive(newValue);
