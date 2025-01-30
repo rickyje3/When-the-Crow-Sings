@@ -16,6 +16,8 @@ public class DynamicEnable : MonoBehaviour
     [Header("If STRING, then fill this.")]
     public string stringValue;
 
+    public bool playPickupSoundOnDisable = false;
+
     private void Start()
     {
         ServiceLocator.Get<GameManager>().dynamicEnables.Add(this);
