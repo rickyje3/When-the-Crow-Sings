@@ -1,3 +1,8 @@
+~ quarry_unlock
+set MFQuarryTag = false;
+Made it through that gate without ripping my clothes! Let's see if I can find this <color=#813408>Teddy</color> guy.
+=>END
+
 ~ theodoor_int
 if theodoor == 0:
 	Theodore_Angry: BUZZ OFF!
@@ -9,7 +14,7 @@ if theodoor == 1:
 if theodoor == 2:
 	Theodore_Sigh: CAN YOU CATCH A CLUE? GO AWAY!!!
 else:
-	It seems I've pissed off whoever is inside enough that they just let out an exasperated sigh when I knock. Maybe there's another way in...
+	It seems I've pissed off the guy inside enough that he just lets out an exasperated sigh when I knock. Maybe there's another way in...
 set theodoor += 1;
 => END
 
