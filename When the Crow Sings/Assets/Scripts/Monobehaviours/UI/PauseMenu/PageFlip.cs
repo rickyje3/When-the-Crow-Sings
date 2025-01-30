@@ -39,6 +39,7 @@ public class PageFlip : MonoBehaviour
             this.gameObject.SetActive(true);
             currentFlippingPage = this;
             targetAngle = -180;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.PageFlip);
             Debug.Log("Flipping left");
         }
     }
@@ -50,6 +51,7 @@ public class PageFlip : MonoBehaviour
             this.gameObject.SetActive(true);
             currentFlippingPage = this;
             targetAngle = 180;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.PageFlip);
             Debug.Log("Flipping right");
         }
     }
