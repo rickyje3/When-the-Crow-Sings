@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MenuSwapper : MonoBehaviour
 {
@@ -8,10 +9,13 @@ public class MenuSwapper : MonoBehaviour
 
     public int currentMenuIndex = -1;
 
+    public UnityEvent playSound;
+
     public void OpenMenu(int whichMenu)
     {
         int currentLoop = 0;
         currentMenuIndex = whichMenu;
+        playSound.Invoke();
         foreach (var menu in menus)
         {
             if (currentLoop == whichMenu)
@@ -19,7 +23,7 @@ public class MenuSwapper : MonoBehaviour
             else menu.SetActive(false);
 
             AdditionalMenuLogic(whichMenu);
-            
+
             currentLoop++;
         }
     }
