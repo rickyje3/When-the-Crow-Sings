@@ -15104,6 +15104,8 @@ GameObject:
   - component: {fileID: 1671600133}
   - component: {fileID: 1671600134}
   - component: {fileID: 1671600135}
+  - component: {fileID: 1671600136}
+  - component: {fileID: 1671600137}
   m_Layer: 0
   m_Name: Journal
   m_TagString: Untagged
@@ -15162,6 +15164,21 @@ MonoBehaviour:
   - {fileID: 1178002632}
   - {fileID: 442832998}
   currentMenuIndex: -1
+  playSound:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1671600136}
+        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!225 &1671600134
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -15187,6 +15204,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuSwapper: {fileID: 1671600133}
+--- !u!114 &1671600136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671600131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89361650d08531a4fa3c7f4d9dc8b3dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Sound>k__BackingField:
+    Guid:
+      Data1: 897922989
+      Data2: 1293232054
+      Data3: -1726495091
+      Data4: -1704564476
+    Path: event:/SFX/Book Flip
+  playOnAwake: 0
+--- !u!114 &1671600137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671600131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f72c20c00cd2fd48af42d239a0e3c02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    Guid:
+      Data1: -2015180639
+      Data2: 1150708937
+      Data3: -647442811
+      Data4: -1773830552
+    Path: event:/SFX/Book Close 3
 --- !u!1 &1674788031
 GameObject:
   m_ObjectHideFlags: 0
@@ -18164,6 +18220,9 @@ MonoBehaviour:
   - {fileID: 1639482499}
   - {fileID: 1671600131}
   currentMenuIndex: -1
+  playSound:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2040272507
 GameObject:
   m_ObjectHideFlags: 0
