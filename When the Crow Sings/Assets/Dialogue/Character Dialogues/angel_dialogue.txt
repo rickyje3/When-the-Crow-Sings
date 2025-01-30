@@ -44,6 +44,7 @@ Angel_Stare: . . .
 Angel_Smile: Well, I wouldn't know anything about that! 
 Angel_Smile: Did you want to help me in the kitchen? Might take your mind off of things, and I could always use an extra hand!
 - Sure.
+	set MFAngelTag = false;
 	set MFAngelTA = true;
 	set HFAngelTA = true;
 	emit 1;
@@ -62,6 +63,7 @@ Angel_Smile: Did you want to help me in the kitchen? Might take your mind off of
 Angel_Smile: Oh! You're back!!!
 Angel: Did you have time to lend me a hand?
 - Yeah, sure.
+	set MFAngelTag = false;
 	set MFAngelTA = true;
 	set AngelTaskAccepted = true;
 	set HFAngelTA = true;
@@ -88,6 +90,7 @@ Angel_Worried: Uh, are you okay? Did you forget what I asked you to do?
 	=> END
 
 ~ angel_task_fin
+set MFAngelTC = false;
 set AngelBaseCompleted = true;
 set GreenhouseDoorUnlocked = true;
 set RecCenterDoorUnlocked = true;
