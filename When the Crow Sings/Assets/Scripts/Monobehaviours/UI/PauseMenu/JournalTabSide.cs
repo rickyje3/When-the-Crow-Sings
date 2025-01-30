@@ -38,6 +38,7 @@ public class JournalTabSide : JournalTab, IPointerEnterHandler, IPointerExitHand
 
     private void OnEnable()
     {
+        image.sprite = deactivatedSprite;
         //StartCoroutine(wait());
     }
 
