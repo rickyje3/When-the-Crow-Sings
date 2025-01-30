@@ -57,39 +57,26 @@ public class GameManager : MonoBehaviour, IService
     {
         foreach (DynamicEnable i in dynamicEnables)
         {
+            bool newValue = false;
             switch (i.valueType)
             {
                 case DynamicEnable.VALUE_TYPE.BOOL:
-                    if (SaveDataAccess.saveData.boolFlags[i.associatedDataKey] == i.boolValue)
-                    {
-                        i.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        i.gameObject.SetActive(false);
-                    }
+                    newValue = SaveDataAccess.saveData.boolFlags[i.associatedDataKey] == i.boolValue;
                     break;
                 case DynamicEnable.VALUE_TYPE.INT:
-                    if (SaveDataAccess.saveData.intFlags[i.associatedDataKey] == i.intValue)
-                    {
-                        i.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        i.gameObject.SetActive(false);
-                    }
+                    newValue = SaveDataAccess.saveData.intFlags[i.associatedDataKey] == i.intValue;
                     break;
                 case DynamicEnable.VALUE_TYPE.STRING:
-                    if (SaveDataAccess.saveData.stringFlags[i.associatedDataKey] == i.stringValue)
-                    {
-                        i.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        i.gameObject.SetActive(false);
-                    }
-                    break;
+                newValue = SaveDataAccess.saveData.stringFlags[i.associatedDataKey] == i.stringValue;
+                break;
             }
+            if (newValue == false
+                && i.gameObject.activeInHierarchy
+                && i.playPickupSoundOnDisable)
+            {
+                Debug.Log("PICKED UP SPECIFICALLY"); // Play "pickup" sound
+            }
+            i.gameObject.SetActive(newValue);
         }
     }
 
