@@ -219,7 +219,7 @@ public class StirringQTE : QuickTimeEvent
             if (Input.GetKeyDown(expectedKey))
             {
                 correctKey = true;
-                StartCoroutine(KeyPressFeedback());
+                KeyPressFeedback();
                 if (qteInteractable.isSoup)
                 {
                     i++;
@@ -230,7 +230,7 @@ public class StirringQTE : QuickTimeEvent
             else
             {
                 correctKey = false;
-                StartCoroutine(KeyPressFeedback());
+                KeyPressFeedback();
             }
         }
     }
@@ -243,7 +243,7 @@ public class StirringQTE : QuickTimeEvent
         if (Vector2.Dot(joystickInput.normalized, expectedDirection) > inputThreshold)
         {
             correctKey = true;
-            StartCoroutine(KeyPressFeedback());
+            KeyPressFeedback();
 
             if (qteInteractable.isSoup)
             {
@@ -254,14 +254,14 @@ public class StirringQTE : QuickTimeEvent
         }
     }
 
-    private IEnumerator KeyPressFeedback()
+    private void KeyPressFeedback()
     {
         countingDown = true;
 
         //if(correctKey) 
             //displayBox.GetComponent<Image>().color = Color.green;
 
-        yield return new WaitForSeconds(0.03f); //Time between transitions (less = faster)
+        //yield return new WaitForSeconds(0.03f); //Time between transitions (less = faster)
 
         //displayBox.GetComponent<Image>().color = Color.white;
 

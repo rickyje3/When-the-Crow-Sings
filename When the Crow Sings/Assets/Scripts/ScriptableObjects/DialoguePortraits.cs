@@ -105,7 +105,7 @@ public class DialoguePortraits : ScriptableObject
         //Recalculate combined conditions immediately
         combinedConditions = (isChance ? 1 : 0) | (isTheodore ? 2 : 0) | (isPhil ? 4 : 0) | (isFarida ? 8 : 0) | (isAngel ? 16 : 0)
             | (isCaleb ? 32 : 0) | (isBeau ? 64 : 0) | (isQuinn ? 128 : 0) | (isJazmyne ? 256 : 0) | (isFrancisco ? 512 : 0) | (isYule ? 1024 : 0);
-        Debug.Log($"Updated combinedConditions: {combinedConditions}");
+        //Debug.Log($"Updated combinedConditions: {combinedConditions}");
 
 
         if (portraits.Count != 0)

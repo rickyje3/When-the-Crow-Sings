@@ -13,7 +13,7 @@ public class PlayFootsteps : MonoBehaviour
     public void PlayOneShot()
     {
         FMODUnity.RuntimeManager.PlayOneShot(DefaultFootsteps, this.transform.position);
-        Debug.Log("Step");
+        //Debug.Log("Step");
 
     }
 }
