@@ -81,8 +81,12 @@ public class SaveData
         { "YuleRod",false },
         { "YuleString",false },
         { "YuleHook",false },
+        { "YuleFishingrod",false }, 
         { "YuleBaseCompleted",false },
         { "YuleExhausted",false },
+        { "FiberPlant1", true},
+        { "FiberPlant2", true},
+        { "FiberPlant3", true},
 
         { "PhilomenaTaskOffered",false },
         { "PhilomenaTaskAccepted",false },
