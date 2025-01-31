@@ -128,6 +128,7 @@ Yule_Thinking: Yes. But I don't know if it works.
 Chance: ... So you want me to see if it works?
 Yule: Yes.
 Chance: Uh, okay.
+set YuleFishingrod = true;
 set MFYuleTPC = false;
 set MFYuleTNC = true;
 set HFYuleTNC = true;
@@ -135,10 +136,12 @@ emit 1;
 => END
 
 ~ yule_task_unfin
+set MFYuleTPC = false;
 Yule_Smile: You went through all the trouble to get the pieces for the rod, don't keep me in suspense. Catch a fish!
 => END
 
 ~ yule_task_fin
+set MFYuleTPC = false;
 set KeyInformation1 = true;
 set YuleBaseCompleted = true;
 set MFYuleTC = false;
