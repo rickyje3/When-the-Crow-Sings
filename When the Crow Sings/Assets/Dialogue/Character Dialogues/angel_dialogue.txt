@@ -91,16 +91,16 @@ Angel_Worried: Uh, are you okay? Did you forget what I asked you to do?
 
 ~ angel_task_fin
 set MFAngelTC = false;
+set HFAngelBC = true;
 set AngelBaseCompleted = true;
 set GreenhouseDoorUnlocked = true;
 set RecCenterDoorUnlocked = true;
-if JazmyneTaskOffered == false:
+if JazmyneTaskAccepted == false:
 	set MFJazmyneTag = true;
-else:
 => angel_task_fin_2
 
 ~ angel_task_fin_2
-if QuinnTaskOffered == false:
+if QuinnTaskAccepted == false:
 	set MFQuinnTag = true;
 Angel_Smile: Thanks so much! Gave me time to prep.
 Angel_Thinking: . . .
@@ -112,7 +112,6 @@ Chance: Thanks, I appreciate it.
 Angel_Smile: No problem! Don't be a stranger!
 Angel_Stare: I mean, I'll see you at mealtime anyway, but. . .
 Angel_Smile: Bye!
-set HFAngelBC = true;
 emit 1;
 if day == 1:
 	=> curfew_check
