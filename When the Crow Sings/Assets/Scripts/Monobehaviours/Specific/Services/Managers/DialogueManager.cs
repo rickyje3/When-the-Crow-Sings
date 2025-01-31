@@ -324,58 +324,57 @@ public class DialogueManager : MonoBehaviour, IService
                         case 1:
                             AudioManager.instance.PlayOneShot(FMODEvents.instance.ChanceBlip);
                             StartCoroutine(DelayBeforeAudioCanPlay());
-                            Debug.Log("Chance");
+                            //Debug.Log("Chance");
                             break;
                         case 2:
                             AudioManager.instance.PlayOneShot(FMODEvents.instance.TheodoreBlip);
                             StartCoroutine(DelayBeforeAudioCanPlay());
-                            Debug.Log("Theodore");
+                            //Debug.Log("Theodore");
                             break;
                         case 4:
                             AudioManager.instance.PlayOneShot(FMODEvents.instance.PhilomenaBlip);
                             StartCoroutine(DelayBeforeAudioCanPlay());
-                            Debug.Log("Phil");
+                            //Debug.Log("Phil");
                             break;
                         case 8:
                             AudioManager.instance.PlayOneShot(FMODEvents.instance.FaridaBlip);
                             StartCoroutine(DelayBeforeAudioCanPlay());
-                            Debug.Log("Farida");
+                            //Debug.Log("Farida");
                             break;
                         case 16:
                             AudioManager.instance.PlayOneShot(FMODEvents.instance.AngelBlip);
                             StartCoroutine(DelayBeforeAudioCanPlay());
-                            Debug.Log("Angel");
+                            //Debug.Log("Angel");
                             break;
                         case 32:
                             AudioManager.instance.PlayOneShot(FMODEvents.instance.CalebBlip);
                             StartCoroutine(DelayBeforeAudioCanPlay());
-                            //StartCoroutine(DelayBeforeAudioCanPlay());
-                            Debug.Log("Caleb");
+                            //Debug.Log("Caleb");
                             break;
                         case 64:
                             AudioManager.instance.PlayOneShot(FMODEvents.instance.BeauBlip);
                             StartCoroutine(DelayBeforeAudioCanPlay());
-                            Debug.Log("Beau");
+                            //Debug.Log("Beau");
                             break;
                         case 128:
                             AudioManager.instance.PlayOneShot(FMODEvents.instance.QuinnBlip);
                             StartCoroutine(DelayBeforeAudioCanPlay());
-                            Debug.Log("Quinn");
+                            //Debug.Log("Quinn");
                             break;
                         case 256:
                             AudioManager.instance.PlayOneShot(FMODEvents.instance.JazmyneBlip);
                             StartCoroutine(DelayBeforeAudioCanPlay());
-                            Debug.Log("Jaz");
+                            //Debug.Log("Jaz");
                             break;
                         case 512:
                             AudioManager.instance.PlayOneShot(FMODEvents.instance.FranciscoBlip);
                             StartCoroutine(DelayBeforeAudioCanPlay());
-                            Debug.Log("Francisco");
+                            //Debug.Log("Francisco");
                             break;
                         case 1024:
                             AudioManager.instance.PlayOneShot(FMODEvents.instance.YuleBlip);
                             StartCoroutine(DelayBeforeAudioCanPlay());
-                            Debug.Log("Yule");
+                            //Debug.Log("Yule");
                             break;
                         default:
                             break;

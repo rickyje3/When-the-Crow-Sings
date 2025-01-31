@@ -12,19 +12,19 @@ public class AudioManager : MonoBehaviour
     public AreaMusic areaMusic { get; private set; }
 
     [Range(0, 1)]
-    public float masterVolume = 1;
+    public float masterVolume = .7f;
 
     [Range(0, 1)]
-    public float musicVolume = 1;
+    public float musicVolume = .7f;
 
     [Range(0, 1)]
-    public float ambienceVolume = 1;
+    public float ambienceVolume = .7f;
 
     [Range(0, 1)]
-    public float soundFXVolume = 1;
+    public float soundFXVolume = .7f;
 
     [Range(0, 1)]
-    public float talkingSoundVolume = 1;
+    public float talkingSoundVolume = .7f;
 
     private Bus masterBus;
     private Bus musicBus;
