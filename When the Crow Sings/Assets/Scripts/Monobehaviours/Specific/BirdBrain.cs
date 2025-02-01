@@ -38,17 +38,12 @@ public class BirdBrain : StateMachineComponent
     public Vector3 destination;
     [HideInInspector]
     public Vector3 direction;
-    [HideInInspector]
-    public float distanceToDestination = 1f;
     public void FlyNavigate()
     {
         // if raycast detects surface AND that surface is NOT the destination, then navigate away.
-        direction = (destination - transform.position).normalized * distanceToDestination;
+        direction =  (destination - transform.position).normalized*flyingSpeed;
         transform.rotation = Quaternion.LookRotation(direction);
-        controller.Move(direction / (flyingSpeed * 200f));//targetPosition);
-
-
-        // D=RT, R=D/T, T=D/R
+        controller.Move(direction);//targetPosition);
     }
 
     public void SetTargetAsTarget(bool _target)

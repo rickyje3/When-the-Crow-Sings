@@ -19,9 +19,6 @@ public class CrowTargetState : StateMachineState
     {
         if (s.targetIsTargetNotSpawn) s.destination = s.crowHolder.CrowTarget.transform.position;
         else s.destination = s.restPoint.transform.position;
-
-        s.distanceToDestination = (s.transform.position - s.destination).magnitude;
-
         s.crowAnimator.SetBool("isFlying", true);
         s.crowAnimator.SetBool("isIdle", false);
         s.crowAnimator.SetBool("isPecking", false);
