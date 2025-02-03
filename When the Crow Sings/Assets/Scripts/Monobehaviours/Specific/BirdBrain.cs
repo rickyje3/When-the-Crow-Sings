@@ -24,7 +24,7 @@ public class BirdBrain : StateMachineComponent
     {
         stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new CrowIdleState(this), "CrowIdleState");
-        //stateMachine.RegisterState(new CrowScatterState(this), "CrowScatterState");
+        stateMachine.RegisterState(new CrowTakeoffState(this), "CrowTakeoffState");
         stateMachine.RegisterState(new CrowTargetState(this), "CrowTargetState");
         stateMachine.RegisterState(new CrowPeckState(this), "CrowPeckState");
     }
@@ -50,7 +50,7 @@ public class BirdBrain : StateMachineComponent
     public void SetTargetAsTarget(bool _target)
     {
         targetIsTargetNotSpawn = _target;
-        stateMachine.Enter("CrowScatterState");
+        stateMachine.Enter("CrowTakeoffState");
     }
 
     public void StillGravity()
