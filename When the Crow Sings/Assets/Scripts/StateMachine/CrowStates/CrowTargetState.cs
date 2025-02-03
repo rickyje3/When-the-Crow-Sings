@@ -13,7 +13,7 @@ public class CrowTargetState : StateMachineState
     public override void FixedUpdate()
     {
         //s.targetPosition = (s.destination - s.transform.position)*.01f;
-        s.FlyNavigate();
+        s.FlyNavigate_FixedUpdate();
     }
     public override void StateEntered()
     {

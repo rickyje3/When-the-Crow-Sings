@@ -24,7 +24,7 @@ public class BirdBrain : StateMachineComponent
     {
         stateMachine = new StateMachine(this);
         stateMachine.RegisterState(new CrowIdleState(this), "CrowIdleState");
-        stateMachine.RegisterState(new CrowScatterState(this), "CrowScatterState");
+        //stateMachine.RegisterState(new CrowScatterState(this), "CrowScatterState");
         stateMachine.RegisterState(new CrowTargetState(this), "CrowTargetState");
         stateMachine.RegisterState(new CrowPeckState(this), "CrowPeckState");
     }
@@ -38,7 +38,8 @@ public class BirdBrain : StateMachineComponent
     public Vector3 destination;
     [HideInInspector]
     public Vector3 direction;
-    public void FlyNavigate()
+
+    public void FlyNavigate_FixedUpdate()
     {
         // if raycast detects surface AND that surface is NOT the destination, then navigate away.
         direction =  (destination - transform.position).normalized*flyingSpeed;

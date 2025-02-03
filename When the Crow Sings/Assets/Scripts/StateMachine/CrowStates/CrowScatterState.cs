@@ -12,7 +12,7 @@ public class CrowScatterState : StateMachineState
     
     public override void FixedUpdate()
     {
-        s.FlyNavigate();
+        s.FlyNavigate_FixedUpdate();
     }
 
     public override void StateEntered()
