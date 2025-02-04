@@ -43,7 +43,7 @@ public class SeeThruWall : MonoBehaviour
         lerpFactor = Mathf.MoveTowards(lerpFactor, targetFactor, Time.deltaTime * (isInView ? growSpeed : shrinkSpeed));
 
         //Clamp the lerpFactor between 0 and max size
-        //lerpFactor = Mathf.Clamp(lerpFactor, 0, occluderMaxSize);
+        lerpFactor = Mathf.Clamp(lerpFactor, 0, occluderMaxSize);
 
         foreach (var material in SeeThruMaterials)
         {
