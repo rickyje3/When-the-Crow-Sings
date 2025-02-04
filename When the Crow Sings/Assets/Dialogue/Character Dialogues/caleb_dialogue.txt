@@ -161,6 +161,10 @@ if CalebBB == 0:
 	=> C0
 if CalebBB == 1:
 	=> C1
+if CalebBB == 2:
+	=> C2
+if CalebBB == 3:
+	=> C3
 else:
 	No more! All gone!
 	=> END
@@ -212,7 +216,7 @@ Chance_Annoyed: Uhuh.
 	Caleb: Sure, I do just about anything electrical around here. I can also do a good bit of work on mechanical things, I fix up the mower when it needs it.
 	Caleb: Sometimes that bird kid brings me things he finds outside and I fix 'em for him.
 	Chance_Thinking: Outside? Like, outside this main fence?
-	Caleb_Smile: Yep, that trouble kid I mentioned earlier. He doesn't bring me much of electronics really, but sometimes he finds a broken puzzle or a flashlight or something and I get it workin' for him.
+	Caleb_Smile: Yep, that trouble kid I mentioned earlier. He doesn't bring me many electronics really, but sometimes he finds a broken puzzle or a flashlight or something and I get it workin' for him.
 	Chance_Annoyed: Isn't it against the rules to go outside of the fencing?
 	Caleb: Sure is.
 	Chance: And you just don't say anything about it?
@@ -234,7 +238,7 @@ Chance_Annoyed: Uhuh.
 	Caleb_Wink: I'd guess it isn't "designated nail technician", based on your hands.
 	Chance_Sigh: I don't know.
 	Chance_Annoyed: I haven't been placed yet, <color=#813408>Farida</color> will assign me in a few weeks or something based off the report C.A.N. sent. 
-	Caleb_Smile: Well let's hope it isn't head of the fashion police!
+	Caleb_Smile: Well let's hope it isn't the head of the fashion police!
 	Chance_Sigh: Yeah, cause you'd get arrested first.
 	Caleb_Smile: Hah!
 => BBEnd
@@ -254,4 +258,53 @@ Caleb: Chance, Fate, Destiny, whatever you'd like to call it.
 	Chance: I'm sorry, I didn't mean to ask something touchy.
 	Caleb_Annoyed: It ain't your fault kid. The work program on the compound I come from applies to everyone, and when you get sent out that doesn't necessarily mean your partner gets sent with you.
 	Caleb_Annoyed: When I was chosen to become the electrician here, my wife's role was already accounted for by someone named <color=#813408>Philomena</color>. And then, when she couldn't do the job anymore, they sent <color=#813408>Farida</color> instead.
+	Chance_Thinking: Is that why you two don't get along?
+	Caleb_Annoyed: Let's not talk about this anymore, kid.
+- Your family
+	Chance: Does your whole family live here?
+	Caleb: Nope, just me, <color=#813408>Calliope</color>, and <color=#813408>Francisco</color>.
+	if FranciscoTaskOffered == true:
+		Chance_Thinking: Is that why Francisco calls you uncle?
+	else:
+		Chance_Thinking: Is that why you recommended me to him?
+	Caleb_Smile: You could say that yeah.
+	Chance: You don't look related.
+	Caleb_Annoyed: What's that supposed to mean?
+	Chance_Thinking: Uh-
+	Caleb_Smile: I'm just messing with you kid! No, he's not my biological nephew. I was friends with his parents back on our home compound.
+	Chance_Annoyed: Uh huh.
+	Caleb: We just got lucky when we got sent to the same compound. <color=#813408>Calliope</color> is elated to have her cousin <color=#813408>Francisco</color> here.
+	Chance_Smile: It must've made it easier to transition into living here, having a familiar face.
+	Caleb_Smile: It sure did.
+	Caleb_Annoyed: As much as it could with leaving her mother behind, anyway.
+	Chance_Thinking: Um.. Has she settled in fine aside from that?
+	Caleb: Oh sure, she's the smartest little lady there could be! She can take any problem by the horns and flip it on its head.
+	Caleb_Smile: She'll be running this whole place one day, mark my words.
+	Chance: I'll be sure to follow her political career.
 => BBend
+
+~ C3
+Caleb_Smile: Back again! Either I have some wealth of knowledge, or you have nothing better to do.
+Chance_Annoyed: I'm sure you can figure out which one.
+- Where you're from
+	Chance: What was it like on the compound you were from before?
+	Caleb_Smile: Oh it was great! Everyone knew everyone, lots of people. I'm from an island that used to be a large city, so there's lots of big buildings that we repurposed.
+	Chance_Smile: I'm from an island too, but no big city. How did you guys grow food?
+	Caleb: Well we relied a lot on the ocean for fish, and as opposed to traditional farming most of our food was grown in underground labs. Think lots and lots of mushrooms.
+	Chance_Thinking: Moving here must've been a big change.
+	Caleb_Thinking: Yeah, you could say that. The people sure are different, but that doesn't really say anything about them.
+	Caleb: Most of the people on this compound now didn't come from compounds like mine, so there's a lot to learn about the different places and walks of life out there. 
+	Caleb_Thinking: It was hard at first. To move from an area so focused on a singular goal of training and learning, to somewhere that is a lot more focused on just living.
+	Caleb: It's a lot more relaxed, but also sometimes I get that itch for a little bit more routine..
+	Chance: Did you get a choice about moving?
+	Caleb: Nah, not how things work up there. We are raised to be the rejuvenating force that brings education and craft back to the country. They hope that with those skills spread out, we might all be able to reconnect one day.
+	Caleb_Smile: Besides, as long as I'm with my <color=#813408>Calli</color> I'll survive.
+- What's with the goggles
+	Chance_Thinking: So why are you wearing big goggles right now?
+	Caleb_Annoyed: What do you mean? Eye protection is very serious, you know.
+	Caleb: Any person, any time, you lose an eye, BAM. You gotta spend time learning how to see without depth perception, and depending on how you lose it you might need to pop that sucker out.
+	Chance_Sigh: Ew!
+	Caleb: I watched a man who didn't believe in eye protection get a piece of metal lodged into his eye while shaping some rebar. We had to carry him to the medical station, and then hold him down while the doc tried to get the piece out.
+	Caleb_Annoyed: Man wouldn't stop moving, doc made one wrong move and <b>POP!</b> Had to hold him down even longer while the doctor scooped out his deflated eyeball and sew his eyelid shut to protect the hole.
+	Chance_Scared: Dude I'm gonna puke, I get it!!
+=> BBEnd
