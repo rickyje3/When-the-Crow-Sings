@@ -275,14 +275,7 @@ Angel_Smile: Hey!
 
 ~ A3
 Angel_Smile: Hello!
-- Hobbies
-	Chance: Do you have any hobbies?
-	Chance_Smile: Besides cooking, I mean.
-	Angel_Smile: Oh! Yes!
-	Angel_Thinking: I like watching movies, playing with my siblings, helping <color=#813408>Quinn</color> in the garden, organizing stuff in the <color=#5b5b1f>Cold Storage</color>, talking with my parents, talking to <color=#813408>Jazmyne</color>, talking to <color=#813408>Caleb</color>, talking to <color=#813408>Beau</color>-
-	Chance: Seems like you like talking.
-	Angel_Stare: Uhuh.
-	Chance_Smile: I can tell.
+
 if JazmyneBaseCompleted == true:
 	- Movie nights
 		Chance:<color=#813408>Jazmyne</color> mentioned that you guys do movie nights sometimes?
@@ -299,7 +292,15 @@ if JazmyneBaseCompleted == true:
 		Chance_Smile: That's crazy.
 		Angel_Smile: It's so cool! My favorite is these movies about um... I think they're hedgehogs? But they're all funny colored so I don't know.
 		Angel_Stare: Maybe they have radiation or something..
-	else:
+	- Hobbies
+		Chance: Do you have any hobbies?
+		Chance_Smile: Besides cooking, I mean.
+		Angel_Smile: Oh! Yes!
+		Angel_Thinking: I like watching movies, playing with my siblings, helping <color=#813408>Quinn</color> in the garden, organizing stuff in the <color=#5b5b1f>Cold Storage</color>, talking with my parents, talking to <color=#813408>Jazmyne</color>, talking to <color=#813408>Caleb</color>, talking to <color=#813408>Beau</color>-
+		Chance: Seems like you like talking.
+		Angel_Stare: Uhuh.
+		Chance_Smile: I can tell.
+else:
 	- Things to do around here
 		Chance: Is there anything to do around here?
 		Angel: Like just to do?
@@ -313,4 +314,12 @@ if JazmyneBaseCompleted == true:
 		Angel_Smile: You can always come help me cook!
 		Chance:. . .
 		Chance_Smile: Yeah, maybe.
+	- Hobbies
+		Chance: Do you have any hobbies?
+		Chance_Smile: Besides cooking, I mean.
+		Angel_Smile: Oh! Yes!
+		Angel_Thinking: I like watching movies, playing with my siblings, helping <color=#813408>Quinn</color> in the garden, organizing stuff in the <color=#5b5b1f>Cold Storage</color>, talking with my parents, talking to <color=#813408>Jazmyne</color>, talking to <color=#813408>Caleb</color>, talking to <color=#813408>Beau</color>-
+		Chance: Seems like you like talking.
+		Angel_Stare: Uhuh.
+		Chance_Smile: I can tell.
 => BBend
