@@ -8,11 +8,11 @@ public class SeeThruWall : MonoBehaviour
     public Camera Camera;
     public LayerMask mask; // Assign this to wall layer
     //private float sphereRadius = 0.9f; //determines size of raycast
-    public float occluderSize = 0;
-    public float occluderMaxSize = 2f;
-    public float lerpFactor = 0f;
-    public float growSpeed = 0.001f;
-    public float shrinkSpeed = 0.003f;
+    private float occluderSize = 0;
+    private float occluderMaxSize = 1.4f;
+    private float lerpFactor = 0f;
+    private float growSpeed = 0.0001f;
+    private float shrinkSpeed = 0.0001f;
 
     public static int PosID = Shader.PropertyToID("_Position");
     public static int SizeID = Shader.PropertyToID("_Size");
@@ -39,18 +39,11 @@ public class SeeThruWall : MonoBehaviour
 
         bool isInView = Physics.Raycast(ray, 3000, mask);
 
-        //Gradually increase or decrease lerpFactor based on isInView
-        if (isInView)
-        {
-            lerpFactor += Time.deltaTime * growSpeed; 
-        }
-        else
-        {
-            lerpFactor -= Time.deltaTime * shrinkSpeed; 
-        }
+        float targetFactor = isInView ? 1f : 0f;
+        lerpFactor = Mathf.MoveTowards(lerpFactor, targetFactor, Time.deltaTime * (isInView ? growSpeed : shrinkSpeed));
 
         //Clamp the lerpFactor between 0 and max size
-        lerpFactor = Mathf.Clamp(lerpFactor, 0, occluderMaxSize);
+        //lerpFactor = Mathf.Clamp(lerpFactor, 0, occluderMaxSize);
 
         foreach (var material in SeeThruMaterials)
         {
@@ -62,10 +55,10 @@ public class SeeThruWall : MonoBehaviour
             else
             {
                 occluderSize = Mathf.Lerp(occluderSize, 0f, lerpFactor);
-                if (occluderSize < 0.6f)
+                /*if (occluderSize < 0.6f)
                 {
                     occluderSize = 0;
-                }
+                }*/
             }
 
             //Sets the size to the material
