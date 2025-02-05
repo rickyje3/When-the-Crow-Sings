@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3788761363672420174}
-  - component: {fileID: 7661351826956083475}
+  - component: {fileID: 869783485398003039}
   m_Layer: 12
   m_Name: Raycast
   m_TagString: Untagged
@@ -32,29 +32,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4240251560430903145}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!136 &7661351826956083475
-CapsuleCollider:
+--- !u!114 &869783485398003039
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3358257303729576182}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.1
-  m_Height: 1.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3fcd5ed52970a74c90a2ac7e50c90aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereRadius: 2.11
+  pointCount: 200
+  viewAngle: 60
 --- !u!1 &7616777099089193631
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,13 +128,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.22
   m_Radius: 0.2
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.35, z: 0}
 --- !u!114 &7491101395590694452
 MonoBehaviour:
   m_ObjectHideFlags: 0
