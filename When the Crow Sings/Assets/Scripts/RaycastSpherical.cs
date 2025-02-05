@@ -9,6 +9,7 @@ public class RaycastSpherical : MonoBehaviour
     public float viewAngle = 60f;
 
     List<Vector3> spherePoints = new List<Vector3>();
+    List<Vector3> collisionPoints = new List<Vector3>();
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +25,11 @@ public class RaycastSpherical : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        //Gizmos.DrawLineList(DistributePointsAcrossSphere().ToArray());
-        Gizmos.DrawLine(Vector3.zero, FindUnobstructedDirection(transform.forward));
+        Gizmos.DrawLineList(DistributePointsAcrossSphere().ToArray());
+        //Gizmos.DrawLine(Vector3.zero, FindUnobstructedDirection(transform.forward));
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLineList(collisionPoints.ToArray());
     }
 
     List<Vector3> DistributePointsAcrossSphere()
@@ -58,25 +62,32 @@ public class RaycastSpherical : MonoBehaviour
         float furthestUnobstructedDistance = 0f;
         RaycastHit hit;
 
-        for (int i = 0; i < 1; i++) // TODO: find what "i < BoidHelper.rayDirections.Length" should be to replace i < 1.
+        collisionPoints = new List<Vector3>();
+
+        for (int i = 0; i < spherePoints.Count - 1; i++) // TODO: find what "i < BoidHelper.rayDirections.Length" should be to replace i < 1.
         {
             Vector3 direction = transform.TransformDirection(spherePoints[i]);
+            //Vector3 direction = (-transform.position + spherePoints[i]);
             if (Physics.SphereCast(transform.position, 1f ,direction, out hit, sphereRadius))
             {
                 if (hit.distance > furthestUnobstructedDistance)
                 {
                     bestDirection = direction;
                     furthestUnobstructedDistance = hit.distance;
+
+                    //collisionPoints.Add(new Vector3(direction.x,direction.y + .1f, direction.z)); // Because every other entry needs to be 0 for the line drawing to work
+                    collisionPoints.Add(direction);
+                    collisionPoints.Add(hit.point);
                 }
             }
             else
             {
-                Debug.Log("Best direction: " + direction.ToString());
+                //Debug.Log("Best direction: " + direction.ToString());
                 return direction;
             }
         }
 
-        Debug.Log("Best direction: " + bestDirection.ToString());
+        //Debug.Log("Best direction: " + bestDirection.ToString());
         return bestDirection;
     }
 }
